@@ -10,6 +10,8 @@
     {% endfor %}
 
     <h1>Record Index</h1>
+    {{ encore_entry_script_tags('record_index_container') }}
+    <div id="SearchBar"></div>
     <table>
         <thead>
             <tr>
@@ -18,16 +20,16 @@
             </tr>
         </thead>
         <tbody>
-        {% for record in records %}
-            <tr>
-                <td>{{ record.titleId }}</td>
-                <td>{{ record.title }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td>No records found</td>
-            </tr>
-        {% endfor %}
+{#        {% for record in records %}#}
+{#            <tr>#}
+{#                <td>{{ record.titleId }}</td>#}
+{#                <td>{{ record.title }}</td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td>No records found</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
         </tbody>
 
     </table>

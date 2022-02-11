@@ -28,6 +28,8 @@ Encore
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
     .addEntry('guide_builder', './assets/react/components/guide-builder/Guide.js')
     .addEntry('react_select_init', './assets/js/select-field-type/initSelect.js')
+    // Record Component
+    .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
     
     // Backend JS
     .addEntry('backend-main', './assets/backend/backend-main.js')
