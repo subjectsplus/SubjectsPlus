@@ -125,17 +125,16 @@ export default class Search extends Component {
 
         return (
             <div id={this.props.tokenType + '-search'}>
-                <h3>{this.props.title}</h3>
-                <SearchBar id={this.props.tokenType + '-searchbar'} className="sidebar-searchbar" 
+                {this.props.extras}
+                <SearchBar id={this.props.tokenType + '-searchbar'} className="form-control"
                         placeholder={'Search ' + this.props.tokenType} onChange={this.onSearchInput} />
-                    {this.props.extras}
-                <button className="scroll-to-top" onClick={this.scrollToTop}>
-                    Scroll To Top
-                </button>
-                <ul id={this.props.tokenType + '-list'} ref={this.listRef}>
+                <ul id={this.props.tokenType + '-list'} ref={this.listRef} className="list-unstyled sp-search-results-panel-list">
                     {resultTokens.length > 0 ? resultTokens : resultsMessage}
                     {bottomElement}
                 </ul>
+                <button className="scroll-to-top" onClick={this.scrollToTop}>
+                    Scroll To Top
+                </button>
             </div>
         );
     }

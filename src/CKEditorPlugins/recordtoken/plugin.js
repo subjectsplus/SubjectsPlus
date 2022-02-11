@@ -32,6 +32,7 @@
 
     var minimumTitleLength = 3;
     var titleApi = '/api/titles/{titleId}';
+    var recordTokenOffcanvas = null;
 
     CKEDITOR.plugins.add('recordtoken', {
         icons: 'record',
@@ -261,13 +262,17 @@
 
             editor.addCommand('toggleRecordSearch', {
                 'exec': function(editor) {
-                    var searchComponent = document.getElementById('record-search');
+                    var searchComponent = document.getElementById('offcanvasRecordToken');
                     if (searchComponent) {
-                        if (searchComponent.style.display === 'none' || searchComponent.style.display === '') {
-                            searchComponent.style.display = 'block';
-                        } else {
-                            searchComponent.style.display = 'none';
+                        if (recordTokenOffcanvas) {
+                            recordTokenOffcanvas.toggle();
                         }
+                        else {
+                            recordTokenOffcanvas = new bootstrap.Offcanvas(searchComponent);
+                            recordTokenOffcanvas.toggle();
+                        }
+                    } else {
+                        console.error('Search component not found!');
                     }
                 }
             });
