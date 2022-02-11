@@ -17,6 +17,18 @@
   --sp-accent-color: #3fc2c6;
   --sp-accent-color-rgb: 63, 194, 198;
   --sp-accent-color-alt: #74ae25;
+  --sp-input-bg: #ffffff;
+  --sp-input-disabled-bg: #e9ecef;
+  --sp-input-color: var(--sp-font-color);
+  --sp-input-border-color: #ced4da;
+  --sp-input-focus-bg: var(--sp-input-bg);
+  --sp-input-focus-border-color: var(--sp-primary-color);
+  --sp-input-focus-color: var(--sp-font-color);
+  --sp-input-placeholder-color: #6c757d;
+  --sp-input-plaintext-color: var(--sp-font-color);
+  --sp-focus-box-shadow-color: 192, 84, 160;
+  --sp-input-selected-bg: var(--sp-primary-color);
+  --sp-input-selected-text: var(--sp-input-bg);
 }
 
 [data-mode="dark"] {
@@ -33,6 +45,18 @@
   --sp-accent-color: #3fc2c6;
   --sp-accent-color-rgb: 63, 194, 198;
   --sp-accent-color-alt: #74ae25;
+  --sp-input-bg: #ffffff;
+  --sp-input-disabled-bg: #e9ecef;
+  --sp-input-color: #333333;
+  --sp-input-border-color: #ced4da;
+  --sp-input-focus-bg: var(--sp-input-bg);
+  --sp-input-focus-border-color: var(--sp-primary-color);
+  --sp-input-focus-color: #333333;
+  --sp-input-placeholder-color: #6c757d;
+  --sp-input-plaintext-color: var(--sp-font-color);
+  --sp-focus-box-shadow-color: 192, 84, 160;
+  --sp-input-selected-bg: var(--sp-primary-color);
+  --sp-input-selected-text: var(--sp-input-bg);
 }
 
 [data-mode="classic"] {
@@ -46,6 +70,18 @@
   --sp-accent-color: #4977a4;
   --sp-accent-color-rgb: 73, 119, 164;
   --sp-accent-color-alt: #f5d76e;
+  --sp-input-bg: #ffffff;
+  --sp-input-disabled-bg: #e9ecef;
+  --sp-input-color: var(--sp-font-color);
+  --sp-input-border-color: #ced4da;
+  --sp-input-focus-bg: var(--sp-input-bg);
+  --sp-input-focus-border-color: var(--sp-primary-color);
+  --sp-input-focus-color: var(--sp-font-color);
+  --sp-input-placeholder-color: #6c757d;
+  --sp-input-plaintext-color: var(--sp-font-color);
+  --sp-focus-box-shadow-color: 192, 84, 160;
+  --sp-input-selected-bg: var(--sp-primary-color);
+  --sp-input-selected-text: var(--sp-input-bg);
 }
 
 $um-orange:       #f17430;
@@ -116,6 +152,17 @@ $headings-margin-bottom:      	$spacer;
 // Borders
 $border-radius:               .25rem;
 $border-radius-circle:        50%;
+
+// Forms
+$input-bg:                    var(--sp-input-bg);
+$input-disabled-bg:           var(--sp-input-disabled-bg);
+$input-color:                 var(--sp-input-color);
+$input-border-color:          var(--sp-input-border-color);
+$input-focus-bg:              var(--sp-input-focus-bg);
+$input-focus-border-color:    var(--sp-input-focus-border-color);
+$input-focus-color:           var(--sp-input-focus-color);
+$input-placeholder-color:     var(--sp-input-placeholder-color);
+$input-plaintext-color:       var(--sp-input-plaintext-color);
 
 // Figures
 $figure-caption-font-size:    $font-size-sm;

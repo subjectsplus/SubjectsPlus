@@ -2,18 +2,25 @@
 <div class="row">
     <div class="col-lg-8">
         <div class="panel-basic border-basic">
-            {{ form_row(form.question) }}
-            {{ form_row(form.answer) }}
+            {{ form_row(form.question, {'label': 'control.faq.form.question' | trans}) }}
+            {{ form_row(form.answer, {'label': 'control.faq.form.answer' | trans}) }}
         </div>
     </div>
     <div class="col-lg-3 offset-lg-1">
-        <h3>Settings</h3>
-        {{ form_row(form.active) }}
-        {{ form_row(form.keywords) }}
-        {{ form_row(form.subject) }}
-        {{ form_row(form.faqpage) }}
+        <h3 class="mt-4 mt-lg-0">{{ 'control.faq.form.settings_header' | trans }}</h3>
+        {{ form_row(form.active, {'label': 'control.faq.form.active_faq' | trans}) }}
+        {{ form_row(form.keywords, {'label': 'control.faq.form.keywords' | trans}) }}
+        {{ form_row(form.subject, {
+            'label': 'control.faq.form.subject' | trans,
+            'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.subject_placeholder' | trans}
+        }) }}
+        {{ form_row(form.faqpage, {
+            'label': 'control.faq.form.faq_collection_page' | trans,
+            'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans}
+        }) }}
         {{ form_rest(form) }}
-        <button class="btn btn-gradient">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-gradient mt-3">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
     </div>
+    {{ encore_entry_script_tags('react_select_init') }}
 </div>
 {{ form_end(form) }}

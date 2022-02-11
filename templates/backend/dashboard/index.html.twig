@@ -14,13 +14,13 @@
                 <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="switchMode">
-                    <label class="form-check-label" for="switchMode">Enable Dark Mode</label>
+                    <label class="form-check-label" for="switchMode">{{ 'control.dashboard.enable_dark_mode' | trans }}</label>
                 </div>
             </div>
             <div class="col-5 text-end">
                 <div class="dropdown basic-dropdown">
                     <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-plus-circle"></i> Create New
+                        <i class="fas fa-plus-circle"></i> {{ 'control.dashboard.create_new_button' | trans }}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownQuickLinks">
                         <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
