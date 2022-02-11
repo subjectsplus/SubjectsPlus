@@ -7,12 +7,50 @@ const selectElements = document.getElementsByClassName('form-select');
 const reactSelectCustomStyles = {
     control: (provided, state) => ({
         ...provided,
-        borderColor: 'var(--sp-react-select-border)',
+        backgroundColor: 'var(--sp-input-bg)',
+        borderColor: state.isFocused ? 'var(--sp-input-focus-border-color)' : 'var(--sp-input-border-color)',
+        boxShadow: state.isFocused ? '0 0 0 0.25rem rgba(var(--sp-focus-box-shadow-color), 20%)' : 'none',
+        '&:hover': {
+            borderColor: 'none'
+        }
     }),
-    placeholder: (provided, state) => ({
+    placeholder: (provided) => ({
         ...provided,
-        color: 'var(--sp-react-select-border)',
+        color: 'var(--sp-input-placeholder-color)'
     }),
+    input: (provided) => ({
+        ...provided,
+        color: 'var(--sp-input-color)'
+    }),
+    indicatorsContainer: (provided, state) => ({
+        ...provided,
+        color: state.isFocused ? 'var(--sp-input-focus-border-color)' : 'var(--sp-input-border-color)',
+        '&:hover': {
+            color: 'var(--sp-input-focus-border-color)'
+        }
+    }),
+    menu: (provided) =>({
+        ...provided,
+        color: 'var(--sp-input-color)'
+    }),
+    multiValue: (provided) =>({
+        ...provided,
+        color: 'var(--sp-input-color)',
+        backgroundColor: 'var(--sp-input-disabled-bg)'
+    }),
+    option: (provided) =>({
+        ...provided,
+        color: 'var(--sp-input-color)',
+        backgroundColor: 'transparent',
+        '&:hover': {
+            color: 'var(--sp-input-selected-text)',
+            backgroundColor: 'var(--sp-input-selected-bg)'
+        }
+    }),
+    noOptionsMessage: (provided) =>({
+        ...provided,
+        color: 'var(--sp-input-color)'
+    })
 }
 
 Array.from(selectElements).forEach( element => {
@@ -20,6 +58,5 @@ Array.from(selectElements).forEach( element => {
     let selectedOptions = Array.from(element.querySelectorAll('option:checked'));
     
     Utility.replaceNodeWithReactComponent(element,
-        <Select isMulti={true} id={element.id} classNamePrefix="sp-react-select" styles={reactSelectCustomStyles} name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} options={options}
-            defaultValue={selectedOptions} />);
+        <Select isMulti={true} id={element.id} classNamePrefix="sp-react-select" styles={reactSelectCustomStyles} name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} options={options} defaultValue={selectedOptions} />);
 });
