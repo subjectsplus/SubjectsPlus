@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
@@ -90,14 +91,15 @@ class Title
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_modified", type="datetime", nullable=false)
+     * @ORM\Column(name="last_modified", type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
      */
     private $lastModified;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Location", mappedBy="title")
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="title")
+     * @ApiSubresource(maxDepth=1)
      */
     private $location;
 
