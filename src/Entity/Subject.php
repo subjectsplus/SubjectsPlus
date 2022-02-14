@@ -93,7 +93,7 @@ class Subject
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="last_modified", type="datetime", nullable=true)
+     * @ORM\Column(name="last_modified", type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
      */
     private $lastModified;
 

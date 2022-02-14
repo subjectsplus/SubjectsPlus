@@ -4,12 +4,18 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Location.
  *
  * @ORM\Table(name="location", indexes={@ORM\Index(name="fk_location_format_id_idx", columns={"format"}), @ORM\Index(name="fk_location_restrictions_id_idx", columns={"access_restrictions"})})
  * @ORM\Entity
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  */
 class Location
 {
@@ -113,27 +119,12 @@ class Location
     private $accessRestrictions;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \Title
      *
-     * @ORM\ManyToMany(targetEntity="Title", inversedBy="location")
-     * @ORM\JoinTable(name="location_title",
-     *     joinColumns={
-     *         @ORM\JoinColumn(name="location_id", referencedColumnName="location_id")
-     *     },
-     *     inverseJoinColumns={
-     *         @ORM\JoinColumn(name="title_id", referencedColumnName="title_id")
-     *     }
-     * )
+     * @ORM\ManyToOne(targetEntity="Title", inversedBy="location")
+     * @ORM\JoinColumn(name="title_id", referencedColumnName="title_id")
      */
     private $title;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->title = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     public function getLocationId(): ?int
     {
@@ -285,25 +276,16 @@ class Location
     }
 
     /**
-     * @return Collection|Title[]
+     * @return Title
      */
-    public function getTitle(): Collection
+    public function getTitle(): Title
     {
         return $this->title;
     }
 
-    public function addTitle(Title $title): self
+    public function setTitle(Title $title): self
     {
-        if (!$this->title->contains($title)) {
-            $this->title[] = $title;
-        }
-
-        return $this;
-    }
-
-    public function removeTitle(Title $title): self
-    {
-        $this->title->removeElement($title);
+        $this->title = $title;
 
         return $this;
     }
