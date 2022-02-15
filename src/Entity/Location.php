@@ -119,7 +119,7 @@ class Location
     private $accessRestrictions;
 
     /**
-     * @var \Title
+     * @var \Title|null
      *
      * @ORM\ManyToOne(targetEntity="Title", inversedBy="location")
      * @ORM\JoinColumn(name="title_id", referencedColumnName="title_id")
@@ -276,14 +276,14 @@ class Location
     }
 
     /**
-     * @return Title
+     * @return Title|null
      */
-    public function getTitle(): Title
+    public function getTitle(): ?Title
     {
         return $this->title;
     }
 
-    public function setTitle(Title $title): self
+    public function setTitle(?Title $title): self
     {
         $this->title = $title;
 
