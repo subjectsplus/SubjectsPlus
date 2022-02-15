@@ -4294,6 +4294,30 @@
         <source>control.faq.form.faq_collection_page_placeholder</source>
         <target>__control.faq.form.faq_collection_page_placeholder</target>
       </trans-unit>
+      <trans-unit id="L1k1Yj." resname="flyout.add_record_token.heading">
+        <source>flyout.add_record_token.heading</source>
+        <target>__flyout.add_record_token.heading</target>
+      </trans-unit>
+      <trans-unit id="frBk6HE" resname="control.flyout.add_record_token.heading">
+        <source>control.flyout.add_record_token.heading</source>
+        <target>__control.flyout.add_record_token.heading</target>
+      </trans-unit>
+      <trans-unit id="u5gZ36W" resname="control.custom_tokens_menu.add_button">
+        <source>control.custom_tokens_menu.add_button</source>
+        <target>__control.custom_tokens_menu.add_button</target>
+      </trans-unit>
+      <trans-unit id="GqmMTUv" resname="control.custom_tokens_menu.add_record_token">
+        <source>control.custom_tokens_menu.add_record_token</source>
+        <target>__control.custom_tokens_menu.add_record_token</target>
+      </trans-unit>
+      <trans-unit id="kuKwVOB" resname="control.custom_tokens_menu.add_media_token">
+        <source>control.custom_tokens_menu.add_media_token</source>
+        <target>__control.custom_tokens_menu.add_media_token</target>
+      </trans-unit>
+      <trans-unit id="YZcuqB." resname="control.flyout.add_media_token.heading">
+        <source>control.flyout.add_media_token.heading</source>
+        <target>__control.flyout.add_media_token.heading</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

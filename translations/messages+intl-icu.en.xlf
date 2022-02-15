@@ -373,6 +373,26 @@
         <source>control.faq.form.faq_collection_page_placeholder</source>
         <target>Select a Collection</target>
       </trans-unit>
+      <trans-unit id="frBk6HE" resname="control.flyout.add_record_token.heading">
+        <source>control.flyout.add_record_token.heading</source>
+        <target>Add a Record</target>
+      </trans-unit>
+      <trans-unit id="u5gZ36W" resname="control.custom_tokens_menu.add_button">
+        <source>control.custom_tokens_menu.add_button</source>
+        <target>Add</target>
+      </trans-unit>
+      <trans-unit id="GqmMTUv" resname="control.custom_tokens_menu.add_record_token">
+        <source>control.custom_tokens_menu.add_record_token</source>
+        <target>Record</target>
+      </trans-unit>
+      <trans-unit id="kuKwVOB" resname="control.custom_tokens_menu.add_media_token">
+        <source>control.custom_tokens_menu.add_media_token</source>
+        <target>Media</target>
+      </trans-unit>
+      <trans-unit id="YZcuqB." resname="control.flyout.add_media_token.heading">
+        <source>control.flyout.add_media_token.heading</source>
+        <target>Add Media</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

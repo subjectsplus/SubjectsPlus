@@ -31,3 +31,28 @@
     padding-right: 0.125rem;
   }
 }
+
+.btn-pill {
+  border-radius: $border-radius-pill;
+  font-size: $font-size-sm;
+  background-color: var(--sp-nav-color);
+  color: $white;
+  padding: .375rem .5rem;
+  line-height: 1;
+  &:hover,
+  &:active,
+  &:focus {
+    @include transition-all();
+    color: $white;
+    border: 1px solid var(--sp-input-border-color);
+  }
+}
+
+.btn-link {
+  color: var(--sp-nav-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}

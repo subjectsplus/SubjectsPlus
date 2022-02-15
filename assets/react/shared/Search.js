@@ -87,14 +87,16 @@ export default class Search extends Component {
     }
 
     render() {
-        var resultsMessage = 'Please enter a search term. (Minimum 3 characters)';
+        // TODO: Translations for text below
+        var resultsMessage = (
+            <p className="fs-sm fst-italic">Please enter a search term (minimum 3 characters).</p>
+        );
         var resultTokens = [];
-        var bottomElement = (
-            <p style={{ textAlign: 'center' }}>
-                <b>End of results.</b>
-            </p>);
+        var  bottomElement = null;
 
-        if (this.state.isErrored) resultsMessage = "Error: Failed to reach API endpoint.";
+        if (this.state.isErrored) resultsMessage = (
+            <p className="fs-sm fst-italic">Error: Failed to reach API endpoint.</p>
+        );
         
         // Turn the current results into token components
         if (!this.state.inputEmpty && !this.state.isErrored) {
@@ -107,20 +109,29 @@ export default class Search extends Component {
                         </li>
                     )}
             });
-            if (resultTokens.length === 0) resultsMessage = "No results found.";
+            if (resultTokens.length === 0) resultsMessage = (
+                <p className="fs-sm fst-italic">No results found.</p>
+            );
         }
 
         // Determine bottom element in results view
         if (this.state.loading) {
             bottomElement = (
-            <p style={{ textAlign: 'center' }}>
-                <b>Loading...</b>
-            </p>);
+            <p className="text-center fw-bold fst-italic">Loading...</p>
+            );
         } else if (this.state.hasNextPage) {
             bottomElement = (
-                <button className="load-more-button" onClick={this.loadNextPage}>
-                    Load More
-                </button>);
+                <div className={`text-center my-2 ${resultTokens.length > 0 ? "d-block" : "d-none"}`}>
+                    <button className="btn btn-pill load-more-button" onClick={this.loadNextPage}>
+                        Load More
+                    </button>
+                </div>);
+        } else if (this.state.inputEmpty) {
+            bottomElement = null;
+        } else {
+            bottomElement = (
+                <p className="text-center mt-2 fw-bold fst-italic">End of results</p>
+            );
         }
 
         return (
@@ -128,13 +139,15 @@ export default class Search extends Component {
                 {this.props.extras}
                 <SearchBar id={this.props.tokenType + '-searchbar'} className="form-control"
                         placeholder={'Search ' + this.props.tokenType} onChange={this.onSearchInput} />
-                <ul id={this.props.tokenType + '-list'} ref={this.listRef} className="list-unstyled sp-search-results-panel-list">
+                <ul id={this.props.tokenType + '-list'} ref={this.listRef} className={`list-unstyled ${resultTokens.length > 0 ? "sp-search-results-panel-list" : ""}`}>
                     {resultTokens.length > 0 ? resultTokens : resultsMessage}
                     {bottomElement}
                 </ul>
-                <button className="scroll-to-top" onClick={this.scrollToTop}>
-                    Scroll To Top
-                </button>
+                <div className={`text-end ${resultTokens.length > 0 ? "d-block" : "d-none"}`}>
+                    <button className="btn btn-link scroll-to-top" onClick={this.scrollToTop}>
+                        <i className="fas fa-arrow-alt-circle-up"></i> Scroll To Top
+                    </button>
+                </div>
             </div>
         );
     }
