@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
@@ -24,7 +25,7 @@ class Section
     /**
      * @var int
      *
-     * @ORM\Column(name="section_id", type="bigint", nullable=false)
+     * @ORM\Column(name="section_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -46,12 +47,15 @@ class Section
 
     /**
      * @ORM\ManyToOne(targetEntity=Tab::class, inversedBy="sections")
-     * @ORM\JoinColumn(name="tab_id", referencedColumnName="tab_id")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="tab_id", referencedColumnName="tab_id")
+     * })
      */
     private $tab;
-
+    
     /**
      * @ORM\OneToMany(targetEntity=Pluslet::class, mappedBy="section")
+     * @ApiSubresource(maxDepth=1)
      */
     private $pluslets;
 
@@ -60,7 +64,7 @@ class Section
         $this->pluslets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function getSectionId(): ?string
+    public function getSectionId(): ?int
     {
         return $this->sectionId;
     }

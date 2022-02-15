@@ -32,6 +32,9 @@ class FaqType extends AbstractType
             ])
             ->add('active', CheckboxType::class, [
                 'required' => false,
+                'label_attr' => [
+                    'class' => 'checkbox-switch',
+                ],
             ])
             ->add('keywords', TextType::class, [
                 'required' => false,
@@ -47,6 +50,7 @@ class FaqType extends AbstractType
                 },
                 'multiple' => true,
                 'placeholder' => 'Select a subject',
+                'attr' => ['data-placeholder-text' => 'Select a false subject'],
                 'expanded' => false,
             ])
             ->add('faqpage', EntityType::class, [
@@ -58,6 +62,7 @@ class FaqType extends AbstractType
                 },
                 'multiple' => true,
                 'placeholder' => 'Select a collection',
+                'attr' => ['data-placeholder-text' => 'Select a collection'],
                 'expanded' => false,
             ]);
     }

@@ -24,7 +24,7 @@ class Pluslet
     /**
      * @var int
      *
-     * @ORM\Column(name="pluslet_id", type="bigint", nullable=false)
+     * @ORM\Column(name="pluslet_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -33,14 +33,14 @@ class Pluslet
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=100, nullable=false)
+     * @ORM\Column(name="title", type="string", length=100)
      */
     private $title = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text", length=0, nullable=false)
+     * @ORM\Column(name="body", type="text", length=0)
      */
     private $body;
 
@@ -52,11 +52,11 @@ class Pluslet
     private $localFile;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="clone", type="integer", nullable=false)
+     * @ORM\Column(name="clone", type="boolean")
      */
-    private $clone = '0';
+    private $clone = false;
 
     /**
      * @var string|null
@@ -73,18 +73,18 @@ class Pluslet
     private $extra;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="hide_titlebar", type="integer", nullable=false)
+     * @ORM\Column(name="hide_titlebar", type="boolean")
      */
-    private $hideTitlebar = '0';
+    private $hideTitlebar = false;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="collapse_body", type="integer", nullable=false)
+     * @ORM\Column(name="collapse_body", type="boolean")
      */
-    private $collapseBody = '0';
+    private $collapseBody = false;
 
     /**
      * @var string|null
@@ -94,45 +94,45 @@ class Pluslet
     private $titlebarStyling;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="favorite_box", type="integer", nullable=false)
+     * @ORM\Column(name="favorite_box", type="boolean")
      */
-    private $favoriteBox = '0';
+    private $favoriteBox = false;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="master", type="integer", nullable=false)
+     * @ORM\Column(name="master", type="boolean", nullable=true)
      */
-    private $master = '0';
+    private $master = false;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="target_blank_links", type="integer", nullable=false)
+     * @ORM\Column(name="target_blank_links", type="boolean")
      */
-    private $targetBlankLinks = '0';
+    private $targetBlankLinks = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="pluslets")
-     * @ORM\JoinTable(name="pluslet_section", 
-     *  joinColumns={
-     *         @ORM\JoinColumn(name="section_id", referencedColumnName="section_id")
-     *     },
-     *  inverseJoinColumns={
-     *         @ORM\JoinColumn(name="pluslet_id", referencedColumnName="pluslet_id")
-     *     }
-     * )
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="section_id", referencedColumnName="section_id")
+     * })
      */
     private $section;
 
-    public function __construct()
-    {
-        $this->plusletSections = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(name="pcolumn", type="integer")
+     */
+    private $pcolumn;
 
-    public function getPlusletId(): ?string
+    /**
+     * @ORM\Column(name="prow", type="integer")
+     */
+    private $prow;
+
+    public function getPlusletId(): ?int
     {
         return $this->plusletId;
     }
@@ -173,12 +173,12 @@ class Pluslet
         return $this;
     }
 
-    public function getClone(): ?int
+    public function getClone(): bool
     {
         return $this->clone;
     }
 
-    public function setClone(int $clone): self
+    public function setClone(bool $clone): self
     {
         $this->clone = $clone;
 
@@ -209,24 +209,24 @@ class Pluslet
         return $this;
     }
 
-    public function getHideTitlebar(): ?int
+    public function getHideTitlebar(): bool
     {
         return $this->hideTitlebar;
     }
 
-    public function setHideTitlebar(int $hideTitlebar): self
+    public function setHideTitlebar(bool $hideTitlebar): self
     {
         $this->hideTitlebar = $hideTitlebar;
 
         return $this;
     }
 
-    public function getCollapseBody(): ?int
+    public function getCollapseBody(): bool
     {
         return $this->collapseBody;
     }
 
-    public function setCollapseBody(int $collapseBody): self
+    public function setCollapseBody(bool $collapseBody): self
     {
         $this->collapseBody = $collapseBody;
 
@@ -245,48 +245,40 @@ class Pluslet
         return $this;
     }
 
-    public function getFavoriteBox(): ?int
+    public function getFavoriteBox(): bool
     {
         return $this->favoriteBox;
     }
 
-    public function setFavoriteBox(int $favoriteBox): self
+    public function setFavoriteBox(bool $favoriteBox): self
     {
         $this->favoriteBox = $favoriteBox;
 
         return $this;
     }
 
-    public function getMaster(): ?int
+    public function getMaster(): ?bool
     {
         return $this->master;
     }
 
-    public function setMaster(int $master): self
+    public function setMaster(?bool $master): self
     {
         $this->master = $master;
 
         return $this;
     }
 
-    public function getTargetBlankLinks(): ?int
+    public function getTargetBlankLinks(): bool
     {
         return $this->targetBlankLinks;
     }
 
-    public function setTargetBlankLinks(int $targetBlankLinks): self
+    public function setTargetBlankLinks(bool $targetBlankLinks): self
     {
         $this->targetBlankLinks = $targetBlankLinks;
 
         return $this;
-    }
-
-    /**
-     * @return Collection|PlusletSection[]
-     */
-    public function getPlusletSections(): Collection
-    {
-        return $this->plusletSections;
     }
 
     public function getSection(): ?Section
@@ -297,6 +289,30 @@ class Pluslet
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getPcolumn(): ?int
+    {
+        return $this->pcolumn;
+    }
+
+    public function setPcolumn(int $pcolumn): self
+    {
+        $this->pcolumn = $pcolumn;
+
+        return $this;
+    }
+
+    public function getProw(): ?int
+    {
+        return $this->prow;
+    }
+
+    public function setProw(int $prow): self
+    {
+        $this->prow = $prow;
 
         return $this;
     }

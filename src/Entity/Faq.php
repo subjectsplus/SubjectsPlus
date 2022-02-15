@@ -30,7 +30,7 @@ class Faq
     /**
      * @var string
      *
-     * @ORM\Column(name="question", type="string", length=255, nullable=false)
+     * @ORM\Column(name="question", type="text", length=255, nullable=false)
      */
     private $question;
 

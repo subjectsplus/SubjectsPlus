@@ -70,7 +70,7 @@ class Chchchanges
         $this->dateAdded = new \DateTimeImmutable();
     }
 
-    public function getChchchangesId(): ?string
+    public function getChchchangesId(): ?int
     {
         return $this->chchchangesId;
     }

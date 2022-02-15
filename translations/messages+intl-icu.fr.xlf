@@ -4199,6 +4199,58 @@
         <source>link_checker.check</source>
         <target>__link_checker.check</target>
       </trans-unit>
+      <trans-unit id="Q8Kd18B" resname="control.dashboard.enable_dark_mode">
+        <source>control.dashboard.enable_dark_mode</source>
+        <target>__control.dashboard.enable_dark_mode</target>
+      </trans-unit>
+      <trans-unit id="Et0eLPT" resname="control.dashboard.create_new_button">
+        <source>control.dashboard.create_new_button</source>
+        <target>__control.dashboard.create_new_button</target>
+      </trans-unit>
+      <trans-unit id="GIy1lYN" resname="control.back_to_list">
+        <source>control.back_to_list</source>
+        <target>__control.back_to_list</target>
+      </trans-unit>
+      <trans-unit id="ispWGgF" resname="control.faq.form.active_faq">
+        <source>control.faq.form.active_faq</source>
+        <target>__control.faq.form.active_faq</target>
+      </trans-unit>
+      <trans-unit id="sEac6Q4" resname="control.faq.form.keywords">
+        <source>control.faq.form.keywords</source>
+        <target>__control.faq.form.keywords</target>
+      </trans-unit>
+      <trans-unit id="47SEqwR" resname="control.faq.form.subject">
+        <source>control.faq.form.subject</source>
+        <target>__control.faq.form.subject</target>
+      </trans-unit>
+      <trans-unit id="oIlnFca" resname="control.faq.form.faq_collection_page">
+        <source>control.faq.form.faq_collection_page</source>
+        <target>__control.faq.form.faq_collection_page</target>
+      </trans-unit>
+      <trans-unit id="pXDKzvm" resname="control.faq.form.save_faq">
+        <source>control.faq.form.save_faq</source>
+        <target>__control.faq.form.save_faq</target>
+      </trans-unit>
+      <trans-unit id="Mj0cqdH" resname="control.faq.form.question">
+        <source>control.faq.form.question</source>
+        <target>__control.faq.form.question</target>
+      </trans-unit>
+      <trans-unit id="cKqxyfT" resname="control.faq.form.answer">
+        <source>control.faq.form.answer</source>
+        <target>__control.faq.form.answer</target>
+      </trans-unit>
+      <trans-unit id="_Me1vUI" resname="control.faq.form.settings_header">
+        <source>control.faq.form.settings_header</source>
+        <target>__control.faq.form.settings_header</target>
+      </trans-unit>
+      <trans-unit id=".MATTgF" resname="control.faq.form.subject_placeholder">
+        <source>control.faq.form.subject_placeholder</source>
+        <target>__control.faq.form.subject_placeholder</target>
+      </trans-unit>
+      <trans-unit id="LlIo4cc" resname="control.faq.form.faq_collection_page_placeholder">
+        <source>control.faq.form.faq_collection_page_placeholder</source>
+        <target>__control.faq.form.faq_collection_page_placeholder</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

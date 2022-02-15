@@ -321,6 +321,58 @@
         <source>link_checker.check</source>
         <target>Check links in guide</target>
       </trans-unit>
+      <trans-unit id="Q8Kd18B" resname="control.dashboard.enable_dark_mode">
+        <source>control.dashboard.enable_dark_mode</source>
+        <target>Enable Dark Mode</target>
+      </trans-unit>
+      <trans-unit id="Et0eLPT" resname="control.dashboard.create_new_button">
+        <source>control.dashboard.create_new_button</source>
+        <target>Create New</target>
+      </trans-unit>
+      <trans-unit id="GIy1lYN" resname="control.back_to_list">
+        <source>control.back_to_list</source>
+        <target>Back to list</target>
+      </trans-unit>
+      <trans-unit id="ispWGgF" resname="control.faq.form.active_faq">
+        <source>control.faq.form.active_faq</source>
+        <target>Active</target>
+      </trans-unit>
+      <trans-unit id="sEac6Q4" resname="control.faq.form.keywords">
+        <source>control.faq.form.keywords</source>
+        <target>Keywords</target>
+      </trans-unit>
+      <trans-unit id="47SEqwR" resname="control.faq.form.subject">
+        <source>control.faq.form.subject</source>
+        <target>Subjects or Course Guides</target>
+      </trans-unit>
+      <trans-unit id="oIlnFca" resname="control.faq.form.faq_collection_page">
+        <source>control.faq.form.faq_collection_page</source>
+        <target>Collections</target>
+      </trans-unit>
+      <trans-unit id="pXDKzvm" resname="control.faq.form.save_faq">
+        <source>control.faq.form.save_faq</source>
+        <target>Save FAQ</target>
+      </trans-unit>
+      <trans-unit id="Mj0cqdH" resname="control.faq.form.question">
+        <source>control.faq.form.question</source>
+        <target>Question</target>
+      </trans-unit>
+      <trans-unit id="cKqxyfT" resname="control.faq.form.answer">
+        <source>control.faq.form.answer</source>
+        <target>Answer</target>
+      </trans-unit>
+      <trans-unit id="_Me1vUI" resname="control.faq.form.settings_header">
+        <source>control.faq.form.settings_header</source>
+        <target>Settings</target>
+      </trans-unit>
+      <trans-unit id=".MATTgF" resname="control.faq.form.subject_placeholder">
+        <source>control.faq.form.subject_placeholder</source>
+        <target>Select a Subject or Course</target>
+      </trans-unit>
+      <trans-unit id="LlIo4cc" resname="control.faq.form.faq_collection_page_placeholder">
+        <source>control.faq.form.faq_collection_page_placeholder</source>
+        <target>Select a Collection</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

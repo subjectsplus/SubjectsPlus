@@ -26,7 +26,7 @@ class Rank
      *
      * @ORM\Column(name="rank", type="integer", nullable=false)
      */
-    private $rank = '0';
+    private $rank = 0;
 
     /**
      * @var string|null
@@ -38,7 +38,7 @@ class Rank
     /**
      * @var bool|null
      *
-     * @ORM\Column(name="dbbysub_active", type="boolean", nullable=true, options={"default": "1"})
+     * @ORM\Column(name="dbbysub_active", type="boolean", nullable=true)
      */
     private $dbbysubActive = true;
 
