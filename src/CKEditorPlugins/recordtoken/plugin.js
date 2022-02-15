@@ -6,7 +6,7 @@
     var descriptionClass = 'record-description';
     var iconClass = 'record-icon';
 
-    var iconSource = '/build/assets/images/icons/information.png';
+    var iconSource = '/build/images/backend/information.png';
 
     var linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
@@ -41,9 +41,17 @@
         onLoad: function() {
             CKEDITOR.addCss(
                 '.' + tokenClass + ' {' +
-                'background: #FFFDE3;' +
-                'padding: 3px 6px;' +
-                'border-bottom: 1px dashed #ccc;' +
+                'background-color: rgba(63, 194, 198, 40%);' +
+                'padding: 0.25rem 0.5rem;' +
+                'border-bottom: 1px dashed #3fc2c6;' +
+                'display: inline-block;' +
+                'margin: 0.125rem;' +
+                '}' +
+                '.cke_widget_wrapper_' + tokenClass + ':hover >.' + tokenClass + '{' +
+                'outline: 2px solid #3fc2c6;' +
+                '}' +
+                '.' + linkClass + '{' +
+                'color: #333333;' +
                 '}' +
                 '.' + iconClass + ' {' +
                 'background-color: transparent;' +

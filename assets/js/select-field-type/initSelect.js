@@ -36,7 +36,11 @@ const reactSelectCustomStyles = {
     multiValue: (provided) =>({
         ...provided,
         color: 'var(--sp-input-color)',
-        backgroundColor: 'var(--sp-input-disabled-bg)'
+        backgroundColor: 'rgba(var(--sp-accent-color-rgb), 85%)'
+    }),
+    multiValueLabel: (provided) =>({
+        ...provided,
+        color: 'var(--sp-input-color)'
     }),
     option: (provided) =>({
         ...provided,

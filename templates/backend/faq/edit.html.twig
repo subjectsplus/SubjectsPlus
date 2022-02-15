@@ -1,14 +1,27 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Edit FAQ{% endblock %}
+{% block title %}{{ 'control.header.faqs.edit_existing_faq' | trans }}Edit FAQ | SubjectsPlus{% endblock %}
 
 {% block content %}
-
-    <h1>Edit FAQ</h1>
-
-    {{ include('backend/media/sidebar.html.twig') }}
-    {{ include('backend/records/sidebar.html.twig') }}
-    {{ include('backend/faq/_form.html.twig', {'button_label': 'Update'}) }}
-    <a href="{{ path('faq_index') }}">back to list</a>
-    {{ include('backend/faq/_delete_form.html.twig') }}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-8">
+                <h1 class="fw-light">Edit FAQ</h1>
+            </div>
+            <div class="col-4 text-end">
+                <a href="{{ path('faq_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
+            </div>
+        </div>
+        <div class="row row-cols-lg-2">
+            <div class="col-lg-8 text-end">
+                {{ include('backend/includes/add_custom_tokens.html.twig') }}
+            </div>
+        </div>
+        <div class="mt-3">
+            {{ include('backend/faq/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('backend/faq/_delete_form.html.twig') }}
+            {{ include('backend/media/sidebar.html.twig') }}
+            {{ include('backend/records/sidebar.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
