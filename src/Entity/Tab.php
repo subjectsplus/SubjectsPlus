@@ -92,7 +92,7 @@ class Tab
     private $subject;
 
     /**
-     * @ORM\OneToMany(targetEntity="Section", mappedBy="tab")
+     * @ORM\OneToMany(targetEntity="Section", mappedBy="tab", cascade={"persist", "remove"})
      * @ApiSubresource(maxDepth=1)
      */
     private $sections;
