@@ -219,7 +219,7 @@ class Title
     {
         if (!$this->location->contains($location)) {
             $this->location[] = $location;
-            $location->addTitle($this);
+            $location->setTitle($this);
         }
 
         return $this;
@@ -228,7 +228,7 @@ class Title
     public function removeLocation(Location $location): self
     {
         if ($this->location->removeElement($location)) {
-            $location->removeTitle($this);
+            $location->setTitle(null);
         }
 
         return $this;
