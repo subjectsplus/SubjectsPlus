@@ -141,7 +141,7 @@ class Subject
     private $discipline;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Tab", mappedBy="subject")
+     * @ORM\OneToMany(targetEntity="App\Entity\Tab", mappedBy="subject", cascade={"persist", "remove"})
      * @ApiSubresource(maxDepth=1)
      */
     private $tabs;

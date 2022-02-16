@@ -16,8 +16,9 @@ use ApiPlatform\Core\Annotation\ApiFilter;
  * @ORM\Entity
  * 
  * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"},
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"},
+ *     order={"sectionIndex": "ASC"}
  * )
  */
 class Section
@@ -54,7 +55,7 @@ class Section
     private $tab;
     
     /**
-     * @ORM\OneToMany(targetEntity=Pluslet::class, mappedBy="section")
+     * @ORM\OneToMany(targetEntity=Pluslet::class, mappedBy="section", cascade={"persist", "remove"})
      * @ApiSubresource(maxDepth=1)
      */
     private $pluslets;

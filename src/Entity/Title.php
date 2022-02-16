@@ -10,6 +10,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Filter\FullTextSearchFilter;
+use App\Filter\LetterSearchFilter;
 
 /**
  * Title.
@@ -33,6 +34,11 @@ use App\Filter\FullTextSearchFilter;
  * @ApiFilter(FullTextSearchFilter::class, properties={
  *      "title": "partial",
  *      "alternateTitle": "partial"
+ * })
+ * 
+ * @ApiFilter(LetterSearchFilter::class, properties={
+ *      "title": "start",
+ *      "alternateTitle": "start"
  * })
  */
 class Title
