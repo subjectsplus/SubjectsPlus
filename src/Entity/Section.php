@@ -16,8 +16,9 @@ use ApiPlatform\Core\Annotation\ApiFilter;
  * @ORM\Entity
  * 
  * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"},
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"},
+ *     order={"sectionIndex": "ASC"}
  * )
  */
 class Section
