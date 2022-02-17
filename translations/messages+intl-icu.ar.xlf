@@ -4326,6 +4326,34 @@
         <source>control.faq.form.update_faq</source>
         <target>__control.faq.form.update_faq</target>
       </trans-unit>
+      <trans-unit id="IHaFq24" resname="control.faqs.delete_faq">
+        <source>control.faqs.delete_faq</source>
+        <target>__control.faqs.delete_faq</target>
+      </trans-unit>
+      <trans-unit id="8wcRYFv" resname="control.faqs.delete_faq.modal.header">
+        <source>control.faqs.delete_faq.modal.header</source>
+        <target>__control.faqs.delete_faq.modal.header</target>
+      </trans-unit>
+      <trans-unit id="Lch7twW" resname="control.faqs.delete_faq.modal.text">
+        <source>control.faqs.delete_faq.modal.text</source>
+        <target>__control.faqs.delete_faq.modal.text</target>
+      </trans-unit>
+      <trans-unit id="h8z7Kj7" resname="control.faqs.delete_faq.cancel_button">
+        <source>control.faqs.delete_faq.cancel_button</source>
+        <target>__control.faqs.delete_faq.cancel_button</target>
+      </trans-unit>
+      <trans-unit id="__HDBxA" resname="control.faqs.delete_faq.confirm_button">
+        <source>control.faqs.delete_faq.confirm_button</source>
+        <target>__control.faqs.delete_faq.confirm_button</target>
+      </trans-unit>
+      <trans-unit id="mEl0NYw" resname="control.header.faqs.index">
+        <source>control.header.faqs.index</source>
+        <target>__control.header.faqs.index</target>
+      </trans-unit>
+      <trans-unit id="JXTLIPa" resname="control.faqs.create_new_button">
+        <source>control.faqs.create_new_button</source>
+        <target>__control.faqs.create_new_button</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

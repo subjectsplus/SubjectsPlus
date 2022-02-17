@@ -29,6 +29,7 @@
   --sp-focus-box-shadow-color: 192, 84, 160;
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
+  --sp-danger-color: #B61621;
 }
 
 [data-mode="dark"] {
@@ -57,6 +58,7 @@
   --sp-focus-box-shadow-color: 192, 84, 160;
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
+  --sp-danger-color: #E94E58;
 }
 
 [data-mode="classic"] {
@@ -82,6 +84,7 @@
   --sp-focus-box-shadow-color: 192, 84, 160;
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
+  --sp-danger-color: #E94E58;
 }
 
 $um-orange:       #f17430;
@@ -153,7 +156,12 @@ $headings-margin-bottom:      	$spacer;
 $border-radius:               .25rem;
 $border-radius-circle:        50%;
 
-// Forms
+// Offcanvas
+$offcanvas-border-color:      var(--sp-border-color);
+$offcanvas-bg-color:          var(--sp-bg-color-alt);
+$offcanvas-color:             var(--sp-font-color);
+
+  // Forms
 $input-bg:                    var(--sp-input-bg);
 $input-disabled-bg:           var(--sp-input-disabled-bg);
 $input-color:                 var(--sp-input-color);

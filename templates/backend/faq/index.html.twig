@@ -1,18 +1,23 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}FAQs index{% endblock %}
+{% block title %}{{ 'control.header.faqs.index' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-8">
+            <h1 class="fw-light">{{ 'control.header.faqs.index' | trans }}</h1>
+        </div>
+        <div class="col-4 text-end">
+            <a class="btn btn-gradient btn-pill-icon" type="button" href="{{ path('faq_new') }}"><i class="fas fa-plus-circle"></i> {{ 'control.faqs.create_new_button' | trans }}</a>
+        </div>
+    </div>
+
     {% for message in app.flashes('notice') %}
         <div class="flash-notice">
             {{ message }}
         </div>
     {% endfor %}
-    
-    <h1>FAQs index</h1>
-
-    <a href="{{ path('faq_new') }}">Create new</a>
-    
     <table class="table">
         <thead>
             <tr>
@@ -52,10 +57,10 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td>no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}

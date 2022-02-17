@@ -155,11 +155,11 @@
       </trans-unit>
       <trans-unit id="15QX2jT" resname="control.header.faqs.view_your_faqs">
         <source>control.header.faqs.view_your_faqs</source>
-        <target>View your FAQs</target>
+        <target>View Your FAQs</target>
       </trans-unit>
       <trans-unit id="g0v_.sm" resname="control.header.faqs.view_faqs">
         <source>control.header.faqs.view_faqs</source>
-        <target>View FAQ</target>
+        <target>View All FAQs</target>
       </trans-unit>
       <trans-unit id="oussNQK" resname="control.header.faqs.view_faqs_by_subject">
         <source>control.header.faqs.view_faqs_by_subject</source>
@@ -400,6 +400,34 @@
       <trans-unit id="DxMm25P" resname="control.faq.form.update_faq">
         <source>control.faq.form.update_faq</source>
         <target>Update FAQ</target>
+      </trans-unit>
+      <trans-unit id="IHaFq24" resname="control.faqs.delete_faq">
+        <source>control.faqs.delete_faq</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="8wcRYFv" resname="control.faqs.delete_faq.modal.header">
+        <source>control.faqs.delete_faq.modal.header</source>
+        <target>Warning: Delete FAQ</target>
+      </trans-unit>
+      <trans-unit id="Lch7twW" resname="control.faqs.delete_faq.modal.text">
+        <source>control.faqs.delete_faq.modal.text</source>
+        <target>Are you sure you want to delete this item permanently?</target>
+      </trans-unit>
+      <trans-unit id="h8z7Kj7" resname="control.faqs.delete_faq.cancel_button">
+        <source>control.faqs.delete_faq.cancel_button</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="__HDBxA" resname="control.faqs.delete_faq.confirm_button">
+        <source>control.faqs.delete_faq.confirm_button</source>
+        <target>Yes, delete this item.</target>
+      </trans-unit>
+      <trans-unit id="mEl0NYw" resname="control.header.faqs.index">
+        <source>control.header.faqs.index</source>
+        <target>All FAQs</target>
+      </trans-unit>
+      <trans-unit id="JXTLIPa" resname="control.faqs.create_new_button">
+        <source>control.faqs.create_new_button</source>
+        <target>New FAQ</target>
       </trans-unit>
     </body>
   </file>
