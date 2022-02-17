@@ -1,6 +1,6 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Hello RecordController!{% endblock %}
+{% block title %}Browse Records{% endblock %}
 
 {% block content %}
     {% for message in app.flashes('notice') %}
@@ -9,34 +9,12 @@
         </div>
     {% endfor %}
 
-    <h1>Record Index</h1>
-    {{ encore_entry_script_tags('alphabet_list') }}
-    <div id="AlphabetList"></div>
+    <h1>Browse Records</h1>
+{#    {{ encore_entry_script_tags('alphabet_list') }}#}
+{#    <div id="AlphabetList"></div>#}
 
-
-    {{ encore_entry_script_tags('record_index_container') }}
-    <div id="SearchBar"></div>
-    <table>
-        <thead>
-            <tr>
-                <td>Record ID</td>
-                <td>Title</td>
-            </tr>
-        </thead>
-        <tbody>
-{#        {% for record in records %}#}
-{#            <tr>#}
-{#                <td>{{ record.titleId }}</td>#}
-{#                <td>{{ record.title }}</td>#}
-{#            </tr>#}
-{#        {% else %}#}
-{#            <tr>#}
-{#                <td>No records found</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-        </tbody>
-
-    </table>
+    {{ encore_entry_script_tags('record_results') }}
+    <div id="RecordResults"></div>
 
 
 {% endblock %}

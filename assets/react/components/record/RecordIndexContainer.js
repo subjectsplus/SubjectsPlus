@@ -48,26 +48,26 @@ export default class RecordIndexContainer extends Component {
     }
 
     render() {
-        let resultItems = [];
-
-        if(this.state.results) {
-            resultItems = this.state.results.map( (result, index) => {
-                return (
-                    <li key={result.titleId}>
-                        {result.title}
-                    </li>
-                );
-            });
-            return (
-                <div>
-                    <ul>
-                        {resultItems}
-                    </ul>
-                </div>
-            );
-        } else {
-            return (<p>No results</p>);
-        }
+        // let resultItems = [];
+        //
+        // if(this.state.results) {
+        //     resultItems = this.state.results.map( (result, index) => {
+        //         return (
+        //             <li key={result.titleId}>
+        //                 {result.title}
+        //             </li>
+        //         );
+        //     });
+        //     return (
+        //         <div>
+        //             <ul>
+        //                 {resultItems}
+        //             </ul>
+        //         </div>
+        //     );
+        // } else {
+        //     return (<p>No results</p>);
+        // }
     }
 }
-ReactDOM.render(<RecordIndexContainer />, document.getElementById('SearchBar'));
+//ReactDOM.render(<RecordIndexContainer />, document.getElementById('SearchBar'));
