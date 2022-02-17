@@ -393,6 +393,14 @@
         <source>control.flyout.add_media_token.heading</source>
         <target>Add Media</target>
       </trans-unit>
+      <trans-unit id="301mQpr" resname="control.header.faqs.edit_existing_faq">
+        <source>control.header.faqs.edit_existing_faq</source>
+        <target>Edit FAQ</target>
+      </trans-unit>
+      <trans-unit id="DxMm25P" resname="control.faq.form.update_faq">
+        <source>control.faq.form.update_faq</source>
+        <target>Update FAQ</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

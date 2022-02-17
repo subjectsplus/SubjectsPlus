@@ -38,36 +38,9 @@
         icons: 'record',
         requires: 'widget,dialog',
         
-        onLoad: function() {
-            CKEDITOR.addCss(
-                '.' + tokenClass + ' {' +
-                'background-color: rgba(63, 194, 198, 40%);' +
-                'padding: 0.25rem 0.5rem;' +
-                'border-bottom: 1px dashed #3fc2c6;' +
-                'display: inline-block;' +
-                'margin: 0.125rem;' +
-                '}' +
-                '.cke_widget_wrapper_' + tokenClass + ':hover >.' + tokenClass + '{' +
-                'outline: 2px solid #3fc2c6;' +
-                '}' +
-                '.' + linkClass + '{' +
-                'color: #333333;' +
-                '}' +
-                '.' + iconClass + ' {' +
-                'background-color: transparent;' +
-                'background-repeat: no-repeat;' +
-                'border: none;' +
-                'cursor: pointer;' +
-                'overflow: hidden;' +
-                'outline: none;' +
-                '}' +
-                '.' + iconClass + ' img {' +
-                'margin: auto' +
-                '}'
-            );
-        },
-
         init: function( editor ) {
+            var pluginDirectory = this.path;
+            editor.addContentsCss( pluginDirectory + 'styles/sp-custom-cke-recordtoken.css' );
 
             var records = {};
             var notifiedToSave = false;

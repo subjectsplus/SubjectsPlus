@@ -1,12 +1,12 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.header.faqs.edit_existing_faq' | trans }}Edit FAQ | SubjectsPlus{% endblock %}
+{% block title %}{{ 'control.header.faqs.edit_existing_faq' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
     <div class="container py-5">
         <div class="row">
             <div class="col-8">
-                <h1 class="fw-light">Edit FAQ</h1>
+                <h1 class="fw-light">{{ 'control.header.faqs.edit_existing_faq' | trans }}</h1>
             </div>
             <div class="col-4 text-end">
                 <a href="{{ path('faq_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
@@ -18,10 +18,10 @@
             </div>
         </div>
         <div class="mt-3">
-            {{ include('backend/faq/_form.html.twig', {'button_label': 'Update'}) }}
-            {{ include('backend/faq/_delete_form.html.twig') }}
-            {{ include('backend/media/sidebar.html.twig') }}
-            {{ include('backend/records/sidebar.html.twig') }}
+            {% set delete_faq = 'true' %}
+            {{ include('backend/faq/_form.html.twig', {'button_label': 'control.faq.form.update_faq' | trans}) }}
         </div>
     </div>
+    {{ include('backend/media/sidebar.html.twig') }}
+    {{ include('backend/records/sidebar.html.twig') }}
 {% endblock %}

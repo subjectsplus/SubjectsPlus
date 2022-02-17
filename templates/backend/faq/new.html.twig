@@ -18,9 +18,10 @@
             </div>
         </div>
         <div class="mt-3">
+            {% set delete_faq = 'false' %}
             {{ include('backend/faq/_form.html.twig') }}
-            {{ include('backend/media/sidebar.html.twig') }}
-            {{ include('backend/records/sidebar.html.twig') }}
         </div>
     </div>
+    {{ include('backend/media/sidebar.html.twig') }}
+    {{ include('backend/records/sidebar.html.twig') }}
 {% endblock %}
