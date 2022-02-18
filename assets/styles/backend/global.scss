@@ -33,7 +33,7 @@
 //@import "~bootstrap/scss/badge";
 @import "~bootstrap/scss/alert";
 //@import "~bootstrap/scss/progress";
-//@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/list-group";
 @import "~bootstrap/scss/close";
 //@import "~bootstrap/scss/toasts";
 @import "~bootstrap/scss/modal";
@@ -54,8 +54,8 @@
 // add partials - General Elements
 @import 'elements/general';
 @import 'elements/buttons';
-@import 'elements/panels';
 @import 'elements/borders';
+@import 'elements/sp-custom-search';
 
 // add partials - Layout
 @import 'layout/footer';

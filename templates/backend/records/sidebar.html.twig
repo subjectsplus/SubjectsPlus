@@ -1,52 +1,10 @@
-{% block content %}
-
-{# TODO: Refactor into different CSS #}
-<style>
-    #record-search {
-      float: right;
-      width: 35%;
-      box-sizing: border-box;
-      padding: 0 0 0 20px;
-      display: none;
-    }
-
-    #record-list {
-      list-style-type: none;
-      margin: 0 !important;
-      padding: 0;
-      overflow: auto;
-      height: 300px;
-    }
-
-    #record-list li {
-      background: #FAFAFA;
-      margin-bottom: 1px;
-      height: 56px;
-      line-height: 56px;
-      cursor: pointer;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    #record-list li:nth-child(2n) {
-      background: #F3F3F3;
-    }
-
-    #record-list li:hover {
-      background: #FFFDE3;
-      border-left: 5px solid #DCDAC1;
-      margin-left: -5px;
-    }
-
-    .record-token {
-      padding: 0 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-</style>
-<div id="record-search-container"></div>
-
-{{ encore_entry_script_tags('record_search') }}
-{% endblock %}
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRecordToken" aria-labelledby="offcanvasRecordTokenLabel">
+    <div class="offcanvas-header">
+        <h3 class="offcanvas-title" id="offcanvasRecordTokenLabel">{{ 'control.flyout.add_record_token.heading' | trans }}</h3>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="record-search-container"></div>
+        {{ encore_entry_script_tags('record_search') }}
+    </div>
+</div>
