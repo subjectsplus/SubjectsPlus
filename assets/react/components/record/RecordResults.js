@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 export default class RecordResults extends Component {
 
     apiLink = '/api/titles'
+    locationsLink = '/api/titles/{titleId}/locations'
 
     constructor(props) {
         super(props);
@@ -26,8 +27,6 @@ export default class RecordResults extends Component {
 
     componentDidMount() {
         this.getResults(this.state.letter);
-        this.fetchLocations();
-
     }
 
     getApiLink(letter, page=1) {
@@ -66,23 +65,17 @@ export default class RecordResults extends Component {
         this.getResults(evt.currentTarget.dataset.letter, this.state.page);
     }
 
-    async fetchTitlesAndLocations() {
+    async fetchTitles() {
 
     }
 
-    async fetchLocations() {
-        let titleResponse = await fetch('/api/titles');
-        let titleResponseJson = await titleResponse.json();
-        //console.log(titleResponseJson);
-        let locations = await Promise.all(
-            titleResponseJson['hydra:member'].map( async locationUrl => {
-                console.log(titleResponseJson);
-                let locationResponse = await fetch('/api/locations/' + titleResponseJson['hydra:member']['titleId']);
-                return locationResponse.json();
+    async fetchLocations(titleId) {
+        let resLink = this.locationsLink.replace('{titleId}', titleId);
 
-            })
-        )
-        //console.log(locations);
+        let locations = await fetch(resLink);
+        let locationsResponse = await locations.json();
+
+        return Promise.all(locationsResponse['hydra:member']);
     }
 
     getResults(letter, page=1) {
@@ -104,24 +97,51 @@ export default class RecordResults extends Component {
                 letter: letter
             });
         })
-            .then(results => {
-                //console.log(results['hydra:member']);
-                    this.setState({
-                        results: results['hydra:member'],
-                        page: page,
-                        hasNextPage: (results['hydra:view']['hydra:next'] != null),
-                        isErrored: false,
-                        loading: false
+        .then(async results => {
+            
+            // for each title, fetch locations and add as key/value pair in title object
+            for (let index = 0; index < results['hydra:member'].length; index++) {
+                let result = results['hydra:member'][index];
+
+                // fetch locations for current title
+                await this.fetchLocations(result.titleId).then(locations => {
+                    let locationsTable = {};
+
+                    // create a lookup table for different formats of location
+                    locations.map(location => {
+                        if (location.format) {
+                            locationsTable[location.format.format] = location;
+                        } else {
+                            locationsTable['Web'] = location;
+                        }
                     });
-                }
-            )
-            .catch(err => {
-                console.error(err);
-                this.setState({
-                    isErrored: true,
-                    loading: false
+
+                    // append locations to the title
+                    results['hydra:member'][index] = {
+                        ...results['hydra:member'][index],
+                        locations: locationsTable
+                    };
                 });
+            }
+
+            // console.log(results['hydra:member']);
+            console.log(results['hydra:member'][0].locations);
+
+            this.setState({
+                results: results['hydra:member'],
+                page: page,
+                hasNextPage: (results['hydra:view']['hydra:next'] != null),
+                isErrored: false,
+                loading: false
             });
+        })
+        .catch(err => {
+            console.error(err);
+            this.setState({
+                isErrored: true,
+                loading: false
+            });
+        });
     }
 
     displayResults() {
@@ -130,9 +150,10 @@ export default class RecordResults extends Component {
         if(this.state.results) {
             //console.log(this.state.results);
             resultItems = this.state.results.map( (result, index) => {
+                console.log(result);
                 return (
                     <li key={result.titleId}>
-                        {result.title}
+                        <a href={result.locations['Web']['location']}>{result.title}</a>
                     </li>
                 );
             });
