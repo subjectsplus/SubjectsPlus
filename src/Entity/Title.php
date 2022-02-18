@@ -22,7 +22,7 @@ use App\Filter\LetterSearchFilter;
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
  *     order={"title": "ASC"},
- *     paginationItemsPerPage=100
+ *     paginationItemsPerPage=10
  * )
  * 
  * @ApiFilter(SearchFilter::class, properties={

@@ -17,7 +17,8 @@ export default class RecordResults extends Component {
             isErrored: false,
             loading: false,
             page: 1,
-            hasNextPage: false
+            hasNextPage: false,
+            data: []
         }
 
         this.onLetterClick = this.onLetterClick.bind(this);
@@ -25,6 +26,8 @@ export default class RecordResults extends Component {
 
     componentDidMount() {
         this.getResults(this.state.letter);
+        this.fetchLocations();
+
     }
 
     getApiLink(letter, page=1) {
@@ -67,6 +70,21 @@ export default class RecordResults extends Component {
 
     }
 
+    async fetchLocations() {
+        let titleResponse = await fetch('/api/titles');
+        let titleResponseJson = await titleResponse.json();
+        //console.log(titleResponseJson);
+        let locations = await Promise.all(
+            titleResponseJson['hydra:member'].map( async locationUrl => {
+                console.log(titleResponseJson);
+                let locationResponse = await fetch('/api/locations/' + titleResponseJson['hydra:member']['titleId']);
+                return locationResponse.json();
+
+            })
+        )
+        //console.log(locations);
+    }
+
     getResults(letter, page=1) {
         // formulate the results api link
         let resLink = this.getApiLink(letter);
@@ -87,6 +105,7 @@ export default class RecordResults extends Component {
             });
         })
             .then(results => {
+                //console.log(results['hydra:member']);
                     this.setState({
                         results: results['hydra:member'],
                         page: page,
@@ -109,7 +128,7 @@ export default class RecordResults extends Component {
         let resultItems = [];
 
         if(this.state.results) {
-            console.log(this.state.results);
+            //console.log(this.state.results);
             resultItems = this.state.results.map( (result, index) => {
                 return (
                     <li key={result.titleId}>
