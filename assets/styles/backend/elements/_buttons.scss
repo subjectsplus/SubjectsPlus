@@ -76,6 +76,15 @@
   }
 }
 
+.btn-link-success {
+  color: var(--sp-success-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-success-color);
+  }
+}
+
 .btn-cancel {
   background-color: var(--sp-input-disabled-bg);
   color: #333333;

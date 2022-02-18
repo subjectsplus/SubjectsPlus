@@ -18,23 +18,29 @@
             {{ message }}
         </div>
     {% endfor %}
-    <table class="table">
+    <table class="table table-striped table-responsive mt-4">
         <thead>
             <tr>
-                <th>FaqId</th>
+                <th>Active</th>
                 <th>Question</th>
                 <th>Answer</th>
                 <th>Keywords</th>
-                <th>Visibility</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for faq in faqs %}
             <tr>
-                <td>{{ faq.faqId }}</td>
+                <td class="fs-xs">
+                    {% if faq.active %}
+                        {{ '<i class="fas fa-circle btn-link-success"></i>' }}
+                    {% else %}
+                        {{ '<i class="fas fa-circle btn-link-danger"></i>' }}
+                    {% endif %}
+                    ID: {{ faq.faqId }}
+                </td>
                 <td>{{ faq.question | raw }}</td>
-                <td>{{ faq.answer | raw }}</td>
+                <td>{{ faq.answer | u.truncate(130, '...') | striptags | raw }}</td>
                 <td>
                     {% for keyword in faq.keywords %}
                         {{ keyword }}
@@ -42,13 +48,6 @@
                             {{'| '}}
                         {% endif %}
                     {% endfor %}
-                </td>
-                <td>
-                    {% if faq.active %}
-                        {{ 'Active' }}
-                    {% else %}
-                        {{ 'Inactive' }}
-                    {% endif %}
                 </td>
                 <td>
                     <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}">show</a>

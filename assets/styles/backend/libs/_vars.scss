@@ -30,6 +30,9 @@
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
   --sp-danger-color: #B61621;
+  --sp-success-color: var(--sp-accent-color-alt);
+  --sp-table-bg-color: var(--sp-bg-color-alt);
+  --sp-table-striped: var(--sp-input-disabled-bg);
 }
 
 [data-mode="dark"] {
@@ -59,6 +62,9 @@
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
   --sp-danger-color: #E94E58;
+  --sp-success-color: var(--sp-accent-color-alt);
+  --sp-table-bg-color: transparent;
+  --sp-table-striped: var(--sp-bg-color-alt);
 }
 
 [data-mode="classic"] {
@@ -85,6 +91,9 @@
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
   --sp-danger-color: #E94E58;
+  --sp-success-color: var(--sp-accent-color-alt);
+  --sp-table-bg-color: var(--sp-bg-color-alt);
+  --sp-table-striped: var(--sp-input-disabled-bg);
 }
 
 $um-orange:       #f17430;
@@ -189,6 +198,10 @@ $table-cell-padding-y:        .75rem;
 $table-cell-padding-x:        .75rem;
 $table-cell-padding-y-sm:     .25rem;
 $table-cell-padding-x-sm:     .25rem;
+$table-bg:                    var(--sp-table-bg-color);
+$table-color:                 var(--sp-font-color);
+$table-border-color:          var(--sp-border-color);
+$table-striped-bg:            var(--sp-table-striped);
 
 // Bootstrap Default Variables.
 @import "~bootstrap/scss/functions";
