@@ -16,6 +16,11 @@ export default class Utility {
         return doc.body.textContent || '';
     }
 
+    static objectIsEmpty(obj) {
+        return obj && Object.keys(obj).length === 0
+            && Object.getPrototypeOf(obj) === Object.prototype
+    }
+
     static replaceNodeWithReactComponent(element, reactComponent) {
         const parent = element.parentNode;
         ReactDOM.render(ReactDOM.createPortal(reactComponent, parent),

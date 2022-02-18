@@ -1,0 +1,29 @@
+.sp-search-results-panel-list {
+  overflow:auto;
+  max-height: 450px;
+  background-color: var(--sp-input-bg);
+  color: var(--sp-input-color);
+  border: 1px solid var(--sp-input-border-color);
+  border-radius: $border-radius-sm;
+
+  li {
+    padding: 0.5rem 0.75rem;
+    font-size: $font-size-sm;
+    &:nth-child(2n){
+      background-color: var(--sp-input-disabled-bg);
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: var(--sp-input-selected-bg);
+      color: var(--sp-input-selected-text);
+      cursor: grab;
+    }
+
+    .record-token {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

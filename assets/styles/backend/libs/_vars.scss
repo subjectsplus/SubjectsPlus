@@ -29,6 +29,10 @@
   --sp-focus-box-shadow-color: 192, 84, 160;
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
+  --sp-danger-color: #B61621;
+  --sp-success-color: var(--sp-accent-color-alt);
+  --sp-table-bg-color: var(--sp-bg-color-alt);
+  --sp-table-striped: var(--sp-input-disabled-bg);
 }
 
 [data-mode="dark"] {
@@ -57,6 +61,10 @@
   --sp-focus-box-shadow-color: 192, 84, 160;
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
+  --sp-danger-color: #E94E58;
+  --sp-success-color: var(--sp-accent-color-alt);
+  --sp-table-bg-color: transparent;
+  --sp-table-striped: var(--sp-bg-color-alt);
 }
 
 [data-mode="classic"] {
@@ -82,6 +90,10 @@
   --sp-focus-box-shadow-color: 192, 84, 160;
   --sp-input-selected-bg: var(--sp-primary-color);
   --sp-input-selected-text: var(--sp-input-bg);
+  --sp-danger-color: #E94E58;
+  --sp-success-color: var(--sp-accent-color-alt);
+  --sp-table-bg-color: var(--sp-bg-color-alt);
+  --sp-table-striped: var(--sp-input-disabled-bg);
 }
 
 $um-orange:       #f17430;
@@ -153,7 +165,12 @@ $headings-margin-bottom:      	$spacer;
 $border-radius:               .25rem;
 $border-radius-circle:        50%;
 
-// Forms
+// Offcanvas
+$offcanvas-border-color:      var(--sp-border-color);
+$offcanvas-bg-color:          var(--sp-bg-color-alt);
+$offcanvas-color:             var(--sp-font-color);
+
+  // Forms
 $input-bg:                    var(--sp-input-bg);
 $input-disabled-bg:           var(--sp-input-disabled-bg);
 $input-color:                 var(--sp-input-color);
@@ -163,6 +180,11 @@ $input-focus-border-color:    var(--sp-input-focus-border-color);
 $input-focus-color:           var(--sp-input-focus-color);
 $input-placeholder-color:     var(--sp-input-placeholder-color);
 $input-plaintext-color:       var(--sp-input-plaintext-color);
+
+// Modals
+$modal-content-color:         var(--sp-input-color);
+$modal-content-bg:            var(--sp-input-bg);
+$modal-content-border-color:  var(--sp-input-border-color);
 
 // Figures
 $figure-caption-font-size:    $font-size-sm;
@@ -176,6 +198,10 @@ $table-cell-padding-y:        .75rem;
 $table-cell-padding-x:        .75rem;
 $table-cell-padding-y-sm:     .25rem;
 $table-cell-padding-x-sm:     .25rem;
+$table-bg:                    var(--sp-table-bg-color);
+$table-color:                 var(--sp-font-color);
+$table-border-color:          var(--sp-border-color);
+$table-striped-bg:            var(--sp-table-striped);
 
 // Bootstrap Default Variables.
 @import "~bootstrap/scss/functions";

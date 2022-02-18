@@ -22,7 +22,7 @@ Encore
      */
 
     /*
-    * React Testing
+    * React
      */
     .addEntry('rep_log_react', './assets/js/rep_log_react.js')
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')

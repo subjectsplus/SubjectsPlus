@@ -34,15 +34,15 @@ export default class RecordSearch extends Component {
     }
 
     render() {
+        // TODO: Translations for title, label below
         return (
             <Search tokenType="record" title="Get Records" apiLink={this.getApiLink}
                 ref={this.searchElement}
                 extras={
-                    <label>
-                        <input id="azlist" name="azlist" type="checkbox" checked={this.state.azlist} 
-                            onChange={this.onAZListCheckBoxInput} />
-                        Limit to A-Z List
-                    </label>} />
+                    <div className="form-check form-switch">
+                        <input id="azlist" name="azlist" type="checkbox" className="form-check-input" checked={this.state.azlist} onChange={this.onAZListCheckBoxInput} />
+                            <label className="form-check-label" for="azlist">Limit to A-Z List</label>
+                    </div>} />
         );
     }
 }
