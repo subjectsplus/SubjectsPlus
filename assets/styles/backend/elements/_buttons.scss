@@ -1,19 +1,29 @@
 .btn-primary {
-  background-color: var(--sp-primary-color);
+  background-color: var(--sp-nav-color);
   color: $white;
-  &:hover{}
+  &:hover,
+  &:active,
+  &:focus{
+    background-color: var(--sp-nav-color);
+  }
 }
 
 .btn-secondary {
   background-color: var(--sp-secondary-color);
   color: $white;
-  &:hover{}
+  &:hover,
+  &:active,
+  &:focus{
+    background-color: var(--sp-secondary-color);
+  }
 }
 
 .btn-gradient {
   background-image: linear-gradient(-45deg, var(--sp-primary-color), var(--sp-secondary-color));
   color: $white;
-  &:hover{
+  &:hover,
+  &:active,
+  &:focus {
     @include transition-all();
     background-image: linear-gradient(-45deg, var(--sp-secondary-color), var(--sp-primary-color));
     color: $white;
@@ -29,5 +39,59 @@
     font-size: 1.5rem;
     vertical-align: bottom;
     padding-right: 0.125rem;
+  }
+}
+
+.btn-pill {
+  border-radius: $border-radius-pill;
+  font-size: $font-size-sm;
+  background-color: var(--sp-nav-color);
+  color: $white;
+  padding: .375rem .5rem;
+  line-height: 1;
+  &:hover,
+  &:active,
+  &:focus {
+    @include transition-all();
+    color: $white;
+    border: 1px solid var(--sp-input-border-color);
+  }
+}
+
+.btn-link {
+  color: var(--sp-nav-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}
+
+.btn-link-danger {
+  color: var(--sp-danger-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-danger-color);
+  }
+}
+
+.btn-link-success {
+  color: var(--sp-success-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-success-color);
+  }
+}
+
+.btn-cancel {
+  background-color: var(--sp-input-disabled-bg);
+  color: #333333;
+  &:hover,
+  &:active,
+  &:focus {
+    @include transition-all();
+    background-color: #DBE2E6;
   }
 }

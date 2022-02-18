@@ -6,7 +6,7 @@
     var descriptionClass = 'record-description';
     var iconClass = 'record-icon';
 
-    var iconSource = '/build/assets/images/icons/information.png';
+    var iconSource = '/build/images/backend/information.png';
 
     var linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
@@ -32,33 +32,15 @@
 
     var minimumTitleLength = 3;
     var titleApi = '/api/titles/{titleId}';
+    var recordTokenOffcanvas = null;
 
     CKEDITOR.plugins.add('recordtoken', {
         icons: 'record',
         requires: 'widget,dialog',
         
-        onLoad: function() {
-            CKEDITOR.addCss(
-                '.' + tokenClass + ' {' +
-                'background: #FFFDE3;' +
-                'padding: 3px 6px;' +
-                'border-bottom: 1px dashed #ccc;' +
-                '}' +
-                '.' + iconClass + ' {' +
-                'background-color: transparent;' +
-                'background-repeat: no-repeat;' +
-                'border: none;' +
-                'cursor: pointer;' +
-                'overflow: hidden;' +
-                'outline: none;' +
-                '}' +
-                '.' + iconClass + ' img {' +
-                'margin: auto' +
-                '}'
-            );
-        },
-
         init: function( editor ) {
+            var pluginDirectory = this.path;
+            editor.addContentsCss( pluginDirectory + 'styles/sp-custom-cke-recordtoken.css' );
 
             var records = {};
             var notifiedToSave = false;
@@ -261,13 +243,17 @@
 
             editor.addCommand('toggleRecordSearch', {
                 'exec': function(editor) {
-                    var searchComponent = document.getElementById('record-search');
+                    var searchComponent = document.getElementById('offcanvasRecordToken');
                     if (searchComponent) {
-                        if (searchComponent.style.display === 'none' || searchComponent.style.display === '') {
-                            searchComponent.style.display = 'block';
-                        } else {
-                            searchComponent.style.display = 'none';
+                        if (recordTokenOffcanvas) {
+                            recordTokenOffcanvas.toggle();
                         }
+                        else {
+                            recordTokenOffcanvas = new bootstrap.Offcanvas(searchComponent);
+                            recordTokenOffcanvas.toggle();
+                        }
+                    } else {
+                        console.error('Search component not found!');
                     }
                 }
             });

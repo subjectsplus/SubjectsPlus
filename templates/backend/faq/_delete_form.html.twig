@@ -1,4 +1,24 @@
-<form method="post" action="{{ path('faq_delete', {'faqId': faq.faqId}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ faq.faqId) }}">
-    <button class="btn">Delete</button>
-</form>
+<div class="mt-5 text-end">
+    <form method="post" action="{{ path('faq_delete', {'faqId': faq.faqId}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ faq.faqId) }}">
+        <button type="button" class="btn btn-link-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteFAQ">
+            <i class="fas fa-trash"></i> {{ 'control.faqs.delete_faq' | trans }}
+        </button>
+
+        <div class="modal fade" id="confirmDeleteFAQ" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmDeleteFAQLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteFAQLabel"><i class="fas fa-exclamation-circle btn-link-danger"></i> {{ 'control.faqs.delete_faq.modal.header' | trans }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'close.aria.label' | trans }}"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-start">{{ 'control.faqs.delete_faq.modal.text' | trans }}</p>
+                        <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">{{ 'control.faqs.delete_faq.cancel_button' | trans }}</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> {{ 'control.faqs.delete_faq.confirm_button' | trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

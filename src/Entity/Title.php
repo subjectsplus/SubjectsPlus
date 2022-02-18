@@ -21,7 +21,8 @@ use App\Filter\LetterSearchFilter;
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
- *     order={"title": "ASC"}
+ *     order={"title": "ASC"},
+ *     paginationItemsPerPage=10
  * )
  * 
  * @ApiFilter(SearchFilter::class, properties={
@@ -37,8 +38,7 @@ use App\Filter\LetterSearchFilter;
  * })
  * 
  * @ApiFilter(LetterSearchFilter::class, properties={
- *      "title": "start",
- *      "alternateTitle": "start"
+ *      "title": "start"
  * })
  */
 class Title

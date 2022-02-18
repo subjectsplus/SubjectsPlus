@@ -4,15 +4,18 @@ CKEDITOR.plugins.add( 'media', {
     init: function( editor ) {
         editor.addCommand('toggleMediaSidebar', {
             'exec': function(editor) {
-                var sidebar = document.getElementById('media-sidebar');
+                var sidebar = document.getElementById('offcanvasMediaToken');
+                var mediaTokenOffcanvas = null;
                 if (sidebar) {
-                    console.log(sidebar);
-                    console.log(sidebar.style.display);
-                    if (sidebar.style.display === 'none' || sidebar.style.display === '') {
-                        sidebar.style.display = 'block';
-                    } else {
-                        sidebar.style.display = 'none';
+                    if (mediaTokenOffcanvas) {
+                        mediaTokenOffcanvas.toggle();
                     }
+                    else {
+                        mediaTokenOffcanvas = new bootstrap.Offcanvas(sidebar);
+                        mediaTokenOffcanvas.toggle();
+                    }
+                } else {
+                    console.error('Media sidebar not found!');
                 }
             }
         });

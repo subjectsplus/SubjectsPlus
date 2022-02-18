@@ -41,9 +41,8 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="faqsDropdown">
                             <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.header.faqs.create_new_faq' | trans }}</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'control.header.faqs.view_your_faqs' | trans }}</a></li>
                             <li><a class="dropdown-item" href="/control/faq/">{{ 'control.header.faqs.view_faqs' | trans }}</a></li>
+                            <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'control.header.faqs.view_your_faqs' | trans }}</a></li>
                             <li><a class="dropdown-item" href="/control/faq/subjects">{{ 'control.header.faqs.view_faqs_by_subject' | trans }}</a></li>
                             <li><a class="dropdown-item" href="/control/faq/collections">{{ 'control.header.faqs.view_faqs_by_collection' | trans }}</a></li>
                             <li><hr class="dropdown-divider"></li>
