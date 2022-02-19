@@ -18,28 +18,39 @@
                 </div>
             </div>
             <div class="col-5 text-end">
-                <div class="dropdown basic-dropdown">
-                    <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-plus-circle"></i> {{ 'control.dashboard.create_new_button' | trans }}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownQuickLinks">
-                        <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
-                        <li><a class="dropdown-item" href="#">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
-                        <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
+                <h5 class="fw-light mb-0">Welcome, {{ app.user.fname }}</h5>
+                <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-link lh-1">
+                        <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
+                    </a>
+            </div>
+        </div>
+        <div class="dropdown basic-dropdown text-end">
+            <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-plus-circle"></i> {{ 'control.dashboard.create_new_button' | trans }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownQuickLinks">
+                <li><a class="dropdown-item" href="/control/guides/build">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
+                <li><a class="dropdown-item" href="/control/record">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
+                <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
+            </ul>
+        </div>
+        <div class="panel-basic border-basic mt-4">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2>Guides</h2>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <h2>Records</h2>
+                </div>
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <h2>FAQs</h2>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
                     </ul>
                 </div>
             </div>
-        </div>
-        <div class="panel-basic border-basic mt-4">
-            <h2>{{ app.user.fname }} {{ app.user.lname }}</h2>
-            <ul class="list-unstyled">
-                <li>{{ app.user.title }}</li>
-                <li>{{ app.user.email }}</li>
-                <li>{{ app.user.tel }}</li>
-            </ul>
-            <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-gradient">
-                <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
-            </a>
         </div>
     </div>
 {% endblock %}
