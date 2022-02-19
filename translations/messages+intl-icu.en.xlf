@@ -57,29 +57,9 @@
         <source>popular_list.new_databases</source>
         <target>New Databases</target>
       </trans-unit>
-      <trans-unit id="IqoIvz7" resname="control.dashboard.hello">
-        <source>control.dashboard.hello</source>
-        <target>Hello</target>
-      </trans-unit>
-      <trans-unit id="1ESeN7a" resname="control.dashboard.welcome">
-        <source>control.dashboard.welcome</source>
-        <target>Welcome</target>
-      </trans-unit>
-      <trans-unit id="m_HeL_J" resname="control.dashboard.friendly_message_coming_from">
-        <source>control.dashboard.friendly_message_coming_from</source>
-        <target>This friendly message is coming from</target>
-      </trans-unit>
-      <trans-unit id="AxEFdGk" resname="control.dashboard.your_controller_at">
-        <source>control.dashboard.your_controller_at</source>
-        <target>Your controller at</target>
-      </trans-unit>
-      <trans-unit id="hhDA0Xm" resname="control.dashboard.your_template_at">
-        <source>control.dashboard.your_template_at</source>
-        <target>Your template at</target>
-      </trans-unit>
       <trans-unit id="RV2LBXZ" resname="header.dashboard">
         <source>header.dashboard</source>
-        <target>Dashboard</target>
+        <target>At a Glance</target>
       </trans-unit>
       <trans-unit id="DFBCkgF" resname="control.dashboard.edit_profile">
         <source>control.dashboard.edit_profile</source>
@@ -263,7 +243,7 @@
       </trans-unit>
       <trans-unit id="FXKxO1H" resname="control.dashboard">
         <source>control.dashboard</source>
-        <target>Dashboard</target>
+        <target>At a Glance</target>
       </trans-unit>
       <trans-unit id="Bv6U9x8" resname="control.header.media">
         <source>control.header.media</source>
