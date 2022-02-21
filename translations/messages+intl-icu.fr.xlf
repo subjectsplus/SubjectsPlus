@@ -4311,6 +4311,30 @@
         <source>control.faqs.create_new_button</source>
         <target>__control.faqs.create_new_button</target>
       </trans-unit>
+      <trans-unit id="34M.Md3" resname="control.dashboard.guides_heading">
+        <source>control.dashboard.guides_heading</source>
+        <target>__control.dashboard.guides_heading</target>
+      </trans-unit>
+      <trans-unit id="BS6QohT" resname="control.dashboard.see_all_guides">
+        <source>control.dashboard.see_all_guides</source>
+        <target>__control.dashboard.see_all_guides</target>
+      </trans-unit>
+      <trans-unit id="7Hlj18x" resname="control.dashboard.records_heading">
+        <source>control.dashboard.records_heading</source>
+        <target>__control.dashboard.records_heading</target>
+      </trans-unit>
+      <trans-unit id="NyT6_cQ" resname="control.dashboard.see_all_records">
+        <source>control.dashboard.see_all_records</source>
+        <target>__control.dashboard.see_all_records</target>
+      </trans-unit>
+      <trans-unit id="sOipBSs" resname="control.dashboard.faqs_heading">
+        <source>control.dashboard.faqs_heading</source>
+        <target>__control.dashboard.faqs_heading</target>
+      </trans-unit>
+      <trans-unit id="ZSN2W0y" resname="control.dashboard.see_all_faqs">
+        <source>control.dashboard.see_all_faqs</source>
+        <target>__control.dashboard.see_all_faqs</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

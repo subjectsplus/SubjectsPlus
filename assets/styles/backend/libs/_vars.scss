@@ -186,8 +186,11 @@ $modal-content-color:         var(--sp-input-color);
 $modal-content-bg:            var(--sp-input-bg);
 $modal-content-border-color:  var(--sp-input-border-color);
 
-// Figures
+// Figures and Images
 $figure-caption-font-size:    $font-size-sm;
+$thumbnail-bg:                var(--sp-bg-color-alt);
+$thumbnail-border-color:      var(--sp-border-color);
+
 
 // Tooltips
 $tooltip-font-size:           $font-size-base;
