@@ -22,10 +22,10 @@ export default class GuideTabContainer extends Component {
             activeKey: '0',
             isErrored: false,
             showSettings: false,
-            savingChanges: false
+            savingChanges: false,
+            settingsValidated: false,
         };
 
-        this.settingsForm = React.createRef();
         this.settingsTabName = React.createRef();
         this.settingsExternalUrl = React.createRef();
         this.settingsTabVisibility = React.createRef();
@@ -33,6 +33,7 @@ export default class GuideTabContainer extends Component {
         this.onTabSelect = this.onTabSelect.bind(this);
         this.toggleSettings = this.toggleSettings.bind(this);
         this.updateTab = this.updateTab.bind(this);
+        this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -80,7 +81,8 @@ export default class GuideTabContainer extends Component {
             this.newTab();
         } else if (this.state.activeKey !== eventKey) {
             this.setState({
-                activeKey: eventKey
+                activeKey: eventKey,
+                settingsValidated: false
             });
         }
     }
@@ -105,7 +107,8 @@ export default class GuideTabContainer extends Component {
             this.setState({
                 tabs: [...this.state.tabs, data],
                 lastTabIndex: data.tabIndex,
-                activeKey: data.tabIndex
+                activeKey: data.tabIndex,
+                settingsValidated: false
             });
         })
         .catch((error) => {
@@ -114,20 +117,17 @@ export default class GuideTabContainer extends Component {
         });
     }
 
-    updateTab(evt) {
-        if (this.settingsForm.current.checkValidity() === false) {
-            return
-        } 
-
+    updateTab() {
         let currentTab = this.state.tabs[this.state.activeKey];
 
         let newLabel = Utility.htmlEntityDecode(this.settingsTabName.current.value.trim());
         let newExternalUrl = Utility.htmlEntityDecode(this.settingsExternalUrl.current.value.trim());
         let newVisibility = (this.settingsTabVisibility.current.value === '1');
 
-        console.log('New Label' + newLabel);
-        console.log('New External URL' + newExternalUrl);
-        console.log('New Visibility' + newVisibility);
+        console.log('Tab Id: ' + currentTab.tabId)
+        console.log('New Label: ' + newLabel);
+        console.log('New External URL:' + newExternalUrl);
+        console.log('New Visibility: ' + newVisibility);
 
         let data = {};
 
@@ -172,29 +172,43 @@ export default class GuideTabContainer extends Component {
                 this.setState({
                     isErrored: true,
                     showSettings: false,
-                    savingChanges: false
+                    savingChanges: false,
+                    settingsValidated: false
                 });
             });
         } else {
             this.setState({
                 showSettings: false,
-                savingChanges: false
+                savingChanges: false,
+                settingsValidated: false
             });
         }
     }
 
-    deleteTab(tabId) {
+    handleSettingsSubmit(evt) {
+        const form = evt.currentTarget;
+        if (form.checkValidity() === false) {
+          evt.preventDefault();
+          evt.stopPropagation();
+        } else {
+            this.updateTab();
+        }
 
+        this.setState({
+            settingsValidated: true
+        });
     }
 
     toggleSettings() {
         this.setState({
-            showSettings: !this.state.showSettings
+            showSettings: !this.state.showSettings,
+            settingsValidated: false
         })
     }
 
     render() {
         if (this.state.tabs) {
+            // Map tab results to bootstrap Tab elements
             let guideTabs = this.state.tabs.map((results, index) => {
                 let tabIndex = results.tabIndex.toString();
                 return (
@@ -219,6 +233,7 @@ export default class GuideTabContainer extends Component {
 
             return (
                 <>
+                    {/* Guide Tab Container consisting of individual tab elements */}
                     <div id="guide-tabs-container">
                         <Tabs activeKey={this.state.activeKey} id="guide-tabs" onSelect={this.onTabSelect}>
                             {guideTabs}
@@ -227,49 +242,57 @@ export default class GuideTabContainer extends Component {
                             />
                         </Tabs>
                     </div>
-
+                    
+                    {/* Modal Form for editing tabs */}
+                    {console.log('Validated: ' + this.state.settingsValidated)}
                     <Modal show={this.state.showSettings} onHide={this.toggleSettings}>
                         <Modal.Header closeButton>
-                        <Modal.Title>Edit Tab</Modal.Title>
+                            <Modal.Title>Edit Tab</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Form ref={this.settingsForm}>
-                                <FloatingLabel
-                                    controlId="floatingTabName"
-                                    label="Tab Name"
-                                    className="mb-3"
-                                >
-                                    <Form.Control required ref={this.settingsTabName} defaultValue={currentTab.label || 'Untitled'} 
-                                        placeholder="Untitled"/>
-                                    <Form.Control.Feedback type="invalid">
-                                        Please enter a tab name.
-                                    </Form.Control.Feedback>
-                                </FloatingLabel>
-                                <FloatingLabel controlId="floatingExternalUrl" label="External URL">
-                                    <Form.Control ref={this.settingsExternalUrl} type="url" 
-                                        defaultValue={currentTab.externalUrl || ''} 
-                                        placeholder="https://www.library.miami.edu/" />
+                            <Form noValidate validated={this.state.settingsValidated} onSubmit={this.handleSettingsSubmit} id="settings-form">
+                                <Form.Group className="mb-3" controlId="formGroupTabName">
+                                    <FloatingLabel
+                                        controlId="floatingTabName"
+                                        label="Tab Name"
+                                        className="mb-3"
+                                    >
+                                        <Form.Control required ref={this.settingsTabName} minLength="3" defaultValue={currentTab.label || 'Untitled'} />
+                                        <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
                                         <Form.Control.Feedback type="invalid">
-                                            Please provide a valid URL.
+                                            Please enter a tab name with a minimum of 3 characters.
                                         </Form.Control.Feedback>
-                                </FloatingLabel>
+                                    </FloatingLabel>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formGroupExternalUrl">
+                                    <FloatingLabel controlId="floatingExternalUrl" label="External URL">
+                                        <Form.Control ref={this.settingsExternalUrl} type="url" 
+                                            defaultValue={currentTab.externalUrl || ''} />
+                                            <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                                            <Form.Control.Feedback type="invalid">
+                                                Please provide a valid URL.
+                                            </Form.Control.Feedback>
+                                    </FloatingLabel>
+                                </Form.Group>
                                 < br/>
-                                <FloatingLabel controlId="floatingTabVisibility" label="Visibility">
-                                    <Form.Select ref={this.settingsTabVisibility} size="sm" 
-                                        aria-label="Set visibility of tab" defaultValue={currentTab.visibility ? '1' : '0'}>
-                                        <option value="0">Hidden</option>
-                                        <option value="1">Public</option>
-                                    </Form.Select>
-                                </FloatingLabel>
+                                <Form.Group className="mb-3" controlId="formGroupTabVisibility">
+                                    <FloatingLabel controlId="floatingTabVisibility" label="Visibility">
+                                        <Form.Select ref={this.settingsTabVisibility} size="sm" 
+                                            aria-label="Set visibility of tab" defaultValue={currentTab.visibility ? '1' : '0'}>
+                                            <option value="0">Hidden</option>
+                                            <option value="1">Public</option>
+                                        </Form.Select>
+                                    </FloatingLabel>
+                                </Form.Group>
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                        <Button variant="secondary" onClick={this.toggleSettings}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={this.updateTab} disabled={this.savingChanges}>
-                            {this.state.savingChanges ? 'Saving...' : 'Save Changes'}
-                        </Button>
+                            <Button variant="secondary" onClick={this.toggleSettings}>
+                                Close
+                            </Button>
+                            <Button variant="primary" disabled={this.state.savingChanges} form="settings-form" type="submit">
+                                {this.state.savingChanges ? 'Saving...' : 'Save Changes'}
+                            </Button>
                         </Modal.Footer>
                     </Modal>
                 </>
