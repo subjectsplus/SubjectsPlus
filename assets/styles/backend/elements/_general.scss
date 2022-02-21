@@ -19,6 +19,16 @@ a {
     @include transition-all();
     color: var(--sp-nav-color);
   }
+
+  &.link-default {
+    color: var(--sp-font-color);
+    &:hover,
+    &:active,
+    &:focus {
+      @include transition-all();
+      color: var(--sp-nav-color);
+    }
+  }
 }
 
 h1, .h1,
@@ -149,4 +159,27 @@ h3, .h3 {
 .panel-basic {
   background-color: var(--sp-bg-color-alt);
   padding: $padding-sm;
+}
+
+// Lists with Images
+.list-img-75 {
+  .list-content {
+    width: calc(100% - 100px);
+    margin-left: .75rem;
+    align-self: center;
+    line-height: 1.2;
+  }
+  .list-img {
+    width: 75px;
+  }
+}
+
+.list-space {
+  li {
+    margin-bottom: .5rem;
+
+    &:last-child {
+      margin-bottom:0;
+    }
+  }
 }

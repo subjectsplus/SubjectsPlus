@@ -27,3 +27,26 @@
     }
   }
 }
+
+.sp-search-all {
+  @media (min-width: map-get($grid-breakpoints, md)) {
+    display: inline-block;
+    width: 475px;
+  }
+}
+
+.sp-round-search-group {
+  border-radius: 50rem !important;
+  border: 3px solid rgba(var(--sp-primary-color-rgb), 0.4);
+  margin-top: 0.5rem;
+
+  input {
+    border-top-left-radius: 50rem !important;
+    border-bottom-left-radius: 50rem !important;
+  }
+
+  button {
+    border-top-right-radius: 50rem !important;
+    border-bottom-right-radius: 50rem !important;
+  }
+}

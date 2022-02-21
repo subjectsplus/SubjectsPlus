@@ -85,9 +85,6 @@
                             <li><a class="dropdown-item" href="/control/log">{{ 'control.header.admin.logs' | trans }}</a></li>
                         </ul>
                     </li>
-                </ul>
-
-                <ul class="navbar-nav order-lg-last">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle user-nav-dropdown" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {# TODO: Replace icon with user profile thumbnail #}
@@ -99,15 +96,8 @@
                         </ul>
                     </li>
                 </ul>
-
-                {# TODO: Search as a working React component #}
-                <form>
-                    <div class="input-group">
-                        <input type="search" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
-                        <button class="btn btn-gradient" type="submit" id="search-button">{{ 'control.header.search.button' | trans }}</button>
-                    </div>
-                </form>
             </div>
         </div>
+        <a class="search-icon-nav ms-1" data-bs-toggle="offcanvas" href="#offcanvasSearchAll" role="button" aria-controls="offcanvasSearchAll"><i class="fas fa-search"></i></a>
     </div>
 </nav>
