@@ -415,7 +415,7 @@
       </trans-unit>
       <trans-unit id="BS6QohT" resname="control.dashboard.see_all_guides">
         <source>control.dashboard.see_all_guides</source>
-        <target>(See all)</target>
+        <target>(See all recent)</target>
       </trans-unit>
       <trans-unit id="7Hlj18x" resname="control.dashboard.records_heading">
         <source>control.dashboard.records_heading</source>
@@ -432,6 +432,30 @@
       <trans-unit id="ZSN2W0y" resname="control.dashboard.see_all_faqs">
         <source>control.dashboard.see_all_faqs</source>
         <target>(See all)</target>
+      </trans-unit>
+      <trans-unit id=".aCD8QF" resname="control.dashboard.favorite_guides_heading">
+        <source>control.dashboard.favorite_guides_heading</source>
+        <target>Favorite Guides</target>
+      </trans-unit>
+      <trans-unit id="mze0jB2" resname="control.dashboard.see_all_favorite_guides">
+        <source>control.dashboard.see_all_favorite_guides</source>
+        <target>(See favorite guides)</target>
+      </trans-unit>
+      <trans-unit id="WudrCZS" resname="control.header.user_icon">
+        <source>control.header.user_icon</source>
+        <target>User options</target>
+      </trans-unit>
+      <trans-unit id="FBfCFWu" resname="control.header.search_icon">
+        <source>control.header.search_icon</source>
+        <target>Search all</target>
+      </trans-unit>
+      <trans-unit id="O9MBzQe" resname="control.dashboard.guides.tab_heading.recent">
+        <source>control.dashboard.guides.tab_heading.recent</source>
+        <target>Recent</target>
+      </trans-unit>
+      <trans-unit id="CspaLm1" resname="control.dashboard.guides.tab_heading.favorites">
+        <source>control.dashboard.guides.tab_heading.favorites</source>
+        <target>Favorites</target>
       </trans-unit>
     </body>
   </file>

@@ -4,7 +4,7 @@
 
 //Custom colors
 :root, [data-mode="default"] {
-  --sp-bg-color: #fff9fe;
+  --sp-bg-color: #fafafa;
   --sp-bg-color-alt: #ffffff;
   --sp-primary-color: #c054a0;
   --sp-primary-color-rgb: 192, 84, 160;
@@ -205,6 +205,13 @@ $table-bg:                    var(--sp-table-bg-color);
 $table-color:                 var(--sp-font-color);
 $table-border-color:          var(--sp-border-color);
 $table-striped-bg:            var(--sp-table-striped);
+
+// Tabs
+$nav-tabs-border-color:             var(--sp-border-color);
+$nav-tabs-link-hover-border-color:  var(--sp-border-color) var(--sp-border-color) var(--sp-border-color);
+$nav-tabs-link-active-color:        var(--sp-input-selected-text);
+$nav-tabs-link-active-bg:           var(--sp-input-selected-bg);
+$nav-tabs-link-active-border-color: var(--sp-border-color)var(--sp-border-color) $nav-tabs-link-active-bg;;
 
 // Bootstrap Default Variables.
 @import "~bootstrap/scss/functions";
