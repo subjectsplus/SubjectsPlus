@@ -20,68 +20,21 @@
             <div class="col-5 text-end">
                 <h5 class="fw-light mb-0">Welcome, {{ app.user.fname }}</h5>
                 {# TODO: Fix path to edit profile #}
-                <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-link lh-1">
+                <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-link lh-1 fs-sm">
                     <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
                 </a>
             </div>
         </div>
-        <div class="dropdown basic-dropdown text-end">
-            <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-plus-circle"></i> {{ 'control.dashboard.create_new_button' | trans }}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownQuickLinks">
-                <li><a class="dropdown-item" href="/control/guides/build">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
-                <li><a class="dropdown-item" href="/control/record">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
-                <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
-            </ul>
-        </div>
+        {{ include('backend/dashboard/_action-menu.html.twig') }}
+
         <div class="panel-basic border-basic mt-4">
             <div class="row">
                 <div class="col-lg-6">
-                    {# TODO: Dynamically list user's 5 recent guides #}
-                    <h2 class="d-inline-block">{{ 'control.dashboard.guides_heading' | trans  }}</h2> <a href="/control/guides/" class="btn-link">{{ 'control.dashboard.see_all_guides' | trans  }}</a>
-                    <ul class="list-unstyled list-img-75">
-                        <li class="d-flex mb-2">
-                            <a href="#" class="d-inline-block"><img src="{{ asset('build/images/backend/thumb75.jpg') }}" class="img-thumbnail list-img" alt="Guide thumbnail" /></a>
-                           <a href="#" class="list-content link-default">Modern Art</a>
-                        </li>
-                        <li class="d-flex mb-2">
-                            <a href="#" class="d-inline-block"><img src="{{ asset('build/images/backend/thumb75.png') }}" class="img-thumbnail list-img" alt="Guide thumbnail" /></a>
-                            <a href="#" class="list-content link-default">APY 418: Introduction to Native and Indigenous Peoples and Perspectives: Stories of Resistance and Resilience</a>
-                        </li>
-                        <li class="d-flex mb-2">
-                            <a href="#" class="d-inline-block"><img src="{{ asset('build/images/backend/thumb75.jpg') }}" class="img-thumbnail list-img" alt="Guide thumbnail" /></a>
-                            <a href="#" class="list-content link-default">Native American and Global Indigenous Studies (NAGIS)</a>
-                        </li>
-                        <li class="d-flex mb-2">
-                            <a href="#" class="d-inline-block"><img src="{{ asset('build/images/backend/thumb75.jpg') }}" class="img-thumbnail list-img" alt="Guide thumbnail" /></a>
-                            <a href="#" class="list-content link-default">ARC 362/662/363/663 Environment | Building | System</a>
-                        </li>
-                        <li class="d-flex mb-2">
-                            <a href="#" class="d-inline-block"><img src="{{ asset('build/images/backend/thumb75.jpg') }}" class="img-thumbnail list-img" alt="Guide thumbnail" /></a>
-                            <a href="#" class="list-content link-default">Banned Books Week 2021</a>
-                        </li>
-                    </ul>
+                    {{ include('backend/dashboard/_guides-listing.html.twig') }}
                 </div>
                 <div class="col-lg-5 offset-lg-1 mt-4 mt-lg-0">
-                    {# TODO: Dynamically list user's 5 recent records #}
-                    <h2 class="d-inline-block">{{ 'control.dashboard.records_heading' | trans  }}</h2> <a href="/control/record/" class="btn-link">{{ 'control.dashboard.see_all_records' | trans  }}</a>
-                    <ul class="list-unstyled list-space">
-                        <li><a href="#" class="link-default">Wordle (NY Times)</a></li>
-                        <li><a href="#" class="link-default">Smashing Magazine</a></li>
-                        <li><a href="#" class="link-default">CSS Tricks</a></li>
-                        <li><a href="#" class="link-default">React JSX</a></li>
-                        <li><a href="#" class="link-default">Symfony Docs</a></li>
-                    </ul>
-                    <h2 class="d-inline-block mt-4">{{ 'control.dashboard.faqs_heading' | trans  }}</h2> <a href="/control/faq/" class="btn-link">{{ 'control.dashboard.see_all_faqs' | trans  }}</a>
-                    {# TODO: Dynamically list user's 5 recent faqs #}
-                    <ul class="list-unstyled list-space">
-                        <li><a href="#" class="link-default">How do I reserve a study room or equipment in Richter Library?</a></li>
-                        <li><a href="#" class="link-default">Can I renew my items online?</a></li>
-                        <li><a href="#" class="link-default">How do I find an E-journal?</a></li>
-                        <li><a href="#" class="link-default">How do you calculate printing cost?</a></li>
-                        <li><a href="#" class="link-default">How do I reserve a study room at Weeks Music Library?</a></li>
-                    </ul>
+                    {{ include('backend/dashboard/_records-listing.html.twig') }}
+                    {{ include('backend/dashboard/_faq-listing.html.twig') }}
                 </div>
             </div>
         </div>
