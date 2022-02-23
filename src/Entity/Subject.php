@@ -100,13 +100,6 @@ class Subject
     /**
      * @var string|null
      *
-     * @ORM\Column(name="background_link", type="string", length=255, nullable=true)
-     */
-    private $backgroundLink;
-
-    /**
-     * @var string|null
-     *
      * @ORM\Column(name="extra", type="string", length=255, nullable=true)
      */
     private $extra;
@@ -289,17 +282,6 @@ class Subject
     public function setLastModified(?\DateTimeInterface $lastModified): self
     {
         $this->lastModified = $lastModified;
-
-        return $this;
-    }
-
-    public function getBackgroundLink(): ?string {
-        return $this->backgroundLink;
-    }
-
-    public function setBackgroundLink(?string $backgroundLink): self
-    {
-        $this->backgroundLink = $backgroundLink;
 
         return $this;
     }
