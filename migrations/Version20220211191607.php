@@ -21,9 +21,13 @@ final class Version20220211191607 extends AbstractMigration
     {
         // drop keys related to title_id and change title_id type
         $this->addSql('ALTER TABLE rank DROP FOREIGN KEY fk_rank_title_id');
+        $this->addSql('ALTER TABLE location_title DROP FOREIGN KEY fk_lt_title_id');
         $this->addSql('DROP INDEX INDEXSEARCHtitle ON title');
         $this->addSql('ALTER TABLE title CHANGE title_id title_id INT AUTO_INCREMENT NOT NULL, CHANGE internal_notes internal_notes MEDIUMTEXT DEFAULT NULL');
 
+        // drop keys related to location_id
+        $this->addSql('ALTER TABLE location_title DROP FOREIGN KEY fk_lt_location_id');
+        
         // drop keys related to source_id and change source_id type
         $this->addSql('ALTER TABLE rank DROP FOREIGN KEY fk_rank_source_id');
         $this->addSql('ALTER TABLE source CHANGE source_id source_id INT AUTO_INCREMENT NOT NULL');
