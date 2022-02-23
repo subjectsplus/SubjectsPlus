@@ -97,6 +97,9 @@ final class Version20220211191607 extends AbstractMigration
         $this->addSql('ALTER TABLE title CHANGE title_id title_id BIGINT AUTO_INCREMENT NOT NULL, CHANGE internal_notes internal_notes MEDIUMTEXT CHARACTER SET utf8 DEFAULT NULL COLLATE `utf8_general_ci` COMMENT \'added v4.1\'');
         $this->addSql('CREATE INDEX INDEXSEARCHtitle ON title (title, alternate_title, description(200))');
 
+        $this->addSql('ALTER TABLE location_title ADD CONSTRAINT fk_lt_title_id FOREIGN KEY (title_id) REFERENCES title (title_id) ON UPDATE CASCADE ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE location_title ADD CONSTRAINT fk_lt_location_id FOREIGN KEY (location_id) REFERENCES location (location_id) ON UPDATE CASCADE ON DELETE CASCADE');
+
         $this->addSql('ALTER TABLE faq_subject CHANGE subject_id subject_id BIGINT DEFAULT NULL');
         $this->addSql('ALTER TABLE faq_subject ADD CONSTRAINT FK_FAQSUBJECT_SUBJECT_ID FOREIGN KEY (subject_id) REFERENCES subject (subject_id)');
         
