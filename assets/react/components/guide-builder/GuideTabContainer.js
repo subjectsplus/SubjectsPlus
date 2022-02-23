@@ -70,10 +70,21 @@ export default class GuideTabContainer extends Component {
             });
         })
         .then(results => {
+            // Retrieve highest untitled count
+            let numberUntitled = 0;
+            results['hydra:member'].forEach(result => {
+                if (result.label.includes('Untitled') && result.label.match(/\d+/)) {
+                    numberUntitled = Math.max(result.label.match(/\d+/)[0], numberUntitled);
+                }
+            });
+
+            console.log('Untitled count: ' + numberUntitled);
+
             this.setState({
                 tabs: results['hydra:member'],
                 lastTabIndex: results['hydra:member'].at(-1)['tabIndex'],
-                isErrored: false
+                isErrored: false,
+                numberUntitled: numberUntitled
             });
         }
         )
@@ -99,9 +110,9 @@ export default class GuideTabContainer extends Component {
     }
 
     newTab() {
-        let numberUntitled = this.state.numberUntitled;
         let initialTabData = {
-            label: (numberUntitled === 0 ? 'Untitled' : 'Untitled ' + numberUntitled),
+            label: (this.state.numberUntitled === 0 ? 'Untitled' : 
+                        'Untitled ' + (this.state.numberUntitled + 1)),
             tabIndex: this.state.lastTabIndex + 1,
             visibility: true,
             subject: '/api/subjects/' + this.props.guideId
@@ -137,11 +148,6 @@ export default class GuideTabContainer extends Component {
         let newExternalUrl = Utility.htmlEntityDecode(this.settingsExternalUrl.current.value.trim());
         let newVisibility = (this.settingsTabVisibility.current.value === '1');
 
-        // console.log('Tab Id: ' + currentTab.tabId)
-        // console.log('New Label: ' + newLabel);
-        // console.log('New External URL:' + newExternalUrl);
-        // console.log('New Visibility: ' + newVisibility);
-
         let data = {};
 
         // Check for any changes in tab data
@@ -172,14 +178,6 @@ export default class GuideTabContainer extends Component {
                 // replace old tab data with new tab data
                 let newTabs = [...this.state.tabs];
                 newTabs[this.state.activeKey] = data;
-                
-                // check if tab label changed from untitled
-                let numberUntitled = this.state.numberUntitled;
-                if (currentTab.label.includes('Untitled')) {
-                    if (!data.label.includes('Untitled')) {
-                        numberUntitled--;
-                    }
-                }
 
                 this.setState({
                     tabs: newTabs,
@@ -218,17 +216,13 @@ export default class GuideTabContainer extends Component {
             }
         }).then(response => {
             if (response.ok) {
-                // TODO: reorganize tab index
                 let newTabs = [...this.state.tabs];
                 let newActiveKey = 0;
                 let newLastTabIndex = this.state.lastTabIndex - 1;
                 
-                // remove the deleted tab from tabs state
+                // remove the deleted tab from tabs
                 newTabs.splice(this.state.activeKey, 1);
-                console.log('Old Tabs: ', this.state.tabs);
-                console.log('New Tabs: ', newTabs);
-                console.log('activeKey: ', this.state.activeKey);
-                console.log('lastTabIndex: ', this.state.lastTabIndex);
+
                 if (this.state.activeKey === this.state.lastTabIndex) {
                     // the tab at the end was deleted
                     newActiveKey = this.state.lastTabIndex - 1;
@@ -238,7 +232,6 @@ export default class GuideTabContainer extends Component {
                 
                 // Update tab index
                 for (let index = this.state.activeKey; index <= newLastTabIndex; index++) {
-                    console.log('Index: ', index);
                     newTabs[index].tabIndex = index;
                     
                     fetch(this.getTabLink(newTabs[index].tabId), {
@@ -255,8 +248,6 @@ export default class GuideTabContainer extends Component {
                     })
                 }
 
-                console.log('New activeKey: ', newActiveKey);
-                console.log('New lastTabindex: ', newLastTabIndex);
                 this.setState({
                     tabs: newTabs,
                     activeKey: newActiveKey,
@@ -328,7 +319,6 @@ export default class GuideTabContainer extends Component {
                 );
             });
             
-            console.log(this.state.activeKey);
             let currentTab = this.state.tabs[this.state.activeKey];
             console.log('Current tab id: ' + currentTab.tabId);
 
