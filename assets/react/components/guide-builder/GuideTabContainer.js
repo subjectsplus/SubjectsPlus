@@ -5,13 +5,15 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Alert from 'react-bootstrap/Alert'
 import Utility from '../../../js/Utility/Utility.js';
 import SectionContainer from './SectionContainer.js';
+import { array } from 'prop-types';
 
 export default class GuideTabContainer extends Component {
     apiLink = '/api/subjects/{subjectId}/tabs';
     postLink = '/api/tabs';
-    putLink = '/api/tabs/{tabId}';
+    tabLink = '/api/tabs/{tabId}';
 
     constructor(props) {
         super(props);
@@ -19,11 +21,13 @@ export default class GuideTabContainer extends Component {
         this.state = {
             tabs: null,
             lastTabIndex: 0,
-            activeKey: '0',
+            activeKey: 0,
             isErrored: false,
             showSettings: false,
             savingChanges: false,
             settingsValidated: false,
+            deleteTabClicked: false,
+            numberUntitled: 0
         };
 
         this.settingsTabName = React.createRef();
@@ -32,7 +36,8 @@ export default class GuideTabContainer extends Component {
 
         this.onTabSelect = this.onTabSelect.bind(this);
         this.toggleSettings = this.toggleSettings.bind(this);
-        this.updateTab = this.updateTab.bind(this);
+        this.updateCurrentTab = this.updateCurrentTab.bind(this);
+        this.handleTabDelete = this.handleTabDelete.bind(this);
         this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this);
     }
 
@@ -43,6 +48,11 @@ export default class GuideTabContainer extends Component {
     getAPILink() {
         return this.apiLink.replace('{subjectId}', 
             this.props.guideId);
+    }
+
+    getTabLink(tabId) {
+        return this.tabLink.replace('{tabId}', 
+            tabId);
     }
 
     getTabs() {
@@ -76,20 +86,22 @@ export default class GuideTabContainer extends Component {
     }
 
     onTabSelect(eventKey) {
+        console.log('Active Key: ', this.state.activeKey.toString());
         if (eventKey === 'new-tab') {
             // Create new tab
             this.newTab();
-        } else if (this.state.activeKey !== eventKey) {
+        } else if (this.state.activeKey.toString() !== eventKey) {
             this.setState({
-                activeKey: eventKey,
+                activeKey: Number(eventKey),
                 settingsValidated: false
             });
         }
     }
 
     newTab() {
+        let numberUntitled = this.state.numberUntitled;
         let initialTabData = {
-            label: 'Untitled',
+            label: (numberUntitled === 0 ? 'Untitled' : 'Untitled ' + numberUntitled),
             tabIndex: this.state.lastTabIndex + 1,
             visibility: true,
             subject: '/api/subjects/' + this.props.guideId
@@ -108,7 +120,8 @@ export default class GuideTabContainer extends Component {
                 tabs: [...this.state.tabs, data],
                 lastTabIndex: data.tabIndex,
                 activeKey: data.tabIndex,
-                settingsValidated: false
+                settingsValidated: false,
+                numberUntitled: this.state.numberUntitled + 1
             });
         })
         .catch((error) => {
@@ -117,17 +130,17 @@ export default class GuideTabContainer extends Component {
         });
     }
 
-    updateTab() {
+    updateCurrentTab() {
         let currentTab = this.state.tabs[this.state.activeKey];
 
         let newLabel = Utility.htmlEntityDecode(this.settingsTabName.current.value.trim());
         let newExternalUrl = Utility.htmlEntityDecode(this.settingsExternalUrl.current.value.trim());
         let newVisibility = (this.settingsTabVisibility.current.value === '1');
 
-        console.log('Tab Id: ' + currentTab.tabId)
-        console.log('New Label: ' + newLabel);
-        console.log('New External URL:' + newExternalUrl);
-        console.log('New Visibility: ' + newVisibility);
+        // console.log('Tab Id: ' + currentTab.tabId)
+        // console.log('New Label: ' + newLabel);
+        // console.log('New External URL:' + newExternalUrl);
+        // console.log('New Visibility: ' + newVisibility);
 
         let data = {};
 
@@ -145,7 +158,7 @@ export default class GuideTabContainer extends Component {
                 savingChanges: true
             });
 
-            let resLink = this.putLink.replace('{tabId}', currentTab.tabId);
+            let resLink = this.getTabLink(currentTab.tabId);
 
             fetch(resLink, {
                 method: 'PUT',
@@ -160,10 +173,19 @@ export default class GuideTabContainer extends Component {
                 let newTabs = [...this.state.tabs];
                 newTabs[this.state.activeKey] = data;
                 
+                // check if tab label changed from untitled
+                let numberUntitled = this.state.numberUntitled;
+                if (currentTab.label.includes('Untitled')) {
+                    if (!data.label.includes('Untitled')) {
+                        numberUntitled--;
+                    }
+                }
+
                 this.setState({
                     tabs: newTabs,
                     showSettings: false,
-                    savingChanges: false
+                    savingChanges: false,
+                    numberUntitled: numberUntitled
                 });
             })
             .catch((error) => {
@@ -185,13 +207,92 @@ export default class GuideTabContainer extends Component {
         }
     }
 
+    deleteCurrentTab() {
+        let currentTab = this.state.tabs[this.state.activeKey];
+        let resLink = this.getTabLink(currentTab.tabId);
+
+        fetch(resLink, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': '*/*',
+            }
+        }).then(response => {
+            if (response.ok) {
+                // TODO: reorganize tab index
+                let newTabs = [...this.state.tabs];
+                let newActiveKey = 0;
+                let newLastTabIndex = this.state.lastTabIndex - 1;
+                
+                // remove the deleted tab from tabs state
+                newTabs.splice(this.state.activeKey, 1);
+                console.log('Old Tabs: ', this.state.tabs);
+                console.log('New Tabs: ', newTabs);
+                console.log('activeKey: ', this.state.activeKey);
+                console.log('lastTabIndex: ', this.state.lastTabIndex);
+                if (this.state.activeKey === this.state.lastTabIndex) {
+                    // the tab at the end was deleted
+                    newActiveKey = this.state.lastTabIndex - 1;
+                } else if (this.state.activeKey !== 0) {
+                    newActiveKey = this.state.activeKey - 1;
+                }
+                
+                // Update tab index
+                for (let index = this.state.activeKey; index <= newLastTabIndex; index++) {
+                    console.log('Index: ', index);
+                    newTabs[index].tabIndex = index;
+                    
+                    fetch(this.getTabLink(newTabs[index].tabId), {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            tabIndex: index
+                        })
+                    }).catch(error => {
+                        alert('Error: Failed to update tab index of displaced tab!');
+                        console.error('Error: ', error);
+                    })
+                }
+
+                console.log('New activeKey: ', newActiveKey);
+                console.log('New lastTabindex: ', newLastTabIndex);
+                this.setState({
+                    tabs: newTabs,
+                    activeKey: newActiveKey,
+                    lastTabIndex: newLastTabIndex,
+                    deleteTabClicked: false,
+                    showSettings: false
+                });
+            }
+        })
+        .catch((error) => {
+            alert('Error: Failed to delete tab!');
+            console.error('Error:', error);
+            this.setState({
+                isErrored: true,
+                deleteTabClicked: false
+            });
+        });
+    }
+
+    handleTabDelete() {
+        if (this.state.deleteTabClicked) {
+            this.deleteCurrentTab();
+        } else {
+            this.setState({
+                deleteTabClicked: true
+            })
+        }
+    }
+
     handleSettingsSubmit(evt) {
         const form = evt.currentTarget;
         if (form.checkValidity() === false) {
           evt.preventDefault();
           evt.stopPropagation();
         } else {
-            this.updateTab();
+            this.updateCurrentTab();
         }
 
         this.setState({
@@ -202,7 +303,8 @@ export default class GuideTabContainer extends Component {
     toggleSettings() {
         this.setState({
             showSettings: !this.state.showSettings,
-            settingsValidated: false
+            settingsValidated: false,
+            deleteTabClicked: false
         })
     }
 
@@ -210,13 +312,12 @@ export default class GuideTabContainer extends Component {
         if (this.state.tabs) {
             // Map tab results to bootstrap Tab elements
             let guideTabs = this.state.tabs.map((results, index) => {
-                let tabIndex = results.tabIndex.toString();
                 return (
-                    <Tab key={results.tabId} eventKey={tabIndex} 
+                    <Tab key={results.tabId} eventKey={results.tabIndex} 
                         title={
                             <>
                                 {Utility.htmlEntityDecode(results.label)}{' '}
-                                {this.state.activeKey === tabIndex && 
+                                {this.state.activeKey === results.tabIndex && 
                                     <a href="#" onClick={this.toggleSettings} key={results.tabId} className="tab-settings-icon">
                                         <i className="fas fa-cog"></i>
                                     </a>}
@@ -227,9 +328,9 @@ export default class GuideTabContainer extends Component {
                 );
             });
             
+            console.log(this.state.activeKey);
             let currentTab = this.state.tabs[this.state.activeKey];
             console.log('Current tab id: ' + currentTab.tabId);
-            console.log(currentTab);
 
             return (
                 <>
@@ -244,7 +345,6 @@ export default class GuideTabContainer extends Component {
                     </div>
                     
                     {/* Modal Form for editing tabs */}
-                    {console.log('Validated: ' + this.state.settingsValidated)}
                     <Modal show={this.state.showSettings} onHide={this.toggleSettings}>
                         <Modal.Header closeButton>
                             <Modal.Title>Edit Tab</Modal.Title>
@@ -258,23 +358,11 @@ export default class GuideTabContainer extends Component {
                                         className="mb-3"
                                     >
                                         <Form.Control required ref={this.settingsTabName} minLength="3" defaultValue={currentTab.label || 'Untitled'} />
-                                        <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
                                         <Form.Control.Feedback type="invalid">
                                             Please enter a tab name with a minimum of 3 characters.
                                         </Form.Control.Feedback>
                                     </FloatingLabel>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formGroupExternalUrl">
-                                    <FloatingLabel controlId="floatingExternalUrl" label="External URL">
-                                        <Form.Control ref={this.settingsExternalUrl} type="url" 
-                                            defaultValue={currentTab.externalUrl || ''} />
-                                            <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
-                                            <Form.Control.Feedback type="invalid">
-                                                Please provide a valid URL.
-                                            </Form.Control.Feedback>
-                                    </FloatingLabel>
-                                </Form.Group>
-                                < br/>
                                 <Form.Group className="mb-3" controlId="formGroupTabVisibility">
                                     <FloatingLabel controlId="floatingTabVisibility" label="Visibility">
                                         <Form.Select ref={this.settingsTabVisibility} size="sm" 
@@ -284,7 +372,30 @@ export default class GuideTabContainer extends Component {
                                         </Form.Select>
                                     </FloatingLabel>
                                 </Form.Group>
+                                <Form.Group className="mb-3" controlId="formGroupExternalUrl">
+                                    <FloatingLabel controlId="floatingExternalUrl" label="Redirect URL (Optional)">
+                                        <Form.Control ref={this.settingsExternalUrl} type="url" 
+                                            defaultValue={currentTab.externalUrl || ''} />
+                                            <Form.Control.Feedback type="invalid">
+                                                Please provide a valid URL.
+                                            </Form.Control.Feedback>
+                                    </FloatingLabel>
+                                </Form.Group>
                             </Form>
+                            <Button variant="danger" onClick={this.handleTabDelete} disabled={this.state.deleteTabClicked || 
+                                this.state.lastTabIndex === 0}>
+                                <i className="fas fa-trash"></i>{' '}
+                                Delete Tab
+                            </Button>
+                            {this.state.deleteTabClicked && (
+                                <Alert variant="danger">
+                                    <>
+                                        Are you sure you want to delete this tab?{' '}
+                                        <a href="#" onClick={() => this.setState({deleteTabClicked: false})}>No</a>{' '}
+                                        <a href="#" onClick={this.handleTabDelete}>Yes</a>
+                                    </>
+                                </Alert>
+                            )}
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.toggleSettings}>
