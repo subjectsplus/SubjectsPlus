@@ -2,21 +2,12 @@
     <button class="btn btn-gradient btn-pill-icon dropdown-toggle" type="button" id="dropdownQuickLinks" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fas fa-plus-circle"></i> {{ 'control.dashboard.create_new_button' | trans }}
     </button>
-    <ul class="dropdown-menu mt-1" aria-labelledby="dropdownQuickLinks">
+    <ul class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="dropdownQuickLinks">
         <li><a class="dropdown-item" href="/control/guides/build">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
         <li><a class="dropdown-item" href="/control/record">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
         <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
+        {# TODO: Conditional - show menu options is user is Admin  #}
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item admin-menu-item" href="#">User</a></li>
     </ul>
 </div>
-
-<!-- New option
-<div class="text-end mt-3 mt-lg-1">
-    <div class="action-dropdown-expand">
-        <h6 class="action-dropdown-title mb-0"><i class="fas fa-plus-circle"></i> Create new</h6>
-        <ul class="list-unstyled d-flex flex-row flex-nowrap justify-content-evenly mb-0">
-            <li><a class="dropdown-item" href="/control/guides/build">{{ 'control.dashboard.create_new_guide' | trans }}</a></li>
-            <li><a class="dropdown-item" href="/control/record">{{ 'control.dashboard.create_new_record' | trans }}</a></li>
-            <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.dashboard.create_new_faq' | trans }}</a></li>
-        </ul>
-    </div>
-</div>-->
