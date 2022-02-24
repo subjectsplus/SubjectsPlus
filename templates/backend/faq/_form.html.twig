@@ -8,7 +8,10 @@
     </div>
     <div class="col-lg-3 offset-lg-1">
         <h3 class="mt-4 mt-lg-0">{{ 'control.faq.form.settings_header' | trans }}</h3>
-        {{ form_row(form.active, {'label': 'control.faq.form.active_faq' | trans}) }}
+        {{ form_row(form.active, {
+            'label': 'control.faq.form.active_faq' | trans,
+            'checked': false,
+        }) }}
         {{ form_row(form.keywords, {'label': 'control.faq.form.keywords' | trans}) }}
         {{ form_row(form.subject, {
             'label': 'control.faq.form.subject' | trans,

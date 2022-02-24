@@ -433,6 +433,54 @@
         <source>control.faqs.create_new_button</source>
         <target>__control.faqs.create_new_button</target>
       </trans-unit>
+      <trans-unit id="34M.Md3" resname="control.dashboard.guides_heading">
+        <source>control.dashboard.guides_heading</source>
+        <target>__control.dashboard.guides_heading</target>
+      </trans-unit>
+      <trans-unit id="BS6QohT" resname="control.dashboard.see_all_guides">
+        <source>control.dashboard.see_all_guides</source>
+        <target>__control.dashboard.see_all_guides</target>
+      </trans-unit>
+      <trans-unit id="7Hlj18x" resname="control.dashboard.records_heading">
+        <source>control.dashboard.records_heading</source>
+        <target>__control.dashboard.records_heading</target>
+      </trans-unit>
+      <trans-unit id="NyT6_cQ" resname="control.dashboard.see_all_records">
+        <source>control.dashboard.see_all_records</source>
+        <target>__control.dashboard.see_all_records</target>
+      </trans-unit>
+      <trans-unit id="sOipBSs" resname="control.dashboard.faqs_heading">
+        <source>control.dashboard.faqs_heading</source>
+        <target>__control.dashboard.faqs_heading</target>
+      </trans-unit>
+      <trans-unit id="ZSN2W0y" resname="control.dashboard.see_all_faqs">
+        <source>control.dashboard.see_all_faqs</source>
+        <target>__control.dashboard.see_all_faqs</target>
+      </trans-unit>
+      <trans-unit id=".aCD8QF" resname="control.dashboard.favorite_guides_heading">
+        <source>control.dashboard.favorite_guides_heading</source>
+        <target>__control.dashboard.favorite_guides_heading</target>
+      </trans-unit>
+      <trans-unit id="mze0jB2" resname="control.dashboard.see_all_favorite_guides">
+        <source>control.dashboard.see_all_favorite_guides</source>
+        <target>__control.dashboard.see_all_favorite_guides</target>
+      </trans-unit>
+      <trans-unit id="WudrCZS" resname="control.header.user_icon">
+        <source>control.header.user_icon</source>
+        <target>__control.header.user_icon</target>
+      </trans-unit>
+      <trans-unit id="FBfCFWu" resname="control.header.search_icon">
+        <source>control.header.search_icon</source>
+        <target>__control.header.search_icon</target>
+      </trans-unit>
+      <trans-unit id="O9MBzQe" resname="control.dashboard.guides.tab_heading.recent">
+        <source>control.dashboard.guides.tab_heading.recent</source>
+        <target>__control.dashboard.guides.tab_heading.recent</target>
+      </trans-unit>
+      <trans-unit id="CspaLm1" resname="control.dashboard.guides.tab_heading.favorites">
+        <source>control.dashboard.guides.tab_heading.favorites</source>
+        <target>__control.dashboard.guides.tab_heading.favorites</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
