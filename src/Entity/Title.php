@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Filter\FullTextSearchFilter;
@@ -22,7 +24,8 @@ use App\Filter\LetterSearchFilter;
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
  *     order={"title": "ASC"},
- *     paginationItemsPerPage=10
+ *     paginationItemsPerPage=10,
+ *     normalizationContext={"groups": {"title"}}
  * )
  * 
  * @ApiFilter(SearchFilter::class, properties={
@@ -49,6 +52,7 @@ class Title
      * @ORM\Column(name="title_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups({"title"})
      */
     private $titleId;
 
@@ -56,6 +60,7 @@ class Title
      * @var string|null
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     * @Groups({"title"})
      */
     private $title;
 
@@ -63,6 +68,7 @@ class Title
      * @var string|null
      *
      * @ORM\Column(name="alternate_title", type="string", length=255, nullable=true)
+     * @Groups({"title"})
      */
     private $alternateTitle;
 
@@ -70,6 +76,7 @@ class Title
      * @var string|null
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     * @Groups({"title"})
      */
     private $description;
 
@@ -77,6 +84,7 @@ class Title
      * @var string|null
      *
      * @ORM\Column(name="internal_notes", type="text", length=16777215, nullable=true)
+     * @Groups({"title"})
      */
     private $internalNotes;
 
@@ -84,6 +92,7 @@ class Title
      * @var string|null
      *
      * @ORM\Column(name="pre", type="string", length=255, nullable=true)
+     * @Groups({"title"})
      */
     private $pre;
 
@@ -91,6 +100,7 @@ class Title
      * @var string|null
      *
      * @ORM\Column(name="last_modified_by", type="string", length=50, nullable=true)
+     * @Groups({"title"})
      */
     private $lastModifiedBy;
 
@@ -98,6 +108,7 @@ class Title
      * @var \DateTime
      *
      * @ORM\Column(name="last_modified", type="datetime", nullable=false, options={"default": "CURRENT_TIMESTAMP"})
+     * @Groups({"title"})
      */
     private $lastModified;
 
@@ -106,14 +117,15 @@ class Title
      *
      * @ORM\OneToMany(targetEntity="Location", mappedBy="title")
      * @ApiSubresource(maxDepth=1)
+     * @Groups({"title"})
      */
     private $location;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Rank", mappedBy="title")
+     * @Groups({"title"})
      */
     private $ranks;
-
 
     /**
      * Constructor.
