@@ -176,6 +176,12 @@ h3, .h3 {
       display: none;
     }
   }
+
+  .dropdown-divider{
+    border-top:0;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    height:50%;
+  }
 }
 
 .action-dropdown-expand{
@@ -213,12 +219,57 @@ h3, .h3 {
       }
     }
   }
+
+  .dropdown-divider{
+    border-top:0;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    height:50%;
+    background-color: var(--sp-input-border-color);
+  }
+}
+
+[data-mode="dark"] {
+  .action-dropdown-expand{
+    .action-dropdown-title{
+      background: transparent;
+      margin-top: 0.25rem;
+    }
+
+    ul{
+      margin-top:.25rem;
+    }
+  }
+}
+
+
+// Admin only menu items
+[data-mode="default"] {
+  .admin-menu-item {
+    color: #277D82;
+    &:hover,
+    &:focus,
+    &:active {
+    color: darken(#277D82, 8%) !important;
+    }
+  }
+}
+
+[data-mode="dark"] {
+  .admin-menu-item {
+    color: var(--sp-accent-color);
+    &:hover,
+    &:focus,
+    &:active {
+      color: lighten(#3fc2c6, 10%) !important;
+    }
+  }
 }
 
 // Modals
 .modal-title {
   color: var(--sp-input-color);
 }
+
 
 // Panels
 .panel-basic {
