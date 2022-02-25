@@ -1,17 +1,48 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSearchAll" aria-labelledby="offcanvasSearchAllLabel">
     <div class="offcanvas-header">
-            <h3 class="offcanvas-title" id="offcanvasSearchAllLabel">Search all</h3>
+            <h3 class="offcanvas-title" id="offcanvasSearchAllLabel">{{ 'control.search_all.flyout.title' | trans }}</h3>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
     </div>
-    <div class="offcanvas-body text-center py-0">
+    <div class="offcanvas-body py-0">
         {# TODO: Search all as a working React component #}
-
-            <form>
-                <div class="input-group">
-                    <input type="search" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
-                    <button class="btn btn-gradient" type="submit" id="search-button">{{ 'control.header.search.button' | trans }}</button>
-                </div>
-            </form>
-
+        <form>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}">
+                <button class="btn btn-gradient dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Choose</button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">All</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <div class="input-group">
+                <input type="search" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
+                <button class="btn btn-gradient" type="submit" id="search-button">{{ 'control.header.search.button' | trans }}</button>
+            </div>
+            <p class="fs-sm fst-italic mt-1">Please enter a search term (minimum 3 characters).</p>
+        </form>
+        <ul class="list-unstyled sp-search-results-panel-list">
+            <li class="search-results-subheading">Records</li>
+            <li><a class="search-all-result-item" href="#">Biblioteca Digital Nacional de Cuba</a></li>
+            <li><a class="search-all-result-item" href="#">Mafia in Florida and Cuba: FBI Surveillance of Meyer Lansky and Santo Trafficante, Jr.</a></li>
+            <li><a class="search-all-result-item" href="#">Cuba Linda</a></li>
+            <li><a class="search-all-result-item" href="#">Feminism in Cuba: Nineteenth through Twentieth Century Archival Documents</a> </li>
+            <li><a class="search-all-result-item" href="#">Biblioteca Digital Nacional de Cuba</a></li>
+            <li class="search-results-subheading">Guides</li>
+            <li><a class="search-all-result-item" href="#">Afro-Cuban Collections</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Genealogy Research</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Heritage Collection</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Heritage Collection Theater</a></li>
+            <li><a class="search-all-result-item" href="#">HIS 310: Africa in Cuba/Cuba in Africa</a></li>
+            <li class="search-results-subheading">FAQs</li>
+            <li><a class="search-all-result-item" href="#">Afro-Cuban Collections</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Genealogy Research</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Heritage Collection</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Heritage Collection Theater</a></li>
+            <li><a class="search-all-result-item" href="#">HIS 310: Africa in Cuba/Cuba in Africa</a></li>
+            <div class="text-center my-2 d-block"><button class="btn btn-pill load-more-button">Load More</button></div>
+        </ul>
+        <div class="text-end d-block"><button class="btn btn-link scroll-to-top"><i class="fas fa-arrow-alt-circle-up"></i> Scroll To Top</button></div>
     </div>
 </div>
