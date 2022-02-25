@@ -24,9 +24,8 @@ Encore
     /*
     * React
      */
-    .addEntry('rep_log_react', './assets/js/rep_log_react.js')
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
-    .addEntry('react_select_init', './assets/js/select-field-type/initSelect.js')
+    .addEntry('react_select_init', './assets/backend/javascript/select-field-type/initSelect.js')
 
     // Record Component
     .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
@@ -36,7 +35,7 @@ Encore
     // Backend JS
     .addEntry('backend-main', './assets/backend/backend-main.js')
     .addEntry('mode-switcher', './assets/backend/mode-switcher.js')
-    .addEntry('guide_builder', './assets/backend/javascript/guide_builder_loader.js')
+    .addEntry('guide_builder', './assets/backend/javascript/entrypoints/guide_builder_loader.js')
 
     //Front-end Main JS
     .addEntry('frontend-main', './assets/frontend/frontend-main.js')
