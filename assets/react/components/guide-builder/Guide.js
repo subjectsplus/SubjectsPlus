@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GuideTabContainer from './GuideTabContainer.js';
-import Utility from '../../../js/Utility/Utility.js';
+import Utility from '../../../backend/javascript/Utility/Utility.js';
 
 export default class Guide extends Component {
     apiLink = '/api/subjects/';
