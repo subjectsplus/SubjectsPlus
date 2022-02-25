@@ -57,29 +57,9 @@
         <source>popular_list.new_databases</source>
         <target>New Databases</target>
       </trans-unit>
-      <trans-unit id="IqoIvz7" resname="control.dashboard.hello">
-        <source>control.dashboard.hello</source>
-        <target>Hello</target>
-      </trans-unit>
-      <trans-unit id="1ESeN7a" resname="control.dashboard.welcome">
-        <source>control.dashboard.welcome</source>
-        <target>Welcome</target>
-      </trans-unit>
-      <trans-unit id="m_HeL_J" resname="control.dashboard.friendly_message_coming_from">
-        <source>control.dashboard.friendly_message_coming_from</source>
-        <target>This friendly message is coming from</target>
-      </trans-unit>
-      <trans-unit id="AxEFdGk" resname="control.dashboard.your_controller_at">
-        <source>control.dashboard.your_controller_at</source>
-        <target>Your controller at</target>
-      </trans-unit>
-      <trans-unit id="hhDA0Xm" resname="control.dashboard.your_template_at">
-        <source>control.dashboard.your_template_at</source>
-        <target>Your template at</target>
-      </trans-unit>
       <trans-unit id="RV2LBXZ" resname="header.dashboard">
         <source>header.dashboard</source>
-        <target>Dashboard</target>
+        <target>At a Glance</target>
       </trans-unit>
       <trans-unit id="DFBCkgF" resname="control.dashboard.edit_profile">
         <source>control.dashboard.edit_profile</source>
@@ -263,7 +243,7 @@
       </trans-unit>
       <trans-unit id="FXKxO1H" resname="control.dashboard">
         <source>control.dashboard</source>
-        <target>Dashboard</target>
+        <target>At a Glance</target>
       </trans-unit>
       <trans-unit id="Bv6U9x8" resname="control.header.media">
         <source>control.header.media</source>
@@ -428,6 +408,54 @@
       <trans-unit id="JXTLIPa" resname="control.faqs.create_new_button">
         <source>control.faqs.create_new_button</source>
         <target>New FAQ</target>
+      </trans-unit>
+      <trans-unit id="34M.Md3" resname="control.dashboard.guides_heading">
+        <source>control.dashboard.guides_heading</source>
+        <target>Recent Guides</target>
+      </trans-unit>
+      <trans-unit id="BS6QohT" resname="control.dashboard.see_all_guides">
+        <source>control.dashboard.see_all_guides</source>
+        <target>(See all recent)</target>
+      </trans-unit>
+      <trans-unit id="7Hlj18x" resname="control.dashboard.records_heading">
+        <source>control.dashboard.records_heading</source>
+        <target>Records</target>
+      </trans-unit>
+      <trans-unit id="NyT6_cQ" resname="control.dashboard.see_all_records">
+        <source>control.dashboard.see_all_records</source>
+        <target>(See all)</target>
+      </trans-unit>
+      <trans-unit id="sOipBSs" resname="control.dashboard.faqs_heading">
+        <source>control.dashboard.faqs_heading</source>
+        <target>FAQs</target>
+      </trans-unit>
+      <trans-unit id="ZSN2W0y" resname="control.dashboard.see_all_faqs">
+        <source>control.dashboard.see_all_faqs</source>
+        <target>(See all)</target>
+      </trans-unit>
+      <trans-unit id=".aCD8QF" resname="control.dashboard.favorite_guides_heading">
+        <source>control.dashboard.favorite_guides_heading</source>
+        <target>Favorite Guides</target>
+      </trans-unit>
+      <trans-unit id="mze0jB2" resname="control.dashboard.see_all_favorite_guides">
+        <source>control.dashboard.see_all_favorite_guides</source>
+        <target>(See favorite guides)</target>
+      </trans-unit>
+      <trans-unit id="WudrCZS" resname="control.header.user_icon">
+        <source>control.header.user_icon</source>
+        <target>User options</target>
+      </trans-unit>
+      <trans-unit id="FBfCFWu" resname="control.header.search_icon">
+        <source>control.header.search_icon</source>
+        <target>Search all</target>
+      </trans-unit>
+      <trans-unit id="O9MBzQe" resname="control.dashboard.guides.tab_heading.recent">
+        <source>control.dashboard.guides.tab_heading.recent</source>
+        <target>Recent</target>
+      </trans-unit>
+      <trans-unit id="CspaLm1" resname="control.dashboard.guides.tab_heading.favorites">
+        <source>control.dashboard.guides.tab_heading.favorites</source>
+        <target>Favorites</target>
       </trans-unit>
     </body>
   </file>

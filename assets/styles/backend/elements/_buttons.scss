@@ -65,6 +65,15 @@
   &:focus {
     color: var(--sp-nav-color);
   }
+
+  i {
+    color: var(--sp-nav-color);
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--sp-nav-color);
+    }
+  }
 }
 
 .btn-link-danger {
