@@ -182,8 +182,7 @@ export default class GuideTabContainer extends Component {
                 this.setState({
                     tabs: newTabs,
                     showSettings: false,
-                    savingChanges: false,
-                    numberUntitled: numberUntitled
+                    savingChanges: false
                 });
             })
             .catch((error) => {
