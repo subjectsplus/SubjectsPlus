@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Utility from '../../js/Utility/Utility.js';
+import Utility from '../../backend/javascript/Utility/Utility.js';
 
 export default class Token extends Component {
 
