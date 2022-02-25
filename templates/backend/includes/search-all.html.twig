@@ -6,6 +6,16 @@
     <div class="offcanvas-body py-0">
         {# TODO: Search all as a working React component #}
         <form>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary fs-xs" for="btncheck1">All</label>
+
+                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                <label class="btn btn-outline-primary fs-xs" for="btncheck2">Checkbox 2</label>
+
+                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                <label class="btn btn-outline-primary fs-xs" for="btncheck3">Checkbox 3</label>
+            </div>
 
             <div class="input-group">
                 <input type="search" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
