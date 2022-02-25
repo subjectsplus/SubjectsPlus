@@ -51,9 +51,9 @@ class Faq
     /**
      * @var bool
      *
-     * @ORM\Column(name="active", type="boolean", nullable="false")
+     * @ORM\Column(name="active", type="boolean", nullable="false", options={"default": "0"})
      */
-    private $active;
+    private $active = false;
 
     /**
      * @var ArrayCollection
@@ -72,7 +72,6 @@ class Faq
     public function __construct() {
         $this->faqSubject = new ArrayCollection();
         $this->faqFaqpage = new ArrayCollection();
-        $this->active = true;
     }
 
     public function getFaqId(): ?int
