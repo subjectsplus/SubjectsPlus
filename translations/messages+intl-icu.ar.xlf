@@ -4402,6 +4402,22 @@
         <source>control.dashboard.guides.tab_heading.favorites</source>
         <target>__control.dashboard.guides.tab_heading.favorites</target>
       </trans-unit>
+      <trans-unit id=".boJlqY" resname="control.faq.form.active_faq_note">
+        <source>control.faq.form.active_faq_note</source>
+        <target>__control.faq.form.active_faq_note</target>
+      </trans-unit>
+      <trans-unit id="t8XKmOg" resname="control.faq.form.active_faq_true.message">
+        <source>control.faq.form.active_faq_true.message</source>
+        <target>__control.faq.form.active_faq_true.message</target>
+      </trans-unit>
+      <trans-unit id="VdAEXv2" resname="control.faq.form.active_faq_false.message">
+        <source>control.faq.form.active_faq_false.message</source>
+        <target>__control.faq.form.active_faq_false.message</target>
+      </trans-unit>
+      <trans-unit id="5T_nSNx" resname="control.search_all.flyout.title">
+        <source>control.search_all.flyout.title</source>
+        <target>__control.search_all.flyout.title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
