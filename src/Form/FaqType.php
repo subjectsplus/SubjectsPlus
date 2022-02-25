@@ -35,6 +35,7 @@ class FaqType extends AbstractType
                 'label_attr' => [
                     'class' => 'checkbox-switch',
                 ],
+                'empty_data' => false,
             ])
             ->add('keywords', TextType::class, [
                 'required' => false,

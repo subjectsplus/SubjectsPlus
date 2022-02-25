@@ -15,9 +15,8 @@
     <div class="col-lg-3 offset-lg-1">
         <h3 class="mt-4 mt-lg-0">{{ 'control.faq.form.settings_header' | trans }}</h3>
         {{ form_row(form.active, {
-            'label': 'control.faq.form.active_faq' | trans,
-            'checked': false,
-        }) }}
+            'label': 'control.faq.form.active_faq' | trans }) }}
+        {{     dump(form.vars.value)  }}
         {% if form.active.vars.value == true %}
             <p class="fs-xs fst-italic mt-n3 mb-4">{{ 'control.faq.form.active_faq_true.message' | trans  }}</p>
         {%  else %}
