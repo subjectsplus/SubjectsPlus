@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import GuideTabContainer from './GuideTabContainer.js';
-import Utility from '../../../js/Utility/Utility.js';
+import Utility from '../../../backend/javascript/Utility/Utility.js';
 
 export default class Guide extends Component {
     apiLink = '/api/subjects/';
@@ -70,6 +69,3 @@ export default class Guide extends Component {
         }
     }
 }
-
-ReactDOM.render(<Guide guideId="653876" />, 
-    document.getElementById('guide-builder-container'));
