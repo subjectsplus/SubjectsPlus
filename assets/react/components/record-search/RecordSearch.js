@@ -41,7 +41,7 @@ export default class RecordSearch extends Component {
                 extras={
                     <div className="form-check form-switch">
                         <input id="azlist" name="azlist" type="checkbox" className="form-check-input" checked={this.state.azlist} onChange={this.onAZListCheckBoxInput} />
-                            <label className="form-check-label" for="azlist">Limit to A-Z List</label>
+                            <label className="form-check-label" htmlFor="azlist">Limit to A-Z List</label>
                     </div>} />
         );
     }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Location.
@@ -39,6 +40,7 @@ class Location
      * @var string|null
      *
      * @ORM\Column(name="location", type="text", length=65535, nullable=true)
+     * @Groups({"title"})
      */
     private $location;
 
@@ -46,6 +48,7 @@ class Location
      * @var string|null
      *
      * @ORM\Column(name="eres_display", type="string", length=1, nullable=true)
+     * @Groups({"title"})
      */
     private $eresDisplay;
 
@@ -74,6 +77,7 @@ class Location
      * @var string|null
      *
      * @ORM\Column(name="ctags", type="string", length=255, nullable=true)
+     * @Groups({"title"})
      */
     private $ctags;
 
@@ -81,6 +85,7 @@ class Location
      * @var string|null
      *
      * @ORM\Column(name="record_status", type="string", length=255, nullable=true)
+     * @Groups({"title"})
      */
     private $recordStatus;
 
@@ -105,6 +110,7 @@ class Location
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(name="format", referencedColumnName="format_id")
      * })
+     * @Groups({"title"})
      */
     private $format;
 
@@ -115,6 +121,7 @@ class Location
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(name="access_restrictions", referencedColumnName="restrictions_id")
      * })
+     * @Groups({"title"})
      */
     private $accessRestrictions;
 

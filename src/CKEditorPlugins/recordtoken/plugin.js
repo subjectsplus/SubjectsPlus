@@ -96,7 +96,7 @@
                     // and update if applicable
                     var linkElement = this.element.findOne('.' + linkClass);
                     if (record && linkElement) {
-                        var locationFromDB = record.location;
+                        var locationFromDB = htmlEntityDecode(record.location);
                         var locationFromLocal = linkElement.getAttribute('href');
                         
                         if (locationFromDB !== locationFromLocal) {
