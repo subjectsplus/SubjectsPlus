@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Alert from 'react-bootstrap/Alert'
-import Utility from '../../../js/Utility/Utility.js';
+import Utility from '../../../backend/javascript/Utility/Utility.js';
 import SectionContainer from './SectionContainer.js';
 import { array } from 'prop-types';
 

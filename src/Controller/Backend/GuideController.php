@@ -68,7 +68,7 @@ class GuideController extends AbstractController
                 $this->addFlash('notice', 'Success! Created new Guide!');
             });
 
-            return $this->redirectToRoute('guide_show', [
+            return $this->redirectToRoute('guide_build', [
                 'subjectId' => $subject->getSubjectId(),
             ]);
         }
@@ -80,11 +80,11 @@ class GuideController extends AbstractController
     }
 
     /**
-     * @Route("/build", name="guide_build", methods={"GET"})
+     * @Route("/build/{subjectId}", name="guide_build", methods={"GET"})
      */
-    public function build(): Response
+    public function build(Subject $subject): Response
     {
-        return $this->render('backend/guide/builder.html.twig', []);
+        return $this->render('backend/guide/builder.html.twig');
     }
 
     /**
