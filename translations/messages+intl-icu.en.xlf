@@ -287,7 +287,7 @@
       </trans-unit>
       <trans-unit id="KuHVLvv" resname="control.header.search.placeholder">
         <source>control.header.search.placeholder</source>
-        <target>Search all</target>
+        <target>Search SubjectsPlus</target>
       </trans-unit>
       <trans-unit id="oJEnRYh" resname="control.header.search.aria.label">
         <source>control.header.search.aria.label</source>
@@ -347,11 +347,11 @@
       </trans-unit>
       <trans-unit id=".MATTgF" resname="control.faq.form.subject_placeholder">
         <source>control.faq.form.subject_placeholder</source>
-        <target>Select a Subject or Course</target>
+        <target>Add a Subject or Course</target>
       </trans-unit>
       <trans-unit id="LlIo4cc" resname="control.faq.form.faq_collection_page_placeholder">
         <source>control.faq.form.faq_collection_page_placeholder</source>
-        <target>Select a Collection</target>
+        <target>Add a Collection</target>
       </trans-unit>
       <trans-unit id="frBk6HE" resname="control.flyout.add_record_token.heading">
         <source>control.flyout.add_record_token.heading</source>
@@ -359,7 +359,7 @@
       </trans-unit>
       <trans-unit id="u5gZ36W" resname="control.custom_tokens_menu.add_button">
         <source>control.custom_tokens_menu.add_button</source>
-        <target>Add</target>
+        <target>Insert</target>
       </trans-unit>
       <trans-unit id="GqmMTUv" resname="control.custom_tokens_menu.add_record_token">
         <source>control.custom_tokens_menu.add_record_token</source>
@@ -456,6 +456,18 @@
       <trans-unit id="CspaLm1" resname="control.dashboard.guides.tab_heading.favorites">
         <source>control.dashboard.guides.tab_heading.favorites</source>
         <target>Favorites</target>
+      </trans-unit>
+      <trans-unit id="t8XKmOg" resname="control.faq.form.active_faq_true.message">
+        <source>control.faq.form.active_faq_true.message</source>
+        <target>This FAQ is public</target>
+      </trans-unit>
+      <trans-unit id="VdAEXv2" resname="control.faq.form.active_faq_false.message">
+        <source>control.faq.form.active_faq_false.message</source>
+        <target>This FAQ is NOT public</target>
+      </trans-unit>
+      <trans-unit id="5T_nSNx" resname="control.search_all.flyout.title">
+        <source>control.search_all.flyout.title</source>
+        <target>Search all</target>
       </trans-unit>
     </body>
   </file>

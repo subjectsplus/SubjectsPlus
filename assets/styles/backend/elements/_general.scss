@@ -277,8 +277,8 @@ h3, .h3 {
   padding: $padding-sm;
 }
 
-// Lists with Images
-.list-img-75 {
+// Lists
+.list-img-75 { //list with img 75px
   .list-content {
     width: calc(100% - 100px);
     margin-left: .75rem;
