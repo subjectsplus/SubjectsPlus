@@ -35,6 +35,7 @@ class FaqType extends AbstractType
                 'label_attr' => [
                     'class' => 'checkbox-switch',
                 ],
+                'empty_data' => false,
             ])
             ->add('keywords', TextType::class, [
                 'required' => false,
@@ -49,8 +50,8 @@ class FaqType extends AbstractType
                     return $subject;
                 },
                 'multiple' => true,
-                'placeholder' => 'Select a subject',
-                'attr' => ['data-placeholder-text' => 'Select a false subject'],
+                'placeholder' => 'Add a Subject or Course',
+                'attr' => ['data-placeholder-text' => 'Add a Subject or Course'],
                 'expanded' => false,
             ])
             ->add('faqpage', EntityType::class, [
@@ -61,8 +62,8 @@ class FaqType extends AbstractType
                     return $faqPage;
                 },
                 'multiple' => true,
-                'placeholder' => 'Select a collection',
-                'attr' => ['data-placeholder-text' => 'Select a collection'],
+                'placeholder' => 'Add a Collection',
+                'attr' => ['data-placeholder-text' => 'Add a Collection'],
                 'expanded' => false,
             ]);
     }

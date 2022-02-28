@@ -57,29 +57,9 @@
         <source>popular_list.new_databases</source>
         <target>New Databases</target>
       </trans-unit>
-      <trans-unit id="IqoIvz7" resname="control.dashboard.hello">
-        <source>control.dashboard.hello</source>
-        <target>Hello</target>
-      </trans-unit>
-      <trans-unit id="1ESeN7a" resname="control.dashboard.welcome">
-        <source>control.dashboard.welcome</source>
-        <target>Welcome</target>
-      </trans-unit>
-      <trans-unit id="m_HeL_J" resname="control.dashboard.friendly_message_coming_from">
-        <source>control.dashboard.friendly_message_coming_from</source>
-        <target>This friendly message is coming from</target>
-      </trans-unit>
-      <trans-unit id="AxEFdGk" resname="control.dashboard.your_controller_at">
-        <source>control.dashboard.your_controller_at</source>
-        <target>Your controller at</target>
-      </trans-unit>
-      <trans-unit id="hhDA0Xm" resname="control.dashboard.your_template_at">
-        <source>control.dashboard.your_template_at</source>
-        <target>Your template at</target>
-      </trans-unit>
       <trans-unit id="RV2LBXZ" resname="header.dashboard">
         <source>header.dashboard</source>
-        <target>Dashboard</target>
+        <target>At a Glance</target>
       </trans-unit>
       <trans-unit id="DFBCkgF" resname="control.dashboard.edit_profile">
         <source>control.dashboard.edit_profile</source>
@@ -263,7 +243,7 @@
       </trans-unit>
       <trans-unit id="FXKxO1H" resname="control.dashboard">
         <source>control.dashboard</source>
-        <target>Dashboard</target>
+        <target>At a Glance</target>
       </trans-unit>
       <trans-unit id="Bv6U9x8" resname="control.header.media">
         <source>control.header.media</source>
@@ -307,7 +287,7 @@
       </trans-unit>
       <trans-unit id="KuHVLvv" resname="control.header.search.placeholder">
         <source>control.header.search.placeholder</source>
-        <target>Search all</target>
+        <target>Search SubjectsPlus</target>
       </trans-unit>
       <trans-unit id="oJEnRYh" resname="control.header.search.aria.label">
         <source>control.header.search.aria.label</source>
@@ -367,11 +347,11 @@
       </trans-unit>
       <trans-unit id=".MATTgF" resname="control.faq.form.subject_placeholder">
         <source>control.faq.form.subject_placeholder</source>
-        <target>Select a Subject or Course</target>
+        <target>Add a Subject or Course</target>
       </trans-unit>
       <trans-unit id="LlIo4cc" resname="control.faq.form.faq_collection_page_placeholder">
         <source>control.faq.form.faq_collection_page_placeholder</source>
-        <target>Select a Collection</target>
+        <target>Add a Collection</target>
       </trans-unit>
       <trans-unit id="frBk6HE" resname="control.flyout.add_record_token.heading">
         <source>control.flyout.add_record_token.heading</source>
@@ -379,7 +359,7 @@
       </trans-unit>
       <trans-unit id="u5gZ36W" resname="control.custom_tokens_menu.add_button">
         <source>control.custom_tokens_menu.add_button</source>
-        <target>Add</target>
+        <target>Insert</target>
       </trans-unit>
       <trans-unit id="GqmMTUv" resname="control.custom_tokens_menu.add_record_token">
         <source>control.custom_tokens_menu.add_record_token</source>
@@ -428,6 +408,66 @@
       <trans-unit id="JXTLIPa" resname="control.faqs.create_new_button">
         <source>control.faqs.create_new_button</source>
         <target>New FAQ</target>
+      </trans-unit>
+      <trans-unit id="34M.Md3" resname="control.dashboard.guides_heading">
+        <source>control.dashboard.guides_heading</source>
+        <target>Recent Guides</target>
+      </trans-unit>
+      <trans-unit id="BS6QohT" resname="control.dashboard.see_all_guides">
+        <source>control.dashboard.see_all_guides</source>
+        <target>(See all recent)</target>
+      </trans-unit>
+      <trans-unit id="7Hlj18x" resname="control.dashboard.records_heading">
+        <source>control.dashboard.records_heading</source>
+        <target>Records</target>
+      </trans-unit>
+      <trans-unit id="NyT6_cQ" resname="control.dashboard.see_all_records">
+        <source>control.dashboard.see_all_records</source>
+        <target>(See all)</target>
+      </trans-unit>
+      <trans-unit id="sOipBSs" resname="control.dashboard.faqs_heading">
+        <source>control.dashboard.faqs_heading</source>
+        <target>FAQs</target>
+      </trans-unit>
+      <trans-unit id="ZSN2W0y" resname="control.dashboard.see_all_faqs">
+        <source>control.dashboard.see_all_faqs</source>
+        <target>(See all)</target>
+      </trans-unit>
+      <trans-unit id=".aCD8QF" resname="control.dashboard.favorite_guides_heading">
+        <source>control.dashboard.favorite_guides_heading</source>
+        <target>Favorite Guides</target>
+      </trans-unit>
+      <trans-unit id="mze0jB2" resname="control.dashboard.see_all_favorite_guides">
+        <source>control.dashboard.see_all_favorite_guides</source>
+        <target>(See favorite guides)</target>
+      </trans-unit>
+      <trans-unit id="WudrCZS" resname="control.header.user_icon">
+        <source>control.header.user_icon</source>
+        <target>User options</target>
+      </trans-unit>
+      <trans-unit id="FBfCFWu" resname="control.header.search_icon">
+        <source>control.header.search_icon</source>
+        <target>Search all</target>
+      </trans-unit>
+      <trans-unit id="O9MBzQe" resname="control.dashboard.guides.tab_heading.recent">
+        <source>control.dashboard.guides.tab_heading.recent</source>
+        <target>Recent</target>
+      </trans-unit>
+      <trans-unit id="CspaLm1" resname="control.dashboard.guides.tab_heading.favorites">
+        <source>control.dashboard.guides.tab_heading.favorites</source>
+        <target>Favorites</target>
+      </trans-unit>
+      <trans-unit id="t8XKmOg" resname="control.faq.form.active_faq_true.message">
+        <source>control.faq.form.active_faq_true.message</source>
+        <target>This FAQ is public</target>
+      </trans-unit>
+      <trans-unit id="VdAEXv2" resname="control.faq.form.active_faq_false.message">
+        <source>control.faq.form.active_faq_false.message</source>
+        <target>This FAQ is NOT public</target>
+      </trans-unit>
+      <trans-unit id="5T_nSNx" resname="control.search_all.flyout.title">
+        <source>control.search_all.flyout.title</source>
+        <target>Search all</target>
       </trans-unit>
     </body>
   </file>
