@@ -47,7 +47,7 @@
             'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans}
         }) }}
         {{ form_rest(form) }}
-        <button class="btn btn-gradient mt-3">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
+        <button class="btn btn-gradient btn-round mt-3">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
         {{ form_end(form) }}
         {% if delete_faq == 'true' %}
             {{ include('backend/faq/_delete_form.html.twig') }}

@@ -42,6 +42,34 @@
   }
 }
 
+.btn-float-icon {
+  color: var(--sp-font-color);
+  background-color: transparent;
+  border: none;
+  border-radius: $border-radius-pill;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+
+  i {
+    font-size: 1.5rem;
+    vertical-align: text-bottom;
+    padding-right: 0.125rem;
+    color: var(--sp-nav-color);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--sp-nav-color);
+    box-shadow: none;
+  }
+}
+
+.btn-round {
+  border-radius: $border-radius-pill;
+  box-shadow: 0 0 0 0.25rem rgba(var(--sp-primary-color-rgb), 20%);
+}
+
 .btn-pill {
   border-radius: $border-radius-pill;
   font-size: $font-size-sm;
@@ -104,3 +132,6 @@
     background-color: #DBE2E6;
   }
 }
+
+.btn-outline-accent {}
+
