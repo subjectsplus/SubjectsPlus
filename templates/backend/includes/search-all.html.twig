@@ -6,23 +6,38 @@
     <div class="offcanvas-body py-0">
         {# TODO: Search all as a working React component #}
         <form>
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic checkbox toggle button group">
-                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked>
-                <label class="btn btn-outline-primary fs-xs" for="btncheck1">All</label>
+            {# Search filters #}
+            <div class="btn-group btn-group-sm mb-3 search-all-filters" role="group" aria-label="Search all filters">
+                <input type="checkbox" class="btn-check" id="searchFilterAll" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="searchFilterAll">All</label>
 
-                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                <label class="btn btn-outline-primary fs-xs" for="btncheck2">Checkbox 2</label>
+                <input type="checkbox" class="btn-check" id="searchFilterRecords" autocomplete="off">
+                <label class="btn btn-outline-primary" for="searchFilterRecords">Records</label>
 
-                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                <label class="btn btn-outline-primary fs-xs" for="btncheck3">Checkbox 3</label>
+                <input type="checkbox" class="btn-check" id="searchFilterGuides" autocomplete="off">
+                <label class="btn btn-outline-primary" for="searchFilterGuides">Guides</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterFaqs" autocomplete="off">
+                <label class="btn btn-outline-primary" for="searchFilterFaqs">FAQs</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterPluslets" autocomplete="off">
+                <label class="btn btn-outline-primary" for="searchFilterPluslets">Pluslets</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterStaff" autocomplete="off">
+                <label class="btn btn-outline-primary" for="searchFilterStaff">Staff</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterTalkback" autocomplete="off">
+                <label class="btn btn-outline-primary" for="searchFilterTalkback">Talkbacks</label>
             </div>
 
+            {# Search input #}
             <div class="input-group">
-                <input type="search" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
+                <input id="search-temp" type="text" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
                 <button class="btn btn-gradient" type="submit" id="search-button">{{ 'control.header.search.button' | trans }}</button>
             </div>
             <p class="fs-sm fst-italic mt-1">Please enter a search term (minimum 3 characters).</p>
         </form>
+
         <ul class="list-unstyled sp-search-results-panel-list">
             <li class="search-results-subheading">Records</li>
             <li><a class="search-all-result-item" href="#">Biblioteca Digital Nacional de Cuba</a></li>

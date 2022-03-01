@@ -79,3 +79,35 @@
   border-radius: 50rem !important;
   border: 3px solid rgba(var(--sp-primary-color-rgb), 0.4);
 }
+
+.search-all-filters {
+  .btn-outline-primary {
+    color: var(--sp-font-color);
+    border-color: var(--sp-accent-color);
+    background-color: transparent ;
+    font-size: $font-size-mini;
+    &:hover{
+      @include transition-all();
+      background-color: var(--sp-accent-color);
+      color: $white;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btn-check{
+    &:focus {
+      box-shadow: none;
+    }
+    &:checked,
+    &:active {
+      + .btn-outline-primary {
+        color: $white;
+        border-color: var(--sp-accent-color);
+        background-color: var(--sp-accent-color);
+      }
+    }
+
+  }
+}
