@@ -5,10 +5,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
+import Nav from 'react-bootstrap/Nav';
 import Utility from '../../../backend/javascript/Utility/Utility.js';
 import SectionContainer from './SectionContainer.js';
-import { array } from 'prop-types';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default class GuideTabContainer extends Component {
     apiLink = '/api/subjects/{subjectId}/tabs';
@@ -40,6 +41,7 @@ export default class GuideTabContainer extends Component {
         this.updateCurrentTab = this.updateCurrentTab.bind(this);
         this.handleTabDelete = this.handleTabDelete.bind(this);
         this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this);
+        this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
     }
 
     componentDidMount() {
@@ -74,8 +76,12 @@ export default class GuideTabContainer extends Component {
             // Retrieve highest untitled count
             let numberUntitled = 0;
             results['hydra:member'].forEach(result => {
-                if (result.label.includes('Untitled') && result.label.match(/\d+/)) {
-                    numberUntitled = Math.max(result.label.match(/\d+/)[0], numberUntitled);
+                if (result.label.includes('Untitled')) {
+                    if (result.label.match(/\d+/)) {
+                        numberUntitled = Math.max(result.label.match(/\d+/)[0], numberUntitled);
+                    } else {
+                        numberUntitled = Math.max(numberUntitled, 1);
+                    }
                 }
             });
 
@@ -274,7 +280,7 @@ export default class GuideTabContainer extends Component {
             this.setState({
                 deletingTab: true
             }, () => {
-                this.deleteCurrentTab()
+                this.deleteCurrentTab();
             });
         } else {
             this.setState({
@@ -306,43 +312,83 @@ export default class GuideTabContainer extends Component {
             showSettings: !this.state.showSettings,
             settingsValidated: false,
             deleteTabClicked: false
+        });
+
+        return false;
+    }
+
+    handleOnDragEnd(result) {
+        let newTabs = [...this.state.tabs];
+        let [reorderedItem] = newTabs.splice(result.source.index, 1);
+        newTabs.splice(result.destination.index, 0, reorderedItem);
+
+        this.setState({
+            tabs: newTabs
         })
     }
 
     render() {
         if (this.state.tabs) {
-            // Map tab results to bootstrap Tab elements
-            let guideTabs = this.state.tabs.map((results, index) => {
-                return (
-                    <Tab key={results.tabId} eventKey={results.tabIndex} 
-                        title={
-                            <>
+            
+            // convert tabs data to draggable nav links
+            let guideTabs = this.state.tabs.map(results => (
+                    <Draggable key={results.tabId} draggableId={results.tabId} index={results.tabIndex}>
+                        {(provided, snapshot) => (
+                            <Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                                key={results.tabId} eventKey={results.tabIndex} tabIndex={results.tabIndex}
+                                active={this.state.activeKey === results.tabIndex}
+>
                                 {Utility.htmlEntityDecode(results.label)}{' '}
                                 {this.state.activeKey === results.tabIndex && 
                                     <a href="#" onClick={this.toggleSettings} key={results.tabId} className="tab-settings-icon">
                                         <i className="fas fa-cog"></i>
                                     </a>}
-                            </>
-                        }>
-                        <SectionContainer tabId={results.tabId} />
-                    </Tab>
-                );
-            });
+                            </Nav.Link>
+                        )}
+                    </Draggable>
+                )
+            );
+            
+            // generate tab content
+            let tabsContent = this.state.tabs.map(results => (
+                <Tab.Pane key={results.tabId} eventKey={results.tabIndex}>
+                    <SectionContainer tabId={results.tabId} />
+                </Tab.Pane>
+            ))
             
             let currentTab = this.state.tabs[this.state.activeKey];
             console.log('Current tab id: ' + currentTab.tabId);
+            console.log(guideTabs);
 
             return (
                 <>
                     {/* Guide Tab Container consisting of individual tab elements */}
-                    <div id="guide-tabs-container">
-                        <Tabs activeKey={this.state.activeKey} id="guide-tabs" onSelect={this.onTabSelect}>
-                            {guideTabs}
-                            <Tab key="new-tab" eventKey="new-tab" 
-                                title={<i className="fas fa-plus"></i>} 
-                            />
-                        </Tabs>
-                    </div>
+                    <DragDropContext onDragEnd={this.handleOnDragEnd}>
+                        <Droppable droppableId="guide-tabs-container" direction="horizontal">
+                            {(provided) => (
+                                <div id="guide-tabs-container" {...provided.droppableProps} ref={provided.innerRef}>
+                                    <Tab.Container id="guide-tabs" onSelect={this.onTabSelect}>
+                                        <Nav variant="tabs">
+                                            {guideTabs}
+                                            {provided.placeholder}
+                                            <Nav.Link as="div" key="new-tab" eventKey="new-tab">
+                                                <i className="fas fa-plus"></i>
+                                            </Nav.Link>
+                                        </Nav>
+                                        <Tab.Content>
+                                            {tabsContent}
+                                        </Tab.Content>
+                                    </Tab.Container>
+                                    {/* <Tabs activeKey={this.state.activeKey} id="guide-tabs" >
+                                        {guideTabs}
+                                        <Tab key="new-tab" eventKey="new-tab" 
+                                            title={<i className="fas fa-plus"></i>} 
+                                        />
+                                    </Tabs> */}
+                                </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
                     
                     {/* Modal Form for editing tabs */}
                     <Modal show={this.state.showSettings} onHide={this.toggleSettings}>
@@ -401,7 +447,7 @@ export default class GuideTabContainer extends Component {
                             <Button variant="secondary" onClick={this.toggleSettings}>
                                 Close
                             </Button>
-                            <Button variant="primary" disabled={this.state.savingChanges} form="settings-form" type="submit">
+                            <Button variant="secondary" disabled={this.state.savingChanges} form="settings-form" type="submit">
                                 {this.state.savingChanges ? 'Saving...' : 'Save Changes'}
                             </Button>
                         </Modal.Footer>
