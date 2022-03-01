@@ -71,13 +71,13 @@
                 <th>Instructor</th>
                 <td>{{ guide.instructor }}</td>
             </tr>
-            <tr>
+            {# <tr>
                 <th>Staff</th>
-                <td>{{ dump(guide.staff) }}</td>
+                <td>{{ dump(guide.staff) }}</td> #}
                 {# {% for entry in staff %}
                     <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</td></span>
                 {% endfor %} #}
-            </tr>
+            {# </tr> #} #}
         </tbody>
     </table>
 
