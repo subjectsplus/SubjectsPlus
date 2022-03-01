@@ -4,9 +4,12 @@
 
 {% block content %}
 <div class="container py-5">
+
     {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
-            {{ message }}
+        <div class="text-center mb-3">
+            <div class="flash-notice">
+                {{ message }}
+            </div>
         </div>
     {% endfor %}
 
@@ -14,7 +17,7 @@
         <div class="col-8">
             <h1 class="fw-light">{{ 'control.header.faqs.index' | trans }}</h1>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switchShowUserFAQs" checked>
+                <input class="form-check-input" type="checkbox" role="switch" id="switchShowUserFAQs">
                 <label class="form-check-label" for="switchShowUserFAQs">Show ONLY my FAQs</label>
             </div>
         </div>

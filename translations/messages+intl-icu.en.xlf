@@ -131,23 +131,23 @@
       </trans-unit>
       <trans-unit id="xQQZp_W" resname="control.header.faqs.create_new_faq">
         <source>control.header.faqs.create_new_faq</source>
-        <target>Create New FAQ</target>
+        <target>New FAQ</target>
       </trans-unit>
       <trans-unit id="15QX2jT" resname="control.header.faqs.view_your_faqs">
         <source>control.header.faqs.view_your_faqs</source>
-        <target>View Your FAQs</target>
+        <target>Your FAQs</target>
       </trans-unit>
       <trans-unit id="g0v_.sm" resname="control.header.faqs.view_faqs">
         <source>control.header.faqs.view_faqs</source>
-        <target>View All FAQs</target>
+        <target>All FAQs</target>
       </trans-unit>
       <trans-unit id="oussNQK" resname="control.header.faqs.view_faqs_by_subject">
         <source>control.header.faqs.view_faqs_by_subject</source>
-        <target>View FAQ By Subjects</target>
+        <target>FAQs by Subject</target>
       </trans-unit>
       <trans-unit id="PVfj5gy" resname="control.header.faqs.view_faqs_by_collection">
         <source>control.header.faqs.view_faqs_by_collection</source>
-        <target>View FAQ By Collections</target>
+        <target>FAQs by Collection</target>
       </trans-unit>
       <trans-unit id="_TKGxO2" resname="control.header.admin">
         <source>control.header.admin</source>

@@ -133,5 +133,34 @@
   }
 }
 
-.btn-outline-accent {}
+.btn-outline-accent {
+  color: var(--sp-font-color);
+  border-color: var(--sp-accent-color);
+  background-color: transparent;
+
+  &:hover {
+    @include transition-all();
+    background-color: var(--sp-accent-color);
+    color:var(--sp-input-color);
+  }
+}
+
+.btn-check{
+  &:checked,
+  &:active {
+    + .btn-outline-accent {
+      border-color: var(--sp-accent-color);
+      background-color: var(--sp-accent-color);
+      color:var(--sp-input-color);
+    }
+  }
+
+  &:focus{
+    + .btn-outline-accent {
+      box-shadow: none;
+    }
+  }
+}
+
+
 
