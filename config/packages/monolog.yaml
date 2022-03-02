@@ -36,23 +36,23 @@ when@test:
                 type: stream
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
                 level: debug
-
-when@prod:
-    monolog:
-        handlers:
-            main:
-                type: rotating_file
-                path: '%kernel.logs_dir%/%kernel.environment%.log'
-                action_level: critical
-                # max number of log files to keep
-                # defaults to zero, which means infinite files
-                max_files: 10
-           nested:
-               type: stream
-               path: "%kernel.logs_dir%/%kernel.environment%.log"
-               level: debug
-               formatter: monolog.formatter.json
-           console:
-               type: console
-               process_psr_3_messages: false
-               channels: ["!event", "!doctrine"]
+#
+#when@prod:
+#    monolog:
+#        handlers:
+#            main:
+#                type: rotating_file
+#                path: '%kernel.logs_dir%/%kernel.environment%.log'
+#                action_level: critical
+#                # max number of log files to keep
+#                # defaults to zero, which means infinite files
+#                max_files: 10
+#            nested:
+#               type: stream
+#               path: "%kernel.logs_dir%/%kernel.environment%.log"
+#               level: debug
+#               formatter: monolog.formatter.json
+#            console:
+#               type: console
+#               process_psr_3_messages: false
+#               channels: ["!event", "!doctrine"]
