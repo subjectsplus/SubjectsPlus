@@ -27,7 +27,8 @@ export default class GuideTabContainer extends Component {
             savingChanges: false,
             settingsValidated: false,
             deleteTabClicked: false,
-            numberUntitled: 0
+            deletingTab: false,
+            numberUntitled: 0,
         };
 
         this.settingsTabName = React.createRef();
@@ -182,8 +183,7 @@ export default class GuideTabContainer extends Component {
                 this.setState({
                     tabs: newTabs,
                     showSettings: false,
-                    savingChanges: false,
-                    numberUntitled: numberUntitled
+                    savingChanges: false
                 });
             })
             .catch((error) => {
@@ -253,6 +253,7 @@ export default class GuideTabContainer extends Component {
                     activeKey: newActiveKey,
                     lastTabIndex: newLastTabIndex,
                     deleteTabClicked: false,
+                    deletingTab: false,
                     showSettings: false
                 });
             }
@@ -262,19 +263,26 @@ export default class GuideTabContainer extends Component {
             console.error('Error:', error);
             this.setState({
                 isErrored: true,
-                deleteTabClicked: false
+                deleteTabClicked: false,
+                deletingTab: false
             });
         });
     }
 
     handleTabDelete() {
         if (this.state.deleteTabClicked) {
-            this.deleteCurrentTab();
+            this.setState({
+                deletingTab: true
+            }, () => {
+                this.deleteCurrentTab()
+            });
         } else {
             this.setState({
                 deleteTabClicked: true
             })
         }
+
+        return false;
     }
 
     handleSettingsSubmit(evt) {
@@ -289,6 +297,8 @@ export default class GuideTabContainer extends Component {
         this.setState({
             settingsValidated: true
         });
+
+        return false;
     }
 
     toggleSettings() {
@@ -382,7 +392,7 @@ export default class GuideTabContainer extends Component {
                                     <>
                                         Are you sure you want to delete this tab?{' '}
                                         <a href="#" onClick={() => this.setState({deleteTabClicked: false})}>No</a>{' '}
-                                        <a href="#" onClick={this.handleTabDelete}>Yes</a>
+                                        <a href="#" onClick={this.state.deletingTab ?  null : this.handleTabDelete}>Yes</a>
                                     </>
                                 </Alert>
                             )}
