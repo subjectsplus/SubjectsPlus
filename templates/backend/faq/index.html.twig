@@ -16,7 +16,7 @@
             <h1 class="fw-light">{{ 'control.header.faqs.index' | trans }}</h1>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="switchShowUserFAQs">
-                <label class="form-check-label" for="switchShowUserFAQs">Show ONLY my FAQs</label>
+                <label class="form-check-label" for="switchShowUserFAQs">{{ 'control.faqs.index.my_faqs_label' | trans }}</label>
             </div>
         </div>
         <div class="col-4 text-end">
@@ -35,10 +35,10 @@
     <table class="table table-striped table-responsive mt-3">
         <thead>
             <tr>
-                <th>Visibility</th>
-                <th>Question</th>
-                <th>Answer</th>
-                <th>Actions</th>
+                <th>{{ 'control.faqs.table.heading.visibility' | trans }}</th>
+                <th>{{ 'control.faqs.table.heading.question' | trans }}</th>
+                <th>{{ 'control.faqs.table.heading.answer' | trans }}</th>
+                <th>{{ 'control.faqs.table.heading.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -46,18 +46,16 @@
             <tr>
                 <td class="fs-xs text-center">
                     {% if faq.active %}
-                        {{ '<i class="fas fa-circle btn-link-success"></i>' }}
-                        <span class="d-block">public</span>
+                        {{ '<i class="fas fa-check btn-link"></i>' }}
                     {% else %}
-                        {{ '<i class="fas fa-circle btn-link-danger"></i>' }}
-                        <span class="d-block">hidden</span>
+                        {{ '<i class="fas fa-times"></i>' }}
                     {% endif %}
                 </td>
                 <td>
                     <div title="ID: {{ faq.faqId }}">{{ faq.question | u.truncate(200, '...') | striptags | raw}}</div>
                     {% if faq.keywords %}
                         <div class="fs-xs mt-3">
-                            <strong>Keywords:</strong>
+                            <strong>{{ 'control.faqs.table.label.keywords' | trans }}:</strong>
                             {% for keyword in faq.keywords %}
                                 {{ keyword }}
                                 {% if not loop.last %}
@@ -69,17 +67,16 @@
                 </td>
                 <td>{{ faq.answer | u.truncate(80, '...') | striptags | raw }}</td>
                 <td>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}" class="btn btn-link fs-xs" type="button"><i class="fas fa-folder-open fs-sm"></i> Show</a>
-                        <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" class="btn btn-link fs-xs" type="button"><i class="fas fa-pen fs-sm"></i> Edit</a>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
+                        <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
                         {# TODO: link to front-end preview #}
-                        <a href="#" class="btn btn-link fs-xs" type="button"><i class="fas fa-eye fs-sm"></i> Preview</a>
+                        <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.preview' | trans }}"><i class="fas fa-eye fs-sm"></i></a>
                     </div>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td>no records found</td>
+                <td>{{ 'control.faqs.table.no_records' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

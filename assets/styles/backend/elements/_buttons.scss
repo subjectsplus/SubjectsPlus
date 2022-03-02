@@ -122,6 +122,15 @@
   }
 }
 
+.btn-link-accent {
+  color: var(--sp-accent-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-accent-color);
+  }
+}
+
 .btn-cancel {
   background-color: var(--sp-input-disabled-bg);
   color: #333333;
@@ -141,7 +150,21 @@
   &:hover {
     @include transition-all();
     background-color: var(--sp-accent-color);
+    border-color: var(--sp-accent-color);
     color:var(--sp-input-color);
+  }
+}
+
+.btn-outline-primary {
+  color: var(--sp-font-color);
+  border-color: var(--sp-nav-color);
+  background-color: transparent;
+
+  &:hover {
+    @include transition-all();
+    background-color: var(--sp-nav-color);
+    color:var(--sp-input-selected-text);
+    border-color: var(--sp-nav-color);
   }
 }
 
@@ -153,12 +176,27 @@
       background-color: var(--sp-accent-color);
       color:var(--sp-input-color);
     }
+    +.btn-outline-primary{
+      border-color: var(--sp-nav-color);
+      background-color: var(--sp-nav-color);
+      color:var(--sp-input-selected-text);
+    }
   }
 
   &:focus{
-    + .btn-outline-accent {
+    + .btn-outline-accent,
+    + .btn-outline-primary{
       box-shadow: none;
     }
+  }
+}
+
+.btn-icon-default{
+  color: var(--sp-font-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
   }
 }
 

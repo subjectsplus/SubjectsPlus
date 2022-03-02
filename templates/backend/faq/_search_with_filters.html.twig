@@ -3,26 +3,26 @@
         {# TODO: autocomplete search with filters #}
         <form>
             <div class="mb-3 mb-lg-0">
-                <input type="text" class="form-control" placeholder="Find a FAQ" aria-label="{{ 'control.header.search.aria.label' | trans }}">
+                <input type="text" class="form-control" placeholder="{{ 'control.faqs.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}">
             </div>
         </form>
     </div>
     <div class="col-md-9 col-lg-6 col-xl-5 align-self-lg-center">
         {# TODO: multi-select filters with react-select #}
         <div class="d-flex flex-row flex-nowrap justify-content-between align-items-baseline">
-            <span class="fs-sm d-inline-block" style="width: 110px;">Filter by:</span>
-            <select class="form-select form-select-sm d-inline-block" style="width: calc(100% - 200px);" aria-label=".form-select-sm example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <span class="fs-sm d-inline-block" style="width: 110px;">{{ 'control.faqs.filter_by' | trans }}:</span>
+            <select class="form-select form-select-sm d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.subject.aria' | trans }}">
+                <option selected>{{ 'control.faqs.filter.subject' | trans }}</option>
+                <option value="1">General</option>
+                <option value="2">Business</option>
+                <option value="3">Medicine</option>
             </select>
-            <span class="fs-sm d-inline-block mx-2">or</span>
-            <select class="form-select form-select-sm d-inline-block" style="width: calc(100% - 200px);" aria-label=".form-select-sm example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <span class="fs-sm d-inline-block mx-2">{{ 'control.faqs.filter_or' | trans }}</span>
+            <select class="form-select form-select-sm d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.collection.aria' | trans }}">
+                <option selected>{{ 'control.faqs.filter.collection' | trans }}</option>
+                <option value="1">Research</option>
+                <option value="2">Catalog Help</option>
+                <option value="3">Popular</option>
             </select>
         </div>
     </div>

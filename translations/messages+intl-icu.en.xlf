@@ -459,11 +459,11 @@
       </trans-unit>
       <trans-unit id="t8XKmOg" resname="control.faq.form.active_faq_true.message">
         <source>control.faq.form.active_faq_true.message</source>
-        <target>Visibility: public</target>
+        <target>This FAQ is public</target>
       </trans-unit>
       <trans-unit id="VdAEXv2" resname="control.faq.form.active_faq_false.message">
         <source>control.faq.form.active_faq_false.message</source>
-        <target>Visibility: hidden</target>
+        <target>This FAQ is NOT public</target>
       </trans-unit>
       <trans-unit id="5T_nSNx" resname="control.search_all.flyout.title">
         <source>control.search_all.flyout.title</source>
@@ -472,6 +472,90 @@
       <trans-unit id="xDU6xzI" resname="control.header.faqs.show_faq">
         <source>control.header.faqs.show_faq</source>
         <target>FAQ</target>
+      </trans-unit>
+      <trans-unit id="u2Ym5LB" resname="control.faqs.index.my_faqs_label">
+        <source>control.faqs.index.my_faqs_label</source>
+        <target>Show ONLY my FAQs</target>
+      </trans-unit>
+      <trans-unit id="IbTbvRD" resname="control.faqs.table.sort.latest">
+        <source>control.faqs.table.sort.latest</source>
+        <target>Latest</target>
+      </trans-unit>
+      <trans-unit id="o9tha0y" resname="control.faqs.table.sort.az">
+        <source>control.faqs.table.sort.az</source>
+        <target>Alpha A-Z</target>
+      </trans-unit>
+      <trans-unit id="xZhvi5m" resname="control.faqs.table.sort.za">
+        <source>control.faqs.table.sort.za</source>
+        <target>Alpha Z-A</target>
+      </trans-unit>
+      <trans-unit id=".3rI6_a" resname="control.faqs.search.placeholder">
+        <source>control.faqs.search.placeholder</source>
+        <target>Find a FAQ</target>
+      </trans-unit>
+      <trans-unit id="tgo74re" resname="control.faqs.filter_by">
+        <source>control.faqs.filter_by</source>
+        <target>Filter by</target>
+      </trans-unit>
+      <trans-unit id="qxgbniU" resname="control.faqs.filter.subject.aria">
+        <source>control.faqs.filter.subject.aria</source>
+        <target>Filter by subject</target>
+      </trans-unit>
+      <trans-unit id="9Zl7aop" resname="control.faqs.filter.subject">
+        <source>control.faqs.filter.subject</source>
+        <target>Subject / Course</target>
+      </trans-unit>
+      <trans-unit id="atl_.Hb" resname="control.faqs.filter_or">
+        <source>control.faqs.filter_or</source>
+        <target>or</target>
+      </trans-unit>
+      <trans-unit id="mvnukRt" resname="control.faqs.filter.collection.aria">
+        <source>control.faqs.filter.collection.aria</source>
+        <target>Filter by collection</target>
+      </trans-unit>
+      <trans-unit id="quGAPfC" resname="control.faqs.filter.collection">
+        <source>control.faqs.filter.collection</source>
+        <target>Collection</target>
+      </trans-unit>
+      <trans-unit id="3ubLV7l" resname="control.faqs.table.heading.visibility">
+        <source>control.faqs.table.heading.visibility</source>
+        <target>Public</target>
+      </trans-unit>
+      <trans-unit id="pIyutoI" resname="control.faqs.table.heading.question">
+        <source>control.faqs.table.heading.question</source>
+        <target>Question</target>
+      </trans-unit>
+      <trans-unit id="mJ5RuvP" resname="control.faqs.table.heading.answer">
+        <source>control.faqs.table.heading.answer</source>
+        <target>Answer</target>
+      </trans-unit>
+      <trans-unit id="r6qLkRy" resname="control.faqs.table.heading.actions">
+        <source>control.faqs.table.heading.actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="YgIGH.8" resname="control.faqs.table.label.keywords">
+        <source>control.faqs.table.label.keywords</source>
+        <target>Keywords</target>
+      </trans-unit>
+      <trans-unit id="BEasrv1" resname="control.faqs.table.button.edit">
+        <source>control.faqs.table.button.edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="OolzfPE" resname="control.faqs.table.button.preview">
+        <source>control.faqs.table.button.preview</source>
+        <target>Preview</target>
+      </trans-unit>
+      <trans-unit id="TBLN5SK" resname="control.faqs.table.no_records">
+        <source>control.faqs.table.no_records</source>
+        <target>No records found</target>
+      </trans-unit>
+      <trans-unit id="zh2hxIN" resname="control.faqs.table.action_buttons.aria">
+        <source>control.faqs.table.action_buttons.aria</source>
+        <target>FAQ actions</target>
+      </trans-unit>
+      <trans-unit id="pz5s15o" resname="control.faqs.preview.label">
+        <source>control.faqs.preview.label</source>
+        <target>Preview</target>
       </trans-unit>
     </body>
   </file>

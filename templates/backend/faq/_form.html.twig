@@ -18,9 +18,9 @@
         
         {# Initial loading of faq_active_message #}
         {% if form.active.vars.checked %}
-            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4"><i class="fas fa-circle btn-link-success"></i> {{ 'control.faq.form.active_faq_true.message' | trans}}</p>
+            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4">{{ 'control.faq.form.active_faq_true.message' | trans}}</p>
         {% else %}
-            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4"><i class="fas fa-circle btn-link-danger"></i> {{ 'control.faq.form.active_faq_false.message' | trans}}</p>
+            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4">{{ 'control.faq.form.active_faq_false.message' | trans}}</p>
         {% endif %}
 
         {# Toggle listener for faq_active_message #}
@@ -30,9 +30,9 @@
 
             activeField.addEventListener('change', (event) => {
                 if (event.currentTarget.checked) {
-                    activeMessage.innerHTML = "<i class='fas fa-circle btn-link-success'></i> {{ 'control.faq.form.active_faq_true.message' | trans }}"
+                    activeMessage.innerText = "{{ 'control.faq.form.active_faq_true.message' | trans }}"
                 } else {
-                    activeMessage.innerHTML = "<i class='fas fa-circle btn-link-danger'></i> {{ 'control.faq.form.active_faq_false.message' | trans }}"
+                    activeMessage.innerText = "{{ 'control.faq.form.active_faq_false.message' | trans }}"
                 }
             });
         </script>
@@ -47,11 +47,13 @@
             'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans}
         }) }}
         {{ form_rest(form) }}
-        <button class="btn btn-gradient btn-round mt-3">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
-        {{ form_end(form) }}
+        <div class="flex flex-row flex-nowrap mt-5">
+            <button class="btn btn-gradient btn-round">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
         {% if delete_faq == 'true' %}
             {{ include('backend/faq/_delete_form.html.twig') }}
         {% endif %}
+        </div>
+        {{ form_end(form) }}
     </div>
     {{ encore_entry_script_tags('react_select_init') }}
 </div>
