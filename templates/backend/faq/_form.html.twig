@@ -18,9 +18,9 @@
         
         {# Initial loading of faq_active_message #}
         {% if form.active.vars.checked %}
-            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4">{{ 'control.faq.form.active_faq_true.message' | trans}}</p>
+            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4"><i class="fas fa-circle btn-link-success"></i> {{ 'control.faq.form.active_faq_true.message' | trans}}</p>
         {% else %}
-            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4">{{ 'control.faq.form.active_faq_false.message' | trans}}</p>
+            <p id="faq_active_message" class="fs-xs fst-italic mt-n3 mb-4"><i class="fas fa-circle btn-link-danger"></i> {{ 'control.faq.form.active_faq_false.message' | trans}}</p>
         {% endif %}
 
         {# Toggle listener for faq_active_message #}
@@ -30,9 +30,9 @@
 
             activeField.addEventListener('change', (event) => {
                 if (event.currentTarget.checked) {
-                    activeMessage.innerText = "{{ 'control.faq.form.active_faq_true.message' | trans }}"
+                    activeMessage.innerHTML = "<i class='fas fa-circle btn-link-success'></i> {{ 'control.faq.form.active_faq_true.message' | trans }}"
                 } else {
-                    activeMessage.innerText = "{{ 'control.faq.form.active_faq_false.message' | trans }}"
+                    activeMessage.innerHTML = "<i class='fas fa-circle btn-link-danger'></i> {{ 'control.faq.form.active_faq_false.message' | trans }}"
                 }
             });
         </script>

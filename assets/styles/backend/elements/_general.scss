@@ -64,7 +64,7 @@ h3, .h3 {
 }
 
 .fs-sm {
-  font-size: $font-size-sm;
+  font-size: $font-size-sm !important;
 }
 
 .fs-xs {
@@ -95,6 +95,13 @@ h3, .h3 {
   color: #055160;
   background-color: rgba(var(--sp-accent-color-rgb), 10%);
   border-color: var(--sp-accent-color);
+}
+
+[data-mode="dark"] {
+  .alert-info {
+    background-color: rgba(var(--sp-accent-color-rgb), 5%);
+    color: var(--sp-input-selected-text);
+  }
 }
 
 // Backgrounds

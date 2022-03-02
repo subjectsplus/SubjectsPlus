@@ -4375,6 +4375,10 @@
         <source>control.search_all.flyout.title</source>
         <target>__control.search_all.flyout.title</target>
       </trans-unit>
+      <trans-unit id="xDU6xzI" resname="control.header.faqs.show_faq">
+        <source>control.header.faqs.show_faq</source>
+        <target>__control.header.faqs.show_faq</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

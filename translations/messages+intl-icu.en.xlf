@@ -135,7 +135,7 @@
       </trans-unit>
       <trans-unit id="15QX2jT" resname="control.header.faqs.view_your_faqs">
         <source>control.header.faqs.view_your_faqs</source>
-        <target>Your FAQs</target>
+        <target>My FAQs</target>
       </trans-unit>
       <trans-unit id="g0v_.sm" resname="control.header.faqs.view_faqs">
         <source>control.header.faqs.view_faqs</source>
@@ -459,15 +459,19 @@
       </trans-unit>
       <trans-unit id="t8XKmOg" resname="control.faq.form.active_faq_true.message">
         <source>control.faq.form.active_faq_true.message</source>
-        <target>This FAQ is public</target>
+        <target>Visibility: public</target>
       </trans-unit>
       <trans-unit id="VdAEXv2" resname="control.faq.form.active_faq_false.message">
         <source>control.faq.form.active_faq_false.message</source>
-        <target>This FAQ is NOT public</target>
+        <target>Visibility: hidden</target>
       </trans-unit>
       <trans-unit id="5T_nSNx" resname="control.search_all.flyout.title">
         <source>control.search_all.flyout.title</source>
         <target>Search all</target>
+      </trans-unit>
+      <trans-unit id="xDU6xzI" resname="control.header.faqs.show_faq">
+        <source>control.header.faqs.show_faq</source>
+        <target>FAQ</target>
       </trans-unit>
     </body>
   </file>
