@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Faqpage.
@@ -18,6 +19,7 @@ class Faqpage
      * @ORM\Column(name="faqpage_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups({"faq"})
      */
     private $faqpageId;
 
@@ -25,6 +27,7 @@ class Faqpage
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @Groups({"faq"})
      */
     private $name;
 
@@ -32,8 +35,18 @@ class Faqpage
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     * @Groups({"faq"})
      */
     private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Faq", mappedBy="faqpages", cascade={"persist", "remove"})
+     */
+    private $faqs;
+
+    public function __construct() {
+        $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getFaqpageId(): ?int
     {
@@ -60,6 +73,33 @@ class Faqpage
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|Faq[]
+     */
+    public function getFaqs(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->faqs;
+    }
+
+    public function addFaq(Faq $faq): self
+    {
+        if (!$this->faqs->contains($faq)) {
+            $this->faqs[] = $faq;
+            $faq->addFaqpage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFaq(Faq $faq): self
+    {
+        if ($this->faqs->removeElement($faq)) {
+            $faq->removeFaqpage($this);
+        }
 
         return $this;
     }
