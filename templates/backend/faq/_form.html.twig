@@ -48,10 +48,20 @@
         }) }}
         {{ form_rest(form) }}
         {{ encore_entry_script_tags('react_select_init') }}
-        <button class="btn btn-gradient mt-3">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
+
+        <div class="row row-cols-2 mt-5">
+            <div class="col-6">
+                <button class="btn btn-gradient btn-round">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
+            </div>
+            <div class="col-6 text-end align-self-center">
+            {% if delete_faq == 'true' %}
+                {{ include('backend/faq/_trash_button.html.twig') }}
+            {% endif %}
+            </div>
+        </div>
         {{ form_end(form) }}
-        {% if delete_faq == 'true' %}
-            {{ include('backend/faq/_delete_form.html.twig') }}
-        {% endif %}
     </div>
 </div>
+{% if delete_faq == 'true' %}
+    {{ include('backend/faq/_delete_form.html.twig') }}
+{% endif %}

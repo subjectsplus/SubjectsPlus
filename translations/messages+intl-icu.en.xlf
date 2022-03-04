@@ -383,7 +383,7 @@
       </trans-unit>
       <trans-unit id="IHaFq24" resname="control.faqs.delete_faq">
         <source>control.faqs.delete_faq</source>
-        <target>Delete</target>
+        <target>Delete FAQ</target>
       </trans-unit>
       <trans-unit id="8wcRYFv" resname="control.faqs.delete_faq.modal.header">
         <source>control.faqs.delete_faq.modal.header</source>

@@ -71,6 +71,11 @@ h3, .h3 {
   font-size: $font-size-mini !important;
 }
 
+// Color only
+.color-primary {
+  color: var(--sp-nav-color);
+}
+
 // Forms
 .form-control,
 .form-check-input,
