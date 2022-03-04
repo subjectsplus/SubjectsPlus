@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use \Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Faq.
@@ -13,7 +14,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * @ORM\Entity(repositoryClass="App\Repository\FaqRepository")
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     normalizationContext={"groups": {"faq"}}
  * )
  */
 class Faq
@@ -24,6 +26,7 @@ class Faq
      * @ORM\Column(name="faq_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups({"faq"})
      */
     private $faqId;
 
@@ -31,6 +34,7 @@ class Faq
      * @var string
      *
      * @ORM\Column(name="question", type="text", length=255, nullable=false)
+     * @Groups({"faq"})
      */
     private $question;
 
@@ -38,6 +42,7 @@ class Faq
      * @var string
      *
      * @ORM\Column(name="answer", type="text", length=65535, nullable=false)
+     * @Groups({"faq"})
      */
     private $answer;
 
@@ -45,6 +50,7 @@ class Faq
      * @var array|null
      *
      * @ORM\Column(name="keywords", type="json", nullable=true)
+     * @Groups({"faq"})
      */
     private $keywords;
 
@@ -52,26 +58,43 @@ class Faq
      * @var bool
      *
      * @ORM\Column(name="active", type="boolean", nullable="false", options={"default": "0"})
+     * @Groups({"faq"})
      */
     private $active = false;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\FaqSubject", mappedBy="faq")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Subject", inversedBy="faqs")
+     * @ORM\JoinTable(name="faq_subject", 
+     *  joinColumns={
+     *         @ORM\JoinColumn(name="faq_id", referencedColumnName="faq_id")
+     *  },
+     *  inverseJoinColumns={
+     *         @ORM\JoinColumn(name="subject_id", referencedColumnName="subject_id")
+     *  })
+     * @Groups({"faq"})
      */
-    private $faqSubject;
+    private $subjects;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\FaqFaqpage", mappedBy="faq")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Faqpage", inversedBy="faqs")
+     * @ORM\JoinTable(name="faq_faqpage", 
+     *  joinColumns={
+     *         @ORM\JoinColumn(name="faq_id", referencedColumnName="faq_id")
+     *  },
+     *  inverseJoinColumns={
+     *         @ORM\JoinColumn(name="faqpage_id", referencedColumnName="faqpage_id")
+     *  })
+     * @Groups({"faq"})
      */
-    private $faqFaqpage;
+    private $faqpages;
 
     public function __construct() {
-        $this->faqSubject = new ArrayCollection();
-        $this->faqFaqpage = new ArrayCollection();
+        $this->subjects = new ArrayCollection();
+        $this->faqpages = new ArrayCollection();
     }
 
     public function getFaqId(): ?int
@@ -130,41 +153,49 @@ class Faq
         return $this;
     }
 
-
-    public function addFaqSubject(FaqSubject $faqSubject): self
+    public function getSubjects(): \Doctrine\Common\Collections\Collection
     {
-        if (!$this->faqSubject->contains($faqSubject)) {
-            $this->faqSubject[] = $faqSubject;
-            $faqSubject->setFaq($this);
+        return $this->subjects;
+    }
+
+    public function addSubject(Subject $subject): self
+    {
+        if (!$this->subjects->contains($subject)) {
+            $this->subjects[] = $subject;
+            $subject->addFaq($this);
         }
 
         return $this;
     }
 
-    public function removeFaqSubject(FaqSubject $faqSubject): self
+    public function removeSubject(Subject $subject): self
     {
-        if ($this->faqSubject->removeElement($faqSubject)) {
-            $faqSubject->setFaq(null);
+        if ($this->subjects->removeElement($subject)) {
+            $subject->removeFaq($this);
         }
 
         return $this;
     }
 
-
-    public function addFaqFaqpage(FaqFaqpage $faqFaqPage): self
+    public function getFaqpages(): \Doctrine\Common\Collections\Collection
     {
-        if (!$this->faqFaqpage->contains($faqFaqPage)) {
-            $this->faqFaqpage[] = $faqFaqPage;
-            $faqFaqPage->setFaq($this);
+        return $this->faqpages;
+    }
+
+    public function addFaqpage(Faqpage $faqPage): self
+    {
+        if (!$this->faqpages->contains($faqPage)) {
+            $this->faqpages[] = $faqPage;
+            $faqPage->addFaq($this);
         }
 
         return $this;
     }
 
-    public function removeFaqFaqpage(FaqFaqpage $faqFaqPage): self
+    public function removeFaqpage(Faqpage $faqPage): self
     {
-        if ($this->faqSubject->removeElement($faqFaqPage)) {
-            $faqFaqPage->setFaq(null);
+        if ($this->faqpages->removeElement($faqPage)) {
+            $faqPage->removeFaq($this);
         }
 
         return $this;

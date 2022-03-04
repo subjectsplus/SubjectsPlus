@@ -1,7 +1,7 @@
+{{ form_start(form) }}
 <div class="row">
     <div class="col-lg-8">
         <div class="panel-basic border-basic">
-        {{ form_start(form) }}
             {{ form_row(form.question, {
                 'label': 'control.faq.form.question' | trans,
                 'label_attr': {'class': 'fw-bold'}
@@ -47,11 +47,11 @@
             'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans}
         }) }}
         {{ form_rest(form) }}
+        {{ encore_entry_script_tags('react_select_init') }}
         <button class="btn btn-gradient mt-3">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
         {{ form_end(form) }}
         {% if delete_faq == 'true' %}
             {{ include('backend/faq/_delete_form.html.twig') }}
         {% endif %}
     </div>
-    {{ encore_entry_script_tags('react_select_init') }}
 </div>
