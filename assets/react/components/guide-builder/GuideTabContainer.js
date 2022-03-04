@@ -85,8 +85,6 @@ export default class GuideTabContainer extends Component {
                 }
             });
 
-            console.log('Untitled count: ' + numberUntitled);
-
             this.setState({
                 tabs: results['hydra:member'],
                 lastTabIndex: results['hydra:member'].at(-1)['tabIndex'],
@@ -104,7 +102,6 @@ export default class GuideTabContainer extends Component {
     }
 
     onTabSelect(eventKey) {
-        console.log('Active Key: ', this.state.activeKey.toString());
         if (eventKey === 'new-tab') {
             // Create new tab
             this.newTab();
@@ -319,8 +316,27 @@ export default class GuideTabContainer extends Component {
 
     handleOnDragEnd(result) {
         let newTabs = [...this.state.tabs];
+
         let [reorderedItem] = newTabs.splice(result.source.index, 1);
         newTabs.splice(result.destination.index, 0, reorderedItem);
+
+        // Update tab index
+        for (let index = 0; index < newTabs.length; index++) {
+            newTabs[index].tabIndex = index;
+            
+            fetch(this.getTabLink(newTabs[index].tabId), {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    tabIndex: index
+                })
+            }).catch(error => {
+                alert('Error: Failed to update tab index of displaced tab!');
+                console.error('Error: ', error);
+            })
+        }
 
         this.setState({
             tabs: newTabs
@@ -329,12 +345,15 @@ export default class GuideTabContainer extends Component {
 
     render() {
         if (this.state.tabs) {
-            
             // convert tabs data to draggable nav links
             let guideTabs = this.state.tabs.map(results => (
                     <Draggable key={results.tabId} draggableId={results.tabId} index={results.tabIndex}>
-                        {(provided, snapshot) => (
-                            <Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                        {(provided, snapshot) => {
+                            if (snapshot.isDragging) {
+                                provided.draggableProps.style.left = undefined;
+                                provided.draggableProps.style.top = undefined;
+                            }
+                            return (<Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                                 key={results.tabId} eventKey={results.tabIndex} tabIndex={results.tabIndex}
                                 active={this.state.activeKey === results.tabIndex}
 >
@@ -343,8 +362,8 @@ export default class GuideTabContainer extends Component {
                                     <a href="#" onClick={this.toggleSettings} key={results.tabId} className="tab-settings-icon">
                                         <i className="fas fa-cog"></i>
                                     </a>}
-                            </Nav.Link>
-                        )}
+                            </Nav.Link>)
+                        }}
                     </Draggable>
                 )
             );
@@ -357,8 +376,6 @@ export default class GuideTabContainer extends Component {
             ))
             
             let currentTab = this.state.tabs[this.state.activeKey];
-            console.log('Current tab id: ' + currentTab.tabId);
-            console.log(guideTabs);
 
             return (
                 <>
