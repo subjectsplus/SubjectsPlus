@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Service\PlusletService;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Psr\Log\LoggerInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -31,6 +29,7 @@ class Subject
      * @ORM\Column(name="subject_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups({"faq"})
      */
     private $subjectId;
 
@@ -38,6 +37,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="subject", type="string", length=255, nullable=true)
+     * @Groups({"faq"})
      */
     private $subject;
 
@@ -45,6 +45,7 @@ class Subject
      * @var int
      *
      * @ORM\Column(name="active", type="boolean", nullable=false)
+     * @Groups({"faq"})
      */
     private $active = false;
 
@@ -52,6 +53,7 @@ class Subject
      * @var string
      *
      * @ORM\Column(name="shortform", type="string", length=50, nullable=false)
+     * @Groups({"faq"})
      */
     private $shortform = '';
 
@@ -66,6 +68,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="header", type="string", length=45, nullable=true)
+     * @Groups({"faq"})
      */
     private $header;
 
@@ -73,6 +76,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @Groups({"faq"})
      */
     private $description;
 
@@ -80,6 +84,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="keywords", type="string", length=255, nullable=true)
+     * @Groups({"faq"})
      */
     private $keywords;
 
@@ -87,6 +92,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="type", type="string", length=20, nullable=true)
+     * @Groups({"faq"})
      */
     private $type;
 
@@ -94,6 +100,7 @@ class Subject
      * @var \DateTime|null
      *
      * @ORM\Column(name="last_modified", type="datetime", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
+     * @Groups({"faq"})
      */
     private $lastModified;
 
@@ -101,6 +108,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="extra", type="string", length=255, nullable=true)
+     * @Groups({"faq"})
      */
     private $extra;
 
@@ -108,6 +116,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="course_code", type="string", length=45, nullable=true)
+     * @Groups({"faq"})
      */
     private $courseCode;
 
@@ -115,6 +124,7 @@ class Subject
      * @var string|null
      *
      * @ORM\Column(name="instructor", type="string", length=255, nullable=true)
+     * @Groups({"faq"})
      */
     private $instructor;
 
@@ -145,9 +155,15 @@ class Subject
     private $logger;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Staff", mappedBy="subjects")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Staff", mappedBy="subjects")
+     * @Groups({"faq"})
      */
     private $staff;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Faq", mappedBy="subjects", cascade={"persist", "remove"})
+     */
+    private $faqs;
 
     /**
      * Constructor.
@@ -157,13 +173,14 @@ class Subject
         $this->staff = new \Doctrine\Common\Collections\ArrayCollection();
         $this->discipline = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tabs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->faqs = new \Doctrine\Common\Collections\ArrayCollection();
         $this->logger = $logger;
     }
 
     /**
-     * @return Collection|Tab[]
+     * @return \Doctrine\Common\Collections\Collection|Tab[]
      */
-    public function getTabs(): Collection
+    public function getTabs(): \Doctrine\Common\Collections\Collection
     {
         return $this->tabs;
     }
@@ -323,9 +340,9 @@ class Subject
     }
 
     /**
-     * @return Collection|Discipline[]
+     * @return \Doctrine\Common\Collections\Collection|Discipline[]
      */
-    public function getDiscipline(): Collection
+    public function getDiscipline(): \Doctrine\Common\Collections\Collection
     {
         return $this->discipline;
     }
@@ -410,9 +427,9 @@ class Subject
     }
 
     /**
-     * @return Collection|Staff[]
+     * @return \Doctrine\Common\Collections\Collection|Staff[]
      */
-    public function getStaff(): Collection
+    public function getStaff(): \Doctrine\Common\Collections\Collection
     {
         return $this->staff;
     }
@@ -431,6 +448,33 @@ class Subject
     {
         if ($this->staff->removeElement($staff)) {
             $staff->removeSubject($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|Faq[]
+     */
+    public function getFaqs(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->faqs;
+    }
+
+    public function addFaq(Faq $faq): self
+    {
+        if (!$this->faqs->contains($faq)) {
+            $this->faqs[] = $faq;
+            $faq->addSubject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFaq(Faq $faq): self
+    {
+        if ($this->faqs->removeElement($faq)) {
+            $faq->removeSubject($this);
         }
 
         return $this;

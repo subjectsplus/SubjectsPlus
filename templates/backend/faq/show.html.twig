@@ -54,13 +54,13 @@
             </tr>
             <tr>
                 <th>Subjects</th>
-                {% for subject in subjects %}
+                {% for subject in faq.subjects %}
                     <span><td>{{ subject.subject }}</td><span>
                 {% endfor %}
             </tr>
             <tr>
                 <th>Collections</th>
-                {% for faqpage in faqpages %}
+                {% for faqpage in faq.faqpages %}
                     <span><td>{{ faqpage.name }}</td></span>
                 {% endfor %}
             </tr>
