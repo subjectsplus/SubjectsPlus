@@ -4,13 +4,10 @@ namespace App\Controller\Backend;
 
 use App\Entity\Faq;
 use App\Entity\Subject;
-use App\Entity\FaqSubject;
 use App\Entity\Faqpage;
-use App\Entity\FaqFaqpage;
 use App\Entity\Chchchanges;
 use App\Entity\Staff;
 use App\Entity\Media;
-use App\Entity\MediaAttachment;
 use App\Form\FaqType;
 use App\Service\FaqService;
 use App\Service\ChangeLogService;
@@ -78,6 +75,7 @@ class FaqController extends AbstractController
             $entityManager->transactional(function() use($form, $faq, $entityManager, $fs, $cls, $ms, $logger) {
                 // Persist Faq entity
                 $entityManager->persist($faq);
+                $entityManager->flush();
 
                 // Get the keywords field
                 $keywordsField = $form->get('keywords')->getData();
@@ -138,17 +136,8 @@ class FaqController extends AbstractController
      * @Route("/subjects", name="faq_show_subjects", methods={"GET"})
      */
     public function displayFaqsBySubjects(Request $request): Response {
-        // Get all Faq's by Subject
-        /** @var FaqRepository $faqRepo */
-        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
-
-        $activeFlag = $request->query->get('active');
-
-        // FORMAT [string: Subject Name] = array: Faq
-        $subject_faqs = $faqRepo->getAllFaqsBySubject($activeFlag);
-
         return $this->render('backend/faq/show_subjects.html.twig', [
-            "subject_faqs" => $subject_faqs,
+            "subjects" => $this->getDoctrine()->getRepository(Subject::class)->findAll(),
         ]);
     }
 
@@ -156,20 +145,10 @@ class FaqController extends AbstractController
      * @Route("/subject/{subjectId}", name="faq_show_subject", methods={"GET"})
      */
     public function displayFaqsBySubject(Request $request, Subject $subject): Response {
-        // Display Faq's for a specific Subject
-        $subject_faqs = array();
-
-        /** @var FaqRepository $faqRepo */
-        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
-
-        $activeFlag = $request->query->get('active');
-
-        // FORMAT [string: Subject Name] = array: Faq
-        $subject_faqs[$subject->getSubject()] = $faqRepo
-        ->getFaqsBySubject($subject, $activeFlag);
-
         return $this->render('backend/faq/show_subjects.html.twig', [
-            "subject_faqs" => $subject_faqs,
+            "subjects" => [
+                $subject
+            ]
         ]);
     }
 
@@ -177,17 +156,8 @@ class FaqController extends AbstractController
      * @Route("/collections", name="faq_show_collections", methods={"GET"})
      */
     public function displayFaqsByCollections(Request $request): Response {
-        // Get all Faq's by Collection/Faqpage
-        /** @var FaqRepository $faqRepo */
-        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
-
-        $activeFlag = $request->query->get('active');
-
-        // FORMAT [string: Faqpage Name] = array: Faq
-        $collection_faqs = $faqRepo->getAllFaqsByCollection($activeFlag);
-
         return $this->render('backend/faq/show_collections.html.twig', [
-            "collection_faqs" => $collection_faqs,
+            "collections" => $this->getDoctrine()->getRepository(Faqpage::class)->findAll(),
         ]);
     }
 
@@ -195,20 +165,10 @@ class FaqController extends AbstractController
      * @Route("/collection/{faqpageId}", name="faq_show_collection", methods={"GET"})
      */
     public function displayFaqsByCollection(Request $request, Faqpage $faqPage): Response {
-        // Display Faq's for a specific Collection/Faqpage
-        $collection_faqs = array();
-        
-        /** @var FaqRepository $faqRepo */
-        $faqRepo = $this->getDoctrine()->getRepository(Faq::class);
-
-        $activeFlag = $request->query->get('active');
-
-        // FORMAT [string: Faqpage Name] = array: Faq
-        $collection_faqs[$faqPage->getName()] = $faqRepo
-        ->getFaqsByCollection($faqPage, $activeFlag);
-
         return $this->render('backend/faq/show_collections.html.twig', [
-            "collection_faqs" => $collection_faqs,
+            "collection_faqs" => [
+                $faqPage
+            ]
         ]);
     }
 
@@ -240,18 +200,6 @@ class FaqController extends AbstractController
      */
     public function show(Faq $faq): Response
     {
-        // Get all subjects associated with the faq
-        /** @var FaqSubjectRepository $faqSubjectRepo */
-        $faqSubjectRepo = $this->getDoctrine()
-        ->getRepository(FaqSubject::class);
-        $subjects = $faqSubjectRepo->getSubjectsByFaq($faq);
-
-        // Get all faqpages/collections associated with the faq
-        /** @var FaqFaqpageRepository $faqFaqpageRepo */
-        $faqFaqpageRepo = $this->getDoctrine()
-        ->getRepository(FaqFaqpage::class);
-        $faqPages = $faqFaqpageRepo->getFaqPagesByFaq($faq);
-
         // Get all staff associated with the faq
         /** @var ChchchangesRepository $chchchangesRepo */
         $chchchangesRepo = $this->getDoctrine()
@@ -260,8 +208,6 @@ class FaqController extends AbstractController
 
         return $this->render('backend/faq/show.html.twig', [
             'faq' => $faq,
-            'subjects' => $subjects,
-            'faqpages' => $faqPages,
             'staff' => $staff,
         ]);
     }
@@ -295,15 +241,10 @@ class FaqController extends AbstractController
         }
 
         // Get all subjects associated with the faq
-        /** @var FaqSubjectRepository $faqSubjectRepo */
-        $faqSubjectRepo = $this->getDoctrine()->getRepository(FaqSubject::class);
-        $subjects = $faqSubjectRepo->getSubjectsByFaq($faq);
+        $subjects = $faq->getSubjects()->toArray();
 
         // Get all faqpages/collections associated with the faq
-        /** @var FaqFaqpageRepository $faqFaqpageRepo */
-        $faqFaqpageRepo = $this->getDoctrine()
-        ->getRepository(FaqFaqpage::class);
-        $faqPages = $faqFaqpageRepo->getFaqPagesByFaq($faq);
+        $faqPages = $faq->getFaqpages()->toArray();
 
         $form = $this->createForm(FaqType::class, $faq);
 
