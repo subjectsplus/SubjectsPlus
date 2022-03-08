@@ -13,7 +13,6 @@ export default class GuideTabContainer extends Component {
     apiLink = '/api/subjects/{subjectId}/tabs';
     postLink = '/api/tabs';
     tabLink = '/api/tabs/{tabId}';
-    putTabsLink = '/api/subjects/{subjectId}';
 
     constructor(props) {
         super(props);
@@ -317,16 +316,13 @@ export default class GuideTabContainer extends Component {
         return false;
     }
 
-    handleOnDragEnd(result) {
-        // exit if tab hasn't changed position
-        if (result.source.index === result.destination.index) return;
-
+    reorderTab(sourceIndex, destinationIndex) {
         // copy existing tabs
         let newTabs = [...this.state.tabs];
 
         // reorder tabs
-        let [reorderedItem] = newTabs.splice(result.source.index, 1);
-        newTabs.splice(result.destination.index, 0, reorderedItem);
+        let [reorderedItem] = newTabs.splice(sourceIndex, 1);
+        newTabs.splice(destinationIndex, 0, reorderedItem);
 
         // Update tab index
         newTabs.map((tab, index) => {
@@ -335,7 +331,7 @@ export default class GuideTabContainer extends Component {
 
         this.setState({
             tabs: newTabs,
-            activeKey: result.destination.index,
+            activeKey: destinationIndex,
         }, () => Promise.all(
                 newTabs.map((tab, index) => {
                     return fetch(this.getTabLink(tab.tabId), {
@@ -356,6 +352,17 @@ export default class GuideTabContainer extends Component {
                 this.addNotification('Error', 'Failed to update tab index of displaced tab!');
             })
         );
+    }
+    
+    handleOnDragEnd(result) {
+        console.log(result);
+        if (result.type === 'tab') {
+            // exit if element hasn't changed position
+            if (result.source.index === result.destination.index) return;
+            this.reorderTab(result.source.index, result.destination.index);
+        } else if (result.type === 'pluslet') {
+            console.log('Pluslet onDragEnd Handler');
+        }
     }
 
     addNotification(title="Notification", body) {
@@ -380,7 +387,7 @@ export default class GuideTabContainer extends Component {
                 <Tab.Pane key={results.tabId} eventKey={results.tabIndex}>
                     <SectionContainer tabId={results.tabId} />
                 </Tab.Pane>
-            ))
+            ));
             
             let currentTab = this.state.tabs[this.state.activeKey];
 
@@ -388,7 +395,7 @@ export default class GuideTabContainer extends Component {
                 <>
                     {/* Guide Tab Container consisting of individual tab elements */}
                     <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                        <Droppable style={{ transform: "none" }} droppableId="guide-tabs-container" direction="horizontal">
+                        <Droppable type="tab" style={{ transform: "none" }} droppableId="guide-tabs-container" direction="horizontal">
                             {(provided) => (
                                 <div id="guide-tabs-container" {...provided.droppableProps} ref={provided.innerRef}>
                                     <Tab.Container id="guide-tabs" onSelect={this.onTabSelect}>
