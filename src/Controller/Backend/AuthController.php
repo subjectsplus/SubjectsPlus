@@ -10,13 +10,20 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AuthController extends AbstractController
 {
     /**
+     * @Route("/control", name="control_index")
+     */
+    public function index() {
+        return $this->redirectToRoute('app_login');
+    }
+
+    /**
      * @Route("/control/login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+         if ($this->getUser()) {
+             return $this->redirectToRoute('control_dashboard');
+         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
