@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Alert from 'react-bootstrap/Alert';
-import Nav from 'react-bootstrap/Nav';
 import Utility from '../../../backend/javascript/Utility/Utility.js';
+import Notification from '../../shared/Notification.js';
 import SectionContainer from './SectionContainer.js';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import DraggableTab from './DraggableTab.js';
+import EditTabModal from './EditTabModal.js';
+import Tab from 'react-bootstrap/Tab';
+import Nav from 'react-bootstrap/Nav';
+import ToastContainer from 'react-bootstrap/ToastContainer'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 export default class GuideTabContainer extends Component {
     apiLink = '/api/subjects/{subjectId}/tabs';
     postLink = '/api/tabs';
     tabLink = '/api/tabs/{tabId}';
+    putTabsLink = '/api/subjects/{subjectId}';
 
     constructor(props) {
         super(props);
@@ -30,6 +29,7 @@ export default class GuideTabContainer extends Component {
             deleteTabClicked: false,
             deletingTab: false,
             numberUntitled: 0,
+            notifications: [],
         };
 
         this.settingsTabName = React.createRef();
@@ -140,8 +140,8 @@ export default class GuideTabContainer extends Component {
             });
         })
         .catch((error) => {
-            alert('Error: Failed to add new tab.');
-            console.error('Error:', error);
+            console.error(error);
+            this.addNotification('Error', 'Failed to add new tab!');
         });
     }
 
@@ -190,8 +190,8 @@ export default class GuideTabContainer extends Component {
                 });
             })
             .catch((error) => {
-                alert('Error: Failed to update tab!');
-                console.error('Error:', error);
+                console.error(error);
+                this.addNotification('Error', 'Failed to update tab!');
                 this.setState({
                     isErrored: true,
                     showSettings: false,
@@ -234,36 +234,38 @@ export default class GuideTabContainer extends Component {
                 }
                 
                 // Update tab index
-                for (let index = this.state.activeKey; index <= newLastTabIndex; index++) {
-                    newTabs[index].tabIndex = index;
-                    
-                    fetch(this.getTabLink(newTabs[index].tabId), {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            tabIndex: index
-                        })
-                    }).catch(error => {
-                        alert('Error: Failed to update tab index of displaced tab!');
-                        console.error('Error: ', error);
+                Promise.all(
+                    newTabs.slice(this.state.activeKey, newLastTabIndex + 1).map((tab, index) => {
+                        index += this.state.activeKey;
+                        tab.tabIndex = index;
+                        return fetch(this.getTabLink(tab.tabId), {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                tabIndex: index
+                            })
+                        });
                     })
-                }
-
-                this.setState({
-                    tabs: newTabs,
-                    activeKey: newActiveKey,
-                    lastTabIndex: newLastTabIndex,
-                    deleteTabClicked: false,
-                    deletingTab: false,
-                    showSettings: false
+                ).then(() => {
+                    this.setState({
+                        tabs: newTabs,
+                        activeKey: newActiveKey,
+                        lastTabIndex: newLastTabIndex,
+                        deleteTabClicked: false,
+                        deletingTab: false,
+                        showSettings: false
+                    });
+                }).catch(error => {
+                    console.error(error);
+                    this.addNotification('Error', 'Failed to update tab index of displaced tab!');
                 });
             }
         })
         .catch((error) => {
-            alert('Error: Failed to delete tab!');
-            console.error('Error:', error);
+            console.error(error);
+            this.addNotification('Error', 'Failed to delete tab!');
             this.setState({
                 isErrored: true,
                 deleteTabClicked: false,
@@ -289,9 +291,10 @@ export default class GuideTabContainer extends Component {
     }
 
     handleSettingsSubmit(evt) {
+        evt.preventDefault();
+
         const form = evt.currentTarget;
         if (form.checkValidity() === false) {
-          evt.preventDefault();
           evt.stopPropagation();
         } else {
             this.updateCurrentTab();
@@ -315,58 +318,62 @@ export default class GuideTabContainer extends Component {
     }
 
     handleOnDragEnd(result) {
+        // exit if tab hasn't changed position
+        if (result.source.index === result.destination.index) return;
+
+        // copy existing tabs
         let newTabs = [...this.state.tabs];
 
+        // reorder tabs
         let [reorderedItem] = newTabs.splice(result.source.index, 1);
         newTabs.splice(result.destination.index, 0, reorderedItem);
 
         // Update tab index
-        for (let index = 0; index < newTabs.length; index++) {
-            newTabs[index].tabIndex = index;
-            
-            fetch(this.getTabLink(newTabs[index].tabId), {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    tabIndex: index
-                })
-            }).catch(error => {
-                alert('Error: Failed to update tab index of displaced tab!');
-                console.error('Error: ', error);
-            })
-        }
+        newTabs.map((tab, index) => {
+            tab.tabIndex = index;
+        });
 
         this.setState({
-            tabs: newTabs
+            tabs: newTabs,
+            activeKey: result.destination.index,
+        }, () => Promise.all(
+                newTabs.map((tab, index) => {
+                    return fetch(this.getTabLink(tab.tabId), {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            tabIndex: index
+                        })
+                    })
+                })
+            ).then(() => {
+                this.addNotification('Success', 'Successfully updated tabs!');
+            })
+            .catch(error => {
+                console.error(error);
+                this.addNotification('Error', 'Failed to update tab index of displaced tab!');
+            })
+        );
+    }
+
+    addNotification(title="Notification", body) {
+        this.setState({
+            notifications: [...this.state.notifications, {
+                title: title,
+                body: body
+            }]
         })
     }
 
     render() {
         if (this.state.tabs) {
             // convert tabs data to draggable nav links
-            let guideTabs = this.state.tabs.map(results => (
-                    <Draggable key={results.tabId} draggableId={results.tabId} index={results.tabIndex}>
-                        {(provided, snapshot) => {
-                            if (snapshot.isDragging) {
-                                provided.draggableProps.style.left = undefined;
-                                provided.draggableProps.style.top = undefined;
-                            }
-                            return (<Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                                key={results.tabId} eventKey={results.tabIndex} tabIndex={results.tabIndex}
-                                active={this.state.activeKey === results.tabIndex}
->
-                                {Utility.htmlEntityDecode(results.label)}{' '}
-                                {this.state.activeKey === results.tabIndex && 
-                                    <a href="#" onClick={this.toggleSettings} key={results.tabId} className="tab-settings-icon">
-                                        <i className="fas fa-cog"></i>
-                                    </a>}
-                            </Nav.Link>)
-                        }}
-                    </Draggable>
-                )
-            );
+            let guideTabs = this.state.tabs.map(tab => (
+              <DraggableTab key={tab.tabId} tab={tab} active={this.state.activeKey === tab.tabIndex} 
+                onClick={this.toggleSettings}/> 
+            ));
             
             // generate tab content
             let tabsContent = this.state.tabs.map(results => (
@@ -381,7 +388,7 @@ export default class GuideTabContainer extends Component {
                 <>
                     {/* Guide Tab Container consisting of individual tab elements */}
                     <DragDropContext onDragEnd={this.handleOnDragEnd}>
-                        <Droppable droppableId="guide-tabs-container" direction="horizontal">
+                        <Droppable style={{ transform: "none" }} droppableId="guide-tabs-container" direction="horizontal">
                             {(provided) => (
                                 <div id="guide-tabs-container" {...provided.droppableProps} ref={provided.innerRef}>
                                     <Tab.Container id="guide-tabs" onSelect={this.onTabSelect}>
@@ -396,79 +403,29 @@ export default class GuideTabContainer extends Component {
                                             {tabsContent}
                                         </Tab.Content>
                                     </Tab.Container>
-                                    {/* <Tabs activeKey={this.state.activeKey} id="guide-tabs" >
-                                        {guideTabs}
-                                        <Tab key="new-tab" eventKey="new-tab" 
-                                            title={<i className="fas fa-plus"></i>} 
-                                        />
-                                    </Tabs> */}
                                 </div>
                             )}
                         </Droppable>
                     </DragDropContext>
                     
                     {/* Modal Form for editing tabs */}
-                    <Modal show={this.state.showSettings} onHide={this.toggleSettings}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Edit Tab</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Form noValidate validated={this.state.settingsValidated} onSubmit={this.handleSettingsSubmit} id="settings-form">
-                                <Form.Group className="mb-3" controlId="formGroupTabName">
-                                    <FloatingLabel
-                                        controlId="floatingTabName"
-                                        label="Tab Name"
-                                        className="mb-3"
-                                    >
-                                        <Form.Control required ref={this.settingsTabName} minLength="3" defaultValue={currentTab.label || 'Untitled'} />
-                                        <Form.Control.Feedback type="invalid">
-                                            Please enter a tab name with a minimum of 3 characters.
-                                        </Form.Control.Feedback>
-                                    </FloatingLabel>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formGroupTabVisibility">
-                                    <FloatingLabel controlId="floatingTabVisibility" label="Visibility">
-                                        <Form.Select ref={this.settingsTabVisibility} size="sm" 
-                                            aria-label="Set visibility of tab" defaultValue={currentTab.visibility ? '1' : '0'}>
-                                            <option value="0">Hidden</option>
-                                            <option value="1">Public</option>
-                                        </Form.Select>
-                                    </FloatingLabel>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formGroupExternalUrl">
-                                    <FloatingLabel controlId="floatingExternalUrl" label="Redirect URL (Optional)">
-                                        <Form.Control ref={this.settingsExternalUrl} type="url" 
-                                            defaultValue={currentTab.externalUrl || ''} />
-                                            <Form.Control.Feedback type="invalid">
-                                                Please provide a valid URL.
-                                            </Form.Control.Feedback>
-                                    </FloatingLabel>
-                                </Form.Group>
-                            </Form>
-                            <Button variant="danger" onClick={this.handleTabDelete} disabled={this.state.deleteTabClicked || 
-                                this.state.lastTabIndex === 0}>
-                                <i className="fas fa-trash"></i>{' '}
-                                Delete Tab
-                            </Button>
-                            {this.state.deleteTabClicked && (
-                                <Alert variant="danger">
-                                    <>
-                                        Are you sure you want to delete this tab?{' '}
-                                        <a href="#" onClick={() => this.setState({deleteTabClicked: false})}>No</a>{' '}
-                                        <a href="#" onClick={this.state.deletingTab ?  null : this.handleTabDelete}>Yes</a>
-                                    </>
-                                </Alert>
-                            )}
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={this.toggleSettings}>
-                                Close
-                            </Button>
-                            <Button variant="secondary" disabled={this.state.savingChanges} form="settings-form" type="submit">
-                                {this.state.savingChanges ? 'Saving...' : 'Save Changes'}
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                    <EditTabModal currentTab={currentTab} show={this.state.showSettings} onToggle={this.toggleSettings}
+                        validated={this.state.settingsValidated} onSubmit={this.handleSettingsSubmit}
+                        settingsTabNameRef={this.settingsTabName} settingsTabVisibilityRef={this.settingsTabVisibility}
+                        settingsExternalUrlRef={this.settingsExternalUrl} deleteButtonOnClick={this.handleTabDelete}
+                        deleteButtonDisabled={this.state.deleteTabClicked || this.state.lastTabIndex === 0}
+                        showDeleteConfirmation={this.state.deleteTabClicked} 
+                        declineDeleteOnClick={() => this.setState({deleteTabClicked: false})}
+                        confirmDeleteOnClick={this.state.deletingTab ?  null : this.handleTabDelete}
+                        savingChanges={this.state.savingChanges}
+                    />
+
+                    {/* Notifications */}
+                    <ToastContainer position="top-end">
+                        {this.state.notifications.map(notification => {
+                            <Notification visible={true} title={notification.title} body={notification.body} />
+                        })}
+                    </ToastContainer>
                 </>
             );
         } else if (this.state.isErrored) {
