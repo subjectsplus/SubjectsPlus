@@ -15,7 +15,7 @@ export default class EditTabModal extends Component {
         return (
             <Modal show={this.props.show} onHide={this.props.onToggle}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Tab</Modal.Title>
+                    <Modal.Title>{'Edit Tab (' + this.props.currentTab.tabId + ')'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form noValidate validated={this.props.validated} onSubmit={this.props.onSubmit} id="settings-form">
