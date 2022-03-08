@@ -40,6 +40,7 @@
                 <td>{{ guide.type }}</td>
                 <td>
                     <a href="{{ path('guide_show', {'subjectId': guide.subjectId}) }}">show</a>
+                    <a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}">build</a>
                 </td>
             </tr>
         {% else %}

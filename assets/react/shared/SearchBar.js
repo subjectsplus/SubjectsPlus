@@ -33,6 +33,7 @@ export default class SearchBar extends Component {
                         placeholder= {this.props.placeholder}
                         onChange={this.props.onChange}
                         className={this.props.className}
+                        autoComplete="off"
                         onKeyDown={this.ignoreEnterKey}
                     />
                 </div>
