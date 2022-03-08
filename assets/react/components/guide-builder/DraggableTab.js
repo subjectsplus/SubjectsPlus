@@ -11,7 +11,7 @@ export default class DraggableTab extends Component {
 
     render() {
         return (
-            <Draggable draggableId={this.props.tab.tabId} index={this.props.tab.tabIndex}>
+            <Draggable type="tab" draggableId={this.props.tab.tabId} index={this.props.tab.tabIndex}>
                 {(provided, snapshot) => {
                     return (
                         <Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
