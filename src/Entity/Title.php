@@ -24,7 +24,7 @@ use App\Filter\LetterSearchFilter;
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
  *     order={"title": "ASC"},
- *     paginationItemsPerPage=10,
+ *     paginationItemsPerPage=100,
  *     normalizationContext={"groups": {"title"}}
  * )
  * 
