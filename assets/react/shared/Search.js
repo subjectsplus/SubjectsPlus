@@ -13,8 +13,10 @@ export default class Search extends Component {
             previousInput: null,
             inputEmpty: true,
             isErrored: false,
-            loading: false
+            loading: false,
         };
+
+        this.inputTimeout = null;
 
         this.listRef = React.createRef();
 
@@ -24,10 +26,17 @@ export default class Search extends Component {
     }
 
     onSearchInput(evt) {
+        clearTimeout(this.inputTimeout);
+
         let userInput = evt.target.value;
         if (typeof userInput === 'string' && userInput.length >= 3) {
             if (userInput !== this.state.previousInput) {
-                this.getResults(userInput, 1);
+                this.setState({inputEmpty: false},
+                    () => {
+                        this.inputTimeout = setTimeout(() => 
+                            this.getResults(userInput, 1), 400);
+                    }
+                );
             }
         } else {
             this.setState({inputEmpty: true, previousInput: '', page: 1});
@@ -57,8 +66,7 @@ export default class Search extends Component {
                 });
             })
             .then(results => {
-                this.setState({
-                    inputEmpty: false, 
+                this.setState({ 
                     previousInput: search_term, 
                     results: (append ? this.state.results.concat(results['hydra:member']) : results['hydra:member']),
                     page: page,
