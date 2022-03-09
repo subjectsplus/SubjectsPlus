@@ -398,7 +398,7 @@ export default class GuideTabContainer extends Component {
                         <Droppable type="tab" style={{ transform: "none" }} droppableId="guide-tabs-container" direction="horizontal">
                             {(provided) => (
                                 <div id="guide-tabs-container" {...provided.droppableProps} ref={provided.innerRef}>
-                                    <Tab.Container id="guide-tabs" onSelect={this.onTabSelect}>
+                                    <Tab.Container id="guide-tabs" onSelect={this.onTabSelect} defaultActiveKey={this.state.activeKey}>
                                         <Nav variant="tabs">
                                             {guideTabs}
                                             {provided.placeholder}
