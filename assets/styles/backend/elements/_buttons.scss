@@ -42,6 +42,34 @@
   }
 }
 
+.btn-float-icon {
+  color: var(--sp-font-color);
+  background-color: transparent;
+  border: none;
+  border-radius: $border-radius-pill;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+
+  i {
+    font-size: 1.5rem;
+    vertical-align: text-bottom;
+    padding-right: 0.125rem;
+    color: var(--sp-nav-color);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--sp-nav-color);
+    box-shadow: none;
+  }
+}
+
+.btn-round {
+  border-radius: $border-radius-pill;
+  box-shadow: 0 0 0 0.25rem rgba(var(--sp-primary-color-rgb), 20%);
+}
+
 .btn-pill {
   border-radius: $border-radius-pill;
   font-size: $font-size-sm;
@@ -94,6 +122,15 @@
   }
 }
 
+.btn-link-accent {
+  color: var(--sp-accent-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-accent-color);
+  }
+}
+
 .btn-cancel {
   background-color: var(--sp-input-disabled-bg);
   color: #333333;
@@ -104,3 +141,64 @@
     background-color: #DBE2E6;
   }
 }
+
+.btn-outline-accent {
+  color: var(--sp-font-color);
+  border-color: var(--sp-accent-color);
+  background-color: transparent;
+
+  &:hover {
+    @include transition-all();
+    background-color: var(--sp-accent-color);
+    border-color: var(--sp-accent-color);
+    color:var(--sp-input-color);
+  }
+}
+
+.btn-outline-primary {
+  color: var(--sp-font-color);
+  border-color: var(--sp-nav-color);
+  background-color: transparent;
+
+  &:hover {
+    @include transition-all();
+    background-color: var(--sp-nav-color);
+    color:var(--sp-input-selected-text);
+    border-color: var(--sp-nav-color);
+  }
+}
+
+.btn-check{
+  &:checked,
+  &:active {
+    + .btn-outline-accent {
+      border-color: var(--sp-accent-color);
+      background-color: var(--sp-accent-color);
+      color:var(--sp-input-color);
+    }
+    +.btn-outline-primary{
+      border-color: var(--sp-nav-color);
+      background-color: var(--sp-nav-color);
+      color:var(--sp-input-selected-text);
+    }
+  }
+
+  &:focus{
+    + .btn-outline-accent,
+    + .btn-outline-primary{
+      box-shadow: none;
+    }
+  }
+}
+
+.btn-icon-default{
+  color: var(--sp-font-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}
+
+
+

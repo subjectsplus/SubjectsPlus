@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom';
 export default class RecordResults extends Component {
 
     apiLink = '/api/titles'
-    locationsLink = '/api/titles/{titleId}/locations'
 
     constructor(props) {
         super(props);
@@ -65,19 +64,6 @@ export default class RecordResults extends Component {
         this.getResults(evt.currentTarget.dataset.letter, this.state.page);
     }
 
-    async fetchTitles() {
-
-    }
-
-    async fetchLocations(titleId) {
-        let resLink = this.locationsLink.replace('{titleId}', titleId);
-
-        let locations = await fetch(resLink);
-        let locationsResponse = await locations.json();
-
-        return Promise.all(locationsResponse['hydra:member']);
-    }
-
     getResults(letter, page=1) {
         // formulate the results api link
         let resLink = this.getApiLink(letter);
@@ -97,35 +83,24 @@ export default class RecordResults extends Component {
                 letter: letter
             });
         })
-        .then(async results => {
-            
-            // for each title, fetch locations and add as key/value pair in title object
-            for (let index = 0; index < results['hydra:member'].length; index++) {
-                let result = results['hydra:member'][index];
+        .then(results => {
 
-                // fetch locations for current title
-                await this.fetchLocations(result.titleId).then(locations => {
-                    let locationsTable = {};
+            // // create a lookup table for different formats of location
+            // results['hydra:member'].map((result, index) => {
+            //     let locationsTable = {};
+            //     result.location.map(location => {
+            //         if (location.format) {
+            //             locationsTable[location.format.format] = location;
+            //         } else {
+            //             locationsTable['Web'] = location;
+            //         }
+            //     });
 
-                    // create a lookup table for different formats of location
-                    locations.map(location => {
-                        if (location.format) {
-                            locationsTable[location.format.format] = location;
-                        } else {
-                            locationsTable['Web'] = location;
-                        }
-                    });
+            //     results['hydra:member'][index]['location'] = locationsTable;
+            // });
 
-                    // append locations to the title
-                    results['hydra:member'][index] = {
-                        ...results['hydra:member'][index],
-                        locations: locationsTable
-                    };
-                });
-            }
-
-            // console.log(results['hydra:member']);
-            console.log(results['hydra:member'][0].locations);
+            console.log(results['hydra:member']);
+            console.log(results['hydra:member'].location);
 
             this.setState({
                 results: results['hydra:member'],
@@ -153,7 +128,7 @@ export default class RecordResults extends Component {
                 console.log(result);
                 return (
                     <li key={result.titleId}>
-                        <a href={result.locations['Web']['location']}>{result.title}</a>
+                        <a href={result.location[0].location}>{result.title}</a>
                     </li>
                 );
             });

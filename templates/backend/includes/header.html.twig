@@ -41,10 +41,11 @@
                             <li><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'control.header.faqs.view_your_faqs' | trans }}</a></li>
                             <li><a class="dropdown-item" href="/control/faq/subjects">{{ 'control.header.faqs.view_faqs_by_subject' | trans }}</a></li>
                             <li><a class="dropdown-item" href="/control/faq/collections">{{ 'control.header.faqs.view_faqs_by_collection' | trans }}</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/control/faq/faq.php">{{ 'New FAQ' | trans }}</a></li>
-                            <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=subject">{{ 'Browse by subject' | trans }}</a></li>
-                            <li><a class="dropdown-item" href="/control/faq/browse_faq.php?type=holding">{{ 'Browse by collection' | trans }}</a></li>
+                            {# TODO: Remove list items below #}
+                            <li><hr class="dropdown-divider visually-hidden"></li>
+                            <li><a class="dropdown-item visually-hidden" href="/control/faq/faq.php">{{ 'New FAQ' | trans }}</a></li>
+                            <li><a class="dropdown-item visually-hidden" href="/control/faq/browse_faq.php?type=subject">{{ 'Browse by subject' | trans }}</a></li>
+                            <li><a class="dropdown-item visually-hidden" href="/control/faq/browse_faq.php?type=holding">{{ 'Browse by collection' | trans }}</a></li>
                         </ul>
                     </li>
                     <li class="nav-item mx-xl-2">
@@ -54,7 +55,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{'control.header.media' | trans}}
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="videosDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="mediaDropdown">
                             <li><a class="dropdown-item" href="/control/media/upload">{{ 'control.header.media.upload' | trans }}</a></li>
                         </ul>
                     </li>
