@@ -376,6 +376,8 @@ export default class GuideTabContainer extends Component {
 
     render() {
         if (this.state.tabs) {
+            let currentTab = this.state.tabs[this.state.activeKey];
+            
             // convert tabs data to draggable nav links
             let guideTabs = this.state.tabs.map(tab => (
               <DraggableTab key={tab.tabId} tab={tab} active={this.state.activeKey === tab.tabIndex} 
@@ -383,13 +385,11 @@ export default class GuideTabContainer extends Component {
             ));
             
             // generate tab content
-            let tabsContent = this.state.tabs.map(results => (
-                <Tab.Pane key={results.tabId} eventKey={results.tabIndex}>
-                    <SectionContainer tabId={results.tabId} />
+            let tabsContent = this.state.tabs.map(tab => (
+                <Tab.Pane key={tab.tabId} eventKey={tab.tabIndex}>
+                    <SectionContainer tabId={tab.tabId} />
                 </Tab.Pane>
             ));
-            
-            let currentTab = this.state.tabs[this.state.activeKey];
 
             return (
                 <>
@@ -398,7 +398,7 @@ export default class GuideTabContainer extends Component {
                         <Droppable type="tab" style={{ transform: "none" }} droppableId="guide-tabs-container" direction="horizontal">
                             {(provided) => (
                                 <div id="guide-tabs-container" {...provided.droppableProps} ref={provided.innerRef}>
-                                    <Tab.Container id="guide-tabs" onSelect={this.onTabSelect} defaultActiveKey={this.state.activeKey}>
+                                    <Tab.Container id="guide-tabs" onSelect={this.onTabSelect} activeKey={this.state.activeKey}>
                                         <Nav variant="tabs">
                                             {guideTabs}
                                             {provided.placeholder}
