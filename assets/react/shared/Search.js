@@ -31,7 +31,7 @@ export default class Search extends Component {
         let userInput = evt.target.value;
         if (typeof userInput === 'string' && userInput.length >= 3) {
             if (userInput !== this.state.previousInput) {
-                this.setState({inputEmpty: false},
+                this.setState({inputEmpty: false, results: []},
                     () => {
                         this.inputTimeout = setTimeout(() => 
                             this.getResults(userInput, 1), 400);
@@ -52,8 +52,7 @@ export default class Search extends Component {
 
         // fetch api results
         this.setState({
-            loading: true, 
-            results: []
+            loading: true
             }, 
             () => fetch(resLink).then(response => {
                 if (response.ok) {
@@ -136,7 +135,7 @@ export default class Search extends Component {
         // Determine bottom element in results view
         if (this.state.loading) {
             bottomElement = (
-            <p className="text-center fw-bold fst-italic">Loading...</p>
+                <p className="text-center fw-bold fst-italic">Loading...</p>
             );
         } else if (this.state.hasNextPage) {
             bottomElement = (

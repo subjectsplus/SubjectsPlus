@@ -15,7 +15,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * 
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     order={"format": "ASC"}
  * )
  */
 class Location
