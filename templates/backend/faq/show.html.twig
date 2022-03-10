@@ -2,6 +2,11 @@
 
 {% block title %}{{ 'control.header.faqs.show_faq' | trans }} {{ faq.faqId }} | SubjectsPlus{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('record-icon-tooltip') }}
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
 
@@ -25,83 +30,88 @@
         <div class="col-lg-8">
             <div class="panel-basic border-basic">
                 <h4>{{ 'control.faqs.table.heading.question' | trans }}</h4>
-                <div>
-                    {{ faq.question | raw }}
-                </div>
-                <h4 class="mt-3">{{ 'control.faqs.table.heading.answer' | trans }}</h4>
-                <div>
-                    {{ faq.answer | raw }}
-                </div>
+                {{ faq.question | raw }}
+            </div>
+            <div class="panel-basic border-basic mt-4">
+                <h4>{{ 'control.faqs.table.heading.answer' | trans }}</h4>
+                {{ faq.answer | raw }}
             </div>
         </div>
         <div class="col-lg-3 offset-lg-1">
             <h3 class="mt-4 mt-lg-0">{{ 'control.faq.form.settings_header' | trans }}</h3>
-            <p>{{ 'control.faqs.table.heading.visibility' | trans }}:
+            <p class="fs-xs fst-italic">
                 {% if faq.active %}
-                    {{ '<i class="fas fa-check color-primary"></i>' }}
+                    <i class="fas fa-check color-primary"></i> {{ 'control.faq.form.active_faq_true.message' | trans }}
                 {% else %}
-                    {{ '<i class="fas fa-times"></i>Inactive' }}
+                    <i class="fas fa-times"></i> {{ 'control.faq.form.active_faq_false.message' | trans }}
                 {% endif %}
             </p>
+            <h5 class="mt-4 fw-semi mb-1">{{ 'control.faqs.table.label.keywords' | trans }}</h5>
+             <p class="fs-sm">{% for keyword in faq.keywords %}
+                    {{ keyword }}
+                    {% if not loop.last %}
+                        {{'| '}}
+                    {% endif %}
+                {% endfor %}
+             </p>
+            <h5 class="mt-4 fw-semi mb-1">{{ 'control.faq.form.subject' | trans }}</h5>
+            <div class="fs-sm">
+                {% for subject in faq.subjects %}
+                    {{ subject.subject }}
+                    {% if not loop.last %}
+                        {{'| '}}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <h5 class="mt-4 fw-semi mb-1">{{ 'control.faq.form.faq_collection_page' | trans }}</h5>
+            <div class="fs-sm">
+                {% for faqpage in faq.faqpages %}
+                    {{ faqpage.name }}
+                    {% if not loop.last %}
+                        {{'| '}}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="row row-cols-2 mt-5">
+                <div class="col-6">
+                    <a class="btn btn-gradient btn-round" href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">{{ 'control.show_faq.button.edit_faq' | trans }}</a>
+                </div>
+                <div class="col-6 text-end align-self-center">
+                    {{ include('backend/faq/_trash_button.html.twig') }}
+                    {{ include('backend/faq/_delete_form.html.twig') }}
+                </div>
+            </div>
+            <p class="fs-xs fst-italic mt-5 mb-1">
+                {% for entry in staff %}
+                    {% if loop.first %}
+                        Last updated: {{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}
+                    {% endif%}
+                {% endfor %}
+            </p>
+            <a class="btn-link fs-sm" href="#">See history</a>
+
+            <div class="accordion" id="updateHistoryAccordion">
+                <div class="accordion-item">
+                    <h5 class="accordion-header mb-0" id="updateHistoryHeading">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#updateHistoryList" aria-expanded="false" aria-controls="updateHistoryList">
+                                Update History
+                        </button>
+                    </h5>
+                    <div id="updateHistoryList" class="accordion-collapse collapse" aria-labelledby="updateHistoryHeading" data-bs-parent="#updateHistoryAccordion">
+                        <div class="accordion-body">
+                            <ul class="list-unstyled list-space fs-xs mb-0">
+                                {% for entry in staff %}
+                                    <li>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
-
 </div>
-
-
-
-
-
-
-    <table class="table">
-        <tbody>
-
-
-            <tr>
-                <th>Keywords</th>
-                <td>
-                    {% for keyword in faq.keywords %}
-                        {{ keyword }}
-                        {% if not loop.last %}
-                            {{'| '}}
-                        {% endif %}
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th>Visibility</th>
-                <td>
-                    {% if faq.active %}
-                        {{ 'Active' }}
-                    {% else %}
-                        {{ 'Inactive' }}
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Staff</th>
-                {% for entry in staff %}
-                    <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</td></span>
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Subjects</th>
-                {% for subject in faq.subjects %}
-                    <span><td>{{ subject.subject }}</td><span>
-                {% endfor %}
-            </tr>
-            <tr>
-                <th>Collections</th>
-                {% for faqpage in faq.faqpages %}
-                    <span><td>{{ faqpage.name }}</td></span>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-
-
-
-    <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">edit</a>
-
-    {{ include('backend/faq/_delete_form.html.twig') }}
 {% endblock %}

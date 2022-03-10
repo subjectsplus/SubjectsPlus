@@ -557,6 +557,14 @@
         <source>control.faqs.preview.label</source>
         <target>Preview</target>
       </trans-unit>
+      <trans-unit id="uWhnU9r" resname="control.general.label.visibility">
+        <source>control.general.label.visibility</source>
+        <target>Visibility</target>
+      </trans-unit>
+      <trans-unit id="to1i1Qz" resname="control.show_faq.button.edit_faq">
+        <source>control.show_faq.button.edit_faq</source>
+        <target>Edit FAQ</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
