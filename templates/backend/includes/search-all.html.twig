@@ -6,13 +6,38 @@
     <div class="offcanvas-body py-0">
         {# TODO: Search all as a working React component #}
         <form>
+            {# Search filters #}
+            <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Search all filters">
+                <input type="checkbox" class="btn-check" id="searchFilterAll" autocomplete="off" checked>
+                <label class="btn btn-outline-accent fs-xs" for="searchFilterAll">All</label>
 
+                <input type="checkbox" class="btn-check" id="searchFilterRecords" autocomplete="off">
+                <label class="btn btn-outline-accent fs-xs" for="searchFilterRecords">Records</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterGuides" autocomplete="off">
+                <label class="btn btn-outline-accent fs-xs" for="searchFilterGuides">Guides</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterFaqs" autocomplete="off">
+                <label class="btn btn-outline-accent fs-xs" for="searchFilterFaqs">FAQs</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterPluslets" autocomplete="off">
+                <label class="btn btn-outline-accent fs-xs" for="searchFilterPluslets">Pluslets</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterStaff" autocomplete="off">
+                <label class="btn btn-outline-accent fs-xs" for="searchFilterStaff">Staff</label>
+
+                <input type="checkbox" class="btn-check" id="searchFilterTalkback" autocomplete="off">
+                <label class="btn btn-outline-accent fs-xs" for="searchFilterTalkback">Talkbacks</label>
+            </div>
+
+            {# Search input #}
             <div class="input-group">
-                <input type="search" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
+                <input id="search-temp" type="text" class="form-control" placeholder="{{ 'control.header.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}" aria-describedby="search-button">
                 <button class="btn btn-gradient" type="submit" id="search-button">{{ 'control.header.search.button' | trans }}</button>
             </div>
             <p class="fs-sm fst-italic mt-1">Please enter a search term (minimum 3 characters).</p>
         </form>
+
         <ul class="list-unstyled sp-search-results-panel-list">
             <li class="search-results-subheading">Records</li>
             <li><a class="search-all-result-item" href="#">Biblioteca Digital Nacional de Cuba</a></li>

@@ -1,8 +1,8 @@
-<div class="mt-5 text-end">
+<div class="d-inline-flex">
     <form method="post" action="{{ path('faq_delete', {'faqId': faq.faqId}) }}">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ faq.faqId) }}">
         <button type="button" class="btn btn-link-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteFAQ">
-            <i class="fas fa-trash"></i> {{ 'control.faqs.delete_faq' | trans }}
+            <i class="fas fa-trash"></i>
         </button>
 
         <div class="modal fade" id="confirmDeleteFAQ" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmDeleteFAQLabel" aria-hidden="true">
