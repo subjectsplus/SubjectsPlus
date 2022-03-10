@@ -76,8 +76,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "SubjectsPlus\\": "lib/SubjectsPlus/"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
