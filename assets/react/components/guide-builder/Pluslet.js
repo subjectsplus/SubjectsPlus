@@ -1,30 +1,25 @@
 import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
-export default class Pluslet extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <Draggable type="pluslet" key={this.props.plusletId.toString()} draggableId={this.props.plusletId.toString()} index={this.props.plusletRow}>
-                {(provided, snapshot) => {
-                    return (
-                        <div className="pluslet" key={this.props.plusletId} ref={provided.innerRef} {...provided.draggableProps} 
-                            {...provided.dragHandleProps}
-                            style={{
-                                ...provided.draggableProps.style,
-                                border: '2px dashed blue',
-                                height: '200px',
-                                width: '150px',
-                            }}>
-                                {'Pluslet ' + this.props.plusletId}
-                        </div>
-                    );
-                }}
-            </Draggable>
-        );
-    }
+function Pluslet(props) {
+    return (
+        <Draggable type="pluslet" key={props.plusletId.toString()} draggableId={props.plusletId.toString()} index={props.plusletRow}>
+            {(provided, snapshot) => {
+                return (
+                    <div className="pluslet" key={props.plusletId} ref={provided.innerRef} {...provided.draggableProps} 
+                        {...provided.dragHandleProps}
+                        style={{
+                            ...provided.draggableProps.style,
+                            border: '2px dashed blue',
+                            height: '200px',
+                            width: '150px',
+                        }}>
+                            {'Pluslet ' + props.plusletId}
+                    </div>
+                );
+            }}
+        </Draggable>
+    )
 }
+
+export default Pluslet;
