@@ -6,11 +6,11 @@
     var descriptionClass = 'record-description';
     var iconClass = 'record-icon';
 
-    var iconSource = '/build/images/backend/information.png';
+    var iconSource = '/build/images/backend/sp-info-circle-solid.svg';
 
     var linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
-        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Decription here"><img src="' + iconSource +'" /></button>',
+        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Description here"><img src="' + iconSource +'" /></button>',
         template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
                     '</span>';

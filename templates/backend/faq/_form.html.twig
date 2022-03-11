@@ -37,7 +37,11 @@
             });
         </script>
 
-        {{ form_row(form.keywords, {'label': 'control.faq.form.keywords' | trans}) }}
+        <div class="mb-3">
+            {{ form_label(form.keywords, 'control.faq.form.keywords' | trans) }} <button type="button" class="btn btn-icon-default fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.faq.form.keywords.help.text' | trans }}"><i class="fas fa-info-circle"></i></button>
+            {{ form_widget(form.keywords) }}
+        </div>
+
         {{ form_row(form.subject, {
             'label': 'control.faq.form.subject' | trans,
             'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.subject_placeholder' | trans}

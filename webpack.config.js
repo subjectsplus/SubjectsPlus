@@ -36,7 +36,7 @@ Encore
     .addEntry('backend-main', './assets/backend/backend-main.js')
     .addEntry('mode-switcher', './assets/backend/mode-switcher.js')
     .addEntry('guide_builder', './assets/backend/javascript/entrypoints/guide_builder_loader.js')
-    .addEntry('record-icon-tooltip', './assets/backend/record-icon-tooltip.js')
+    .addEntry('bs-tooltips', './assets/backend/bs-tooltip-popover-init.js')
 
     //Front-end Main JS
     .addEntry('frontend-main', './assets/frontend/frontend-main.js')

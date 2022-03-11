@@ -4475,6 +4475,10 @@
         <source>control.show_faq.button.edit_faq</source>
         <target>__control.show_faq.button.edit_faq</target>
       </trans-unit>
+      <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
+        <source>control.faq.form.keywords.help.text</source>
+        <target>__control.faq.form.keywords.help.text</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

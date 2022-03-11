@@ -565,6 +565,10 @@
         <source>control.show_faq.button.edit_faq</source>
         <target>Edit FAQ</target>
       </trans-unit>
+      <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
+        <source>control.faq.form.keywords.help.text</source>
+        <target>Use commas</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
