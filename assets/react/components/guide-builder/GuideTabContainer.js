@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Utility from '../../../backend/javascript/Utility/Utility.js';
-import GuideAPI from '../../apis/GuideAPI.js';
 import Notification from '../../shared/Notification.js';
 import SectionContainer from './SectionContainer.js';
 import DraggableTab from './DraggableTab.js';
