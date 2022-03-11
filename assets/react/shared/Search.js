@@ -1,42 +1,46 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import Token from './Token.js';
 import SearchBar from './SearchBar.js';
+import { useDebouncedCallback } from 'use-debounce';
 
-export default class Search extends Component {
-    constructor(props) {
-        super(props);
+function Search(props) {
+    const [results, setResults] = useState([]);
+    const [page, setPage] = useState(1);
+    const [hasNextPage, setHasNextPage] = useState(false);
+    const [previousInput, setPreviousInput] = useState(null);
+    const [inputEmpty, setInputEmpty] = useState(true);
+    const [isErrored, setIsErrored] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-        this.state = {
-            results: [],
-            page: 1,
-            hasNextPage: false,
-            previousInput: null,
-            inputEmpty: true,
-            isErrored: false,
-            loading: false
-        };
+    const debouncedGetResults = useDebouncedCallback(
+        (input, page=1, append=false) => getResults(input, page, append), 400);
 
-        this.listRef = React.createRef();
+    const listRef = useRef();
 
-        this.onSearchInput = this.onSearchInput.bind(this);
-        this.loadNextPage = this.loadNextPage.bind(this);
-        this.scrollToTop = this.scrollToTop.bind(this);
-    }
+    useEffect(() => {
+        if (props.refresh !== 0) refresh();
+      }, [props.refresh]);
 
-    onSearchInput(evt) {
-        var userInput = evt.target.value;
+    const onSearchInput = (evt) => {
+        const userInput = evt.target.value;
         if (typeof userInput === 'string' && userInput.length >= 3) {
-            if (userInput !== this.state.previousInput) {
-                this.getResults(userInput, 1);
+            if (userInput !== previousInput) {
+                setInputEmpty(false);
+                setLoading(true);
+                setResults([]);
+                debouncedGetResults(userInput);
             }
         } else {
-            this.setState({inputEmpty: true, page: 1});
+            setInputEmpty(true);
+            setResults([]);
+            setPreviousInput('');
+            setPage(1);
         }
     }
 
-    getResults(search_term, page=1, append=false) {
+    const getResults = (search_term, page=1, append=false) => {
         // formulate the results api link
-        var resLink = this.props.apiLink(search_term, page);
+        const resLink = props.apiLink(search_term, page);
 
         // only append results from subsequent pages
         if (page === 1) append = false;
@@ -47,108 +51,100 @@ export default class Search extends Component {
                 return response.json();
             }
 
-            this.setState({
-                isErrored: true,
-                loading: false
-            });
+            setIsErrored(true);
+            setLoading(false);
         })
-        .then(results => {
-            this.setState({
-                inputEmpty: false, 
-                previousInput: search_term, 
-                results: (append ? this.state.results.concat(results['hydra:member']) : results['hydra:member']),
-                page: page,
-                hasNextPage: (results['hydra:view']['hydra:next'] != null),
-                isErrored: false,
-                loading: false
-            });
-        }
-        )
+        .then(latestResults => {
+            setPreviousInput(search_term);
+            setResults((append ? results.concat(latestResults['hydra:member']) : latestResults['hydra:member']));
+            setPage(page);
+            setHasNextPage((latestResults['hydra:view']['hydra:next'] != null));
+            setIsErrored(false);
+            setLoading(false);
+        })
         .catch(err => {
             console.error(err);
-            this.setState({
-                isErrored: true,
-                loading: false
-            });
-        });
+            setIsErrored(true);
+            setLoading(false);
+        })
     }
 
-    refresh() {
-        this.getResults(this.state.previousInput);
+    const refresh = () => {
+        setLoading(true);
+        setResults([]);
+        debouncedGetResults(previousInput);
     }
 
-    loadNextPage() {
-        this.setState({loading: true},
-            this.getResults(this.state.previousInput, this.state.page + 1, true));
+    const loadNextPage = () => {
+        setLoading(true);
+        getResults(previousInput, page + 1, true);
     }
 
-    scrollToTop(evt) {
-        this.listRef.current.scrollTop = 0;
+    const scrollToTop = () => {
+        listRef.current.scrollTop = 0;
     }
 
-    render() {
-        // TODO: Translations for text below
-        var resultsMessage = (
-            <p className="fs-sm fst-italic">Please enter a search term (minimum 3 characters).</p>
-        );
-        var resultTokens = [];
-        var  bottomElement = null;
-
-        if (this.state.isErrored) resultsMessage = (
-            <p className="fs-sm fst-italic">Error: Failed to reach API endpoint.</p>
-        );
-        
-        // Turn the current results into token components
-        if (!this.state.inputEmpty && !this.state.isErrored) {
-            resultTokens = this.state.results.map( (result, index) => {
-                if (this.props.tokenType === 'record') {
-                    return (
-                        <li key={result.titleId}>
-                            <Token tokenType="record" recordId={result.titleId} recordTitle={result.title}
-                                recordDescription={result.description} recordLocation={result.location[0].location} />
-                        </li>
-                    )}
-            });
-            if (resultTokens.length === 0) resultsMessage = (
+    const resultsMessage = useMemo(() => {
+        if (isErrored) {
+            return (
+                <p className="fs-sm fst-italic">Error: Failed to reach API endpoint.</p>
+            );
+        } else if (inputEmpty) {
+            return (
+                <p className="fs-sm fst-italic">Please enter a search term (minimum 3 characters).</p>
+            );
+        } else if (results.length > 0) {
+            return results.map(result => (
+                <li key={result['@id']}>
+                    <Token tokenType={props.tokenType} token={result} />
+                </li>
+            ));
+        } else if (loading) {
+            return null;
+        } else {
+            return (
                 <p className="fs-sm fst-italic">No results found.</p>
             );
         }
+    }, [isErrored, inputEmpty, loading, results]);
 
-        // Determine bottom element in results view
-        if (this.state.loading) {
-            bottomElement = (
-            <p className="text-center fw-bold fst-italic">Loading...</p>
+    const bottomElement = useMemo(() => {
+        if (loading) {
+            return (
+                <p className="text-center fw-bold fst-italic">Loading...</p>
             );
-        } else if (this.state.hasNextPage) {
-            bottomElement = (
-                <div className={`text-center my-2 ${resultTokens.length > 0 ? "d-block" : "d-none"}`}>
-                    <button className="btn btn-pill load-more-button" onClick={this.loadNextPage}>
+        } else if (hasNextPage) {
+            return (
+                <div className={`text-center my-2 ${results.length > 0 ? "d-block" : "d-none"}`}>
+                    <button className="btn btn-pill load-more-button" onClick={loadNextPage}>
                         Load More
                     </button>
                 </div>);
-        } else if (this.state.inputEmpty) {
-            bottomElement = null;
+        } else if (inputEmpty) {
+            return null;
         } else {
-            bottomElement = (
+            return (
                 <p className="text-center mt-2 fw-bold fst-italic">End of results</p>
             );
         }
+    }, [loading, hasNextPage, inputEmpty]);
 
-        return (
-            <div id={this.props.tokenType + '-search'}>
-                {this.props.extras}
-                <SearchBar id={this.props.tokenType + '-searchbar'} className="form-control"
-                        placeholder={'Search ' + this.props.tokenType} onChange={this.onSearchInput} />
-                <ul id={this.props.tokenType + '-list'} ref={this.listRef} className={`list-unstyled ${resultTokens.length > 0 ? "sp-search-results-panel-list" : ""}`}>
-                    {resultTokens.length > 0 ? resultTokens : resultsMessage}
-                    {bottomElement}
-                </ul>
-                <div className={`text-end ${resultTokens.length > 0 ? "d-block" : "d-none"}`}>
-                    <button className="btn btn-link scroll-to-top" onClick={this.scrollToTop}>
-                        <i className="fas fa-arrow-alt-circle-up"></i> Scroll To Top
-                    </button>
-                </div>
+    return (
+        <div id={props.tokenType + '-search'}>
+            {props.extras}
+            <SearchBar id={props.tokenType + '-searchbar'} className="form-control"
+                    placeholder={'Search ' + props.tokenType} onChange={onSearchInput} />
+            <ul id={props.tokenType + '-list'} ref={listRef} className={`list-unstyled ${results.length > 0 ? "sp-search-results-panel-list" : ""}`}>
+                {resultsMessage}
+                {bottomElement}
+            </ul>
+            <div className={`text-end ${results.length > 0 ? "d-block" : "d-none"}`}>
+                <button className="btn btn-link scroll-to-top" onClick={scrollToTop}>
+                    <i className="fas fa-arrow-alt-circle-up"></i> Scroll To Top
+                </button>
             </div>
-        );
-    }
+        </div>
+    );
 }
+
+export default Search;
