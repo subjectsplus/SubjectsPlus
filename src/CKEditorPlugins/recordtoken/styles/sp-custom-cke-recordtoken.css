@@ -35,5 +35,7 @@
 }
 
 .record-icon img {
-    margin: auto;
+    vertical-align: bottom;
+    width: 20px;
+    height: 20px;
 }

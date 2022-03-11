@@ -589,6 +589,18 @@
         <source>control.faqs.preview.label</source>
         <target>__control.faqs.preview.label</target>
       </trans-unit>
+      <trans-unit id="uWhnU9r" resname="control.general.label.visibility">
+        <source>control.general.label.visibility</source>
+        <target>__control.general.label.visibility</target>
+      </trans-unit>
+      <trans-unit id="to1i1Qz" resname="control.show_faq.button.edit_faq">
+        <source>control.show_faq.button.edit_faq</source>
+        <target>__control.show_faq.button.edit_faq</target>
+      </trans-unit>
+      <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
+        <source>control.faq.form.keywords.help.text</source>
+        <target>__control.faq.form.keywords.help.text</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
