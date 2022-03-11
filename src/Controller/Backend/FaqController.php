@@ -324,7 +324,7 @@ class FaqController extends AbstractController
                 $cls->addLog($staff, 'faq', $faqId, $question, 'update');
 
                 // Create flash message
-                $this->addFlash('notice', 'Success! Changes saved to Faq!');
+                $this->addFlash('notice', 'Success! Changes saved to FAQ!');
             });
 
             return $this->redirectToRoute('faq_show', [
@@ -368,7 +368,7 @@ class FaqController extends AbstractController
                 $cls->addLog($staff, 'faq', $faqId, $question, 'delete');
 
                 // Create flash message
-                $this->addFlash('notice', 'Success! Deleted Faq!');
+                $this->addFlash('notice', 'Success! Deleted FAQ!');
             });
         }
 

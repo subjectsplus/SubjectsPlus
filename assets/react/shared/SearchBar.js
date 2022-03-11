@@ -1,43 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class SearchBar extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.ignoreEnterKey = this.ignoreEnterKey.bind(this);
-        this.preventDefault = this.preventDefault.bind(this);
+function SearchBar(props) {
+    const ignoreEnterKey = evt => {
+        if (evt.keyCode === 13)
+            evt.preventDefault();
     }
 
-    ignoreEnterKey(evt) {
-        if (evt.keyCode === 13) {
-            this.preventDefault(evt);
-        }
-    }
-
-    preventDefault(evt) {
-        evt.preventDefault();
-    }
-
-    render() {
-        return (
-            <form action="#" onSubmit={this.preventDefault}>
-                {/* Label is for accessibility purposes, will not be visible */}
-                <div className="mb-2">
-                    <label htmlFor={this.props.id} className="form-label">
-                        <span className="visually-hidden">{this.props.placeholder}</span>
-                    </label>
-                    <input
-                        type="text"
-                        id={this.props.id}
-                        placeholder= {this.props.placeholder}
-                        onChange={this.props.onChange}
-                        className={this.props.className}
-                        autoComplete="off"
-                        onKeyDown={this.ignoreEnterKey}
-                    />
-                </div>
-            </form>
-        )
-    }
+    return (
+        <form action={void(0)} onSubmit={(evt) => evt.preventDefault()}>
+            {/* Label is for accessibility purposes, will not be visible */}
+            <div className="mb-2">
+                <label htmlFor={props.id} className="form-label">
+                    <span className="visually-hidden">{props.placeholder}</span>
+                </label>
+                <input
+                    type="text"
+                    id={props.id}
+                    placeholder= {props.placeholder}
+                    onChange={props.onChange}
+                    className={props.className}
+                    autoComplete="off"
+                    onKeyDown={ignoreEnterKey}
+                />
+            </div>
+        </form>
+    );
 }
+
+export default SearchBar;

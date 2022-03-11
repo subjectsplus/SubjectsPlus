@@ -1,50 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom'
 import Search from '../../shared/Search.js';
 
-export default class RecordSearch extends Component {
-    apiLink = '/api/titles';
+function RecordSearch() {
+    const apiLink = '/api/titles';
 
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            azlist: true,
-        };
+    const [azlist, setAZList] = useState(true);
+    const [refresh, performRefresh] = useState(0);
 
-        this.searchElement = React.createRef();
-
-        this.onAZListCheckBoxInput = this.onAZListCheckBoxInput.bind(this);
-        this.getApiLink = this.getApiLink.bind(this);
+    const onAZListCheckBoxInput = (evt) => {
+        setAZList(evt.target.checked);
+        performRefresh(prev => prev + 1);
     }
 
-    onAZListCheckBoxInput(evt) {
-        this.setState({azlist: evt.target.checked},
-            () => {
-                this.searchElement.current.refresh();
-            });
-    }
-
-    getApiLink(search_term, page=1) {
-        return this.apiLink + '?' + new URLSearchParams({
+    const getApiLink = (search_term, page=1) => {
+        return apiLink + '?' + new URLSearchParams({
             search: search_term,
-            'location.eresDisplay': (this.state.azlist ? 'Y' : 'N'),
+            'location.eresDisplay': (azlist ? 'Y' : 'N'),
             page: page
         });
     }
 
-    render() {
-        // TODO: Translations for title, label below
-        return (
-            <Search tokenType="record" title="Get Records" apiLink={this.getApiLink}
-                ref={this.searchElement}
-                extras={
-                    <div className="form-check form-switch">
-                        <input id="azlist" name="azlist" type="checkbox" className="form-check-input" checked={this.state.azlist} onChange={this.onAZListCheckBoxInput} />
-                            <label className="form-check-label" htmlFor="azlist">Limit to A-Z List</label>
-                    </div>} />
-        );
-    }
+    // TODO: Translations for title, label below
+    return (
+        <Search tokenType="record" title="Get Records" apiLink={getApiLink}
+            refresh={refresh}
+            extras={
+                <div className="form-check form-switch">
+                    <input id="azlist" name="azlist" type="checkbox" className="form-check-input" checked={azlist} onChange={onAZListCheckBoxInput} />
+                        <label className="form-check-label" htmlFor="azlist">Limit to A-Z List</label>
+                </div>} />
+    );
 }
 
 ReactDOM.render(<RecordSearch />,

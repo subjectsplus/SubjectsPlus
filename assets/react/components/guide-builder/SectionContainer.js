@@ -14,7 +14,11 @@ export default class SectionContainer extends Component {
         };
     }
 
-    getApiLink() {
+    componentDidMount() {
+        this.getSections();
+    }
+
+    getAPILink() {
         return this.apiLink.replace('{tabId}', 
             this.props.tabId);
     }
@@ -50,8 +54,8 @@ export default class SectionContainer extends Component {
 
     render() {
         if (this.state.sections) {
-            var guideSections = this.state.sections.map((result, index) => 
-                <Section sectionId={result.sectionId} />)
+            let guideSections = this.state.sections.map((result, index) => 
+                <Section key={result.sectionId} sectionId={result.sectionId} />)
             return (
                 <div className="section-container">
                     {guideSections}

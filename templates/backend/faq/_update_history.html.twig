@@ -1,0 +1,23 @@
+<p class="fs-xs fst-italic mt-5 mb-1">
+    {% for entry in staff %}
+        {% if loop.first %}
+            Last updated: {{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}
+        {% endif%}
+    {% endfor %}
+</p>
+<div class="accordion accordion-transparent" id="updateHistoryAccordion">
+    <div class="accordion-item">
+        <p class="accordion-header" id="updateHistoryHeading">
+            <button class="accordion-button collapsed fs-sm btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#updateHistoryList" aria-expanded="false" aria-controls="updateHistoryList">See history</button>
+        </p>
+        <div id="updateHistoryList" class="accordion-collapse collapse" aria-labelledby="updateHistoryHeading" data-bs-parent="#updateHistoryAccordion">
+            <div class="accordion-body">
+                <ul class="list-unstyled list-space fs-xs mb-0">
+                    {% for entry in staff %}
+                        <li>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
