@@ -25,6 +25,7 @@
         </div>
         <div class="mt-3">
             {% set delete_faq = 'true' %}
+            {% set update_history = 'false' %}
             {{ include('backend/faq/_form.html.twig', {'button_label': 'control.faq.form.update_faq' | trans}) }}
         </div>
     </div>

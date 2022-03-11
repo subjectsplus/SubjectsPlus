@@ -64,6 +64,10 @@
             </div>
         </div>
         {{ form_end(form) }}
+
+        {% if update_history == 'true' %}
+            {{ include('backend/faq/_update_history.html.twig') }}
+        {% endif %}
     </div>
 </div>
 {% if delete_faq == 'true' %}

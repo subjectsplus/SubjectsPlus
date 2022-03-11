@@ -361,3 +361,35 @@ h3, .h3 {
     }
   }
 }
+
+.accordion-transparent {
+  .accordion-item {
+    border: none;
+    background-color: transparent;
+    &:first-of-type,
+    &:last-of-type {
+      .accordion-button {
+        border-radius:0;
+      }
+    }
+  }
+
+  .accordion-button{
+    padding:0;
+    background-color: transparent;
+    border-radius: 0;
+    &:after {
+      margin-left: 0.25rem;
+      width: 1rem;
+      height: 1rem;
+      background-size: 1rem;
+    }
+    &:not(.collapsed){
+      box-shadow: none;
+    }
+  }
+
+  .accordion-body{
+    padding: 0.5rem 0 0 0;
+  }
+}

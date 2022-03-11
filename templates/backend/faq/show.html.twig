@@ -81,36 +81,7 @@
                     {{ include('backend/faq/_delete_form.html.twig') }}
                 </div>
             </div>
-            <p class="fs-xs fst-italic mt-5 mb-1">
-                {% for entry in staff %}
-                    {% if loop.first %}
-                        Last updated: {{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}
-                    {% endif%}
-                {% endfor %}
-            </p>
-            <a class="btn-link fs-sm" href="#">See history</a>
-
-            <div class="accordion" id="updateHistoryAccordion">
-                <div class="accordion-item">
-                    <h5 class="accordion-header mb-0" id="updateHistoryHeading">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#updateHistoryList" aria-expanded="false" aria-controls="updateHistoryList">
-                                Update History
-                        </button>
-                    </h5>
-                    <div id="updateHistoryList" class="accordion-collapse collapse" aria-labelledby="updateHistoryHeading" data-bs-parent="#updateHistoryAccordion">
-                        <div class="accordion-body">
-                            <ul class="list-unstyled list-space fs-xs mb-0">
-                                {% for entry in staff %}
-                                    <li>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
+            {{ include('backend/faq/_update_history.html.twig') }}
         </div>
     </div>
 </div>
