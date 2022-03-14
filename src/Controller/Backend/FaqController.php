@@ -117,7 +117,7 @@ class FaqController extends AbstractController
                 $cls->addLog($staff, 'faq', $faqId, $question, 'insert');
 
                 // Create flash message
-                $this->addFlash('notice', 'Success! Created new Faq!');
+                $this->addFlash('notice', 'Success! Created new FAQ!');
             });
 
             return $this->redirectToRoute('faq_show', [

@@ -4479,6 +4479,10 @@
         <source>control.faq.form.keywords.help.text</source>
         <target>__control.faq.form.keywords.help.text</target>
       </trans-unit>
+      <trans-unit id="rdSxsTE" resname="control.faqs.by_user.heading">
+        <source>control.faqs.by_user.heading</source>
+        <target>__control.faqs.by_user.heading</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

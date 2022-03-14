@@ -569,6 +569,10 @@
         <source>control.faq.form.keywords.help.text</source>
         <target>Use commas</target>
       </trans-unit>
+      <trans-unit id="rdSxsTE" resname="control.faqs.by_user.heading">
+        <source>control.faqs.by_user.heading</source>
+        <target>My FAQs</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
