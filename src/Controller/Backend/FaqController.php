@@ -204,11 +204,11 @@ class FaqController extends AbstractController
         /** @var ChchchangesRepository $chchchangesRepo */
         $chchchangesRepo = $this->getDoctrine()
         ->getRepository(Chchchanges::class);
-        $staff = $chchchangesRepo->getStaffByFaq($faq);
+        $update_history = $chchchangesRepo->getStaffByFaq($faq);
 
         return $this->render('backend/faq/show.html.twig', [
             'faq' => $faq,
-            'staff' => $staff,
+            'updateHistory' => $update_history,
         ]);
     }
 
@@ -332,11 +332,18 @@ class FaqController extends AbstractController
             ]);
         }
 
+        // Get all staff associated with the faq
+        /** @var ChchchangesRepository $chchchangesRepo */
+        $chchchangesRepo = $this->getDoctrine()
+            ->getRepository(Chchchanges::class);
+        $update_history = $chchchangesRepo->getStaffByFaq($faq);
+
         return $this->render('backend/faq/edit.html.twig', [
             'faq' => $faq,
             'form' => $form->createView(),
             'media' => $staffMedia,
             'records' => $records,
+            'updateHistory' => $update_history,
         ]);
     }
 
