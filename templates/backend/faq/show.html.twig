@@ -1,75 +1,88 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}FAQ{% endblock %}
+{% block title %}{{ 'control.header.faqs.show_faq' | trans }} {{ faq.faqId }} | SubjectsPlus{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('bs-tooltips') }}
+{% endblock %}
 
 {% block content %}
-    <h1>FAQ</h1>
+<div class="container py-5">
 
     {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
+        <div class="flash-notice alert alert-info text-center mb-4">
             {{ message }}
         </div>
     {% endfor %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>FaqId</th>
-                <td>{{ faq.faqId }}</td>
-            </tr>
-            <tr>
-                <th>Question</th>
-                <td>{{ faq.question | raw }}</td>
-            </tr>
-            <tr>
-                <th>Answer</th>
-                <td>{{ faq.answer | raw }}</td>
-            </tr>
-            <tr>
-                <th>Keywords</th>
-                <td>
-                    {% for keyword in faq.keywords %}
-                        {{ keyword }}
-                        {% if not loop.last %}
-                            {{'| '}}
-                        {% endif %}
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th>Visibility</th>
-                <td>
-                    {% if faq.active %}
-                        {{ 'Active' }}
-                    {% else %}
-                        {{ 'Inactive' }}
+    <div class="row">
+        <div class="col-8">
+            <h1 class="fw-light d-inline-block me-2">{{ 'control.header.faqs.show_faq' | trans }} {{ faq.faqId }}</h1>
+            <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.faqs.preview.label' | trans }}</a>
+        </div>
+        <div class="col-4 text-end">
+            <a href="{{ path('faq_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-8">
+            <div class="panel-basic border-basic">
+                <h4>{{ 'control.faqs.table.heading.question' | trans }}</h4>
+                {{ faq.question | raw }}
+            </div>
+            <div class="panel-basic border-basic mt-4">
+                <h4>{{ 'control.faqs.table.heading.answer' | trans }}</h4>
+                {{ faq.answer | raw }}
+            </div>
+        </div>
+        <div class="col-lg-3 offset-lg-1">
+            <h3 class="mt-4 mt-lg-0">{{ 'control.faq.form.settings_header' | trans }}</h3>
+            <p class="fs-xs fst-italic">
+                {% if faq.active %}
+                    <i class="fas fa-check color-primary"></i> {{ 'control.faq.form.active_faq_true.message' | trans }}
+                {% else %}
+                    <i class="fas fa-times"></i> {{ 'control.faq.form.active_faq_false.message' | trans }}
+                {% endif %}
+            </p>
+            <h5 class="mt-4 fw-semi mb-1">{{ 'control.faqs.table.label.keywords' | trans }}</h5>
+             <p class="fs-sm">{% for keyword in faq.keywords %}
+                    {{ keyword }}
+                    {% if not loop.last %}
+                        {{'| '}}
                     {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Staff</th>
-                {% for entry in staff %}
-                    <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</td></span>
                 {% endfor %}
-            </tr>
-            <tr>
-                <th>Subjects</th>
+             </p>
+            <h5 class="mt-4 fw-semi mb-1">{{ 'control.faq.form.subject' | trans }}</h5>
+            <div class="fs-sm">
                 {% for subject in faq.subjects %}
-                    <span><td>{{ subject.subject }}</td><span>
+                    {{ subject.subject }}
+                    {% if not loop.last %}
+                        {{'| '}}
+                    {% endif %}
                 {% endfor %}
-            </tr>
-            <tr>
-                <th>Collections</th>
+            </div>
+            <h5 class="mt-4 fw-semi mb-1">{{ 'control.faq.form.faq_collection_page' | trans }}</h5>
+            <div class="fs-sm">
                 {% for faqpage in faq.faqpages %}
-                    <span><td>{{ faqpage.name }}</td></span>
+                    {{ faqpage.name }}
+                    {% if not loop.last %}
+                        {{'| '}}
+                    {% endif %}
                 {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('faq_index') }}">back to list</a>
-
-    <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">edit</a>
-
-    {{ include('backend/faq/_delete_form.html.twig') }}
+            </div>
+            <div class="row row-cols-2 mt-5">
+                <div class="col-6">
+                    <a class="btn btn-gradient btn-round" href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">{{ 'control.show_faq.button.edit_faq' | trans }}</a>
+                </div>
+                <div class="col-6 text-end align-self-center">
+                    {{ include('backend/faq/_trash_button.html.twig') }}
+                    {{ include('backend/faq/_delete_form.html.twig') }}
+                </div>
+            </div>
+            {{ include('backend/faq/_update_history.html.twig') }}
+        </div>
+    </div>
+</div>
 {% endblock %}
