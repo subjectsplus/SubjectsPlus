@@ -12,6 +12,20 @@ import { useQuery, useQueryClient, useMutation } from 'react-query';
 function GuideTabContainer(props) {
     const postLink = '/api/tabs';
 
+    const [lastTabIndex, setLastTabIndex] = useState(0);
+    const [activeKey, setActiveKey] = useState(0);
+    const [isErrored, setIsErrored] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
+    const [savingChanges, setSavingChanges] = useState(false);
+    const [settingsValidated, setSettingsValidated] = useState(false);
+    const [deleteTabClicked, setDeleteTabClicked] = useState(false);
+    const [deletingTab, setDeletingTab] = useState(false);
+    const [numberUntitled, setNumberUntitled] = useState(0);
+
+    const settingsTabName = useRef();
+    const settingsExternalUrl = useRef();
+    const settingsTabVisibility = useRef();
+
     const queryClient = useQueryClient();
     const {isLoading, isError, data, error} = useQuery(['tabs', props.subjectId], 
         () => GuideAPI.fetchTabs(props.subjectId), {
@@ -24,7 +38,6 @@ function GuideTabContainer(props) {
             await queryClient.cancelQueries(['tabs', props.subjectId]);
             const previousTabData = queryClient.getQueryData(['tabs', props.subjectId]);
 
-            console.log('Optimistic result: ', tabData.optimisticResult);
             queryClient.setQueryData(['tabs', props.subjectId], {
                 ...previousTabData,
                 'hydra:member': tabData.optimisticResult,
@@ -43,59 +56,18 @@ function GuideTabContainer(props) {
         },
     });
 
-    const [lastTabIndex, setLastTabIndex] = useState(0);
-    const [activeKey, setActiveKey] = useState(0);
-    const [isErrored, setIsErrored] = useState(false);
-    const [showSettings, setShowSettings] = useState(false);
-    const [savingChanges, setSavingChanges] = useState(false);
-    const [settingsValidated, setSettingsValidated] = useState(false);
-    const [deleteTabClicked, setDeleteTabClicked] = useState(false);
-    const [deletingTab, setDeletingTab] = useState(false);
-    const [numberUntitled, setNumberUntitled] = useState(0);
-
-    const settingsTabName = useRef();
-    const settingsExternalUrl = useRef();
-    const settingsTabVisibility = useRef();
-
     useEffect(() => {
-        if (data) setLastTabIndex(data.at(-1)['tabIndex']);
+        if (data) {
+            setLastTabIndex(data.at(-1)['tabIndex']);
+            setNumberUntitled(Math.max.apply(Math, data.map(function(result) {
+                if (result.label.includes('Untitled')) {
+                    return (result.label.match(/\d+/) ? result.label.match(/\d+/)[0] : 1);
+                } else {
+                    return 0;
+                }
+            })));
+        }
     }, [data]);
-    
-    // const getTabs = () => {
-    //     // formulate the results api link for guide
-    //     const resLink = getAPILink();
-
-    //     // fetch api results
-    //     fetch(resLink).then(response => {
-    //         if (response.ok) {
-    //             return response.json();
-    //         }
-
-    //         setIsErrored(true);
-    //     })
-    //     .then(results => {
-    //         // Retrieve highest untitled count
-    //         let numberUntitled = 0;
-    //         results['hydra:member'].forEach(result => {
-    //             if (result.label.includes('Untitled')) {
-    //                 if (result.label.match(/\d+/)) {
-    //                     numberUntitled = Math.max(result.label.match(/\d+/)[0], numberUntitled);
-    //                 } else {
-    //                     numberUntitled = Math.max(numberUntitled, 1);
-    //                 }
-    //             }
-    //         });
-
-    //         setTabs(results['hydra:member']);
-    //         setLastTabIndex(results['hydra:member'].at(-1)['tabIndex']);
-    //         setIsErrored(false);
-    //         setNumberUntitled(numberUntitled);
-    //     })
-    //     .catch(err => {
-    //         console.error(err);
-    //         setIsErrored(true);
-    //     });
-    // }
 
     const onTabSelect = (eventKey) => {
         if (eventKey === 'new-tab') {
