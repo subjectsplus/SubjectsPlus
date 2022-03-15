@@ -10,10 +10,10 @@ function GuideBuilder(props) {
     const [loading, setLoading] = useState(true);
     const [isErrored, setIsErrored] = useState(false);
 
-    useEffect(() => getGuide(), [props.guideId]);
+    useEffect(() => getGuide(), [props.subjectId]);
 
     const getAPILink = () => {
-        return apiLink + props.guideId;
+        return apiLink + props.subjectId;
     }
 
     const getGuide = () => {
@@ -45,7 +45,7 @@ function GuideBuilder(props) {
             return (
                 <>
                     <h3>{Utility.htmlEntityDecode(guide.subject)}</h3>
-                    <GuideTabContainer guideId={props.guideId} />
+                    <GuideTabContainer subjectId={props.subjectId} />
                 </>
             );
         } else if (loading) {
