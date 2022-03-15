@@ -573,6 +573,14 @@
         <source>control.faqs.by_user.heading</source>
         <target>My FAQs</target>
       </trans-unit>
+      <trans-unit id="h1xbvfM" resname="control.faqs.by_subject.heading">
+        <source>control.faqs.by_subject.heading</source>
+        <target>FAQs by Subject</target>
+      </trans-unit>
+      <trans-unit id="MF3cFcf" resname="control.faqs.by_collection.heading">
+        <source>control.faqs.by_collection.heading</source>
+        <target>FAQs by Collection</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

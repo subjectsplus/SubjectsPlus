@@ -4526,6 +4526,14 @@
         <source>control.faqs.by_user.heading</source>
         <target>__control.faqs.by_user.heading</target>
       </trans-unit>
+      <trans-unit id="h1xbvfM" resname="control.faqs.by_subject.heading">
+        <source>control.faqs.by_subject.heading</source>
+        <target>__control.faqs.by_subject.heading</target>
+      </trans-unit>
+      <trans-unit id="MF3cFcf" resname="control.faqs.by_collection.heading">
+        <source>control.faqs.by_collection.heading</source>
+        <target>__control.faqs.by_collection.heading</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

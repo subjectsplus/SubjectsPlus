@@ -3,6 +3,7 @@
 {% block title %}{{ 'control.faqs.by_user.heading' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
+{# TODO: Will replace this screen with index with active filters #}
 <div class="container py-5">
     <div class="row">
         <div class="col-8">
@@ -30,6 +31,7 @@
         </tr>
         </thead>
         <tbody>
+        {# TODO: Show recent version of FAQ, not an entry for each change #}
         {% for entry in faqs %}
             <tr>
                 <td class="fs-xs text-center">
@@ -53,7 +55,7 @@
                         </div>
                     {% endif %}
                     <div  class="fs-xs mt-3">
-                        {{ "%s, %s"|format(entry.message, entry.dateAdded|format_date())}}
+                        {{ "%s (%s)"|format(entry.dateAdded|format_date(), entry.message|title)}}
                     </div>
                 </td>
                 <td>{{ entry.faq.answer | u.truncate(80, '...') | striptags | raw }}</td>
