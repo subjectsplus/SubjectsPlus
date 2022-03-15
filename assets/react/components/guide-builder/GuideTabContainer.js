@@ -1,20 +1,48 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Utility from '../../../backend/javascript/Utility/Utility.js';
-import Notification from '../../shared/Notification.js';
+import GuideAPI from '../../apis/GuideAPI.js';
 import SectionContainer from './SectionContainer.js';
 import DraggableTab from './DraggableTab.js';
 import EditTabModal from './EditTabModal.js';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
-import ToastContainer from 'react-bootstrap/ToastContainer'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { useQuery, useQueryClient, useMutation } from 'react-query';
 
 function GuideTabContainer(props) {
-    const apiLink = '/api/subjects/{subjectId}/tabs';
     const postLink = '/api/tabs';
-    const tabLink = '/api/tabs/{tabId}';
 
-    const [tabs, setTabs] = useState(null);
+    const queryClient = useQueryClient();
+    const {isLoading, isError, data, error} = useQuery(['tabs', props.subjectId], 
+        () => GuideAPI.fetchTabs(props.subjectId), {
+            select: data => data['hydra:member']
+        }
+    );
+    
+    const reorderTabMutation = useMutation(GuideAPI.reorderTab, {
+        onMutate: async tabData => {
+            await queryClient.cancelQueries(['tabs', props.subjectId]);
+            const previousTabData = queryClient.getQueryData(['tabs', props.subjectId]);
+
+            console.log('Optimistic result: ', tabData.optimisticResult);
+            queryClient.setQueryData(['tabs', props.subjectId], {
+                ...previousTabData,
+                'hydra:member': tabData.optimisticResult,
+            });
+            
+            return { previousTabData };
+        },
+        onError: (error, tabData, context) => {
+            // Perform rollback of tab mutation
+            console.error(error);
+            queryClient.setQueryData(['tabs', props.subjectId], context.previousTabData);
+        },
+        onSettled: () => {
+            // Refetch the tab data
+            queryClient.invalidateQueries(['tabs', props.subjectId]);
+        },
+    });
+
     const [lastTabIndex, setLastTabIndex] = useState(0);
     const [activeKey, setActiveKey] = useState(0);
     const [isErrored, setIsErrored] = useState(false);
@@ -29,53 +57,45 @@ function GuideTabContainer(props) {
     const settingsExternalUrl = useRef();
     const settingsTabVisibility = useRef();
 
-    useEffect(() => getTabs(), [props.guideId])
+    useEffect(() => {
+        if (data) setLastTabIndex(data.at(-1)['tabIndex']);
+    }, [data]);
+    
+    // const getTabs = () => {
+    //     // formulate the results api link for guide
+    //     const resLink = getAPILink();
 
-    const getAPILink = () => {
-        return apiLink.replace('{subjectId}', 
-            props.guideId);
-    }
+    //     // fetch api results
+    //     fetch(resLink).then(response => {
+    //         if (response.ok) {
+    //             return response.json();
+    //         }
 
-    const getTabLink = (tabId) => {
-        return tabLink.replace('{tabId}', 
-            tabId);
-    }
+    //         setIsErrored(true);
+    //     })
+    //     .then(results => {
+    //         // Retrieve highest untitled count
+    //         let numberUntitled = 0;
+    //         results['hydra:member'].forEach(result => {
+    //             if (result.label.includes('Untitled')) {
+    //                 if (result.label.match(/\d+/)) {
+    //                     numberUntitled = Math.max(result.label.match(/\d+/)[0], numberUntitled);
+    //                 } else {
+    //                     numberUntitled = Math.max(numberUntitled, 1);
+    //                 }
+    //             }
+    //         });
 
-    const getTabs = () => {
-        // formulate the results api link for guide
-        const resLink = getAPILink();
-
-        // fetch api results
-        fetch(resLink).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-
-            setIsErrored(true);
-        })
-        .then(results => {
-            // Retrieve highest untitled count
-            let numberUntitled = 0;
-            results['hydra:member'].forEach(result => {
-                if (result.label.includes('Untitled')) {
-                    if (result.label.match(/\d+/)) {
-                        numberUntitled = Math.max(result.label.match(/\d+/)[0], numberUntitled);
-                    } else {
-                        numberUntitled = Math.max(numberUntitled, 1);
-                    }
-                }
-            });
-
-            setTabs(results['hydra:member']);
-            setLastTabIndex(results['hydra:member'].at(-1)['tabIndex']);
-            setIsErrored(false);
-            setNumberUntitled(numberUntitled);
-        })
-        .catch(err => {
-            console.error(err);
-            setIsErrored(true);
-        });
-    }
+    //         setTabs(results['hydra:member']);
+    //         setLastTabIndex(results['hydra:member'].at(-1)['tabIndex']);
+    //         setIsErrored(false);
+    //         setNumberUntitled(numberUntitled);
+    //     })
+    //     .catch(err => {
+    //         console.error(err);
+    //         setIsErrored(true);
+    //     });
+    // }
 
     const onTabSelect = (eventKey) => {
         if (eventKey === 'new-tab') {
@@ -93,7 +113,7 @@ function GuideTabContainer(props) {
                         'Untitled ' + (numberUntitled + 1)),
             tabIndex: lastTabIndex + 1,
             visibility: true,
-            subject: '/api/subjects/' + props.guideId
+            subject: '/api/subjects/' + props.subjectId
         };
 
         fetch(postLink, {
@@ -105,7 +125,6 @@ function GuideTabContainer(props) {
         })
         .then(response => response.json())
         .then(data => {
-            setTabs([...tabs, data]);
             setLastTabIndex(data.tabIndex);
             setActiveKey(data.tabIndex);
             setSettingsValidated(false);
@@ -118,7 +137,7 @@ function GuideTabContainer(props) {
     }
 
     const updateCurrentTab = () => {
-        const currentTab = tabs[activeKey];
+        const currentTab = tabs.data[activeKey];
 
         const newLabel = Utility.htmlEntityDecode(settingsTabName.current.value.trim());
         const newExternalUrl = Utility.htmlEntityDecode(settingsExternalUrl.current.value.trim());
@@ -151,7 +170,7 @@ function GuideTabContainer(props) {
                 let newTabs = [...tabs];
                 newTabs[activeKey] = data;
 
-                setTabs(newTabs);
+                //setTabs(newTabs);
                 setShowSettings(false);
                 setSavingChanges(false);
             })
@@ -171,7 +190,7 @@ function GuideTabContainer(props) {
     }
 
     const deleteCurrentTab = () => {
-        let currentTab = tabs[activeKey];
+        let currentTab = tabs.data[activeKey];
 
         fetch(getTabLink(currentTab.tabId), {
             method: 'DELETE',
@@ -212,7 +231,7 @@ function GuideTabContainer(props) {
                 ).then(() => {
                     setActiveKey(newActiveKey);
                     setLastTabIndex(newLastTabIndex);
-                    setTabs(newTabs);
+                    //setTabs(newTabs);
                     setDeleteTabClicked(false);
                     setDeletingTab(false);
                     setShowSettings(false);
@@ -257,49 +276,26 @@ function GuideTabContainer(props) {
         return false;
     }
 
-    const toggleSettings = () => {
-        setShowSettings(!showSettings);
-        setSettingsValidated(false);
-        setDeleteTabClicked(false);
-
-        return false;
-    }
-
-    const reorderTab = (sourceIndex, destinationIndex) => {
+    const reorderTab = async (sourceIndex, destinationIndex) => {
         // copy existing tabs
-        let newTabs = [...tabs];
+        let newTabs = [...data];
 
         // reorder tabs
-        let [reorderedItem] = newTabs.splice(sourceIndex, 1);
+        const [reorderedItem] = newTabs.splice(sourceIndex, 1);
         newTabs.splice(destinationIndex, 0, reorderedItem);
-
-        // Update tab index
-        newTabs.map((tab, index) => {
+        
+        // set tab index
+        newTabs.forEach((tab, index) => {
             tab.tabIndex = index;
         });
 
         setActiveKey(destinationIndex);
-        setTabs(newTabs);
 
-        Promise.all(
-            newTabs.map((tab, index) => {
-                return fetch(getTabLink(tab.tabId), {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        tabIndex: index
-                    })
-                })
-            })
-        )
-        .then(() => {
-            //this.addNotification('Success', 'Successfully updated tabs!');
-        })
-        .catch(error => {
-            console.error(error);
-            //this.addNotification('Error', 'Failed to update tab index of displaced tab!');
+        reorderTabMutation.mutate({
+            subjectId: props.subjectId, 
+            sourceTabIndex: sourceIndex,
+            destinationTabIndex: destinationIndex,
+            optimisticResult: newTabs
         });
     }
     
@@ -307,7 +303,11 @@ function GuideTabContainer(props) {
         console.log(result);
         if (result.type === 'tab') {
             // exit if element hasn't changed position
+            if (result.source === undefined || result.destination === undefined) return;
+            if (result.source.index === undefined || result.destination.index === undefined) return;
             if (result.source.index === result.destination.index) return;
+
+            // perform the reordering
             reorderTab(result.source.index, result.destination.index);
         } else if (result.type === 'pluslet') {
             console.log('Pluslet onDragEnd Handler');
@@ -315,20 +315,26 @@ function GuideTabContainer(props) {
     }
 
     const guideTabContent = () => {
-        if (tabs) {
-            const currentTab = tabs[activeKey];
+        if (isLoading) {
+            return (<p>Loading tabs...</p>);
+        } else if (isError) {
+            console.error(error);
+            return (<p>Error: Failed to load tabs through API Endpoint!</p>);
+        } else {
+            const currentTab = data[activeKey];
+
+            console.log('Tabs: ', data);
             console.log('Current tab: ', currentTab);
-            console.log('Tabs: ', tabs);
             console.log('Active key: ', activeKey);
             
             // convert tabs data to draggable nav links
-            const guideTabs = tabs.map(tab => (
+            const guideTabs = data.map(tab => (
                 <DraggableTab key={tab.tabId} tab={tab} active={activeKey === tab.tabIndex} 
-                    onClick={toggleSettings}/> 
+                    onClick={() => setShowSettings(!showSettings)}/> 
             ));
 
             // generate tab content
-            const tabsContent = tabs.map(tab => (
+            const tabsContent = data.map(tab => (
                 <Tab.Pane key={tab.tabId} eventKey={tab.tabIndex}>
                     <SectionContainer tabId={tab.tabId} />
                 </Tab.Pane>
@@ -359,7 +365,7 @@ function GuideTabContainer(props) {
                     </DragDropContext>
                     
                     {/* Modal Form for editing tabs */}
-                    <EditTabModal currentTab={currentTab} show={showSettings} onToggle={toggleSettings}
+                    <EditTabModal currentTab={currentTab} show={showSettings} onHide={() => setShowSettings(false)}
                         validated={settingsValidated} onSubmit={handleSettingsSubmit}
                         settingsTabNameRef={settingsTabName} settingsTabVisibilityRef={settingsTabVisibility}
                         settingsExternalUrlRef={settingsExternalUrl} deleteButtonOnClick={handleTabDelete}
@@ -371,10 +377,6 @@ function GuideTabContainer(props) {
                     />
                 </>
             );
-        } else if (isErrored) {
-            return (<p>Error: Failed to load tabs through API Endpoint!</p>);
-        } else {
-            return (<p>Loading Tabs...</p>);
         }
     }
 
