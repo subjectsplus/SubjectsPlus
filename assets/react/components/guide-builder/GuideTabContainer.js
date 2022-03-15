@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Utility from '../../../backend/javascript/Utility/Utility.js';
-import GuideAPI from '../../apis/GuideAPI.js';
+import { useReorderTab, useFetchTabs } from '../../apis/GuideAPI.js';
 import SectionContainer from './SectionContainer.js';
 import DraggableTab from './DraggableTab.js';
 import EditTabModal from './EditTabModal.js';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useQuery, useQueryClient, useMutation } from 'react-query';
 
 function GuideTabContainer(props) {
     const postLink = '/api/tabs';
@@ -26,35 +25,9 @@ function GuideTabContainer(props) {
     const settingsExternalUrl = useRef();
     const settingsTabVisibility = useRef();
 
-    const queryClient = useQueryClient();
-    const {isLoading, isError, data, error} = useQuery(['tabs', props.subjectId], 
-        () => GuideAPI.fetchTabs(props.subjectId), {
-            select: data => data['hydra:member']
-        }
-    );
+    const {isLoading, isError, data, error} = useFetchTabs(props.subjectId);
     
-    const reorderTabMutation = useMutation(GuideAPI.reorderTab, {
-        onMutate: async tabData => {
-            await queryClient.cancelQueries(['tabs', props.subjectId]);
-            const previousTabData = queryClient.getQueryData(['tabs', props.subjectId]);
-
-            queryClient.setQueryData(['tabs', props.subjectId], {
-                ...previousTabData,
-                'hydra:member': tabData.optimisticResult,
-            });
-            
-            return { previousTabData };
-        },
-        onError: (error, tabData, context) => {
-            // Perform rollback of tab mutation
-            console.error(error);
-            queryClient.setQueryData(['tabs', props.subjectId], context.previousTabData);
-        },
-        onSettled: () => {
-            // Refetch the tab data
-            queryClient.invalidateQueries(['tabs', props.subjectId]);
-        },
-    });
+    const reorderTabMutation = useReorderTab(props.subjectId);
 
     useEffect(() => {
         if (data) {
@@ -256,13 +229,15 @@ function GuideTabContainer(props) {
         const [reorderedItem] = newTabs.splice(sourceIndex, 1);
         newTabs.splice(destinationIndex, 0, reorderedItem);
         
-        // set tab index
+        // set the updated tab index to produce optimistic result
         newTabs.forEach((tab, index) => {
             tab.tabIndex = index;
         });
 
+        // focus the tab container to the destination tab
         setActiveKey(destinationIndex);
 
+        // perform the reorder mutation in the background
         reorderTabMutation.mutate({
             subjectId: props.subjectId, 
             sourceTabIndex: sourceIndex,
