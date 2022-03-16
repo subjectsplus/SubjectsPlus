@@ -10,8 +10,8 @@
             <h1 class="fw-light">{{ 'control.faqs.by_collection.heading' | trans }}</h1>
             {# TODO: Add active filter #}
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switchShowActiveSubjects">
-                <label class="form-check-label" for="switchShowActiveSubjects">Show ACTIVE collections</label>
+                <input class="form-check-input" type="checkbox" role="switch" id="switchShowActiveCollections">
+                <label class="form-check-label" for="switchShowActiveCollections">Show ACTIVE collections</label>
             </div>
         </div>
         <div class="col-7 col-sm-6 col-md-5 col-lg-4 col-xl-3 text-sm-end mt-2 mt-sm-1">
@@ -26,8 +26,8 @@
         </div>
         {% for collection in collections %}
             {% if collection.faqs is not empty %}
-                {# TODO: Add anchor tag with collection shortform #}
-                <h3 class="mt-4">{{ subject.subject | raw}}</h3>
+                {# TODO: Add anchor tag with collection name value #}
+                <h3 class="mt-4">{{ collection.name | raw}}</h3>
                 <table class="table table-striped table-responsive">
                     <thead>
                     <tr>
@@ -38,7 +38,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for faq in subject.faqs|reverse %}
+                    {% for faq in collection.faqs|reverse %}
                         <tr>
                             <td class="fs-xs text-center" style="width:75px;">
                                 {% if faq.active %}
@@ -81,65 +81,4 @@
         {% endfor %}
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-    
-    {% for collection in collections %}
-        {% if collection.faqs is not empty %}
-            <h2>{{ collection.name | raw}}</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>FaqId</th>
-                        <th>Question</th>
-                        <th>Answer</th>
-                        <th>Keywords</th>
-                        <th>Visibility</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for faq in collection.faqs %}
-                    <tr>
-                        <td>{{ faq.faqId }}</td>
-                        <td>{{ faq.question | raw }}</td>
-                        <td>{{ faq.answer | raw }}</td>
-                        <td>
-                            {% for keyword in faq.keywords %}
-                                {{ keyword }}
-                                {% if not loop.last %}
-                                    {{'| '}}
-                                {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {% if faq.active %}
-                                {{ 'Active' }}
-                            {% else %}
-                                {{ 'Inactive' }}
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="{{ path('faq_show', {'faqId': faq.faqId}) }}">show</a>
-                            <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}">edit</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="7">no records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
-    {% endfor %}
-
 {% endblock %}

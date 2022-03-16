@@ -156,7 +156,7 @@ class FaqController extends AbstractController
      * @Route("/collections", name="faq_show_collections", methods={"GET"})
      */
     public function displayFaqsByCollections(Request $request): Response {
-        return $this->render('backend/faq/show_collections.html.twig', [
+        return $this->render('backend/faq/manage_faq_collections.html.twig', [
             "collections" => $this->getDoctrine()->getRepository(Faqpage::class)->findAll(),
         ]);
     }

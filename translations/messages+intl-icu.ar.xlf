@@ -4534,6 +4534,18 @@
         <source>control.faqs.by_collection.heading</source>
         <target>__control.faqs.by_collection.heading</target>
       </trans-unit>
+      <trans-unit id="U.QlAlE" resname="control.header.faqs.admin.manage_faq_collections">
+        <source>control.header.faqs.admin.manage_faq_collections</source>
+        <target>__control.header.faqs.admin.manage_faq_collections</target>
+      </trans-unit>
+      <trans-unit id="zKfBvBP" resname="control.faqs.manage_faq_collection.heading">
+        <source>control.faqs.manage_faq_collection.heading</source>
+        <target>__control.faqs.manage_faq_collection.heading</target>
+      </trans-unit>
+      <trans-unit id="NiRUiLv" resname="control.faqs.admin.create_new_collection">
+        <source>control.faqs.admin.create_new_collection</source>
+        <target>__control.faqs.admin.create_new_collection</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

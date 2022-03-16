@@ -1,0 +1,52 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}{{ 'control.faqs.manage_faq_collection.heading' | trans }} | SubjectsPlus{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice alert alert-info text-center mb-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="row g-1">
+        <div class="col-7">
+            <h1 class="fw-light">{{ 'control.faqs.manage_faq_collection.heading' | trans }}</h1>
+            {# TODO: Add switch to include Subjects #}
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchIncludeFaqsBySubject">
+                <label class="form-check-label" for="switchIncludeFaqsBySubject">Include Subjects</label>
+            </div>
+        </div>
+        <div class="col-5 text-end">
+            <a class="btn btn-gradient btn-pill-icon" type="button" data-bs-toggle="modal" data-bs-target="#addNewFaqCollection"><i class="fas fa-plus-circle"></i> {{ 'control.faqs.admin.create_new_collection' | trans }}</a>
+
+            {# Add new FAQ collection modal #}
+            <div class="modal fade" id="addNewFaqCollection" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addNewFaqCollectionLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="addNewFaqCollectionLabel">New FAQ Collection</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'close.aria.label' | trans }}"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-floating mb-4">
+                                    <input type="text" class="form-control" id="collectionName" placeholder="Collection Name">
+                                    <label for="collectionName">Collection Name</label>
+                                </div>
+                                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">{{ 'control.faqs.delete_faq.cancel_button' | trans }}</button>
+                                <button class="btn btn-gradient">Add Collection</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <p>table here</p>
+    </div>
+</div>
+{% endblock %}
