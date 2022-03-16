@@ -11,11 +11,11 @@ export default class DraggableTab extends Component {
 
     render() {
         return (
-            <Draggable type="tab" draggableId={this.props.tab.tabId} index={this.props.tab.tabIndex}>
+            <Draggable type="tab" draggableId={'tab-' + this.props.tab.tabIndex} index={this.props.tab.tabIndex}>
                 {(provided, snapshot) => {
                     return (
                         <Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
-                            key={this.props.tab.tabId} eventKey={this.props.tab.tabIndex} tabIndex={this.props.tab.tabIndex}
+                            eventKey={this.props.tab.tabIndex} tabIndex={this.props.tab.tabIndex}
                             active={this.props.active}>
                                 {Utility.htmlEntityDecode(this.props.tab.label)}{' '}
                                 {this.props.active && 
