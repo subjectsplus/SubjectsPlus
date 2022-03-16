@@ -1,45 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
-export function useReorderTab(subjectId) {
-    if (subjectId === undefined) throw new Error('"subjectId" field is required to call useReorderTab.');
-
-    const queryClient = useQueryClient();
-    return useMutation(reorderTab, {
-        onMutate: async tabData => {
-            await queryClient.cancelQueries(['tabs', subjectId]);
-            const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
-
-            // produce optimistic result
-            const newTabs = [...previousTabsData['hydra:member']];
-
-            // reorder tabs
-            const [reorderedItem] = newTabs.splice(tabData.sourceTabIndex, 1);
-            newTabs.splice(tabData.destinationTabIndex, 0, reorderedItem);
-        
-            // set the updated tab index
-            newTabs.forEach((tab, index) => {
-                tab.tabIndex = index;
-            });
-
-            queryClient.setQueryData(['tabs', subjectId], {
-                ...previousTabsData,
-                'hydra:member': newTabs,
-            });
-            
-            return { previousTabsData };
-        },
-        onError: (error, tabData, context) => {
-            // Perform rollback of tab mutation
-            console.error(error);
-            queryClient.setQueryData(['tabs', subjectId], context.previousTabsData);
-        },
-        onSettled: () => {
-            // Refetch the tab data
-            queryClient.invalidateQueries(['tabs', subjectId]);
-        },
-    });
-}
-
 export function useFetchTabs(subjectId) {
     if (subjectId === undefined) throw new Error('"subjectId" field is required to call useFetchTabs.');
 
@@ -97,7 +57,7 @@ export function useUpdateTab(subjectId) {
             optimisticResult['hydra:member'][updatedTab.tabIndex] = updatedTab.optimisticResult;
             
             console.log('optimisticResult', optimisticResult);
-            
+
             queryClient.setQueryData(['tabs', subjectId], optimisticResult);
             return { previousTabsData };
         },
@@ -127,6 +87,46 @@ export function useDeleteTab(subjectId) {
             optimisticResult['hydra:member'].forEach((tab, index) => tab.tabIndex = index);
 
             queryClient.setQueryData(['tabs', subjectId], optimisticResult);
+            
+            return { previousTabsData };
+        },
+        onError: (error, tabData, context) => {
+            // Perform rollback of tab mutation
+            console.error(error);
+            queryClient.setQueryData(['tabs', subjectId], context.previousTabsData);
+        },
+        onSettled: () => {
+            // Refetch the tab data
+            queryClient.invalidateQueries(['tabs', subjectId]);
+        },
+    });
+}
+
+export function useReorderTab(subjectId) {
+    if (subjectId === undefined) throw new Error('"subjectId" field is required to call useReorderTab.');
+
+    const queryClient = useQueryClient();
+    return useMutation(reorderTab, {
+        onMutate: async tabData => {
+            await queryClient.cancelQueries(['tabs', subjectId]);
+            const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
+
+            // produce optimistic result
+            const newTabs = [...previousTabsData['hydra:member']];
+
+            // reorder tabs
+            const [reorderedItem] = newTabs.splice(tabData.sourceTabIndex, 1);
+            newTabs.splice(tabData.destinationTabIndex, 0, reorderedItem);
+        
+            // set the updated tab index
+            newTabs.forEach((tab, index) => {
+                tab.tabIndex = index;
+            });
+
+            queryClient.setQueryData(['tabs', subjectId], {
+                ...previousTabsData,
+                'hydra:member': newTabs,
+            });
             
             return { previousTabsData };
         },

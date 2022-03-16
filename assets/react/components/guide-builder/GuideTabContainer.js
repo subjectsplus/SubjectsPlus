@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Utility from '../../../backend/javascript/Utility/Utility.js';
-import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '../../apis/GuideAPI.js';
+import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '../../apis/guide/TabAPI.js';
 import SectionContainer from './SectionContainer.js';
 import DraggableTab from './DraggableTab.js';
 import EditTabModal from './EditTabModal.js';
@@ -11,7 +11,6 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 function GuideTabContainer(props) {
     const [lastTabIndex, setLastTabIndex] = useState(0);
     const [activeKey, setActiveKey] = useState(0);
-    const [isErrored, setIsErrored] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
     const [savingChanges, setSavingChanges] = useState(false);
     const [settingsValidated, setSettingsValidated] = useState(false);
@@ -197,10 +196,6 @@ function GuideTabContainer(props) {
             return (<p>Error: Failed to load tabs through API Endpoint!</p>);
         } else {
             const currentTab = data[activeKey];
-
-            console.log('Tabs: ', data);
-            console.log('Current tab: ', currentTab);
-            console.log('Active key: ', activeKey);
             
             // convert tabs data to draggable nav links
             const guideTabs = data.map(tab => (
