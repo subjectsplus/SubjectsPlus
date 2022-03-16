@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Utility from '../../../backend/javascript/Utility/Utility.js';
-import { useReorderTab, useFetchTabs } from '../../apis/GuideAPI.js';
+import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '../../apis/GuideAPI.js';
 import SectionContainer from './SectionContainer.js';
 import DraggableTab from './DraggableTab.js';
 import EditTabModal from './EditTabModal.js';
@@ -9,8 +9,6 @@ import Nav from 'react-bootstrap/Nav';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 function GuideTabContainer(props) {
-    const postLink = '/api/tabs';
-
     const [lastTabIndex, setLastTabIndex] = useState(0);
     const [activeKey, setActiveKey] = useState(0);
     const [isErrored, setIsErrored] = useState(false);
@@ -28,6 +26,9 @@ function GuideTabContainer(props) {
     const {isLoading, isError, data, error} = useFetchTabs(props.subjectId);
     
     const reorderTabMutation = useReorderTab(props.subjectId);
+    const createTabMutation = useCreateTab(props.subjectId);
+    const updateTabMutation = useUpdateTab(props.subjectId);
+    const deleteTabMutation = useDeleteTab(props.subjectId);
 
     useEffect(() => {
         if (data) {
@@ -61,71 +62,50 @@ function GuideTabContainer(props) {
             subject: '/api/subjects/' + props.subjectId
         };
 
-        fetch(postLink, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(initialTabData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            setLastTabIndex(data.tabIndex);
-            setActiveKey(data.tabIndex);
-            setSettingsValidated(false);
-            setNumberUntitled(numberUntitled + 1)
-        })
-        .catch((error) => {
-            console.error(error);
-            //this.addNotification('Error', 'Failed to add new tab!');
+        createTabMutation.mutate(initialTabData, {
+            onSuccess: () => {
+                setActiveKey(lastTabIndex + 1);
+                setSettingsValidated(false);
+            }
         });
     }
 
     const updateCurrentTab = () => {
-        const currentTab = tabs.data[activeKey];
+        const currentTab = data[activeKey];
 
         const newLabel = Utility.htmlEntityDecode(settingsTabName.current.value.trim());
         const newExternalUrl = Utility.htmlEntityDecode(settingsExternalUrl.current.value.trim());
         const newVisibility = (settingsTabVisibility.current.value === '1');
 
-        let data = {};
+        const changes = {};
 
         // Check for any changes in tab data
-        if (newLabel && newLabel !== currentTab.label) data['label'] = newLabel;
+        if (newLabel && newLabel !== currentTab.label) changes['label'] = newLabel;
         
         if (newExternalUrl && newExternalUrl !== currentTab.externalUrl) 
-            data['externalUrl'] = newExternalUrl;
+            changes['externalUrl'] = newExternalUrl;
 
-        if (newVisibility !== currentTab.visibility) data['visibility'] = newVisibility;
+        if (newVisibility !== currentTab.visibility) changes['visibility'] = newVisibility;
 
-        if (!Utility.objectIsEmpty(data)) {
+        if (!Utility.objectIsEmpty(changes)) {
             // changes have been made to tab data
             setSavingChanges(true);
 
-            fetch(getTabLink(currentTab.tabId), {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // replace old tab data with new tab data
-                let newTabs = [...tabs];
-                newTabs[activeKey] = data;
-
-                //setTabs(newTabs);
-                setShowSettings(false);
-                setSavingChanges(false);
-            })
-            .catch((error) => {
-                console.error(error);
-                //this.addNotification('Error', 'Failed to update tab!');
-                setIsErrored(true);
-                setShowSettings(false);
-                setSavingChanges(false);
-                setSettingsValidated(false);
+            updateTabMutation.mutate({
+                tabId: currentTab.tabId,
+                tabIndex: currentTab.tabIndex,
+                data: changes,
+                optimisticResult: {
+                    ...currentTab,
+                    'label': changes['label'] ?? currentTab['label'],
+                    'externalUrl': changes['externalUrl'] ?? currentTab['externalUrl'],
+                    'visibility': changes['visibility'] ?? currentTab['visibility']
+                }
+            }, {
+                onSettled: () => {
+                    setShowSettings(false);
+                    setSavingChanges(false);
+                }
             });
         } else {
             setShowSettings(false);
@@ -135,63 +115,24 @@ function GuideTabContainer(props) {
     }
 
     const deleteCurrentTab = () => {
-        let currentTab = tabs.data[activeKey];
+        const currentTab = data[activeKey];
+        let newActiveKey = 0;
 
-        fetch(getTabLink(currentTab.tabId), {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': '*/*',
-            }
-        }).then(response => {
-            if (response.ok) {
-                let newTabs = [...tabs];
-                let newActiveKey = 0;
-                let newLastTabIndex = lastTabIndex - 1;
-                
-                // remove the deleted tab from tabs
-                newTabs.splice(activeKey, 1);
+        if (activeKey === lastTabIndex) {
+            // the tab at the end was deleted
+            newActiveKey = lastTabIndex - 1;
+        } else if (activeKey !== 0) {
+            newActiveKey = activeKey - 1;
+        }
 
-                if (activeKey === lastTabIndex) {
-                    // the tab at the end was deleted
-                    newActiveKey = lastTabIndex - 1;
-                } else if (activeKey !== 0) {
-                    newActiveKey = activeKey - 1;
-                }
-                
-                // Update tab index
-                Promise.all(
-                    newTabs.slice(activeKey, lastTabIndex).map((tab, index) => {
-                        index += activeKey;
-                        tab.tabIndex = index;
-                        return fetch(getTabLink(tab.tabId), {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                tabIndex: index
-                            })
-                        });
-                    })
-                ).then(() => {
-                    setActiveKey(newActiveKey);
-                    setLastTabIndex(newLastTabIndex);
-                    //setTabs(newTabs);
-                    setDeleteTabClicked(false);
-                    setDeletingTab(false);
-                    setShowSettings(false);
-                }).catch(error => {
-                    console.error(error);
-                    //this.addNotification('Error', 'Failed to update tab index of displaced tab!');
-                });
+        setActiveKey(newActiveKey);
+
+        deleteTabMutation.mutate(currentTab.tabId, {
+            onSettled: () => {
+                setDeleteTabClicked(false);
+                setDeletingTab(false);
+                setShowSettings(false);
             }
-        })
-        .catch((error) => {
-            console.error(error);
-            //this.addNotification('Error', 'Failed to delete tab!');
-            setIsErrored(true);
-            setDeleteTabClicked(false);
-            setDeletingTab(false);
         });
     }
 
@@ -222,18 +163,6 @@ function GuideTabContainer(props) {
     }
 
     const reorderTab = async (sourceIndex, destinationIndex) => {
-        // copy existing tabs
-        let newTabs = [...data];
-
-        // reorder tabs
-        const [reorderedItem] = newTabs.splice(sourceIndex, 1);
-        newTabs.splice(destinationIndex, 0, reorderedItem);
-        
-        // set the updated tab index to produce optimistic result
-        newTabs.forEach((tab, index) => {
-            tab.tabIndex = index;
-        });
-
         // focus the tab container to the destination tab
         setActiveKey(destinationIndex);
 
@@ -241,8 +170,7 @@ function GuideTabContainer(props) {
         reorderTabMutation.mutate({
             subjectId: props.subjectId, 
             sourceTabIndex: sourceIndex,
-            destinationTabIndex: destinationIndex,
-            optimisticResult: newTabs
+            destinationTabIndex: destinationIndex
         });
     }
     
@@ -276,13 +204,13 @@ function GuideTabContainer(props) {
             
             // convert tabs data to draggable nav links
             const guideTabs = data.map(tab => (
-                <DraggableTab key={tab.tabId} tab={tab} active={activeKey === tab.tabIndex} 
+                <DraggableTab key={'tab-' + tab.tabIndex} tab={tab} active={activeKey === tab.tabIndex} 
                     onClick={() => setShowSettings(!showSettings)}/> 
             ));
 
             // generate tab content
             const tabsContent = data.map(tab => (
-                <Tab.Pane key={tab.tabId} eventKey={tab.tabIndex}>
+                <Tab.Pane key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex}>
                     <SectionContainer tabId={tab.tabId} />
                 </Tab.Pane>
             ));
