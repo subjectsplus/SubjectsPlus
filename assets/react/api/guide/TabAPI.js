@@ -1,19 +1,20 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
-export function useFetchTabs(subjectId) {
+export function useFetchTabs(subjectId, enabled=true) {
     if (subjectId === undefined) throw new Error('"subjectId" field is required to call useFetchTabs.');
 
     return useQuery(['tabs', subjectId], 
         () => fetchTabs(subjectId), {
-            select: data => data['hydra:member']
+            select: data => data['hydra:member'],
+            enabled: enabled
         }
     );
 }
 
-export function useFetchTab(tabId) {
+export function useFetchTab(tabId, enabled=true) {
     if (tabId === undefined) throw new Error('"tabId" field is required to call useFetchTab');
 
-    return useQuery(['tab', tabId], () => fetchTab(tabId));
+    return useQuery(['tab', tabId], () => fetchTab(tabId), { enabled: enabled });
 }
 
 export function useCreateTab(subjectId) {

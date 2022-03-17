@@ -17,12 +17,13 @@ function GuideTabContainer(props) {
     const [deleteTabClicked, setDeleteTabClicked] = useState(false);
     const [deletingTab, setDeletingTab] = useState(false);
     const [numberUntitled, setNumberUntitled] = useState(0);
+    const [draggingTab, setDraggingTab] = useState(false);
 
     const settingsTabName = useRef();
     const settingsExternalUrl = useRef();
     const settingsTabVisibility = useRef();
 
-    const {isLoading, isError, data, error} = useFetchTabs(props.subjectId);
+    const {isLoading, isError, data, error} = useFetchTabs(props.subjectId, !draggingTab);
     
     const reorderTabMutation = useReorderTab(props.subjectId);
     const createTabMutation = useCreateTab(props.subjectId);
@@ -173,9 +174,17 @@ function GuideTabContainer(props) {
         });
     }
     
+    const handleOnDragStart = (initial) => {
+        if (initial.type === 'tab') {
+            setDraggingTab(true);
+        }
+    }
+
     const handleOnDragEnd = (result) => {
         console.log(result);
         if (result.type === 'tab') {
+            setDraggingTab(false);
+
             // exit if element hasn't changed position
             if (result.source === undefined || result.destination === undefined) return;
             if (result.source.index === undefined || result.destination.index === undefined) return;
@@ -213,7 +222,7 @@ function GuideTabContainer(props) {
             return (
                 <>
                     {/* Guide Tab Container consisting of individual tab elements */}
-                    <DragDropContext onDragEnd={handleOnDragEnd}>
+                    <DragDropContext onDragStart={handleOnDragStart} onDragEnd={handleOnDragEnd}>
                         <Droppable type="tab" style={{ transform: "none" }} droppableId="guide-tabs-container" direction="horizontal">
                             {(provided) => (
                                 <div id="guide-tabs-container" {...provided.droppableProps} ref={provided.innerRef}>
