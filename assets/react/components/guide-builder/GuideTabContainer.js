@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { htmlEntityDecode, objectIsEmpty } from '#utility/Utility';
 import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '#api/guide/TabAPI';
 import SectionContainer from './SectionContainer';
@@ -192,8 +192,6 @@ function GuideTabContainer(props) {
 
             // perform the reordering
             reorderTab(result.source.index, result.destination.index);
-        } else if (result.type === 'pluslet') {
-            console.log('Pluslet onDragEnd Handler');
         }
     }
 
@@ -208,16 +206,21 @@ function GuideTabContainer(props) {
             
             // convert tabs data to draggable nav links
             const guideTabs = data.map(tab => (
-                <DraggableTab key={'tab-' + tab.tabIndex} tab={tab} active={activeKey === tab.tabIndex} 
-                    onClick={() => setShowSettings(!showSettings)}/> 
+                <DraggableTab key={'tab-' + tab.tabIndex} tab={tab} active={activeKey === tab.tabIndex}
+                    onClick={() => setShowSettings(!showSettings)} /> 
             ));
 
             // generate tab content
-            const tabsContent = data.map(tab => (
-                <Tab.Pane key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex}>
-                    <SectionContainer tabId={tab.tabId} />
-                </Tab.Pane>
-            ));
+            const tabsContent = data.map(tab => {
+                if (tab.tabId) {
+                    return (
+                        <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={'tab-pane' + (activeKey === tab.tabIndex ? ' active': '')} 
+                            key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
+                            <SectionContainer tabId={tab.tabId} />
+                        </Tab.Pane>
+                    )
+                }
+            });
 
             return (
                 <>
@@ -234,14 +237,16 @@ function GuideTabContainer(props) {
                                                 <i className="fas fa-plus"></i>
                                             </Nav.Link>
                                         </Nav>
-                                        <Tab.Content>
-                                            {tabsContent}
-                                        </Tab.Content>
                                     </Tab.Container>
                                 </div>
                             )}
                         </Droppable>
                     </DragDropContext>
+                    
+                    {/* Tab Content */}
+                    <Tab.Content>
+                        {tabsContent}
+                    </Tab.Content>
                     
                     {/* Modal Form for editing tabs */}
                     <EditTabModal currentTab={currentTab} show={showSettings} onHide={() => setShowSettings(false)}
