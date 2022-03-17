@@ -154,14 +154,28 @@ async function fetchTab(tabId) {
 }
 
 async function createTab(initialTabData) {
-    const req = await fetch('/api/tabs', {
+    const tabReq = await fetch('/api/tabs', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(initialTabData)
     });
-    return req.json();
+
+    const tabData = await tabReq.json();
+
+    // Create new default section assigned to tab
+    const sectionReq = await fetch('/api/sections', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            tab: `/api/tabs/${tabData.tabId}`
+        })
+    });
+
+    return sectionReq.json();
 }
     
 async function updateTab({tabId, data}) {
