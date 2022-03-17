@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GuideBuilder from '../../../react/components/guide-builder/GuideBuilder.js';
+import GuideBuilder from '#components/guide-builder/GuideBuilder';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 

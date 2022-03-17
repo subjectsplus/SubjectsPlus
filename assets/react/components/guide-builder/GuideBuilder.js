@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import GuideTabContainer from './GuideTabContainer.js';
-import Utility from '../../../backend/javascript/Utility/Utility.js';
+import GuideTabContainer from './GuideTabContainer';
+import { htmlEntityDecode } from '#utility/Utility';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 function GuideBuilder(props) {
@@ -44,7 +44,7 @@ function GuideBuilder(props) {
         if (guide) {
             return (
                 <>
-                    <h3>{Utility.htmlEntityDecode(guide.subject)}</h3>
+                    <h3>{htmlEntityDecode(guide.subject)}</h3>
                     <GuideTabContainer subjectId={props.subjectId} />
                 </>
             );

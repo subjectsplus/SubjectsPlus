@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Pluslet from './Pluslet.js';
+import Pluslet from './Pluslet';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 export default class Section extends Component {

@@ -54,6 +54,12 @@
     "stimulus": "^2.0.0",
     "webpack-notifier": "^1.14.1"
   },
+  "imports": {
+    "#entrypoints/*": "./assets/backend/javascript/entrypoints/*",
+    "#utility/*": "./assets/backend/javascript/Utility/*",
+    "#components/*": "./assets/react/components/*",
+    "#api/*": "./assets/react/api/*"
+  },
   "browserslist": [
     "defaults",
     "not IE 11"

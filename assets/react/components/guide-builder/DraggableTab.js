@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Utility from '../../../backend/javascript/Utility/Utility.js';
+import { htmlEntityDecode } from '#utility/Utility';
 import Nav from 'react-bootstrap/Nav';
 import { Draggable } from 'react-beautiful-dnd';
 
@@ -17,7 +17,7 @@ export default class DraggableTab extends Component {
                         <Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                             eventKey={this.props.tab.tabIndex} tabIndex={this.props.tab.tabIndex}
                             active={this.props.active}>
-                                {Utility.htmlEntityDecode(this.props.tab.label)}{' '}
+                                {htmlEntityDecode(this.props.tab.label)}{' '}
                                 {this.props.active && 
                                     <a href={void(0)} onClick={this.props.onClick} key={this.props.tab.tabId} className="tab-settings-icon">
                                         <i className="fas fa-cog"></i>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import Utility from '../../../backend/javascript/Utility/Utility.js';
-import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '../../apis/guide/TabAPI.js';
-import SectionContainer from './SectionContainer.js';
-import DraggableTab from './DraggableTab.js';
-import EditTabModal from './EditTabModal.js';
+import { htmlEntityDecode, objectIsEmpty } from '#utility/Utility';
+import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '#api/guide/TabAPI';
+import SectionContainer from './SectionContainer';
+import DraggableTab from './DraggableTab';
+import EditTabModal from './EditTabModal';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -72,8 +72,8 @@ function GuideTabContainer(props) {
     const updateCurrentTab = () => {
         const currentTab = data[activeKey];
 
-        const newLabel = Utility.htmlEntityDecode(settingsTabName.current.value.trim());
-        const newExternalUrl = Utility.htmlEntityDecode(settingsExternalUrl.current.value.trim());
+        const newLabel = htmlEntityDecode(settingsTabName.current.value.trim());
+        const newExternalUrl = htmlEntityDecode(settingsExternalUrl.current.value.trim());
         const newVisibility = (settingsTabVisibility.current.value === '1');
 
         const changes = {};
@@ -86,7 +86,7 @@ function GuideTabContainer(props) {
 
         if (newVisibility !== currentTab.visibility) changes['visibility'] = newVisibility;
 
-        if (!Utility.objectIsEmpty(changes)) {
+        if (!objectIsEmpty(changes)) {
             // changes have been made to tab data
             setSavingChanges(true);
 
