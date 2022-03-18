@@ -625,6 +625,10 @@
         <source>control.faqs.admin.create_new_collection</source>
         <target>__control.faqs.admin.create_new_collection</target>
       </trans-unit>
+      <trans-unit id="jtLstcU" resname="control.faqs.table.button.delete">
+        <source>control.faqs.table.button.delete</source>
+        <target>__control.faqs.table.button.delete</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

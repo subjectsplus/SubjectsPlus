@@ -1,0 +1,50 @@
+<div class="panel-basic border-basic">
+    <form>
+        <div class="row mb-4 g-2">
+            <div class="col-9">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="collectionName" placeholder="Collection Name" value="Interlibrary Loan">
+                    <label for="collectionName">Collection Name</label>
+                </div>
+            </div>
+            <div class="col-3 align-self-end pt-4">
+                <a class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.delete' | trans }}" data-bs-toggle="modal" data-bs-target="#deleteFaqCollection"><i class="fas fa-trash fs-sm"></i></a>
+            </div>
+        </div>
+        <h4>FAQ Order</h4>
+        {% for collection in collections %}
+            {% if loop.index == 8 %}
+                <table class="table">
+                {% for faq in collection.faqs %}
+                    <tr class="sp-dnd fs-sm" draggable="true" ondragstart="start()"  ondragover="dragover()">
+                        <td>{{ loop.index }}</td>
+                        <td><div title="ID: {{ faq.faqId }}">{{ faq.question | u.truncate(200, '...') | striptags | raw}}</div></td>
+                    </tr>
+                {% endfor %}
+                    <script>
+                        var row;
+
+                        function start(){
+                            row = event.target;
+                        }
+                        function dragover(){
+                            var e = event;
+                            e.preventDefault();
+
+                            let children= Array.from(e.target.parentNode.parentNode.children);
+
+                            if(children.indexOf(e.target.parentNode)>children.indexOf(row))
+                                e.target.parentNode.after(row);
+                            else
+                                e.target.parentNode.before(row);
+                        }
+                    </script>
+                </table>
+            {% endif %}
+        {% endfor %}
+        <div class="mt-4 text-end">
+            <button class="btn btn-gradient btn-round">Update</button>
+        </div>
+    </form>
+</div>
+{{ include('backend/faq/_delete_faq_collection.html.twig') }}
