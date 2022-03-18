@@ -140,6 +140,10 @@
     @include transition-all();
     background-color: #DBE2E6;
   }
+
+  &.btn-round {
+    box-shadow: 0 0 0 0.25rem rgba(#DBE2E6, 80%);
+  }
 }
 
 .btn-outline-accent {
