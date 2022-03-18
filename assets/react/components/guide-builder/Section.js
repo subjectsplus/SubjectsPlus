@@ -1,81 +1,27 @@
-import React, { Component } from 'react';
-import Pluslet from './Pluslet.js';
+import React, { useMemo } from 'react';
+import Pluslet from './Pluslet';
+import { useFetchPluslets } from '#api/guide/PlusletAPI';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-export default class Section extends Component {
-    apiLink = '/api/sections/{sectionId}/pluslets';
+function Section({ sectionId, layout }) {
+    const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            pluslets: null,
-            isErrored: false,
-            loading: false,
-        };
-    }
-
-    componentDidMount() {
-        this.getPluslets();
-    }
-
-    getAPILink() {
-        return this.apiLink.replace('{sectionId}', 
-            this.props.sectionId);
-    }
-
-    getPluslets() {
-        // formulate the results api link for guide
-        var resLink = this.getAPILink();
-
-        // fetch api results
-        this.setState({
-            loading: true,
-        }, () => fetch(resLink)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-
-                this.setState({
-                    isErrored: true
-                });
-            })
-            .then(results => {
-                this.setState({
-                    pluslets: results["hydra:member"],
-                    isErrored: false,
-                    loading: false
-                });
-            }
-            )
-            .catch(err => {
-                console.error(err);
-                this.setState({
-                    isErrored: true
-                });
-            })
-        );
-    }
-
-    render() {
-        let pluslets = [];
-
-        if (this.state.pluslets) {
-            pluslets = this.state.pluslets.map((pluslet, index) => {
-                return (<Pluslet key={pluslet.plusletId} plusletId={pluslet.plusletId} plusletRow={index} />)
-            });
-        }
-
-        if (this.state.isErrored) {
-            return (<p>Error: Failed to load sections through API Endpoint!</p>);
-        } else if (this.state.loading) {
+    const sectionContent = useMemo(() => {
+        if (isLoading) {
             return (<p>Loading Pluslets...</p>);
+        } else if (isError) {
+            console.error(error);
+            return (<p>Error: Failed to load sections through API Endpoint!</p>);
         } else {
+            const pluslets = data.map((pluslet, index) => 
+                <Pluslet key={pluslet.plusletId} plusletId={pluslet.plusletId} plusletRow={index} />
+            );
+
             return (
-                <Droppable type="pluslet" key={this.props.sectionId.toString()} style={{ transform: "none" }} droppableId={this.props.sectionId.toString()} direction="vertical">
+                <Droppable type="pluslet" key={sectionId.toString()} style={{ transform: "none" }} 
+                    droppableId={sectionId.toString()} direction="vertical">
                     {(provided) => (
-                        <div className="guide-section" {...provided.droppableProps} ref={provided.innerRef}
+                        <div className="guide-section" data-layout={layout} {...provided.droppableProps} ref={provided.innerRef}
                             style={{
                                 border: '2px solid black',
                                 height: '500px',
@@ -88,5 +34,9 @@ export default class Section extends Component {
                 </Droppable>
             );
         }
-    }
+    }, [data]);
+
+    return sectionContent;
 }
+
+export default Section;
