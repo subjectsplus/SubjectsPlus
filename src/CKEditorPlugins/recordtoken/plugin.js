@@ -1,5 +1,6 @@
 (function() {
     // TODO: Implement auto check for record tokens whose details might have changed in database
+    // TODO: Add description to iconTemplate popover
 
     var linkClass = 'record-link';
     var tokenClass = 'record-token';
@@ -10,7 +11,7 @@
 
     var linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
-        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Description here"><img src="' + iconSource +'" /></button>',
+        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Description content will load here"><img src="' + iconSource +'" /></button>',
         template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
                     '</span>';

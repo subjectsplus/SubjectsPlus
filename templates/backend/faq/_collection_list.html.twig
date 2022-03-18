@@ -1,0 +1,24 @@
+<h4>Current Collections</h4>
+<table class="table table-striped table-borderless table-responsive table-sm">
+    <tbody>
+    {% for collection in collections %}
+        {% if loop.index == 8 %}
+            <tr class="table-active">
+        {% else %}
+            <tr>
+        {% endif %}
+        <td style="width:40px;">
+            <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
+                {# TODO: Add edit FAQ collection functionality #}
+                <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
+            </div>
+        </td>
+        <td class="align-middle">{{  collection.name | raw}}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td>{{ 'control.faqs.table.no_records' | trans }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

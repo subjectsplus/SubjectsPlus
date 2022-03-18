@@ -1,0 +1,21 @@
+{# TODO: Add working new FAQ collection #}
+<div class="modal fade" id="addNewFaqCollection" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addNewFaqCollectionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addNewFaqCollectionLabel">New FAQ Collection</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'close.aria.label' | trans }}"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="collectionName" placeholder="Collection Name">
+                        <label for="collectionName">Collection Name</label>
+                    </div>
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">{{ 'control.faqs.delete_faq.cancel_button' | trans }}</button>
+                    <button class="btn btn-gradient">Add Collection</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

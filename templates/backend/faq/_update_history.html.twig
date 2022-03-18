@@ -1,5 +1,5 @@
 <p class="fs-xs fst-italic mt-5 mb-1">
-    {% for entry in staff %}
+    {% for entry in updateHistory %}
         {% if loop.first %}
             Last updated: {{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}
         {% endif%}
@@ -13,7 +13,7 @@
         <div id="updateHistoryList" class="accordion-collapse collapse" aria-labelledby="updateHistoryHeading" data-bs-parent="#updateHistoryAccordion">
             <div class="accordion-body">
                 <ul class="list-unstyled list-space fs-xs mb-0">
-                    {% for entry in staff %}
+                    {% for entry in updateHistory %}
                         <li>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</li>
                     {% endfor %}
                 </ul>

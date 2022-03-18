@@ -1,0 +1,37 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}{{ 'control.faqs.manage_faq_collection.heading' | trans }} | SubjectsPlus{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice alert alert-info text-center mb-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="row g-1">
+        <div class="col-7">
+            <h1 class="fw-light">{{ 'control.faqs.manage_faq_collection.heading' | trans }}</h1>
+            {# TODO: Add switch to include Subjects #}
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchIncludeFaqsBySubject">
+                <label class="form-check-label" for="switchIncludeFaqsBySubject">Switch to Subjects</label>
+            </div>
+        </div>
+        <div class="col-5 text-end">
+            <a class="btn btn-gradient btn-pill-icon" type="button" data-bs-toggle="modal" data-bs-target="#addNewFaqCollection"><i class="fas fa-plus-circle"></i> {{ 'control.faqs.admin.create_new_collection' | trans }}</a>
+            {{ include('backend/faq/_add_faq_collection.html.twig') }}
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                {{ include('backend/faq/_collection_list.html.twig') }}
+            </div>
+            <div class="col-lg-7 offset-lg-1">
+                {{ include('backend/faq/_collection_edit.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
