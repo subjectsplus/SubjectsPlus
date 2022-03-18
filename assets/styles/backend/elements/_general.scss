@@ -425,4 +425,12 @@ h3, .h3 {
 // Cursor
 .sp-dnd {
   cursor:all-scroll;
+
+  &:before {
+    content: "";
+    border-left: 3px dotted var(--sp-border-color);
+    display: block;
+    height: 15px;
+    margin: 15px 3px;
+  }
 }

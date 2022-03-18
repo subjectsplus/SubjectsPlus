@@ -1,20 +1,33 @@
+{# TODO: Make working form #}
 <div class="panel-basic border-basic">
     <form>
-        <div class="row mb-4 g-2">
+        <div class="row mb-5 g-2">
             <div class="col-9">
+                {# TODO: Make name inactive if subject is selected #}
                 <div class="form-floating">
                     <input type="text" class="form-control" id="collectionName" placeholder="Collection Name" value="Interlibrary Loan">
                     <label for="collectionName">Collection Name</label>
                 </div>
             </div>
             <div class="col-3 align-self-end pt-4">
-                <a class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.delete' | trans }}" data-bs-toggle="modal" data-bs-target="#deleteFaqCollection"><i class="fas fa-trash fs-sm"></i></a>
+                {# TODO: Hide button if subject is selected #}
+                <a class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.delete' | trans }}" data-bs-toggle="modal" data-bs-target="#deleteFaqCollection"><i class="fas fa-trash"></i></a>
             </div>
         </div>
-        <h4>FAQ Order</h4>
+
+        <div class="row">
+            <div class="col-8"><h4>FAQ List</h4></div>
+            <div class="col-4 text-end">
+                <button class="btn btn-float-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearchFAQs" aria-controls="offcanvasSearchFAQs">
+                    <i class="fas fa-plus-circle"></i> Add to list
+                </button>
+            </div>
+        </div>
+
+        {# TODO: Replace with React draggable table #}
         {% for collection in collections %}
             {% if loop.index == 8 %}
-                <table class="table">
+                <table class="table table-hover">
                 {% for faq in collection.faqs %}
                     <tr class="sp-dnd fs-sm" draggable="true" ondragstart="start()"  ondragover="dragover()">
                         <td>{{ loop.index }}</td>
@@ -48,3 +61,4 @@
     </form>
 </div>
 {{ include('backend/faq/_delete_faq_collection.html.twig') }}
+{{ include('backend/faq/_collection_list_search_faq.html.twig') }}
