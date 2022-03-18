@@ -94,6 +94,17 @@ h3, .h3 {
   border-color: var(--sp-nav-color);
 }
 
+.form-floating{
+  > .form-control:focus,
+  .form-control:not(:placeholder-shown),
+  .form-select {
+    ~ label {
+      color: #333333;
+    }
+  }
+}
+
+
 // Alerts
 .alert {
   padding: 0.5rem 1rem;
@@ -391,5 +402,35 @@ h3, .h3 {
 
   .accordion-body{
     padding: 0.5rem 0 0 0;
+  }
+}
+
+// Tables
+.table-active {
+  td {
+    background-color: var(--sp-input-selected-bg) !important;
+    color: var(--sp-input-selected-text) !important;
+    --bs-table-accent-bg: var(--sp-input-selected-bg) !important;
+
+    .btn-icon-default{
+      color: var(--sp-input-selected-text);
+      &:hover{
+        @include transition-all();
+        color: var(--sp-input-selected-text);
+      }
+    }
+  }
+}
+
+// Cursor
+.sp-dnd {
+  cursor:all-scroll;
+
+  &:before {
+    content: "";
+    border-left: 3px dotted var(--sp-border-color);
+    display: block;
+    height: 15px;
+    margin: 15px 3px;
   }
 }

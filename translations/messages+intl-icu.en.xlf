@@ -387,7 +387,7 @@
       </trans-unit>
       <trans-unit id="8wcRYFv" resname="control.faqs.delete_faq.modal.header">
         <source>control.faqs.delete_faq.modal.header</source>
-        <target>Warning: Delete FAQ</target>
+        <target>Delete FAQ</target>
       </trans-unit>
       <trans-unit id="Lch7twW" resname="control.faqs.delete_faq.modal.text">
         <source>control.faqs.delete_faq.modal.text</source>
@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="__HDBxA" resname="control.faqs.delete_faq.confirm_button">
         <source>control.faqs.delete_faq.confirm_button</source>
-        <target>Yes, delete this item.</target>
+        <target>Yes, delete</target>
       </trans-unit>
       <trans-unit id="mEl0NYw" resname="control.header.faqs.index">
         <source>control.header.faqs.index</source>
@@ -568,6 +568,34 @@
       <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
         <source>control.faq.form.keywords.help.text</source>
         <target>Use commas</target>
+      </trans-unit>
+      <trans-unit id="rdSxsTE" resname="control.faqs.by_user.heading">
+        <source>control.faqs.by_user.heading</source>
+        <target>My FAQs</target>
+      </trans-unit>
+      <trans-unit id="h1xbvfM" resname="control.faqs.by_subject.heading">
+        <source>control.faqs.by_subject.heading</source>
+        <target>FAQs by Subject</target>
+      </trans-unit>
+      <trans-unit id="MF3cFcf" resname="control.faqs.by_collection.heading">
+        <source>control.faqs.by_collection.heading</source>
+        <target>FAQs by Collection</target>
+      </trans-unit>
+      <trans-unit id="U.QlAlE" resname="control.header.faqs.admin.manage_faq_collections">
+        <source>control.header.faqs.admin.manage_faq_collections</source>
+        <target>Manage FAQ Collections</target>
+      </trans-unit>
+      <trans-unit id="zKfBvBP" resname="control.faqs.manage_faq_collection.heading">
+        <source>control.faqs.manage_faq_collection.heading</source>
+        <target>Manage FAQ Collections</target>
+      </trans-unit>
+      <trans-unit id="NiRUiLv" resname="control.faqs.admin.create_new_collection">
+        <source>control.faqs.admin.create_new_collection</source>
+        <target>New Collection</target>
+      </trans-unit>
+      <trans-unit id="jtLstcU" resname="control.faqs.table.button.delete">
+        <source>control.faqs.table.button.delete</source>
+        <target>Delete</target>
       </trans-unit>
     </body>
   </file>
