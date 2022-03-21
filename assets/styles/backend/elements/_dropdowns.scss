@@ -1,0 +1,115 @@
+// Dropdowns
+.basic-dropdown{
+  .dropdown-menu {
+    border: 1px solid var(--sp-border-color);
+    background-color: var(--sp-bg-color-alt);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
+  }
+
+  .dropdown-item {
+    color: var(--sp-font-color);
+    &:hover,
+    &:focus {
+      @include transition-all();
+      background-color: var(--sp-nav-color);
+      color:$white !important;
+    }
+  }
+
+  .dropdown-toggle{
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.action-dropdown{
+  .dropdown-menu {
+    border: 1px solid var(--sp-border-color);
+    background-color: var(--sp-bg-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
+    border-radius: $border-radius-pill;
+    &.show {
+      display: flex;
+    }
+  }
+
+  .dropdown-item {
+    color: var(--sp-font-color);
+    &:hover,
+    &:focus {
+      @include transition-all();
+      background-color: transparent;
+      color: var(--sp-nav-color) !important;
+    }
+  }
+
+  .dropdown-toggle{
+    &:after {
+      display: none;
+    }
+  }
+
+  .dropdown-divider{
+    border-top:0;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    height:50%;
+  }
+}
+
+.action-dropdown-expand{
+  display: inline-block;
+  position: relative;
+  border-radius: $border-radius-pill;
+  border: 1px solid var(--sp-nav-color);
+  background-color: $white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
+
+  .action-dropdown-title{
+    position: absolute;
+    top: 0;
+    left: 1.5rem;
+    background: linear-gradient(180deg, var(--sp-bg-color) 8px, $white 0);
+    margin-top: -0.5rem;
+    padding: 0 0.5rem;
+    line-height: 1;
+    font-weight: normal;
+    font-size: $font-size-sm;
+    color: var(--sp-nav-color);
+  }
+
+  ul {
+    li {
+      padding: .5rem 0 .375rem 0;
+      a {
+        color: var(--sp-input-color);
+        &:hover,
+        &:focus,
+        &:active {
+          color: var(--sp-nav-color);
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  .dropdown-divider{
+    border-top:0;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    height:50%;
+    background-color: var(--sp-input-border-color);
+  }
+}
+
+[data-mode="dark"] {
+  .action-dropdown-expand{
+    .action-dropdown-title{
+      background: transparent;
+      margin-top: 0.25rem;
+    }
+
+    ul{
+      margin-top:.25rem;
+    }
+  }
+}

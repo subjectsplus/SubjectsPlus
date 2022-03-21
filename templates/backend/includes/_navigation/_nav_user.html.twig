@@ -1,0 +1,10 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle user-nav-dropdown" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="{{ 'control.header.user_icon' | trans  }}">
+        {# TODO: Replace icon with user profile thumbnail #}
+        <i class="fas fa-user-circle"></i>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="/control/staff/{{ app.user.staffId }}/edit">{{ 'control.dashboard.edit_profile' | trans  }}</a></li>
+        <li><a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'login.form.logout.prompt' | trans }}</a></li>
+    </ul>
+</li>

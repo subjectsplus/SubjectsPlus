@@ -5,8 +5,8 @@
             <div class="col-9">
                 {# TODO: Make name inactive if subject is selected #}
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="collectionName" placeholder="Collection Name" value="Interlibrary Loan">
-                    <label for="collectionName">Collection Name</label>
+                    <input type="text" class="form-control" id="collectionName" placeholder="{{ 'control.faqs.admin.new_faq_collection.collection_name' | trans }}" value="Interlibrary Loan">
+                    <label for="collectionName">{{ 'control.faqs.admin.new_faq_collection.collection_name' | trans }}</label>
                 </div>
             </div>
             <div class="col-3 align-self-end pt-4">
@@ -16,10 +16,10 @@
         </div>
 
         <div class="row">
-            <div class="col-8"><h4>FAQ List</h4></div>
+            <div class="col-8"><h4>{{ 'control.faqs.admin.faq_collection.faq_list' | trans }}</h4></div>
             <div class="col-4 text-end">
-                <button class="btn btn-float-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearchFAQs" aria-controls="offcanvasSearchFAQs">
-                    <i class="fas fa-plus-circle"></i> Add to list
+                <button class="btn btn-float-icon fs-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearchFAQs" aria-controls="offcanvasSearchFAQs">
+                    <i class="fas fa-plus-circle"></i> {{ 'control.faqs.admin.faq_collection.add_to_list' | trans }}
                 </button>
             </div>
         </div>
@@ -27,11 +27,22 @@
         {# TODO: Replace with React draggable table #}
         {% for collection in collections %}
             {% if loop.index == 8 %}
-                <table class="table table-hover">
+                <table class="table table-hover table-options-hover">
                 {% for faq in collection.faqs %}
                     <tr class="sp-dnd fs-sm" draggable="true" ondragstart="start()"  ondragover="dragover()">
                         <td>{{ loop.index }}</td>
-                        <td><div title="ID: {{ faq.faqId }}">{{ faq.question | u.truncate(200, '...') | striptags | raw}}</div></td>
+                        <td>
+                            <div title="ID: {{ faq.faqId }}">
+                                {{ faq.question | u.truncate(200, '...') | striptags | raw}}
+                            </div>
+                        </td>
+                        <td class="table-cell-options-hover">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
+                                <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
+                                {# TODO: remove from list option #}
+                                <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.admin.faq_collection.remove_from_list' | trans }}"><i class="fas fa-minus-circle fs-sm"></i></a>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                     <script>
@@ -56,7 +67,7 @@
             {% endif %}
         {% endfor %}
         <div class="mt-4 text-end">
-            <button class="btn btn-gradient btn-round">Update</button>
+            <button class="btn btn-gradient btn-round">{{ 'control.faqs.admin.faq_collection.update' | trans }}</button>
         </div>
     </form>
 </div>

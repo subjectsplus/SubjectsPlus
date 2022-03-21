@@ -1,16 +1,6 @@
-<style>
-    .form {
-      border: 1px solid #E7E7E7;
-      padding: 0 20px;
-      background: #fff;
-      position: relative;
-      float: left;
-    }
-</style>
-
 <div class="form">
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button class="btn">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-gradient btn-round">{{ button_label|default('Save Guide') }}</button>
     {{ form_end(form) }}
 </div>
