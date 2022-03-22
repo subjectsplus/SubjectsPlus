@@ -1,6 +1,49 @@
-<div class="form">
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-gradient btn-round">{{ button_label|default('Save Guide') }}</button>
-    {{ form_end(form) }}
+{{ form_start(form) }}
+<div class="row mt-4">
+    <div class="col-lg-5">
+        <div class="panel-basic border-basic">
+            <div class="row mb-3">
+                <div class="col-8">
+                    {{ form_label(form.shortform, null, {
+                        'label': 'control.guide_form.shortform' | trans,
+                        'label_attr': {'class': 'form-required'}
+                    }) }}
+                    <span class="fs-xs">{{ 'control.guide_form.shortform.info' | trans }}</span>
+                    <button type="button" class="btn btn-icon-default fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide_form.shortform.help.text' | trans }}"><i class="fas fa-info-circle"></i></button>
+                    {{ form_widget(form.shortform,{
+                        'attr': {'class': 'form-control-short'}
+                    }) }}
+                </div>
+
+                <div class="col-4">
+                    <div class="form-image-preview"></div>
+                    <label for="guideThumbnail" class="btn-link fs-sm">Upload thumbnail
+                        <input class="form-control form-file-hidden" id="guideThumbnail" type="file">
+                    </label>
+                </div>
+            </div>
+
+
+
+            {{ form_row(form.subject, {'label': 'control.guide_form.title' | trans}) }}
+            {{ form_row(form.type, {'label': 'control.guide_form.type' | trans}) }}
+            {{ form_row(form.active, {'label': 'control.guide_form.visibility' | trans}) }}
+            {{ form_rest(form) }}
+        </div>
+    </div>
+
+    <div class="col-lg-4 offset-lg-2">
+        <h3 class="mt-4 mt-lg-0">{{ 'control.guide_form.settings_header' | trans }}</h3>
+
+        {# TODO: Add fields to Symfony form  #}
+        <h5>Blackboard Integration</h5>
+        <div class="mb-3">
+
+        </div>
+
+        <div class="mt-4">
+            <button class="btn btn-gradient btn-round">{{ button_label|default('control.guide_form.save_guide' | trans) }}</button>
+        </div>
+    </div>
 </div>
+{{ form_end(form) }}

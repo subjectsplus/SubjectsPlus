@@ -25,3 +25,45 @@
     }
   }
 }
+
+.form-required {
+  position: relative;
+  &:before{
+    content: "*";
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -0.5rem;
+    margin-top: -0.25rem;
+    font-weight: bold;
+  }
+}
+
+.form-control-short{
+  width: 50%;
+}
+
+.form-file-hidden {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form-image-preview {
+  width: 75px;
+  height: 75px;
+  background-position: center center;
+  background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+  background-color:#fff;
+  background-size: cover;
+  background-repeat:no-repeat;
+}
+

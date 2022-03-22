@@ -2,6 +2,11 @@
 
 {% block title %}{{ 'control.guide_meta.header' | trans }} | SubjectsPlus{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('bs-tooltips') }}
+{% endblock %}
+
 {% block content %}
     <div class="container py-5">
         <div class="row">

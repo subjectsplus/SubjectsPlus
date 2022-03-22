@@ -4602,6 +4602,38 @@
         <source>control.guide_meta.header</source>
         <target>__control.guide_meta.header</target>
       </trans-unit>
+      <trans-unit id="X2ICRbM" resname="control.guide_form.shortform">
+        <source>control.guide_form.shortform</source>
+        <target>__control.guide_form.shortform</target>
+      </trans-unit>
+      <trans-unit id="QlANbq6" resname="control.guide_form.title">
+        <source>control.guide_form.title</source>
+        <target>__control.guide_form.title</target>
+      </trans-unit>
+      <trans-unit id="OoNCqvU" resname="control.guide_form.settings_header">
+        <source>control.guide_form.settings_header</source>
+        <target>__control.guide_form.settings_header</target>
+      </trans-unit>
+      <trans-unit id="ipHC3Xf" resname="control.guide_form.type">
+        <source>control.guide_form.type</source>
+        <target>__control.guide_form.type</target>
+      </trans-unit>
+      <trans-unit id="InuirW1" resname="control.guide_form.visibility">
+        <source>control.guide_form.visibility</source>
+        <target>__control.guide_form.visibility</target>
+      </trans-unit>
+      <trans-unit id="vq762Od" resname="control.guide_form.save_guide">
+        <source>control.guide_form.save_guide</source>
+        <target>__control.guide_form.save_guide</target>
+      </trans-unit>
+      <trans-unit id="LgQomEo" resname="control.guide_form.shortform.help.text">
+        <source>control.guide_form.shortform.help.text</source>
+        <target>__control.guide_form.shortform.help.text</target>
+      </trans-unit>
+      <trans-unit id="5iHJLdP" resname="control.guide_form.shortform.info">
+        <source>control.guide_form.shortform.info</source>
+        <target>__control.guide_form.shortform.info</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
