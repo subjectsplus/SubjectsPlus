@@ -14,18 +14,18 @@
         iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Description content will load here"><img src="' + iconSource +'" /></button>',
         template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
-                    '</span>';
+                    '</span>&nbsp;';
     
     var templateBlock = new CKEDITOR.template(function(data) {
 
         if (data.descriptionType == 'block') {
             return '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                 linkTemplate + descriptionTemplate +
-                    '</span>';
+                    '</span>&nbsp;';
         } else if (data.descriptionType == 'icon') {
             return '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
             linkTemplate + iconTemplate +
-                '</span>';
+                '</span>&nbsp;';
         } else {
             return template;
         }
