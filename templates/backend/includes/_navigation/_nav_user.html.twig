@@ -4,6 +4,13 @@
         <i class="fas fa-user-circle"></i>
     </a>
     <ul class="dropdown-menu" aria-labelledby="userDropdown">
+        <li class="dropdown-item-text">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchMode">
+                <label class="form-check-label" for="switchMode">{{ 'control.dashboard.enable_dark_mode' | trans }}</label>
+            </div>
+        </li>
+        <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="/control/staff/{{ app.user.staffId }}/edit">{{ 'control.dashboard.edit_profile' | trans  }}</a></li>
         <li><a class="dropdown-item" href="{{ path('app_logout') }}">{{ 'login.form.logout.prompt' | trans }}</a></li>
     </ul>

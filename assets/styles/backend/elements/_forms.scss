@@ -44,26 +44,28 @@
 }
 
 .form-file-hidden {
-  width: 0;
-  height: 0;
+  width: 0.1px;
+  height: 0.1px;
   overflow: hidden;
   padding: 0;
   border-radius: 0;
   border: none;
   background-color: transparent;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 
   &:focus {
     box-shadow: none;
   }
+
+  + label {
+    font-size: $font-size-mini;
+    cursor: pointer;
+  }
 }
 
 .form-image-preview {
-  width: 75px;
-  height: 75px;
-  background-position: center center;
-  background:url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
-  background-color:#fff;
-  background-size: cover;
-  background-repeat:no-repeat;
+
 }
 

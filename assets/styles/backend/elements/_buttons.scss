@@ -104,6 +104,15 @@
   }
 }
 
+.btn-link-default {
+  color: var(--sp-font-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}
+
 .btn-link-danger {
   color: var(--sp-danger-color);
   &:hover,

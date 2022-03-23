@@ -8,18 +8,19 @@
                         'label': 'control.guide_form.shortform' | trans,
                         'label_attr': {'class': 'form-required'}
                     }) }}
-                    <span class="fs-xs">{{ 'control.guide_form.shortform.info' | trans }}</span>
                     <button type="button" class="btn btn-icon-default fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide_form.shortform.help.text' | trans }}"><i class="fas fa-info-circle"></i></button>
                     {{ form_widget(form.shortform,{
-                        'attr': {'class': 'form-control-short'}
+                        'attr': {'class': 'form-control'}
                     }) }}
+                    <span class="fs-xs">{{ 'control.guide_form.shortform.info' | trans }}</span>
                 </div>
 
-                <div class="col-4">
-                    <div class="form-image-preview"></div>
-                    <label for="guideThumbnail" class="btn-link fs-sm">Upload thumbnail
-                        <input class="form-control form-file-hidden" id="guideThumbnail" type="file">
-                    </label>
+                <div class="col-3 offset-1 text-center">
+                    <div class="form-image-preview">
+                        <img src="{{ asset('build/images/backend/thumb75.jpg') }}" class="img-thumbnail list-img" alt="Guide thumbnail" />
+                    </div>
+                    <input class="form-file-hidden" id="guideThumbnail" type="file">
+                    <label for="guideThumbnail" class="btn-link-default">Upload thumbnail</label>
                 </div>
             </div>
 
