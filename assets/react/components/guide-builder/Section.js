@@ -1,13 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import Pluslet from './Pluslet';
 import { useFetchPluslets } from '#api/guide/PlusletAPI';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import Container from 'react-bootstrap/Container';
+import { useDeleteSection } from '#api/guide/SectionAPI';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-function Section({ sectionId, layout, sectionIndex }) {
+function Section({ tabId, sectionId, layout, sectionIndex }) {
     const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
+
+    const deleteSectionMutation = useDeleteSection(tabId);
 
     const padding = 16;
 
@@ -16,14 +18,21 @@ function Section({ sectionId, layout, sectionIndex }) {
         position: 'relative',
         marginBottom: `${padding}px`,
         background: isDragging ? "lightgreen" : "grey",
+        width: '900px',
         ...draggableStyle
       });
 
-    const getSectionDroppableStyle = (isDraggingOver) => ({
+    const getSectionStyle = (isDraggingOver) => ({
         background: isDraggingOver ? "lightblue" : "lightgrey",
         padding: padding,
-        width: 200
     });
+
+    const deleteSection = () => {
+        const confirmed = confirm('Are you sure you want to delete this section?');
+        if (confirmed) {
+            deleteSectionMutation.mutate(sectionId);
+        }
+    }
 
     const sectionAnchorStyle = {
         position: 'absolute',
@@ -38,23 +47,50 @@ function Section({ sectionId, layout, sectionIndex }) {
         zindex: 1
     }
 
-    const generateContainer = (pluslets) => {
+    const columnStyle = {
+        width: '100%',
+    }
+
+    const columns = useMemo( () => {
         const splitLayout = layout.split('-');
-        
-        const rows = splitLayout.map(size => {
+        let column = 0;
 
+        const columns = splitLayout.map(size => {
             if (Number(size) !== 0) {
-                return (
-                    <Row>
-                        <Col lg={Number(size)}>
+                let index = 0;
+                let pluslets;
 
-                        </Col>
-                    </Row>
-                )
+                if (data && data.length > 0) {
+                    pluslets = data.map(pluslet => {
+                        if (pluslet.pcolumn == column) {
+                            return (
+                                <Pluslet key={pluslet.plusletId} 
+                                    plusletId={pluslet.plusletId} plusletRow={index++} />
+                            );
+                        }
+                    });
+                }
+
+                const columnId = `section-${sectionId.toString()}-column-${column++}`;
+                return (     
+                    <Col key={columnId} lg={Number(size)}>
+                        <Droppable type="pluslet" style={{ transform: 'none' }} 
+                            droppableId={columnId} direction="vertical">
+                            {(provided, snapshot) => (
+                                <div style={columnStyle} {...provided.droppableProps} ref={provided.innerRef}>
+                                    <h3>{columnId}</h3>
+                                    {pluslets ?? 'Add a pluslet'}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </Col>
+                );
             }
         });
 
-    }
+        return columns;
+    }, [data]);
 
     const sectionContent = useMemo(() => {
         if (isLoading) {
@@ -63,10 +99,6 @@ function Section({ sectionId, layout, sectionIndex }) {
             console.error(error);
             return (<p>Error: Failed to load sections through API Endpoint!</p>);
         } else {
-            const pluslets = data.map((pluslet, index) =>
-                <Pluslet key={pluslet.plusletId} plusletId={pluslet.plusletId} plusletRow={index} />
-            );
-
             return (
                 <Draggable type="section" draggableId={'section-' + sectionIndex} index={sectionIndex}>
                     {(provided, snapshot) => (
@@ -76,21 +108,17 @@ function Section({ sectionId, layout, sectionIndex }) {
                                 <span className="drag-handle" {...provided.dragHandleProps}>
                                     <i className="fas fa-arrows-alt"></i>
                                 </span>
-                                <span className="select-more">
-                                    <i className="fas fa-ellipsis-v"></i>
-                                </span>
+                                <button className="delete-section" onClick={deleteSection}>
+                                    <i className="fas fa-trash"></i>
+                                </button>
                             </span>
-                            <Droppable type="pluslet" key={sectionId.toString()} style={{ transform: "none" }} 
-                                droppableId={sectionId.toString()} direction="vertical">
-                                {(provided, snapshot) => (
-                                    <div className="guide-section" data-layout={layout} {...provided.droppableProps} 
-                                        ref={provided.innerRef}
-                                        style={getSectionDroppableStyle(snapshot.isDraggingOver)}>
-                                        {pluslets.length > 0 ? pluslets : 'Add a pluslet'}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
+                            <div className="guide-section" data-layout={layout}
+                                style={getSectionStyle(snapshot.isDragging)}>
+                                <h3>Section {sectionId}</h3>
+                                <Row>
+                                    {columns}
+                                </Row>
+                            </div>
                         </div>
                     )}
                 </Draggable>
