@@ -37,7 +37,7 @@ function SectionContainer({ tabId }) {
             // perform the reordering
             reorderSection(result.source.index, result.destination.index);
         } else if (result.type === 'pluslet') {
-            console.log('Pluslet onDragEnd Handler');
+            console.log('Pluslet onDragEnd Handler, result: ', result);
         }
     }
 
@@ -62,8 +62,7 @@ function SectionContainer({ tabId }) {
             const guideSections = data.map((section, index) => {
                 return (
                     <Section key={section.sectionId || 'section-' + index} sectionId={section.sectionId || 'section-' + index} 
-                        layout={section.layout || '4-4-4'}
-                        sectionIndex={section.sectionIndex || index} />
+                        layout={section.layout || '4-4-4'} sectionIndex={section.sectionIndex || index} tabId={tabId} />
                 );
             });
 
