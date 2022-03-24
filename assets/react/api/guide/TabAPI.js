@@ -254,7 +254,7 @@ async function deleteTab(tabId) {
         throw new Error(req.status + ' ' + req.statusText);
     }
     
-    return req.json();
+    return req.text();
 }
 
 async function reorderTab({subjectId, sourceTabIndex, destinationTabIndex}) {

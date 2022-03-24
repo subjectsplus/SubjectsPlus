@@ -236,7 +236,7 @@ async function deleteSection(sectionId) {
         throw new Error(req.status + ' ' + req.statusText);
     }
     
-    return req.json();
+    return req.text();
 }
 
 async function reorderSection({ tabId, sourceSectionIndex, destinationSectionIndex }) {
