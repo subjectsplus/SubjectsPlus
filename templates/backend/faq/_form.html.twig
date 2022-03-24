@@ -44,11 +44,11 @@
 
         {{ form_row(form.subject, {
             'label': 'control.faq.form.subject' | trans,
-            'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.subject_placeholder' | trans}
+            'attr': {'class': 'invisible form-select-multi', 'data-placeholder-text': 'control.faq.form.subject_placeholder' | trans}
         }) }}
         {{ form_row(form.faqpage, {
             'label': 'control.faq.form.faq_collection_page' | trans,
-            'attr': {'class': 'invisible', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans}
+            'attr': {'class': 'invisible form-select-multi', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans}
         }) }}
         {{ form_rest(form) }}
         {{ encore_entry_script_tags('react_select_init') }}
