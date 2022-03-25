@@ -18,10 +18,20 @@ export function useFetchPluslet(plusletId) {
 
 async function fetchPluslets(sectionId) {
     const data = await fetch(`/api/sections/${sectionId}/pluslets`);
+
+    if (!data.ok) {
+        throw new Error(data.status + ' ' + data.statusText);
+    }
+
     return data.json();
 }
 
 async function fetchPluslet(plusletId) {
     const data = await fetch(`/api/pluslets/${plusletId}`);
+
+    if (!data.ok) {
+        throw new Error(data.status + ' ' + data.statusText);
+    }
+    
     return data.json();
 }

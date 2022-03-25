@@ -145,11 +145,21 @@ export function useReorderTab(subjectId) {
 
 async function fetchTabs(subjectId) {
     const data = await fetch(`/api/subjects/${subjectId}/tabs`);
+    
+    if (!data.ok) {
+        throw new Error(data.status + ' ' + data.statusText);
+    }
+
     return data.json();
 }
 
 async function fetchTab(tabId) {
     const data = await fetch(`/api/tabs/${tabId}`);
+
+    if (!data.ok) {
+        throw new Error(data.status + ' ' + data.statusText);
+    }
+
     return data.json();
 }
 
@@ -161,6 +171,10 @@ async function createTab(initialTabData) {
         },
         body: JSON.stringify(initialTabData)
     });
+
+    if (!tabReq.ok) {
+        throw new Error(tabReq.status + ' ' + tabReq.statusText);
+    }
 
     const tabData = await tabReq.json();
 
@@ -174,6 +188,10 @@ async function createTab(initialTabData) {
             tab: `/api/tabs/${tabData.tabId}`
         })
     });
+
+    if (!sectionReq.ok) {
+        throw new Error(sectionReq.status + ' ' + sectionReq.statusText);
+    }
 
     return sectionReq.json();
 }
@@ -189,6 +207,11 @@ async function updateTab({tabId, data}) {
         },
         body: JSON.stringify(data)
     });
+
+    if (!req.ok) {
+        throw new Error(req.status + ' ' + req.statusText);
+    }
+
     return req.json();
 }
 
@@ -201,7 +224,6 @@ async function deleteTab(tabId) {
     const newTabs = [...tabs];
    
     // update the tab index
-    console.log('tab index of tab to delete: ', tabToDelete.tabIndex);
     newTabs.splice(tabToDelete.tabIndex, 1);
     await Promise.all(newTabs.map((tab, index) => {
         if (tab.tabIndex !== index) {
@@ -213,6 +235,9 @@ async function deleteTab(tabId) {
                 body: JSON.stringify({
                     tabIndex: index
                 })
+            }).catch(error => {
+                console.error(error);
+                throw new Error(error);
             });
         }
     }));
@@ -224,14 +249,18 @@ async function deleteTab(tabId) {
             'Content-Type': '*/*',
         }
     });
+
+    if (!req.ok) {
+        throw new Error(req.status + ' ' + req.statusText);
+    }
     
-    return req.json();
+    return req.text();
 }
 
 async function reorderTab({subjectId, sourceTabIndex, destinationTabIndex}) {
     if (subjectId === undefined) throw new Error('"subjectId" field is required to perform reorder tab request.');
-    if (sourceTabIndex === undefined) throw new Error('"sourceTabIndex" field is required to perform update tab request');
-    if (destinationTabIndex === undefined) throw new Error('"destinationTabIndex" field is required to perform update tab request.');
+    if (sourceTabIndex === undefined) throw new Error('"sourceTabIndex" field is required to perform reorder tab request');
+    if (destinationTabIndex === undefined) throw new Error('"destinationTabIndex" field is required to perform reorder tab request.');
     
     // fetch current tabs
     const {'hydra:member': tabs} = await fetchTabs(subjectId);
@@ -254,6 +283,9 @@ async function reorderTab({subjectId, sourceTabIndex, destinationTabIndex}) {
                 body: JSON.stringify({
                     tabIndex: index
                 })
+            }).catch(error => {
+                console.error(error);
+                throw new Error(error);
             });
         }
     }));
