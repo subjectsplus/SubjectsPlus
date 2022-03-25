@@ -713,6 +713,34 @@
         <source>control.guide_form.shortform.info</source>
         <target>__control.guide_form.shortform.info</target>
       </trans-unit>
+      <trans-unit id="ku.Ni0z" resname="control.guide_meta.show.header">
+        <source>control.guide_meta.show.header</source>
+        <target>__control.guide_meta.show.header</target>
+      </trans-unit>
+      <trans-unit id="Izh.sQf" resname="control.guide.preview.label">
+        <source>control.guide.preview.label</source>
+        <target>__control.guide.preview.label</target>
+      </trans-unit>
+      <trans-unit id="mbrFuSz" resname="control.guide.delete_guide.modal.header">
+        <source>control.guide.delete_guide.modal.header</source>
+        <target>__control.guide.delete_guide.modal.header</target>
+      </trans-unit>
+      <trans-unit id="9f9wgt1" resname="control.guide.delete_guide.modal.text">
+        <source>control.guide.delete_guide.modal.text</source>
+        <target>__control.guide.delete_guide.modal.text</target>
+      </trans-unit>
+      <trans-unit id="M1vDYjq" resname="control.guide.delete_guide.cancel_button">
+        <source>control.guide.delete_guide.cancel_button</source>
+        <target>__control.guide.delete_guide.cancel_button</target>
+      </trans-unit>
+      <trans-unit id="QZfLk7S" resname="control.guide.delete_guide.confirm_button">
+        <source>control.guide.delete_guide.confirm_button</source>
+        <target>__control.guide.delete_guide.confirm_button</target>
+      </trans-unit>
+      <trans-unit id="ZU.bzG1" resname="control.guide.delete_guide.title">
+        <source>control.guide.delete_guide.title</source>
+        <target>__control.guide.delete_guide.title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

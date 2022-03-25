@@ -38,7 +38,7 @@
                         </td>
                         <td class="table-cell-options-hover">
                             <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
-                                <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
+                                <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" target="_blank" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
                                 {# TODO: remove from list option #}
                                 <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.admin.faq_collection.remove_from_list' | trans }}"><i class="fas fa-minus-circle fs-sm"></i></a>
                             </div>

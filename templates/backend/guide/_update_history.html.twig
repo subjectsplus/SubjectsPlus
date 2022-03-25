@@ -1,0 +1,18 @@
+<p class="fs-xs fst-italic mt-5 mb-1">
+    Last updated: {{ guide.lastModified|format_date() }}
+</p>
+<div class="accordion accordion-transparent" id="updateHistoryAccordion">
+    <div class="accordion-item">
+        <p class="accordion-header" id="updateHistoryHeading">
+            <button class="accordion-button collapsed fs-sm btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#updateHistoryList" aria-expanded="false" aria-controls="updateHistoryList">See history</button>
+        </p>
+        <div id="updateHistoryList" class="accordion-collapse collapse" aria-labelledby="updateHistoryHeading" data-bs-parent="#updateHistoryAccordion">
+            <div class="accordion-body">
+                <ul class="list-unstyled list-space fs-xs mb-0">
+                    {# TODO: Add history list, include staff email  #}
+                    {{ guide.lastModified|format_date() }}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

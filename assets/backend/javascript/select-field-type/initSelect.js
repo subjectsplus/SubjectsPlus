@@ -64,7 +64,7 @@ Array.from(multiSelectElements).forEach( element => {
     let selectedOptions = Array.from(element.querySelectorAll('option:checked'));
     
     replaceNodeWithReactComponent(element,
-        <Select isMulti={true} id={element.id} classNamePrefix="sp-react-select" styles={reactSelectCustomStyles} name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} options={options} defaultValue={selectedOptions} />);
+        <Select isMulti={true} id={element.id} classNamePrefix="sp-react-select-multi" styles={reactSelectCustomStyles} name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} options={options} defaultValue={selectedOptions} />);
 });
 
 Array.from(singleSelectElements).forEach( element => {
