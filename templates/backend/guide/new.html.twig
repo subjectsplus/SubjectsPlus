@@ -17,7 +17,8 @@
                 <a href="{{ path('guide_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
             </div>
         </div>
-
+        {% set delete_faq = 'false' %}
+        {% set update_history = 'false' %}
         {{ include('backend/guide/_form.html.twig') }}
     </div>
 {% endblock %}
