@@ -1,16 +1,113 @@
-<style>
-    .form {
-      border: 1px solid #E7E7E7;
-      padding: 0 20px;
-      background: #fff;
-      position: relative;
-      float: left;
-    }
-</style>
+{{ form_start(form) }}
+<div class="row mt-4">
+    <div class="col-lg-5 col-xl-4 offset-lg-1 order-last">
+        <h3 class="mt-4 mt-lg-0">{{ 'control.guide_form.settings_header' | trans }}</h3>
 
-<div class="form">
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+        {# TODO: Add fields to Symfony form  #}
+        <h5>Staff</h5>
+        <div class="mb-3">
+            {# TODO: Implement as React Select  #}
+            <select class="form-select invisible form-select-multi" aria-label="Guide Theme" id="guideTheme" data-placeholder-text="Select staff" multiple="multiple">
+                <option value="1">User One</option>
+                <option value="2">User Two</option>
+                <option value="3">User Three</option>
+            </select>
+        </div>
+
+        <h5 class="mt-4">Metadata</h5>
+        <div class="mb-2">
+            <label for="guideKeywords" class="form-label">Keywords</label> <button type="button" class="btn btn-icon-default fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.faq.form.keywords.help.text' | trans }}"><i class="fas fa-info-circle"></i></button>
+            <input type="text" class="form-control" id="guideKeywords">
+        </div>
+        <div class="mb-3">
+            <label for="guideDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="guideDescription"></textarea>
+        </div>
+
+
+        <h5 class="mt-4">Blackboard Integration</h5>
+        <div class="row">
+            <div class="col-4">
+                <label for="BBCourseCode" class="form-label">Course Code</label>
+                <input type="text" class="form-control" id="BBCourseCode">
+            </div>
+            <div class="col-8">
+                <label for="BBCourseInstructor" class="form-label">Instructor</label>
+                <select class="form-select" aria-label="BB Course Instructor" id="BBCourseInstructor">
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="col-lg-6 col-xl-5">
+        <div class="panel-basic border-basic">
+            <div class="row mb-3">
+                <div class="col-8">
+                    {{ form_label(form.shortform, null, {
+                        'label': 'control.guide_form.shortform' | trans,
+                        'label_attr': {'class': 'form-required'}
+                    }) }}
+                    <button type="button" class="btn btn-icon-default fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide_form.shortform.help.text' | trans }}"><i class="fas fa-info-circle"></i></button>
+                    {{ form_widget(form.shortform) }}
+                    <span class="fs-xs">{{ 'control.guide_form.shortform.info' | trans }}</span>
+                </div>
+
+                <div class="col-4 text-center">
+                {# TODO: Add FileType to Symfony form, render input and label with form reference variables. If image has been added for guide, replace img source below (Edit view)  #}
+                    {#  https://symfony.com/doc/current/form/form_customization.html#twig-reference-form-variables #}
+
+                    <input class="form-file-upload-hidden" id="guideThumbnail" type="file">
+                    <label for="guideThumbnail" class="btn-link-default">
+                        <img src="{{ asset('build/images/backend/sp-upload-file75.jpg') }}" class="img-thumbnail" alt="Guide thumbnail" />
+                        <div class="pt-1">Upload thumbnail <button type="button" class="btn btn-icon-default fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Format: jpg or png"><i class="fas fa-info-circle"></i></button></div>
+                        <span class="d-block fst-italic" id="GuideThumbFileName"></span>
+                    </label>
+
+                    {# Display chosen file #}
+                    <script type="text/javascript">
+                        let inputField = document.getElementById('guideThumbnail');
+
+                        let label = inputField.nextElementSibling;
+                        let labelVal = label.innerHTML;
+
+                        inputField.addEventListener('change', (event) => {
+                            let fileName = inputField.files[0].name;
+
+                            if( fileName )
+                                label.querySelector('#GuideThumbFileName').innerHTML = fileName;
+                            else
+                                label.innerHTML = labelVal;
+                        });
+                    </script>
+                </div>
+            </div>
+
+            {{ form_row(form.subject, {
+                'label': 'control.guide_form.title' | trans,
+                'label_attr': {'class': 'form-required'}
+            }) }}
+            {{ form_row(form.type, {
+                'label': 'control.guide_form.type' | trans,
+                'label_attr': {'class': 'form-required'}
+            }) }}
+            {{ form_row(form.active, {
+                'label': 'control.guide_form.visibility' | trans,
+                'label_attr': {'class': 'form-required'}
+            }) }}
+            {{ form_rest(form) }}
+
+            <div class="mt-4">
+                <button class="btn btn-gradient btn-round">{{ button_label|default('control.guide_form.save_guide' | trans) }}</button>
+            </div>
+        </div>
+    </div>
+
+
 </div>
+{{ encore_entry_script_tags('react_select_init') }}
+{{ form_end(form) }}

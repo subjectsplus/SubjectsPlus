@@ -104,6 +104,15 @@
   }
 }
 
+.btn-link-default {
+  color: var(--sp-font-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}
+
 .btn-link-danger {
   color: var(--sp-danger-color);
   &:hover,
@@ -139,6 +148,16 @@
   &:focus {
     @include transition-all();
     background-color: #DBE2E6;
+  }
+
+  &.btn-round {
+    box-shadow: 0 0 0 0.25rem rgba(#DBE2E6, 0.8);
+  }
+}
+
+.btn-danger {
+  &.btn-round {
+    box-shadow: 0 0 0 0.25rem rgba(#B61621, 0.15);
   }
 }
 

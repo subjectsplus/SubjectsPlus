@@ -212,7 +212,7 @@ function GuideTabContainer(props) {
 
             // generate tab content
             const tabsContent = data.map(tab => {
-                if (tab.tabId) {
+                if (tab.tabId && currentTab.tabIndex == tab.tabIndex) {
                     return (
                         <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={'tab-pane' + (activeKey === tab.tabIndex ? ' active': '')} 
                             key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>

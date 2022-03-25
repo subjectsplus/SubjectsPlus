@@ -2,20 +2,11 @@
 
 {% block title %}{{ 'control.dashboard' | trans }} | SubjectsPlus{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('mode-switcher') }}
-{% endblock %}
-
 {% block content %}
     <div class="container py-5">
         <div class="row row-cols-2">
             <div class="col-7">
                 <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="switchMode">
-                    <label class="form-check-label" for="switchMode">{{ 'control.dashboard.enable_dark_mode' | trans }}</label>
-                </div>
             </div>
             <div class="col-5 text-end">
                 <h5 class="fw-light mb-0">Welcome, {{ app.user.fname }}</h5>

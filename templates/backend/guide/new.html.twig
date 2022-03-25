@@ -1,12 +1,23 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}New Guide{% endblock %}
+{% block title %}{{ 'control.guide_meta.header' | trans }} | SubjectsPlus{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('bs-tooltips') }}
+{% endblock %}
 
 {% block content %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-8">
+                <h1 class="fw-light">{{ 'control.guide_meta.header' | trans }}</h1>
+            </div>
+            <div class="col-4 text-end">
+                <a href="{{ path('guide_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
+            </div>
+        </div>
 
-    <h1>Create new Guide</h1>
-
-    {{ include('backend/guide/_form.html.twig') }}
-
-    <a href="{{ path('guide_index') }}">back to list</a>
+        {{ include('backend/guide/_form.html.twig') }}
+    </div>
 {% endblock %}
