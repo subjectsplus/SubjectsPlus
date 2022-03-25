@@ -1,4 +1,3 @@
-// TODO: Save mode user preference in database vs. local storage
 // Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#storing-preferences
 
 const adminModeToggleSwitch = document.querySelector('#switchMode');

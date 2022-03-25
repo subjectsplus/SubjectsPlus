@@ -1,0 +1,58 @@
+// Accordions
+.accordion-button{
+  &:after{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb(51,51,51)'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  }
+
+  &:not(.collapsed){
+    &:after {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb(51,51,51)'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+  }
+}
+
+[data-mode="dark"] {
+  .accordion-button{
+    &:after{
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb(255,255,255)'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+
+    &:not(.collapsed){
+      &:after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='rgb(255,255,255)'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+      }
+    }
+  }
+}
+
+.accordion-transparent {
+  .accordion-item {
+    border: none;
+    background-color: transparent;
+    &:first-of-type,
+    &:last-of-type {
+      .accordion-button {
+        border-radius:0;
+      }
+    }
+  }
+
+  .accordion-button{
+    padding:0;
+    background-color: transparent;
+    border-radius: 0;
+    &:after {
+      margin-left: 0.25rem;
+      width: 1rem;
+      height: 1rem;
+      background-size: 1rem;
+    }
+    &:not(.collapsed){
+      box-shadow: none;
+    }
+  }
+
+  .accordion-body{
+    padding: 0.5rem 0 0 0;
+  }
+}
