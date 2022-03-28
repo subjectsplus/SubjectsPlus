@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
+import ErrorBoundary from '#components/shared/ErrorBoundary';
 import Section from './Section';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -42,6 +43,7 @@ function SectionContainer({ tabId }) {
     }
 
     const addSection = () => {
+        console.log('Data: ', data);
         if (data && typeof data === 'array') {
             const initialSectionData = {
                 sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
@@ -67,7 +69,7 @@ function SectionContainer({ tabId }) {
             });
 
             return (
-                <>
+                <ErrorBoundary>
                     <button id="add-section" onClick={addSection}>
                         <i className="fas fa-plus"></i>
                     </button>
@@ -82,7 +84,7 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
-                </>
+                </ErrorBoundary>
             );
         }
     }, [data, isError, isLoading]);

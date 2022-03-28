@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { htmlEntityDecode, objectIsEmpty } from '#utility/Utility';
 import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '#api/guide/TabAPI';
+import ErrorBoundary from '#components/shared/ErrorBoundary';
 import SectionContainer from './SectionContainer';
 import DraggableTab from './DraggableTab';
 import EditTabModal from './EditTabModal';
@@ -216,7 +217,9 @@ function GuideTabContainer(props) {
                     return (
                         <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={'tab-pane' + (activeKey === tab.tabIndex ? ' active': '')} 
                             key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
-                            <SectionContainer tabId={tab.tabId} />
+                            <ErrorBoundary>
+                                <SectionContainer tabId={tab.tabId} />
+                            </ErrorBoundary>
                         </Tab.Pane>
                     )
                 }

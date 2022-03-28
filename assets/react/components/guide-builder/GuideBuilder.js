@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GuideTabContainer from './GuideTabContainer';
+import ErrorBoundary from '#components/shared/ErrorBoundary';
 import { htmlEntityDecode } from '#utility/Utility';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -45,7 +46,9 @@ function GuideBuilder(props) {
             return (
                 <>
                     <h3>{htmlEntityDecode(guide.subject)}</h3>
-                    <GuideTabContainer subjectId={props.subjectId} />
+                    <ErrorBoundary>
+                        <GuideTabContainer subjectId={props.subjectId} />
+                    </ErrorBoundary>
                 </>
             );
         } else if (loading) {

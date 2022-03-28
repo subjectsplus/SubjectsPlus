@@ -1,10 +1,9 @@
 import React from 'react';
 
-function Error({ errorCode, errorMessage}) {
+function Error() {
     return (
         <div>
             <p>Error has occurred!</p>
-            <p>{'Error: ' + errorCode + ' - ' + errorMessage}</p>
         </div>
     )
 }
