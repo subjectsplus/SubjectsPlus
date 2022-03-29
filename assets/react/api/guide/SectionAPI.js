@@ -24,10 +24,14 @@ export function useCreateSection(tabId) {
         onMutate: async newSection => {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
-
+            const optimisticResult = {
+                ...newSection,
+                sectionId: 'section-' + newSection.sectionIndex
+            }
+            
             queryClient.setQueryData(['sections', tabId], {
                 ...previousSectionsData,
-                'hydra:member': [...previousSectionsData['hydra:member'], newSection],
+                'hydra:member': [...previousSectionsData['hydra:member'], optimisticResult],
             });
             
             return { previousSectionsData };
@@ -170,6 +174,8 @@ async function createSection(initialSectionData) {
         },
         body: JSON.stringify(initialSectionData)
     });
+
+    
 
     if (!sectionReq.ok) {
         throw new Error(sectionReq.status + ' ' + sectionReq.statusText);

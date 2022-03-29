@@ -43,10 +43,10 @@ function SectionContainer({ tabId }) {
     }
 
     const addSection = () => {
-        console.log('Data: ', data);
-        if (data && typeof data === 'array') {
+        if (Array.isArray(data)) {
             const initialSectionData = {
                 sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
+                layout: '4-4-4',
                 tab: '/api/tabs/' + tabId
             };
 
@@ -63,8 +63,8 @@ function SectionContainer({ tabId }) {
         } else {
             const guideSections = data.map((section, index) => {
                 return (
-                    <Section key={section.sectionId || 'section-' + index} sectionId={section.sectionId || 'section-' + index} 
-                        layout={section.layout || '4-4-4'} sectionIndex={section.sectionIndex || index} tabId={tabId} />
+                    <Section key={section.sectionId} sectionId={section.sectionId} 
+                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} />
                 );
             });
 
