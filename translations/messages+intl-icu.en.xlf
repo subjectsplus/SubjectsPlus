@@ -709,6 +709,10 @@
         <source>control.guide.delete_guide.title</source>
         <target>Delete guide</target>
       </trans-unit>
+      <trans-unit id="1ESeN7a" resname="control.dashboard.welcome">
+        <source>control.dashboard.welcome</source>
+        <target>Welcome</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
