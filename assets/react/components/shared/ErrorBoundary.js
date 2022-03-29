@@ -5,6 +5,7 @@ export default class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
         this.state = { hasError: false };
+        this.attemptRetry = this.attemptRetry.bind(this);
     }
     
     static getDerivedStateFromError(error) {
@@ -12,12 +13,18 @@ export default class ErrorBoundary extends React.Component {
         return { hasError: true };
     }
 
+    attemptRetry() {
+        this.setState({
+            hasError: false
+        })
+    }
+
     render() {
         if (this.state.hasError) {
             // You can render any custom fallback UI      
-            return <Error />;    
+            return <Error onRetry={this.attemptRetry} />;    
         }
-        
+
         return this.props.children; 
     }
 }

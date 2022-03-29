@@ -69,7 +69,7 @@ function SectionContainer({ tabId }) {
             });
 
             return (
-                <ErrorBoundary>
+                <>
                     <button id="add-section" onClick={addSection}>
                         <i className="fas fa-plus"></i>
                     </button>
@@ -84,7 +84,7 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
-                </ErrorBoundary>
+                </>
             );
         }
     }, [data, isError, isLoading]);
