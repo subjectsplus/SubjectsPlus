@@ -14,6 +14,19 @@
       &:focus {
         color: var(--sp-input-selected-text);
       }
+      i {
+        color: #FFFFFF;
+      }
     }
   }
+}
+
+.tab-settings-icon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+#guide-tabs-tab-new-tab{
+  cursor: pointer;
 }

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6 col-lg-6 col-xl-5">
+    <div class="col-md-6 col-lg-6 col-xl-4">
         {# TODO: autocomplete search with filters #}
         <form>
             <div class="mb-3 mb-md-0">
@@ -7,11 +7,11 @@
             </div>
         </form>
     </div>
-    <div class="col-md-6 col-lg-6 col-xl-5 align-self-md-center">
+    <div class="col-md-6 col-lg-6 col-xl-4 align-self-md-center">
         {# TODO: multi-select filters with react-select #}
         <div class="d-flex flex-row flex-nowrap align-items-baseline">
             <span class="fs-sm d-inline-block" style="width: 65px;">{{ 'control.guides.filter_by' | trans }}:</span>
-            <select class="form-select form-select-sm d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.type.aria' | trans }}">
+            <select class="form-select d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.type.aria' | trans }}">
                 <option selected>{{ 'control.guides.filter.type' | trans }}</option>
                 <option value="1">Subject</option>
                 <option value="2">Course</option>

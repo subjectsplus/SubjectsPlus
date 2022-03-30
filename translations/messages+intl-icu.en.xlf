@@ -355,7 +355,7 @@
       </trans-unit>
       <trans-unit id="frBk6HE" resname="control.flyout.add_record_token.heading">
         <source>control.flyout.add_record_token.heading</source>
-        <target>Add a Record</target>
+        <target>Insert a Record</target>
       </trans-unit>
       <trans-unit id="u5gZ36W" resname="control.custom_tokens_menu.add_button">
         <source>control.custom_tokens_menu.add_button</source>
@@ -371,7 +371,7 @@
       </trans-unit>
       <trans-unit id="YZcuqB." resname="control.flyout.add_media_token.heading">
         <source>control.flyout.add_media_token.heading</source>
-        <target>Add Media</target>
+        <target>Insert Media</target>
       </trans-unit>
       <trans-unit id="301mQpr" resname="control.header.faqs.edit_existing_faq">
         <source>control.header.faqs.edit_existing_faq</source>
