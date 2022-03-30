@@ -813,6 +813,10 @@
         <source>control.guides.filter.type</source>
         <target>__control.guides.filter.type</target>
       </trans-unit>
+      <trans-unit id="ppuCrUF" resname="control.header.guides.guide_builder">
+        <source>control.header.guides.guide_builder</source>
+        <target>__control.header.guides.guide_builder</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

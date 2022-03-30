@@ -785,6 +785,10 @@
         <source>control.guides.filter.type</source>
         <target>Type</target>
       </trans-unit>
+      <trans-unit id="ppuCrUF" resname="control.header.guides.guide_builder">
+        <source>control.header.guides.guide_builder</source>
+        <target>Guide Builder</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

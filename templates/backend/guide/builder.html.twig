@@ -1,6 +1,6 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.header.guides.guide_builder' | trans }} | SubjectsPlus{% endblock %}
+{% block title %}{{ 'control.header.guides.guide_builder' | trans }}: {{ guide.subject | raw }} | SubjectsPlus{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -17,16 +17,16 @@
 
     <div class="row">
         <div class="col-8">
-            {# TODO: Add variables for name, id, shortform #}
-            <h1 class="fw-light d-inline-block me-2 mb-1">Guide.name</h1>
+            <h1 class="fw-light d-inline-block me-2 mb-1">{{ guide.subject | raw }}</h1>
             {# TODO: link to front-end preview #}
             <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
-            <p class="fs-xs">ID: guide.subjectId | Slug: guide.shortform | <a href="#" class="btn-link" type="button"><i class="fas fa-cog"></i> {{ 'control.guides.table.button.guide_details' | trans }}</a> </p>
+            <p class="fs-xs">ID: {{ guide.subjectId }} | Slug: {{ guide.shortform }}</p>
         </div>
         <div class="col-4 text-end">
-            <a href="{{ path('guide_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
+           <a class="btn-link fs-4" data-bs-toggle="offcanvas" href="#offcanvasGuideDetails" role="button" aria-controls="offcanvasGuideDetails" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i></a>
         </div>
     </div>
     <div id="guide-builder-container"></div>
 </div>
+{{ include('backend/guide/_offcanvas_guide_details.html.twig') }}
 {% endblock %}
