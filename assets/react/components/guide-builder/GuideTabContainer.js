@@ -214,7 +214,7 @@ function GuideTabContainer(props) {
             const tabsContent = data.map(tab => {
                 if (tab.tabId && currentTab.tabIndex == tab.tabIndex) {
                     return (
-                        <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={'tab-pane' + (activeKey === tab.tabIndex ? ' active': '')} 
+                        <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={(activeKey === tab.tabIndex ? 'active': '')}
                             key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
                             <SectionContainer tabId={tab.tabId} />
                         </Tab.Pane>
@@ -233,7 +233,7 @@ function GuideTabContainer(props) {
                                         <Nav variant="tabs">
                                             {guideTabs}
                                             {provided.placeholder}
-                                            <Nav.Link as="div" key="new-tab" eventKey="new-tab">
+                                            <Nav.Link as="div" key="new-tab" eventKey="new-tab" title="Add New Tab">
                                                 <i className="fas fa-plus"></i>
                                             </Nav.Link>
                                         </Nav>
@@ -244,7 +244,7 @@ function GuideTabContainer(props) {
                     </DragDropContext>
                     
                     {/* Tab Content */}
-                    <Tab.Content>
+                    <Tab.Content className="sp-tab-content">
                         {tabsContent}
                     </Tab.Content>
                     

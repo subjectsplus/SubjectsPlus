@@ -10,9 +10,8 @@ function Pluslet({ plusletId, plusletRow }) {
                         {...provided.draggableProps} {...provided.dragHandleProps}
                         style={{
                             ...provided.draggableProps.style,
-                            border: '2px dashed blue',
+                            backgroundColor: '#d5d5d5',
                             height: '200px',
-                            width: '150px',
                         }}>
                             {'Pluslet ' + plusletId}
                     </div>
