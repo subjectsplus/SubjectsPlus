@@ -11,6 +11,9 @@ framework:
         #app: cache.adapter.redis
         #default_redis_provider: redis://localhost
 
+        # Set the directory we want our cache to be stored in
+        directory: '%kernel.project_dir%/var/cache/prod'
+
         # APCu (not recommended with heavy random-write workloads as memory fragmentation can cause perf issues)
         app: cache.adapter.apcu
 
