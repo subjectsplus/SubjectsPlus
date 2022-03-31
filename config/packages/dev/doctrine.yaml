@@ -23,3 +23,19 @@ doctrine:
         dql:
             string_functions:
                 JSON_VALID: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonValid
+        metadata_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        query_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        result_cache_driver:
+            type: pool
+            pool: doctrine.result_cache_pool
+framework:
+    cache:
+        pools:
+            doctrine.result_cache_pool:
+                adapter: cache.app
+            doctrine.system_cache_pool:
+                adapter: cache.system
