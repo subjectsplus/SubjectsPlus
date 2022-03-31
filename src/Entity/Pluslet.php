@@ -17,6 +17,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
+ *     order={"prow": "ASC"}
  * )
  */
 class Pluslet

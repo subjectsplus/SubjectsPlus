@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom'
-import Search from '../../shared/Search.js';
+import Search from '#components/shared/Search';
 
 function RecordSearch() {
     const apiLink = '/api/titles';

@@ -194,8 +194,8 @@ $thumbnail-border-color:      var(--sp-border-color);
 
 
 // Tooltips
-$tooltip-font-size:           $font-size-base;
-$tooltip-max-width:           200px;
+$tooltip-font-size:           $font-size-sm;
+$tooltip-max-width:           350px;
 
 // Tables
 $table-cell-padding-y:        .75rem;
@@ -206,13 +206,31 @@ $table-bg:                    var(--sp-table-bg-color);
 $table-color:                 var(--sp-font-color);
 $table-border-color:          var(--sp-border-color);
 $table-striped-bg:            var(--sp-table-striped);
+$table-active-color:          var(--sp-input-selected-text);
+$table-active-bg:             var(--sp-input-selected-bg);
 
 // Tabs
 $nav-tabs-border-color:             var(--sp-border-color);
 $nav-tabs-link-hover-border-color:  var(--sp-border-color) var(--sp-border-color) var(--sp-border-color);
 $nav-tabs-link-active-color:        var(--sp-input-selected-text);
 $nav-tabs-link-active-bg:           var(--sp-input-selected-bg);
-$nav-tabs-link-active-border-color: var(--sp-border-color)var(--sp-border-color) $nav-tabs-link-active-bg;;
+$nav-tabs-link-active-border-color: var(--sp-border-color)var(--sp-border-color) $nav-tabs-link-active-bg;
+
+// Accordions
+$accordion-padding-y:                     0.5rem;
+$accordion-padding-x:                     1rem;
+$accordion-color:                         var(--sp-font-color);
+$accordion-bg:                            var(--sp-table-striped);
+$accordion-border-color:                  var(--sp-border-color);
+
+$accordion-button-color:                  $accordion-color;
+$accordion-button-bg:                     $accordion-bg;
+$accordion-button-active-bg:              var(--sp-nav-color);
+$accordion-button-active-color:           var(--sp-input-selected-text);
+
+$accordion-icon-width:                    1.25rem;
+$accordion-icon-color:                    var(--sp-font-color);
+$accordion-icon-active-color:             var(--sp-nav-color);
 
 // Bootstrap Default Variables.
 @import "~bootstrap/scss/functions";

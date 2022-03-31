@@ -1,92 +1,132 @@
-import React, { Component } from 'react';
-import Pluslet from './Pluslet.js';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import React, { useState, useMemo } from 'react';
+import Pluslet from './Pluslet';
+import { useFetchPluslets } from '#api/guide/PlusletAPI';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { useDeleteSection } from '#api/guide/SectionAPI';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-export default class Section extends Component {
-    apiLink = '/api/sections/{sectionId}/pluslets';
+function Section({ tabId, sectionId, layout, sectionIndex }) {
+    const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
 
-    constructor(props) {
-        super(props);
+    const deleteSectionMutation = useDeleteSection(tabId);
 
-        this.state = {
-            pluslets: null,
-            isErrored: false,
-            loading: false,
-        };
+    const padding = 16;
+
+    const getSectionDraggableStyle = (isDragging, draggableStyle) => ({
+        padding: `${padding * 2}px`,
+        position: 'relative',
+        marginBottom: `${padding}px`,
+        background: isDragging ? "lightgreen" : "grey",
+        width: '900px',
+        ...draggableStyle
+      });
+
+    const getSectionStyle = (isDraggingOver) => ({
+        background: isDraggingOver ? "lightblue" : "lightgrey",
+        padding: padding,
+    });
+
+    const deleteSection = () => {
+        const confirmed = confirm('Are you sure you want to delete this section?');
+        if (confirmed) {
+            deleteSectionMutation.mutate(sectionId);
+        }
     }
 
-    componentDidMount() {
-        this.getPluslets();
+    const sectionAnchorStyle = {
+        position: 'absolute',
+        display: 'block',
+        border: '1px solid #000',
+        width: '50px',
+        height: '20px',
+        lineHeight: '20px',
+        right: 0,
+        top: 0,
+        marginTop: '-10px',
+        zindex: 1
     }
 
-    getAPILink() {
-        return this.apiLink.replace('{sectionId}', 
-            this.props.sectionId);
+    const columnStyle = {
+        width: '100%',
     }
 
-    getPluslets() {
-        // formulate the results api link for guide
-        var resLink = this.getAPILink();
+    const columns = useMemo( () => {
+        const splitLayout = layout.split('-');
+        let column = 0;
 
-        // fetch api results
-        this.setState({
-            loading: true,
-        }, () => fetch(resLink)
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
+        const columns = splitLayout.map(size => {
+            if (Number(size) !== 0) {
+                let index = 0;
+                let pluslets;
+
+                if (data && data.length > 0) {
+                    pluslets = data.map(pluslet => {
+                        if (pluslet.pcolumn == column) {
+                            return (
+                                <Pluslet key={pluslet.plusletId} 
+                                    plusletId={pluslet.plusletId} plusletRow={index++} />
+                            );
+                        }
+                    });
                 }
 
-                this.setState({
-                    isErrored: true
-                });
-            })
-            .then(results => {
-                this.setState({
-                    pluslets: results["hydra:member"],
-                    isErrored: false,
-                    loading: false
-                });
+                const columnId = `section-${sectionId.toString()}-column-${column++}`;
+                return (     
+                    <Col key={columnId} lg={Number(size)}>
+                        <Droppable type="pluslet" style={{ transform: 'none' }} 
+                            droppableId={columnId} direction="vertical">
+                            {(provided, snapshot) => (
+                                <div style={columnStyle} {...provided.droppableProps} ref={provided.innerRef}>
+                                    <h3>{columnId}</h3>
+                                    {pluslets ?? 'Add a pluslet'}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </Col>
+                );
             }
-            )
-            .catch(err => {
-                console.error(err);
-                this.setState({
-                    isErrored: true
-                });
-            })
-        );
-    }
+        });
 
-    render() {
-        let pluslets = [];
+        return columns;
+    }, [data]);
 
-        if (this.state.pluslets) {
-            pluslets = this.state.pluslets.map((pluslet, index) => {
-                return (<Pluslet key={pluslet.plusletId} plusletId={pluslet.plusletId} plusletRow={index} />)
-            });
-        }
-
-        if (this.state.isErrored) {
-            return (<p>Error: Failed to load sections through API Endpoint!</p>);
-        } else if (this.state.loading) {
+    const sectionContent = useMemo(() => {
+        if (isLoading) {
             return (<p>Loading Pluslets...</p>);
+        } else if (isError) {
+            console.error(error);
+            return (<p>Error: Failed to load sections through API Endpoint!</p>);
         } else {
             return (
-                <Droppable type="pluslet" key={this.props.sectionId.toString()} style={{ transform: "none" }} droppableId={this.props.sectionId.toString()} direction="vertical">
-                    {(provided) => (
-                        <div className="guide-section" {...provided.droppableProps} ref={provided.innerRef}
-                            style={{
-                                border: '2px solid black',
-                                height: '500px',
-                                width: '750px',
-                            }}>
-                            {pluslets}
-                            {provided.placeholder}
+                <Draggable type="section" draggableId={'section-' + sectionIndex} index={sectionIndex}>
+                    {(provided, snapshot) => (
+                        <div ref={provided.innerRef} {...provided.draggableProps}
+                            style={getSectionDraggableStyle(snapshot.isDragging, provided.draggableProps.style)}>
+                            <span style={sectionAnchorStyle}>
+                                <span className="drag-handle" {...provided.dragHandleProps}>
+                                    <i className="fas fa-arrows-alt"></i>
+                                </span>
+                                <button className="delete-section" onClick={deleteSection}>
+                                    <i className="fas fa-trash"></i>
+                                </button>
+                            </span>
+                            <div className="guide-section" data-layout={layout}
+                                style={getSectionStyle(snapshot.isDragging)}>
+                                <h3>Section {sectionId}</h3>
+                                <Row>
+                                    {columns}
+                                </Row>
+                            </div>
                         </div>
                     )}
-                </Droppable>
+                </Draggable>
             );
         }
-    }
+    }, [data, isLoading, isError]);
+
+    return sectionContent;
 }
+
+export default Section;

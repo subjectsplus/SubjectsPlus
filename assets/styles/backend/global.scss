@@ -53,9 +53,18 @@
 
 // add partials - General Elements
 @import 'elements/general';
+@import 'elements/lists';
+@import 'elements/forms';
+@import 'elements/alerts';
+@import 'elements/dropdowns';
 @import 'elements/buttons';
 @import 'elements/borders';
+@import 'elements/tabs';
+@import 'elements/accordions';
+@import 'elements/tables';
 @import 'elements/sp-custom-search';
+@import 'elements/record-token';
+@import 'elements/sp_dnd';
 
 // add partials - Layout
 @import 'layout/footer';

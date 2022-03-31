@@ -1,8 +1,10 @@
 import React from 'react';
 import Select from 'react-select';
-import Utility from '../Utility/Utility.js';
+import { replaceNodeWithReactComponent } from '#utility/Utility';
 
-const selectElements = document.getElementsByClassName('form-select');
+const multiSelectElements = document.getElementsByClassName('form-select-multi');
+
+const singleSelectElements = document.getElementsByClassName('form-select');
 
 const reactSelectCustomStyles = {
     control: (provided, state) => ({
@@ -57,10 +59,18 @@ const reactSelectCustomStyles = {
     })
 }
 
-Array.from(selectElements).forEach( element => {
+Array.from(multiSelectElements).forEach( element => {
     let options = Array.from(element.options);
     let selectedOptions = Array.from(element.querySelectorAll('option:checked'));
     
-    Utility.replaceNodeWithReactComponent(element,
-        <Select isMulti={true} id={element.id} classNamePrefix="sp-react-select" styles={reactSelectCustomStyles} name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} options={options} defaultValue={selectedOptions} />);
+    replaceNodeWithReactComponent(element,
+        <Select isMulti={true} id={element.id} classNamePrefix="sp-react-select-multi" styles={reactSelectCustomStyles} name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} options={options} defaultValue={selectedOptions} />);
+});
+
+Array.from(singleSelectElements).forEach( element => {
+    let options = Array.from(element.options);
+    let selectedOptions = Array.from(element.querySelectorAll('option:checked'));
+
+    replaceNodeWithReactComponent(element,
+        <Select id={element.id} classNamePrefix="sp-react-select" styles={reactSelectCustomStyles} name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} options={options} defaultValue={selectedOptions} />);
 });

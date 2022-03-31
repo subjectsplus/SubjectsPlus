@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import SearchBar from '../../shared/SearchBar.js';
-import Token from "../../shared/Token";
 
 console.log('record component container');
 

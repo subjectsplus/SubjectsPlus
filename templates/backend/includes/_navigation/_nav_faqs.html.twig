@@ -1,0 +1,16 @@
+<li class="nav-item dropdown mx-xl-2">
+    <a class="nav-link dropdown-toggle" href="#" id="faqsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{'control.header.faqs' | trans}}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="faqsDropdown">
+        <li><a class="dropdown-item" href="/control/faq/new">{{ 'control.header.faqs.create_new_faq' | trans }}</a></li>
+        <li><a class="dropdown-item" href="/control/faq/">{{ 'control.header.faqs.view_faqs' | trans }}</a></li>
+        {# TODO: Remove menu options when reac FAQ table is done #}
+        <li class="visually-hidden"><a class="dropdown-item" href="/control/faq/staffmember/{{ app.user.staffId }}">{{ 'control.header.faqs.view_your_faqs' | trans }}</a></li>
+        <li class="visually-hidden"><a class="dropdown-item" href="/control/faq/subjects">{{ 'control.header.faqs.view_faqs_by_subject' | trans }}</a></li>
+        <li class="visually-hidden"><a class="dropdown-item" href="/control/faq/collections">{{ 'control.header.faqs.view_faqs_by_collection' | trans }}</a></li>
+        {# TODO: Conditional - show menu options if FAQ permissions are true #}
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item admin-menu-item" href="/control/faq/collections">{{ 'control.header.faqs.admin.manage_faq_collections' | trans }}</a></li>
+    </ul>
+</li>

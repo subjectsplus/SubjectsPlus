@@ -71,38 +71,9 @@ h3, .h3 {
   font-size: $font-size-mini !important;
 }
 
-// Forms
-.form-control,
-.form-check-input,
-.btn,
-.btn-check,
-.btn-close,
-.form-select{
-  &:focus {
-    box-shadow: 0 0 0 0.25rem rgba(var(--sp-focus-box-shadow-color), 20%);
-  }
-}
-
-.form-check-input:checked {
-  background-color: var(--sp-nav-color);
-  border-color: var(--sp-nav-color);
-}
-
-// Alerts
-.alert {
-  padding: 0.5rem 1rem;
-}
-.alert-info {
-  color: #055160;
-  background-color: rgba(var(--sp-accent-color-rgb), 10%);
-  border-color: var(--sp-accent-color);
-}
-
-[data-mode="dark"] {
-  .alert-info {
-    background-color: rgba(var(--sp-accent-color-rgb), 5%);
-    color: var(--sp-input-selected-text);
-  }
+// Color only
+.color-primary {
+  color: var(--sp-nav-color);
 }
 
 // Backgrounds
@@ -133,123 +104,6 @@ h3, .h3 {
   }
 }
 
-// Dropdowns
-.basic-dropdown{
-  .dropdown-menu {
-    border: 1px solid var(--sp-border-color);
-    background-color: var(--sp-bg-color-alt);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
-  }
-
-  .dropdown-item {
-    color: var(--sp-font-color);
-    &:hover,
-    &:focus {
-      @include transition-all();
-      background-color: var(--sp-nav-color);
-      color:$white !important;
-    }
-  }
-
-  .dropdown-toggle{
-    &:after {
-      display: none;
-    }
-  }
-}
-
-.action-dropdown{
-  .dropdown-menu {
-    border: 1px solid var(--sp-border-color);
-    background-color: var(--sp-bg-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
-    border-radius: $border-radius-pill;
-    &.show {
-      display: flex;
-    }
-  }
-
-  .dropdown-item {
-    color: var(--sp-font-color);
-    &:hover,
-    &:focus {
-      @include transition-all();
-      background-color: transparent;
-      color: var(--sp-nav-color) !important;
-    }
-  }
-
-  .dropdown-toggle{
-    &:after {
-      display: none;
-    }
-  }
-
-  .dropdown-divider{
-    border-top:0;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
-    height:50%;
-  }
-}
-
-.action-dropdown-expand{
-  display: inline-block;
-  position: relative;
-  border-radius: $border-radius-pill;
-  border: 1px solid var(--sp-nav-color);
-  background-color: $white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
-
-  .action-dropdown-title{
-    position: absolute;
-    top: 0;
-    left: 1.5rem;
-    background: linear-gradient(180deg, var(--sp-bg-color) 8px, $white 0);
-    margin-top: -0.5rem;
-    padding: 0 0.5rem;
-    line-height: 1;
-    font-weight: normal;
-    font-size: $font-size-sm;
-    color: var(--sp-nav-color);
-  }
-
-  ul {
-    li {
-      padding: .5rem 0 .375rem 0;
-      a {
-        color: var(--sp-input-color);
-        &:hover,
-        &:focus,
-        &:active {
-          color: var(--sp-nav-color);
-          background-color: transparent;
-        }
-      }
-    }
-  }
-
-  .dropdown-divider{
-    border-top:0;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
-    height:50%;
-    background-color: var(--sp-input-border-color);
-  }
-}
-
-[data-mode="dark"] {
-  .action-dropdown-expand{
-    .action-dropdown-title{
-      background: transparent;
-      margin-top: 0.25rem;
-    }
-
-    ul{
-      margin-top:.25rem;
-    }
-  }
-}
-
-
 // Admin only menu items
 [data-mode="default"] {
   .admin-menu-item {
@@ -278,53 +132,9 @@ h3, .h3 {
   color: var(--sp-input-color);
 }
 
-
 // Panels
 .panel-basic {
   background-color: var(--sp-bg-color-alt);
   padding: $padding-sm;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
-}
-
-// Lists
-.list-img-75 { //list with img 75px
-  .list-content {
-    width: calc(100% - 100px);
-    margin-left: .75rem;
-    align-self: center;
-    line-height: 1.2;
-  }
-  .list-img {
-    width: 75px;
-  }
-}
-
-.list-space {
-  li {
-    margin-bottom: .5rem;
-
-    &:last-child {
-      margin-bottom:0;
-    }
-  }
-}
-
-// Tabs
-.nav-tabs {
-  .nav-link {
-    color: var(--sp-font-color);
-
-    &:hover,
-    &:focus {
-      @include transition-all();
-      color: var(--sp-nav-color);
-    }
-
-    &.active {
-      &:hover,
-      &:focus {
-        color: var(--sp-input-selected-text);
-      }
-    }
-  }
 }

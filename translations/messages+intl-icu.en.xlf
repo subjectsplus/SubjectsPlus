@@ -115,11 +115,11 @@
       </trans-unit>
       <trans-unit id="QYMJjQL" resname="control.header.guides.new_guide">
         <source>control.header.guides.new_guide</source>
-        <target>New guide</target>
+        <target>New Guide</target>
       </trans-unit>
       <trans-unit id="EVTC8m6" resname="control.header.guides.browse_guides">
         <source>control.header.guides.browse_guides</source>
-        <target>Browse guides</target>
+        <target>All Guides</target>
       </trans-unit>
       <trans-unit id="5F_jaqd" resname="control.header.guides.manage_files">
         <source>control.header.guides.manage_files</source>
@@ -303,7 +303,7 @@
       </trans-unit>
       <trans-unit id="Q8Kd18B" resname="control.dashboard.enable_dark_mode">
         <source>control.dashboard.enable_dark_mode</source>
-        <target>Enable Dark Mode</target>
+        <target>Dark Mode</target>
       </trans-unit>
       <trans-unit id="Et0eLPT" resname="control.dashboard.create_new_button">
         <source>control.dashboard.create_new_button</source>
@@ -383,11 +383,11 @@
       </trans-unit>
       <trans-unit id="IHaFq24" resname="control.faqs.delete_faq">
         <source>control.faqs.delete_faq</source>
-        <target>Delete</target>
+        <target>Delete FAQ</target>
       </trans-unit>
       <trans-unit id="8wcRYFv" resname="control.faqs.delete_faq.modal.header">
         <source>control.faqs.delete_faq.modal.header</source>
-        <target>Warning: Delete FAQ</target>
+        <target>Delete FAQ</target>
       </trans-unit>
       <trans-unit id="Lch7twW" resname="control.faqs.delete_faq.modal.text">
         <source>control.faqs.delete_faq.modal.text</source>
@@ -399,7 +399,7 @@
       </trans-unit>
       <trans-unit id="__HDBxA" resname="control.faqs.delete_faq.confirm_button">
         <source>control.faqs.delete_faq.confirm_button</source>
-        <target>Yes, delete this item.</target>
+        <target>Yes, delete</target>
       </trans-unit>
       <trans-unit id="mEl0NYw" resname="control.header.faqs.index">
         <source>control.header.faqs.index</source>
@@ -556,6 +556,158 @@
       <trans-unit id="pz5s15o" resname="control.faqs.preview.label">
         <source>control.faqs.preview.label</source>
         <target>Preview</target>
+      </trans-unit>
+      <trans-unit id="uWhnU9r" resname="control.general.label.visibility">
+        <source>control.general.label.visibility</source>
+        <target>Visibility</target>
+      </trans-unit>
+      <trans-unit id="to1i1Qz" resname="control.show_faq.button.edit_faq">
+        <source>control.show_faq.button.edit_faq</source>
+        <target>Edit FAQ</target>
+      </trans-unit>
+      <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
+        <source>control.faq.form.keywords.help.text</source>
+        <target>Use commas</target>
+      </trans-unit>
+      <trans-unit id="rdSxsTE" resname="control.faqs.by_user.heading">
+        <source>control.faqs.by_user.heading</source>
+        <target>My FAQs</target>
+      </trans-unit>
+      <trans-unit id="h1xbvfM" resname="control.faqs.by_subject.heading">
+        <source>control.faqs.by_subject.heading</source>
+        <target>FAQs by Subject</target>
+      </trans-unit>
+      <trans-unit id="MF3cFcf" resname="control.faqs.by_collection.heading">
+        <source>control.faqs.by_collection.heading</source>
+        <target>FAQs by Collection</target>
+      </trans-unit>
+      <trans-unit id="U.QlAlE" resname="control.header.faqs.admin.manage_faq_collections">
+        <source>control.header.faqs.admin.manage_faq_collections</source>
+        <target>Manage FAQ Collections</target>
+      </trans-unit>
+      <trans-unit id="zKfBvBP" resname="control.faqs.manage_faq_collection.heading">
+        <source>control.faqs.manage_faq_collection.heading</source>
+        <target>Manage FAQ Collections</target>
+      </trans-unit>
+      <trans-unit id="NiRUiLv" resname="control.faqs.admin.create_new_collection">
+        <source>control.faqs.admin.create_new_collection</source>
+        <target>New Collection</target>
+      </trans-unit>
+      <trans-unit id="jtLstcU" resname="control.faqs.table.button.delete">
+        <source>control.faqs.table.button.delete</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="W9xQIsw" resname="control.faqs.admin.switch_to_subjects">
+        <source>control.faqs.admin.switch_to_subjects</source>
+        <target>Switch to Subjects</target>
+      </trans-unit>
+      <trans-unit id="nDDfmLr" resname="control.faqs.admin.new_faq_collection.heading">
+        <source>control.faqs.admin.new_faq_collection.heading</source>
+        <target>New FAQ Collection</target>
+      </trans-unit>
+      <trans-unit id="DB.31Ue" resname="control.faqs.admin.new_faq_collection.collection_name">
+        <source>control.faqs.admin.new_faq_collection.collection_name</source>
+        <target>Collection Name</target>
+      </trans-unit>
+      <trans-unit id="cTC6DkV" resname="control.faqs.admin.new_faq_collection.add_collection">
+        <source>control.faqs.admin.new_faq_collection.add_collection</source>
+        <target>Add Collection</target>
+      </trans-unit>
+      <trans-unit id="vVimdNF" resname="control.faqs.admin.faq_collection_list.current_collections">
+        <source>control.faqs.admin.faq_collection_list.current_collections</source>
+        <target>Current Collections</target>
+      </trans-unit>
+      <trans-unit id=".vmluXN" resname="control.faqs.admin.faq_collection.faq_list">
+        <source>control.faqs.admin.faq_collection.faq_list</source>
+        <target>FAQ List</target>
+      </trans-unit>
+      <trans-unit id="oGrVUpv" resname="control.faqs.admin.faq_collection.add_to_list">
+        <source>control.faqs.admin.faq_collection.add_to_list</source>
+        <target>Add to list</target>
+      </trans-unit>
+      <trans-unit id="kiL1c_V" resname="control.faqs.admin.faq_collection.remove_from_list">
+        <source>control.faqs.admin.faq_collection.remove_from_list</source>
+        <target>Remove from list</target>
+      </trans-unit>
+      <trans-unit id="jDNhwnN" resname="control.faqs.admin.faq_collection.update">
+        <source>control.faqs.admin.faq_collection.update</source>
+        <target>Update Collection</target>
+      </trans-unit>
+      <trans-unit id="OWPF528" resname="control.faqs.admin.faq_collection.delete_faq_collection">
+        <source>control.faqs.admin.faq_collection.delete_faq_collection</source>
+        <target>Delete FAQ Collection</target>
+      </trans-unit>
+      <trans-unit id="XLlcP5v" resname="control.faqs.admin.faq_collection.delete.confirm_button">
+        <source>control.faqs.admin.faq_collection.delete.confirm_button</source>
+        <target>Yes, delete</target>
+      </trans-unit>
+      <trans-unit id="5ut1WSZ" resname="control.faqs.manage_faq_collection.offcanvas.heading">
+        <source>control.faqs.manage_faq_collection.offcanvas.heading</source>
+        <target>Add FAQs to List</target>
+      </trans-unit>
+      <trans-unit id="XUEKjbJ" resname="control.guide_meta.header">
+        <source>control.guide_meta.header</source>
+        <target>New Guide</target>
+      </trans-unit>
+      <trans-unit id="X2ICRbM" resname="control.guide_form.shortform">
+        <source>control.guide_form.shortform</source>
+        <target>Short Form</target>
+      </trans-unit>
+      <trans-unit id="QlANbq6" resname="control.guide_form.title">
+        <source>control.guide_form.title</source>
+        <target>Guide Title</target>
+      </trans-unit>
+      <trans-unit id="OoNCqvU" resname="control.guide_form.settings_header">
+        <source>control.guide_form.settings_header</source>
+        <target>Additional Settings</target>
+      </trans-unit>
+      <trans-unit id="ipHC3Xf" resname="control.guide_form.type">
+        <source>control.guide_form.type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="InuirW1" resname="control.guide_form.visibility">
+        <source>control.guide_form.visibility</source>
+        <target>Visibility</target>
+      </trans-unit>
+      <trans-unit id="vq762Od" resname="control.guide_form.save_guide">
+        <source>control.guide_form.save_guide</source>
+        <target>Save Guide</target>
+      </trans-unit>
+      <trans-unit id="LgQomEo" resname="control.guide_form.shortform.help.text">
+        <source>control.guide_form.shortform.help.text</source>
+        <target>NO spaces, special characters, etc.</target>
+      </trans-unit>
+      <trans-unit id="5iHJLdP" resname="control.guide_form.shortform.info">
+        <source>control.guide_form.shortform.info</source>
+        <target>(Slug for friendly URL)</target>
+      </trans-unit>
+      <trans-unit id="ku.Ni0z" resname="control.guide_meta.show.header">
+        <source>control.guide_meta.show.header</source>
+        <target>Guide Details</target>
+      </trans-unit>
+      <trans-unit id="Izh.sQf" resname="control.guide.preview.label">
+        <source>control.guide.preview.label</source>
+        <target>Preview</target>
+      </trans-unit>
+      <trans-unit id="mbrFuSz" resname="control.guide.delete_guide.modal.header">
+        <source>control.guide.delete_guide.modal.header</source>
+        <target>Delete Guide</target>
+      </trans-unit>
+      <trans-unit id="9f9wgt1" resname="control.guide.delete_guide.modal.text">
+        <source>control.guide.delete_guide.modal.text</source>
+        <target>Are you sure you want to delete this item permanently?</target>
+      </trans-unit>
+      <trans-unit id="M1vDYjq" resname="control.guide.delete_guide.cancel_button">
+        <source>control.guide.delete_guide.cancel_button</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="QZfLk7S" resname="control.guide.delete_guide.confirm_button">
+        <source>control.guide.delete_guide.confirm_button</source>
+        <target>Yes, delete</target>
+      </trans-unit>
+      <trans-unit id="ZU.bzG1" resname="control.guide.delete_guide.title">
+        <source>control.guide.delete_guide.title</source>
+        <target>Delete guide</target>
       </trans-unit>
     </body>
   </file>

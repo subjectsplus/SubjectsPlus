@@ -117,7 +117,7 @@ class FaqController extends AbstractController
                 $cls->addLog($staff, 'faq', $faqId, $question, 'insert');
 
                 // Create flash message
-                $this->addFlash('notice', 'Success! Created new Faq!');
+                $this->addFlash('notice', 'Success! Created new FAQ!');
             });
 
             return $this->redirectToRoute('faq_show', [
@@ -156,7 +156,7 @@ class FaqController extends AbstractController
      * @Route("/collections", name="faq_show_collections", methods={"GET"})
      */
     public function displayFaqsByCollections(Request $request): Response {
-        return $this->render('backend/faq/show_collections.html.twig', [
+        return $this->render('backend/faq/manage_faq_collections.html.twig', [
             "collections" => $this->getDoctrine()->getRepository(Faqpage::class)->findAll(),
         ]);
     }
@@ -204,11 +204,11 @@ class FaqController extends AbstractController
         /** @var ChchchangesRepository $chchchangesRepo */
         $chchchangesRepo = $this->getDoctrine()
         ->getRepository(Chchchanges::class);
-        $staff = $chchchangesRepo->getStaffByFaq($faq);
+        $update_history = $chchchangesRepo->getStaffByFaq($faq);
 
         return $this->render('backend/faq/show.html.twig', [
             'faq' => $faq,
-            'staff' => $staff,
+            'updateHistory' => $update_history,
         ]);
     }
 
@@ -324,7 +324,7 @@ class FaqController extends AbstractController
                 $cls->addLog($staff, 'faq', $faqId, $question, 'update');
 
                 // Create flash message
-                $this->addFlash('notice', 'Success! Changes saved to Faq!');
+                $this->addFlash('notice', 'Success! Changes saved to FAQ!');
             });
 
             return $this->redirectToRoute('faq_show', [
@@ -332,11 +332,18 @@ class FaqController extends AbstractController
             ]);
         }
 
+        // Get all staff associated with the faq
+        /** @var ChchchangesRepository $chchchangesRepo */
+        $chchchangesRepo = $this->getDoctrine()
+            ->getRepository(Chchchanges::class);
+        $update_history = $chchchangesRepo->getStaffByFaq($faq);
+
         return $this->render('backend/faq/edit.html.twig', [
             'faq' => $faq,
             'form' => $form->createView(),
             'media' => $staffMedia,
             'records' => $records,
+            'updateHistory' => $update_history,
         ]);
     }
 
@@ -368,7 +375,7 @@ class FaqController extends AbstractController
                 $cls->addLog($staff, 'faq', $faqId, $question, 'delete');
 
                 // Create flash message
-                $this->addFlash('notice', 'Success! Deleted Faq!');
+                $this->addFlash('notice', 'Success! Deleted FAQ!');
             });
         }
 

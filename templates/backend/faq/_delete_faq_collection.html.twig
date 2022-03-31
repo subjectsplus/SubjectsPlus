@@ -1,0 +1,20 @@
+{# TODO: Working delete FAQ collection functionality #}
+<div class="modal fade" id="deleteFaqCollection" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteFaqCollectionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="deleteFaqCollectionLabel"><i class="fas fa-exclamation-circle btn-link-danger"></i> {{ 'control.faqs.admin.faq_collection.delete_faq_collection' | trans }}</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'close.aria.label' | trans }}"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-start">{{ 'control.faqs.delete_faq.modal.text' | trans }}</p>
+                <form>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-cancel btn-round me-2" data-bs-dismiss="modal">{{ 'control.faqs.delete_faq.cancel_button' | trans }}</button>
+                        <button type="submit" class="btn btn-danger btn-round"><i class="fas fa-trash"></i> {{ 'control.faqs.admin.faq_collection.delete.confirm_button' | trans }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
