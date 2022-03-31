@@ -10,6 +10,8 @@ export default class ErrorBoundary extends React.Component {
     
     static getDerivedStateFromError(error) {
         // Update state so the next render will show the fallback UI.
+        // TODO: Possibly log the error
+        console.error(error);
         return { hasError: true };
     }
 
