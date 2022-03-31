@@ -51,24 +51,22 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         width: '100%',
     }
 
-    const columns = useMemo( () => {
+    const generatedColumns = useMemo(() => {
         const splitLayout = layout.split('-');
         let column = 0;
+        let pluslets = Array.isArray(data) ? [...data] : null;
 
         const columns = splitLayout.map(size => {
             if (Number(size) !== 0) {
-                let index = 0;
-                let pluslets;
+                let columnRow = 0;
+                let columnPluslets;
 
-                if (data && data.length > 0) {
-                    pluslets = data.map(pluslet => {
-                        if (pluslet.pcolumn == column) {
-                            return (
-                                <Pluslet key={pluslet.plusletId} 
-                                    plusletId={pluslet.plusletId} plusletRow={index++} />
-                            );
-                        }
-                    });
+                if (pluslets && pluslets.length > 0) {
+                    columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === column)
+                    .map(pluslet => (
+                        <Pluslet key={pluslet.plusletId} 
+                            plusletId={pluslet.plusletId} plusletRow={columnRow++} />)
+                    );
                 }
 
                 const columnId = `section-${sectionId.toString()}-column-${column++}`;
@@ -79,7 +77,7 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                             {(provided, snapshot) => (
                                 <div style={columnStyle} {...provided.droppableProps} ref={provided.innerRef}>
                                     <h3>{columnId}</h3>
-                                    {pluslets ?? 'Add a pluslet'}
+                                    {columnPluslets?.length > 0 ? columnPluslets : 'Add a pluslet'}
                                     {provided.placeholder}
                                 </div>
                             )}
@@ -116,7 +114,7 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                                 style={getSectionStyle(snapshot.isDragging)}>
                                 <h3>Section {sectionId}</h3>
                                 <Row>
-                                    {columns}
+                                    {generatedColumns}
                                 </Row>
                             </div>
                         </div>
