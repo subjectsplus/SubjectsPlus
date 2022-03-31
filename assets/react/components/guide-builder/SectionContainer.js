@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
-import ErrorBoundary from '#components/shared/ErrorBoundary';
+import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -9,6 +9,7 @@ function SectionContainer({ tabId }) {
 
     const createSectionMutation = useCreateSection(tabId);
     const reorderSectionMutation = useReorderSection(tabId);
+    const reorderPlusletMutation = useReorderPluslet();
 
     const padding = 8;
 
@@ -29,16 +30,41 @@ function SectionContainer({ tabId }) {
 
     const handleOnDragEnd = (result) => {
         console.log(result);
+
+        if (result.source === undefined || result.source === null || 
+            result.destination === undefined || result.destination === null) return;
+        if (result.source.index === undefined || result.destination.index === undefined) return;
+
         if (result.type === 'section') {
             // exit if element hasn't changed position
-            if (result.source === undefined || result.destination === undefined) return;
-            if (result.source.index === undefined || result.destination.index === undefined) return;
             if (result.source.index === result.destination.index) return;
 
-            // perform the reordering
             reorderSection(result.source.index, result.destination.index);
         } else if (result.type === 'pluslet') {
             console.log('Pluslet onDragEnd Handler, result: ', result);
+            
+            // Source details
+            const sourceId = result.source.droppableId.split('-');
+            const sourceSection = sourceId[1];
+            const sourceColumn = Number(sourceId[3]);
+            const sourceIndex = result.source.index;
+
+            // Destination details
+            const destinationId = result.destination.droppableId.split('-');
+            const destinationSection = destinationId[1];
+            const destinationColumn = Number(destinationId[3]);
+            const destinationIndex = result.destination.index;
+
+            if (sourceSection === destinationSection && sourceColumn === destinationColumn
+                    && sourceIndex === destinationIndex) return;
+            
+            reorderPlusletMutation.mutate({
+                sectionId: sourceSection,
+                sourceColumn: sourceColumn,
+                sourceIndex: sourceIndex, 
+                destinationColumn: destinationColumn,
+                destinationIndex: destinationIndex
+            });
         }
     }
 
