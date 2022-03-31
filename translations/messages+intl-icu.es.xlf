@@ -741,6 +741,10 @@
         <source>control.guide.delete_guide.title</source>
         <target>__control.guide.delete_guide.title</target>
       </trans-unit>
+      <trans-unit id="hN4Cmho" resname="control.faq.form.default_no_options_message">
+        <source>control.faq.form.default_no_options_message</source>
+        <target>__control.faq.form.default_no_options_message</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
