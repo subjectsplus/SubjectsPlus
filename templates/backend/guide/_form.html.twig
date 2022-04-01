@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        {% if update_history == 'true' %}
+        {% if update_history is defined  %}
             {{ include('backend/guide/_update_history.html.twig') }}
         {% endif %}
     </div>
@@ -109,7 +109,7 @@
                     <button class="btn btn-gradient btn-round">{{ button_label|default('control.guide_form.save_guide' | trans) }}</button>
                 </div>
                 <div class="col-6 text-end align-self-center">
-                    {% if delete_faq == 'true' %}
+                    {% if delete_faq is defined %}
                         {{ include('backend/guide/_trash_button.html.twig') }}
                     {% endif %}
                 </div>
@@ -118,6 +118,6 @@
     </div>
 </div>
 {{ form_end(form) }}
-{% if delete_faq == 'true' %}
+{% if delete_faq is defined %}
     {{ include('backend/guide/_delete_form.html.twig') }}
 {% endif %}
