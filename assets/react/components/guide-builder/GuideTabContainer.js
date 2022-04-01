@@ -181,7 +181,6 @@ function GuideTabContainer(props) {
     }
 
     const handleOnDragEnd = (result) => {
-        console.log(result);
         if (result.type === 'tab') {
             setDraggingTab(false);
 
