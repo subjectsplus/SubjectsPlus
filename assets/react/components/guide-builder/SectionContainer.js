@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
@@ -29,8 +29,6 @@ function SectionContainer({ tabId }) {
     }
 
     const handleOnDragEnd = (result) => {
-        console.log(result);
-
         if (result.source === undefined || result.source === null || 
             result.destination === undefined || result.destination === null) return;
         if (result.source.index === undefined || result.destination.index === undefined) return;
@@ -41,22 +39,22 @@ function SectionContainer({ tabId }) {
 
             reorderSection(result.source.index, result.destination.index);
         } else if (result.type === 'pluslet') {
-            console.log('Pluslet onDragEnd Handler, result: ', result);
-            
             // Source details
             const sourceId = result.source.droppableId.split('-');
-            const sourceSection = sourceId[1];
+            const sourceSection = Number(sourceId[1]);
             const sourceColumn = Number(sourceId[3]);
             const sourceIndex = result.source.index;
 
             // Destination details
             const destinationId = result.destination.droppableId.split('-');
-            const destinationSection = destinationId[1];
+            const destinationSection = Number(destinationId[1]);
             const destinationColumn = Number(destinationId[3]);
             const destinationIndex = result.destination.index;
 
             if (sourceSection === destinationSection && sourceColumn === destinationColumn
                     && sourceIndex === destinationIndex) return;
+            
+            // TODO: Handle case where plusletRow is incorrect and not ordered
             
             reorderPlusletMutation.mutate({
                 sectionId: sourceSection,
@@ -80,7 +78,7 @@ function SectionContainer({ tabId }) {
         }
     }
 
-    const containerContent = useMemo(() => {
+    const containerContent = () => {
         if (isLoading) {
             return (<p>Loading Sections...</p>);
         } else if (isError) {
@@ -113,9 +111,9 @@ function SectionContainer({ tabId }) {
                 </>
             );
         }
-    }, [data, isError, isLoading]);
+    };
 
-    return containerContent;
+    return containerContent();
 }
 
 export default SectionContainer;

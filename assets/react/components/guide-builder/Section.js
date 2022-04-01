@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import Pluslet from './Pluslet';
 import { useFetchPluslets } from '#api/guide/PlusletAPI';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
@@ -51,33 +51,33 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         width: '100%',
     }
 
-    const generatedColumns = useMemo(() => {
+    const generateColumns = () => {
         const splitLayout = layout.split('-');
         let column = 0;
         let pluslets = Array.isArray(data) ? [...data] : null;
 
         const columns = splitLayout.map(size => {
             if (Number(size) !== 0) {
-                let columnRow = 0;
                 let columnPluslets;
-
+                
                 if (pluslets && pluslets.length > 0) {
                     columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === column)
                     .map(pluslet => (
                         <Pluslet key={pluslet.plusletId} 
-                            plusletId={pluslet.plusletId} plusletRow={columnRow++} />)
+                            plusletId={pluslet.plusletId} plusletRow={pluslet.prow} />)
                     );
                 }
 
                 const columnId = `section-${sectionId.toString()}-column-${column++}`;
+
                 return (     
                     <Col key={columnId} lg={Number(size)}>
+                        <h3>{columnId}</h3>
                         <Droppable type="pluslet" style={{ transform: 'none' }} 
                             droppableId={columnId} direction="vertical">
                             {(provided, snapshot) => (
                                 <div style={columnStyle} {...provided.droppableProps} ref={provided.innerRef}>
-                                    <h3>{columnId}</h3>
-                                    {columnPluslets?.length > 0 ? columnPluslets : 'Add a pluslet'}
+                                    {columnPluslets?.length > 0 ? columnPluslets : <h3>Add a pluslet</h3>}
                                     {provided.placeholder}
                                 </div>
                             )}
@@ -88,9 +88,9 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         });
 
         return columns;
-    }, [data]);
+    };
 
-    const sectionContent = useMemo(() => {
+    const sectionContent = () => {
         if (isLoading) {
             return (<p>Loading Pluslets...</p>);
         } else if (isError) {
@@ -114,7 +114,7 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                                 style={getSectionStyle(snapshot.isDragging)}>
                                 <h3>Section {sectionId}</h3>
                                 <Row>
-                                    {generatedColumns}
+                                    {generateColumns()}
                                 </Row>
                             </div>
                         </div>
@@ -122,9 +122,9 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                 </Draggable>
             );
         }
-    }, [data, isLoading, isError]);
+    };
 
-    return sectionContent;
+    return sectionContent();
 }
 
 export default Section;
