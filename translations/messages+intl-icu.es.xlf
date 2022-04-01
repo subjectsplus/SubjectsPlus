@@ -817,6 +817,10 @@
         <source>control.header.guides.guide_builder</source>
         <target>__control.header.guides.guide_builder</target>
       </trans-unit>
+      <trans-unit id="ZT3aQoe" resname="control.guide.form.keywords.help.text">
+        <source>control.guide.form.keywords.help.text</source>
+        <target>__control.guide.form.keywords.help.text</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

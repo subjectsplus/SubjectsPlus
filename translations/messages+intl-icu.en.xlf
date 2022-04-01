@@ -567,7 +567,7 @@
       </trans-unit>
       <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
         <source>control.faq.form.keywords.help.text</source>
-        <target>Use commas</target>
+        <target>Separate terms with commas</target>
       </trans-unit>
       <trans-unit id="rdSxsTE" resname="control.faqs.by_user.heading">
         <source>control.faqs.by_user.heading</source>
@@ -788,6 +788,10 @@
       <trans-unit id="ppuCrUF" resname="control.header.guides.guide_builder">
         <source>control.header.guides.guide_builder</source>
         <target>Guide Builder</target>
+      </trans-unit>
+      <trans-unit id="ZT3aQoe" resname="control.guide.form.keywords.help.text">
+        <source>control.guide.form.keywords.help.text</source>
+        <target>Separate terms with commas</target>
       </trans-unit>
     </body>
   </file>

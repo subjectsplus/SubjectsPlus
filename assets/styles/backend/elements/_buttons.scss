@@ -219,5 +219,14 @@
   }
 }
 
+.btn-icon-primary{
+  color: var(--sp-nav-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}
+
 
 
