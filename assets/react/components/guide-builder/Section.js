@@ -98,7 +98,7 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
             return (<p>Error: Failed to load sections through API Endpoint!</p>);
         } else {
             return (
-                <Draggable type="section" draggableId={'section-' + sectionIndex} index={sectionIndex}>
+                <Draggable type="section" draggableId={'section-' + sectionId} index={sectionIndex}>
                     {(provided, snapshot) => (
                         <div ref={provided.innerRef} {...provided.draggableProps}
                             style={getSectionDraggableStyle(snapshot.isDragging, provided.draggableProps.style)}>
