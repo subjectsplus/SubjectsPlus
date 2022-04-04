@@ -1,55 +1,78 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Staff FAQs{% endblock %}
+{% block title %}{{ 'control.faqs.by_user.heading' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
-    <h1>Staff FAQs</h1>
-    <h2>{{ "%s (%s)"|format(staffName, staffEmail) }}</h2>
-    <table class="table">
+{# TODO: Will replace this screen with index with active filters #}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-8">
+            <h1 class="fw-light mb-1">{{ 'control.faqs.by_user.heading' | trans }}</h1>
+            <h5 class="fs-sm">{{ "%s"|format(staffName) }}</h5>
+        </div>
+        <div class="col-4 text-end">
+            <a class="btn btn-gradient btn-pill-icon" type="button" href="{{ path('faq_new') }}"><i class="fas fa-plus-circle"></i> {{ 'control.faqs.create_new_button' | trans }}</a>
+        </div>
+    </div>
+    <div class="mt-3">
+        {{ include('backend/faq/_search_with_filters.html.twig') }}
+    </div>
+
+    <div class="text-end mt-5">
+        {{ include('backend/faq/_sorting_table_buttons.html.twig') }}
+    </div>
+    <table class="table table-striped table-responsive mt-3">
         <thead>
-            <tr>
-                <th>FaqId</th>
-                <th>Question</th>
-                <th>Answer</th>
-                <th>Keywords</th>
-                <th>Visibility</th>
-                <th>Action,Date</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>{{ 'control.faqs.table.heading.visibility' | trans }}</th>
+            <th>{{ 'control.faqs.table.heading.question' | trans }}</th>
+            <th>{{ 'control.faqs.table.heading.answer' | trans }}</th>
+            <th>{{ 'control.faqs.table.heading.actions' | trans }}</th>
+        </tr>
         </thead>
         <tbody>
-            {% for entry in faqs %}
-                <tr>
-                    <td>{{ entry.faq.faqId }}</td>
-                    <td>{{ entry.faq.question | raw }}</td>
-                    <td>{{ entry.faq.answer | raw }}</td>
-                    <td>
-                        {% for keyword in entry.faq.keywords %}
-                            {{ keyword }}
-                            {% if not loop.last %}
-                                {{'| '}}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% if entry.faq.active %}
-                            {{ 'Active' }}
-                        {% else %}
-                            {{ 'Inactive' }}
-                        {% endif %}
-                    </td>
-                    <td>{{ "%s, %s"|format(entry.message, entry.dateAdded|format_date())}}</td>
-                    <td>
-                        <a href="{{ path('faq_show', {'faqId': entry.faq.faqId}) }}">show</a>
-                        <a href="{{ path('faq_edit', {'faqId': entry.faq.faqId}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7">no records found</td>
-                </tr>
-            {% endfor %}
+        {# TODO: Show recent version of FAQ, not an entry for each change #}
+        {% for entry in faqs %}
+            <tr>
+                <td class="fs-xs text-center">
+                    {% if entry.faq.active %}
+                        {{ '<i class="fas fa-check color-primary"></i>' }}
+                    {% else %}
+                        {{ '<i class="fas fa-times"></i>' }}
+                    {% endif %}
+                </td>
+                <td>
+                    <div title="ID: {{ entry.faq.faqId }}">{{ entry.faq.question | u.truncate(200, '...') | striptags | raw}}</div>
+                    {% if entry.faq.keywords %}
+                        <div class="fs-xs mt-3">
+                            <strong>{{ 'control.faqs.table.label.keywords' | trans }}:</strong>
+                            {% for keyword in entry.faq.keywords %}
+                                {{ keyword }}
+                                {% if not loop.last %}
+                                    {{'| '}}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div  class="fs-xs mt-3">
+                        {{ "%s (%s)"|format(entry.dateAdded|format_date(), entry.message|title)}}
+                    </div>
+                </td>
+                <td>{{ entry.faq.answer | u.truncate(80, '...') | striptags | raw }}</td>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
+                        <a href="{{ path('faq_edit', {'faqId': entry.faq.faqId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
+                        {# TODO: link to front-end preview #}
+                        <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.preview' | trans }}"><i class="fas fa-eye fs-sm"></i></a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>{{ 'control.faqs.table.no_records' | trans }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
-
+</div>
 {% endblock %}

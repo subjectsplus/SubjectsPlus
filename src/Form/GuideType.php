@@ -16,6 +16,7 @@ class GuideType extends AbstractType
         $builder
             ->add('subject', null, [
                 'label' => 'Guide Title',
+                'required' => true,
             ])
             ->add('shortform', null, [
                 'label' => 'Shortform',

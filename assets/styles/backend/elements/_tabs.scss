@@ -1,0 +1,19 @@
+// Tabs
+.nav-tabs {
+  .nav-link {
+    color: var(--sp-font-color);
+
+    &:hover,
+    &:focus {
+      @include transition-all();
+      color: var(--sp-nav-color);
+    }
+
+    &.active {
+      &:hover,
+      &:focus {
+        color: var(--sp-input-selected-text);
+      }
+    }
+  }
+}

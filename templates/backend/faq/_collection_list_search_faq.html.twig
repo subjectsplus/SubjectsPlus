@@ -1,0 +1,35 @@
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSearchFAQs" aria-labelledby="offcanvasSearchFAQsLabel">
+    <div class="offcanvas-header">
+        <h3 class="offcanvas-title" id="offcanvasSearchFAQsLabel">{{ 'control.faqs.manage_faq_collection.offcanvas.heading' | trans }}</h3>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
+    </div>
+    <div class="offcanvas-body py-0">
+        {# TODO: Search faqs as a working React component, with click to insert #}
+        {# TODO: include Load More, End of Results, Loading, Scroll to Top #}
+        <form>
+            <div class="mb-2">
+                <label for="faq-searchbar" class="form-label"><span class="visually-hidden">Search FAQ</span></label>
+                <input type="text" id="faq-searchbar" placeholder="Search FAQ" class="form-control" autocomplete="off">
+            </div>
+        </form>
+        <ul id="faq-list" class="list-unstyled ">
+            <p class="fs-sm fst-italic">Please enter a search term (minimum 3 characters).</p>
+        </ul>
+
+        <ul class="list-unstyled sp-search-results-panel-list">
+            <li><a class="search-all-result-item" href="#">Afro-Cuban Collections</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Genealogy Research</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Heritage Collection</a></li>
+            <li><a class="search-all-result-item" href="#">Cuban Heritage Collection Theater</a></li>
+            <li><a class="search-all-result-item" href="#">HIS 310: Africa in Cuba/Cuba in Africa</a></li>
+            <div class="text-center my-2 d-block">
+                <button class="btn btn-pill load-more-button">Load More</button>
+            </div>
+        </ul>
+        <div class="text-end">
+            <button class="btn btn-link scroll-to-top">
+                <i class="fas fa-arrow-alt-circle-up"></i> Scroll To Top
+            </button>
+        </div>
+    </div>
+</div>

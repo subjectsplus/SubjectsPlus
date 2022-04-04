@@ -7,6 +7,7 @@ use App\Entity\Subject;
 use App\Entity\Faqpage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,7 @@ class FaqType extends AbstractType
         // TODO: autosave ckeditor
         // TODO: flash messages
         $builder
-            ->add('question', CKEditorType::class, [
+            ->add('question', TextareaType::class, [
                 'required' => true,
             ])
             ->add('answer', CKEditorType::class, [

@@ -1,86 +1,105 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Guide{% endblock %}
+{% block title %}{{ 'control.guide_meta.show.header' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
-    <h1>Guide</h1>
-
+<div class="container py-5">
     {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
+        <div class="flash-notice alert alert-info text-center mb-4">
             {{ message }}
         </div>
     {% endfor %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>SubjectId</th>
-                <td>{{ guide.subjectId }}</td>
-            </tr>
-            <tr>
-                <th>Subject</th>
-                <td>{{ guide.subject | raw }}</td>
-            </tr>
-            <tr>
-                <th>Visibility</th>
-                <td>
-                    {% if guide.active %}
-                        {{ 'Active' }}
-                    {% else %}
-                        {{ 'Inactive' }}
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Shortform</th>
-                <td>{{ guide.shortform }}</td>
-            </tr>
-            <tr>
-                <th>Redirect URL</th>
-                <td>{{ guide.redirectUrl }}</td>
-            </tr>
-            <tr>
-                <th>Header</th>
-                <td>{{ guide.header }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ guide.description }}</td>
-            </tr>
-            <tr>
-                <th>Keywords</th>
-                <td>{{ guide.keywords }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ guide.type }}</td>
-            </tr>
-            <tr>
-                <th>Last Modified</th>
-                <td>{{ guide.lastModified|format_date() }}</td>
-            </tr>
-            <tr>
-                <th>Extra</th>
-                <td>{{ guide.extra }}</td>
-            </tr>
-            <tr>
-                <th>Course Code</th>
-                <td>{{ guide.courseCode }}</td>
-            </tr>
-            <tr>
-                <th>Instructor</th>
-                <td>{{ guide.instructor }}</td>
-            </tr>
-            {# <tr>
-                <th>Staff</th>
-                <td>{{ dump(guide.staff) }}</td> #}
-                {# {% for entry in staff %}
-                    <span><td>{{ "%s, %s"|format(entry.dateAdded|format_date(), entry.email) }}</td></span>
-                {% endfor %} #}
-            {# </tr> #} #}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-8">
+            <h1 class="fw-light d-inline-block me-2 mb-1">{{ guide.subject | raw }}</h1>
+            {# TODO: link to front-end preview #}
+            <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
+            <p class="fs-xs">ID: {{ guide.subjectId }} | Slug: {{ guide.shortform }} </p>
+        </div>
+        <div class="col-4 text-end">
+            <a href="{{ path('guide_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
+        </div>
+    </div>
 
-    <a href="{{ path('guide_index') }}">back to list</a>
+    <div class="row mt-4">
+        <div class="col-lg-6 col-xl-6">
+            <div class="panel-basic border-basic">
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <img src="{{ asset('build/images/backend/thumb75.jpg') }}" class="img-thumbnail" alt="Guide thumbnail" style="width: 70px;" />
+                    </div>
+                    <div class="col-9 text-end align-self-center">
+                        <p class="fs-sm fst-italic mb-0">
+                            {% if guide.active %}
+                                <i class="fas fa-check color-primary"></i> This guide is public
+                            {% else %}
+                                <i class="fas fa-times"></i> This guide is NOT public
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <table class="table table-striped table-borderless table-responsive fs-sm">
+                    <tbody>
+                    <tr>
+                        <th>Type</th>
+                        <td>{{ guide.type }}</td>
+                    </tr>
+                    <tr>
+                        <th>Keywords</th>
+                        <td>
+                            {% for keyword in guide.keywords %}
+                                {{ keyword }}
+                                {% if not loop.last %}
+                                    {{'| '}}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ guide.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Redirect URL</th>
+                        <td>{{ guide.redirectUrl }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-5 col-xl-4 offset-lg-1">
+            <h3 class="mt-4 mt-lg-0">Additional Settings</h3>
+            <h5 class="fw-semi mb-1">Blackboard Integration</h5>
+            <table class="table table-borderless table-sm table-responsive mt-3 fs-sm">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Instructor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ guide.courseCode }}</td>
+                        <td>{{ guide.instructor }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <h5 class="mt-4 fw-semi mb-1">Theme</h5>
+            <p class="fs-sm">{{ guide.header }}</p>
+            <div class="row row-cols-2 mt-5">
+                <div class="col-6">
+                    <a class="btn btn-gradient btn-round" href="#">Edit Guide Details</a>
+                </div>
+                <div class="col-6 text-end align-self-center">
+                    {{ include('backend/guide/_trash_button.html.twig') }}
+                    {{ include('backend/guide/_delete_form.html.twig') }}
+                </div>
+            </div>
+            {{ include('backend/guide/_update_history.html.twig') }}
+        </div>
+        <div class="col-xl-1"></div>
+    </div>
+</div>
 {% endblock %}

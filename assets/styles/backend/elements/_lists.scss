@@ -1,0 +1,22 @@
+// Lists
+.list-img-75 { //list with img 75px
+  .list-content {
+    width: calc(100% - 100px);
+    margin-left: .75rem;
+    align-self: center;
+    line-height: 1.2;
+  }
+  .list-img {
+    width: 75px;
+  }
+}
+
+.list-space {
+  li {
+    margin-bottom: .5rem;
+
+    &:last-child {
+      margin-bottom:0;
+    }
+  }
+}

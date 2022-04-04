@@ -1,0 +1,38 @@
+// Tables
+.table-active {
+  td {
+    background-color: var(--sp-input-selected-bg) !important;
+    color: var(--sp-input-selected-text) !important;
+    --bs-table-accent-bg: var(--sp-input-selected-bg) !important;
+
+    .btn-icon-default{
+      color: var(--sp-input-selected-text);
+      &:hover{
+        @include transition-all();
+        color: var(--sp-input-selected-text);
+      }
+    }
+  }
+}
+
+.table-hover {
+  &.table-options-hover {
+    > tbody {
+      > tr {
+        td.table-cell-options-hover {
+          .btn-group {
+            visibility: hidden;
+          }
+        }
+
+        &:hover {
+          td.table-cell-options-hover {
+            .btn-group {
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}
