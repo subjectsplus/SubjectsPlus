@@ -1,18 +1,32 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Guides index{% endblock %}
+{% block title %}{{ 'control.header.guides.guide_builder' | trans }}: {{ guide.subject | raw }} | SubjectsPlus{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('guide_builder') }}
+{% endblock %}
 
 {% block content %}
+<div class="container py-5">
     {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
+        <div class="flash-notice alert alert-info text-center mb-4">
             {{ message }}
         </div>
     {% endfor %}
-    
-    <h1>Guide Builder</h1>
-    
-    <div id="guide-builder-container"></div>
-    {{ encore_entry_script_tags('guide_builder') }}
-    
 
+    <div class="row">
+        <div class="col-8">
+            <h1 class="fw-light d-inline-block me-2 mb-1" title="ID: {{ guide.subjectId }}">{{ guide.subject | raw }}</h1>
+            {# TODO: link to front-end preview #}
+            <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
+            <p class="fs-xs">Short form: {{ guide.shortform }}</p>
+        </div>
+        <div class="col-4 text-end">
+           <a class="btn-link fs-4" data-bs-toggle="offcanvas" href="#offcanvasGuideDetails" role="button" aria-controls="offcanvasGuideDetails" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i></a>
+        </div>
+    </div>
+    <div id="guide-builder-container"></div>
+</div>
+{{ include('backend/guide/_offcanvas_guide_details.html.twig') }}
 {% endblock %}

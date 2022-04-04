@@ -84,7 +84,9 @@ class GuideController extends AbstractController
      */
     public function build(Subject $subject): Response
     {
-        return $this->render('backend/guide/builder.html.twig');
+        return $this->render('backend/guide/builder.html.twig', [
+            'guide' => $subject,
+        ]);
     }
 
     /**

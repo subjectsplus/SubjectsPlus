@@ -6,17 +6,16 @@
     <div class="container py-5">
         <div class="row row-cols-2">
             <div class="col-7">
-                <h1 class="fw-light">{{ 'control.dashboard' | trans }}</h1>
-            </div>
-            <div class="col-5 text-end">
-                <h5 class="fw-light mb-0">Welcome, {{ app.user.fname }}</h5>
+                <h1 class="fw-light mb-0">{{ 'control.dashboard.welcome' | trans  }}, {{ app.user.fname }}</h1>
                 {# TODO: Fix path to edit profile #}
                 <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-link lh-1 fs-sm">
                     <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
                 </a>
             </div>
+            <div class="col-5 text-end align-self-end">
+                {{ include('backend/dashboard/_action-menu.html.twig') }}
+            </div>
         </div>
-        {{ include('backend/dashboard/_action-menu.html.twig') }}
 
         <div class="panel-basic border-basic mt-4">
             <div class="row">

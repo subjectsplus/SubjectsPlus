@@ -11,13 +11,8 @@ function SectionContainer({ tabId }) {
     const reorderSectionMutation = useReorderSection(tabId);
     const reorderPlusletMutation = useReorderPluslet();
 
-    const padding = 8;
-
-    const getSectionContainerStyle = (isDraggingOver) => ({
-        background: isDraggingOver ? 'lightblue' : 'transparent',
-        padding: padding,
-        display: 'block',
-        width: '400px'
+   const getSectionContainerStyle = (isDraggingOver) => ({
+        backgroundColor: isDraggingOver ? 'transparent' : 'transparent'
     });
 
     const reorderSection = (sourceIndex, destinationIndex) => {
@@ -94,9 +89,12 @@ function SectionContainer({ tabId }) {
 
             return (
                 <>
-                    <button id="add-section" onClick={addSection}>
-                        <i className="fas fa-plus"></i>
-                    </button>
+
+                    <div className="text-center mb-3">
+                        <button id="add-section" className="btn btn-link p-1" title="Add Section" onClick={addSection}>
+                            <i className="fas fa-plus-circle"></i>
+                        </button>
+                    </div>
                     <DragDropContext onDragEnd={handleOnDragEnd}>
                         <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (

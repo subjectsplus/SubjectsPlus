@@ -44,7 +44,6 @@ function GuideBuilder(props) {
         if (guide) {
             return (
                 <>
-                    <h3>{htmlEntityDecode(guide.subject)}</h3>
                     <GuideTabContainer subjectId={props.subjectId} />
                 </>
             );

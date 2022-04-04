@@ -38,7 +38,7 @@
         </script>
 
         <div class="mb-3">
-            {{ form_label(form.keywords, 'control.faq.form.keywords' | trans) }} <button type="button" class="btn btn-icon-default fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.faq.form.keywords.help.text' | trans }}"><i class="fas fa-info-circle"></i></button>
+            {{ form_label(form.keywords, 'control.faq.form.keywords' | trans) }} <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.faq.form.keywords.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
             {{ form_widget(form.keywords) }}
         </div>
 
@@ -62,18 +62,18 @@
                 <button class="btn btn-gradient btn-round">{{ button_label|default('control.faq.form.save_faq' | trans) }}</button>
             </div>
             <div class="col-6 text-end align-self-center">
-            {% if delete_faq == 'true' %}
+            {% if delete_faq is defined %}
                 {{ include('backend/faq/_trash_button.html.twig') }}
             {% endif %}
             </div>
         </div>
         {{ form_end(form) }}
 
-        {% if update_history == 'true' %}
+        {% if update_history is defined %}
             {{ include('backend/faq/_update_history.html.twig') }}
         {% endif %}
     </div>
 </div>
-{% if delete_faq == 'true' %}
+{% if delete_faq is defined %}
     {{ include('backend/faq/_delete_form.html.twig') }}
 {% endif %}
