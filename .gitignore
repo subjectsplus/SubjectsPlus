@@ -1257,3 +1257,9 @@ docs/
 
 ### image/file uploads
 public/uploads/
+
+###> custom ignore ###
+src/DataFixtures
+
+
+###< custom ignore ###

@@ -67,12 +67,16 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true,
+            "composer/package-versions-deprecated": true
+        }
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "SubjectsPlus\\": "lib/SubjectsPlus/"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
