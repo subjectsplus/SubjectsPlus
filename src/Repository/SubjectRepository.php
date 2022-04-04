@@ -23,6 +23,19 @@ class SubjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Subject::class);
     }
 
+    /**
+     * @return Subject[]
+     */
+    public function findAllSubjectsAlphabetical()
+    {
+        return $this->createQueryBuilder('s')
+                    ->orderBy('s.subject', 'ASC')
+                    ->where('s.active = true')
+                    ->getQuery()
+                    ->execute()
+            ;
+    }
+
     public function getGuideListForStaff()
     {
         return $this->createQueryBuilder('s')

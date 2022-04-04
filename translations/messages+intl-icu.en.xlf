@@ -323,11 +323,11 @@
       </trans-unit>
       <trans-unit id="47SEqwR" resname="control.faq.form.subject">
         <source>control.faq.form.subject</source>
-        <target>Subjects or Course Guides</target>
+        <target>Associate with Guide(s)</target>
       </trans-unit>
       <trans-unit id="oIlnFca" resname="control.faq.form.faq_collection_page">
         <source>control.faq.form.faq_collection_page</source>
-        <target>Collections</target>
+        <target>Associate with Collection(s)</target>
       </trans-unit>
       <trans-unit id="pXDKzvm" resname="control.faq.form.save_faq">
         <source>control.faq.form.save_faq</source>
@@ -347,11 +347,11 @@
       </trans-unit>
       <trans-unit id=".MATTgF" resname="control.faq.form.subject_placeholder">
         <source>control.faq.form.subject_placeholder</source>
-        <target>Add a Subject or Course</target>
+        <target>Search and add</target>
       </trans-unit>
       <trans-unit id="LlIo4cc" resname="control.faq.form.faq_collection_page_placeholder">
         <source>control.faq.form.faq_collection_page_placeholder</source>
-        <target>Add a Collection</target>
+        <target>Search and add</target>
       </trans-unit>
       <trans-unit id="frBk6HE" resname="control.flyout.add_record_token.heading">
         <source>control.flyout.add_record_token.heading</source>
@@ -567,7 +567,7 @@
       </trans-unit>
       <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
         <source>control.faq.form.keywords.help.text</source>
-        <target>Use commas</target>
+        <target>Separate terms with commas</target>
       </trans-unit>
       <trans-unit id="rdSxsTE" resname="control.faqs.by_user.heading">
         <source>control.faqs.by_user.heading</source>
