@@ -4,7 +4,7 @@ export function useFetchPluslets(sectionId) {
     if (sectionId === undefined) throw new Error('"sectionId" argument is required to call useFetchPluslets.');
 
     return useQuery(['pluslets', sectionId], 
-        () => fetchPluslets(sectionId), {
+        () => fetchPluslets(sectionId, {pagination: false}), {
             select: data => data['hydra:member']
         }
     );
@@ -165,7 +165,8 @@ async function updatePluslet({plusletId, data}) {
 
 async function reorderPlusletWithinColumn(sectionId, column, sourceIndex, destinationIndex) {
     const {'hydra:member': pluslets} = await fetchPluslets(sectionId, {
-        pcolumn: column
+        pcolumn: column,
+        pagination: false
     });
     
     // Move pluslet within the same column
@@ -193,7 +194,8 @@ async function reorderPlusletWithinColumn(sectionId, column, sourceIndex, destin
 
 async function reorderPlusletWithinSection(sectionId, sourceColumn, sourceIndex, destinationColumn, destinationIndex) {
     const {'hydra:member': sourcePluslets} = await fetchPluslets(sectionId, {
-        pcolumn: sourceColumn
+        pcolumn: sourceColumn,
+        pagination: false
     });
 
     // Remove pluslet from source column
@@ -219,7 +221,8 @@ async function reorderPlusletWithinSection(sectionId, sourceColumn, sourceIndex,
 
     // Move pluslet to a different column
     const {'hydra:member': destinationPluslets} = await fetchPluslets(sectionId, {
-        pcolumn: destinationColumn
+        pcolumn: destinationColumn,
+        pagination: false
     });
 
     // Add to destination column and reorder destination column pluslets 
