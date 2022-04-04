@@ -4,7 +4,7 @@ export function useFetchSections(tabId) {
     if (tabId === undefined) throw new Error('"tabId" argument is required to call useFetchSections.');
 
     return useQuery(['sections', tabId], 
-        () => fetchSections(tabId), {
+        () => fetchSections(tabId, {pagination: false}), {
             select: data => data['hydra:member']
         }
     );
@@ -24,10 +24,14 @@ export function useCreateSection(tabId) {
         onMutate: async newSection => {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
-
+            const optimisticResult = {
+                ...newSection,
+                sectionId: 'section-' + newSection.sectionIndex
+            }
+            
             queryClient.setQueryData(['sections', tabId], {
                 ...previousSectionsData,
-                'hydra:member': [...previousSectionsData['hydra:member'], newSection],
+                'hydra:member': [...previousSectionsData['hydra:member'], optimisticResult],
             });
             
             return { previousSectionsData };
@@ -142,9 +146,10 @@ export function useReorderSection(tabId) {
     });
 }
 
-async function fetchSections(tabId) {
-    const data = await fetch(`/api/tabs/${tabId}/sections`);
-
+async function fetchSections(tabId, filters=null) {
+    const data = await fetch(`/api/tabs/${tabId}/sections`
+        + (filters ? '?' + new URLSearchParams(filters) : ''));
+    
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
     }
@@ -170,6 +175,8 @@ async function createSection(initialSectionData) {
         },
         body: JSON.stringify(initialSectionData)
     });
+
+    
 
     if (!sectionReq.ok) {
         throw new Error(sectionReq.status + ' ' + sectionReq.statusText);
@@ -202,7 +209,7 @@ async function deleteSection(sectionId) {
 
     const sectionToDelete = await fetchSection(sectionId);
     const tabId = sectionToDelete['tab'].split("/").pop();
-    const {'hydra:member': sections } = await fetchSections(tabId);
+    const {'hydra:member': sections } = await fetchSections(tabId, {pagination: false});
     const newSections = [...sections];
    
     // update the section index
@@ -245,7 +252,7 @@ async function reorderSection({ tabId, sourceSectionIndex, destinationSectionInd
     if (destinationSectionIndex === undefined) throw new Error('"destinationSectionIndex" field is required to perform reorder section request.');
     
     // fetch current sections
-    const {'hydra:member': sections} = await fetchSections(tabId);
+    const {'hydra:member': sections} = await fetchSections(tabId, {pagination: false});
 
     // copy existing sections
     const newSections = [...sections];

@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
+import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -8,6 +9,7 @@ function SectionContainer({ tabId }) {
 
     const createSectionMutation = useCreateSection(tabId);
     const reorderSectionMutation = useReorderSection(tabId);
+    const reorderPlusletMutation = useReorderPluslet();
 
     const padding = 8;
 
@@ -27,24 +29,48 @@ function SectionContainer({ tabId }) {
     }
 
     const handleOnDragEnd = (result) => {
-        console.log(result);
+        if (result.source === undefined || result.source === null || 
+            result.destination === undefined || result.destination === null) return;
+        if (result.source.index === undefined || result.destination.index === undefined) return;
+
         if (result.type === 'section') {
             // exit if element hasn't changed position
-            if (result.source === undefined || result.destination === undefined) return;
-            if (result.source.index === undefined || result.destination.index === undefined) return;
             if (result.source.index === result.destination.index) return;
 
-            // perform the reordering
             reorderSection(result.source.index, result.destination.index);
         } else if (result.type === 'pluslet') {
-            console.log('Pluslet onDragEnd Handler, result: ', result);
+            // Source details
+            const sourceId = result.source.droppableId.split('-');
+            const sourceSection = Number(sourceId[1]);
+            const sourceColumn = Number(sourceId[3]);
+            const sourceIndex = result.source.index;
+
+            // Destination details
+            const destinationId = result.destination.droppableId.split('-');
+            const destinationSection = Number(destinationId[1]);
+            const destinationColumn = Number(destinationId[3]);
+            const destinationIndex = result.destination.index;
+
+            if (sourceSection === destinationSection && sourceColumn === destinationColumn
+                    && sourceIndex === destinationIndex) return;
+            
+            // TODO: Handle case where plusletRow is incorrect and not ordered
+            
+            reorderPlusletMutation.mutate({
+                sectionId: sourceSection,
+                sourceColumn: sourceColumn,
+                sourceIndex: sourceIndex, 
+                destinationColumn: destinationColumn,
+                destinationIndex: destinationIndex
+            });
         }
     }
 
     const addSection = () => {
-        if (data && typeof data === 'array') {
+        if (Array.isArray(data)) {
             const initialSectionData = {
                 sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
+                layout: '4-4-4',
                 tab: '/api/tabs/' + tabId
             };
 
@@ -52,7 +78,7 @@ function SectionContainer({ tabId }) {
         }
     }
 
-    const containerContent = useMemo(() => {
+    const containerContent = () => {
         if (isLoading) {
             return (<p>Loading Sections...</p>);
         } else if (isError) {
@@ -61,8 +87,8 @@ function SectionContainer({ tabId }) {
         } else {
             const guideSections = data.map((section, index) => {
                 return (
-                    <Section key={section.sectionId || 'section-' + index} sectionId={section.sectionId || 'section-' + index} 
-                        layout={section.layout || '4-4-4'} sectionIndex={section.sectionIndex || index} tabId={tabId} />
+                    <Section key={section.sectionId} sectionId={section.sectionId} 
+                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} />
                 );
             });
 
@@ -85,9 +111,9 @@ function SectionContainer({ tabId }) {
                 </>
             );
         }
-    }, [data, isError, isLoading]);
+    };
 
-    return containerContent;
+    return containerContent();
 }
 
 export default SectionContainer;

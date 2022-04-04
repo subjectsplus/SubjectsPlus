@@ -42,14 +42,18 @@
             {{ form_widget(form.keywords) }}
         </div>
 
-        {{ form_row(form.subject, {
-            'label': 'control.faq.form.subject' | trans,
-            'attr': {'class': 'invisible form-select-multi', 'data-placeholder-text': 'control.faq.form.subject_placeholder' | trans}
-        }) }}
         {{ form_row(form.faqpage, {
             'label': 'control.faq.form.faq_collection_page' | trans,
-            'attr': {'class': 'invisible form-select-multi', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans}
+            'attr': {'class': 'invisible form-select-multi', 'data-placeholder-text': 'control.faq.form.faq_collection_page_placeholder' | trans,
+                        'data-no-options-message': 'control.faq.form.default_no_options_message' | trans}
         }) }}
+        
+        {{ form_row(form.subject, {
+            'label': 'control.faq.form.subject' | trans,
+            'attr': {'class': 'invisible form-select-multi', 'data-placeholder-text': 'control.faq.form.subject_placeholder' | trans,
+                        'data-no-options-message': 'control.faq.form.default_no_options_message' | trans}
+        }) }}
+
         {{ form_rest(form) }}
         {{ encore_entry_script_tags('react_select_init') }}
 

@@ -4,7 +4,7 @@ export function useFetchTabs(subjectId, enabled=true) {
     if (subjectId === undefined) throw new Error('"subjectId" field is required to call useFetchTabs.');
 
     return useQuery(['tabs', subjectId], 
-        () => fetchTabs(subjectId), {
+        () => fetchTabs(subjectId, {pagination: false}), {
             select: data => data['hydra:member'],
             enabled: enabled
         }
@@ -143,9 +143,10 @@ export function useReorderTab(subjectId) {
     });
 }
 
-async function fetchTabs(subjectId) {
-    const data = await fetch(`/api/subjects/${subjectId}/tabs`);
-    
+async function fetchTabs(subjectId, filters=null) {
+    const data = await fetch(`/api/subjects/${subjectId}/tabs`
+        + (filters ? '?' + new URLSearchParams(filters) : ''));
+
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
     }
@@ -220,7 +221,7 @@ async function deleteTab(tabId) {
 
     const tabToDelete = await fetchTab(tabId);
     const subjectId = tabToDelete['subject'].split("/").pop();
-    const {'hydra:member': tabs } = await fetchTabs(subjectId);
+    const {'hydra:member': tabs } = await fetchTabs(subjectId, {pagination: false});
     const newTabs = [...tabs];
    
     // update the tab index
@@ -263,7 +264,7 @@ async function reorderTab({subjectId, sourceTabIndex, destinationTabIndex}) {
     if (destinationTabIndex === undefined) throw new Error('"destinationTabIndex" field is required to perform reorder tab request.');
     
     // fetch current tabs
-    const {'hydra:member': tabs} = await fetchTabs(subjectId);
+    const {'hydra:member': tabs} = await fetchTabs(subjectId, {pagination: false});
 
     // copy existing tabs
     const newTabs = [...tabs];

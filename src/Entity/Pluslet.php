@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * Pluslet.
@@ -15,10 +16,18 @@ use ApiPlatform\Core\Annotation\ApiFilter;
  * @ORM\Entity
  * 
  * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"},
- *     order={"prow": "ASC"}
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"},
+ *     order={
+ *      "pcolumn": "ASC",
+ *      "prow": "ASC"
+ *      }
  * )
+ * 
+ * @ApiFilter(SearchFilter::class, properties={
+ *      "pcolumn": "exact",
+ *      "prow": "exact"
+ *  })
  */
 class Pluslet
 {

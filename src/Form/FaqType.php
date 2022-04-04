@@ -15,10 +15,34 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
+use App\Repository\SubjectRepository;
+use App\Repository\FaqpageRepository;
 
 
 class FaqType extends AbstractType
 {
+    /**
+     * @var SubjectRepository
+     */
+    private $subjectRepository;
+
+    /**
+     * @var faqpageRepository;
+     */
+    private $faqpageRepository;
+
+    public function __construct(SubjectRepository $subjectRepository, FaqpageRepository $faqpageRepository)
+    {
+        $this->subjectRepository = $subjectRepository;
+        $this->faqpageRepository = $faqpageRepository;
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // TODO: autosave ckeditor
@@ -43,6 +67,7 @@ class FaqType extends AbstractType
                 'empty_data' => '',
             ])
             ->add('subject', EntityType::class, [
+                'choices' => $this->subjectRepository->findAllSubjectsAlphabetical(),
                 'class' => Subject::class,
                 'required' => false,
                 'mapped' => false,
@@ -55,6 +80,7 @@ class FaqType extends AbstractType
                 'expanded' => false,
             ])
             ->add('faqpage', EntityType::class, [
+                'choices' => $this->faqpageRepository->getAllFaqCollectionsAlpha(),
                 'class' => Faqpage::class,
                 'required' => false,
                 'mapped' => false,
