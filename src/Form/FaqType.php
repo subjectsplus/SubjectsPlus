@@ -75,8 +75,8 @@ class FaqType extends AbstractType
                     return $subject;
                 },
                 'multiple' => true,
-                'placeholder' => 'Add a Subject or Course',
-                'attr' => ['data-placeholder-text' => 'Add a Subject or Course'],
+                'placeholder' => 'Search and add',
+                'attr' => ['data-placeholder-text' => 'Search and add'],
                 'expanded' => false,
             ])
             ->add('faqpage', EntityType::class, [
@@ -88,8 +88,8 @@ class FaqType extends AbstractType
                     return $faqPage;
                 },
                 'multiple' => true,
-                'placeholder' => 'Add a Collection',
-                'attr' => ['data-placeholder-text' => 'Add a Collection'],
+                'placeholder' => 'Search and add',
+                'attr' => ['data-placeholder-text' => 'Search and add'],
                 'expanded' => false,
             ]);
     }

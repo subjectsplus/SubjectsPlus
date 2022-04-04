@@ -710,89 +710,89 @@
         <target>Delete guide</target>
       </trans-unit>
       <trans-unit id="1ESeN7a" resname="control.dashboard.welcome">
-          <source>control.dashboard.welcome</source>
-          <target>Welcome</target>
-        </trans-unit>
-        <trans-unit id=".GOLKLg" resname="control.header.guides.index">
-          <source>control.header.guides.index</source>
-          <target>All Guides</target>
-        </trans-unit>
-        <trans-unit id="NyAloag" resname="control.guides.index.my_guides_label">
-          <source>control.guides.index.my_guides_label</source>
-          <target>Show ONLY my guides</target>
-        </trans-unit>
-        <trans-unit id="Qs1Ph_Z" resname="control.guides.create_new_button">
-          <source>control.guides.create_new_button</source>
-          <target>New Guide</target>
-        </trans-unit>
-        <trans-unit id="0LltObt" resname="control.guides.table.heading.visibility">
-          <source>control.guides.table.heading.visibility</source>
-          <target>Public</target>
-        </trans-unit>
-        <trans-unit id="pFn6ZCT" resname="control.guides.table.heading.guide_name">
-          <source>control.guides.table.heading.guide_name</source>
-          <target>Guide</target>
-        </trans-unit>
-        <trans-unit id="OFL92e." resname="control.guides.table.heading.description">
-          <source>control.guides.table.heading.description</source>
-          <target>Description</target>
-        </trans-unit>
-        <trans-unit id="SIZ968F" resname="control.guides.table.heading.actions">
-          <source>control.guides.table.heading.actions</source>
-          <target>Actions</target>
-        </trans-unit>
-        <trans-unit id="9vk7YLQ" resname="control.guides.table.button.guide_details">
-          <source>control.guides.table.button.guide_details</source>
-          <target>Guide Details</target>
-        </trans-unit>
-        <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
-          <source>control.faqs.table.button.guide_builder</source>
-          <target>Guide Builder</target>
-        </trans-unit>
-        <trans-unit id="keTSog4" resname="control.guides.table.button.preview">
-          <source>control.guides.table.button.preview</source>
-          <target>Preview</target>
-        </trans-unit>
-        <trans-unit id="Fd5S48B" resname="control.guides.table.label.keywords">
-          <source>control.guides.table.label.keywords</source>
-          <target>Keywords</target>
-        </trans-unit>
-        <trans-unit id="MjUFkcq" resname="control.guides.table.sort.latest">
-          <source>control.guides.table.sort.latest</source>
-          <target>Latest</target>
-        </trans-unit>
-        <trans-unit id="dZP4FVq" resname="control.guides.table.sort.az">
-          <source>control.guides.table.sort.az</source>
-          <target>Alpha A-Z</target>
-        </trans-unit>
-        <trans-unit id=".httBLP" resname="control.guides.table.sort.za">
-          <source>control.guides.table.sort.za</source>
-          <target>Alpha Z-A</target>
-        </trans-unit>
-        <trans-unit id=".qW4Fiz" resname="control.guides.search.placeholder">
-          <source>control.guides.search.placeholder</source>
-          <target>Find a guide</target>
-        </trans-unit>
-        <trans-unit id="LVwaDfd" resname="control.guides.filter_by">
-          <source>control.guides.filter_by</source>
-          <target>Filter by</target>
-        </trans-unit>
-        <trans-unit id="NK7adBO" resname="control.faqs.filter.type.aria">
-          <source>control.faqs.filter.type.aria</source>
-          <target>Filter by type</target>
-        </trans-unit>
-        <trans-unit id="U8QgcWR" resname="control.guides.filter.type">
-          <source>control.guides.filter.type</source>
-          <target>Type</target>
-        </trans-unit>
-        <trans-unit id="ppuCrUF" resname="control.header.guides.guide_builder">
-          <source>control.header.guides.guide_builder</source>
-          <target>Guide Builder</target>
-        </trans-unit>
-        <trans-unit id="ZT3aQoe" resname="control.guide.form.keywords.help.text">
-          <source>control.guide.form.keywords.help.text</source>
-          <target>Separate terms with commas</target>
-    </trans-unit>
+        <source>control.dashboard.welcome</source>
+        <target>Welcome</target>
+      </trans-unit>
+      <trans-unit id=".GOLKLg" resname="control.header.guides.index">
+        <source>control.header.guides.index</source>
+        <target>All Guides</target>
+      </trans-unit>
+      <trans-unit id="NyAloag" resname="control.guides.index.my_guides_label">
+        <source>control.guides.index.my_guides_label</source>
+        <target>Show ONLY my guides</target>
+      </trans-unit>
+      <trans-unit id="Qs1Ph_Z" resname="control.guides.create_new_button">
+        <source>control.guides.create_new_button</source>
+        <target>New Guide</target>
+      </trans-unit>
+      <trans-unit id="0LltObt" resname="control.guides.table.heading.visibility">
+        <source>control.guides.table.heading.visibility</source>
+        <target>Public</target>
+      </trans-unit>
+      <trans-unit id="pFn6ZCT" resname="control.guides.table.heading.guide_name">
+        <source>control.guides.table.heading.guide_name</source>
+        <target>Guide</target>
+      </trans-unit>
+      <trans-unit id="OFL92e." resname="control.guides.table.heading.description">
+        <source>control.guides.table.heading.description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="SIZ968F" resname="control.guides.table.heading.actions">
+        <source>control.guides.table.heading.actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="9vk7YLQ" resname="control.guides.table.button.guide_details">
+        <source>control.guides.table.button.guide_details</source>
+        <target>Guide Details</target>
+      </trans-unit>
+      <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
+        <source>control.faqs.table.button.guide_builder</source>
+        <target>Guide Builder</target>
+      </trans-unit>
+      <trans-unit id="keTSog4" resname="control.guides.table.button.preview">
+        <source>control.guides.table.button.preview</source>
+        <target>Preview</target>
+      </trans-unit>
+      <trans-unit id="Fd5S48B" resname="control.guides.table.label.keywords">
+        <source>control.guides.table.label.keywords</source>
+        <target>Keywords</target>
+      </trans-unit>
+      <trans-unit id="MjUFkcq" resname="control.guides.table.sort.latest">
+        <source>control.guides.table.sort.latest</source>
+        <target>Latest</target>
+      </trans-unit>
+      <trans-unit id="dZP4FVq" resname="control.guides.table.sort.az">
+        <source>control.guides.table.sort.az</source>
+        <target>Alpha A-Z</target>
+      </trans-unit>
+      <trans-unit id=".httBLP" resname="control.guides.table.sort.za">
+        <source>control.guides.table.sort.za</source>
+        <target>Alpha Z-A</target>
+      </trans-unit>
+      <trans-unit id=".qW4Fiz" resname="control.guides.search.placeholder">
+        <source>control.guides.search.placeholder</source>
+        <target>Find a guide</target>
+      </trans-unit>
+      <trans-unit id="LVwaDfd" resname="control.guides.filter_by">
+        <source>control.guides.filter_by</source>
+        <target>Filter by</target>
+      </trans-unit>
+      <trans-unit id="NK7adBO" resname="control.faqs.filter.type.aria">
+        <source>control.faqs.filter.type.aria</source>
+        <target>Filter by type</target>
+      </trans-unit>
+      <trans-unit id="U8QgcWR" resname="control.guides.filter.type">
+        <source>control.guides.filter.type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="ppuCrUF" resname="control.header.guides.guide_builder">
+        <source>control.header.guides.guide_builder</source>
+        <target>Guide Builder</target>
+      </trans-unit>
+      <trans-unit id="ZT3aQoe" resname="control.guide.form.keywords.help.text">
+        <source>control.guide.form.keywords.help.text</source>
+        <target>Separate terms with commas</target>
+      </trans-unit>
       <trans-unit id="hN4Cmho" resname="control.faq.form.default_no_options_message">
         <source>control.faq.form.default_no_options_message</source>
         <target>No results</target>
