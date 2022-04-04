@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\ORM\Mapping\OrderBy;
 
 /**
  * Faqpage.
@@ -28,6 +29,7 @@ class Faqpage
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      * @Groups({"faq"})
+     * @OrderBy({"name" = "ASC"})
      */
     private $name;
 

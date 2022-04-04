@@ -8,6 +8,8 @@ use Psr\Log\LoggerInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\ORM\Mapping\OrderBy;
+
 
 /**
  * Subject.
@@ -38,6 +40,7 @@ class Subject
      *
      * @ORM\Column(name="subject", type="string", length=255, nullable=true)
      * @Groups({"faq"})
+     * @OrderBy({"subject" = "ASC"})
      */
     private $subject;
 
