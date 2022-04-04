@@ -709,6 +709,10 @@
         <source>control.guide.delete_guide.title</source>
         <target>Delete guide</target>
       </trans-unit>
+      <trans-unit id="hN4Cmho" resname="control.faq.form.default_no_options_message">
+        <source>control.faq.form.default_no_options_message</source>
+        <target>No results</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
