@@ -1,6 +1,33 @@
 doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+
+        options:
+            !php/const PDO::MYSQL_ATTR_SSL_CA: '%env(AZURE_MYSQL_SSL_CERT_PATH)%'
+
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '13'
     orm:
         auto_generate_proxy_classes: false
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+        dql:
+            string_functions:
+                JSON_VALID: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonValid
+
         metadata_cache_driver:
             type: pool
             pool: doctrine.system_cache_pool

@@ -57,5 +57,5 @@ services:
         class: App\Logger\RequestProcessor
         arguments: ['@request_stack', '@service_container']
         tags:
-            - { name: monolog.processor, method: processRecord, handler: db_error_handler }
+            - { name: monolog.processor, method: processRecord, handler: main }
 
