@@ -181,7 +181,6 @@ function GuideTabContainer(props) {
     }
 
     const handleOnDragEnd = (result) => {
-        console.log(result);
         if (result.type === 'tab') {
             setDraggingTab(false);
 
@@ -216,7 +215,7 @@ function GuideTabContainer(props) {
                     return (
                         <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={'tab-pane' + (activeKey === tab.tabIndex ? ' active': '')} 
                             key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
-                            <SectionContainer tabId={tab.tabId} />
+                                <SectionContainer tabId={tab.tabId} />
                         </Tab.Pane>
                     )
                 }

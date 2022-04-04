@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Error({ errorCode, errorMessage}) {
+function Error({onRetry}) {
     return (
         <div>
             <p>Error has occurred!</p>
-            <p>{'Error: ' + errorCode + ' - ' + errorMessage}</p>
+            <button onClick={onRetry}>Retry</button>
         </div>
     )
 }
