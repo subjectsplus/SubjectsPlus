@@ -32,6 +32,7 @@ security:
                secret: '%kernel.secret%'
                lifetime: 1800
 
+            entry_point: App\Security\LoginFormAuthenticator
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -42,4 +43,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/control/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/control, roles: ROLE_USER }
