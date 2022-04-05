@@ -98,20 +98,6 @@ Encore
         from: './assets/backend/images',
         to: 'images/backend/[path][name].[ext]'
     })
-
-    // Make legacy assets available | Added by Jane - to be reviewed
-    //.copyFiles({
-     //   from: './assets/css',
-     //   to: 'assets/css/[path][name].[ext]'
-    //})
-    //.copyFiles({
-    //    from: './assets/js',
-    //    to: 'assets/js/[path][name].[ext]'
-    //})
-    //.copyFiles({
-     //   from: './assets/jquery',
-    //    to: 'assets/jquery/[path][name].[ext]'
-   // })
     
     // CKEditor 4
     .copyFiles([
