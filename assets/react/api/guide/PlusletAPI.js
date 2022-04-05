@@ -38,7 +38,9 @@ export function useReorderPluslet() {
             // Produce optimistic result
             if (sourceSection === destinationSection && sourceColumn === destinationColumn) {
                 const columnPluslets = destinationPluslets.filter(pluslet =>
-                    pluslet.pcolumn === destinationColumn);
+                    pluslet.pcolumn === destinationColumn).filter(
+                        pluslet => pluslet !== undefined
+                    );
 
                 const updatedPluslets = {};
 
@@ -62,14 +64,16 @@ export function useReorderPluslet() {
                     }
                 });
             } else {
-                const sourceColumnPluslets = sourcePluslets.filter(pluslet =>
-                    pluslet.pcolumn === sourceColumn);
-
+                const sourceColumnPluslets = sourcePluslets.filter(
+                    pluslet => pluslet.pcolumn === sourceColumn).filter(
+                        pluslet => pluslet !== undefined
+                );
+                
                 const updatedPluslets = {};
 
                 // Remove pluslet from source column
                 const [reorderedItem] = sourceColumnPluslets.splice(sourceIndex, 1);
-                
+
                 // Pluslet must be removed from sourcePluslets if not the same section
                 if (sourceSection !== destinationSection) {
                     sourcePluslets.splice(sourcePluslets.findIndex(pluslet => 
@@ -87,8 +91,10 @@ export function useReorderPluslet() {
                 });
 
                 // Move pluslet to a different section/column
-                const destinationColumnPluslets = destinationPluslets.filter(pluslet =>
-                    pluslet.pcolumn === destinationColumn);
+                const destinationColumnPluslets = destinationPluslets.filter(
+                    pluslet => pluslet.pcolumn === destinationColumn).filter(
+                        pluslet => pluslet !== undefined
+                );
 
                 // Add to destination column and reorder destination column pluslets 
                 destinationColumnPluslets.splice(destinationIndex, 0, reorderedItem);
@@ -139,9 +145,6 @@ export function useReorderPluslet() {
                     }
                     return plusletA.pcolumn - plusletB.pcolumn;
                 });
-
-                console.log('source pluslets: ', sourcePluslets);
-                console.log('destination pluslets: ', destinationPluslets);
 
                 // Set optimistic result to query data
                 queryClient.setQueryData(['pluslets', sourceSection], {
