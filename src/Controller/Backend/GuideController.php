@@ -24,7 +24,7 @@ class GuideController extends AbstractController
     {
         $guides = $this->getDoctrine()
         ->getRepository(Subject::class)
-        ->findAll();
+        ->findBy(array('active' => 1), array('subject' => 'ASC'));
 
         return $this->render('backend/guide/index.html.twig', [
             'guides' => $guides,
