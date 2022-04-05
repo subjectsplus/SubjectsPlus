@@ -39,12 +39,13 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         const columns = splitLayout.map(size => {
             if (Number(size) !== 0) {
                 let columnPluslets;
-                
+
                 if (pluslets && pluslets.length > 0) {
                     columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === column)
-                    .map(pluslet => (
+                    .filter(pluslet => pluslet !== undefined)
+                    .map((pluslet, row) => (
                         <Pluslet key={pluslet.plusletId} 
-                            plusletId={pluslet.plusletId} plusletRow={pluslet.prow} />)
+                            plusletId={pluslet.plusletId} plusletRow={row} />)
                     );
                 }
 
