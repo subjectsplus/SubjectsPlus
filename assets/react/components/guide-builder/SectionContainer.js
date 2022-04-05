@@ -30,6 +30,10 @@ function SectionContainer({ tabId }) {
 
             reorderSection(result.source.index, result.destination.index);
         } else if (result.type === 'pluslet') {
+            console.log('Source: ', result.source);
+            console.log('Destination: ', result.destination);
+            console.log('Source Droppable Id: ', result.source.droppableId);
+            console.log('Destination Droppable Id: ', result.destination.droppableId);
             // Source details
             const sourceId = result.source.droppableId.split('-');
             const sourceSection = Number(sourceId[1]);
@@ -46,11 +50,12 @@ function SectionContainer({ tabId }) {
                     && sourceIndex === destinationIndex) return;
             
             // TODO: Handle case where plusletRow is incorrect and not ordered
-            
+            // TODO: Add a debounce to prevent spam requests
             reorderPlusletMutation.mutate({
-                sectionId: sourceSection,
+                sourceSection: sourceSection,
                 sourceColumn: sourceColumn,
-                sourceIndex: sourceIndex, 
+                sourceIndex: sourceIndex,
+                destinationSection: destinationSection,
                 destinationColumn: destinationColumn,
                 destinationIndex: destinationIndex
             });
