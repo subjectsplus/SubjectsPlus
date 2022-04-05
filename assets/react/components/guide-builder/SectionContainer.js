@@ -11,10 +11,6 @@ function SectionContainer({ tabId }) {
     const reorderSectionMutation = useReorderSection(tabId);
     const reorderPlusletMutation = useReorderPluslet();
 
-   const getSectionContainerStyle = (isDraggingOver) => ({
-        backgroundColor: isDraggingOver ? 'transparent' : 'transparent'
-    });
-
     const reorderSection = (sourceIndex, destinationIndex) => {
         reorderSectionMutation.mutate({
             tabId: tabId,
@@ -98,8 +94,7 @@ function SectionContainer({ tabId }) {
                     <DragDropContext onDragEnd={handleOnDragEnd}>
                         <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (
-                                <div className="section-container" {...provided.droppableProps} ref={provided.innerRef}
-                                style={getSectionContainerStyle(snapshot.isDraggingOver)}>
+                                <div className="section-container" {...provided.droppableProps} ref={provided.innerRef}>
                                     {guideSections}
                                     {provided.placeholder}
                                 </div> 
