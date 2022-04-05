@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-9 col-lg-6 col-xl-5">
+    <div class="col-md-9 col-lg-6 col-xl-4">
         {# TODO: autocomplete search with filters #}
         <form>
             <div class="mb-3 mb-lg-0">
@@ -11,14 +11,14 @@
         {# TODO: multi-select filters with react-select #}
         <div class="d-flex flex-row flex-nowrap justify-content-between align-items-baseline">
             <span class="fs-sm d-inline-block" style="width: 110px;">{{ 'control.faqs.filter_by' | trans }}:</span>
-            <select class="form-select form-select-sm d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.subject.aria' | trans }}">
+            <select class="form-select d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.subject.aria' | trans }}">
                 <option selected>{{ 'control.faqs.filter.subject' | trans }}</option>
                 <option value="1">General</option>
                 <option value="2">Business</option>
                 <option value="3">Medicine</option>
             </select>
             <span class="fs-sm d-inline-block mx-2">{{ 'control.faqs.filter_or' | trans }}</span>
-            <select class="form-select form-select-sm d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.collection.aria' | trans }}">
+            <select class="form-select d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.collection.aria' | trans }}">
                 <option selected>{{ 'control.faqs.filter.collection' | trans }}</option>
                 <option value="1">Research</option>
                 <option value="2">Catalog Help</option>
