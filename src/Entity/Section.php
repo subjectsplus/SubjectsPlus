@@ -71,8 +71,9 @@ class Section
      */
     private $uuid;
 
-    public function __construct()
+    public function __construct(Uuid $uuid = null)
     {
+        $this->uuid = $uuid ?: Uuid::v4();
         $this->pluslets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
