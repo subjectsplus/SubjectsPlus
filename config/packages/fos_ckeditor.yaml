@@ -6,11 +6,11 @@ fos_ck_editor:
 
     configs:
         default:
-            extraPlugins: 'media,recordtoken,image2,embed,autoembed,find,autogrow'
+            extraPlugins: 'media,recordtoken,image2,autoembed,find,autogrow'
             embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}'
-
-
-
+            skin: 'moono-lisa'
+            toolbar: [["Bold","Italic","-","NumberedList","BulletedList","-","RemoveFormat","PasteText","PasteFromWord","-", "Link","Anchor","-","Source","-","Media","Record"]]
+            removeButtons: 'Styles,About,Find,Replace,Strike,Subscript,Superscript,Outdent,Indent,Blockquote,Underline,Maximize,Format,Scayt,MediaEmbed,Table,HorizontalRule,SpecialChar,Cut,Copy,Paste,Undo,Redo,Unlink,Image'
 
             # file upload/browse routes
             # filebrowserBrowseRoute: 'media_browse'
