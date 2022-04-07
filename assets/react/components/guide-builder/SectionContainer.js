@@ -3,6 +3,7 @@ import { useFetchSections, useCreateSection, useReorderSection } from '#api/guid
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 function SectionContainer({ tabId }) {
     const {isLoading, isError, data, error} = useFetchSections(tabId);
@@ -74,6 +75,7 @@ function SectionContainer({ tabId }) {
     const addSection = () => {
         if (Array.isArray(data)) {
             const initialSectionData = {
+                uuid: uuidv4(),
                 sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
                 layout: '4-4-4',
                 tab: '/api/tabs/' + tabId
@@ -92,7 +94,7 @@ function SectionContainer({ tabId }) {
         } else {
             const guideSections = data.map((section, index) => {
                 return (
-                    <Section key={section.sectionId} sectionId={section.sectionId} 
+                    <Section key={section.uuid} sectionId={section.uuid} 
                         layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} />
                 );
             });
