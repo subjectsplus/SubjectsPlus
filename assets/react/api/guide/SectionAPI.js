@@ -26,7 +26,7 @@ export function useCreateSection(tabId) {
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
             const optimisticResult = {
                 ...newSection,
-                sectionId: 'section-' + newSection.sectionIndex
+                sectionId: newSection.uuid
             }
             
             queryClient.setQueryData(['sections', tabId], {
@@ -85,11 +85,12 @@ export function useDeleteSection(tabId) {
         onMutate: async deletedSection => {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
-            
+            console.log('previousSectionsData: ', previousSectionsData);
+
             const optimisticResult = {...previousSectionsData};
             optimisticResult['hydra:member'].splice(deletedSection.sectionIndex, 1);
             optimisticResult['hydra:member'].forEach((section, index) => section.sectionIndex = index);
-
+            console.log('optimisticResult: ', optimisticResult);
             queryClient.setQueryData(['sections', tabId], optimisticResult);
             
             return { previousSectionsData };
@@ -214,9 +215,9 @@ async function deleteSection(sectionId) {
    
     // update the section index
     newSections.splice(sectionToDelete.sectionIndex, 1);
-    await Promise.all(newSections.map((section, index) => {
+    await Promise.all(newSections.map(async (section, index) => {
         if (section.sectionIndex !== index) {
-            return fetch(`/api/sections/${section.sectionId}`, {
+            return fetch(`/api/sections/${section.uuid}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -262,9 +263,9 @@ async function reorderSection({ tabId, sourceSectionIndex, destinationSectionInd
     newSections.splice(destinationSectionIndex, 0, reorderedItem);
 
     // perform the updating of the section index asynchronously
-    return Promise.all(newSections.map((section, index) => {
+    return Promise.all(newSections.map(async (section, index) => {
         if (newSections[index].sectionIndex !== index) {
-            return fetch(`/api/sections/${section.sectionId}`, {
+            return fetch(`/api/sections/${section.uuid}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
