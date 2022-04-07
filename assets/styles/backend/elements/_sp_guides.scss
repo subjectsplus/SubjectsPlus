@@ -1,0 +1,57 @@
+// Guide Tabs
+.tab-settings-icon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+#guide-tabs-tab-new-tab{
+  cursor: pointer;
+}
+
+// Guide Tab Content
+.sp-tab-content{
+  background-color: var(--sp-bg-color-alt);
+  padding: $padding-sm 0.75rem;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--sp-border-color);
+  border-left: 1px solid var(--sp-border-color);
+  border-right: 1px solid var(--sp-border-color);
+  border-bottom-left-radius: $border-radius-sm;
+  border-bottom-right-radius: $border-radius-sm;
+}
+
+// Guide Tab Content Section
+.section-container {
+  .sp-section-drag-handle {
+    position: absolute;
+    top:0;
+    right: 0;
+    background-color: var(--sp-nav-color);
+    color: #FFFFFF;
+    width: 36px;
+    height: 24px;
+    text-align: center;
+    margin-top: -25px;
+    z-index: 1;
+  }
+
+  .sp-section-delete-btn{
+    position: absolute;
+    bottom: calc(50% - 27px);
+    right: 0.25rem;
+    z-index: 1;
+    margin-bottom: 0.25rem;
+    line-height: 1;
+    padding: 0.25rem;
+  }
+
+  .guide-section {
+    width: calc(100% - 24px);
+  }
+
+  .sp-guide-column {
+    padding: 0.5rem;
+    border: 1px dotted #b5b5b5;
+  }
+}

@@ -8,12 +8,12 @@ function DraggableTab({ tab, active, onClick }) {
         <Draggable type="tab" draggableId={'tab-' + tab.tabIndex} index={tab.tabIndex}>
             {(provided, snapshot) => {
                 return (
-                    <Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
+                    <Nav.Link as="div" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="fs-sm"
                         eventKey={tab.tabIndex} tabIndex={tab.tabIndex}
                         active={active}>
                             {htmlEntityDecode(tab.label)}{' '}
                             {active && 
-                                <a href={void(0)} onClick={onClick} key={tab.tabId} className="tab-settings-icon">
+                                <a href={void(0)} onClick={onClick} key={tab.tabId} className="tab-settings-icon" title="Edit Tab">
                                     <i className="fas fa-cog"></i>
                                 </a>}
                     </Nav.Link>

@@ -24,7 +24,7 @@ class GuideController extends AbstractController
     {
         $guides = $this->getDoctrine()
         ->getRepository(Subject::class)
-        ->findAll();
+        ->findBy(array('active' => 1), array('subject' => 'ASC'));
 
         return $this->render('backend/guide/index.html.twig', [
             'guides' => $guides,
@@ -84,7 +84,9 @@ class GuideController extends AbstractController
      */
     public function build(Subject $subject): Response
     {
-        return $this->render('backend/guide/builder.html.twig');
+        return $this->render('backend/guide/builder.html.twig', [
+            'guide' => $subject,
+        ]);
     }
 
     /**

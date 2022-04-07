@@ -10,7 +10,8 @@ function EditTabModal(props) {
     return (
         <Modal show={props.show} onHide={props.onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>{'Edit Tab (' + props.currentTab.tabId + ')'}</Modal.Title>
+                <Modal.Title>Edit Tab</Modal.Title><br />
+                <span className="fs-xs d-block">{'ID:' + props.currentTab.tabId}</span>
             </Modal.Header>
             <Modal.Body>
                 <Form noValidate validated={props.validated} onSubmit={props.onSubmit} id="settings-form">

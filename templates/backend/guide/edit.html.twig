@@ -1,0 +1,27 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Edit Guide Details | SubjectsPlus{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('bs-tooltips') }}
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-8">
+                <h1 class="fw-light d-inline-block me-2 mb-1">{{ guide.subject | raw }}</h1>
+                {# TODO: link to front-end preview #}
+                <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
+                <p class="fs-xs">ID: {{ guide.subjectId }} | Slug: {{ guide.shortform }} </p>
+            </div>
+            <div class="col-4 text-end">
+                <a href="{{ path('guide_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
+            </div>
+        </div>
+        {% set delete_faq = 'true' %}
+        {% set update_history = 'true' %}
+        {{ include('backend/guide/_form.html.twig', {'button_label': 'Save Guide Details'}) }}
+    </div>
+{% endblock %}
