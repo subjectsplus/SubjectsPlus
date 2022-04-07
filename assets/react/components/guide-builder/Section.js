@@ -49,8 +49,8 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                     );
                 }
 
-                const columnId = `section-${sectionId.toString()}-column-${column++}`;
-
+                const columnId = `section|${sectionId.toString()}|column|${column++}`;
+                
                 return (     
                     <Col key={columnId} lg={Number(size)} className="mb-3 mb-lg-0">
                         <Droppable type="pluslet" style={{ transform: 'none' }}

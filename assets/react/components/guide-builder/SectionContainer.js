@@ -3,7 +3,7 @@ import { useFetchSections, useCreateSection, useReorderSection } from '#api/guid
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
 function SectionContainer({ tabId }) {
     const {isLoading, isError, data, error} = useFetchSections(tabId);
@@ -35,23 +35,30 @@ function SectionContainer({ tabId }) {
             console.log('Destination: ', result.destination);
             console.log('Source Droppable Id: ', result.source.droppableId);
             console.log('Destination Droppable Id: ', result.destination.droppableId);
+            
             // Source details
-            const sourceId = result.source.droppableId.split('-');
-            const sourceSection = Number(sourceId[1]);
+            const sourceId = result.source.droppableId.split('|');
+            const sourceSection = sourceId[1];
             const sourceColumn = Number(sourceId[3]);
             const sourceIndex = result.source.index;
 
             // Destination details
-            const destinationId = result.destination.droppableId.split('-');
-            const destinationSection = Number(destinationId[1]);
+            const destinationId = result.destination.droppableId.split('|');
+            const destinationSection = destinationId[1];
             const destinationColumn = Number(destinationId[3]);
             const destinationIndex = result.destination.index;
 
+            // Error if source/destination section id are not uuid's
+            if (!uuidValidate(sourceSection)) {
+                throw new Error("Source section id must be a valid uuid.");
+            } else if (!uuidValidate(destinationSection)) {
+                throw new Error("Destination section id must be a valid uuid.");
+            }
+
+            // If no positioning has changed, do not mutate
             if (sourceSection === destinationSection && sourceColumn === destinationColumn
                     && sourceIndex === destinationIndex) return;
             
-            // TODO: Handle case where plusletRow is incorrect and not ordered
-            // TODO: Add a debounce to prevent spam requests
             reorderPlusletMutation.mutate({
                 sourceSection: sourceSection,
                 sourceColumn: sourceColumn,
