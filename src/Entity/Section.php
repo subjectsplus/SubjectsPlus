@@ -6,13 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * Section.
  *
- * @ORM\Table(name="section", indexes={@ORM\Index(name="fk_section_tab_idx", columns={"tab_id"})})
+ * @ORM\Table(name="section", uniqueConstraints={@ORM\UniqueConstraint(name="section_uuid", columns={"uuid"})},
+ *      indexes={@ORM\Index(name="fk_section_tab_idx", columns={"tab_id"})})
  * @ORM\Entity
  * 
  * @ApiResource(
@@ -29,6 +32,7 @@ class Section
      * @ORM\Column(name="section_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ApiProperty(identifier=false)
      */
     private $sectionId;
 
@@ -59,6 +63,13 @@ class Section
      * @ApiSubresource(maxDepth=1)
      */
     private $pluslets;
+
+    /**
+     * @var Symfony\Component\Uid\Uuid|null
+     * @ORM\Column(type="uuid", nullable=true)
+     * @ApiProperty(identifier=true)
+     */
+    private $uuid;
 
     public function __construct()
     {
@@ -132,6 +143,18 @@ class Section
                 $pluslet->setSection(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUuid(): ?Uuid
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(Uuid $uuid): self
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }
