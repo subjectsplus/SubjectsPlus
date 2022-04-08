@@ -327,7 +327,7 @@
       </trans-unit>
       <trans-unit id="oIlnFca" resname="control.faq.form.faq_collection_page">
         <source>control.faq.form.faq_collection_page</source>
-        <target>Associate with Collection(s)</target>
+        <target>Associate with FAQ List(s)</target>
       </trans-unit>
       <trans-unit id="pXDKzvm" resname="control.faq.form.save_faq">
         <source>control.faq.form.save_faq</source>
@@ -567,7 +567,7 @@
       </trans-unit>
       <trans-unit id="XtJd0gW" resname="control.faq.form.keywords.help.text">
         <source>control.faq.form.keywords.help.text</source>
-        <target>Separate terms with commas</target>
+        <target>Please use comma separated terms</target>
       </trans-unit>
       <trans-unit id="rdSxsTE" resname="control.faqs.by_user.heading">
         <source>control.faqs.by_user.heading</source>
@@ -583,11 +583,11 @@
       </trans-unit>
       <trans-unit id="U.QlAlE" resname="control.header.faqs.admin.manage_faq_collections">
         <source>control.header.faqs.admin.manage_faq_collections</source>
-        <target>Manage FAQ Collections</target>
+        <target>Manage FAQ Lists</target>
       </trans-unit>
       <trans-unit id="zKfBvBP" resname="control.faqs.manage_faq_collection.heading">
         <source>control.faqs.manage_faq_collection.heading</source>
-        <target>Manage FAQ Collections</target>
+        <target>Manage FAQ Lists</target>
       </trans-unit>
       <trans-unit id="NiRUiLv" resname="control.faqs.admin.create_new_collection">
         <source>control.faqs.admin.create_new_collection</source>
@@ -791,7 +791,7 @@
       </trans-unit>
       <trans-unit id="ZT3aQoe" resname="control.guide.form.keywords.help.text">
         <source>control.guide.form.keywords.help.text</source>
-        <target>Separate terms with commas</target>
+        <target>Please use comma separated terms</target>
       </trans-unit>
       <trans-unit id="hN4Cmho" resname="control.faq.form.default_no_options_message">
         <source>control.faq.form.default_no_options_message</source>
