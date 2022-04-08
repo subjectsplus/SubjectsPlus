@@ -2,11 +2,6 @@
 
 {% block title %}{{ 'control.link_checker' | trans }} | SubjectsPlus{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('linkcheck') }}
-{% endblock %}
-
 {% block content %}
   <div class="container py-5">
     <h1 class="fw-light">{{ 'control.link_checker' | trans }}</h1>
