@@ -85,13 +85,17 @@ export function useDeleteSection(tabId) {
         onMutate: async deletedSection => {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
-            console.log('previousSectionsData: ', previousSectionsData);
 
-            const optimisticResult = {...previousSectionsData};
-            optimisticResult['hydra:member'].splice(deletedSection.sectionIndex, 1);
-            optimisticResult['hydra:member'].forEach((section, index) => section.sectionIndex = index);
-            console.log('optimisticResult: ', optimisticResult);
-            queryClient.setQueryData(['sections', tabId], optimisticResult);
+            const optimisticResult = [...previousSectionsData['hydra:member']];
+            console.log('deletedSection: ', deletedSection);
+            console.log('(before) optimistic result: ', optimisticResult);
+            optimisticResult.splice(deletedSection.sectionIndex, 1);
+            optimisticResult.forEach((section, index) => section.sectionIndex = index);
+            console.log('(after) optimistic result: ', optimisticResult);
+            queryClient.setQueryData(['sections', tabId], {
+                ...previousSectionsData,
+                'hydra:member': optimisticResult
+            });
             
             return { previousSectionsData };
         },
@@ -102,7 +106,7 @@ export function useDeleteSection(tabId) {
         },
         onSettled: () => {
             // Refetch the tab data
-            queryClient.invalidateQueries(['sections', tabId]);
+            //queryClient.invalidateQueries(['sections', tabId]);
         },
     });
 }
@@ -177,8 +181,6 @@ async function createSection(initialSectionData) {
         body: JSON.stringify(initialSectionData)
     });
 
-    
-
     if (!sectionReq.ok) {
         throw new Error(sectionReq.status + ' ' + sectionReq.statusText);
     }
@@ -205,7 +207,7 @@ async function updateSection({sectionId, data}) {
     return req.json();
 }
 
-async function deleteSection(sectionId) {
+async function deleteSection({ sectionId }) {
     if (sectionId === undefined) throw new Error('"sectionId" field is required to perform delete section request.');
 
     const sectionToDelete = await fetchSection(sectionId);
