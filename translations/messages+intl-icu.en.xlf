@@ -667,7 +667,7 @@
       </trans-unit>
       <trans-unit id="InuirW1" resname="control.guide_form.visibility">
         <source>control.guide_form.visibility</source>
-        <target>Visibility</target>
+        <target>Status</target>
       </trans-unit>
       <trans-unit id="vq762Od" resname="control.guide_form.save_guide">
         <source>control.guide_form.save_guide</source>
@@ -687,7 +687,7 @@
       </trans-unit>
       <trans-unit id="Izh.sQf" resname="control.guide.preview.label">
         <source>control.guide.preview.label</source>
-        <target>Preview</target>
+        <target>View Live</target>
       </trans-unit>
       <trans-unit id="mbrFuSz" resname="control.guide.delete_guide.modal.header">
         <source>control.guide.delete_guide.modal.header</source>
@@ -799,7 +799,7 @@
       </trans-unit>
       <trans-unit id="e.j59OA" resname="control.guides.index.active_guides_label">
         <source>control.guides.index.active_guides_label</source>
-        <target>ACTIVE Guides</target>
+        <target>PUBLIC Guides</target>
       </trans-unit>
       <trans-unit id="rsRrPc." resname="control.guides.table.heading.type">
         <source>control.guides.table.heading.type</source>
