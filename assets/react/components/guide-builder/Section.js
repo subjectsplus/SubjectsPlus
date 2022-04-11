@@ -31,7 +31,6 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         if (confirmed) {
             deleteSectionMutation.mutate({
                 sectionId: sectionId,
-                sectionIndex: sectionIndex
             });
         }
     }
