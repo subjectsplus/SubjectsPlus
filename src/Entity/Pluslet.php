@@ -7,12 +7,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * Pluslet.
  *
- * @ORM\Table(name="pluslet")
+ * @ORM\Table(name="pluslet", uniqueConstraints={@ORM\UniqueConstraint(name="pluslet_uuid", columns={"uuid"})})
  * @ORM\Entity
  * 
  * @ApiResource(
@@ -37,6 +39,7 @@ class Pluslet
      * @ORM\Column(name="pluslet_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ApiProperty(identifier=false)
      */
     private $plusletId;
 
@@ -141,6 +144,18 @@ class Pluslet
      * @ORM\Column(name="prow", type="integer")
      */
     private $prow;
+
+    /**
+     * @var Symfony\Component\Uid\Uuid|null
+     * @ORM\Column(type="uuid", nullable=true)
+     * @ApiProperty(identifier=true)
+     */
+    private $uuid;
+    
+    public function __construct(Uuid $uuid = null)
+    {
+        $this->uuid = $uuid ?: Uuid::v4();
+    }
 
     public function getPlusletId(): ?int
     {
@@ -325,5 +340,10 @@ class Pluslet
         $this->prow = $prow;
 
         return $this;
+    }
+
+    public function getUuid(): ?Uuid
+    {
+        return $this->uuid;
     }
 }
