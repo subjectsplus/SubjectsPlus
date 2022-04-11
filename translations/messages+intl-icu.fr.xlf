@@ -4703,6 +4703,18 @@
         <source>control.faq.form.default_no_options_message</source>
         <target>__control.faq.form.default_no_options_message</target>
       </trans-unit>
+      <trans-unit id="e.j59OA" resname="control.guides.index.active_guides_label">
+        <source>control.guides.index.active_guides_label</source>
+        <target>__control.guides.index.active_guides_label</target>
+      </trans-unit>
+      <trans-unit id="rsRrPc." resname="control.guides.table.heading.type">
+        <source>control.guides.table.heading.type</source>
+        <target>__control.guides.table.heading.type</target>
+      </trans-unit>
+      <trans-unit id="FAf7EgQ" resname="control.guides.table.heading.last_update">
+        <source>control.guides.table.heading.last_update</source>
+        <target>__control.guides.table.heading.last_update</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
