@@ -5,7 +5,8 @@ export function useFetchPluslets(sectionId) {
 
     return useQuery(['pluslets', sectionId],
         () => fetchPluslets(sectionId, { pagination: false }), {
-        select: data => data['hydra:member']
+        select: data => data['hydra:member'],
+        staleTime: 5000
     }
     );
 }

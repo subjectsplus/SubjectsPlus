@@ -6,6 +6,7 @@ export function useFetchTabs(subjectId, enabled=true) {
     return useQuery(['tabs', subjectId], 
         () => fetchTabs(subjectId, {pagination: false}), {
             select: data => data['hydra:member'],
+            staleTime: 5000,
             enabled: enabled
         }
     );
