@@ -1,11 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import produce from "immer";
 
 export function useFetchSections(tabId) {
     if (tabId === undefined) throw new Error('"tabId" argument is required to call useFetchSections.');
 
     return useQuery(['sections', tabId], 
         () => fetchSections(tabId, {pagination: false}), {
-            select: data => data['hydra:member']
+            select: data => data['hydra:member'],
+            staleTime: 5000
         }
     );
 }
@@ -86,16 +88,13 @@ export function useDeleteSection(tabId) {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
 
-            const optimisticResult = [...previousSectionsData['hydra:member']];
-            console.log('deletedSection: ', deletedSection);
-            console.log('(before) optimistic result: ', optimisticResult);
-            optimisticResult.splice(deletedSection.sectionIndex, 1);
-            optimisticResult.forEach((section, index) => section.sectionIndex = index);
-            console.log('(after) optimistic result: ', optimisticResult);
-            queryClient.setQueryData(['sections', tabId], {
-                ...previousSectionsData,
-                'hydra:member': optimisticResult
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                draftData['hydra:member'] = draftData['hydra:member'].filter((section) => section.uuid !== deletedSection.sectionId);
+                draftData['hydra:member'].forEach((section, index) => section.sectionIndex = index);
+                draftData['hydra:totalItems'] = draftData['hydra:member'].length;
             });
+            
+            queryClient.setQueryData(['sections', tabId], optimisticResult);
             
             return { previousSectionsData };
         },
@@ -106,7 +105,7 @@ export function useDeleteSection(tabId) {
         },
         onSettled: () => {
             // Refetch the tab data
-            //queryClient.invalidateQueries(['sections', tabId]);
+            queryClient.invalidateQueries(['sections', tabId]);
         },
     });
 }
