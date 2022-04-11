@@ -16,6 +16,34 @@ export function useFetchPluslet(plusletId) {
     return useQuery(['pluslet', plusletId], () => fetchPluslet(plusletId));
 }
 
+export function useCreatePluslet(sectionId) {
+    if (sectionId === undefined) throw new Error('"sectionId" field is required to call useCreatePluslet.');
+
+    const queryClient = useQueryClient();
+    return useMutation(createPluslet, {
+        onMutate: async newPluslet => {
+            await queryClient.cancelQueries(['pluslets', sectionId]);
+            const previousPlusletsData = queryClient.getQueryData(['pluslets', sectionId]);
+            
+            queryClient.setQueryData(['pluslets', sectionId], {
+                ...previousPlusletsData,
+                'hydra:member': [...previousPlusletsData['hydra:member'], newPluslet],
+            });
+            
+            return { previousPlusletsData };
+        },
+        onError: (error, newPluslet, context) => {
+            // Perform rollback of tab mutation
+            console.error(error);
+            queryClient.setQueryData(['pluslets', sectionId], context.previousPlusletsData);
+        },
+        onSettled: () => {
+            // Refetch the tab data
+            queryClient.invalidateQueries(['pluslets', sectionId]);
+        },
+    });
+}
+
 export function useReorderPluslet() {
     const queryClient = useQueryClient();
     return useMutation(reorderPluslet, {
@@ -218,6 +246,22 @@ async function fetchPluslet(plusletId) {
     }
 
     return data.json();
+}
+
+async function createPluslet(initialPlusletData) {
+    const plusletReq = await fetch('/api/pluslets', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(initialPlusletData)
+    });
+
+    if (!plusletReq.ok) {
+        throw new Error(plusletReq.status + ' ' + plusletReq.statusText);
+    }
+
+    return plusletReq.json();
 }
 
 async function updatePluslet({ plusletId, data }) {
