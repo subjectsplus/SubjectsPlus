@@ -83,11 +83,14 @@ export function useDeleteTab(subjectId) {
             await queryClient.cancelQueries(['tabs', subjectId]);
             const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
             
-            const optimisticResult = {...previousTabsData};
-            optimisticResult['hydra:member'].splice(deletedTab.tabIndex, 1);
-            optimisticResult['hydra:member'].forEach((tab, index) => tab.tabIndex = index);
+            const optimisticResult = [...previousTabsData['hydra:member']];
+            optimisticResult.splice(deletedTab.tabIndex, 1);
+            optimisticResult.forEach((tab, index) => tab.tabIndex = index);
 
-            queryClient.setQueryData(['tabs', subjectId], optimisticResult);
+            queryClient.setQueryData(['tabs', subjectId], {
+                ...previousTabsData,
+                'hydra:member': optimisticResult
+            });
             
             return { previousTabsData };
         },
