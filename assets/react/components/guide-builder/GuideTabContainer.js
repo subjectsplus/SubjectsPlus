@@ -127,13 +127,13 @@ function GuideTabContainer(props) {
 
         setActiveKey(newActiveKey);
 
-        deleteTabMutation.mutate(currentTab.tabId, {
-            onSettled: () => {
-                setDeleteTabClicked(false);
-                setDeletingTab(false);
-                setShowSettings(false);
-            }
+        deleteTabMutation.mutate({
+            tabId: currentTab.tabId
         });
+
+        setDeleteTabClicked(false);
+        setDeletingTab(false);
+        setShowSettings(false);
     }
 
     const handleTabDelete = () => {
@@ -164,6 +164,7 @@ function GuideTabContainer(props) {
 
     const reorderTab = async (sourceIndex, destinationIndex) => {
         // focus the tab container to the destination tab
+        // todo: figure out whether we want to move only the current active tab at any given time
         setActiveKey(destinationIndex);
 
         // perform the reorder mutation in the background
@@ -181,12 +182,15 @@ function GuideTabContainer(props) {
     }
 
     const handleOnDragEnd = (result) => {
+        // exit if the necessary drag data needed is not available
+        if (result.source === undefined || result.source === null || 
+            result.destination === undefined || result.destination === null) return;
+        if (result.source.index === undefined || result.destination.index === undefined) return;
+
         if (result.type === 'tab') {
             setDraggingTab(false);
 
             // exit if element hasn't changed position
-            if (result.source === undefined || result.destination === undefined) return;
-            if (result.source.index === undefined || result.destination.index === undefined) return;
             if (result.source.index === result.destination.index) return;
 
             // perform the reordering
