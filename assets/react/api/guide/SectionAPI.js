@@ -26,15 +26,14 @@ export function useCreateSection(tabId) {
         onMutate: async newSection => {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
-            const optimisticResult = {
-                ...newSection,
-                sectionId: newSection.uuid
-            }
-            
-            queryClient.setQueryData(['sections', tabId], {
-                ...previousSectionsData,
-                'hydra:member': [...previousSectionsData['hydra:member'], optimisticResult],
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                draftData['hydra:member'].push({
+                    ...newSection,
+                    sectionId: newSection.uuid
+                });
             });
+            
+            queryClient.setQueryData(['sections', tabId], optimisticResult);
             
             return { previousSectionsData };
         },
@@ -59,11 +58,10 @@ export function useUpdateSection(tabId) {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
 
-            const optimisticResult = {...previousSectionsData};
-            optimisticResult['hydra:member'][updatedSection.sectionIndex] = updatedSection.optimisticResult;
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                draftData['hydra:member'][updatedSection.sectionIndex] = updatedSection.optimisticResult;
+            });
             
-            console.log('optimisticResult', optimisticResult);
-
             queryClient.setQueryData(['sections', tabId], optimisticResult);
             return { previousSectionsData };
         },
