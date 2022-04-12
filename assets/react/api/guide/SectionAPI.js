@@ -120,21 +120,13 @@ export function useReorderSection(tabId) {
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
 
             // produce optimistic result
-            const newSections = [...previousSectionsData['hydra:member']];
-
-            // reorder sections
-            const [reorderedItem] = newSections.splice(sectionData.sourceSectionIndex, 1);
-            newSections.splice(sectionData.destinationSectionIndex, 0, reorderedItem);
-        
-            // set the updated tab index
-            newSections.forEach((section, index) => {
-                section.sectionIndex = index;
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                const [reorderedSection] = draftData['hydra:member'].splice(sectionData.sourceSectionIndex, 1);
+                draftData['hydra:member'].splice(sectionData.destinationSectionIndex, 0, reorderedSection);
+                draftData['hydra:member'].forEach((section, index) => section.sectionIndex = index);
             });
 
-            queryClient.setQueryData(['sections', tabId], {
-                ...previousSectionsData,
-                'hydra:member': newSections,
-            });
+            queryClient.setQueryData(['sections', tabId], optimisticResult);
             
             return { previousSectionsData };
         },
