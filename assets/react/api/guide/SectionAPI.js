@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import produce from "immer";
+import produce from 'immer';
 
 export function useFetchSections(tabId) {
     if (tabId === undefined) throw new Error('"tabId" argument is required to call useFetchSections.');
