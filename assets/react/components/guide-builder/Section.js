@@ -38,7 +38,7 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
     const addPluslet = (column, row) => {
         if (Array.isArray(data)) {
             const initialPlusletData = {
-                uuid: uuidv4(),
+                id: uuidv4(),
                 title: "Untitled",
                 type: "Basic",
                 body: "",
@@ -68,8 +68,8 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                     columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === currentColumn)
                     .filter(pluslet => pluslet !== undefined)
                     .map((pluslet, row) => (
-                        <Pluslet key={pluslet.uuid} 
-                            plusletId={pluslet.uuid} plusletRow={row} />)
+                        <Pluslet key={pluslet.id} 
+                            plusletId={pluslet.id} plusletRow={row} />)
                     );
                 }
 

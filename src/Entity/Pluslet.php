@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * Pluslet.
@@ -149,6 +148,7 @@ class Pluslet
      * @var Symfony\Component\Uid\Uuid|null
      * @ORM\Column(type="uuid", nullable=true)
      * @ApiProperty(identifier=true)
+     * @SerializedName("id")
      */
     private $uuid;
     

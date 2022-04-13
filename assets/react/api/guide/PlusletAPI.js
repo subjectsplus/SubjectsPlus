@@ -58,20 +58,20 @@ export function useDeletePluslet(sectionId) {
             const optimisticResult = produce(previousPlusletsData, draftData => {
                 const updates = {};
                 const columnPluslets = draftData['hydra:member'].filter(pluslet => pluslet.pcolumn === deletedPluslet.pcolumn)
-                .filter(pluslet => pluslet.uuid !== deletedPluslet.plusletId);
+                .filter(pluslet => pluslet.id !== deletedPluslet.id);
 
                 columnPluslets.forEach((pluslet, index) => {
                     if (pluslet.prow !== index) {
-                        updates[pluslet.uuid] = {
+                        updates[pluslet.id] = {
                             prow: index
                         };
                     }
                 });
 
-                draftData['hydra:member'] = draftData['hydra:member'].filter((pluslet) => pluslet.uuid !== deletedPluslet.plusletId);
+                draftData['hydra:member'] = draftData['hydra:member'].filter((pluslet) => pluslet.id !== deletedPluslet.id);
                 draftData['hydra:member'].forEach(pluslet => {
-                    if (updates[pluslet.uuid]) {
-                        pluslet.prow = updates[pluslet.uuid].prow;
+                    if (updates[pluslet.id]) {
+                        pluslet.prow = updates[pluslet.id].prow;
                     }
                 });
                 draftData['hydra:totalItems'] = draftData['hydra:member'].length;
@@ -131,7 +131,7 @@ export function useReorderPluslet() {
                 // Index the updated prow
                 columnPluslets.forEach((pluslet, index) => {
                     if (pluslet.prow !== index) {
-                        updatedPluslets[pluslet.uuid] = {
+                        updatedPluslets[pluslet.id] = {
                             prow: index
                         };
                     }
@@ -139,8 +139,8 @@ export function useReorderPluslet() {
 
                 // Set the updated prow
                 destinationPluslets.forEach(pluslet => {
-                    if (updatedPluslets[pluslet.uuid]) {
-                        pluslet.prow = updatedPluslets[pluslet.uuid].prow;
+                    if (updatedPluslets[pluslet.id]) {
+                        pluslet.prow = updatedPluslets[pluslet.id].prow;
                     }
                 });
             } else {
@@ -159,13 +159,13 @@ export function useReorderPluslet() {
                 // Pluslet must be removed from sourcePluslets if not the same section
                 if (sourceSection !== destinationSection) {
                     sourcePluslets.splice(sourcePluslets.findIndex(pluslet => 
-                        pluslet.uuid === reorderedItem.uuid), 1);
+                        pluslet.id === reorderedItem.id), 1);
                 }
 
                 // Set the updated prow for source column pluslets
                 sourceColumnPluslets.forEach((pluslet, index) => {
                     if (pluslet.prow !== index) {
-                        updatedPluslets[pluslet.uuid] = {
+                        updatedPluslets[pluslet.id] = {
                             prow: index,
                             pcolumn: sourceColumn
                         };
@@ -190,8 +190,8 @@ export function useReorderPluslet() {
                 destinationColumnPluslets.forEach((pluslet, index) => {
                     // Note: possibly due to it not recognizing reorderedItem in conditional
                     if (pluslet.prow !== index || pluslet.pcolumn !== destinationColumn
-                        || pluslet.uuid === reorderedItem.uuid) {
-                        updatedPluslets[pluslet.uuid] = {
+                        || pluslet.id === reorderedItem.id) {
+                        updatedPluslets[pluslet.id] = {
                             prow: index,
                             pcolumn: destinationColumn
                         };
@@ -200,16 +200,16 @@ export function useReorderPluslet() {
 
                 // Set the updated prow/pcolumn
                 sourcePluslets.forEach(pluslet => {
-                    if (updatedPluslets[pluslet.uuid]) {
-                        pluslet.prow = updatedPluslets[pluslet.uuid].prow;
-                        pluslet.pcolumn = updatedPluslets[pluslet.uuid].pcolumn;
+                    if (updatedPluslets[pluslet.id]) {
+                        pluslet.prow = updatedPluslets[pluslet.id].prow;
+                        pluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
                     }
                 });
 
                 destinationPluslets.forEach(pluslet => {
-                    if (updatedPluslets[pluslet.uuid]) {
-                        pluslet.prow = updatedPluslets[pluslet.uuid].prow;
-                        pluslet.pcolumn = updatedPluslets[pluslet.uuid].pcolumn;
+                    if (updatedPluslets[pluslet.id]) {
+                        pluslet.prow = updatedPluslets[pluslet.id].prow;
+                        pluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
                     }
                 });
 
@@ -301,7 +301,7 @@ async function createPluslet(initialPlusletData) {
     const plusletReq = await fetch('/api/pluslets', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(initialPlusletData)
     });
@@ -320,7 +320,7 @@ async function updatePluslet({ plusletId, data }) {
     const req = await fetch(`/api/pluslets/${plusletId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(data)
     });
@@ -347,10 +347,10 @@ async function deletePluslet({ plusletId }) {
     newPluslets.splice(plusletToDelete.prow, 1);
     await Promise.all(newPluslets.map(async (pluslet, index) => {
         if (pluslet.prow !== index) {
-            return fetch(`/api/pluslets/${pluslet.uuid}`, {
+            return fetch(`/api/pluslets/${pluslet.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     prow: index
@@ -393,10 +393,10 @@ async function reorderPlusletWithinColumn(sectionId, column, sourceIndex, destin
     // Perform the updating of the section index asynchronously
     return Promise.all(pluslets.map(async (pluslet, index) => {
         if (pluslet.prow !== index) {
-            return fetch(`/api/pluslets/${pluslet.uuid}`, {
+            return fetch(`/api/pluslets/${pluslet.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     prow: index
@@ -428,10 +428,10 @@ async function reorderPlusletAcrossSections(sourceSection, sourceColumn, sourceI
     // Reorder source column pluslets
     await Promise.all(sourceColumnPluslets.map(async (pluslet, index) => {
         if (pluslet.prow !== index) {
-            return fetch(`/api/pluslets/${pluslet.uuid}`, {
+            return fetch(`/api/pluslets/${pluslet.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     prow: index
@@ -455,11 +455,11 @@ async function reorderPlusletAcrossSections(sourceSection, sourceColumn, sourceI
     console.log('(after) destinationColumnPluslets: ', destinationColumnPluslets);
     return Promise.all(destinationColumnPluslets.map(async (pluslet, index) => {
         if (pluslet.prow !== index || pluslet.pcolumn !== destinationColumn
-            || pluslet.uuid === reorderedItem.uuid) {
-            return fetch(`/api/pluslets/${pluslet.uuid}`, {
+            || pluslet.id === reorderedItem.id) {
+            return fetch(`/api/pluslets/${pluslet.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     prow: index,
