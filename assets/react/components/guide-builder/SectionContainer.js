@@ -73,7 +73,7 @@ function SectionContainer({ tabId }) {
     const addSection = () => {
         if (Array.isArray(data)) {
             const initialSectionData = {
-                uuid: uuidv4(),
+                id: uuidv4(),
                 sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
                 layout: '4-4-4',
                 tab: '/api/tabs/' + tabId
@@ -92,7 +92,7 @@ function SectionContainer({ tabId }) {
         } else {
             const guideSections = data.map((section, index) => {
                 return (
-                    <Section key={section.uuid} sectionId={section.uuid} 
+                    <Section key={section.id} sectionId={section.id} 
                         layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} />
                 );
             });
