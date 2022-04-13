@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import produce from 'immer';
 
 export function useFetchPluslets(sectionId) {
     if (sectionId === undefined) throw new Error('"sectionId" argument is required to call useFetchPluslets.');
@@ -25,10 +26,11 @@ export function useCreatePluslet(sectionId) {
             await queryClient.cancelQueries(['pluslets', sectionId]);
             const previousPlusletsData = queryClient.getQueryData(['pluslets', sectionId]);
             
-            queryClient.setQueryData(['pluslets', sectionId], {
-                ...previousPlusletsData,
-                'hydra:member': [...previousPlusletsData['hydra:member'], newPluslet],
+            const optimisticResult = produce(previousPlusletsData, draftData => {
+                draftData['hydra:member'].push(newPluslet);
             });
+
+            queryClient.setQueryData(['pluslets', sectionId], optimisticResult);
             
             return { previousPlusletsData };
         },
