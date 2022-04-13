@@ -5,7 +5,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDeleteSection } from '#api/guide/SectionAPI';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 function Section({ tabId, sectionId, layout, sectionIndex }) {
     const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
