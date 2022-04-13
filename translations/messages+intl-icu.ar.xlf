@@ -4758,6 +4758,14 @@
         <source>control.guides.table.heading.last_update</source>
         <target>__control.guides.table.heading.last_update</target>
       </trans-unit>
+      <trans-unit id="eBjdB6_" resname="control.guides.back_to_list">
+        <source>control.guides.back_to_list</source>
+        <target>__control.guides.back_to_list</target>
+      </trans-unit>
+      <trans-unit id="DlS4Gzj" resname="control.guide_meta.edit.header">
+        <source>control.guide_meta.edit.header</source>
+        <target>__control.guide_meta.edit.header</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
