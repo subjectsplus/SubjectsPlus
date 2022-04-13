@@ -108,58 +108,70 @@ export function useReorderPluslet() {
             await queryClient.cancelQueries(['pluslets', destinationSection]);
 
             const sourcePlusletsData = queryClient.getQueryData(['pluslets', sourceSection]);
-            const sourcePluslets = [...sourcePlusletsData['hydra:member']];
             const destinationPlusletsData = queryClient.getQueryData(['pluslets', destinationSection]);
-            const destinationPluslets = [...destinationPlusletsData['hydra:member']];
 
             // Produce optimistic result
             if (sourceSection === destinationSection && sourceColumn === destinationColumn) {
-                const columnPluslets = destinationPluslets.filter(pluslet =>
-                    pluslet.pcolumn === destinationColumn).filter(
+                const optimisticDestinationPluslets = produce(destinationPlusletsData, draftData => {
+                    const columnPluslets = draftData['hydra:member'].filter(
+                        pluslet => pluslet.pcolumn === destinationColumn).filter(
                         pluslet => pluslet !== undefined
                     );
 
-                const updatedPluslets = {};
+                    const updatedPluslets = {};
 
-                // Move pluslet within the same column
-                const [reorderedItem] = columnPluslets.splice(sourceIndex, 1);
+                    // Move pluslet within the same column
+                    const [reorderedPluslet] = columnPluslets.splice(sourceIndex, 1);
 
-                if (!reorderedItem) throw new Error('Failed to find source pluslet to reorder for optimistic result.');
+                    if (!reorderedPluslet) throw new Error('Failed to find source pluslet to reorder for optimistic result.');
 
-                columnPluslets.splice(destinationIndex, 0, reorderedItem);
+                    columnPluslets.splice(destinationIndex, 0, reorderedPluslet);
 
-                // Index the updated prow
-                columnPluslets.forEach((pluslet, index) => {
-                    if (pluslet.prow !== index) {
-                        updatedPluslets[pluslet.id] = {
-                            prow: index
-                        };
-                    }
+                    // Index the updated prow
+                    columnPluslets.forEach((pluslet, index) => {
+                        if (pluslet.prow !== index) {
+                            updatedPluslets[pluslet.id] = {
+                                prow: index
+                            };
+                        }
+                    });
+
+                    // Set the updated prow
+                    draftData['hydra:member'].forEach(pluslet => {
+                        if (updatedPluslets[pluslet.id]) {
+                            pluslet.prow = updatedPluslets[pluslet.id].prow;
+                        }
+                    });
+
+                    // Resort the pluslets
+                    draftData['hydra:member'].sort((plusletA, plusletB) => {
+                        if (plusletA.pcolumn === plusletB.pcolumn) {
+                            return plusletA.prow - plusletB.prow;
+                        }
+                        return plusletA.pcolumn - plusletB.pcolumn;
+                    });
                 });
-
-                // Set the updated prow
-                destinationPluslets.forEach(pluslet => {
-                    if (updatedPluslets[pluslet.id]) {
-                        pluslet.prow = updatedPluslets[pluslet.id].prow;
-                    }
-                });
+    
+                queryClient.setQueryData(['pluslets', destinationSection], optimisticDestinationPluslets);
+    
+                return { destinationPlusletsData };
             } else {
-                const sourceColumnPluslets = sourcePluslets.filter(
+                const sourceColumnPluslets = sourcePlusletsData['hydra:member'].filter(
                     pluslet => pluslet.pcolumn === sourceColumn).filter(
-                        pluslet => pluslet !== undefined
+                    pluslet => pluslet !== undefined
                 );
-                
+
                 const updatedPluslets = {};
 
                 // Remove pluslet from source column
-                const [reorderedItem] = sourceColumnPluslets.splice(sourceIndex, 1);
+                const [reorderedPluslet] = sourceColumnPluslets.splice(sourceIndex, 1);
                 
-                if (!reorderedItem) throw new Error('Failed to find source pluslet to reorder for optimistic result.');
+                if (!reorderedPluslet) throw new Error('Failed to find source pluslet to reorder for optimistic result.');
 
                 // Pluslet must be removed from sourcePluslets if not the same section
                 if (sourceSection !== destinationSection) {
-                    sourcePluslets.splice(sourcePluslets.findIndex(pluslet => 
-                        pluslet.id === reorderedItem.id), 1);
+                    const plusletIndex = sourcePluslets.findIndex(pluslet => pluslet.id === reorderedPluslet.id);
+                    sourcePluslets.splice(plusletIndex, 1);
                 }
 
                 // Set the updated prow for source column pluslets
@@ -173,24 +185,23 @@ export function useReorderPluslet() {
                 });
 
                 // Move pluslet to a different section/column
-                const destinationColumnPluslets = destinationPluslets.filter(
+                const destinationColumnPluslets = destinationPlusletsData['hydra:member'].filter(
                     pluslet => pluslet.pcolumn === destinationColumn).filter(
                         pluslet => pluslet !== undefined
                 );
 
                 // Add to destination column and reorder destination column pluslets 
-                destinationColumnPluslets.splice(destinationIndex, 0, reorderedItem);
+                destinationColumnPluslets.splice(destinationIndex, 0, reorderedPluslet);
 
                 // Pluslet must be added to destinationPluslets if not the same section
                 if (sourceSection !== destinationSection) {
-                    destinationPluslets.push(reorderedItem);
+                    destinationPluslets.push(reorderedPluslet);
                 }
 
                 // Set the updated prow/pcolumn for destination column pluslets
                 destinationColumnPluslets.forEach((pluslet, index) => {
-                    // Note: possibly due to it not recognizing reorderedItem in conditional
                     if (pluslet.prow !== index || pluslet.pcolumn !== destinationColumn
-                        || pluslet.id === reorderedItem.id) {
+                        || pluslet.id === reorderedPluslet.id) {
                         updatedPluslets[pluslet.id] = {
                             prow: index,
                             pcolumn: destinationColumn
@@ -198,63 +209,48 @@ export function useReorderPluslet() {
                     }
                 });
 
-                // Set the updated prow/pcolumn
-                sourcePluslets.forEach(pluslet => {
-                    if (updatedPluslets[pluslet.id]) {
-                        pluslet.prow = updatedPluslets[pluslet.id].prow;
-                        pluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
-                    }
+                const optimisticSourcePluslets = produce(sourcePlusletsData, draftData => {
+                    // Set the updated prow/pcolumn
+                    draftData['hydra:member'].forEach(pluslet => {
+                        if (updatedPluslets[pluslet.id]) {
+                            pluslet.prow = updatedPluslets[pluslet.id].prow;
+                            pluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
+                        }
+                    });
+
+                    // Resort the pluslets
+                    draftData['hydra:member'].sort((plusletA, plusletB) => {
+                        if (plusletA.pcolumn === plusletB.pcolumn) {
+                            return plusletA.prow - plusletB.prow;
+                        }
+                        return plusletA.pcolumn - plusletB.pcolumn;
+                    });
                 });
 
-                destinationPluslets.forEach(pluslet => {
-                    if (updatedPluslets[pluslet.id]) {
-                        pluslet.prow = updatedPluslets[pluslet.id].prow;
-                        pluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
-                    }
-                });
+                const optimisticDestinationPluslets = produce(destinationPlusletsData, draftData => {
+                    // Set the updated prow/pcolumn
+                    draftData['hydra:member'].forEach(pluslet => {
+                        if (updatedPluslets[pluslet.id]) {
+                            pluslet.prow = updatedPluslets[pluslet.id].prow;
+                            pluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
+                        }
+                    });
 
-                // Sort the pluslets
-                sourcePluslets.sort((plusletA, plusletB) => {
-                    if (plusletA.pcolumn === plusletB.pcolumn) {
-                        return plusletA.prow - plusletB.prow;
-                    }
-                    return plusletA.pcolumn - plusletB.pcolumn;
-                });
-
-                destinationPluslets.sort((plusletA, plusletB) => {
-                    if (plusletA.pcolumn === plusletB.pcolumn) {
-                        return plusletA.prow - plusletB.prow;
-                    }
-                    return plusletA.pcolumn - plusletB.pcolumn;
+                    // Resort the pluslets
+                    draftData['hydra:member'].sort((plusletA, plusletB) => {
+                        if (plusletA.pcolumn === plusletB.pcolumn) {
+                            return plusletA.prow - plusletB.prow;
+                        }
+                        return plusletA.pcolumn - plusletB.pcolumn;
+                    });
                 });
 
                 // Set optimistic result to query data
-                queryClient.setQueryData(['pluslets', sourceSection], {
-                    ...sourcePlusletsData,
-                    'hydra:member': sourcePluslets,
-                });
-
-                queryClient.setQueryData(['pluslets', destinationSection], {
-                    ...destinationPlusletsData,
-                    'hydra:member': destinationPluslets,
-                });
+                queryClient.setQueryData(['pluslets', sourceSection], optimisticSourcePluslets);
+                queryClient.setQueryData(['pluslets', destinationSection], optimisticDestinationPluslets);
 
                 return { sourcePlusletsData, destinationPlusletsData };
             }
-
-            destinationPluslets.sort((plusletA, plusletB) => {
-                if (plusletA.pcolumn === plusletB.pcolumn) {
-                    return plusletA.prow - plusletB.prow;
-                }
-                return plusletA.pcolumn - plusletB.pcolumn;
-            });
-
-            queryClient.setQueryData(['pluslets', destinationSection], {
-                ...destinationPlusletsData,
-                'hydra:member': destinationPluslets,
-            });
-
-            return { destinationPlusletsData };
         },
         onError: (error, plusletData, context) => {
             // Perform rollback of pluslet order mutation
