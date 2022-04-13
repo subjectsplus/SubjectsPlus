@@ -380,11 +380,11 @@ async function reorderPlusletWithinColumn(sectionId, column, sourceIndex, destin
     });
 
     // Move pluslet within the same column
-    const [reorderedItem] = pluslets.splice(sourceIndex, 1);
+    const [reorderedPluslet] = pluslets.splice(sourceIndex, 1);
 
-    if (!reorderedItem) throw new Error('Failed to find source pluslet to reorder.');
+    if (!reorderedPluslet) throw new Error('Failed to find source pluslet to reorder.');
 
-    pluslets.splice(destinationIndex, 0, reorderedItem);
+    pluslets.splice(destinationIndex, 0, reorderedPluslet);
 
     // Perform the updating of the section index asynchronously
     return Promise.all(pluslets.map(async (pluslet, index) => {
@@ -413,13 +413,12 @@ async function reorderPlusletAcrossSections(sourceSection, sourceColumn, sourceI
     });
 
     // Remove pluslet from source column
-    console.log('(before) sourceColumnPluslets: ', sourceColumnPluslets);
-    const [reorderedItem] = sourceColumnPluslets.splice(sourceIndex, 1);
+    const [reorderedPluslet] = sourceColumnPluslets.splice(sourceIndex, 1);
 
     // Note: Issue occurs when dragging multiple pluslets consistently before
     // the mutation can "catch up", possibly need some sort of limiter, or if
     // too many requests at once, force a loader screen to catch up
-    if (!reorderedItem) throw new Error('Failed to find source pluslet to reorder.');
+    if (!reorderedPluslet) throw new Error('Failed to find source pluslet to reorder.');
 
     // Reorder source column pluslets
     await Promise.all(sourceColumnPluslets.map(async (pluslet, index) => {
@@ -446,12 +445,10 @@ async function reorderPlusletAcrossSections(sourceSection, sourceColumn, sourceI
     });
 
     // Add to destination column and reorder destination column pluslets
-    console.log('(before) destinationColumnPluslets: ', destinationColumnPluslets);
-    destinationColumnPluslets.splice(destinationIndex, 0, reorderedItem);
-    console.log('(after) destinationColumnPluslets: ', destinationColumnPluslets);
+    destinationColumnPluslets.splice(destinationIndex, 0, reorderedPluslet);
     return Promise.all(destinationColumnPluslets.map(async (pluslet, index) => {
         if (pluslet.prow !== index || pluslet.pcolumn !== destinationColumn
-            || pluslet.id === reorderedItem.id) {
+            || pluslet.id === reorderedPluslet.id) {
             return fetch(`/api/pluslets/${pluslet.id}`, {
                 method: 'PUT',
                 headers: {
