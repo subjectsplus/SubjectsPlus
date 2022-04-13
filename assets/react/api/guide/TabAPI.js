@@ -86,7 +86,7 @@ export function useDeleteTab(subjectId) {
             const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
             
             const optimisticResult = produce(previousTabsData, draftData => {
-                draftData['hydra:member'] = draftData['hydra:member'].filter(tab => tab.tabId !== deletedTab.tabId);
+                draftData['hydra:member'] = draftData['hydra:member'].filter(tab => tab.id !== deletedTab.tabId);
                 draftData['hydra:member'].forEach((tab, index) => tab.tabIndex = index);
             });
 
@@ -162,7 +162,7 @@ async function createTab(initialTabData) {
     const tabReq = await fetch('/api/tabs', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(initialTabData)
     });
@@ -177,10 +177,10 @@ async function createTab(initialTabData) {
     const sectionReq = await fetch('/api/sections', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify({
-            tab: `/api/tabs/${tabData.tabId}`
+            tab: `/api/tabs/${tabData.id}`
         })
     });
 
@@ -198,7 +198,7 @@ async function updateTab({tabId, data}) {
     const req = await fetch(`/api/tabs/${tabId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(data)
     });
@@ -220,12 +220,12 @@ async function deleteTab({ tabId }) {
    
     // update the tab index
     newTabs.splice(tabToDelete.tabIndex, 1);
-    await Promise.all(newTabs.map((tab, index) => {
+    await Promise.all(newTabs.map(async (tab, index) => {
         if (tab.tabIndex !== index) {
-            return fetch(`/api/tabs/${tab.tabId}`, {
+            return fetch(`/api/tabs/${tab.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     tabIndex: index
@@ -270,10 +270,10 @@ async function reorderTab({subjectId, sourceTabIndex, destinationTabIndex}) {
     // perform the updating of the tab index asynchronously
     return Promise.all(newTabs.map((tab, index) => {
         if (newTabs[index].tabIndex !== index) {
-            return fetch(`/api/tabs/${tab.tabId}`, {
+            return fetch(`/api/tabs/${tab.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     tabIndex: index

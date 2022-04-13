@@ -7,6 +7,7 @@ import EditTabModal from './EditTabModal';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 function GuideTabContainer(props) {
     const [lastTabIndex, setLastTabIndex] = useState(0);
@@ -55,6 +56,7 @@ function GuideTabContainer(props) {
 
     const newTab = () => {
         const initialTabData = {
+            id: uuidv4(),
             label: (numberUntitled === 0 ? 'Untitled' : 
                         'Untitled ' + (numberUntitled + 1)),
             tabIndex: lastTabIndex + 1,
@@ -92,7 +94,7 @@ function GuideTabContainer(props) {
             setSavingChanges(true);
 
             updateTabMutation.mutate({
-                tabId: currentTab.tabId,
+                id: currentTab.id,
                 tabIndex: currentTab.tabIndex,
                 data: changes,
                 optimisticResult: {
@@ -128,7 +130,7 @@ function GuideTabContainer(props) {
         setActiveKey(newActiveKey);
 
         deleteTabMutation.mutate({
-            tabId: currentTab.tabId
+            tabId: currentTab.id
         });
 
         setDeleteTabClicked(false);
@@ -209,19 +211,19 @@ function GuideTabContainer(props) {
             
             // convert tabs data to draggable nav links
             const guideTabs = data.map(tab => (
-                <DraggableTab key={'tab-' + tab.tabIndex} tab={tab} active={activeKey === tab.tabIndex}
-                    onClick={() => setShowSettings(!showSettings)} /> 
+                <DraggableTab key={'tab-' + tab.tabIndex} tabId={tab.id} tabIndex={tab.tabIndex} label={tab.label}
+                    active={activeKey === tab.tabIndex} onClick={() => setShowSettings(!showSettings)} /> 
             ));
 
             // generate tab content
             const tabsContent = data.map(tab => {
-                if (tab.tabId && currentTab.tabIndex == tab.tabIndex) {
+                if (currentTab.tabIndex == tab.tabIndex) {
                     return (
                         <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={(activeKey === tab.tabIndex ? 'active': '')}
                             key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
-                                <SectionContainer tabId={tab.tabId} />
+                                <SectionContainer tabId={tab.id} />
                         </Tab.Pane>
-                    )
+                    );
                 }
             });
 
