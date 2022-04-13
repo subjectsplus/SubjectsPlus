@@ -84,7 +84,7 @@ export function useDeleteSection(tabId) {
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
 
             const optimisticResult = produce(previousSectionsData, draftData => {
-                draftData['hydra:member'] = draftData['hydra:member'].filter((section) => section.id !== deletedSection.id);
+                draftData['hydra:member'] = draftData['hydra:member'].filter((section) => section.id !== deletedSection.sectionId);
                 draftData['hydra:member'].forEach((section, index) => section.sectionIndex = index);
                 draftData['hydra:totalItems'] = draftData['hydra:member'].length;
             });
