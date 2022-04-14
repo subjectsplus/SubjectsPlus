@@ -107,7 +107,7 @@
       </trans-unit>
       <trans-unit id="a1eFlPx" resname="control.header.records.browse_items">
         <source>control.header.records.browse_items</source>
-        <target>Browse items</target>
+        <target>All Records</target>
       </trans-unit>
       <trans-unit id="O3tjp_Y" resname="control.header.records.databases_by_subject">
         <source>control.header.records.databases_by_subject</source>

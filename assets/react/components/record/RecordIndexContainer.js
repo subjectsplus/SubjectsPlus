@@ -1,71 +1,21 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import AlphabetList from "#components/record/AlphabetList";
 
-console.log('record component container');
+import Records from "#components/record/Records";
 
-export default class RecordIndexContainer extends Component {
+function RecordIndexContainer(props) {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            results : [],
-            isErrored : false
-        }
-    }
-
-    componentDidMount() {
-        this.getResults();
-    }
-
-    getResults() {
-        var apiLink = '/api/titles?pagination=true';
-
-        // fetch api results
-        fetch(apiLink).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-
-            this.setState({
-                isErrored: true
-
-            });
-        })
-        .then(results => {
-            this.setState({
-                results: results['hydra:member']
-            })
-        })
-        .catch(err => {
-            console.error(err);
-            this.setState({
-                isErrored: true
-            });
-        });
-    }
-
-    render() {
-        // let resultItems = [];
-        //
-        // if(this.state.results) {
-        //     resultItems = this.state.results.map( (result, index) => {
-        //         return (
-        //             <li key={result.titleId}>
-        //                 {result.title}
-        //             </li>
-        //         );
-        //     });
-        //     return (
-        //         <div>
-        //             <ul>
-        //                 {resultItems}
-        //             </ul>
-        //         </div>
-        //     );
-        // } else {
-        //     return (<p>No results</p>);
-        // }
-    }
+    return (
+        <>
+            <div>
+                <h1>Record Index Container</h1>
+            </div>
+            <div><AlphabetList /></div>
+            <div>Filters</div>
+            <div>Search Bar</div>
+            <div><Records />></div>
+        </>
+    )
 }
-//ReactDOM.render(<RecordIndexContainer />, document.getElementById('SearchBar'));
+
+export default RecordIndexContainer;

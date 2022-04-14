@@ -36,22 +36,8 @@ export default class RecordResults extends Component {
         });
     }
 
-    setAlphabetLetters() {
-        return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K","L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    }
 
-    getAlphabetList() {
-        let alphabet = this.setAlphabetLetters();
 
-        return alphabet.map((letter,index)=>{
-            return <li
-                    className="list-group-item"
-                    key={index}>
-                        <a onClick={this.onLetterClick}
-                           href="#"
-                           data-letter={letter}>{letter}</a></li>
-        });
-    }
 
     onLetterClick(evt) {
         //console.log(evt);
@@ -159,14 +145,14 @@ export default class RecordResults extends Component {
 
     render() {
 
-        let alphabetList = this.getAlphabetList();
+
         let displayResults = this.displayResults();
         let recordCount = this.getRecordCount();
 
         return (
 
             <div>
-                <ul className="list-group list-group-horizontal">{alphabetList}</ul>
+
                 <div>{recordCount}</div>
                 <ul>{displayResults}</ul>
             </div>

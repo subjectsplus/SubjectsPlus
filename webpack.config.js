@@ -28,7 +28,7 @@ Encore
     .addEntry('react_select_init', './assets/backend/javascript/select-field-type/initSelect.js')
 
     // Record Component
-    .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
+    .addEntry('record-index-loader', './assets/react/entry-points/RecordIndexLoader.js')
     .addEntry('alphabet_list', './assets/react/components/record/AlphabetList.js')
     .addEntry('record_results', './assets/react/components/record/RecordResults.js')
 
