@@ -1,8 +1,8 @@
 import React from 'react';
 import Pluslet from './Pluslet';
 import { useFetchPluslets, useCreatePluslet } from '#api/guide/PlusletAPI';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useDeleteSection } from '#api/guide/SectionAPI';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { v4 as uuidv4 } from 'uuid';
@@ -68,7 +68,7 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                     columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === currentColumn)
                     .filter(pluslet => pluslet !== undefined)
                     .map((pluslet, row) => (
-                        <Pluslet key={pluslet.id} 
+                        <Pluslet key={pluslet.id} sectionId={sectionId}
                             plusletId={pluslet.id} plusletRow={row} />)
                     );
                 }

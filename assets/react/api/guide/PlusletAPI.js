@@ -68,7 +68,7 @@ export function useDeletePluslet(sectionId) {
                     }
                 });
 
-                draftData['hydra:member'] = draftData['hydra:member'].filter((pluslet) => pluslet.id !== deletedPluslet.id);
+                draftData['hydra:member'] = draftData['hydra:member'].filter((pluslet) => pluslet.id !== deletedPluslet.plusletId);
                 draftData['hydra:member'].forEach(pluslet => {
                     if (updates[pluslet.id]) {
                         pluslet.prow = updates[pluslet.id].prow;
