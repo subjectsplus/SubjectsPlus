@@ -48,7 +48,7 @@ final class Version20220413190340 extends AbstractMigration
         );
 
         // Generate uuidv4 for existing columns
-        $this->addSql('UPDATE tab SET uuid = UNHEX(REPLACE(uuid_v4s(), "-","")) WHERE uuid IS NULL;');
+        $this->addSql('UPDATE tab SET uuid = UNHEX(REPLACE(uuid_v4s(), "-" COLLATE utf8mb4_unicode_ci, "" COLLATE utf8mb4_unicode_ci)) WHERE uuid IS NULL;');
     }
 
     public function down(Schema $schema): void
