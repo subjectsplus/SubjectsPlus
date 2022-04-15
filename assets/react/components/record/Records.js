@@ -28,16 +28,20 @@ function Records() {
 
 
     const recordsContent = () => {
-        return (
-            <>
-                <div>
-                    {data.map((record) => {
-                        record.title
-                    })}
-                </div>
-            </>
+        if (isLoading) {
+            return (<p>Loading Records...</p>);
+        } else if (isError) {
+            console.error(error);
+            return (<p>Error: Failed to load sections through API Endpoint!</p>);
+        } else {
+            return (
 
-        );
+                    <div>
+                        {data.map((record) => record.title)}
+                    </div>
+
+            );
+        }
     }
 
     return recordsContent();
