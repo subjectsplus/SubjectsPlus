@@ -228,5 +228,14 @@
   }
 }
 
+.btn-icon-table-sort {
+  color: var(--sp-input-disabled-bg);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}
+
 
 

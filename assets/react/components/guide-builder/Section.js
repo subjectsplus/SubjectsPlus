@@ -1,15 +1,17 @@
 import React from 'react';
 import Pluslet from './Pluslet';
-import { useFetchPluslets } from '#api/guide/PlusletAPI';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { useFetchPluslets, useCreatePluslet } from '#api/guide/PlusletAPI';
 import { useDeleteSection } from '#api/guide/SectionAPI';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { v4 as uuidv4 } from 'uuid';
 
 function Section({ tabId, sectionId, layout, sectionIndex }) {
     const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
 
     const deleteSectionMutation = useDeleteSection(tabId);
+    const createPlusletMutation = useCreatePluslet(sectionId);
 
     const getSectionDraggableStyle = (isDragging, draggableStyle) => ({
         position: 'relative',
@@ -27,7 +29,26 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
     const deleteSection = () => {
         const confirmed = confirm('Are you sure you want to delete this section?');
         if (confirmed) {
-            deleteSectionMutation.mutate(sectionId);
+            deleteSectionMutation.mutate({
+                sectionId: sectionId,
+            });
+        }
+    }
+
+    const addPluslet = (column, row) => {
+        if (Array.isArray(data)) {
+            const initialPlusletData = {
+                id: uuidv4(),
+                title: "Untitled",
+                type: "Basic",
+                body: "",
+                pcolumn: column,
+                prow: row,
+                section: '/api/sections/' + sectionId
+            }
+
+            console.log('initialPlusletData: ', initialPlusletData);
+            createPlusletMutation.mutate(initialPlusletData);
         }
     }
 
@@ -40,17 +61,21 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
             if (Number(size) !== 0) {
                 let columnPluslets;
 
+                // set current column and increment by 1
+                const currentColumn = column++;
+
                 if (pluslets && pluslets.length > 0) {
-                    columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === column)
+                    columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === currentColumn)
                     .filter(pluslet => pluslet !== undefined)
                     .map((pluslet, row) => (
-                        <Pluslet key={pluslet.plusletId} 
-                            plusletId={pluslet.plusletId} plusletRow={row} />)
+                        <Pluslet key={pluslet.id} sectionId={sectionId}
+                            plusletId={pluslet.id} plusletRow={row} />)
                     );
                 }
 
-                const columnId = `section|${sectionId.toString()}|column|${column++}`;
-                
+                const columnId = `section|${sectionId.toString()}|column|${currentColumn}`;
+                const columnRows = Array.isArray(columnPluslets) ? columnPluslets.length : 0;
+
                 return (     
                     <Col key={columnId} lg={Number(size)} className="mb-3 mb-lg-0">
                         <Droppable type="pluslet" style={{ transform: 'none' }}
@@ -60,7 +85,7 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                                     <span className="visually-hidden">{columnId}</span>
                                     <div className="text-center mb-2">
                                         <button className="btn btn-link p-1" title="Add Pluslet">
-                                            <i className="fas fa-plus-circle"></i>
+                                            <i className="fas fa-plus-circle" onClick={() => addPluslet(currentColumn, columnRows)}></i>
                                         </button>
                                     </div>
                                     {columnPluslets}

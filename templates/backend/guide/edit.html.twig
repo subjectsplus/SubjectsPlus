@@ -1,6 +1,6 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Edit Guide Details | SubjectsPlus{% endblock %}
+{% block title %}{{ 'control.guide_meta.edit.header' | trans }} | SubjectsPlus{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -9,17 +9,11 @@
 
 {% block content %}
     <div class="container py-5">
-        <div class="row">
-            <div class="col-8">
-                <h1 class="fw-light d-inline-block me-2 mb-1">{{ guide.subject | raw }}</h1>
-                {# TODO: link to front-end preview #}
-                <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
-                <p class="fs-xs">ID: {{ guide.subjectId }} | Slug: {{ guide.shortform }} </p>
-            </div>
-            <div class="col-4 text-end">
-                <a href="{{ path('guide_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
-            </div>
-        </div>
+        <a href="{{ path('guide_index') }}" class="d-block fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
+        <h1 class="fw-light d-inline-block me-2 mb-1">{{ 'control.guide_meta.edit.header' | trans }}</h1>
+        {# TODO: link to front-end preview #}
+        <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
+
         {% set delete_faq = 'true' %}
         {% set update_history = 'true' %}
         {{ include('backend/guide/_form.html.twig', {'button_label': 'Save Guide Details'}) }}

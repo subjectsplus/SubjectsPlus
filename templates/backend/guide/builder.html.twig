@@ -16,13 +16,14 @@
     {% endfor %}
 
     <div class="row">
-        <div class="col-8">
-            <h1 class="fw-light d-inline-block me-2 mb-1" title="ID: {{ guide.subjectId }}">{{ guide.subject | raw }}</h1>
+        <div class="col-10">
+            <h1 class="fw-light d-inline me-2 mb-1">{{ guide.subject | raw }}</h1>
             {# TODO: link to front-end preview #}
             <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
-            <p class="fs-xs">Short form: {{ guide.shortform }}</p>
+            {# TODO: Display full public URL #}
+            <p class="fs-xs">/{{ guide.shortform }}</p>
         </div>
-        <div class="col-4 text-end">
+        <div class="col-2 text-end">
            <a class="btn-link fs-4" data-bs-toggle="offcanvas" href="#offcanvasGuideDetails" role="button" aria-controls="offcanvasGuideDetails" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i></a>
         </div>
     </div>

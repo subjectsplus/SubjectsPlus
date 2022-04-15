@@ -10,6 +10,7 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * Section.
@@ -68,13 +69,14 @@ class Section
      * @var Symfony\Component\Uid\Uuid|null
      * @ORM\Column(type="uuid", nullable=true)
      * @ApiProperty(identifier=true)
+     * @SerializedName("id")
      */
     private $uuid;
 
     public function __construct(Uuid $uuid = null)
     {
         $this->uuid = $uuid ?: Uuid::v4();
-        $this->pluslets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pluslets = new ArrayCollection();
     }
 
     public function getSectionId(): ?int
@@ -151,12 +153,5 @@ class Section
     public function getUuid(): ?Uuid
     {
         return $this->uuid;
-    }
-
-    public function setUuid(Uuid $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
     }
 }

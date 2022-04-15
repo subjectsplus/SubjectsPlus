@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import produce from 'immer';
 
 export function useFetchTabs(subjectId, enabled=true) {
     if (subjectId === undefined) throw new Error('"subjectId" field is required to call useFetchTabs.');
@@ -6,6 +7,7 @@ export function useFetchTabs(subjectId, enabled=true) {
     return useQuery(['tabs', subjectId], 
         () => fetchTabs(subjectId, {pagination: false}), {
             select: data => data['hydra:member'],
+            staleTime: 5000,
             enabled: enabled
         }
     );
@@ -26,10 +28,11 @@ export function useCreateTab(subjectId) {
             await queryClient.cancelQueries(['tabs', subjectId]);
             const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
 
-            queryClient.setQueryData(['tabs', subjectId], {
-                ...previousTabsData,
-                'hydra:member': [...previousTabsData['hydra:member'], newTab],
+            const optimisticResult = produce(previousTabsData, draftData => {
+                draftData['hydra:member'].push(newTab);
             });
+
+            queryClient.setQueryData(['tabs', subjectId], optimisticResult);
             
             return { previousTabsData };
         },
@@ -54,10 +57,9 @@ export function useUpdateTab(subjectId) {
             await queryClient.cancelQueries(['tabs', subjectId]);
             const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
 
-            const optimisticResult = {...previousTabsData};
-            optimisticResult['hydra:member'][updatedTab.tabIndex] = updatedTab.optimisticResult;
-            
-            console.log('optimisticResult', optimisticResult);
+            const optimisticResult = produce(previousTabsData, draftData => {
+                draftData['hydra:member'][updatedTab.tabIndex] = updatedTab.optimisticResult;
+            });
 
             queryClient.setQueryData(['tabs', subjectId], optimisticResult);
             return { previousTabsData };
@@ -83,9 +85,10 @@ export function useDeleteTab(subjectId) {
             await queryClient.cancelQueries(['tabs', subjectId]);
             const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
             
-            const optimisticResult = {...previousTabsData};
-            optimisticResult['hydra:member'].splice(deletedTab.tabIndex, 1);
-            optimisticResult['hydra:member'].forEach((tab, index) => tab.tabIndex = index);
+            const optimisticResult = produce(previousTabsData, draftData => {
+                draftData['hydra:member'] = draftData['hydra:member'].filter(tab => tab.id !== deletedTab.tabId);
+                draftData['hydra:member'].forEach((tab, index) => tab.tabIndex = index);
+            });
 
             queryClient.setQueryData(['tabs', subjectId], optimisticResult);
             
@@ -112,22 +115,13 @@ export function useReorderTab(subjectId) {
             await queryClient.cancelQueries(['tabs', subjectId]);
             const previousTabsData = queryClient.getQueryData(['tabs', subjectId]);
 
-            // produce optimistic result
-            const newTabs = [...previousTabsData['hydra:member']];
-
-            // reorder tabs
-            const [reorderedItem] = newTabs.splice(tabData.sourceTabIndex, 1);
-            newTabs.splice(tabData.destinationTabIndex, 0, reorderedItem);
-        
-            // set the updated tab index
-            newTabs.forEach((tab, index) => {
-                tab.tabIndex = index;
+            const optimisticResult = produce(previousTabsData, draftData => {
+                const [reorderedTab] = draftData['hydra:member'].splice(tabData.sourceTabIndex, 1);
+                draftData['hydra:member'].splice(tabData.destinationTabIndex, 0, reorderedTab);
+                draftData['hydra:member'].forEach((tab, index) => tab.tabIndex = index);
             });
 
-            queryClient.setQueryData(['tabs', subjectId], {
-                ...previousTabsData,
-                'hydra:member': newTabs,
-            });
+            queryClient.setQueryData(['tabs', subjectId], optimisticResult);
             
             return { previousTabsData };
         },
@@ -168,7 +162,7 @@ async function createTab(initialTabData) {
     const tabReq = await fetch('/api/tabs', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(initialTabData)
     });
@@ -183,10 +177,10 @@ async function createTab(initialTabData) {
     const sectionReq = await fetch('/api/sections', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify({
-            tab: `/api/tabs/${tabData.tabId}`
+            tab: `/api/tabs/${tabData.id}`
         })
     });
 
@@ -204,7 +198,7 @@ async function updateTab({tabId, data}) {
     const req = await fetch(`/api/tabs/${tabId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(data)
     });
@@ -216,7 +210,7 @@ async function updateTab({tabId, data}) {
     return req.json();
 }
 
-async function deleteTab(tabId) {
+async function deleteTab({ tabId }) {
     if (tabId === undefined) throw new Error('"tabId" field is required to perform delete tab request.');
 
     const tabToDelete = await fetchTab(tabId);
@@ -226,12 +220,12 @@ async function deleteTab(tabId) {
    
     // update the tab index
     newTabs.splice(tabToDelete.tabIndex, 1);
-    await Promise.all(newTabs.map((tab, index) => {
+    await Promise.all(newTabs.map(async (tab, index) => {
         if (tab.tabIndex !== index) {
-            return fetch(`/api/tabs/${tab.tabId}`, {
+            return fetch(`/api/tabs/${tab.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     tabIndex: index
@@ -276,10 +270,10 @@ async function reorderTab({subjectId, sourceTabIndex, destinationTabIndex}) {
     // perform the updating of the tab index asynchronously
     return Promise.all(newTabs.map((tab, index) => {
         if (newTabs[index].tabIndex !== index) {
-            return fetch(`/api/tabs/${tab.tabId}`, {
+            return fetch(`/api/tabs/${tab.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     tabIndex: index
