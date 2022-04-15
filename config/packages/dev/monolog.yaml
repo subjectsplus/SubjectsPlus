@@ -8,13 +8,20 @@ monolog:
         
         grouped_handler:
             type: group
-            members: ["nested_handler", "db_error_handler"]
+            members: ["nested_handler", "db_error_handler", "file_log"]
         
         nested_handler:
             type:  stream
             path:  "php://stderr" # apache logs if using apache
             level: info 
             #formatter: monolog.formatter.json
+
+        file_log:
+            type: stream
+            # log to var/log/(environment).log
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            # log *all* messages (debug is lowest level)
+            level: debug
 
         db_error_handler:
             type: service

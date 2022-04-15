@@ -7,6 +7,7 @@ import EditTabModal from './EditTabModal';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 function GuideTabContainer(props) {
     const [lastTabIndex, setLastTabIndex] = useState(0);
@@ -55,6 +56,7 @@ function GuideTabContainer(props) {
 
     const newTab = () => {
         const initialTabData = {
+            id: uuidv4(),
             label: (numberUntitled === 0 ? 'Untitled' : 
                         'Untitled ' + (numberUntitled + 1)),
             tabIndex: lastTabIndex + 1,
@@ -92,7 +94,7 @@ function GuideTabContainer(props) {
             setSavingChanges(true);
 
             updateTabMutation.mutate({
-                tabId: currentTab.tabId,
+                id: currentTab.id,
                 tabIndex: currentTab.tabIndex,
                 data: changes,
                 optimisticResult: {
@@ -127,13 +129,13 @@ function GuideTabContainer(props) {
 
         setActiveKey(newActiveKey);
 
-        deleteTabMutation.mutate(currentTab.tabId, {
-            onSettled: () => {
-                setDeleteTabClicked(false);
-                setDeletingTab(false);
-                setShowSettings(false);
-            }
+        deleteTabMutation.mutate({
+            tabId: currentTab.id
         });
+
+        setDeleteTabClicked(false);
+        setDeletingTab(false);
+        setShowSettings(false);
     }
 
     const handleTabDelete = () => {
@@ -164,6 +166,7 @@ function GuideTabContainer(props) {
 
     const reorderTab = async (sourceIndex, destinationIndex) => {
         // focus the tab container to the destination tab
+        // todo: figure out whether we want to move only the current active tab at any given time
         setActiveKey(destinationIndex);
 
         // perform the reorder mutation in the background
@@ -181,12 +184,15 @@ function GuideTabContainer(props) {
     }
 
     const handleOnDragEnd = (result) => {
+        // exit if the necessary drag data needed is not available
+        if (result.source === undefined || result.source === null || 
+            result.destination === undefined || result.destination === null) return;
+        if (result.source.index === undefined || result.destination.index === undefined) return;
+
         if (result.type === 'tab') {
             setDraggingTab(false);
 
             // exit if element hasn't changed position
-            if (result.source === undefined || result.destination === undefined) return;
-            if (result.source.index === undefined || result.destination.index === undefined) return;
             if (result.source.index === result.destination.index) return;
 
             // perform the reordering
@@ -205,19 +211,19 @@ function GuideTabContainer(props) {
             
             // convert tabs data to draggable nav links
             const guideTabs = data.map(tab => (
-                <DraggableTab key={'tab-' + tab.tabIndex} tab={tab} active={activeKey === tab.tabIndex}
-                    onClick={() => setShowSettings(!showSettings)} /> 
+                <DraggableTab key={'tab-' + tab.tabIndex} tabId={tab.id} tabIndex={tab.tabIndex} label={tab.label}
+                    active={activeKey === tab.tabIndex} onClick={() => setShowSettings(!showSettings)} /> 
             ));
 
             // generate tab content
             const tabsContent = data.map(tab => {
-                if (tab.tabId && currentTab.tabIndex == tab.tabIndex) {
+                if (currentTab.tabIndex == tab.tabIndex) {
                     return (
                         <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={(activeKey === tab.tabIndex ? 'active': '')}
                             key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
-                                <SectionContainer tabId={tab.tabId} />
+                                <SectionContainer tabId={tab.id} />
                         </Tab.Pane>
-                    )
+                    );
                 }
             });
 

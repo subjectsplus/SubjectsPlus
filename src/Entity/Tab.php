@@ -6,13 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * Tab.
  *
- * @ORM\Table(name="tab", indexes={@ORM\Index(name="fk_t_subject_id_idx", columns={"subject_id"})})
+ * @ORM\Table(name="tab", uniqueConstraints={@ORM\UniqueConstraint(name="tab_uuid", columns={"uuid"})}, 
+ *  indexes={@ORM\Index(name="fk_t_subject_id_idx", columns={"subject_id"})})
  * @ORM\Entity
  * 
  * @ApiResource(
@@ -29,6 +33,7 @@ class Tab
      * @ORM\Column(name="tab_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ApiProperty(identifier=false)
      */
     private $tabId;
 
@@ -97,8 +102,17 @@ class Tab
      */
     private $sections;
 
-    public function __construct()
+    /**
+     * @var Symfony\Component\Uid\Uuid|null
+     * @ORM\Column(type="uuid", nullable=true)
+     * @ApiProperty(identifier=true)
+     * @SerializedName("id")
+     */
+    private $uuid;
+
+    public function __construct(Uuid $uuid = null)
     {
+        $this->uuid = $uuid ?: Uuid::v4();
         $this->sections = new ArrayCollection();
     }
 
@@ -239,5 +253,10 @@ class Tab
         }
 
         return $this;
+    }
+
+    public function getUuid(): ?Uuid
+    {
+        return $this->uuid;
     }
 }
