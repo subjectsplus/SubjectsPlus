@@ -119,7 +119,7 @@
       </trans-unit>
       <trans-unit id="EVTC8m6" resname="control.header.guides.browse_guides">
         <source>control.header.guides.browse_guides</source>
-        <target>All Guides</target>
+        <target>Research Guides</target>
       </trans-unit>
       <trans-unit id="5F_jaqd" resname="control.header.guides.manage_files">
         <source>control.header.guides.manage_files</source>
@@ -667,7 +667,7 @@
       </trans-unit>
       <trans-unit id="InuirW1" resname="control.guide_form.visibility">
         <source>control.guide_form.visibility</source>
-        <target>Visibility</target>
+        <target>Status</target>
       </trans-unit>
       <trans-unit id="vq762Od" resname="control.guide_form.save_guide">
         <source>control.guide_form.save_guide</source>
@@ -687,7 +687,7 @@
       </trans-unit>
       <trans-unit id="Izh.sQf" resname="control.guide.preview.label">
         <source>control.guide.preview.label</source>
-        <target>Preview</target>
+        <target>View Live</target>
       </trans-unit>
       <trans-unit id="mbrFuSz" resname="control.guide.delete_guide.modal.header">
         <source>control.guide.delete_guide.modal.header</source>
@@ -715,7 +715,7 @@
       </trans-unit>
       <trans-unit id=".GOLKLg" resname="control.header.guides.index">
         <source>control.header.guides.index</source>
-        <target>All Guides</target>
+        <target>Research Guides</target>
       </trans-unit>
       <trans-unit id="NyAloag" resname="control.guides.index.my_guides_label">
         <source>control.guides.index.my_guides_label</source>
@@ -727,11 +727,11 @@
       </trans-unit>
       <trans-unit id="0LltObt" resname="control.guides.table.heading.visibility">
         <source>control.guides.table.heading.visibility</source>
-        <target>Public</target>
+        <target>Status</target>
       </trans-unit>
       <trans-unit id="pFn6ZCT" resname="control.guides.table.heading.guide_name">
         <source>control.guides.table.heading.guide_name</source>
-        <target>Guide</target>
+        <target>Guide Name</target>
       </trans-unit>
       <trans-unit id="OFL92e." resname="control.guides.table.heading.description">
         <source>control.guides.table.heading.description</source>
@@ -751,7 +751,7 @@
       </trans-unit>
       <trans-unit id="keTSog4" resname="control.guides.table.button.preview">
         <source>control.guides.table.button.preview</source>
-        <target>Preview</target>
+        <target>View Live</target>
       </trans-unit>
       <trans-unit id="Fd5S48B" resname="control.guides.table.label.keywords">
         <source>control.guides.table.label.keywords</source>
@@ -796,6 +796,26 @@
       <trans-unit id="hN4Cmho" resname="control.faq.form.default_no_options_message">
         <source>control.faq.form.default_no_options_message</source>
         <target>No results</target>
+      </trans-unit>
+      <trans-unit id="e.j59OA" resname="control.guides.index.active_guides_label">
+        <source>control.guides.index.active_guides_label</source>
+        <target>PUBLIC Guides</target>
+      </trans-unit>
+      <trans-unit id="rsRrPc." resname="control.guides.table.heading.type">
+        <source>control.guides.table.heading.type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="FAf7EgQ" resname="control.guides.table.heading.last_update">
+        <source>control.guides.table.heading.last_update</source>
+        <target>Update Date</target>
+      </trans-unit>
+      <trans-unit id="eBjdB6_" resname="control.guides.back_to_list">
+        <source>control.guides.back_to_list</source>
+        <target>Back to guides</target>
+      </trans-unit>
+      <trans-unit id="DlS4Gzj" resname="control.guide_meta.edit.header">
+        <source>control.guide_meta.edit.header</source>
+        <target>Edit Guide Details</target>
       </trans-unit>
     </body>
   </file>
