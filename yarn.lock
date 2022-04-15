@@ -1916,6 +1916,19 @@ chrome-trace-event@^1.0.2:
   version "1.0.3"
   resolved "https://registry.npmjs.org/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz"
 
+ckeditor4-integrations-common@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ckeditor4-integrations-common/-/ckeditor4-integrations-common-1.0.0.tgz#a8afc33b94877b4d01362c7c73aa9eec162b2d20"
+  integrity sha512-OAoQT/gYrHkg0qgzf6MS/rndYhq3SScLVQ3rtXQeuCE8ju7nFHg3qZ7WGA2XpFxcZzsMP6hhugXqdel5vbcC3g==
+
+ckeditor4-react@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ckeditor4-react/-/ckeditor4-react-3.0.0.tgz#4df03e0184fc3e5f0e965ec585ce8d6e6383db64"
+  integrity sha512-t/HT6GjFWbY9jv099mT+6p9ZJhybGeqBxbS/S+Y0MH/vlo2wRmCaSEBUBJQF7b+gexhfe/DYk89NmRGDePlH7A==
+  dependencies:
+    ckeditor4-integrations-common "^1.0.0"
+    prop-types "^15.8.1"
+
 ckeditor4@^4.16.1:
   version "4.16.2"
   resolved "https://registry.npmjs.org/ckeditor4/-/ckeditor4-4.16.2.tgz"
@@ -4681,7 +4694,7 @@ prop-types-extra@^1.1.0:
     react-is "^16.3.2"
     warning "^4.0.0"
 
-prop-types@^15.6.0, prop-types@^15.6.2:
+prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   dependencies:
