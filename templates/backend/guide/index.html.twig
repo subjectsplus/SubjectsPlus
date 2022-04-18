@@ -56,15 +56,15 @@
                             </div>
                         </td>
                         <td><a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn-link-default">{{ guide.subject | raw }}</a></td>
-                        <td class="fs-xs text-center" style="width:75px;">
+                        <td>
                             {% if guide.active %}
-                                {{ '<i class="fas fa-check color-primary"></i>' }}
+                                {{ 'control.guides.table.type.active' | trans }}
                             {% else %}
-                                {{ '<i class="fas fa-times"></i>' }}
+                                {{ 'control.guides.table.type.hidden' | trans }}
                             {% endif %}
                         </td>
                         <td>{{ guide.type }}</td>
-                        <td style="width:130px;">{{ guide.lastModified|format_date() }}</td>
+                        <td style="min-width:130px;">{{ guide.lastModified|format_date() }}</td>
                     </tr>
                 {% else %}
                     <tr>
@@ -74,7 +74,14 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-xl-3 offset-xl-1">
+        <div class="col-xl-3 offset-xl-1 mt-4">
+            <h5>Key to Icons</h5>
+            <ul class="list-unstyled list-space fs-sm">
+                <li><i class="fas fa-cog"></i> Edit guide metadata</li>
+                <li><i class="fas fa-pen"></i> Edit guide content</li>
+                <li><i class="fas fa-eye fs-sm"></i> View guide on public website</li>
+            </ul>
+            <p class="mt-4"><a href="#" class="btn-link">Help with Guides</a></p>
 
         </div>
     </div>

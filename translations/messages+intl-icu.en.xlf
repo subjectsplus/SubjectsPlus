@@ -683,7 +683,7 @@
       </trans-unit>
       <trans-unit id="ku.Ni0z" resname="control.guide_meta.show.header">
         <source>control.guide_meta.show.header</source>
-        <target>Guide Details</target>
+        <target>Guide Metadata</target>
       </trans-unit>
       <trans-unit id="Izh.sQf" resname="control.guide.preview.label">
         <source>control.guide.preview.label</source>
@@ -743,7 +743,7 @@
       </trans-unit>
       <trans-unit id="9vk7YLQ" resname="control.guides.table.button.guide_details">
         <source>control.guides.table.button.guide_details</source>
-        <target>Guide Details</target>
+        <target>Guide Metadata</target>
       </trans-unit>
       <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
         <source>control.faqs.table.button.guide_builder</source>
@@ -815,7 +815,23 @@
       </trans-unit>
       <trans-unit id="DlS4Gzj" resname="control.guide_meta.edit.header">
         <source>control.guide_meta.edit.header</source>
-        <target>Edit Guide Details</target>
+        <target>Edit Guide Metadata</target>
+      </trans-unit>
+      <trans-unit id="BpYajg3" resname="control.guides.table.type.active">
+        <source>control.guides.table.type.active</source>
+        <target>Public</target>
+      </trans-unit>
+      <trans-unit id="pKhfdzr" resname="control.guides.table.type.hidden">
+        <source>control.guides.table.type.hidden</source>
+        <target>Hidden</target>
+      </trans-unit>
+      <trans-unit id="mVwafaf" resname="control.guides.show.type.active">
+        <source>control.guides.show.type.active</source>
+        <target>This guide is public</target>
+      </trans-unit>
+      <trans-unit id="LFcA838" resname="control.guides.show.type.inactive">
+        <source>control.guides.show.type.inactive</source>
+        <target>This guide is NOT public</target>
       </trans-unit>
     </body>
   </file>
