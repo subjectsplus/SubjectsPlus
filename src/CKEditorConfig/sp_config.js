@@ -20,7 +20,7 @@ CKEDITOR.editorConfig = function( config ) {
 			'Link', 'Anchor', '-', 
 			'Source', '-', 
 			'Image', 'Embed', '-', 
-			'Media', '-', 
+			'-', 
 			'Record'
 		]
 	];
@@ -38,5 +38,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.embed_provider = '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}';
 
 	// Set Extra Plugins.
-	config.extraPlugins = 'media,recordtoken,image2,embed,autoembed,find';
+	config.extraPlugins = 'recordtoken,image2,embed,autoembed,find';
+
+	// Set Base Z-Index
+	config.baseFloatZIndex = 100001;
 };

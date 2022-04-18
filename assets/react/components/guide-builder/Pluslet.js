@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDeletePluslet } from '#api/guide/PlusletAPI';
+import CKEditor from '#components/shared/CKEditor';
 import { Draggable } from 'react-beautiful-dnd';
-import { CKEditor } from 'ckeditor4-react';
 
 function Pluslet({ plusletId, plusletRow, sectionId }) {
 
@@ -41,7 +41,8 @@ function Pluslet({ plusletId, plusletRow, sectionId }) {
                             </button>
                         </div>
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
-                        {editable ? <CKEditor editorUrl="/build/ckeditor/ckeditor.js" config={{customConfig: '/build/ckeditor/sp_config.js'}} initData={<p>Hello from CKEditor 4!</p>}/> : <p>Double click me to edit!</p>}
+                        {editable ? <CKEditor initData={<p>Hello from CKEditor 4!</p>} /> 
+                                        : <p>Double click me to edit!</p>}
                     </div>
                 );
             }}
