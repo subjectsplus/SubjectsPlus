@@ -4739,6 +4739,10 @@
         <source>control.guides.show.type.inactive</source>
         <target>__control.guides.show.type.inactive</target>
       </trans-unit>
+      <trans-unit id="Wc1Sxkx" resname="control.faqs.index.active_faqs_label">
+        <source>control.faqs.index.active_faqs_label</source>
+        <target>__control.faqs.index.active_faqs_label</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

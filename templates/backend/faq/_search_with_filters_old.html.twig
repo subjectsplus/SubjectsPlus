@@ -1,5 +1,5 @@
 <div class="row g-3">
-    <div class="col-md-9 col-lg-6 col-xl-4">
+    <div class="col-md-9 col-lg-6 col-xl-3">
         {# TODO: React autocomplete search with filters #}
         <form>
             <div class="mb-2 mb-lg-0">
@@ -10,20 +10,20 @@
     <div class="col-md-9 col-lg-6 col-xl-5 align-self-lg-center">
         {# TODO: multi-select filters with react-select #}
         <div class="d-flex flex-row flex-nowrap justify-content-between align-items-baseline">
+            <span class="fs-sm d-inline-block" style="width: 120px;">{{ 'control.faqs.filter_by' | trans }}:</span>
+            <select class="form-select d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.subject.aria' | trans }}">
+                <option selected>{{ 'control.faqs.filter.subject' | trans }}</option>
+                <option value="1">General</option>
+                <option value="2">Business</option>
+                <option value="3">Medicine</option>
+            </select>
+            <span class="fs-sm d-inline-block mx-2">{{ 'control.faqs.filter_or' | trans }}</span>
             <select class="form-select d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.collection.aria' | trans }}">
                 <option selected>{{ 'control.faqs.filter.collection' | trans }}</option>
                 <option value="1">Research</option>
                 <option value="2">Catalog Help</option>
                 <option value="3">Popular</option>
             </select>
-            {# TODO: Change between User's Guides and All Guides #}
-            <div class="btn-group btn-group-sm" role="group" aria-label="Toggle for My Guides and All Guides">
-                <input type="radio" class="btn-check" name="guidesToggle" id="myGuides" autocomplete="off" checked>
-                <label class="btn btn-outline-primary fs-xs" for="myGuides">My Guides</label>
-
-                <input type="radio" class="btn-check" name="guidesToggle" id="allGuides" autocomplete="off">
-                <label class="btn btn-outline-primary fs-xs" for="allGuides">All Guides</label>
-            </div>
         </div>
     </div>
 </div>

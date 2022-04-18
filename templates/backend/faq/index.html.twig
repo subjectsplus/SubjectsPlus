@@ -15,8 +15,8 @@
         <div class="col-8">
             <h1 class="fw-light">{{ 'control.header.faqs.index' | trans }}</h1>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switchShowUserFAQs">
-                <label class="form-check-label" for="switchShowUserFAQs">{{ 'control.faqs.index.my_faqs_label' | trans }}</label>
+                <input class="form-check-input" type="checkbox" role="switch" id="switchShowActiveFAQs">
+                <label class="form-check-label fs-sm" for="switchShowActiveFAQs">{{ 'control.faqs.index.active_faqs_label' | trans }}</label>
             </div>
         </div>
         <div class="col-4 text-end">
@@ -28,58 +28,61 @@
         {{ include('backend/faq/_search_with_filters.html.twig') }}
     </div>
 
-    <div class="text-end mt-5">
-        {{ include('backend/faq/_sorting_table_buttons.html.twig') }}
+    <div class="row mt-4">
+        <div class="col-xl-8">
+            <table class="table table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>{{ 'control.faqs.table.heading.visibility' | trans }}</th>
+                    <th>{{ 'control.faqs.table.heading.question' | trans }}</th>
+                    <th>{{ 'control.faqs.table.heading.answer' | trans }}</th>
+                    <th>{{ 'control.faqs.table.heading.actions' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for faq in faqs |reverse %}
+                    <tr>
+                        <td class="fs-xs text-center">
+                            {% if faq.active %}
+                                {{ '<i class="fas fa-check color-primary"></i>' }}
+                            {% else %}
+                                {{ '<i class="fas fa-times"></i>' }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div title="ID: {{ faq.faqId }}">{{ faq.question | u.truncate(200, '...') | striptags | raw}}</div>
+                            {% if faq.keywords %}
+                                <div class="fs-xs mt-3">
+                                    <strong>{{ 'control.faqs.table.label.keywords' | trans }}:</strong>
+                                    {% for keyword in faq.keywords %}
+                                        {{ keyword }}
+                                        {% if not loop.last %}
+                                            {{'| '}}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>{{ faq.answer | u.truncate(80, '...') | striptags | raw }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
+                                <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
+                                {# TODO: link to front-end preview #}
+                                <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.preview' | trans }}"><i class="fas fa-eye fs-sm"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ 'control.faqs.table.no_records' | trans }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-3 offset-xl-1"></div>
     </div>
 
-    <table class="table table-striped table-responsive mt-3">
-        <thead>
-            <tr>
-                <th>{{ 'control.faqs.table.heading.visibility' | trans }}</th>
-                <th>{{ 'control.faqs.table.heading.question' | trans }}</th>
-                <th>{{ 'control.faqs.table.heading.answer' | trans }}</th>
-                <th>{{ 'control.faqs.table.heading.actions' | trans }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for faq in faqs |reverse %}
-            <tr>
-                <td class="fs-xs text-center">
-                    {% if faq.active %}
-                        {{ '<i class="fas fa-check color-primary"></i>' }}
-                    {% else %}
-                        {{ '<i class="fas fa-times"></i>' }}
-                    {% endif %}
-                </td>
-                <td>
-                    <div title="ID: {{ faq.faqId }}">{{ faq.question | u.truncate(200, '...') | striptags | raw}}</div>
-                    {% if faq.keywords %}
-                        <div class="fs-xs mt-3">
-                            <strong>{{ 'control.faqs.table.label.keywords' | trans }}:</strong>
-                            {% for keyword in faq.keywords %}
-                                {{ keyword }}
-                                {% if not loop.last %}
-                                    {{'| '}}
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </td>
-                <td>{{ faq.answer | u.truncate(80, '...') | striptags | raw }}</td>
-                <td>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
-                        <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
-                        {# TODO: link to front-end preview #}
-                        <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.preview' | trans }}"><i class="fas fa-eye fs-sm"></i></a>
-                    </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td>{{ 'control.faqs.table.no_records' | trans }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
 </div>
 {% endblock %}
