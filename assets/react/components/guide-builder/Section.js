@@ -69,7 +69,8 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentEditablePlusle
                     .filter(pluslet => pluslet !== undefined)
                     .map((pluslet, row) => (
                         <Pluslet key={pluslet.id} sectionId={sectionId}
-                            plusletId={pluslet.id} plusletRow={row} 
+                            plusletId={pluslet.id} plusletRow={row}
+                            plusletTitle={pluslet.title}
                             currentEditablePluslet={currentEditablePluslet} 
                             currentEditablePlusletCallBack={currentEditablePlusletCallBack} />)
                     );
