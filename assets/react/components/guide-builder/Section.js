@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { v4 as uuidv4 } from 'uuid';
 
-function Section({ tabId, sectionId, layout, sectionIndex }) {
+function Section({ tabId, sectionId, layout, sectionIndex, currentEditablePluslet, currentEditablePlusletCallBack }) {
     const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
 
     const deleteSectionMutation = useDeleteSection(tabId);
@@ -69,7 +69,9 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                     .filter(pluslet => pluslet !== undefined)
                     .map((pluslet, row) => (
                         <Pluslet key={pluslet.id} sectionId={sectionId}
-                            plusletId={pluslet.id} plusletRow={row} />)
+                            plusletId={pluslet.id} plusletRow={row} 
+                            currentEditablePluslet={currentEditablePluslet} 
+                            currentEditablePlusletCallBack={currentEditablePlusletCallBack} />)
                     );
                 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
@@ -6,12 +6,14 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
 function SectionContainer({ tabId }) {
+    const [currentEditablePluslet, setCurrentEditablePluslet] = useState('');
+    
     const {isLoading, isError, data, error} = useFetchSections(tabId);
 
     const createSectionMutation = useCreateSection(tabId);
     const reorderSectionMutation = useReorderSection(tabId);
     const reorderPlusletMutation = useReorderPluslet();
-
+    
     const reorderSection = (sourceIndex, destinationIndex) => {
         reorderSectionMutation.mutate({
             tabId: tabId,
@@ -93,13 +95,14 @@ function SectionContainer({ tabId }) {
             const guideSections = data.map((section, index) => {
                 return (
                     <Section key={section.id} sectionId={section.id} 
-                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} />
+                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} 
+                        currentEditablePluslet={currentEditablePluslet} 
+                        currentEditablePlusletCallBack={setCurrentEditablePluslet} />
                 );
             });
 
             return (
                 <>
-
                     <div className="text-center mb-3">
                         <button id="add-section" className="btn btn-link p-1" title="Add Section" onClick={addSection}>
                             <i className="fas fa-plus-circle"></i>

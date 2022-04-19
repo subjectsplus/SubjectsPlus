@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
-import { useDeletePluslet } from '#api/guide/PlusletAPI';
+import React, { useState, useEffect } from 'react';
+import { useUpdatePluslet, useDeletePluslet } from '#api/guide/PlusletAPI';
 import CKEditor from '#components/shared/CKEditor';
 import { Draggable } from 'react-beautiful-dnd';
 
-function Pluslet({ plusletId, plusletRow, sectionId }) {
+function Pluslet({ plusletId, plusletRow, sectionId, currentEditablePluslet, currentEditablePlusletCallBack }) {
 
     const [editable, setEditable] = useState(false);
+
+    const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
+
+    useEffect(() => {
+        if (editable && currentEditablePluslet !== plusletId) {
+            // TODO: Save current content
+            setEditable(false);
+        }
+    }, [currentEditablePluslet]);
 
     const deletePluslet = () => {
         const confirmed = confirm('Are you sure you want to delete this pluslet?');
@@ -18,9 +27,16 @@ function Pluslet({ plusletId, plusletRow, sectionId }) {
     }
 
     const doubleClicked = () => {
-        setEditable(!editable);
+        if (currentEditablePluslet !== plusletId) {
+            setEditable(true);
+            currentEditablePlusletCallBack(plusletId);
+        } else {
+            setEditable(false);
+            currentEditablePlusletCallBack('');
+        }
     }
-    
+
+    // TODO: title textbox to display/change title (only when editable)
     return (
         <Draggable type="pluslet" key={plusletId.toString()} draggableId={plusletId.toString()} index={plusletRow}>
             {(provided, snapshot) => {
