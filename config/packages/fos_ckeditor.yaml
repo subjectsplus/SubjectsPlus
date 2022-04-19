@@ -6,7 +6,7 @@ fos_ck_editor:
 
     configs:
         default:
-            customConfig: '/build/ckeditor/sp_config.js'
+            customConfig: 'sp_config.js'
                 
 twig:
     form_themes:
