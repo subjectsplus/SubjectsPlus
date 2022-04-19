@@ -10,6 +10,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"},
+ *     order={"createdAt": "DESC", "updatedAt": "DESC"}
+ * )
  */
 class Media implements \Serializable
 {
