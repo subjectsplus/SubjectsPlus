@@ -4,10 +4,11 @@ import CKEditor from '#components/shared/CKEditor';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDebouncedCallback } from 'use-debounce';
 
-function Pluslet({ plusletId, plusletTitle, plusletRow, sectionId, currentEditablePluslet, currentEditablePlusletCallBack }) {
+function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, currentEditablePluslet, currentEditablePlusletCallBack }) {
 
     const [editable, setEditable] = useState(false);
     const [title, setTitle] = useState(plusletTitle);
+    const [body, setBody] = useState(plusletBody);
 
     const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
@@ -96,7 +97,7 @@ function Pluslet({ plusletId, plusletTitle, plusletRow, sectionId, currentEditab
                         </div>
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                         {editable ? editableTitle : <p>{plusletTitle}</p> }
-                        {editable ? <CKEditor initData={<p>Hello from CKEditor 4!</p>} /> 
+                        {editable ? <CKEditor initData={body} /> 
                                         : <p>Double click me to edit!</p>}
                     </div>
                 );
