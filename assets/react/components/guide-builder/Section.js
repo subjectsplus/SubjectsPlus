@@ -70,7 +70,7 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentEditablePlusle
                     .map((pluslet, row) => (
                         <Pluslet key={pluslet.id} sectionId={sectionId}
                             plusletId={pluslet.id} plusletRow={row}
-                            plusletTitle={pluslet.title}
+                            plusletTitle={pluslet.title} plusletBody={pluslet.body}
                             currentEditablePluslet={currentEditablePluslet} 
                             currentEditablePlusletCallBack={currentEditablePlusletCallBack} />)
                     );
