@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useUpdatePluslet, useDeletePluslet } from '#api/guide/PlusletAPI';
 import CKEditor from '#components/shared/CKEditor';
 import { Draggable } from 'react-beautiful-dnd';
+import { useDebouncedCallback } from 'use-debounce';
 
 function Pluslet({ plusletId, plusletTitle, plusletRow, sectionId, currentEditablePluslet, currentEditablePlusletCallBack }) {
 
     const [editable, setEditable] = useState(false);
     const [title, setTitle] = useState(plusletTitle);
+
     const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
 
     useEffect(() => {
         if (editable && currentEditablePluslet !== plusletId) {
-            // TODO: Save current content
+            // if another pluslet is being edited, save current content
+            // and set this pluslet in view mode
+            updatePlusletTitle();
             setEditable(false);
         }
     }, [currentEditablePluslet]);
@@ -36,7 +40,17 @@ function Pluslet({ plusletId, plusletTitle, plusletRow, sectionId, currentEditab
         }
     }
 
-    // TODO: title textbox to display/change title (only when editable)
+    const updatePlusletTitle = () => {
+        if (title !== plusletTitle) {
+            updatePlusletMutation.mutate({
+                plusletId: plusletId,
+                data: {
+                    title: title
+                }
+            });
+        }
+    }
+
     const editableTitle = (
         <div className="mb-2">
             {/* Label is for accessibility purposes, will not be visible */}
@@ -47,9 +61,16 @@ function Pluslet({ plusletId, plusletTitle, plusletRow, sectionId, currentEditab
                 type="text"
                 id="edit-pluslet-title"
                 placeholder= "Enter Pluslet Title"
-                // onChange={props.onChange}
+                value={title}
                 autoComplete="off"
-                // onKeyDown={ignoreEnterKey}
+                onChange={evt => setTitle(evt.target.value)}
+                onKeyDown={evt => {
+                    if (evt.code === 'Enter') {
+                        evt.preventDefault();
+                        updatePlusletTitle();
+                        setEditable(false);
+                    }
+                }}
             />
         </div>
     );
@@ -74,7 +95,7 @@ function Pluslet({ plusletId, plusletTitle, plusletRow, sectionId, currentEditab
                             </button>
                         </div>
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
-                        {editable ? editableTitle : <p>{title}</p> }
+                        {editable ? editableTitle : <p>{plusletTitle}</p> }
                         {editable ? <CKEditor initData={<p>Hello from CKEditor 4!</p>} /> 
                                         : <p>Double click me to edit!</p>}
                     </div>
