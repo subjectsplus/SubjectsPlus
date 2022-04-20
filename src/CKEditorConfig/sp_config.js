@@ -40,6 +40,9 @@ CKEDITOR.editorConfig = function( config ) {
 	// Set Extra Plugins.
 	config.extraPlugins = 'recordtoken,image2,embed,autoembed,find';
 
+	// Remove plugins.
+	config.removePlugins = 'image';
+
 	// Set Base Z-Index
 	config.baseFloatZIndex = 100001;
 };
