@@ -37,6 +37,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             currentEditablePlusletCallBack(plusletId);
         } else {
             setEditable(false);
+            updatePlusletTitle();
             currentEditablePlusletCallBack('');
         }
     }
