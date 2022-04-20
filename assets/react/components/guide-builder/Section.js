@@ -19,11 +19,15 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         border: '1px dotted #b5b5b5',
         padding: '0.5rem .75rem',
         background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent',
+        maxHeight: isDragging ? '100px !important' : '100% !important',
+        overflow: isDragging ? 'hidden' : 'initial',
         ...draggableStyle
       });
 
     const getSectionStyle = (isDraggingOver) => ({
-        backgroundColor: isDraggingOver ? "rgba(0,0,0, 5%)" : "transparent"
+        backgroundColor: isDraggingOver ? "rgba(0,0,0, 5%)" : "transparent",
+        maxHeight: isDraggingOver ? '80px' : 'fit-content',
+        overflow: isDraggingOver ? 'hidden' : 'initial'
     });
 
     const deleteSection = () => {

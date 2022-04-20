@@ -99,12 +99,6 @@ function SectionContainer({ tabId }) {
 
             return (
                 <>
-
-                    <div className="text-center mb-3">
-                        <button id="add-section" className="btn btn-link p-1" title="Add Section" onClick={addSection}>
-                            <i className="fas fa-plus-circle"></i>
-                        </button>
-                    </div>
                     <DragDropContext onDragEnd={handleOnDragEnd}>
                         <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (
@@ -115,6 +109,11 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
+                    <div className="text-center mb-3">
+                        <button id="add-section" className="btn btn-link p-1" onClick={addSection}>
+                            <i className="fas fa-plus-circle"></i> Add Section
+                        </button>
+                    </div>
                 </>
             );
         }
