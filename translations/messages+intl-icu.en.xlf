@@ -555,7 +555,7 @@
       </trans-unit>
       <trans-unit id="pz5s15o" resname="control.faqs.preview.label">
         <source>control.faqs.preview.label</source>
-        <target>Preview</target>
+        <target>View Live</target>
       </trans-unit>
       <trans-unit id="uWhnU9r" resname="control.general.label.visibility">
         <source>control.general.label.visibility</source>
@@ -591,7 +591,7 @@
       </trans-unit>
       <trans-unit id="NiRUiLv" resname="control.faqs.admin.create_new_collection">
         <source>control.faqs.admin.create_new_collection</source>
-        <target>New Collection</target>
+        <target>New List</target>
       </trans-unit>
       <trans-unit id="jtLstcU" resname="control.faqs.table.button.delete">
         <source>control.faqs.table.button.delete</source>
@@ -603,27 +603,27 @@
       </trans-unit>
       <trans-unit id="nDDfmLr" resname="control.faqs.admin.new_faq_collection.heading">
         <source>control.faqs.admin.new_faq_collection.heading</source>
-        <target>New FAQ Collection</target>
+        <target>New FAQ List</target>
       </trans-unit>
       <trans-unit id="DB.31Ue" resname="control.faqs.admin.new_faq_collection.collection_name">
         <source>control.faqs.admin.new_faq_collection.collection_name</source>
-        <target>Collection Name</target>
+        <target>List Name</target>
       </trans-unit>
       <trans-unit id="cTC6DkV" resname="control.faqs.admin.new_faq_collection.add_collection">
         <source>control.faqs.admin.new_faq_collection.add_collection</source>
-        <target>Add Collection</target>
+        <target>Add List</target>
       </trans-unit>
       <trans-unit id="vVimdNF" resname="control.faqs.admin.faq_collection_list.current_collections">
         <source>control.faqs.admin.faq_collection_list.current_collections</source>
-        <target>Current Collections</target>
+        <target>Current Lists</target>
       </trans-unit>
       <trans-unit id=".vmluXN" resname="control.faqs.admin.faq_collection.faq_list">
         <source>control.faqs.admin.faq_collection.faq_list</source>
-        <target>FAQ List</target>
+        <target>FAQs</target>
       </trans-unit>
       <trans-unit id="oGrVUpv" resname="control.faqs.admin.faq_collection.add_to_list">
         <source>control.faqs.admin.faq_collection.add_to_list</source>
-        <target>Add to list</target>
+        <target>Add FAQ to list</target>
       </trans-unit>
       <trans-unit id="kiL1c_V" resname="control.faqs.admin.faq_collection.remove_from_list">
         <source>control.faqs.admin.faq_collection.remove_from_list</source>
@@ -631,11 +631,11 @@
       </trans-unit>
       <trans-unit id="jDNhwnN" resname="control.faqs.admin.faq_collection.update">
         <source>control.faqs.admin.faq_collection.update</source>
-        <target>Update Collection</target>
+        <target>Update List</target>
       </trans-unit>
       <trans-unit id="OWPF528" resname="control.faqs.admin.faq_collection.delete_faq_collection">
         <source>control.faqs.admin.faq_collection.delete_faq_collection</source>
-        <target>Delete FAQ Collection</target>
+        <target>Delete FAQ List</target>
       </trans-unit>
       <trans-unit id="XLlcP5v" resname="control.faqs.admin.faq_collection.delete.confirm_button">
         <source>control.faqs.admin.faq_collection.delete.confirm_button</source>
