@@ -519,7 +519,7 @@
       </trans-unit>
       <trans-unit id="3ubLV7l" resname="control.faqs.table.heading.visibility">
         <source>control.faqs.table.heading.visibility</source>
-        <target>Public</target>
+        <target>Status</target>
       </trans-unit>
       <trans-unit id="pIyutoI" resname="control.faqs.table.heading.question">
         <source>control.faqs.table.heading.question</source>
@@ -543,7 +543,7 @@
       </trans-unit>
       <trans-unit id="OolzfPE" resname="control.faqs.table.button.preview">
         <source>control.faqs.table.button.preview</source>
-        <target>Preview</target>
+        <target>View Live</target>
       </trans-unit>
       <trans-unit id="TBLN5SK" resname="control.faqs.table.no_records">
         <source>control.faqs.table.no_records</source>
@@ -836,6 +836,22 @@
       <trans-unit id="Wc1Sxkx" resname="control.faqs.index.active_faqs_label">
         <source>control.faqs.index.active_faqs_label</source>
         <target>PUBLIC FAQs</target>
+      </trans-unit>
+      <trans-unit id="8CLy_3n" resname="control.faqs.table.status.active">
+        <source>control.faqs.table.status.active</source>
+        <target>Public</target>
+      </trans-unit>
+      <trans-unit id="GRPxBwl" resname="control.faqs.table.status.not_active">
+        <source>control.faqs.table.status.not_active</source>
+        <target>Not Public</target>
+      </trans-unit>
+      <trans-unit id="YvF4U8U" resname="control.faqs.table.heading.last_update">
+        <source>control.faqs.table.heading.last_update</source>
+        <target>Update Date</target>
+      </trans-unit>
+      <trans-unit id="gYevwuA" resname="control.faqs.back_to_list">
+        <source>control.faqs.back_to_list</source>
+        <target>Back to FAQs</target>
       </trans-unit>
     </body>
   </file>
