@@ -57,7 +57,9 @@ export function useUpdatePluslet(sectionId) {
 
             const optimisticResult = produce(previousPlusletsData, draftData => {
                 const index = draftData['hydra:member'].findIndex(pluslet => pluslet.id === updatedPluslet.plusletId);
-                draftData['hydra:member'][index] = updatedSection.optimisticResult;
+                Object.keys(updatedPluslet.data).map(key => {
+                    draftData['hydra:member'][index][key] = updatedPluslet.data[key];
+                });
             });
             
             queryClient.setQueryData(['pluslets', sectionId], optimisticResult);
