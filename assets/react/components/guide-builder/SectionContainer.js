@@ -7,7 +7,8 @@ import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
 function SectionContainer({ tabId }) {
     const [currentEditablePluslet, setCurrentEditablePluslet] = useState('');
-    
+    const [draggingId, setDraggingId] = useState(null);
+
     const {isLoading, isError, data, error} = useFetchSections(tabId);
 
     const createSectionMutation = useCreateSection(tabId);
@@ -23,6 +24,9 @@ function SectionContainer({ tabId }) {
     }
 
     const handleOnDragEnd = (result) => {
+        // reset dragging id
+        setDraggingId(null);
+
         if (result.source === undefined || result.source === null || 
             result.destination === undefined || result.destination === null) return;
         if (result.source.index === undefined || result.destination.index === undefined) return;
@@ -72,6 +76,10 @@ function SectionContainer({ tabId }) {
         }
     }
 
+    const handleOnBeforeCapture = (beforeCapture) => {
+        setDraggingId(beforeCapture.draggableId);
+    }
+
     const addSection = () => {
         if (Array.isArray(data)) {
             const initialSectionData = {
@@ -96,7 +104,8 @@ function SectionContainer({ tabId }) {
                 return (
                     <Section key={section.id} sectionId={section.id} 
                         layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} 
-                        currentEditablePluslet={currentEditablePluslet} 
+                        currentEditablePluslet={currentEditablePluslet}
+                        isCurrentlyDragging={'section-' + section.id === draggingId}
                         currentEditablePlusletCallBack={setCurrentEditablePluslet} />
                 );
             });
@@ -108,7 +117,7 @@ function SectionContainer({ tabId }) {
                             <i className="fas fa-plus-circle"></i>
                         </button>
                     </div>
-                    <DragDropContext onDragEnd={handleOnDragEnd}>
+                    <DragDropContext onDragEnd={handleOnDragEnd} onBeforeCapture={handleOnBeforeCapture}>
                         <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (
                                 <div className="section-container" {...provided.droppableProps} ref={provided.innerRef}>
