@@ -7,8 +7,8 @@ const CONFIG = {
 
 const editorUrl = '/build/ckeditor/ckeditor.js';
 
-function CKEditor({ initData }) {
-    return <Editor editorUrl={editorUrl} config={CONFIG} initData={initData} />
+function CKEditor(props) {
+    return <Editor {...props} editorUrl={editorUrl} config={CONFIG} />
 }
 
 export default CKEditor;
