@@ -18,6 +18,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             // if another pluslet is being edited, save current content
             // and set this pluslet in view mode
             updatePlusletTitle();
+            updatePlusletBody();
             setEditable(false);
         }
     }, [currentEditablePluslet]);
@@ -38,6 +39,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         } else {
             setEditable(false);
             updatePlusletTitle();
+            updatePlusletBody();
             currentEditablePlusletCallBack('');
         }
     }
@@ -53,6 +55,24 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         }
     }
 
+    const updatePlusletBody = () => {
+        if (body !== plusletBody) {
+            updatePlusletMutation.mutate({
+                plusletId: plusletId,
+                data: {
+                    body: body
+                }
+            });
+        }
+    }
+
+    const debouncedUpdatePlusletBody = useDebouncedCallback(updatePlusletBody, 1000);
+
+    const onCKEditorChanged = evt => {
+        setBody(evt.editor.getData())
+        debouncedUpdatePlusletBody();
+    }
+    
     const editableTitle = (
         <div className="mb-2">
             {/* Label is for accessibility purposes, will not be visible */}
@@ -98,7 +118,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                         </div>
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                         {editable ? editableTitle : <p>{plusletTitle}</p> }
-                        {editable ? <CKEditor initData={body} /> 
+                        {/* TODO: Use DOMPurify to purify the HTML before render/save */}
+                        {editable ? <CKEditor initData={body} onChange={onCKEditorChanged} /> 
                                         : <p>Double click me to edit!</p>}
                     </div>
                 );
