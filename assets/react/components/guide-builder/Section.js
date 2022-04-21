@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Pluslet from './Pluslet';
 import { useFetchPluslets, useCreatePluslet } from '#api/guide/PlusletAPI';
 import { useDeleteSection } from '#api/guide/SectionAPI';
@@ -18,16 +18,12 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         marginBottom: '2.5rem',
         border: '1px dotted #b5b5b5',
         padding: '0.5rem .75rem',
-        background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent',
-        maxHeight: isDragging ? '100px !important' : '100% !important',
-        overflow: isDragging ? 'hidden' : 'initial',
+        backgroundColor: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent',
         ...draggableStyle
       });
 
     const getSectionStyle = (isDraggingOver) => ({
         backgroundColor: isDraggingOver ? "rgba(0,0,0, 5%)" : "transparent",
-        maxHeight: isDraggingOver ? '80px' : 'fit-content',
-        overflow: isDraggingOver ? 'hidden' : 'initial'
     });
 
     const deleteSection = () => {
@@ -55,6 +51,8 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
             createPlusletMutation.mutate(initialPlusletData);
         }
     }
+
+    const [addPlusletStyle, setStyle] = useState({visibility: 'hidden'});
 
     const generateColumns = () => {
         const splitLayout = layout.split('-');
@@ -87,13 +85,23 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                             {(provided, snapshot) => (
                                 <div className="sp-guide-column" {...provided.droppableProps} ref={provided.innerRef}>
                                     <span className="visually-hidden">{columnId}</span>
-                                    <div className="text-center mb-2">
-                                        <button className="btn btn-link p-1" title="Add Pluslet">
-                                            <i className="fas fa-plus-circle" onClick={() => addPluslet(currentColumn, columnRows)}></i>
-                                        </button>
-                                    </div>
                                     {columnPluslets}
                                     {provided.placeholder}
+                                    <div className="text-center mt-2">
+                                        <button
+                                            className="btn btn-muted p-1"
+                                            onClick={() => addPluslet(currentColumn, columnRows)}
+                                            onMouseEnter={e => {
+                                                setStyle({visibility: 'visible'});
+                                            }}
+                                            onMouseLeave={e => {
+                                                setStyle({visibility: 'hidden'})
+                                            }}
+                                        >
+                                            <i className="fas fa-plus-circle d-block"></i>
+                                            <span className="fs-xs" style={addPlusletStyle}>Add Pluslet</span>
+                                        </button>
+                                    </div>
                                 </div>
                             )}
                         </Droppable>
@@ -120,9 +128,16 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                             <div className="drag-handle sp-section-drag-handle" {...provided.dragHandleProps} title="Move section">
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
-                            <button className="delete-section btn btn-icon-default sp-section-delete-btn" onClick={deleteSection} title="Delete section">
-                                <i className="fas fa-trash"></i>
-                            </button>
+                            <div className="dropdown basic-dropdown dropend">
+                                <button className="btn btn-icon-default dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i className="fas fa-ellipsis-h"></i>
+                                </button>
+                                <ul className="dropdown-menu fs-sm" aria-labelledby="sectionMenuOptions">
+                                    <li><a className="dropdown-item delete-section" onClick={deleteSection}><i
+                                        className="fas fa-trash"></i> Delete Section</a></li>
+                                </ul>
+                            </div>
+
 
                             <div className="guide-section" data-layout={layout}
                                 style={getSectionStyle(snapshot.isDragging)}>

@@ -228,8 +228,9 @@
   }
 }
 
-.btn-icon-table-sort {
-  color: var(--sp-input-disabled-bg);
+.btn-icon-table-sort,
+.btn-muted{
+  color: rgba(0,0,0, 0.4);
   &:hover,
   &:active,
   &:focus {

@@ -36,14 +36,14 @@
     z-index: 1;
   }
 
-  .sp-section-delete-btn{
+  .sp-section-menu-btn{
     position: absolute;
-    bottom: calc(50% - 27px);
-    right: 0.25rem;
+    top: 0;
+    right:0;
     z-index: 1;
-    margin-bottom: 0.25rem;
     line-height: 1;
     padding: 0.25rem;
+    margin-right: -0.5rem;
   }
 
   .guide-section {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
@@ -83,6 +83,8 @@ function SectionContainer({ tabId }) {
         }
     }
 
+    const [addSectionStyle, setStyle] = useState({visibility: 'hidden'});
+
     const containerContent = () => {
         if (isLoading) {
             return (<p>Loading Sections...</p>);
@@ -109,9 +111,20 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
-                    <div className="text-center mb-3">
-                        <button id="add-section" className="btn btn-link p-1" onClick={addSection}>
-                            <i className="fas fa-plus-circle"></i> Add Section
+                    <div className="text-center mt-1">
+                        <button
+                            id="add-section"
+                            className="btn btn-muted p-1"
+                            onClick={addSection}
+                            onMouseEnter={e => {
+                                setStyle({visibility: 'visible'});
+                            }}
+                            onMouseLeave={e => {
+                                setStyle({visibility: 'hidden'})
+                            }}
+                        >
+                            <i className="fas fa-plus-circle d-block"></i>
+                            <span className="fs-xs" style={addSectionStyle}>Add Section</span>
                         </button>
                     </div>
                 </>
