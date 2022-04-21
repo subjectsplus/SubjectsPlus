@@ -3,6 +3,7 @@ import { useUpdatePluslet, useDeletePluslet } from '#api/guide/PlusletAPI';
 import CKEditor from '#components/shared/CKEditor';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDebouncedCallback } from 'use-debounce';
+import DOMPurify from 'dompurify';
 
 function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, currentEditablePluslet, currentEditablePlusletCallBack }) {
 
@@ -60,7 +61,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             updatePlusletMutation.mutate({
                 plusletId: plusletId,
                 data: {
-                    body: body
+                    body: DOMPurify.sanitize(body)
                 }
             });
         }
@@ -118,9 +119,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                         </div>
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                         {editable ? editableTitle : <p>{plusletTitle}</p> }
-                        {/* TODO: Use DOMPurify to purify the HTML before render/save */}
                         {editable ? <CKEditor initData={body} onChange={onCKEditorChanged} /> 
-                                        : <p>Double click me to edit!</p>}
+                                        : <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />}
                     </div>
                 );
             }}
