@@ -33,15 +33,16 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         }
     }
 
-    const doubleClicked = () => {
+    const toggleEditable = () => {
+        console.log('currentEditablePluslet: ', currentEditablePluslet);
         if (currentEditablePluslet !== plusletId) {
             setEditable(true);
             currentEditablePlusletCallBack(plusletId);
         } else {
             setEditable(false);
+            currentEditablePlusletCallBack('');
             updatePlusletTitle();
             updatePlusletBody();
-            currentEditablePlusletCallBack('');
         }
     }
 
@@ -74,35 +75,65 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         debouncedUpdatePlusletBody();
     }
     
-    const editableTitle = (
-        <div className="mb-2">
-            {/* Label is for accessibility purposes, will not be visible */}
-            <label htmlFor="edit-pluslet-title" className="form-label">
-                <span className="visually-hidden">Enter Pluslet Title</span>
-            </label>
-            <input
-                type="text"
-                id="edit-pluslet-title"
-                placeholder= "Enter Pluslet Title"
-                value={title}
-                autoComplete="off"
-                onChange={evt => setTitle(evt.target.value)}
-                onKeyDown={evt => {
-                    if (evt.code === 'Enter') {
-                        evt.preventDefault();
-                        updatePlusletTitle();
-                        setEditable(false);
-                    }
-                }}
-            />
-        </div>
-    );
+    const editableTitle = () => {
+        if (editable) {
+            return (
+                <div className="mb-2">
+                    {/* Label is for accessibility purposes, will not be visible */}
+                    <label htmlFor="edit-pluslet-title" className="form-label">
+                        <span className="visually-hidden">Enter Pluslet Title</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="edit-pluslet-title"
+                        placeholder= "Enter Pluslet Title"
+                        value={title}
+                        autoComplete="off"
+                        onChange={evt => setTitle(evt.target.value)}
+                        onKeyDown={evt => {
+                            if (evt.code === 'Enter') {
+                                evt.preventDefault();
+                                updatePlusletTitle();
+                                setEditable(false);
+                            }
+                        }}
+                    />
+                </div>
+            );
+        } else {
+            return (<p>{plusletTitle}</p>);
+        }
+    }
 
+    const editSaveButton = () => {
+        if (editable) {
+            return (
+                <button onClick={toggleEditable} title="Save pluslet">
+                    <i className="fas fa-save"></i>
+                </button>
+            );
+        } else {
+            return (
+                <button onClick={toggleEditable} title="Edit pluslet">
+                    <i className="fas fa-pen"></i>
+                </button>
+            );
+        }
+    }
+
+    const editor = () => {
+        if (editable) {
+            return (<CKEditor initData={body} onChange={onCKEditorChanged} />);
+        } else {
+            return (<div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
+        }
+    }
+    
     return (
         <Draggable type="pluslet" key={plusletId.toString()} draggableId={plusletId.toString()} index={plusletRow}>
             {(provided, snapshot) => {
                 return (
-                    <div className="pluslet" key={plusletId} ref={provided.innerRef} onDoubleClick={doubleClicked}
+                    <div className="pluslet" key={plusletId} ref={provided.innerRef} onDoubleClick={toggleEditable}
                         {...provided.draggableProps}
                         style={{
                             ...provided.draggableProps.style,
@@ -116,11 +147,11 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                             <button onClick={deletePluslet} title="Delete pluslet">
                                 <i className="fas fa-trash"></i>
                             </button>
+                            {editSaveButton()}
                         </div>
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
-                        {editable ? editableTitle : <p>{plusletTitle}</p> }
-                        {editable ? <CKEditor initData={body} onChange={onCKEditorChanged} /> 
-                                        : <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />}
+                        {editableTitle()}
+                        {editor()}
                     </div>
                 );
             }}
