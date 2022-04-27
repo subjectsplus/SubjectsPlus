@@ -1961,6 +1961,7 @@ function apiGetTopicGuidesList() {
 }
 
 function listCollections( $search = "", $display = "default", $show_children = "false" ) {
+    global $PublicPath;
 	$db = new Querier();
 
 	$whereclause = "";
@@ -2032,11 +2033,30 @@ function listCollections( $search = "", $display = "default", $show_children = "
 					$r2        = $db->query( $q2 );
 					$num_rows2 = count( $r2 );
 
+
 					foreach ( $r2 as $mysubguide ) {
 
-						$guide_location2 = $guide_path . $mysubguide[2];
+						$guide_location2 = $PublicPath . $mysubguide[2];
 
-						$list_bonus .= "<li><a href=\"$guide_location2\" class=\"no-decoration default\">$mysubguide[1]</a></li>";
+						$list_bonus .= "<li><a href=\"$guide_location2\" class=\"no-decoration default\">$mysubguide[1]</a>";
+
+                        $hasChildGuides = verifyHasChildGuides($mysubguide[0]);
+                        if(($hasChildGuides) && ($hasChildGuides[0]['subject_parent'] === $mysubguide[0])) {
+                            $child_guides = getChildGuides($mysubguide[0]);
+                            $list_bonus .= "<ul>";
+                            foreach ($child_guides as $cg) {
+
+                                $cg_link = $PublicPath . $cg['shortform'];
+
+                                $list_bonus .= "<li>";
+                                $list_bonus .= "<a href=\"$cg_link\" class=\"no-decoration default\">$cg[1]</a>";
+                                $list_bonus .= "</li>";
+                            }
+                            $list_bonus .= "</ul>";
+
+                        }
+
+                        $list_bonus .= "</li>";
 					}
 
 				}
@@ -2268,4 +2288,42 @@ function decryptIt( $q ) {
 	$qDecoded = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $q ), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0" );
 
 	return $qDecoded;
+}
+
+function verifyHasChildGuides($parent_id) {
+
+    $db = new Querier();
+    $connection = $db->getConnection ();
+
+    $statement = $connection->prepare ( "select subject_parent from subject_subject where subject_parent = :parent_id" );
+    $statement->bindParam ( ":parent_id", $parent_id );
+    $statement->execute ();
+    return $statement->fetchAll();
+
+    /*
+     * select subject_parent from subject_subject where subject_parent = '10155'
+     */
+}
+
+function getChildGuides($parent_id) {
+
+    $db = new Querier();
+    $connection = $db->getConnection ();
+
+    $statement = $connection->prepare ( "select *
+    from subject
+    left join subject_subject
+    ON subject.subject_id = subject_subject.subject_child
+    where subject_parent = :parent_id" );
+    $statement->bindParam ( ":parent_id", $parent_id );
+    $statement->execute ();
+    return $statement->fetchAll();
+
+    /*
+    select *
+    from subject
+left join subject_subject
+    ON subject.subject_id = subject_subject.subject_child
+where subject_parent = "13621";
+    */
 }
