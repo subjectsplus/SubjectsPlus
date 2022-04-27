@@ -128,11 +128,13 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                             <div className="drag-handle sp-section-drag-handle" {...provided.dragHandleProps} title="Move section">
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
-                            <div className="dropdown basic-dropdown dropend">
+                            <div className="dropdown basic-dropdown">
                                 <button className="btn btn-icon-default dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fas fa-ellipsis-h"></i>
                                 </button>
-                                <ul className="dropdown-menu fs-sm" aria-labelledby="sectionMenuOptions">
+                                <ul className="dropdown-menu dropdown-menu-end fs-xs" aria-labelledby="sectionMenuOptions">
+                                    <li><span className="dropdown-item-text">Choose a layout</span></li>
+                                    <li><hr className="dropdown-divider" /></li>
                                     <li><a className="dropdown-item delete-section" onClick={deleteSection}><i
                                         className="fas fa-trash"></i> Delete Section</a></li>
                                 </ul>
