@@ -84,6 +84,14 @@ function Search(props) {
         listRef.current.scrollTop = 0;
     }
 
+    const pasteToCKEditor = evt => {
+        if (CKEDITOR?.instances['pluslet_ckeditor']) {
+            CKEDITOR.instances['pluslet_ckeditor'].insertHtml(evt.target.outerHTML);
+        } else if (CKEDITOR?.instances['faq_answer']) {
+            CKEDITOR.instances['faq_answer'].insertHtml(evt.target.outerHTML);
+        }
+    }
+
     const resultsMessage = useMemo(() => {
         if (isErrored) {
             return (
@@ -96,7 +104,7 @@ function Search(props) {
         } else if (results.length > 0) {
             return results.map(result => (
                 <li key={result['@id']}>
-                    <Token tokenType={props.tokenType} token={result} />
+                    <Token tokenType={props.tokenType} token={result} onClick={pasteToCKEditor} />
                 </li>
             ));
         } else if (loading) {

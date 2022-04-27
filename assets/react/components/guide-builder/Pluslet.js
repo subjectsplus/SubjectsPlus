@@ -136,7 +136,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
     const editor = () => {
         if (editable) {
-            return (<CKEditor initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
+            return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
         } else {
             return (<div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
         }

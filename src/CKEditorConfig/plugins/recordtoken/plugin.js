@@ -1,23 +1,21 @@
 (function() {
-    // TODO: Implement auto check for record tokens whose details might have changed in database
     // TODO: Add description to iconTemplate popover
 
-    var linkClass = 'record-link';
-    var tokenClass = 'record-token';
-    var descriptionClass = 'record-description';
-    var iconClass = 'record-icon';
+    const linkClass = 'record-link';
+    const tokenClass = 'record-token';
+    const descriptionClass = 'record-description';
+    const iconClass = 'record-icon';
 
-    var iconSource = '/build/images/backend/sp-info-circle-solid.svg';
+    const iconSource = '/build/images/backend/sp-info-circle-solid.svg';
 
-    var linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
+    const linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
         iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Description content will load here"><img src="' + iconSource +'" /></button>',
         template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
                     '</span>&nbsp;';
     
-    var templateBlock = new CKEDITOR.template(function(data) {
-
+    const templateBlock = new CKEDITOR.template(function(data) {
         if (data.descriptionType == 'block') {
             return '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                 linkTemplate + descriptionTemplate +
@@ -31,20 +29,20 @@
         }
     });
 
-    var minimumTitleLength = 3;
-    var titleApi = '/api/titles/{titleId}';
-    var recordTokenOffcanvas = null;
+    const minimumTitleLength = 3;
+    const titleApi = '/api/titles/{titleId}';
+    let recordTokenOffcanvas = null;
 
     CKEDITOR.plugins.add('recordtoken', {
         icons: 'record',
         requires: 'widget,dialog',
         
         init: function( editor ) {
-            var pluginDirectory = this.path;
+            const pluginDirectory = this.path;
             editor.addContentsCss( pluginDirectory + 'styles/sp-custom-cke-recordtoken.css' );
 
-            var records = {};
-            var notifiedToSave = false;
+            const records = {};
+            let notifiedToSave = false;
 
             // Create record token widget
             editor.widgets.add('recordtoken', {
@@ -64,8 +62,8 @@
                         evt.data.widget = this;
                     });
 
-                    var recordId = this.element.data('record-id');
-                    var record = null;
+                    const recordId = this.element.data('record-id');
+                    let record = null;
 
                     // Set record data, call api and index if unavailable
                     if (records[recordId]) {
@@ -95,10 +93,10 @@
 
                     // Check if location has changed from database
                     // and update if applicable
-                    var linkElement = this.element.findOne('.' + linkClass);
+                    const linkElement = this.element.findOne('.' + linkClass);
                     if (record && linkElement) {
-                        var locationFromDB = htmlEntityDecode(record.location);
-                        var locationFromLocal = linkElement.getAttribute('href');
+                        let locationFromDB = htmlEntityDecode(record.location);
+                        let locationFromLocal = linkElement.getAttribute('href');
                         
                         if (locationFromDB !== locationFromLocal) {
                             linkElement.setAttribute('href', locationFromDB);
@@ -112,8 +110,8 @@
                     }
 
                     // Set description type data
-                    var descriptionBlock = this.element.findOne('.' + descriptionClass);
-                    var descriptionIcon = this.element.findOne('.' + iconClass);
+                    const descriptionBlock = this.element.findOne('.' + descriptionClass);
+                    const descriptionIcon = this.element.findOne('.' + iconClass);
 
                     if (descriptionBlock) {
                         this.setData('descriptionType', 'block');
@@ -122,8 +120,8 @@
                         // Check if description content from DB has changed
                         // and update if applicable
                         if (record) {
-                            var descriptionFromDB = record.description;
-                            var descriptionFromLocal = descriptionBlock.getText();
+                            let descriptionFromDB = record.description;
+                            let descriptionFromLocal = descriptionBlock.getText();
 
                             if (descriptionFromDB !== descriptionFromLocal) {
                                 descriptionBlock.setText(descriptionFromDB);
@@ -146,8 +144,8 @@
 
                 data: function() {
                     // Update title
-                    var origTitle = this.data.record.title;
-                    var newTitle = this.data.title;
+                    const origTitle = this.data.record.title;
+                    const newTitle = this.data.title;
                     
                     editor.fire('saveSnapshot');
 
@@ -172,12 +170,12 @@
                     }
 
                     // Update description type
-                    var newDescriptionType = this.data.descriptionType;
+                    const newDescriptionType = this.data.descriptionType;
 
                     if (this.oldDescriptionType === newDescriptionType)
                         return;
                     
-                    var description = this.data.record.description;
+                    const description = this.data.record.description;
                     if (!description || description.trim().length == 0) {
                         // Description is null or empty
                         // Set description type to none
@@ -187,25 +185,25 @@
 
                     if (this.oldDescriptionType == 'block') {
                         // Undo the block template
-                        var descriptionBlock = this.element.findOne('.' + descriptionClass);
+                        const descriptionBlock = this.element.findOne('.' + descriptionClass);
                         if (descriptionBlock) {
                             descriptionBlock.remove();
                         }
 
-                        var breakLine = this.element.findOne('br');
+                        const breakLine = this.element.findOne('br');
                         if (breakLine) {
                             breakLine.remove();
                         }
                     } else if (this.oldDescriptionType == 'icon') {
                         // Undo the icon template
-                        var descriptionIcon = this.element.findOne('.' + iconClass);
+                        const descriptionIcon = this.element.findOne('.' + iconClass);
                         if (descriptionIcon) {
                             descriptionIcon.remove();
                         }
                     }
 
                     if (newDescriptionType == 'block') {
-                        var html = '<br />' + descriptionTemplate.replace('{recordDescription}', description);
+                        const html = '<br />' + descriptionTemplate.replace('{recordDescription}', description);
                         this.element.appendHtml(html);
                     } else if (newDescriptionType == 'icon') {
                         this.element.appendHtml(iconTemplate);
@@ -244,7 +242,7 @@
 
             editor.addCommand('toggleRecordSearch', {
                 'exec': function(editor) {
-                    var searchComponent = document.getElementById('offcanvasRecordToken');
+                    const searchComponent = document.getElementById('offcanvasRecordToken');
                     if (searchComponent) {
                         if (recordTokenOffcanvas) {
                             recordTokenOffcanvas.toggle();
@@ -260,15 +258,34 @@
             });
 
             editor.on('paste', function(evt) {
-                var record = evt.data.dataTransfer.getData('record');
-                if (!record) {
+                const tokenElement = evt.data.dataTransfer.getData('tokenElement');
+                if (!tokenElement) {
                     return;
                 }
 
+                evt.data.dataValue = tokenElement;
+            });
+
+            editor.on('insertHtml', function(evt) {
+                const temp = document.createElement('div');
+                temp.innerHTML = evt.data.dataValue;
+
+                const recordElement = temp.firstChild;
+                if (!recordElement.dataset['recordId']) {
+                    return;
+                }
+
+                const record = {
+                    'recordId': recordElement.dataset['recordId'],
+                    'title': recordElement.dataset['recordTitle'],
+                    'description': recordElement.dataset['recordDescription'],
+                    'location': recordElement.dataset['recordLocation']
+                };
+
                 // replace placeholders in template with record details
-                var dataValue = template.replace('{recordId}', record.recordId);
-                dataValue = dataValue.replace('{recordLink}', record.location);
-                dataValue = dataValue.replace('{recordTitle}', record.title);
+                const dataValue = template.replace('{recordId}', record.recordId)
+                .replace('{recordLink}', record.location)
+                .replace('{recordTitle}', record.title);
 
                 evt.data.dataValue = dataValue;
 
@@ -291,27 +308,21 @@
     CKEDITOR.on('instanceReady', function() {
 
         // When an item in the contact list is dragged, copy its data into the drag and drop data transfer.
-        // This data is later read by the editor#paste listener in the media plugin defined above.
+        // This data is later read by the editor#paste listener in the record plugin defined above.
         if (CKEDITOR.document.getById('record-list')) {
             CKEDITOR.document.getById('record-list').on('dragstart', function(evt) {
                 // The target may be some element inside the draggable div (e.g. the image), so get the div.media-card.
-                var target = evt.data.getTarget().getAscendant('div', true);
+                const target = evt.data.getTarget().getAscendant('div', true);
 
                 // Initialization of the CKEditor 4 data transfer facade is a necessary step to extend and unify native
                 // browser capabilities. For instance, Internet Explorer does not support any other data type than 'text' and 'URL'.
                 // Note: evt is an instance of CKEDITOR.dom.event, not a native event.
                 CKEDITOR.plugins.clipboard.initDragDataTransfer(evt);
 
-                var dataTransfer = evt.data.dataTransfer;
+                const dataTransfer = evt.data.dataTransfer;
 
-                var record = {
-                    'recordId': target.data('record-id'),
-                    'title': target.data('record-title'),
-                    'description': target.data('record-description'),
-                    'location': target.data('record-location')
-                };
-
-                dataTransfer.setData('record', record);
+                // Set outerHTML of token to tokenElement data key
+                dataTransfer.setData('tokenElement', target.$.outerHTML);
 
                 // You need to set some normal data types to backup values for two reasons:
                 // * In some browsers this is necessary to enable drag and drop into text in the editor.
@@ -330,7 +341,7 @@
     });
 
     function getWidgetAllowedContent() {
-        var rules = {
+        return {
             span: {
                 classes: [tokenClass, descriptionClass],
                 attributes: 'data-*'
@@ -346,16 +357,14 @@
                 attributes: ['src', 'data-bs-*']
             }
         }
-
-        return rules;
     }
 
     function getRecordFromAPI(recordId) {
-        var apiLink = titleApi.replace('{titleId}', recordId);
-        var apiResult = CKEDITOR.ajax.load(apiLink);
+        let apiLink = titleApi.replace('{titleId}', recordId);
+        let apiResult = CKEDITOR.ajax.load(apiLink);
         
         if (apiResult) {
-            var record = JSON.parse(apiResult);
+            const record = JSON.parse(apiResult);
 
             return {
                 'recordId': recordId,
@@ -369,12 +378,12 @@
     function htmlEntityDecode(str) {
         if (typeof str !== 'string') return '';
 
-        var doc = new DOMParser().parseFromString(str, 'text/html');
+        const doc = new DOMParser().parseFromString(str, 'text/html');
         return doc.body.textContent || '';
     }
 
     function notifyUser(editor, message, messageType='warning') {
-        var notification = new CKEDITOR.plugins.notification( editor, {
+        const notification = new CKEDITOR.plugins.notification( editor, {
             message: message,
             type: messageType
         });
