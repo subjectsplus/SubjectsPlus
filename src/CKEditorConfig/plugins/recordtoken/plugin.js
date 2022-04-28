@@ -10,7 +10,7 @@
 
     const linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
-        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Description content will load here"><img src="' + iconSource +'" /></button>',
+        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{recordDescription}"><img src="' + iconSource +'" /></button>',
         template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
                     '</span>&nbsp;';
@@ -206,7 +206,8 @@
                         const html = '<br />' + descriptionTemplate.replace('{recordDescription}', description);
                         this.element.appendHtml(html);
                     } else if (newDescriptionType == 'icon') {
-                        this.element.appendHtml(iconTemplate);
+                        const html = iconTemplate.replace('{recordDescription}', description);
+                        this.element.appendHtml(html);
                     }
 
                     this.oldDescriptionType = newDescriptionType;
