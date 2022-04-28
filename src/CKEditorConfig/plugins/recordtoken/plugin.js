@@ -120,7 +120,8 @@
                         // Check if description content from DB has changed
                         // and update if applicable
                         if (record) {
-                            let descriptionFromDB = record.description;
+                            // todo: handle spacing that may cause false flags, i.e. record id 177
+                            let descriptionFromDB = htmlEntityDecode(record.description);
                             let descriptionFromLocal = descriptionBlock.getText();
 
                             if (descriptionFromDB !== descriptionFromLocal) {
