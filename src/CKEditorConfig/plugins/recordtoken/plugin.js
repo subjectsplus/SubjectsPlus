@@ -85,8 +85,8 @@
                     }
 
                     // Set data for locally changeable title
-                    if (this.element.data('record-title')) {
-                        this.setData('title', this.element.data('record-title'));
+                    if (this.element.data('record-title-override')) {
+                        this.setData('title', this.element.data('record-title-override'));
                     } else if (record) {
                         this.setData('title', record.title);
                     }
@@ -153,7 +153,7 @@
                         // New title must meet character requirements before being set
                         if (newTitle.trim().length >= minimumTitleLength) {
                             // Set new record title data field and text
-                            this.element.data('record-title', newTitle);
+                            this.element.data('record-title-override', newTitle);
                             this.element.findOne('.' + linkClass).setText(newTitle);
                         } else {
                             // Notify the user of invalid title length
@@ -163,9 +163,9 @@
                         // New title is the same as original
                         this.element.findOne('.' + linkClass).setText(origTitle);
                         
-                        if (this.element.data('record-title')) {
+                        if (this.element.data('record-title-override')) {
                             // remove record title override data
-                            this.element.removeAttribute('data-record-title');
+                            this.element.removeAttribute('data-record-title-override');
                         }
                     }
 
