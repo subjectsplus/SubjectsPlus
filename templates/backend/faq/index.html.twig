@@ -65,7 +65,7 @@
                         </div>
                     {% endif %}
                 </td>
-                <td>{{ faq.answer | u.truncate(80, '...') | striptags | raw }}</td>
+                <td>{{ faq.answer | striptags | raw | u.truncate(80, '...') }}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
                         <a href="{{ path('faq_edit', {'faqId': faq.faqId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.edit' | trans }}"><i class="fas fa-pen"></i></a>
