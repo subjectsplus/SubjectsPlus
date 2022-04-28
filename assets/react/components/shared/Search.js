@@ -92,6 +92,8 @@ function Search(props) {
         }
     }
 
+    // TODO: Add an indicator/text at the top of results that lets the user
+    // know that they can both click and drag to insert results into ckeditor
     const resultsMessage = useMemo(() => {
         if (isErrored) {
             return (
