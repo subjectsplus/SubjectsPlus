@@ -26,6 +26,7 @@ class TokenService {
         // Query for all span tags with data-record-id attribute
         $titleIds = $xpath->query('//span/@data-record-id');
         
+        /** @var \App\Repository\TitleRepository $titleRepo */
         $titleRepo = $this->entityManager->getRepository(Title::class);
 
         foreach ($titleIds as $titleId) {
@@ -38,10 +39,16 @@ class TokenService {
 
             foreach ($recordElement->childNodes as $childNode) {
                 // TODO: caching and updating on the database
+                
                 // check for link tags
                 if (strtolower($childNode->nodeName) === 'a') {
+                    // update the link to the database value's location field
                     $childNode->setAttribute('href', $recordInfo->getLocation()[0]->getLocation());
-                    $childNode->nodeValue = $recordInfo->getTitle();
+
+                    // update title to database value if no override is present
+                    if (!$recordElement->hasAttribute('data-record-title-override')) {
+                        $childNode->nodeValue = $recordInfo->getTitle();
+                    }
                 }
 
                 // check for description blocks
