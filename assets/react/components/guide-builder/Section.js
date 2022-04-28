@@ -132,8 +132,17 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                                 <button className="btn btn-icon-default dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fas fa-ellipsis-h"></i>
                                 </button>
-                                <ul className="dropdown-menu dropdown-menu-end fs-xs" aria-labelledby="sectionMenuOptions">
-                                    <li><span className="dropdown-item-text">Choose a layout</span></li>
+                                <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="sectionMenuOptions">
+                                    <li><span className="dropdown-item-text fw-bold fs-sm">Layout</span>
+                                        <ul className="list-unstyled d-flex flex-row flex-wrap">
+                                            <li className="sp-icon-col"><a className="dropdown-item"><i className="fas fa-columns fs-4"></i></a></li>
+                                            <li className="sp-icon-col"><a className="dropdown-item"><span className="sp-col-1"></span> One column</a></li>
+                                            <li className="sp-icon-col"><a className="dropdown-item"><span className="sp-col-2"></span> Two column</a></li>
+                                            <li className="sp-icon-col"><a className="dropdown-item"><span className="sp-col-2"></span> Two column</a></li>
+                                            <li className="sp-icon-col"><a className="dropdown-item"><span className="sp-col-2"></span> Two column</a></li>
+                                            <li className="sp-icon-col"><a className="dropdown-item"><span className="sp-col-2"></span> Two column</a></li>
+                                        </ul>
+                                    </li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><a className="dropdown-item delete-section" onClick={deleteSection}><i
                                         className="fas fa-trash"></i> Delete Section</a></li>
