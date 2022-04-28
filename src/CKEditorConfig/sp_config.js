@@ -45,4 +45,6 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Set Base Z-Index
 	config.baseFloatZIndex = 100001;
+
+	// TODO: Tabs not working
 };
