@@ -13,6 +13,8 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
     const deleteSectionMutation = useDeleteSection(tabId);
     const createPlusletMutation = useCreatePluslet(sectionId);
 
+    const [addPlusletHovered, setAddPlusletHovered] = useState(null);
+
     const getSectionDraggableStyle = (isDragging, draggableStyle) => ({
         position: 'relative',
         marginBottom: '2.5rem',
@@ -52,8 +54,6 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
         }
     }
 
-    const [addPlusletStyle, setStyle] = useState({visibility: 'hidden'});
-
     const generateColumns = () => {
         const splitLayout = layout.split('-');
         let column = 0;
@@ -92,14 +92,17 @@ function Section({ tabId, sectionId, layout, sectionIndex }) {
                                             className="btn btn-muted p-1"
                                             onClick={() => addPluslet(currentColumn, columnRows)}
                                             onMouseEnter={e => {
-                                                setStyle({visibility: 'visible'});
+                                                setAddPlusletHovered(columnId);
                                             }}
                                             onMouseLeave={e => {
-                                                setStyle({visibility: 'hidden'})
+                                                setAddPlusletHovered(null);
                                             }}
                                         >
                                             <i className="fas fa-plus-circle d-block"></i>
-                                            <span className="fs-xs" style={addPlusletStyle}>Add Pluslet</span>
+                                            <span className="fs-xs" style={{
+                                                visibility: addPlusletHovered === columnId ? 'visible' : 'hidden'}}>
+                                                    Add Pluslet
+                                            </span>
                                         </button>
                                     </div>
                                 </div>
