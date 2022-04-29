@@ -1,0 +1,7 @@
+{% block title %}{{ 'control.header.faqs.show_faq' | trans }} {{ faq.faqId }} | SubjectsPlus{% endblock %}
+
+{% block content %}
+<p>Question: {{ faq.question }}</p>
+<p>Answer:</p>
+<p>{{ faq.answer | raw }}</p>
+{% endblock %}

@@ -10,7 +10,7 @@
                 <form method="post" action="{{ path('faq_delete', {'faqId': faq.faqId}) }}">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ faq.faqId) }}">
                     <div class="text-end">
-                        <button type="button" class="btn btn-cancel btn-round me-2" data-bs-dismiss="modal">{{ 'control.faqs.delete_faq.cancel_button' | trans }}</button>
+                        <button type="button" class="btn btn-link-default me-2" data-bs-dismiss="modal">{{ 'control.faqs.delete_faq.cancel_button' | trans }}</button>
                         <button type="submit" class="btn btn-danger btn-round"><i class="fas fa-trash"></i> {{ 'control.faqs.delete_faq.confirm_button' | trans }}</button>
                     </div>
                 </form>

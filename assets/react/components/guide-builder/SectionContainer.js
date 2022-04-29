@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
@@ -6,12 +6,15 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
 function SectionContainer({ tabId }) {
+    const [currentEditablePluslet, setCurrentEditablePluslet] = useState('');
+    const [draggingId, setDraggingId] = useState(null);
+
     const {isLoading, isError, data, error} = useFetchSections(tabId);
 
     const createSectionMutation = useCreateSection(tabId);
     const reorderSectionMutation = useReorderSection(tabId);
     const reorderPlusletMutation = useReorderPluslet();
-
+    
     const reorderSection = (sourceIndex, destinationIndex) => {
         reorderSectionMutation.mutate({
             tabId: tabId,
@@ -21,6 +24,9 @@ function SectionContainer({ tabId }) {
     }
 
     const handleOnDragEnd = (result) => {
+        // reset dragging id
+        setDraggingId(null);
+
         if (result.source === undefined || result.source === null || 
             result.destination === undefined || result.destination === null) return;
         if (result.source.index === undefined || result.destination.index === undefined) return;
@@ -70,6 +76,10 @@ function SectionContainer({ tabId }) {
         }
     }
 
+    const handleOnBeforeCapture = (beforeCapture) => {
+        setDraggingId(beforeCapture.draggableId);
+    }
+
     const addSection = () => {
         if (Array.isArray(data)) {
             const initialSectionData = {
@@ -83,6 +93,8 @@ function SectionContainer({ tabId }) {
         }
     }
 
+    const [addSectionStyle, setStyle] = useState({visibility: 'hidden'});
+
     const containerContent = () => {
         if (isLoading) {
             return (<p>Loading Sections...</p>);
@@ -93,18 +105,15 @@ function SectionContainer({ tabId }) {
             const guideSections = data.map((section, index) => {
                 return (
                     <Section key={section.id} sectionId={section.id} 
-                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} />
+                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} 
+                        currentEditablePluslet={currentEditablePluslet}
+                        isCurrentlyDragging={'section-' + section.id === draggingId}
+                        currentEditablePlusletCallBack={setCurrentEditablePluslet} />
                 );
             });
 
             return (
                 <>
-
-                    <div className="text-center mb-3">
-                        <button id="add-section" className="btn btn-link p-1" title="Add Section" onClick={addSection}>
-                            <i className="fas fa-plus-circle"></i>
-                        </button>
-                    </div>
                     <DragDropContext onDragEnd={handleOnDragEnd}>
                         <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (
@@ -115,6 +124,22 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
+                    <div className="text-center mt-1 add-section-container">
+                        <button
+                            id="add-section"
+                            className="btn btn-muted p-1"
+                            onClick={addSection}
+                            onMouseEnter={e => {
+                                setStyle({visibility: 'visible'});
+                            }}
+                            onMouseLeave={e => {
+                                setStyle({visibility: 'hidden'})
+                            }}
+                        >
+                            <i className="fas fa-plus-circle d-block"></i>
+                            <span className="fs-xs" style={addSectionStyle}>Add Section</span>
+                        </button>
+                    </div>
                 </>
             );
         }

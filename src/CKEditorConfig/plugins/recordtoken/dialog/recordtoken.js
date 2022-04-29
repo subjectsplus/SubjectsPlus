@@ -31,10 +31,10 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                         validate: CKEDITOR.dialog.validate.notEmpty('Title field cannot be empty.'),
 
                         onClick: function() {
-                            var dialog = this.getDialog();
-                            var widget = dialog.widget;
+                            const dialog = this.getDialog();
+                            const widget = dialog.widget;
 
-                            var record = widget.data.record;
+                            const record = widget.data.record;
                             if (record) {
                                 dialog.setValueOf('tab-main', 'record-title', record.title);
                             }
@@ -46,7 +46,7 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                         id: 'record-description',
                         label: 'Description',
                         setup: function(widget) {
-                            var record = widget.data.record;
+                            const record = widget.data.record;
                             if (record) {
                                 if (!record.description || record.description.trim().length === 0) {
                                     this.setValue('No description available for this record.');
@@ -67,11 +67,12 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                         'default': 'none',
                         
                         setup: function(widget) {
-                            var record = widget.data.record;
+                            const record = widget.data.record;
 
                             if (record && (!record.description || record.description.trim().length === 0)) {
                                 this.getElement().hide();
                             } else {
+                                this.setValue(widget.data.descriptionType);
                                 this.getElement().show();
                             }
                         },

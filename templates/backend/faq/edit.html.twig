@@ -9,15 +9,10 @@
 
 {% block content %}
     <div class="container py-5">
-        <div class="row">
-            <div class="col-8">
-                <h1 class="fw-light d-inline-block me-2">{{ 'control.header.faqs.edit_existing_faq' | trans }}</h1>
-                <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.faqs.preview.label' | trans }}</a>
-            </div>
-            <div class="col-4 text-end">
-                <a href="{{ path('faq_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
-            </div>
-        </div>
+        <a href="{{ path('faq_index') }}" class="fs-sm d-block" style="width:max-content;"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.faqs.back_to_list' | trans }}</a>
+        <h1 class="fw-light d-inline-block me-2">{{ 'control.header.faqs.edit_existing_faq' | trans }}</h1>
+        <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.faqs.preview.label' | trans }}</a>
+
         <div class="row row-cols-lg-2">
             <div class="col-lg-8 text-end">
                 {{ include('backend/includes/add_custom_tokens.html.twig') }}
