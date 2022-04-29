@@ -129,6 +129,7 @@
                         </div>
                     {% endif %}
                 </td>
+                {# TODO: fix answer not showing up for certain faq's that start with a record token or html tags #}
                 <td>{{ faq.answer | striptags | raw | u.truncate(80, '...') }}</td>
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
