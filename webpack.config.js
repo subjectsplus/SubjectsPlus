@@ -103,8 +103,9 @@ Encore
         {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
         {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'},
         
-        // CKEditor Plugins
-        {from: './src/CKEditorPlugins/', to: 'ckeditor/plugins/[path][name].[ext]'}
+        // CKEditor Custom Config and Plugins
+        {from: './src/CKEditorConfig/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './src/CKEditorConfig/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
     ])
 
 

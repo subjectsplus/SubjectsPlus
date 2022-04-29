@@ -49,7 +49,7 @@ final class Version20220407160312 extends AbstractMigration
         );
 
         // Generate uuidv4 for existing columns
-        $this->addSql('UPDATE section SET uuid = UNHEX(REPLACE(uuid_v4s(), "-","")) WHERE uuid IS NULL;');
+        $this->addSql('UPDATE section SET uuid = UNHEX(REPLACE(uuid_v4s(), "-" COLLATE utf8mb4_unicode_ci, "" COLLATE utf8mb4_unicode_ci)) WHERE uuid IS NULL;');
         
     }
 

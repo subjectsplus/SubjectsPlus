@@ -62,13 +62,13 @@ export function useUpdateSection(tabId) {
             queryClient.setQueryData(['sections', tabId], optimisticResult);
             return { previousSectionsData };
         },
-        onError: (error, tabData, context) => {
-            // Perform rollback of tab mutation
+        onError: (error, sectionData, context) => {
+            // Perform rollback of section mutation
             console.error(error);
             queryClient.setQueryData(['sections', tabId], context.previousSectionsData);
         },
         onSettled: () => {
-            // Refetch the tab data
+            // Refetch the section data
             queryClient.invalidateQueries(['sections', tabId]);
         },
     });
