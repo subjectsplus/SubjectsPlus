@@ -228,7 +228,8 @@ function GuideTabContainer(props) {
                 if (currentTab.tabIndex == tab.tabIndex) {
                     return (
                         <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={(activeKey === tab.tabIndex ? 'active': '')}
-                            key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
+                            key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}
+                            transition={false}>
                                 <SectionContainer tabId={tab.id} />
                         </Tab.Pane>
                     );
