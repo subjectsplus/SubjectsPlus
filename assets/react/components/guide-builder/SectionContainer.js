@@ -124,7 +124,7 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
-                    <div className="text-center mt-1">
+                    <div className="text-center mt-1 add-section-container">
                         <button
                             id="add-section"
                             className="btn btn-muted p-1"
