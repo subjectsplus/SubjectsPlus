@@ -29,8 +29,8 @@ function Pluslet({ plusletId, plusletRow, sectionId }) {
                         {...provided.draggableProps}
                         style={{
                             ...provided.draggableProps.style,
-                            backgroundColor: '#d5d5d5',
-                            height: '200px',
+                            height: 'auto',
+                            marginBottom: '1.25rem'
                         }}>
                         <div>
                             <div className="drag-handle" {...provided.dragHandleProps} title="Move pluslet">
