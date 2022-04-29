@@ -116,7 +116,7 @@ if ( $rnew = $statement->fetchAll() ) {
 
 // Add header now, because we need a value ($v2styles) from it
 include( "includes/header_splux.php" );
-
+global $PublicPath;
 
 // put together our main result display
 //**************************************
@@ -231,6 +231,24 @@ if ( isset( $_GET["searchterm"] ) && trim($_GET["searchterm"]) != "") {
 				if ( $myrow[7] != "" ) {
 					$list_bonus .= "<strong>Keywords:</strong> " . $myrow[7];
 				} // add keywords
+
+                $hasChildGuides = verifyHasChildGuides($myrow[0]);
+                if(($hasChildGuides) && ($hasChildGuides[0]['subject_parent'] === $myrow[0])) {
+                    $child_guides = getChildGuides($myrow[0]);
+                    $list_bonus .= "<br /><div><strong>Associated Guides:</strong></div>";
+                    $list_bonus .= "<ul>";
+                    foreach ($child_guides as $cg) {
+
+                        $cg_link = $PublicPath . $cg['shortform'];
+
+                        $list_bonus .= "<li>";
+                        $list_bonus .= "<a href=\"$cg_link\" class=\"no-decoration default\">$cg[1]</a>";
+                        $list_bonus .= "</li>";
+                    }
+                    $list_bonus .= "</ul>";
+
+                }
+
 
 				$our_item = "<li title=\"{$title_hover}\"><i class=\"fa {$icon}\"></i> <a href=\"$guide_location\" class=\"no-decoration default\">" . htmlspecialchars_decode( $myrow[1] ) . "</a>
             <div class=\"guide_list_bonus\">$list_bonus</div>
