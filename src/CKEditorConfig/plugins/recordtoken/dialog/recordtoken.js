@@ -28,7 +28,6 @@ CKEDITOR.dialog.add( 'recordtoken', function( editor ) {
                         type: 'button',
                         id: 'record-title-reset',
                         label: 'Reset',
-                        validate: CKEDITOR.dialog.validate.notEmpty('Title field cannot be empty.'),
 
                         onClick: function() {
                             const dialog = this.getDialog();
