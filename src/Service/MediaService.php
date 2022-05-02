@@ -91,21 +91,21 @@ class MediaService {
 
             // move to upload destination and rename
             $file = $file->move($absDestination, $name);
-            
+            $largeFile = null;
+            $mediumFile = null;
+            $smallFile = null;
+
             if (strpos($mimeType, "image/") !== false) {
                  // Generate and upload the sized images
                 $sizedImages = $this->generateSizedImages($file);
-                $largeFile = null;
                 if (isset($sizedImages['large'])) {
                     $largeFile = new File($sizedImages['large']);
                 }
 
-                $mediumFile = null;
                 if (isset($sizedImages['medium'])) {
                     $mediumFile = new File($sizedImages['medium']);
                 }
 
-                $smallFile = null;
                 if (isset($sizedImages['small'])) {
                     $smallFile = new File($sizedImages['small']);
                 }
@@ -249,16 +249,22 @@ class MediaService {
         }
     }
 
+    public function getRelativeDirectory(string $mimeType) {
+        $subDirName = $this->fileNamer->getSubDirectoryFromMimeType($mimeType);
+        
+        return join(DIRECTORY_SEPARATOR, [
+            $this->uploadDestination, 
+            $subDirName
+        ]);
+    }
+
     public function getRelativeUrlFromMedia(Media $media, int $sizeType = ImageSizeType::ORIGINAL_IMAGE) { 
         $mimeType = $media->getMimeType();
 
         if ($mimeType === null) return null;
 
-        $subDirName = $this->fileNamer->getSubDirectoryFromMimeType($mimeType);
-        $publicDestination = join(DIRECTORY_SEPARATOR, [
-            $this->uploadDestination, 
-            $subDirName
-        ]);
+        $publicDestination = $this->getRelativeDirectory($mimeType);
+
         if ($sizeType === ImageSizeType::LARGE_IMAGE) {
             $fileName = $media->getLargeFileName();
         } else if ($sizeType === ImageSizeType::MEDIUM_IMAGE) {

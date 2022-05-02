@@ -134,6 +134,7 @@ class MediaController extends AbstractController
                 $media->setFileName($fileName);
                 $media->setMimeType($mimeType);
                 $media->setFilesize($upload->getSize());
+                $media->setDirectory($uploader->getRelativeDirectory($mimeType));
                 $media->setStaff($staff);
                 
                 $entityManager->persist($media);
