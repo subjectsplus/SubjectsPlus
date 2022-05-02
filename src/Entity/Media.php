@@ -123,6 +123,11 @@ class Media implements \Serializable
      */
     private $altText;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $directory;
+
     public function getMediaId(): ?int
     {
         return $this->mediaId;
@@ -282,6 +287,18 @@ class Media implements \Serializable
         return $this->altText;
     }
 
+    public function getDirectory(): ?string
+    {
+        return $this->directory;
+    }
+
+    public function setDirectory(string $directory): self
+    {
+        $this->directory = $directory;
+
+        return $this;
+    }
+    
     /** @see \Serializable::serialize() */
     public function serialize()
     {
