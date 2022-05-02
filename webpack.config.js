@@ -24,8 +24,15 @@ Encore
     /*
     * React
      */
+
+    // Record-Search component
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
+
+    // React-Select component intializer
     .addEntry('react_select_init', './assets/backend/javascript/select-field-type/initSelect.js')
+
+    // Media-Browser component loader
+    .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.js')
 
     // Record Component
     .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
