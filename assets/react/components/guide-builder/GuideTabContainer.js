@@ -97,7 +97,7 @@ function GuideTabContainer(props) {
             setSavingChanges(true);
 
             updateTabMutation.mutate({
-                id: currentTab.id,
+                tabId: currentTab.id,
                 tabIndex: currentTab.tabIndex,
                 data: changes,
                 optimisticResult: {
