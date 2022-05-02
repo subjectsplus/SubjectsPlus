@@ -115,7 +115,7 @@ class Title
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="Location", mappedBy="title")
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="title", fetch="EAGER")
      * @ApiSubresource(maxDepth=1)
      * @Groups({"title"})
      */

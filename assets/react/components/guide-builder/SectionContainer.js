@@ -93,6 +93,8 @@ function SectionContainer({ tabId }) {
         }
     }
 
+    const [addSectionStyle, setStyle] = useState({visibility: 'hidden'});
+
     const containerContent = () => {
         if (isLoading) {
             return (<p>Loading Sections...</p>);
@@ -112,12 +114,7 @@ function SectionContainer({ tabId }) {
 
             return (
                 <>
-                    <div className="text-center mb-3">
-                        <button id="add-section" className="btn btn-link p-1" title="Add Section" onClick={addSection}>
-                            <i className="fas fa-plus-circle"></i>
-                        </button>
-                    </div>
-                    <DragDropContext onDragEnd={handleOnDragEnd} onBeforeCapture={handleOnBeforeCapture}>
+                    <DragDropContext onDragEnd={handleOnDragEnd}>
                         <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (
                                 <div className="section-container" {...provided.droppableProps} ref={provided.innerRef}>
@@ -127,6 +124,22 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
+                    <div className="text-center mt-1 add-section-container">
+                        <button
+                            id="add-section"
+                            className="btn btn-muted p-1"
+                            onClick={addSection}
+                            onMouseEnter={e => {
+                                setStyle({visibility: 'visible'});
+                            }}
+                            onMouseLeave={e => {
+                                setStyle({visibility: 'hidden'})
+                            }}
+                        >
+                            <i className="fas fa-plus-circle d-block"></i>
+                            <span className="fs-xs" style={addSectionStyle}>Add Section</span>
+                        </button>
+                    </div>
                 </>
             );
         }

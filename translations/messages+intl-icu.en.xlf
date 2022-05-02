@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="g0v_.sm" resname="control.header.faqs.view_faqs">
         <source>control.header.faqs.view_faqs</source>
-        <target>All FAQs</target>
+        <target>FAQs</target>
       </trans-unit>
       <trans-unit id="oussNQK" resname="control.header.faqs.view_faqs_by_subject">
         <source>control.header.faqs.view_faqs_by_subject</source>
@@ -403,7 +403,7 @@
       </trans-unit>
       <trans-unit id="mEl0NYw" resname="control.header.faqs.index">
         <source>control.header.faqs.index</source>
-        <target>All FAQs</target>
+        <target>Frequently Asked Questions</target>
       </trans-unit>
       <trans-unit id="JXTLIPa" resname="control.faqs.create_new_button">
         <source>control.faqs.create_new_button</source>
@@ -495,7 +495,7 @@
       </trans-unit>
       <trans-unit id="tgo74re" resname="control.faqs.filter_by">
         <source>control.faqs.filter_by</source>
-        <target>Filter by</target>
+        <target>Shows in</target>
       </trans-unit>
       <trans-unit id="qxgbniU" resname="control.faqs.filter.subject.aria">
         <source>control.faqs.filter.subject.aria</source>
@@ -503,7 +503,7 @@
       </trans-unit>
       <trans-unit id="9Zl7aop" resname="control.faqs.filter.subject">
         <source>control.faqs.filter.subject</source>
-        <target>Subject / Course</target>
+        <target>Guide</target>
       </trans-unit>
       <trans-unit id="atl_.Hb" resname="control.faqs.filter_or">
         <source>control.faqs.filter_or</source>
@@ -515,11 +515,11 @@
       </trans-unit>
       <trans-unit id="quGAPfC" resname="control.faqs.filter.collection">
         <source>control.faqs.filter.collection</source>
-        <target>Collection</target>
+        <target>FAQ List</target>
       </trans-unit>
       <trans-unit id="3ubLV7l" resname="control.faqs.table.heading.visibility">
         <source>control.faqs.table.heading.visibility</source>
-        <target>Public</target>
+        <target>Status</target>
       </trans-unit>
       <trans-unit id="pIyutoI" resname="control.faqs.table.heading.question">
         <source>control.faqs.table.heading.question</source>
@@ -543,7 +543,7 @@
       </trans-unit>
       <trans-unit id="OolzfPE" resname="control.faqs.table.button.preview">
         <source>control.faqs.table.button.preview</source>
-        <target>Preview</target>
+        <target>View Live</target>
       </trans-unit>
       <trans-unit id="TBLN5SK" resname="control.faqs.table.no_records">
         <source>control.faqs.table.no_records</source>
@@ -555,7 +555,7 @@
       </trans-unit>
       <trans-unit id="pz5s15o" resname="control.faqs.preview.label">
         <source>control.faqs.preview.label</source>
-        <target>Preview</target>
+        <target>View Live</target>
       </trans-unit>
       <trans-unit id="uWhnU9r" resname="control.general.label.visibility">
         <source>control.general.label.visibility</source>
@@ -591,7 +591,7 @@
       </trans-unit>
       <trans-unit id="NiRUiLv" resname="control.faqs.admin.create_new_collection">
         <source>control.faqs.admin.create_new_collection</source>
-        <target>New Collection</target>
+        <target>New List</target>
       </trans-unit>
       <trans-unit id="jtLstcU" resname="control.faqs.table.button.delete">
         <source>control.faqs.table.button.delete</source>
@@ -603,27 +603,27 @@
       </trans-unit>
       <trans-unit id="nDDfmLr" resname="control.faqs.admin.new_faq_collection.heading">
         <source>control.faqs.admin.new_faq_collection.heading</source>
-        <target>New FAQ Collection</target>
+        <target>New FAQ List</target>
       </trans-unit>
       <trans-unit id="DB.31Ue" resname="control.faqs.admin.new_faq_collection.collection_name">
         <source>control.faqs.admin.new_faq_collection.collection_name</source>
-        <target>Collection Name</target>
+        <target>List Name</target>
       </trans-unit>
       <trans-unit id="cTC6DkV" resname="control.faqs.admin.new_faq_collection.add_collection">
         <source>control.faqs.admin.new_faq_collection.add_collection</source>
-        <target>Add Collection</target>
+        <target>Add List</target>
       </trans-unit>
       <trans-unit id="vVimdNF" resname="control.faqs.admin.faq_collection_list.current_collections">
         <source>control.faqs.admin.faq_collection_list.current_collections</source>
-        <target>Current Collections</target>
+        <target>Current Lists</target>
       </trans-unit>
       <trans-unit id=".vmluXN" resname="control.faqs.admin.faq_collection.faq_list">
         <source>control.faqs.admin.faq_collection.faq_list</source>
-        <target>FAQ List</target>
+        <target>FAQs</target>
       </trans-unit>
       <trans-unit id="oGrVUpv" resname="control.faqs.admin.faq_collection.add_to_list">
         <source>control.faqs.admin.faq_collection.add_to_list</source>
-        <target>Add to list</target>
+        <target>Add FAQ to list</target>
       </trans-unit>
       <trans-unit id="kiL1c_V" resname="control.faqs.admin.faq_collection.remove_from_list">
         <source>control.faqs.admin.faq_collection.remove_from_list</source>
@@ -631,11 +631,11 @@
       </trans-unit>
       <trans-unit id="jDNhwnN" resname="control.faqs.admin.faq_collection.update">
         <source>control.faqs.admin.faq_collection.update</source>
-        <target>Update Collection</target>
+        <target>Update List</target>
       </trans-unit>
       <trans-unit id="OWPF528" resname="control.faqs.admin.faq_collection.delete_faq_collection">
         <source>control.faqs.admin.faq_collection.delete_faq_collection</source>
-        <target>Delete FAQ Collection</target>
+        <target>Delete FAQ List</target>
       </trans-unit>
       <trans-unit id="XLlcP5v" resname="control.faqs.admin.faq_collection.delete.confirm_button">
         <source>control.faqs.admin.faq_collection.delete.confirm_button</source>
@@ -683,7 +683,7 @@
       </trans-unit>
       <trans-unit id="ku.Ni0z" resname="control.guide_meta.show.header">
         <source>control.guide_meta.show.header</source>
-        <target>Guide Details</target>
+        <target>Guide Metadata</target>
       </trans-unit>
       <trans-unit id="Izh.sQf" resname="control.guide.preview.label">
         <source>control.guide.preview.label</source>
@@ -743,7 +743,7 @@
       </trans-unit>
       <trans-unit id="9vk7YLQ" resname="control.guides.table.button.guide_details">
         <source>control.guides.table.button.guide_details</source>
-        <target>Guide Details</target>
+        <target>Guide Metadata</target>
       </trans-unit>
       <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
         <source>control.faqs.table.button.guide_builder</source>
@@ -815,7 +815,43 @@
       </trans-unit>
       <trans-unit id="DlS4Gzj" resname="control.guide_meta.edit.header">
         <source>control.guide_meta.edit.header</source>
-        <target>Edit Guide Details</target>
+        <target>Edit Guide Metadata</target>
+      </trans-unit>
+      <trans-unit id="BpYajg3" resname="control.guides.table.type.active">
+        <source>control.guides.table.type.active</source>
+        <target>Public</target>
+      </trans-unit>
+      <trans-unit id="pKhfdzr" resname="control.guides.table.type.hidden">
+        <source>control.guides.table.type.hidden</source>
+        <target>Hidden</target>
+      </trans-unit>
+      <trans-unit id="mVwafaf" resname="control.guides.show.type.active">
+        <source>control.guides.show.type.active</source>
+        <target>This guide is public</target>
+      </trans-unit>
+      <trans-unit id="LFcA838" resname="control.guides.show.type.inactive">
+        <source>control.guides.show.type.inactive</source>
+        <target>This guide is NOT public</target>
+      </trans-unit>
+      <trans-unit id="Wc1Sxkx" resname="control.faqs.index.active_faqs_label">
+        <source>control.faqs.index.active_faqs_label</source>
+        <target>PUBLIC FAQs</target>
+      </trans-unit>
+      <trans-unit id="8CLy_3n" resname="control.faqs.table.status.active">
+        <source>control.faqs.table.status.active</source>
+        <target>Public</target>
+      </trans-unit>
+      <trans-unit id="GRPxBwl" resname="control.faqs.table.status.not_active">
+        <source>control.faqs.table.status.not_active</source>
+        <target>Not Public</target>
+      </trans-unit>
+      <trans-unit id="YvF4U8U" resname="control.faqs.table.heading.last_update">
+        <source>control.faqs.table.heading.last_update</source>
+        <target>Update Date</target>
+      </trans-unit>
+      <trans-unit id="gYevwuA" resname="control.faqs.back_to_list">
+        <source>control.faqs.back_to_list</source>
+        <target>Back to FAQs</target>
       </trans-unit>
     </body>
   </file>

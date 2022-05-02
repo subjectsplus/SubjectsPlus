@@ -13,6 +13,8 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
     const deleteSectionMutation = useDeleteSection(tabId);
     const createPlusletMutation = useCreatePluslet(sectionId);
 
+    const [addPlusletHovered, setAddPlusletHovered] = useState(null);
+
     const getSectionWindowStyle = (isDragging, draggableStyle) => ({
         position: 'relative',
         marginBottom: '2.5rem',
@@ -87,13 +89,26 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
                             {(provided, snapshot) => (
                                 <div className="sp-guide-column" {...provided.droppableProps} ref={provided.innerRef}>
                                     <span className="visually-hidden">{columnId}</span>
-                                    <div className="text-center mb-2">
-                                        <button className="btn btn-link p-1" title="Add Pluslet">
-                                            <i className="fas fa-plus-circle" onClick={() => addPluslet(currentColumn, columnRows)}></i>
-                                        </button>
-                                    </div>
                                     {columnPluslets}
                                     {provided.placeholder}
+                                    <div className="text-center mt-2">
+                                        <button
+                                            className="btn btn-muted p-1"
+                                            onClick={() => addPluslet(currentColumn, columnRows)}
+                                            onMouseEnter={e => {
+                                                setAddPlusletHovered(columnId);
+                                            }}
+                                            onMouseLeave={e => {
+                                                setAddPlusletHovered(null);
+                                            }}
+                                        >
+                                            <i className="fas fa-plus-circle d-block"></i>
+                                            <span className="fs-xs" style={{
+                                                visibility: addPlusletHovered === columnId ? 'visible' : 'hidden'}}>
+                                                    Add Pluslet
+                                            </span>
+                                        </button>
+                                    </div>
                                 </div>
                             )}
                         </Droppable>
@@ -120,9 +135,35 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
                             <div className="drag-handle sp-section-drag-handle" {...provided.dragHandleProps} title="Move section">
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
-                            <button className="delete-section btn btn-icon-default sp-section-delete-btn" onClick={deleteSection} title="Delete section">
-                                <i className="fas fa-trash"></i>
-                            </button>
+                            <div className="dropdown basic-dropdown">
+                                <button className="btn btn-icon-default dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i className="fas fa-ellipsis-h"></i>
+                                </button>
+                                <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="sectionMenuOptions">
+                                    <li><span className="dropdown-item-text fw-bold fs-sm">Layout</span>
+                                        <ul className="sp-section-layout-list">
+                                            {/*
+                                              sp-col-1 = 12-0-0 or 0-12-0
+                                              sp-col-2 = 6-6-0
+                                              sp-col-2-left-sidebar = 4-8-0 or 9-3-0
+                                              sp-col-2-right-sidebar = 8-4-0
+                                              sp-col-3 = 4-4-4
+                                              sp-col-3-sidebars = 3-6-3
+                                              Don't know what to do with the random ones like 7-5-0
+                                            */}
+                                            <li><a className="dropdown-item"><span className="sp-col-1"></span></a></li>
+                                            <li><a className="dropdown-item"><span className="sp-col-2"></span></a></li>
+                                            <li><a className="dropdown-item"><span className="sp-col-2-left-sidebar"></span></a></li>
+                                            <li><a className="dropdown-item"><span className="sp-col-2-right-sidebar"></span></a></li>
+                                            <li><a className="dropdown-item"><span className="sp-col-3"></span></a></li>
+                                            <li><a className="dropdown-item"><span className="sp-col-3-sidebars"></span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><a className="dropdown-item delete-section" onClick={deleteSection}><i
+                                        className="fas fa-trash"></i> Delete Section</a></li>
+                                </ul>
+                            </div>
 
                             <div className="guide-section-content" data-layout={layout}
                                 style={getSectionContentStyle(snapshot.isDragging || isCurrentlyDragging)}>

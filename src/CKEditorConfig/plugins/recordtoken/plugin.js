@@ -10,7 +10,7 @@
 
     const linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
-        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Description content will load here"><img src="' + iconSource +'" /></button>',
+        iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{recordDescription}"><img src="' + iconSource +'" /></button>',
         template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
                     linkTemplate +
                     '</span>&nbsp;';
@@ -85,8 +85,8 @@
                     }
 
                     // Set data for locally changeable title
-                    if (this.element.data('record-title')) {
-                        this.setData('title', this.element.data('record-title'));
+                    if (this.element.data('record-title-override')) {
+                        this.setData('title', this.element.data('record-title-override'));
                     } else if (record) {
                         this.setData('title', record.title);
                     }
@@ -120,7 +120,8 @@
                         // Check if description content from DB has changed
                         // and update if applicable
                         if (record) {
-                            let descriptionFromDB = record.description;
+                            // todo: handle spacing that may cause false flags, i.e. record id 177
+                            let descriptionFromDB = htmlEntityDecode(record.description);
                             let descriptionFromLocal = descriptionBlock.getText();
 
                             if (descriptionFromDB !== descriptionFromLocal) {
@@ -153,7 +154,7 @@
                         // New title must meet character requirements before being set
                         if (newTitle.trim().length >= minimumTitleLength) {
                             // Set new record title data field and text
-                            this.element.data('record-title', newTitle);
+                            this.element.data('record-title-override', newTitle);
                             this.element.findOne('.' + linkClass).setText(newTitle);
                         } else {
                             // Notify the user of invalid title length
@@ -163,9 +164,9 @@
                         // New title is the same as original
                         this.element.findOne('.' + linkClass).setText(origTitle);
                         
-                        if (this.element.data('record-title')) {
+                        if (this.element.data('record-title-override')) {
                             // remove record title override data
-                            this.element.removeAttribute('data-record-title');
+                            this.element.removeAttribute('data-record-title-override');
                         }
                     }
 
@@ -206,7 +207,8 @@
                         const html = '<br />' + descriptionTemplate.replace('{recordDescription}', description);
                         this.element.appendHtml(html);
                     } else if (newDescriptionType == 'icon') {
-                        this.element.appendHtml(iconTemplate);
+                        const html = iconTemplate.replace('{recordDescription}', description);
+                        this.element.appendHtml(html);
                     }
 
                     this.oldDescriptionType = newDescriptionType;
