@@ -69,7 +69,6 @@ function GuideTabContainer(props) {
             onSuccess: () => {
                 setActiveKey(lastTabIndex + 1);
                 setSettingsValidated(false);
-                toast.success('Created new tab successfully!');
             },
             onError: () => toast.error('Error has occurred. Failed to create new tab!')
         });
