@@ -37,30 +37,6 @@ class MediaController extends AbstractController
     }
 
     /**
-     * @Route("/browse", name="media_browse")
-     */
-    public function browse(Request $request, LoggerInterface $logger): Response
-    {
-        $ckeditorFuncNum = $request->query->get('CKEditorFuncNum');
-        $ckeditorInstance = $request->query->get('CKEditor');
-        $langCode = $request->query->get('langCode');
-        $type = $request->query->get('type');
-        $target = $request->query->get('target');
-        $targetId = $request->query->get('target_id');
-
-        $logger->info("CKEditorFuncNum: " . $ckeditorFuncNum);
-        $logger->info("CKEditor: " . $ckeditorInstance);
-        $logger->info("LangCode: " . $langCode);
-        $logger->info("Type: " . $type);
-        $logger->info("Target: " . $target);
-        $logger->info("Target Id: " . $targetId);
-
-        return $this->render('backend/media/browse.html.twig', [
-            
-        ]);
-    }
-
-    /**
      * Renders an upload page for Media source.
      * 
      * Renders an upload page for client to upload media sources.
@@ -91,73 +67,12 @@ class MediaController extends AbstractController
         $form = $this->createForm(MediaType::class, $media);
         $form->handleRequest($request);
 
-        $logger->info("Created form.");
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $logger->info("Form submitted!");
-            $logger->info("Validation succeeded!");
+            /** @var UploadedFile $upload */
+            $upload = $form->get('file')->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $conn = $this->getDoctrine()->getConnection();
-
-            $conn->beginTransaction();
-
-            try {
-                /** @var UploadedFile $upload */
-                $upload = $form->get('file')->getData();
-
-                // Upload file to file server
-                $uploadResults = $uploader->uploadFile($upload);
-                /** @var UploadedFile $upload */
-                $upload = $uploadResults['file'];
-                $fileName = $upload->getFilename();
-                $mimeType = $upload->getMimeType();
-
-                // Variations for image files
-                $largeFile = $uploadResults['largeFile'];
-                $mediumFile = $uploadResults['mediumFile'];
-                $smallFile = $uploadResults['smallFile'];
-
-                if ($largeFile !== null) {
-                    $media->setLargeFileName($largeFile->getFilename());
-                }
-
-                if ($mediumFile !== null) {
-                    $media->setMediumFileName($mediumFile->getFilename());
-                }
-
-                if ($smallFile !== null) {
-                    $media->setSmallFileName($smallFile->getFilename());
-                }
-                
-                // Fill Media entity values
-                $media->setFileName($fileName);
-                $media->setMimeType($mimeType);
-                $media->setFilesize($upload->getSize());
-                $media->setDirectory($uploader->getRelativeDirectory($mimeType));
-                $media->setStaff($staff);
-                
-                $entityManager->persist($media);
-                $entityManager->flush();
-                $conn->commit();
-            } catch (\Exception $e) {
-                // delete the file if uploaded already
-                if (isset($file) && file_exists($file->getRealPath())) {
-                    unlink($file->getRealPath());
-                }
-                if (isset($largeFile) && file_exists($largeFile->getRealPath())) {
-                    unlink($largeFile->getRealPath());
-                }
-                if (isset($mediumFile) && file_exists($mediumFile->getRealPath())) {
-                    unlink($mediumFile->getRealPath());
-                }
-                if (isset($smallFile) && file_exists($smallFile->getRealPath())) {
-                    unlink($smallFile->getRealPath());
-                }
-                $conn->rollback();
-                throw $e;
-            }
-
+            $uploader->handleUploadFile($upload, $media, $staff);
+            
             return $this->redirectToRoute("media_show", [
                 "mediaId" => $media->getMediaId(),
             ]);

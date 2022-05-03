@@ -51,6 +51,67 @@ class MediaService {
         $this->imageCompressionQuality = $imageCompressionQuality;
     }
 
+    public function handleUploadFile(UploadedFile $upload, Media $media, Staff $staff)
+    {
+        $conn = $this->entityManager->getConnection();
+        $conn->beginTransaction();
+
+        try {
+            // Upload file to file server
+            $uploadResults = $this->uploadFile($upload);
+
+            /** @var UploadedFile $upload */
+            $upload = $uploadResults['file'];
+            
+            $fileName = $upload->getFilename();
+            $mimeType = $upload->getMimeType();
+
+            // Variations for image files
+            $largeFile = $uploadResults['largeFile'];
+            $mediumFile = $uploadResults['mediumFile'];
+            $smallFile = $uploadResults['smallFile'];
+
+            if ($largeFile !== null) {
+                $media->setLargeFileName($largeFile->getFilename());
+            }
+
+            if ($mediumFile !== null) {
+                $media->setMediumFileName($mediumFile->getFilename());
+            }
+
+            if ($smallFile !== null) {
+                $media->setSmallFileName($smallFile->getFilename());
+            }
+            
+            // Fill Media entity values
+            $media->setFileName($fileName);
+            $media->setMimeType($mimeType);
+            $media->setFilesize($upload->getSize());
+            $media->setDirectory($this->getRelativeDirectory($mimeType));
+            $media->setStaff($staff);
+            
+            $this->entityManager->persist($media);
+            $this->entityManager->flush();
+            $conn->commit();
+        } catch (\Exception $e) {
+            // delete the file if uploaded already
+            if (isset($upload) && file_exists($upload->getRealPath())) {
+                unlink($upload->getRealPath());
+            }
+            if (isset($largeFile) && file_exists($largeFile->getRealPath())) {
+                unlink($largeFile->getRealPath());
+            }
+            if (isset($mediumFile) && file_exists($mediumFile->getRealPath())) {
+                unlink($mediumFile->getRealPath());
+            }
+            if (isset($smallFile) && file_exists($smallFile->getRealPath())) {
+                unlink($smallFile->getRealPath());
+            }
+            $conn->rollback();
+            throw $e;
+        }
+    }
+    
     /**
      * Uploads a file to the file server.
      * 
