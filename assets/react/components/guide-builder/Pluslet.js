@@ -91,15 +91,16 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const editableTitle = () => {
         if (editable) {
             return (
-                <div className="mb-2">
+                <div className="sp-pluslet-title">
                     {/* Label is for accessibility purposes, will not be visible */}
-                    <label htmlFor="edit-pluslet-title" className="form-label">
-                        <span className="visually-hidden">Enter Pluslet Title</span>
+                    <label htmlFor="edit-pluslet-title" className="form-label visually-hidden">
+                        Enter Pluslet Title
                     </label>
                     <input
                         type="text"
                         id="edit-pluslet-title"
                         placeholder= "Enter Pluslet Title"
+                        className="form-control"
                         value={title}
                         autoComplete="off"
                         onChange={evt => setTitle(evt.target.value)}
@@ -114,20 +115,20 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                 </div>
             );
         } else {
-            return (<p>{plusletTitle}</p>);
+            return (<p className="sp-pluslet-title">{plusletTitle}</p>);
         }
     }
 
     const editSaveButton = () => {
         if (editable) {
             return (
-                <button onClick={toggleEditable} title="Save pluslet">
+                <button onClick={toggleEditable} title="Save pluslet" className="btn btn-icon-default sp-pluslet-icon-btn">
                     <i className="fas fa-save"></i>
                 </button>
             );
         } else {
             return (
-                <button onClick={toggleEditable} title="Edit pluslet">
+                <button onClick={toggleEditable} title="Edit pluslet" className="btn btn-icon-default sp-pluslet-icon-btn">
                     <i className="fas fa-pen"></i>
                 </button>
             );
@@ -151,20 +152,21 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                         {...provided.draggableProps}
                         style={{
                             ...provided.draggableProps.style,
-                            height: 'auto',
-                            marginBottom: '1.25rem'
+                            height: 'auto'
                         }}>
-                        <div>
-                            <div className="drag-handle" {...provided.dragHandleProps} title="Move pluslet">
+                        <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
+                        <div className="sp-pluslet-actions-container">
+                            <div className="drag-handle btn-icon-default me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
-                            <button onClick={deletePluslet} title="Delete pluslet">
-                                <i className="fas fa-trash"></i>
-                            </button>
-                            {editSaveButton()}
+                            {editableTitle()}
+                            <div className="text-end">
+                                {editSaveButton()}
+                                <button onClick={deletePluslet} title="Delete pluslet" className="btn btn-icon-default sp-pluslet-icon-btn">
+                                    <i className="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
-                        <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
-                        {editableTitle()}
                         {editor()}
                     </div>
                 );

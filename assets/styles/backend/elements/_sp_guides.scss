@@ -163,6 +163,46 @@
   }
 }
 
+// Pluslet
+.pluslet {
+  position: relative;
+  margin-bottom: 1.5rem;
+
+  .sp-pluslet-actions-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .sp-pluslet-drag-handle {
+      background-color: var(--sp-nav-color);
+      color: #FFFFFF;
+      width: 30px;
+      height: 24px;
+      text-align: center;
+      margin-right: 0.5rem
+    }
+
+  }
+
+  .sp-pluslet-title{
+    width: calc(100% - 80px);
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+    .form-control {
+      font-weight: bold;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
+  .sp-pluslet-icon-btn{
+    font-size: $font-size-sm;
+    padding: 0 .25rem;
+    line-height: 1;
+    vertical-align: baseline;
+  }
+}
 
 
 
