@@ -22,13 +22,19 @@ function MediaPreview({ mimeType, source }) {
             <span className="media-preview">
                 <i className={mimeTypeIcons[mimeType] + ' fa-2x'}></i>
             </span>
-        )
+        );
+    } else if (mimeType.length > 6 && mimeType.substring(0, 6) in mimeTypeIcons) {
+        return (
+            <span className="media-preview">
+                <i className={mimeTypeIcons[mimeType.substring(0, 6)] + ' fa-2x'}></i>
+            </span>
+        );
     } else {
         return (
             <span className="media-preview">
                 <i className="fas fa-file fa-2x"></i>
             </span>
-        )
+        );
     }
 }
 

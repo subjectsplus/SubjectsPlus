@@ -30,6 +30,7 @@ function MediaList({ staffId }) {
                                 data-title={token.title} data-alt-text={token.altText}
                                 data-caption={token.caption}>
                                     <MediaPreview mimeType={token.mimeType} source={relativeUrl} />
+                                    {' '}
                                     <span>{token.title}</span>
                             </div>
                         </li>
