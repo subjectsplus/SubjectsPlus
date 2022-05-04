@@ -3,39 +3,24 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Media;
-use App\Entity\MediaAttachment;
 use App\Entity\Staff;
 use App\Repository\MediaRepository;
 use App\Form\MediaType;
 use App\Form\MediaEditType;
 use App\Service\MediaService;
-use App\Service\ValidationService;
 use App\Service\ChangeLogService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Validator\Constraints\File as FileValidator;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
 /**
  * @Route("/control/media")
  */
 class MediaController extends AbstractController
 {
-    /**
-     * @Route("/", name="media_index")
-     */
-    public function index(): Response
-    {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
-    }
-
     /**
      * Renders an upload page for Media source.
      * 
@@ -51,15 +36,14 @@ class MediaController extends AbstractController
      * 
      * Post-Submission: Redirects to the 'media_show' route with parameter 'mediaId'.
      */
-    public function upload(Request $request, MediaService $uploader, ValidationService $validation, LoggerInterface $logger): Response
-    {
-        
-        $logger->info("Connected to media_upload route.");
-       
+    public function upload(Request $request, ChangeLogService $cls, MediaService $uploader): Response
+    {  
         /** @var Staff $staff */
         $staff = $this->getUser();
+
         /** @var MediaRepository $mediaRepo */
         $mediaRepo = $this->getDoctrine()->getRepository(Media::class);
+
         $staffMedia = $mediaRepo->findByStaff($staff); // all media owned by staff member
 
         $media = new Media();
@@ -71,7 +55,12 @@ class MediaController extends AbstractController
             /** @var UploadedFile $upload */
             $upload = $form->get('file')->getData();
 
-            $uploader->handleUploadFile($upload, $media, $staff);
+            $media = $uploader->handleUploadFile($upload, $media, $staff);
+
+            // Create new log entry
+            /** @var Staff $staff */
+            $staff = $this->getUser();
+            $cls->addLog($staff, 'media', $media->getMediaId(), $media->getTitle(), 'insert');
             
             return $this->redirectToRoute("media_show", [
                 "mediaId" => $media->getMediaId(),
@@ -111,7 +100,7 @@ class MediaController extends AbstractController
      * 
      * @Route("/{mediaId}/edit", name="media_edit")
      */
-    public function edit(Request $request, Media $media): Response
+    public function edit(Request $request, ChangeLogService $cls, Media $media): Response
     {
         $form = $this->createForm(MediaEditType::class, $media);
         $form->handleRequest($request);
@@ -119,6 +108,11 @@ class MediaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             
+            // Create new log entry
+            /** @var Staff $staff */
+            $staff = $this->getUser();
+            $cls->addLog($staff, 'media', $media->getMediaId(), $media->getTitle(), 'edit');
+
             return $this->redirectToRoute("media_show", [
                 "mediaId" => $media->getMediaId(),
             ]);
