@@ -6,13 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * Section.
  *
- * @ORM\Table(name="section", indexes={@ORM\Index(name="fk_section_tab_idx", columns={"tab_id"})})
+ * @ORM\Table(name="section", uniqueConstraints={@ORM\UniqueConstraint(name="section_uuid", columns={"uuid"})},
+ *      indexes={@ORM\Index(name="fk_section_tab_idx", columns={"tab_id"})})
  * @ORM\Entity
  * 
  * @ApiResource(
@@ -29,6 +33,7 @@ class Section
      * @ORM\Column(name="section_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ApiProperty(identifier=false)
      */
     private $sectionId;
 
@@ -60,9 +65,18 @@ class Section
      */
     private $pluslets;
 
-    public function __construct()
+    /**
+     * @var Symfony\Component\Uid\Uuid|null
+     * @ORM\Column(type="uuid", nullable=true)
+     * @ApiProperty(identifier=true)
+     * @SerializedName("id")
+     */
+    private $uuid;
+
+    public function __construct(Uuid $uuid = null)
     {
-        $this->pluslets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->uuid = $uuid ?: Uuid::v4();
+        $this->pluslets = new ArrayCollection();
     }
 
     public function getSectionId(): ?int
@@ -134,5 +148,10 @@ class Section
         }
 
         return $this;
+    }
+
+    public function getUuid(): ?Uuid
+    {
+        return $this->uuid;
     }
 }

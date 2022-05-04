@@ -1,20 +1,24 @@
 .btn-primary {
   background-color: var(--sp-nav-color);
   color: $white;
+  border-color: transparent;
   &:hover,
   &:active,
   &:focus{
     background-color: var(--sp-nav-color);
+    border-color: transparent;
   }
 }
 
 .btn-secondary {
   background-color: var(--sp-secondary-color);
   color: $white;
+  border-color: transparent;
   &:hover,
   &:active,
   &:focus{
     background-color: var(--sp-secondary-color);
+    border-color: transparent;
   }
 }
 
@@ -221,6 +225,16 @@
 
 .btn-icon-primary{
   color: var(--sp-nav-color);
+  &:hover,
+  &:active,
+  &:focus {
+    color: var(--sp-nav-color);
+  }
+}
+
+.btn-icon-table-sort,
+.btn-muted{
+  color: rgba(0,0,0, 0.4);
   &:hover,
   &:active,
   &:focus {

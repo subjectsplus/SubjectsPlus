@@ -4,19 +4,14 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('bs-tooltips') }}
+    {{ encore_entry_script_tags('bs_tooltips') }}
 {% endblock %}
 
 {% block content %}
     <div class="container py-5">
-        <div class="row">
-            <div class="col-8">
-                <h1 class="fw-light">{{ 'control.header.faqs.create_new_faq' | trans }}</h1>
-            </div>
-            <div class="col-4 text-end">
-                <a href="{{ path('faq_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
-            </div>
-        </div>
+        <a href="{{ path('faq_index') }}" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.faqs.back_to_list' | trans }}</a>
+        <h1 class="fw-light">{{ 'control.header.faqs.create_new_faq' | trans }}</h1>
+
         <div class="row row-cols-lg-2">
             <div class="col-lg-8 text-end">
                 {{ include('backend/includes/add_custom_tokens.html.twig') }}

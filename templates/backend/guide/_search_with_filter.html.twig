@@ -1,23 +1,21 @@
-<div class="row">
-    <div class="col-md-6 col-lg-6 col-xl-4">
-        {# TODO: autocomplete search with filters #}
+<div class="row g-2">
+    <div class="col-sm-7 col-xl-4">
+        {# TODO: React autocomplete search #}
         <form>
-            <div class="mb-3 mb-md-0">
+            <div class="mb-3 mb-sm-0">
                 <input type="text" class="form-control" placeholder="{{ 'control.guides.search.placeholder' | trans }}" aria-label="{{ 'control.header.search.aria.label' | trans }}">
             </div>
         </form>
     </div>
-    <div class="col-md-6 col-lg-6 col-xl-4 align-self-md-center">
-        {# TODO: multi-select filters with react-select #}
-        <div class="d-flex flex-row flex-nowrap align-items-baseline">
-            <span class="fs-sm d-inline-block" style="width: 65px;">{{ 'control.guides.filter_by' | trans }}:</span>
-            <select class="form-select d-inline-block" style="width: calc(100% - 200px);" aria-label="{{ 'control.faqs.filter.type.aria' | trans }}">
-                <option selected>{{ 'control.guides.filter.type' | trans }}</option>
-                <option value="1">Subject</option>
-                <option value="2">Course</option>
-                <option value="3">Topic</option>
-                <option value="4">Placeholder</option>
-            </select>
+    <div class="col-sm-5 col-xl-4 align-self-sm-end text-sm-end">
+        {# TODO: Change between User's Guides and All Guides #}
+        <div class="btn-group btn-group-sm" role="group" aria-label="Toggle for My Guides and All Guides">
+            <input type="radio" class="btn-check" name="guidesToggle" id="myGuides" autocomplete="off" checked>
+            <label class="btn btn-outline-primary fs-xs" for="myGuides">My Guides</label>
+
+            <input type="radio" class="btn-check" name="guidesToggle" id="allGuides" autocomplete="off">
+            <label class="btn btn-outline-primary fs-xs" for="allGuides">All Guides</label>
         </div>
+
     </div>
 </div>

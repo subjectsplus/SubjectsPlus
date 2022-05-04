@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 
 function SectionContainer({ tabId }) {
+    const [currentEditablePluslet, setCurrentEditablePluslet] = useState('');
+    const [draggingId, setDraggingId] = useState(null);
+
     const {isLoading, isError, data, error} = useFetchSections(tabId);
 
     const createSectionMutation = useCreateSection(tabId);
     const reorderSectionMutation = useReorderSection(tabId);
     const reorderPlusletMutation = useReorderPluslet();
-
+    
     const reorderSection = (sourceIndex, destinationIndex) => {
         reorderSectionMutation.mutate({
             tabId: tabId,
@@ -20,6 +24,9 @@ function SectionContainer({ tabId }) {
     }
 
     const handleOnDragEnd = (result) => {
+        // reset dragging id
+        setDraggingId(null);
+
         if (result.source === undefined || result.source === null || 
             result.destination === undefined || result.destination === null) return;
         if (result.source.index === undefined || result.destination.index === undefined) return;
@@ -34,23 +41,30 @@ function SectionContainer({ tabId }) {
             console.log('Destination: ', result.destination);
             console.log('Source Droppable Id: ', result.source.droppableId);
             console.log('Destination Droppable Id: ', result.destination.droppableId);
+            
             // Source details
-            const sourceId = result.source.droppableId.split('-');
-            const sourceSection = Number(sourceId[1]);
+            const sourceId = result.source.droppableId.split('|');
+            const sourceSection = sourceId[1];
             const sourceColumn = Number(sourceId[3]);
             const sourceIndex = result.source.index;
 
             // Destination details
-            const destinationId = result.destination.droppableId.split('-');
-            const destinationSection = Number(destinationId[1]);
+            const destinationId = result.destination.droppableId.split('|');
+            const destinationSection = destinationId[1];
             const destinationColumn = Number(destinationId[3]);
             const destinationIndex = result.destination.index;
 
+            // Error if source/destination section id are not uuid's
+            if (!uuidValidate(sourceSection)) {
+                throw new Error("Source section id must be a valid uuid.");
+            } else if (!uuidValidate(destinationSection)) {
+                throw new Error("Destination section id must be a valid uuid.");
+            }
+
+            // If no positioning has changed, do not mutate
             if (sourceSection === destinationSection && sourceColumn === destinationColumn
                     && sourceIndex === destinationIndex) return;
             
-            // TODO: Handle case where plusletRow is incorrect and not ordered
-            // TODO: Add a debounce to prevent spam requests
             reorderPlusletMutation.mutate({
                 sourceSection: sourceSection,
                 sourceColumn: sourceColumn,
@@ -62,9 +76,14 @@ function SectionContainer({ tabId }) {
         }
     }
 
+    const handleOnBeforeCapture = (beforeCapture) => {
+        setDraggingId(beforeCapture.draggableId);
+    }
+
     const addSection = () => {
         if (Array.isArray(data)) {
             const initialSectionData = {
+                id: uuidv4(),
                 sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
                 layout: '4-4-4',
                 tab: '/api/tabs/' + tabId
@@ -73,6 +92,8 @@ function SectionContainer({ tabId }) {
             createSectionMutation.mutate(initialSectionData);
         }
     }
+
+    const [addSectionStyle, setStyle] = useState({visibility: 'hidden'});
 
     const containerContent = () => {
         if (isLoading) {
@@ -83,19 +104,16 @@ function SectionContainer({ tabId }) {
         } else {
             const guideSections = data.map((section, index) => {
                 return (
-                    <Section key={section.sectionId} sectionId={section.sectionId} 
-                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} />
+                    <Section key={section.id} sectionId={section.id} 
+                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} 
+                        currentEditablePluslet={currentEditablePluslet}
+                        isCurrentlyDragging={'section-' + section.id === draggingId}
+                        currentEditablePlusletCallBack={setCurrentEditablePluslet} />
                 );
             });
 
             return (
                 <>
-
-                    <div className="text-center mb-3">
-                        <button id="add-section" className="btn btn-link p-1" title="Add Section" onClick={addSection}>
-                            <i className="fas fa-plus-circle"></i>
-                        </button>
-                    </div>
                     <DragDropContext onDragEnd={handleOnDragEnd}>
                         <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (
@@ -106,6 +124,22 @@ function SectionContainer({ tabId }) {
                             )}
                         </Droppable>
                     </DragDropContext>
+                    <div className="text-center mt-1 add-section-container">
+                        <button
+                            id="add-section"
+                            className="btn btn-muted p-1"
+                            onClick={addSection}
+                            onMouseEnter={e => {
+                                setStyle({visibility: 'visible'});
+                            }}
+                            onMouseLeave={e => {
+                                setStyle({visibility: 'hidden'})
+                            }}
+                        >
+                            <i className="fas fa-plus-circle d-block"></i>
+                            <span className="fs-xs" style={addSectionStyle}>Add Section</span>
+                        </button>
+                    </div>
                 </>
             );
         }

@@ -1,8 +1,0 @@
-<h4 class="mt-4 text-center">{{ 'popular_list.new_databases' | trans }}</h4>
-
-
-<ul>
-{% for database in newestDatabases %}
-<li><a href="{{database.url}}">{{database.title}}</a></li>
-{% endfor %}
-</ul>

@@ -1,11 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import produce from 'immer';
 
 export function useFetchSections(tabId) {
     if (tabId === undefined) throw new Error('"tabId" argument is required to call useFetchSections.');
 
     return useQuery(['sections', tabId], 
         () => fetchSections(tabId, {pagination: false}), {
-            select: data => data['hydra:member']
+            select: data => data['hydra:member'],
+            staleTime: 5000
         }
     );
 }
@@ -24,15 +26,11 @@ export function useCreateSection(tabId) {
         onMutate: async newSection => {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
-            const optimisticResult = {
-                ...newSection,
-                sectionId: 'section-' + newSection.sectionIndex
-            }
-            
-            queryClient.setQueryData(['sections', tabId], {
-                ...previousSectionsData,
-                'hydra:member': [...previousSectionsData['hydra:member'], optimisticResult],
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                draftData['hydra:member'].push(newSection);
             });
+            
+            queryClient.setQueryData(['sections', tabId], optimisticResult);
             
             return { previousSectionsData };
         },
@@ -57,21 +55,20 @@ export function useUpdateSection(tabId) {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
 
-            const optimisticResult = {...previousSectionsData};
-            optimisticResult['hydra:member'][updatedSection.sectionIndex] = updatedSection.optimisticResult;
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                draftData['hydra:member'][updatedSection.sectionIndex] = updatedSection.optimisticResult;
+            });
             
-            console.log('optimisticResult', optimisticResult);
-
             queryClient.setQueryData(['sections', tabId], optimisticResult);
             return { previousSectionsData };
         },
-        onError: (error, tabData, context) => {
-            // Perform rollback of tab mutation
+        onError: (error, sectionData, context) => {
+            // Perform rollback of section mutation
             console.error(error);
             queryClient.setQueryData(['sections', tabId], context.previousSectionsData);
         },
         onSettled: () => {
-            // Refetch the tab data
+            // Refetch the section data
             queryClient.invalidateQueries(['sections', tabId]);
         },
     });
@@ -85,11 +82,13 @@ export function useDeleteSection(tabId) {
         onMutate: async deletedSection => {
             await queryClient.cancelQueries(['sections', tabId]);
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
-            
-            const optimisticResult = {...previousSectionsData};
-            optimisticResult['hydra:member'].splice(deletedSection.sectionIndex, 1);
-            optimisticResult['hydra:member'].forEach((section, index) => section.sectionIndex = index);
 
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                draftData['hydra:member'] = draftData['hydra:member'].filter((section) => section.id !== deletedSection.sectionId);
+                draftData['hydra:member'].forEach((section, index) => section.sectionIndex = index);
+                draftData['hydra:totalItems'] = draftData['hydra:member'].length;
+            });
+            
             queryClient.setQueryData(['sections', tabId], optimisticResult);
             
             return { previousSectionsData };
@@ -116,21 +115,13 @@ export function useReorderSection(tabId) {
             const previousSectionsData = queryClient.getQueryData(['sections', tabId]);
 
             // produce optimistic result
-            const newSections = [...previousSectionsData['hydra:member']];
-
-            // reorder sections
-            const [reorderedItem] = newSections.splice(sectionData.sourceSectionIndex, 1);
-            newSections.splice(sectionData.destinationSectionIndex, 0, reorderedItem);
-        
-            // set the updated tab index
-            newSections.forEach((section, index) => {
-                section.sectionIndex = index;
+            const optimisticResult = produce(previousSectionsData, draftData => {
+                const [reorderedSection] = draftData['hydra:member'].splice(sectionData.sourceSectionIndex, 1);
+                draftData['hydra:member'].splice(sectionData.destinationSectionIndex, 0, reorderedSection);
+                draftData['hydra:member'].forEach((section, index) => section.sectionIndex = index);
             });
 
-            queryClient.setQueryData(['sections', tabId], {
-                ...previousSectionsData,
-                'hydra:member': newSections,
-            });
+            queryClient.setQueryData(['sections', tabId], optimisticResult);
             
             return { previousSectionsData };
         },
@@ -171,12 +162,10 @@ async function createSection(initialSectionData) {
     const sectionReq = await fetch('/api/sections', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(initialSectionData)
     });
-
-    
 
     if (!sectionReq.ok) {
         throw new Error(sectionReq.status + ' ' + sectionReq.statusText);
@@ -192,7 +181,7 @@ async function updateSection({sectionId, data}) {
     const req = await fetch(`/api/sections/${sectionId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/ld+json',
         },
         body: JSON.stringify(data)
     });
@@ -204,7 +193,7 @@ async function updateSection({sectionId, data}) {
     return req.json();
 }
 
-async function deleteSection(sectionId) {
+async function deleteSection({ sectionId }) {
     if (sectionId === undefined) throw new Error('"sectionId" field is required to perform delete section request.');
 
     const sectionToDelete = await fetchSection(sectionId);
@@ -214,12 +203,12 @@ async function deleteSection(sectionId) {
    
     // update the section index
     newSections.splice(sectionToDelete.sectionIndex, 1);
-    await Promise.all(newSections.map((section, index) => {
+    await Promise.all(newSections.map(async (section, index) => {
         if (section.sectionIndex !== index) {
-            return fetch(`/api/sections/${section.sectionId}`, {
+            return fetch(`/api/sections/${section.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     sectionIndex: index
@@ -262,12 +251,12 @@ async function reorderSection({ tabId, sourceSectionIndex, destinationSectionInd
     newSections.splice(destinationSectionIndex, 0, reorderedItem);
 
     // perform the updating of the section index asynchronously
-    return Promise.all(newSections.map((section, index) => {
+    return Promise.all(newSections.map(async (section, index) => {
         if (newSections[index].sectionIndex !== index) {
-            return fetch(`/api/sections/${section.sectionId}`, {
+            return fetch(`/api/sections/${section.id}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/ld+json',
                 },
                 body: JSON.stringify({
                     sectionIndex: index

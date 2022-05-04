@@ -4,7 +4,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('bs-tooltips') }}
+    {{ encore_entry_script_tags('bs_tooltips') }}
 {% endblock %}
 
 {% block content %}
@@ -16,16 +16,10 @@
         </div>
     {% endfor %}
 
-    <div class="row">
-        <div class="col-8">
-            <h1 class="fw-light d-inline-block me-2" title="ID: {{ faq.faqId }}">{{ 'control.header.faqs.show_faq' | trans }}</h1>
-            {# TODO: link to front-end preview #}
-            <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.faqs.preview.label' | trans }}</a>
-        </div>
-        <div class="col-4 text-end">
-            <a href="{{ path('faq_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
-        </div>
-    </div>
+    <a href="{{ path('faq_index') }}" class="fs-sm" style="width:max-content;"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.faqs.back_to_list' | trans }}</a>
+    <h1 class="fw-light mb-0">{{ 'control.header.faqs.show_faq' | trans }}</h1>
+    {# TODO: Display and link to full public URL #}
+    <a href="#" class="btn-link fs-xs"><i class="fas fa-eye"></i> {{ 'control.faqs.preview.label' | trans }}</a>
 
     <div class="row mt-4">
         <div class="col-lg-8">
@@ -38,7 +32,7 @@
                 {{ faq.answer | raw }}
             </div>
         </div>
-        <div class="col-lg-3 offset-lg-1">
+        <div class="col-lg-4 col-xl-3 offset-xl-1">
             <h3 class="mt-4 mt-lg-0">{{ 'control.faq.form.settings_header' | trans }}</h3>
             <p class="fs-xs fst-italic">
                 {% if faq.active %}

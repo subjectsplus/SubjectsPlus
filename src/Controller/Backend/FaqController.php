@@ -263,6 +263,7 @@ class FaqController extends AbstractController
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
             
+            // TODO: Refactor into a service
             $entityManager->transactional(function() use ($faq, $fs, $cls, $ms, $form, $keywords, $subjects, $faqPages) {
                 // Get the keywords field, check for any changes
                 $keywordsField = $form->get('keywords')->getData();

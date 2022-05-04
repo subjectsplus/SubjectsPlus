@@ -10,8 +10,9 @@ function EditTabModal(props) {
     return (
         <Modal show={props.show} onHide={props.onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Tab</Modal.Title><br />
-                <span className="fs-xs d-block">{'ID:' + props.currentTab.tabId}</span>
+                <Modal.Title>Edit Tab
+                    <span className="fs-xs d-block">{'ID:' + props.currentTab.tabId}</span>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form noValidate validated={props.validated} onSubmit={props.onSubmit} id="settings-form">
@@ -61,10 +62,10 @@ function EditTabModal(props) {
                 )}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={props.onToggle}>
+                <Button variant="link" className="btn-link-default" onClick={props.onToggle}>
                     Close
                 </Button>
-                <Button variant="secondary" disabled={props.savingChanges} form="settings-form" type="submit">
+                <Button variant="primary" className="btn-gradient btn-round" disabled={props.savingChanges} form="settings-form" type="submit">
                     {props.savingChanges ? 'Saving...' : 'Save Changes'}
                 </Button>
             </Modal.Footer>

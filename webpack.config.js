@@ -33,18 +33,13 @@ Encore
     .addEntry('record_results', './assets/react/components/record/RecordResults.js')
 
     // Backend JS
-    .addEntry('backend-main', './assets/backend/backend-main.js')
-    .addEntry('mode-switcher', './assets/backend/mode-switcher.js')
+    .addEntry('backend_main', './assets/backend/BackendMain.js')
+    .addEntry('mode_switcher', './assets/backend/javascript/ModeSwitcher.js')
+    .addEntry('bs_tooltips', './assets/backend/javascript/BSTooltipPopoverInit.js')
     .addEntry('guide_builder', './assets/backend/javascript/entrypoints/guide_builder_loader.js')
-    .addEntry('bs-tooltips', './assets/backend/bs-tooltip-popover-init.js')
 
     //Front-end Main JS
-    .addEntry('frontend-main', './assets/frontend/frontend-main.js')
-
-    // Added by Jane - to be reviewed
-    //.addEntry('patron_index', './assets/frontend/jane/index.js')
-    //.addEntry('patron_database_list', './assets/frontend/jane/database_list.js')
-    .addEntry('linkcheck', './assets/backend/linkcheck.js')
+    .addEntry('frontend_main', './assets/frontend/FrontendMain.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -108,8 +103,9 @@ Encore
         {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
         {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'},
         
-        // CKEditor Plugins
-        {from: './src/CKEditorPlugins/', to: 'ckeditor/plugins/[path][name].[ext]'}
+        // CKEditor Custom Config and Plugins
+        {from: './src/CKEditorConfig/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './src/CKEditorConfig/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
     ])
 
 

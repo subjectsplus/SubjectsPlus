@@ -10,17 +10,10 @@
         </div>
     {% endfor %}
 
-    <div class="row">
-        <div class="col-8">
-            <h1 class="fw-light d-inline-block me-2 mb-1" title="ID: {{ guide.subjectId }}">{{ guide.subject | raw }}</h1>
-            {# TODO: link to front-end preview #}
-            <a href="#" class="btn-link fs-sm align-baseline" type="button"><i class="fas fa-eye"></i> {{ 'control.guide.preview.label' | trans }}</a>
-            <p class="fs-xs">Short form: {{ guide.shortform }} </p>
-        </div>
-        <div class="col-4 text-end">
-            <a href="{{ path('guide_index') }}"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.back_to_list' | trans }}</a>
-        </div>
-    </div>
+    <a href="{{ path('guide_index') }}" class="d-block fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
+    <h1 class="fw-light mb-0">{{ guide.subject | raw }}</h1>
+    {# TODO: Display and link to full public URL #}
+    <a href="#" class="btn-link fs-xs" title="{{ 'control.guide.preview.label' | trans }}"><i class="fas fa-eye"></i> {{ guide.shortform }}</a>
 
     <div class="row mt-4">
         <div class="col-lg-6 col-xl-6">
@@ -32,9 +25,9 @@
                     <div class="col-9 text-end align-self-center">
                         <p class="fs-sm fst-italic mb-0">
                             {% if guide.active %}
-                                <i class="fas fa-check color-primary"></i> This guide is public
+                                <i class="fas fa-check color-primary"></i> {{ 'control.guides.show.type.active' | trans }}
                             {% else %}
-                                <i class="fas fa-times"></i> This guide is NOT public
+                                <i class="fas fa-times"></i> {{ 'control.guides.show.type.inactive' | trans }}
                             {% endif %}
                         </p>
                     </div>
