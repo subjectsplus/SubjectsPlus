@@ -122,13 +122,13 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const editSaveButton = () => {
         if (editable) {
             return (
-                <button onClick={toggleEditable} title="Save pluslet" className="btn btn-icon-default sp-pluslet-icon-btn">
+                <button onClick={toggleEditable} title="Save pluslet" className="btn btn-muted sp-pluslet-icon-btn">
                     <i className="fas fa-save"></i>
                 </button>
             );
         } else {
             return (
-                <button onClick={toggleEditable} title="Edit pluslet" className="btn btn-icon-default sp-pluslet-icon-btn">
+                <button onClick={toggleEditable} title="Edit pluslet" className="btn btn-muted sp-pluslet-icon-btn">
                     <i className="fas fa-pen"></i>
                 </button>
             );
@@ -154,17 +154,34 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                             ...provided.draggableProps.style,
                             height: 'auto'
                         }}>
+                        {/* TODO: Append sp-pluslet-hover-region to pluslet className to style on hover event */}
+                        {/* TODO: Add styles when dragging pluslet, reduce height and only show title bar area
+                                  background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent'
+                        */}
+
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                         <div className="sp-pluslet-actions-container">
-                            <div className="drag-handle btn-icon-default me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
+                            {/* TODO: Pluslet hover event shows drag handle, use style visibility */}
+                            <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
                             {editableTitle()}
                             <div className="text-end">
+                                {/* TODO: Pluslet hover event shows edit, save, dots buttons/icons, use style visibility.
+                                          Keep icons visible when pluslet is on editing mode
+                                */}
+
                                 {editSaveButton()}
-                                <button onClick={deletePluslet} title="Delete pluslet" className="btn btn-icon-default sp-pluslet-icon-btn">
-                                    <i className="fas fa-trash"></i>
-                                </button>
+
+                                <div className="dropdown basic-dropdown d-inline-block ms-1">
+                                    <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
+                                        <li><a className="dropdown-item delete-section" onClick={deletePluslet}><i
+                                            className="fas fa-trash"></i> Delete Pluslet</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         {editor()}

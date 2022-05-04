@@ -243,7 +243,7 @@
 }
 
 [data-mode="dark"] {
-  btn-icon-table-sort,
+  .btn-icon-table-sort,
   .btn-muted{
     color: rgba(181,181,181, 0.75);
     &:hover,
@@ -253,6 +253,8 @@
     }
   }
 }
+
+
 
 
 

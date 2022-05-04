@@ -27,13 +27,18 @@
     position: absolute;
     top:0;
     right: 0;
-    background-color: var(--sp-nav-color);
     color: #FFFFFF;
+    background-color: rgba(0,0,0, 0.4);
     width: 36px;
     height: 24px;
     text-align: center;
     margin-top: -25px;
     z-index: 1;
+
+    &:hover{
+      @include transition-all();
+      background-color: var(--sp-nav-color);
+    }
   }
 
   .sp-section-menu-btn{
@@ -51,7 +56,7 @@
   }
 
   .sp-guide-column {
-    padding: 0.5rem;
+    padding: 0.25rem;
     border: 1px dotted #b5b5b5;
   }
 }
@@ -167,6 +172,7 @@
 .pluslet {
   position: relative;
   margin-bottom: 1.5rem;
+  padding: 0.25rem;
 
   .sp-pluslet-actions-container{
     display: flex;
@@ -185,7 +191,7 @@
   }
 
   .sp-pluslet-title{
-    width: calc(100% - 80px);
+    width: calc(100% - 67px);
     margin-bottom: 1rem;
     font-weight: bold;
 
@@ -201,6 +207,16 @@
     padding: 0 .25rem;
     line-height: 1;
     vertical-align: baseline;
+  }
+}
+
+.sp-pluslet-hover-region {
+  background-color: #f6f6f6;
+}
+
+[data-mode="dark"] {
+  .sp-pluslet-hover-region{
+    background-color: var(--sp-bg-color);
   }
 }
 
