@@ -65,6 +65,8 @@ class MediaService {
             
             $fileName = $upload->getFilename();
             $mimeType = $upload->getMimeType();
+            $fileSize = $upload->getSize();
+            $directory = $this->getRelativeDirectory($mimeType);
 
             // Variations for image files
             $largeFile = $uploadResults['largeFile'];
@@ -86,32 +88,21 @@ class MediaService {
             // Fill Media entity values
             $media->setFileName($fileName);
             $media->setMimeType($mimeType);
-            $media->setFilesize($upload->getSize());
-            $media->setDirectory($this->getRelativeDirectory($mimeType));
+            $media->setFilesize($fileSize);
+            $media->setDirectory($directory);
             $media->setStaff($staff);
             
             $this->entityManager->persist($media);
             $this->entityManager->flush();
             $conn->commit();
+
+            return $media;
         } catch (\Exception $e) {
-            // delete the file if uploaded already
-            if (isset($upload) && file_exists($upload->getRealPath())) {
-                unlink($upload->getRealPath());
-            }
-            if (isset($largeFile) && file_exists($largeFile->getRealPath())) {
-                unlink($largeFile->getRealPath());
-            }
-            if (isset($mediumFile) && file_exists($mediumFile->getRealPath())) {
-                unlink($mediumFile->getRealPath());
-            }
-            if (isset($smallFile) && file_exists($smallFile->getRealPath())) {
-                unlink($smallFile->getRealPath());
-            }
             $conn->rollback();
             throw $e;
         }
     }
-    
+
     /**
      * Uploads a file to the file server.
      * 
@@ -126,7 +117,6 @@ class MediaService {
      * the integrity of the file server.
      */
     public function uploadFile(UploadedFile $file) {
-        $path = null;
         try {
             // move file to upload destination
             $name = $this->fileNamer->fileName($file);
@@ -187,17 +177,17 @@ class MediaService {
             ];
         } catch (\Exception $e) {
             // rollback the file upload; delete file 
-            if (isset($file) && file_exists($file->getRealPath())) {
-                unlink($file->getRealPath());
+            if (isset($file) && $file->isFile()) {
+                unlink($file->getRealPath()  . '/' . $file->getFilename());
             }
-            if (isset($smallImage) && file_exists($smallImage->getRealPath())) {
-                unlink($smallImage->getRealPath());
+            if (isset($smallImage) && $smallImage->isFile()) {
+                unlink($smallImage->getRealPath()  . '/' . $smallImage->getFilename());
             }
-            if (isset($mediumImage) && file_exists($mediumImage->getRealPath())) {
-                unlink($mediumImage->getRealPath());
+            if (isset($mediumImage) && $mediumImage->isFile()) {
+                unlink($mediumImage->getRealPath() . '/' . $mediumImage->getFilename());
             }
-            if (isset($largeImage) && file_exists($largeImage->getRealPath())) {
-                unlink($largeImage->getRealPath());
+            if (isset($largeImage) && $largeImage->isFile()) {
+                unlink($largeImage->getRealPath() . '/' . $largeImage->getFilename());
             }
             throw $e;
         }
