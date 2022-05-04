@@ -6,15 +6,56 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Backend\MediaAPIUploadController;
 
 /**
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
  * 
  * @ApiResource(
- *     collectionOperations={"get", "post"},
  *     itemOperations={"get", "put", "delete"},
- *     order={"createdAt": "DESC", "updatedAt": "DESC"}
+ *     order={"createdAt": "DESC", "updatedAt": "DESC"},
+ *     collectionOperations={
+ *         "get", 
+ *         "post" = {
+ *              "controller" = MediaAPIUploadController::class,
+ *              "deserialize" = false,
+ *              "validation_groups" = {"image", "generic"},
+ *              "openapi_context" = {
+ *                  "requestBody" = {
+ *                      "description" = "File upload to an existing resource (Media)",
+ *                      "required" = true,
+ *                      "content" = {
+ *                          "multipart/form-data" = {
+ *                              "schema" = {
+ *                                  "type" = "object",
+ *                                  "properties" = {
+ *                                      "title" = {
+ *                                          "description" = "The title of the Media",
+ *                                          "type" = "string",
+ *                                          "example" = "Untitled",
+ *                                      },
+ *                                      "caption" = {
+ *                                          "description" = "The caption of the Media",
+ *                                          "type" = "string",
+ *                                      },
+ *                                      "altText" = {
+ *                                          "description" = "The alternative text of the Media",
+ *                                          "type" = "string",
+ *                                      },
+ *                                      "file" = {
+ *                                          "type" = "string",
+ *                                          "format" = "binary",
+ *                                          "description" = "Upload a media file",
+ *                                      },
+ *                                  },
+ *                              },
+ *                          },
+ *                      },
+ *                  },
+ *              }
+ *          }
+ *      }
  * )
  */
 class Media implements \Serializable
@@ -81,14 +122,14 @@ class Media implements \Serializable
     private $createdAt;
 
     /**
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime_immutable", nullable=true)
      *
      * @var \DateTimeInterface|null
      */
     private $updatedAt;
 
     /**
-     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     * @ORM\Column(name="deleted_at", type="datetime_immutable", nullable=true)
      *
      * @var \DateTimeInterface|null
      */
@@ -127,6 +168,10 @@ class Media implements \Serializable
      * @ORM\Column(type="string", length=255)
      */
     private $directory;
+
+    public function __construct() {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getMediaId(): ?int
     {
