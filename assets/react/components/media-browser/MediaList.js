@@ -41,9 +41,12 @@ function MediaList({ staffId }) {
     };
 
     return (
-        <ul id="media-list" className="list-unstyled">
-            {mediaTokens()}
-        </ul>
+        <div id="media-list-container">'
+            <h3>My Media</h3>
+            <ul id="media-list" className="list-unstyled">
+                {mediaTokens()}
+            </ul>
+        </div>
     )
 }
 

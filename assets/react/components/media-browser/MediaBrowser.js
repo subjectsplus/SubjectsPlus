@@ -1,4 +1,5 @@
 import React from 'react';
+import MediaUploader from './MediaUploader';
 import MediaList from './MediaList';
 
 function MediaBrowser() {
@@ -9,7 +10,12 @@ function MediaBrowser() {
      *      <MediaList />
      * </Media>
      */
-    return <MediaList staffId={CURRENT_STAFF_ID} />
+    return (
+        <div id="media-browser">
+            <MediaUploader />
+            <MediaList staffId={CURRENT_STAFF_ID} />
+        </div>
+    );
 }
 
 export default MediaBrowser;
