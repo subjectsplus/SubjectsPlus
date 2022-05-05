@@ -12,7 +12,6 @@ function MediaList({ staffId }) {
             console.error(error);
             return (<p>Error: Failed to load media through API Endpoint!</p>);
         } else {
-            console.log('media: ', data);
             if (!data?.length) {
                 return (<p>No media found.</p>);
             } else {

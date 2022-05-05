@@ -1,11 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
-function FileDropzone() {
-  const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
-  }, []);
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop });
+function FileDropzone({ onDrop, multiple }) {
+
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop: onDrop, multiple: multiple });
 
   return (
     <div {...getRootProps()}>
