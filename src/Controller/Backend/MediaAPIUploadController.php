@@ -28,6 +28,11 @@ class MediaAPIUploadController extends AbstractController
             throw new BadRequestHttpException('"file" is required');
         } else if ($upload->getError() === UPLOAD_ERR_INI_SIZE) {
             throw new BadRequestHttpException('"file" exceeds max upload file size');
+        } else if ($upload->getError() > 1) {
+            // Internal error caused by the server, nothing that the end user has control over
+            // LogController page will show the full error details
+            // For upload error messages/codes, refer to: https://www.php.net/manual/en/features.file-upload.errors.php
+            throw new \Exception('File upload has failed');
         }
 
         // Construct the Media object
