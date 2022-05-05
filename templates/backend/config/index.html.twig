@@ -21,11 +21,11 @@
         <tbody>
             {% for config in configs %}
                 <tr>
-                    <td>{{ config.id }}</td>
+                    <td>{{ config.optionLabel }}</td>
                     <td>{{ config.optionKey }}</td>
                     <td>{{ config.optionValue }}</td>
                     <td>{{ config.autoload }}</td>
-                    <td>{{ config.category }}</td>
+                    <td>{{ config.configCategory }}</td>
                     <td>
                          <a href="{{ path('config_edit', {'id': config.id}) }}">Edit</a>
                          &nbsp;|&nbsp;

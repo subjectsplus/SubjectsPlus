@@ -39,10 +39,17 @@ class Config
      */
     private $autoload;
 
+//    /**
+//     * @ORM\ManyToOne(targetEntity=ConfigCategory::class, inversedBy="configs")
+//     * @ORM\JoinColumn(nullable=false)
+//     */
+//    private $category;
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity=ConfigCategory::class, inversedBy="configs")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    private $configCategory;
 
     public function getId(): ?int
     {
@@ -97,14 +104,26 @@ class Config
         return $this;
     }
 
-    public function getCategory(): ?string
+//    public function getCategory(): ?ConfigCategory
+//    {
+//        return $this->category;
+//    }
+//
+//    public function setCategory(?ConfigCategory $configCategory): self
+//    {
+//        $this->category = $configCategory;
+//
+//        return $this;
+//    }
+
+    public function getConfigCategory(): ?ConfigCategory
     {
-        return $this->category;
+        return $this->configCategory;
     }
 
-    public function setCategory(?string $category): self
+    public function setConfigCategory(?ConfigCategory $configCategory): self
     {
-        $this->category = $category;
+        $this->configCategory = $configCategory;
 
         return $this;
     }
