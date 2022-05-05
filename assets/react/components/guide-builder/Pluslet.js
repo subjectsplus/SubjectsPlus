@@ -139,7 +139,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         if (editable) {
             return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
         } else {
-            return (<div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
+            return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
         }
     }
     
@@ -178,7 +178,9 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                                         <i className="fas fa-ellipsis-v"></i>
                                     </button>
                                     <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
-                                        <li><a className="dropdown-item delete-section" onClick={deletePluslet}><i
+                                        <li><a className="dropdown-item">Make Favorite</a></li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li><a className="dropdown-item" onClick={deletePluslet}><i
                                             className="fas fa-trash"></i> Delete Pluslet</a></li>
                                     </ul>
                                 </div>

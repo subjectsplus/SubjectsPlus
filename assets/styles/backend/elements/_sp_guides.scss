@@ -208,6 +208,13 @@
     line-height: 1;
     vertical-align: baseline;
   }
+
+  .sp-pluslet-body{
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
 }
 
 .sp-pluslet-hover-region {

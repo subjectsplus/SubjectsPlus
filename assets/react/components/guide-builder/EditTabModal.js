@@ -47,21 +47,22 @@ function EditTabModal(props) {
                         </FloatingLabel>
                     </Form.Group>
                 </Form>
-                <Button variant="danger" onClick={props.deleteButtonOnClick} disabled={props.deleteButtonDisabled}>
+                <Button variant="link" className="btn-icon-default p-0 fs-sm" onClick={props.deleteButtonOnClick} disabled={props.deleteButtonDisabled} title="Delete Tab">
                     <i className="fas fa-trash"></i>{' '}
                     Delete Tab
                 </Button>
                 {props.showDeleteConfirmation && (
-                    <Alert variant="danger">
+                    <Alert variant="danger" className="fs-sm">
                         <>
                             Are you sure you want to delete this tab?{' '}
-                            <Button variant="link" onClick={props.declineDeleteOnClick}>No</Button>
-                            <Button variant="link" onClick={props.confirmDeleteOnClick}>Yes</Button>
+                            <Button variant="link" className="btn-link-default fs-sm" onClick={props.declineDeleteOnClick}>No</Button>
+                            <Button variant="link" className="btn-link-default fs-sm" onClick={props.confirmDeleteOnClick}>Yes</Button>
                         </>
                     </Alert>
                 )}
             </Modal.Body>
             <Modal.Footer>
+                {/* TODO: Close button on modal does not work */}
                 <Button variant="link" className="btn-link-default" onClick={props.onToggle}>
                     Close
                 </Button>
