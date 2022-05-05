@@ -55,7 +55,7 @@ class MediaController extends AbstractController
             /** @var UploadedFile $upload */
             $upload = $form->get('file')->getData();
 
-            $media = $uploader->handleUploadFile($upload, $media, $staff);
+            $uploader->handleUploadFile($upload, $media, $staff);
 
             // Create new log entry
             /** @var Staff $staff */

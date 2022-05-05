@@ -20,7 +20,6 @@ use App\Controller\Backend\MediaAPIUploadController;
  *         "post" = {
  *              "controller" = MediaAPIUploadController::class,
  *              "deserialize" = false,
- *              "validation_groups" = {"image", "generic"},
  *              "openapi_context" = {
  *                  "requestBody" = {
  *                      "description" = "File upload to an existing resource (Media)",

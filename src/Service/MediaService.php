@@ -4,6 +4,8 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\Criteria;
@@ -12,30 +14,31 @@ use App\Entity\MediaAttachment;
 use App\Entity\Staff;
 use App\Enum\ImageSizeType;
 use Masterminds\HTML5;
-use Psr\Log\LoggerInterface;
+
 
 class MediaService {
 
     private $entityManager;
     private $fileNamer;
+    private $validator;
     private $projectDir;
     private $uploadDestination;
     private $smallImageDimensions;
     private $mediumImageDimensions;
     private $largeImageDimensions;
-    private $logger;
     private $uploadOriginalImage;
     private $imageCompressionQuality;
 
     public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, 
-        LoggerInterface $logger, string $projectDir, string $uploadDestination, string $smallImageDimensions,
-        string $mediumImageDimensions, string $largeImageDimensions, bool $uploadOriginalImage, int $imageCompressionQuality)
+        ValidatorInterface $validator, string $projectDir, string $uploadDestination, 
+        string $smallImageDimensions, string $mediumImageDimensions, string $largeImageDimensions, 
+        bool $uploadOriginalImage, int $imageCompressionQuality)
     {
         $this->entityManager = $entityManager;
         $this->fileNamer = $fileNamer;
+        $this->validator = $validator;
         $this->projectDir = rtrim($projectDir, "/\\");
         $this->uploadDestination = rtrim($uploadDestination, "/\\");
-        $this->logger = $logger;
 
         // Set Image Dimensions
         list($width, $height) = explode('x', $smallImageDimensions, 2);
@@ -58,7 +61,7 @@ class MediaService {
 
         try {
             // Upload file to file server
-            $uploadResults = $this->uploadFile($upload);
+            $uploadResults = $this->uploadFile($upload, $media);
 
             /** @var UploadedFile $upload */
             $upload = $uploadResults['file'];
@@ -95,8 +98,6 @@ class MediaService {
             $this->entityManager->persist($media);
             $this->entityManager->flush();
             $conn->commit();
-
-            return $media;
         } catch (\Exception $e) {
             $conn->rollback();
             throw $e;
@@ -116,7 +117,7 @@ class MediaService {
      * @throws \Exception Upon an error, rollback will occur where file is deleted to preserve
      * the integrity of the file server.
      */
-    public function uploadFile(UploadedFile $file) {
+    public function uploadFile(UploadedFile $file, Media $media) {
         try {
             // move file to upload destination
             $name = $this->fileNamer->fileName($file);
@@ -142,6 +143,15 @@ class MediaService {
 
             // move to upload destination and rename
             $file = $file->move($absDestination, $name);
+
+            // trigger any possible validation errors in order to rollback if necessary
+            $media->setFile($file);
+            $validationGroups = self::getValidationGroupsFromMimeType($mimeType);
+            $validationErrors = $this->validator->validate($media, null, $validationGroups);
+            if (count($validationErrors) > 0) {
+                throw new ValidatorException($validationErrors);
+            }
+
             $largeFile = null;
             $mediumFile = null;
             $smallFile = null;
@@ -166,6 +176,7 @@ class MediaService {
                     unlink($file->getRealPath());
                     // reset reference to largest image version available
                     $file = $largeFile ?? $mediumFile ?? $smallFile;
+                    $media->setFile($file);
                 }
             }
 
@@ -178,16 +189,16 @@ class MediaService {
         } catch (\Exception $e) {
             // rollback the file upload; delete file 
             if (isset($file) && $file->isFile()) {
-                unlink($file->getRealPath()  . '/' . $file->getFilename());
+                unlink($file->getRealPath());
             }
             if (isset($smallImage) && $smallImage->isFile()) {
-                unlink($smallImage->getRealPath()  . '/' . $smallImage->getFilename());
+                unlink($smallImage->getRealPath());
             }
             if (isset($mediumImage) && $mediumImage->isFile()) {
-                unlink($mediumImage->getRealPath() . '/' . $mediumImage->getFilename());
+                unlink($mediumImage->getRealPath());
             }
             if (isset($largeImage) && $largeImage->isFile()) {
-                unlink($largeImage->getRealPath() . '/' . $largeImage->getFilename());
+                unlink($largeImage->getRealPath());
             }
             throw $e;
         }
@@ -347,13 +358,7 @@ class MediaService {
         if ($fileData instanceof File) {
             try {
                 $mimeType = $fileData->getMimeType();
-                if ($mimeType !== null) {
-                    if (strpos($mimeType, "image/") !== false) {
-                        return ['image'];
-                    } else {
-                        return ['generic'];
-                    }
-                }
+                return self::getValidationGroupsFromMimeType($mimeType);
             } catch (\Exception $e) {
                 // This will most likely be an file upload size error
                 // triggered by the ini requirements
@@ -362,6 +367,14 @@ class MediaService {
             }
         }
         return ['Default'];
+    }
+
+    public static function getValidationGroupsFromMimeType(string $mimeType) {
+        if (strpos($mimeType, "image/") !== false) {
+            return ['image'];
+        } else {
+            return ['generic'];
+        }
     }
 
     /**

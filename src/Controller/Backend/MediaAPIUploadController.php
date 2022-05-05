@@ -10,25 +10,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 class MediaAPIUploadController extends AbstractController
 {
-    public function __invoke(Request $request, ChangeLogService $cls, MediaService $uploader, LoggerInterface $logger): Media
+    public function __invoke(Request $request, ChangeLogService $cls, MediaService $uploader): Media
     {
+        // Gather the request fields
         /** @var UploadedFile $upload */
         $upload = $request->files->get('file');
-
         $title = $request->get('title');
         $caption = $request->get('caption');
         $altText = $request->get('altText');
 
+        // Check for errors with uploaded file
         if (!$upload) {
             throw new BadRequestHttpException('"file" is required');
         } else if ($upload->getError() === UPLOAD_ERR_INI_SIZE) {
             throw new BadRequestHttpException('"file" exceeds max upload file size');
         }
 
+        // Construct the Media object
         $media = new Media();
         $media->setTitle($title);
         $media->setCaption($caption);
@@ -38,14 +40,19 @@ class MediaAPIUploadController extends AbstractController
         // TODO: Accept staff as a parameter
         $staff = $this->getUser();
         
-        /** @var Media $resultingMedia */
-        $resultingMedia = $uploader->handleUploadFile($upload, $media, $staff);
+        // Upload file to media
+        try {
+            $uploader->handleUploadFile($upload, $media, $staff);
+        } catch(ValidatorException $e) {
+            // Validation failed
+            throw new BadRequestHttpException($e->getMessage());
+        }
 
         // Create new log entry
         /** @var Staff $staff */
         $staff = $this->getUser();
-        $cls->addLog($staff, 'media', $resultingMedia->getMediaId(), $resultingMedia->getTitle(), 'insert');
+        $cls->addLog($staff, 'media', $media->getMediaId(), $media->getTitle(), 'insert');
  
-        return $resultingMedia;
+        return $media;
     }
 }
