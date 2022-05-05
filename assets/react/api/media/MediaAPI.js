@@ -24,3 +24,23 @@ async function fetchMedia(filters = null) {
 
     return data.json();
 }
+
+export async function createMedia(initialMediaData) {
+    if (!('file' in initialMediaData)) throw new Error('"file" field is required to perform create media request');
+
+    const form = new FormData();
+    for (const key of Object.keys(initialMediaData)) {
+        form.append(key, initialMediaData[key]);
+    }
+    
+    const mediaReq = await fetch('/api/media', {
+        method: 'POST',
+        body: form
+    });
+
+    if (!mediaReq.ok) {
+        throw new Error(mediaReq.status + ' ' + mediaReq.statusText);
+    }
+
+    return mediaReq.json();
+}
