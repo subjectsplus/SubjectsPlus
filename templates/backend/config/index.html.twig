@@ -7,6 +7,14 @@
 <div class="container">
     <h1>App Config</h1>
     <a href="{{ path('config_new') }}">Add New Config</a>
+
+    <ul class="list-group list-group-horizontal">
+    {% for cat in configCategories %}
+      <li class="list-group-item">{{ cat.categoryKey}}</li>
+    {% endfor %}
+    </ul>
+<hr />
+
     <table class="table">
         <thead>
             <tr>

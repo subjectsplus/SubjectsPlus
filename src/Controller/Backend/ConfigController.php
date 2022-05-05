@@ -4,6 +4,7 @@ namespace App\Controller\Backend;
 
 use App\Entity\Config;
 use App\Form\ConfigType;
+use App\Repository\ConfigCategoryRepository;
 use App\Repository\ConfigRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +19,20 @@ class ConfigController extends AbstractController
     /**
      * @Route("/", name="config_index")
      */
-    public function index(ConfigRepository $configRepository): Response
+    public function index(ConfigRepository $configRepository, ConfigCategoryRepository $configCategoryRepository): Response
     {
 
-        $configs = $configRepository->findAll();
+        //$configs = $configRepository->findAll();
+        $configCategories = $configCategoryRepository->findAll();
+
+        $configs = $this->getDoctrine()
+                       ->getRepository(Config::class)
+                       ->findBy(array('configCategory' => 2), array());
+
         return $this->render('backend/config/index.html.twig', [
             'controller_name' => 'ConfigController',
             'configs' => $configs,
+            'configCategories' => $configCategories,
         ]);
     }
 
