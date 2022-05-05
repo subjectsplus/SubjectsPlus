@@ -4,5 +4,28 @@
 
 
 {% block content %}
-
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th>Key</th>
+                <th>Value</th>
+                <th>Autoload</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for config in configs %}
+                <tr>
+                    <td>{{ config.id }}</td>
+                    <td>{{ config.optionKey }}</td>
+                    <td>{{ config.optionValue }}</td>
+                    <td>{{ config.autoload }}</td>
+                    <td>{{ config.category }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
