@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Backend;
+namespace App\Controller\Backend\Api;
 
 use App\Entity\Media;
 use App\Entity\Staff;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Exception\ValidatorException;
 
-class MediaAPIUploadController extends AbstractController
+class MediaUploader extends AbstractController
 {
     public function __invoke(Request $request, ChangeLogService $cls, MediaService $uploader): Media
     {
