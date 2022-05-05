@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\Backend\MediaAPIUploadController;
+use App\Controller\Backend\Api\MediaUploader;
 
 /**
  * @ORM\Table(name="media")
@@ -18,7 +18,7 @@ use App\Controller\Backend\MediaAPIUploadController;
  *     collectionOperations={
  *         "get", 
  *         "post" = {
- *              "controller" = MediaAPIUploadController::class,
+ *              "controller" = MediaUploader::class,
  *              "deserialize" = false,
  *              "openapi_context" = {
  *                  "requestBody" = {
