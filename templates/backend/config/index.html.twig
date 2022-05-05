@@ -5,6 +5,8 @@
 
 {% block content %}
 <div class="container">
+    <h1>App Config</h1>
+    <a href="{{ path('config_new') }}">Add New Config</a>
     <table class="table">
         <thead>
             <tr>
@@ -13,6 +15,7 @@
                 <th>Value</th>
                 <th>Autoload</th>
                 <th>Category</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +26,11 @@
                     <td>{{ config.optionValue }}</td>
                     <td>{{ config.autoload }}</td>
                     <td>{{ config.category }}</td>
+                    <td>
+                         <a href="{{ path('config_edit', {'id': config.id}) }}">Edit</a>
+                         &nbsp;|&nbsp;
+                         {{ include('backend/config/_delete_form.html.twig') }}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

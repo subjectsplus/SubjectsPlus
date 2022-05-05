@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConfigController extends AbstractController
 {
     /**
-     * @Route("/", name="app_backend_config")
+     * @Route("/", name="config_index")
      */
     public function index(ConfigRepository $configRepository): Response
     {
@@ -32,22 +32,56 @@ class ConfigController extends AbstractController
      * @Route("/new", name="config_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
-        {
-            $config = new Config();
+    {
+        $config = new Config();
 
-            $form = $this->createForm(ConfigType::class, $config);
-            $form->handleRequest($request);
+        $form = $this->createForm(ConfigType::class, $config);
+        $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($config);
-                $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($config);
+            $entityManager->flush();
 
-                return $this->redirectToRoute('app_backend_config');
-            }
-
-            return $this->renderForm('backend/config/new.html.twig', [
-                'form' => $form,
-            ]);
+            return $this->redirectToRoute('config_index');
         }
+
+        return $this->renderForm('backend/config/new.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="config_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Config $config): Response
+    {
+        $form = $this->createForm(ConfigType::class, $config);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('config_index');
+        }
+
+        return $this->render('backend/config/edit.html.twig', [
+            'config' => $config,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="config_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Config $config): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$config->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($config);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('config_index');
+    }
 }

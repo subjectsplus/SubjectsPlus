@@ -5,10 +5,9 @@
 
 {% block content %}
 <div class="container">
- {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Save</button>
-    {{ form_end(form) }}
+    {{ include('backend/config/_form.html.twig', {'button_label': 'Save'}) }}
+
+    <a href="{{ path('config_index') }}">back to list</a>
 </div>
 {% endblock %}
 
