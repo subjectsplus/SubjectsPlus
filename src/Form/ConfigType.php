@@ -15,7 +15,7 @@ class ConfigType extends AbstractType
             ->add('option_key')
             ->add('option_label')
             ->add('option_value')
-            ->add('autoload')
+            ->add('required')
             ->add('configCategory')
         ;
     }

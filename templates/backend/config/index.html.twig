@@ -22,7 +22,7 @@
                 <th>Label</th>
                 <th>Key</th>
                 <th>Value</th>
-                <th>Autoload</th>
+                <th>Required</th>
                 <th>Category</th>
                 <th>Actions</th>
             </tr>
@@ -33,7 +33,7 @@
                     <td>{{ config.optionLabel }}</td>
                     <td>{{ config.optionKey }}</td>
                     <td>{{ config.optionValue }}</td>
-                    <td>{{ config.autoload }}</td>
+                    <td>{{ config.required }}</td>
                     <td>{{ config.configCategory }}</td>
                     <td>
                          <a href="{{ path('config_edit', {'id': config.id}) }}">Edit</a>

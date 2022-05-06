@@ -37,7 +37,7 @@ class Config
     /**
      * @ORM\Column(type="boolean")
      */
-    private $autoload;
+    private $required;
 
 //    /**
 //     * @ORM\ManyToOne(targetEntity=ConfigCategory::class, inversedBy="configs")
@@ -92,14 +92,14 @@ class Config
         return $this;
     }
 
-    public function getAutoload(): ?bool
+    public function getRequired(): ?bool
     {
-        return $this->autoload;
+        return $this->required;
     }
 
-    public function setAutoload(bool $autoload): self
+    public function setRequired(bool $required): self
     {
-        $this->autoload = $autoload;
+        $this->required = $required;
 
         return $this;
     }
