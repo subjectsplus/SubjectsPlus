@@ -136,13 +136,13 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
                             <div className="dropdown basic-dropdown">
-                                <button className="btn btn-icon-default dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button className="btn btn-muted dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i className="fas fa-ellipsis-h"></i>
                                 </button>
                                 <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="sectionMenuOptions">
                                     <li><span className="dropdown-item-text fw-bold fs-sm">Layout</span>
                                         <ul className="sp-section-layout-list">
-                                            {/*
+                                            {/* TODO: match column classNames to bootstrap columns
                                               sp-col-1 = 12-0-0 or 0-12-0
                                               sp-col-2 = 6-6-0
                                               sp-col-2-left-sidebar = 4-8-0 or 9-3-0
