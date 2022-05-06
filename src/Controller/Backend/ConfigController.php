@@ -6,6 +6,7 @@ use App\Entity\Config;
 use App\Form\ConfigType;
 use App\Repository\ConfigCategoryRepository;
 use App\Repository\ConfigRepository;
+use App\Service\ConfigService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,8 @@ class ConfigController extends AbstractController
     /**
      * @Route("/category/{id}", name="config_index")
      */
-    public function index(Request $request, $id, ConfigRepository $configRepository, ConfigCategoryRepository $configCategoryRepository): Response
+    public function index(Request $request, $id, ConfigRepository $configRepository, ConfigCategoryRepository $configCategoryRepository,
+    ConfigService $configService): Response
     {
         $configCategories =
             $configCategoryRepository->findBy(array(), array('category_key' => 'ASC'));
