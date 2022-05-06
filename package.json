@@ -62,8 +62,8 @@
     "webpack-notifier": "^1.14.1"
   },
   "imports": {
-    "#entrypoints/*": "./assets/backend/javascript/entrypoints/*",
-    "#utility/*": "./assets/backend/javascript/Utility/*",
+    "#entrypoints/*": "./assets/react/entrypoints/*",
+    "#utility/*": "./assets/react/utility/*",
     "#components/*": "./assets/react/components/*",
     "#api/*": "./assets/react/api/*"
   },
