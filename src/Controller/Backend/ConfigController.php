@@ -52,7 +52,7 @@ class ConfigController extends AbstractController
             $entityManager->persist($config);
             $entityManager->flush();
 
-            return $this->redirectToRoute('config_index');
+            return $this->redirectToRoute('config_index', array('id' => '8'));
         }
 
         return $this->renderForm('backend/config/new.html.twig', [
@@ -71,7 +71,7 @@ class ConfigController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('config_index');
+            return $this->redirectToRoute('config_index', array('id' => '8'));
         }
 
         return $this->render('backend/config/edit.html.twig', [
@@ -91,6 +91,6 @@ class ConfigController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('config_index');
+        return $this->redirectToRoute('config_index', array('id' => '8'));
     }
 }
