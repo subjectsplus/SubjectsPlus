@@ -141,7 +141,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         } else {
             // TODO: Handle Media-Embed being sanitized
             // TODO: Fix issue where Media-Embed turns every link into an iframe
-            return (<div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
+            return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
         }
     }
     
