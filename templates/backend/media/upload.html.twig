@@ -15,17 +15,19 @@
         <div id="staff-media-view">
             <div>Your Previous Uploads</div>
             {% for media_item in staff_media %}
-                <div class="media-item">
-                    <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}">
-                        <img src="
-                            {% if 'image/' in media_item.mimeType %}
-                                {# media_item is an image #}
-                                {{ asset(media_item | get_media_url('small')) }}
-                            {% endif %}
-                        "/>
-                    </a>
-                    <div class="media-item-title">{{ media_item.title }}</div>
-                </div>
+                {% if media_item.deletedAt is null %}
+                    <div class="media-item">
+                        <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}">
+                            <img src="
+                                {% if 'image/' in media_item.mimeType %}
+                                    {# media_item is an image #}
+                                    {{ asset(media_item | get_media_url('small')) }}
+                                {% endif %}
+                            "/>
+                        </a>
+                        <div class="media-item-title">{{ media_item.title }}</div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     {% endif %}
