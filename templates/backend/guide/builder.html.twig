@@ -4,7 +4,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('guide_builder') }}
+    {{ encore_entry_script_tags('guide_builder_loader') }}
 {% endblock %}
 
 {% block content %}
@@ -24,6 +24,6 @@
     <div id="guide-builder-container" class="mt-4"></div>
 </div>
 {{ include('backend/guide/_offcanvas_guide_details.html.twig') }}
-{# {{ include('backend/media/sidebar.html.twig') }} #}
+{{ include('backend/media/sidebar.html.twig') }}
 {{ include('backend/records/sidebar.html.twig') }}
 {% endblock %}

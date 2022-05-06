@@ -139,7 +139,9 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         if (editable) {
             return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
         } else {
-            return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
+            // TODO: Handle Media-Embed being sanitized
+            // TODO: Fix issue where Media-Embed turns every link into an iframe
+            return (<div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
         }
     }
     
