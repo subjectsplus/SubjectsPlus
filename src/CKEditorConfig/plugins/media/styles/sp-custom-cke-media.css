@@ -1,0 +1,41 @@
+:root {
+    --cke-recordtoken-accent: #3fc2c6;
+    --cke-recordtoken-accent-rgb: 63, 194, 198;
+}
+.record-token{
+    background-color: rgba(var(--cke-recordtoken-accent-rgb), 0.4);
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px dashed var(--cke-recordtoken-accent);
+    display: inline-block;
+    margin: 0.125rem;
+}
+
+.cke_widget_wrapper_record-token:hover >.record-token{
+    outline: 2px solid var(--cke-recordtoken-accent) !important;
+}
+.cke_widget_wrapper.cke_widget_focused>.cke_widget_element, .cke_widget_wrapper .cke_widget_editable.cke_widget_editable_focused {
+    outline: 2px solid var(--cke-recordtoken-accent) !important;
+}
+
+.record-link {
+    color: #333333;
+}
+
+.record-description {
+
+}
+
+.record-icon {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.record-icon img {
+    vertical-align: bottom;
+    width: 20px;
+    height: 20px;
+}
