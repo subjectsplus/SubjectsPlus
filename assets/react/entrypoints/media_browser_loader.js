@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import ErrorBoundary from '#components/shared/ErrorBoundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import MediaBrowser from '#components/media-browser/MediaBrowser';
-import { ReactQueryDevtools } from 'react-query/devtools';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -19,7 +18,6 @@ ReactDOM.render(
             {mediaBrowser}    
         </ErrorBoundary>)
     }
-    <ReactQueryDevtools initialIsOpen={false} position="top-left" />
 </QueryClientProvider>,
     document.getElementById('media-browser-container')
 );
