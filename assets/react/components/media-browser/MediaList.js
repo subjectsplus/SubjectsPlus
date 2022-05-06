@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFetchMediaByStaff } from '#api/media/MediaAPI';
 import MediaPreview from './MediaPreview';
 
-function MediaList({ staffId }) {
-    const {isLoading, isError, data, error} = useFetchMediaByStaff(staffId);
+function MediaList({ refresh, staffId }) {
+    const {isLoading, isError, data, error, refetch} = useFetchMediaByStaff(staffId);
+    const [currentRefresh, setCurrentRefresh] = useState(refresh);
+
+    if (refresh !== currentRefresh) {
+        setCurrentRefresh(refresh);
+        refetch();
+    }
 
     const mediaTokens = () => {
         if (isLoading) {
@@ -40,7 +46,7 @@ function MediaList({ staffId }) {
     };
 
     return (
-        <div id="media-list-container">'
+        <div id="media-list-container">
             <h3>My Media</h3>
             <ul id="media-list" className="list-unstyled">
                 {mediaTokens()}
