@@ -10,7 +10,8 @@
 
     <ul class="list-group list-group-horizontal">
     {% for cat in configCategories %}
-      <li class="list-group-item">{{ cat.categoryKey}}</li>
+      <li class="list-group-item">
+        <a href="/control/config/category/{{ cat.id}}">{{ cat.categoryKey}}</a></li>
     {% endfor %}
     </ul>
 <hr />

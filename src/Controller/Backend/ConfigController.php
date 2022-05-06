@@ -17,17 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConfigController extends AbstractController
 {
     /**
-     * @Route("/", name="config_index")
+     * @Route("/category/{id}", name="config_index")
      */
-    public function index(ConfigRepository $configRepository, ConfigCategoryRepository $configCategoryRepository): Response
+    public function index(Request $request, $id, ConfigRepository $configRepository, ConfigCategoryRepository $configCategoryRepository): Response
     {
-
-        //$configs = $configRepository->findAll();
-        $configCategories = $configCategoryRepository->findAll();
+        $configCategories =
+            $configCategoryRepository->findBy(array(), array('category_key' => 'ASC'));
 
         $configs = $this->getDoctrine()
                        ->getRepository(Config::class)
-                       ->findBy(array('configCategory' => 2), array());
+                       ->findBy(array('configCategory' => $id), array());
 
         return $this->render('backend/config/index.html.twig', [
             'controller_name' => 'ConfigController',
