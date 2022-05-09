@@ -23,7 +23,6 @@ function MediaUploader({ fileUploadedCallback }) {
             altText: evt.target.altText.value,
             file: fileDropped
         };
-        // TODO: Create media attachment
         // TODO: Handle bad request errors
         createMedia(initialMediaData).then(
             () => {
