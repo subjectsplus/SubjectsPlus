@@ -11,6 +11,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const [editable, setEditable] = useState(false);
     const [title, setTitle] = useState(plusletTitle);
     const [body, setBody] = useState(plusletBody);
+    const [plusletHovered, setPlusletHovered] = useState(false);
 
     const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
@@ -135,6 +136,16 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         }
     }
 
+    const getPlusletClassName = () => {
+        let className = 'pluslet';
+
+        if (plusletHovered) {
+            className += ' sp-pluslet-hover-region';
+        }
+
+        return className;
+    }
+
     const editor = () => {
         if (editable) {
             return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
@@ -149,14 +160,13 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         <Draggable type="pluslet" key={plusletId.toString()} draggableId={plusletId.toString()} index={plusletRow}>
             {(provided, snapshot) => {
                 return (
-                    <div className="pluslet" key={plusletId} ref={provided.innerRef} onDoubleClick={toggleEditable}
-                        onKeyDown={handleSaveKey}
+                    <div className={getPlusletClassName()} key={plusletId} ref={provided.innerRef} onDoubleClick={toggleEditable}
+                        onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} onMouseLeave={() => setPlusletHovered(false)}
                         {...provided.draggableProps}
                         style={{
                             ...provided.draggableProps.style,
                             height: 'auto'
                         }}>
-                        {/* TODO: Append sp-pluslet-hover-region to pluslet className to style on hover event */}
                         {/* TODO: Add styles when dragging pluslet, reduce height and only show title bar area
                                   background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent'
                         */}
