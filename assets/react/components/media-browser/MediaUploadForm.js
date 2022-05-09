@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MediaUploadForm({ disabled, onSubmit }) {
+function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
     return (
         <form action={void(0)} onSubmit={onSubmit}>
             <div className="mb-2">
@@ -15,7 +15,7 @@ function MediaUploadForm({ disabled, onSubmit }) {
                         id="media-title-field"
                         placeholder="Title"
                         autoComplete="off"
-                        defaultValue="Untitled"
+                        defaultValue={defaultTitle}
                         required="required"
                     />
 
@@ -43,6 +43,9 @@ function MediaUploadForm({ disabled, onSubmit }) {
                         autoComplete="off"
                     />
 
+                    {/* Cancel Button */}
+                    <button onClick={onCancel}>Cancel Upload</button>
+                    
                     {/* Submit Button */}
                     <input type="submit" value="Upload Media" />
                 </fieldset>
