@@ -7,6 +7,7 @@ import { removeFileExtension } from '#utility/Utility';
 function MediaUploader({ fileUploadedCallback }) {
     const [fileDropped, setFileDropped] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
+    const [isErrored, setIsErrored] = useState(false);
 
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles?.length > 0) {
@@ -16,6 +17,7 @@ function MediaUploader({ fileUploadedCallback }) {
     
     const onUploadSubmit = evt => {
         evt.preventDefault();
+        setIsErrored(false);
         setIsUploading(true);
         const initialMediaData = { 
             title: evt.target.title.value || 'Untitled',
@@ -30,7 +32,12 @@ function MediaUploader({ fileUploadedCallback }) {
                 setIsUploading(false);
                 setFileDropped(null);
             }
-        ).catch(err => console.error(err));
+        ).catch(err => {
+            console.error(err);
+            setIsUploading(false);
+            setFileDropped(null);
+            setIsErrored(true);
+        });
     }
 
     const onCancel = evt => {
@@ -56,6 +63,7 @@ function MediaUploader({ fileUploadedCallback }) {
             return (
                 <div id="file-dropzone">
                     <FileDropzone multiple={false} onDrop={onDrop} />
+                    {isErrored && <p style={{color: 'red'}}>An error occurred while uploading, please try again.</p>}
                 </div>
             );
         }
