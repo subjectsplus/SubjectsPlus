@@ -139,11 +139,18 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const getPlusletClassName = () => {
         let className = 'pluslet';
 
-        if (plusletHovered) {
+        if (plusletHovered || editable) {
             className += ' sp-pluslet-hover-region';
         }
 
         return className;
+    }
+
+    const getVisuallyHidden = (className) => {
+        if (plusletHovered || editable) {
+            return className;
+        }
+        return className + ' visually-hidden';
     }
 
     const editor = () => {
@@ -173,16 +180,11 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                         <div className="sp-pluslet-actions-container">
-                            {/* TODO: Pluslet hover event shows drag handle, use style visibility */}
-                            <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
+                            <div className={getVisuallyHidden('drag-handle btn-muted me-1 fs-sm')} {...provided.dragHandleProps} title="Move pluslet">
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
                             {editableTitle()}
-                            <div className="text-end">
-                                {/* TODO: Pluslet hover event shows edit, save, dots buttons/icons, use style visibility.
-                                          Keep icons visible when pluslet is on editing mode
-                                */}
-
+                            <div className={getVisuallyHidden('text-end')}>
                                 {editSaveButton()}
 
                                 <div className="dropdown basic-dropdown d-inline-block ms-1">
