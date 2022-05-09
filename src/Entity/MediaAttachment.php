@@ -4,9 +4,15 @@ namespace App\Entity;
 
 use App\Repository\MediaAttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=MediaAttachmentRepository::class)
+ * 
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"}
+ * )
  */
 class MediaAttachment
 {
