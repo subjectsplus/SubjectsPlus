@@ -4802,6 +4802,10 @@
         <source>control.faqs.back_to_list</source>
         <target>__control.faqs.back_to_list</target>
       </trans-unit>
+      <trans-unit id="csYgWF9" resname="control.media.upload.title">
+        <source>control.media.upload.title</source>
+        <target>__control.media.upload.title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

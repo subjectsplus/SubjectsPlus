@@ -242,5 +242,19 @@
   }
 }
 
+[data-mode="dark"] {
+  .btn-icon-table-sort,
+  .btn-muted{
+    color: rgba(181,181,181, 0.75);
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--sp-nav-color);
+    }
+  }
+}
+
+
+
 
 

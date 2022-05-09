@@ -1,34 +1,41 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Upload{% endblock %}
+{% block title %}{{ 'control.media.upload.title' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
+<div class="container py-5">
+
     {% for error in app.flashes('error') %}
-        <div class="flash-error">
+        <div class="flash-error alert alert-info text-center mb-4">
             {{ error }}
         </div>
     {% endfor %}
-    {{ include('backend/media/_form.html.twig') }} 
-
-    {# Existing view of staff user's images/files #}
-    {% if staff_media is not null %}
-        <div id="staff-media-view">
-            <div>Your Previous Uploads</div>
-            {% for media_item in staff_media %}
-                {% if media_item.deletedAt is null %}
-                    <div class="media-item">
-                        <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}">
-                            <img src="
-                                {% if 'image/' in media_item.mimeType %}
-                                    {# media_item is an image #}
-                                    {{ asset(media_item | get_media_url('small')) }}
-                                {% endif %}
-                            "/>
-                        </a>
-                        <div class="media-item-title">{{ media_item.title }}</div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+    <div class="row">
+        <div class="col-8">
+            <h1 class="fw-light">{{ 'control.media.upload.title' | trans }}</h1>
+            {{ include('backend/media/_form.html.twig') }}
         </div>
-    {% endif %}
+        <div class="col-4">
+            {# Existing view of staff user's images/files #}
+            {% if staff_media is not null %}
+                <div id="staff-media-view">
+                    <div>Your Previous Uploads</div>
+                    {% for media_item in staff_media %}
+                        <div class="media-item">
+                            <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}">
+                                <img src="
+                            {% if 'image/' in media_item.mimeType %}
+                                {# media_item is an image #}
+                                {{ asset(media_item | get_media_url('small')) }}
+                            {% endif %}
+                        "/>
+                            </a>
+                            <div class="media-item-title">{{ media_item.title }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
