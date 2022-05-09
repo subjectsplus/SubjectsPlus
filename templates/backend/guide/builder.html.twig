@@ -24,6 +24,6 @@
     <div id="guide-builder-container" class="mt-4"></div>
 </div>
 {{ include('backend/guide/_offcanvas_guide_details.html.twig') }}
-{{ include('backend/media/sidebar.html.twig') }}
+{{ include('backend/media/sidebar.html.twig', {'attachment_type': 'guide', 'attachment_id': guide.subjectId }) }}
 {{ include('backend/records/sidebar.html.twig') }}
 {% endblock %}
