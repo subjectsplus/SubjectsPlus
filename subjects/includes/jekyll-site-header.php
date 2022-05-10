@@ -391,13 +391,16 @@ if (is_null($header_type)
 
 
 
-										<h5>Fellowships</h5>
+										<h5>Fellowships & Grants</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/specialcollections/abrams-banning-grant.html">Dave Abrams and Gene Banning Pan Am Research Grant</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/library-research-scholars.html">Library Research Scholars & Adobe Scholars
-												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/chc/fellows.html">Goizueta Foundation Graduate Fellowship Program</a></li>
 
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/library-research-scholars.html">Library Research Scholars &amp; Adobe Scholars</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/specialcollections/world-wings-grant.html">The World Wings International, Inc. Research Grant</a></li>
 										</ul>
 
 
