@@ -7,6 +7,7 @@ parameters:
     app.upload_destination: '/uploads/' # Relative path from public/ for file uploads
     
     # IMAGE SETTINGS
+    # computed based on width
     app.small_image_dimensions: '264x264' # Maximum dimensions (width x height) in pixels for small image
     app.medium_image_dimensions: '500x500' # Maximum dimensions (width x height) in pixels for medium image
     app.large_image_dimensions: '750x750' # Maximum dimensions (width x height) in pixels for large image
