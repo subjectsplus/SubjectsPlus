@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFetchMediaByStaff } from '#api/media/MediaAPI';
-import MediaPreview from './MediaPreview';
+import MediaToken from './MediaToken';
 
 function MediaList({ refresh, staffId }) {
     const {isLoading, isError, data, error, refetch} = useFetchMediaByStaff(staffId);
@@ -9,6 +9,17 @@ function MediaList({ refresh, staffId }) {
     if (refresh !== currentRefresh) {
         setCurrentRefresh(refresh);
         refetch();
+    }
+
+    const getLargestImageSize = (media) => {
+        if (media.largeFileName) {
+            return 'large';
+        } else if (media.mediumFileName) {
+            return 'medium';
+        } else if (media.smallFileName) {
+            return 'small';
+        }  
+        return null;
     }
 
     const mediaTokens = () => {
@@ -21,23 +32,10 @@ function MediaList({ refresh, staffId }) {
             if (!data?.length) {
                 return (<p>No media found.</p>);
             } else {
-                return data.map(token => {
-                    const fileName = (token.mimeType.includes('image/') ? 
-                        (token.largeFileName ?? token.mediumFileName ?? token.smallFileName) : token.fileName
-                    );
-                    const relativeUrl = token.directory + '/' + fileName;
-
+                return data.map(media => {
                     return (
-                        <li key={token.mediaId}>
-                            <div className="media-card" draggable="true" data-media-id={token.mediaId}
-                                data-mime-type={token.mimeType}
-                                data-link={relativeUrl}
-                                data-title={token.title} data-alt-text={token.altText}
-                                data-caption={token.caption}>
-                                    <MediaPreview mimeType={token.mimeType} source={relativeUrl} />
-                                    {' '}
-                                    <span>{token.title}</span>
-                            </div>
+                        <li key={media.mediaId}>
+                            <MediaToken media={media} defaultImageSize={getLargestImageSize(media)} />
                         </li>
                     );
                 });

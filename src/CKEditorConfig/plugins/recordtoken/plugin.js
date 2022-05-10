@@ -313,7 +313,7 @@
         // This data is later read by the editor#paste listener in the record plugin defined above.
         if (CKEDITOR.document.getById('record-list')) {
             CKEDITOR.document.getById('record-list').on('dragstart', function(evt) {
-                // The target may be some element inside the draggable div (e.g. the image), so get the div.media-card.
+                // The target may be some element inside the draggable div (e.g. the image), so get the div.record-token.
                 const target = evt.data.getTarget().getAscendant('div', true);
 
                 // Initialization of the CKEditor 4 data transfer facade is a necessary step to extend and unify native
