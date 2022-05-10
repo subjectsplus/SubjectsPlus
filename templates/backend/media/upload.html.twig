@@ -34,6 +34,7 @@
                         {% for media_item in staff_media %}
                             <li class="media-item">
                                 <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}" class="btn-link-default">
+                                {# TODO: Display generic icons for PDF, DOC, PPT, etc file uploads #}
                                     <img src="
                             {% if 'image/' in media_item.mimeType %}
                                 {# media_item is an image #}

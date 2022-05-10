@@ -895,7 +895,7 @@
       </trans-unit>
       <trans-unit id="iltCw_n" resname="control.media.upload.previous_uploads">
         <source>control.media.upload.previous_uploads</source>
-        <target>My Previous Uploads</target>
+        <target>My Recent Uploads</target>
       </trans-unit>
     </body>
   </file>
