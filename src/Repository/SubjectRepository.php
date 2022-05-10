@@ -36,6 +36,16 @@ class SubjectRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * @param $shortform
+     *
+     * @return Subject|null
+     */
+    public function findSubjectByShortForm($shortform)
+    {
+        return $this->findOneBy(array('shortform' => $shortform));
+    }
+
     public function getGuideListForStaff()
     {
         return $this->createQueryBuilder('s')
