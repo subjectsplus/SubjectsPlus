@@ -1,0 +1,14 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}New Config Entry{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {{ include('backend/config/_form.html.twig', {'button_label': 'Save'}) }}
+
+    <a href="{{ path('config_index', {'id': 8}) }}">back to list</a>
+</div>
+{% endblock %}
+
+

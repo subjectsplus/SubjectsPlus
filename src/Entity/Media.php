@@ -6,10 +6,59 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Backend\Api\MediaUploader;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
+ * 
+ * @ApiResource(
+ *     itemOperations={"get", "put", "delete"},
+ *     order={"createdAt": "DESC", "updatedAt": "DESC"},
+ *     normalizationContext={"groups": {"media"}},
+ *     collectionOperations={
+ *         "get", 
+ *         "post" = {
+ *              "controller" = MediaUploader::class,
+ *              "deserialize" = false,
+ *              "openapi_context" = {
+ *                  "requestBody" = {
+ *                      "description" = "File upload to an existing resource (Media)",
+ *                      "required" = true,
+ *                      "content" = {
+ *                          "multipart/form-data" = {
+ *                              "schema" = {
+ *                                  "type" = "object",
+ *                                  "properties" = {
+ *                                      "title" = {
+ *                                          "description" = "The title of the Media",
+ *                                          "type" = "string",
+ *                                          "example" = "Untitled",
+ *                                      },
+ *                                      "caption" = {
+ *                                          "description" = "The caption of the Media",
+ *                                          "type" = "string",
+ *                                      },
+ *                                      "altText" = {
+ *                                          "description" = "The alternative text of the Media",
+ *                                          "type" = "string",
+ *                                      },
+ *                                      "file" = {
+ *                                          "type" = "string",
+ *                                          "format" = "binary",
+ *                                          "description" = "Upload a media file",
+ *                                      },
+ *                                  },
+ *                              },
+ *                          },
+ *                      },
+ *                  },
+ *              }
+ *          }
+ *      }
+ * )
  */
 class Media implements \Serializable
 {
@@ -17,6 +66,7 @@ class Media implements \Serializable
      * @ORM\Id
      * @ORM\Column(name="media_id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"media"})
      */
     private $mediaId;
 
@@ -27,63 +77,72 @@ class Media implements \Serializable
 
     /**
      * @ORM\Column(name="file_name", type="string", nullable=true)
-     *
+     * @Groups({"media"})
+     * 
      * @var string|null
      */
     private $fileName;
 
     /**
      * @ORM\Column(name="large_file_name", type="string", nullable=true)
-     *
+     * @Groups({"media"})
+     * 
      * @var string|null
      */
     private $largeFileName;
 
     /**
      * @ORM\Column(name="medium_file_name", type="string", nullable=true)
-     *
+     * @Groups({"media"})
+     * 
      * @var string|null
      */
     private $mediumFileName;
 
     /**
      * @ORM\Column(name="small_file_name", type="string", nullable=true)
-     *
+     * @Groups({"media"})
+     * 
      * @var string|null
      */
     private $smallFileName;
 
     /**
      * @ORM\Column(name="file_size", type="integer", nullable=true)
-     *
+     * @Groups({"media"})
+     * 
      * @var int|null
      */
     private $fileSize;
 
     /**
      * @ORM\Column(name="mime_type", type="string", nullable=true)
-     *
+     * @Groups({"media"})
+     * 
      * @var string|null
      */
     private $mimeType;
 
     /**
      * @ORM\Column(name="created_at", type="datetime_immutable")
-     *
+     * @Groups({"media"})
+     * 
      * @var \DateTimeInterface|null
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     *
+     * @ORM\Column(name="updated_at", type="datetime_immutable", nullable=true)
+     * @Groups({"media"})
+     * 
      * @var \DateTimeInterface|null
      */
     private $updatedAt;
 
     /**
-     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
-     *
+     * @ORM\Column(name="deleted_at", type="datetime_immutable", nullable=true)
+     * @Groups({"media"})
+     * 
      * @var \DateTimeInterface|null
      */
     private $deletedAt;
@@ -93,6 +152,7 @@ class Media implements \Serializable
      *
      * @ORM\OneToOne(targetEntity="App\Entity\Staff")
      * @ORM\JoinColumn(name="staff_id", referencedColumnName="staff_id")
+     * @Groups({"media"})
      */
     private $staff;
 
@@ -100,6 +160,7 @@ class Media implements \Serializable
      * @var string|null
      * 
      * @ORM\Column(name="title", type="string", nullable=true)
+     * @Groups({"media"})
      */
     private $title = "Untitled";
 
@@ -107,6 +168,7 @@ class Media implements \Serializable
      * @var string|null
      * 
      * @ORM\Column(name="caption", type="text", nullable=true)
+     * @Groups({"media"})
      */
     private $caption;
 
@@ -114,8 +176,19 @@ class Media implements \Serializable
      * @var string|null
      * 
      * @ORM\Column(name="alt_text", type="text", nullable=true)
+     * @Groups({"media"})
      */
     private $altText;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"media"})
+     */
+    private $directory;
+
+    public function __construct() {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getMediaId(): ?int
     {
@@ -276,6 +349,18 @@ class Media implements \Serializable
         return $this->altText;
     }
 
+    public function getDirectory(): ?string
+    {
+        return $this->directory;
+    }
+
+    public function setDirectory(string $directory): self
+    {
+        $this->directory = $directory;
+
+        return $this;
+    }
+    
     /** @see \Serializable::serialize() */
     public function serialize()
     {

@@ -46,6 +46,37 @@ export function useCreatePluslet(sectionId) {
     });
 }
 
+export function useUpdatePluslet(sectionId) {
+    if (sectionId === undefined) throw new Error('"sectionId" field is required to call useUpdatePluslet.');
+
+    const queryClient = useQueryClient();
+    return useMutation(updatePluslet, {
+        onMutate: async updatedPluslet => {
+            await queryClient.cancelQueries(['pluslets', sectionId]);
+            const previousPlusletsData = queryClient.getQueryData(['pluslets', sectionId]);
+
+            const optimisticResult = produce(previousPlusletsData, draftData => {
+                const index = draftData['hydra:member'].findIndex(pluslet => pluslet.id === updatedPluslet.plusletId);
+                Object.keys(updatedPluslet.data).map(key => {
+                    draftData['hydra:member'][index][key] = updatedPluslet.data[key];
+                });
+            });
+            
+            queryClient.setQueryData(['pluslets', sectionId], optimisticResult);
+            return { previousPlusletsData };
+        },
+        onError: (error, plusletData, context) => {
+            // Perform rollback of pluslets mutation
+            console.error(error);
+            queryClient.setQueryData(['pluslets', sectionId], context.previousPlusletsData);
+        },
+        onSettled: () => {
+            // Refetch the pluslets data
+            queryClient.invalidateQueries(['pluslets', sectionId]);
+        },
+    });
+}
+
 export function useDeletePluslet(sectionId) {
     if (sectionId === undefined) throw new Error('"sectionId" field is required to call useDeletePluslet.');
 

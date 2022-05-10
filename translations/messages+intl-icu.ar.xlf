@@ -4766,6 +4766,46 @@
         <source>control.guide_meta.edit.header</source>
         <target>__control.guide_meta.edit.header</target>
       </trans-unit>
+      <trans-unit id="BpYajg3" resname="control.guides.table.type.active">
+        <source>control.guides.table.type.active</source>
+        <target>__control.guides.table.type.active</target>
+      </trans-unit>
+      <trans-unit id="pKhfdzr" resname="control.guides.table.type.hidden">
+        <source>control.guides.table.type.hidden</source>
+        <target>__control.guides.table.type.hidden</target>
+      </trans-unit>
+      <trans-unit id="mVwafaf" resname="control.guides.show.type.active">
+        <source>control.guides.show.type.active</source>
+        <target>__control.guides.show.type.active</target>
+      </trans-unit>
+      <trans-unit id="LFcA838" resname="control.guides.show.type.inactive">
+        <source>control.guides.show.type.inactive</source>
+        <target>__control.guides.show.type.inactive</target>
+      </trans-unit>
+      <trans-unit id="Wc1Sxkx" resname="control.faqs.index.active_faqs_label">
+        <source>control.faqs.index.active_faqs_label</source>
+        <target>__control.faqs.index.active_faqs_label</target>
+      </trans-unit>
+      <trans-unit id="8CLy_3n" resname="control.faqs.table.status.active">
+        <source>control.faqs.table.status.active</source>
+        <target>__control.faqs.table.status.active</target>
+      </trans-unit>
+      <trans-unit id="GRPxBwl" resname="control.faqs.table.status.not_active">
+        <source>control.faqs.table.status.not_active</source>
+        <target>__control.faqs.table.status.not_active</target>
+      </trans-unit>
+      <trans-unit id="YvF4U8U" resname="control.faqs.table.heading.last_update">
+        <source>control.faqs.table.heading.last_update</source>
+        <target>__control.faqs.table.heading.last_update</target>
+      </trans-unit>
+      <trans-unit id="gYevwuA" resname="control.faqs.back_to_list">
+        <source>control.faqs.back_to_list</source>
+        <target>__control.faqs.back_to_list</target>
+      </trans-unit>
+      <trans-unit id="csYgWF9" resname="control.media.upload.title">
+        <source>control.media.upload.title</source>
+        <target>__control.media.upload.title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

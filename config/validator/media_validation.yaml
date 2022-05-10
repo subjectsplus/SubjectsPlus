@@ -29,7 +29,8 @@ App\Entity\Media:
     properties:
         file:
             - Image:
-                mimeTypes: ['image/*']
+                mimeTypes: ['image/apng', 'image/avif', 'image/gif', 'image/jpeg', 'image/png', 'image/webp']
+                mimeTypesMessage: 'Image file provided not supported! Please upload a .apng, .avif, .gif, .jpg, .png, or .webp image file.'
                 groups: ['image']
             - File:
                 # do not include images for generic, use image group

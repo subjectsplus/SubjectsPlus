@@ -8,6 +8,7 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 function GuideTabContainer(props) {
     const [lastTabIndex, setLastTabIndex] = useState(0);
@@ -68,7 +69,8 @@ function GuideTabContainer(props) {
             onSuccess: () => {
                 setActiveKey(lastTabIndex + 1);
                 setSettingsValidated(false);
-            }
+            },
+            onError: () => toast.error('Error has occurred. Failed to create new tab!')
         });
     }
 
@@ -94,7 +96,7 @@ function GuideTabContainer(props) {
             setSavingChanges(true);
 
             updateTabMutation.mutate({
-                id: currentTab.id,
+                tabId: currentTab.id,
                 tabIndex: currentTab.tabIndex,
                 data: changes,
                 optimisticResult: {
@@ -107,7 +109,9 @@ function GuideTabContainer(props) {
                 onSettled: () => {
                     setShowSettings(false);
                     setSavingChanges(false);
-                }
+                },
+                onSuccess: () => toast.success('Updated tab successfully!'),
+                onError: () => toast.error('Error has occurred. Failed to update tab!')
             });
         } else {
             setShowSettings(false);
@@ -131,6 +135,9 @@ function GuideTabContainer(props) {
 
         deleteTabMutation.mutate({
             tabId: currentTab.id
+        }, {
+            onSuccess: () => toast.success('Deleted tab successfully!'),
+            onError: () => toast.error('Error has occurred. Failed to delete tab!')
         });
 
         setDeleteTabClicked(false);
@@ -219,8 +226,9 @@ function GuideTabContainer(props) {
             const tabsContent = data.map(tab => {
                 if (currentTab.tabIndex == tab.tabIndex) {
                     return (
-                        <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={(activeKey === tab.tabIndex ? 'active': '')}
-                            key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}>
+                        <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} key={'tab-pane-' + tab.tabIndex} 
+                            eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}
+                            active={true}>
                                 <SectionContainer tabId={tab.id} />
                         </Tab.Pane>
                     );

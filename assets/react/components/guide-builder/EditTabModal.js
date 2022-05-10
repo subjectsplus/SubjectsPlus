@@ -10,8 +10,9 @@ function EditTabModal(props) {
     return (
         <Modal show={props.show} onHide={props.onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Tab</Modal.Title><br />
-                <span className="fs-xs d-block">{'ID:' + props.currentTab.tabId}</span>
+                <Modal.Title>Edit Tab
+                    <span className="fs-xs d-block">{'ID:' + props.currentTab.tabId}</span>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form noValidate validated={props.validated} onSubmit={props.onSubmit} id="settings-form">
@@ -46,25 +47,26 @@ function EditTabModal(props) {
                         </FloatingLabel>
                     </Form.Group>
                 </Form>
-                <Button variant="danger" onClick={props.deleteButtonOnClick} disabled={props.deleteButtonDisabled}>
+                <Button variant="link" className="btn-icon-default p-0 fs-sm" onClick={props.deleteButtonOnClick} disabled={props.deleteButtonDisabled} title="Delete Tab">
                     <i className="fas fa-trash"></i>{' '}
                     Delete Tab
                 </Button>
                 {props.showDeleteConfirmation && (
-                    <Alert variant="danger">
+                    <Alert variant="danger" className="fs-sm">
                         <>
                             Are you sure you want to delete this tab?{' '}
-                            <Button variant="link" onClick={props.declineDeleteOnClick}>No</Button>
-                            <Button variant="link" onClick={props.confirmDeleteOnClick}>Yes</Button>
+                            <Button variant="link" className="btn-link-default fs-sm" onClick={props.declineDeleteOnClick}>No</Button>
+                            <Button variant="link" className="btn-link-default fs-sm" onClick={props.confirmDeleteOnClick}>Yes</Button>
                         </>
                     </Alert>
                 )}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={props.onToggle}>
+                {/* TODO: Close button on modal does not work */}
+                <Button variant="link" className="btn-link-default" onClick={props.onToggle}>
                     Close
                 </Button>
-                <Button variant="secondary" disabled={props.savingChanges} form="settings-form" type="submit">
+                <Button variant="primary" className="btn-gradient btn-round" disabled={props.savingChanges} form="settings-form" type="submit">
                     {props.savingChanges ? 'Saving...' : 'Save Changes'}
                 </Button>
             </Modal.Footer>

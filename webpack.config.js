@@ -24,8 +24,18 @@ Encore
     /*
     * React
      */
+
+    // Record-Search component
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
-    .addEntry('react_select_init', './assets/backend/javascript/select-field-type/initSelect.js')
+
+    // React-Select component intializer
+    .addEntry('react_select_init', './assets/react/entrypoints/select-field-type/initSelect.js')
+
+    // Media-Browser component loader
+    .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.js')
+
+    // Guide-Bulder component loader
+    .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.js')
 
     // Record Component
     .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
@@ -36,7 +46,6 @@ Encore
     .addEntry('backend_main', './assets/backend/BackendMain.js')
     .addEntry('mode_switcher', './assets/backend/javascript/ModeSwitcher.js')
     .addEntry('bs_tooltips', './assets/backend/javascript/BSTooltipPopoverInit.js')
-    .addEntry('guide_builder', './assets/backend/javascript/entrypoints/guide_builder_loader.js')
 
     //Front-end Main JS
     .addEntry('frontend_main', './assets/frontend/FrontendMain.js')
@@ -103,8 +112,9 @@ Encore
         {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
         {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'},
         
-        // CKEditor Plugins
-        {from: './src/CKEditorPlugins/', to: 'ckeditor/plugins/[path][name].[ext]'}
+        // CKEditor Custom Config and Plugins
+        {from: './src/CKEditorConfig/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './src/CKEditorConfig/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
     ])
 
 

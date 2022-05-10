@@ -1260,6 +1260,6 @@ public/uploads/
 
 ###> custom ignore ###
 src/DataFixtures
-
-
+package-lock.json
+yarn.lock
 ###< custom ignore ###
