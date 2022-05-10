@@ -853,6 +853,10 @@
         <source>control.faqs.back_to_list</source>
         <target>Back to FAQs</target>
       </trans-unit>
+      <trans-unit id="csYgWF9" resname="control.media.upload.title">
+        <source>control.media.upload.title</source>
+        <target>Upload Media</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

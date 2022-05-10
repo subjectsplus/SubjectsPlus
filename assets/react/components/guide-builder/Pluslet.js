@@ -91,15 +91,16 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const editableTitle = () => {
         if (editable) {
             return (
-                <div className="mb-2">
+                <div className="sp-pluslet-title">
                     {/* Label is for accessibility purposes, will not be visible */}
-                    <label htmlFor="edit-pluslet-title" className="form-label">
-                        <span className="visually-hidden">Enter Pluslet Title</span>
+                    <label htmlFor="edit-pluslet-title" className="form-label visually-hidden">
+                        Enter Pluslet Title
                     </label>
                     <input
                         type="text"
                         id="edit-pluslet-title"
                         placeholder= "Enter Pluslet Title"
+                        className="form-control"
                         value={title}
                         autoComplete="off"
                         onChange={evt => setTitle(evt.target.value)}
@@ -114,20 +115,20 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                 </div>
             );
         } else {
-            return (<p>{plusletTitle}</p>);
+            return (<p className="sp-pluslet-title">{plusletTitle}</p>);
         }
     }
 
     const editSaveButton = () => {
         if (editable) {
             return (
-                <button onClick={toggleEditable} title="Save pluslet">
+                <button onClick={toggleEditable} title="Save pluslet" className="btn btn-muted sp-pluslet-icon-btn">
                     <i className="fas fa-save"></i>
                 </button>
             );
         } else {
             return (
-                <button onClick={toggleEditable} title="Edit pluslet">
+                <button onClick={toggleEditable} title="Edit pluslet" className="btn btn-muted sp-pluslet-icon-btn">
                     <i className="fas fa-pen"></i>
                 </button>
             );
@@ -138,7 +139,9 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         if (editable) {
             return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
         } else {
-            return (<div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
+            // TODO: Handle Media-Embed being sanitized
+            // TODO: Fix issue where Media-Embed turns every link into an iframe
+            return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
         }
     }
     
@@ -151,20 +154,40 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                         {...provided.draggableProps}
                         style={{
                             ...provided.draggableProps.style,
-                            height: 'auto',
-                            marginBottom: '1.25rem'
+                            height: 'auto'
                         }}>
-                        <div>
-                            <div className="drag-handle" {...provided.dragHandleProps} title="Move pluslet">
+                        {/* TODO: Append sp-pluslet-hover-region to pluslet className to style on hover event */}
+                        {/* TODO: Add styles when dragging pluslet, reduce height and only show title bar area
+                                  background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent'
+                        */}
+
+                        <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
+                        <div className="sp-pluslet-actions-container">
+                            {/* TODO: Pluslet hover event shows drag handle, use style visibility */}
+                            <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
                                 <i className="fas fa-arrows-alt"></i>
                             </div>
-                            <button onClick={deletePluslet} title="Delete pluslet">
-                                <i className="fas fa-trash"></i>
-                            </button>
-                            {editSaveButton()}
+                            {editableTitle()}
+                            <div className="text-end">
+                                {/* TODO: Pluslet hover event shows edit, save, dots buttons/icons, use style visibility.
+                                          Keep icons visible when pluslet is on editing mode
+                                */}
+
+                                {editSaveButton()}
+
+                                <div className="dropdown basic-dropdown d-inline-block ms-1">
+                                    <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i className="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
+                                        <li><a className="dropdown-item">Make Favorite</a></li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li><a className="dropdown-item" onClick={deletePluslet}><i
+                                            className="fas fa-trash"></i> Delete Pluslet</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
-                        {editableTitle()}
                         {editor()}
                     </div>
                 );

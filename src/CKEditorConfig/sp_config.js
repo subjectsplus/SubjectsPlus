@@ -19,8 +19,9 @@ CKEDITOR.editorConfig = function( config ) {
 			'RemoveFormat', 'PasteText', 'PasteFromWord', '-', 
 			'Link', 'Anchor', '-', 
 			'Source', '-', 
-			'Image', 'Embed', '-', 
+			'Image', 'Embed', 
 			'-', 
+			'Media', '-', 
 			'Record'
 		]
 	];
@@ -38,7 +39,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.embed_provider = '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}';
 
 	// Set Extra Plugins.
-	config.extraPlugins = 'recordtoken,image2,embed,autoembed,find';
+	config.extraPlugins = 'media,recordtoken,image2,embed,autoembed,find';
 
 	// Remove plugins.
 	config.removePlugins = 'image';
