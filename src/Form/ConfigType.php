@@ -11,6 +11,7 @@ class ConfigType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // TODO: add unique constraint to option_key
         $builder
             ->add('option_key')
             ->add('option_label')

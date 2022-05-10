@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=ConfigRepository::class)
+ * @UniqueEntity("option_key")
  */
 class Config
 {
@@ -20,7 +21,7 @@ class Config
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $option_key;
 
