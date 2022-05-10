@@ -146,11 +146,11 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         return className;
     }
 
-    const getVisuallyHidden = (className) => {
+    const getVisibility = (className) => {
         if (plusletHovered || editable) {
             return className;
         }
-        return className + ' visually-hidden';
+        return className + ' invisible';
     }
 
     const editor = () => {
@@ -180,11 +180,11 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
                         <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                         <div className="sp-pluslet-actions-container">
-                            <div className={getVisuallyHidden('drag-handle btn-muted me-1 fs-sm')} {...provided.dragHandleProps} title="Move pluslet">
-                                <i className="fas fa-arrows-alt"></i>
+                            <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
+                                <i className={getVisibility('fas fa-arrows-alt')}></i>
                             </div>
                             {editableTitle()}
-                            <div className={getVisuallyHidden('text-end')}>
+                            <div className={getVisibility('text-end')}>
                                 {editSaveButton()}
 
                                 <div className="dropdown basic-dropdown d-inline-block ms-1">
