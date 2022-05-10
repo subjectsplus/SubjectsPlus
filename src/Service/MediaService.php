@@ -72,20 +72,34 @@ class MediaService
             $directory = $this->getRelativeDirectory($mimeType);
 
             // Variations for image files
+            /** @var File $largeFile */
             $largeFile = $uploadResults['largeFile'];
+            
+            /** @var File $mediumFile */
             $mediumFile = $uploadResults['mediumFile'];
+
+            /** @var File $smallFile */
             $smallFile = $uploadResults['smallFile'];
 
             if ($largeFile !== null) {
+                list($width, $height) = \getimagesize($largeFile->getRealPath());
                 $media->setLargeFileName($largeFile->getFilename());
+                $media->setLargeImageFileWidth($width);
+                $media->setLargeImageFileHeight($height);
             }
 
             if ($mediumFile !== null) {
+                list($width, $height) = \getimagesize($mediumFile->getRealPath());
                 $media->setMediumFileName($mediumFile->getFilename());
+                $media->setMediumImageFileWidth($width);
+                $media->setMediumImageFileHeight($height);
             }
 
             if ($smallFile !== null) {
+                list($width, $height) = \getimagesize($smallFile->getRealPath());
                 $media->setSmallFileName($smallFile->getFilename());
+                $media->setSmallImageFileWidth($width);
+                $media->setSmallImageFileHeight($height);
             }
             
             // Fill Media entity values
