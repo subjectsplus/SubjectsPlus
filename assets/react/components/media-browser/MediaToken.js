@@ -3,7 +3,7 @@ import MediaPreview from './MediaPreview';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-function MediaToken({ media, defaultImageSize }) {
+function MediaToken({ media, defaultImageSize, onClick }) {
     const [currentImageSize, setCurrentImageSize] = useState(defaultImageSize);
 
     const isImage = media.mimeType.includes('image/');
@@ -60,9 +60,11 @@ function MediaToken({ media, defaultImageSize }) {
             data-link={relativeUrl}
             data-title={media.title} data-alt-text={media.altText}
             data-caption={media.caption}>
-            <MediaPreview mimeType={media.mimeType} source={relativeUrl} />
-            {' '}
-            <span>{media.title}</span>
+            <span onClick={onClick}>
+                <MediaPreview mimeType={media.mimeType} source={relativeUrl} />
+                {' '}
+                <span>{media.title}</span>
+            </span>
             {' '}
             {isImage &&
                 <div className="image-file-sizes">

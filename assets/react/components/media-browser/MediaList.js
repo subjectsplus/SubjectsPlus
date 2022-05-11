@@ -22,6 +22,16 @@ function MediaList({ refresh, staffId }) {
         return null;
     }
 
+    const pasteToCKEditor = evt => {
+        const mediaElement = evt.target.closest('div.media-token');
+
+        if (CKEDITOR?.instances['pluslet_ckeditor']) {
+            CKEDITOR.instances['pluslet_ckeditor'].insertHtml(mediaElement.outerHTML);
+        } else if (CKEDITOR?.instances['faq_answer']) {
+            CKEDITOR.instances['faq_answer'].insertHtml(mediaElement.outerHTML);
+        }
+    }
+
     const mediaTokens = () => {
         if (isLoading) {
             return (<p>Loading Media...</p>)
@@ -35,7 +45,8 @@ function MediaList({ refresh, staffId }) {
                 return data.map(media => {
                     return (
                         <li key={media.mediaId}>
-                            <MediaToken media={media} defaultImageSize={getLargestImageSize(media)} />
+                            <MediaToken media={media} defaultImageSize={getLargestImageSize(media)} 
+                                onClick={pasteToCKEditor} />
                         </li>
                     );
                 });
