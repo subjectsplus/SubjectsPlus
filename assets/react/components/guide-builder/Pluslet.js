@@ -74,7 +74,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             updatePlusletMutation.mutate({
                 plusletId: plusletId,
                 data: {
-                    body: DOMPurify.sanitize(body)
+                    body: DOMPurify.sanitize(body, { ADD_TAGS: ["oembed"] })
                 }
             });
         }
@@ -159,7 +159,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         } else {
             // TODO: Handle Media-Embed being sanitized
             // TODO: Fix issue where Media-Embed turns every link into an iframe
-            return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body)}} />);
+            return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body, { ADD_TAGS: ["oembed"] })}} />);
         }
     }
     
