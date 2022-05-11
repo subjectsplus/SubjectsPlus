@@ -273,7 +273,7 @@
                 temp.innerHTML = evt.data.dataValue;
 
                 const recordElement = temp.firstChild;
-                if (!recordElement.dataset['recordId']) {
+                if (!recordElement?.dataset?.recordId) {
                     return;
                 }
 
