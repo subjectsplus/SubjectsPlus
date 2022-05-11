@@ -29,4 +29,9 @@ class SubjectService
         return $this->subjectRepository->findSubjectByShortForm($shortform);
     }
 
+    public function getSubjectTabs($subject_id)
+    {
+        
+    }
+
 }
