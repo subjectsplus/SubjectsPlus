@@ -309,7 +309,7 @@
 
     CKEDITOR.on('instanceReady', function() {
 
-        // When an item in the contact list is dragged, copy its data into the drag and drop data transfer.
+        // When an item in the record list is dragged, copy its data into the drag and drop data transfer.
         // This data is later read by the editor#paste listener in the record plugin defined above.
         if (CKEDITOR.document.getById('record-list')) {
             CKEDITOR.document.getById('record-list').on('dragstart', function(evt) {
