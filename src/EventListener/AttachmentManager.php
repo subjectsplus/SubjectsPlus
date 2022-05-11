@@ -4,6 +4,7 @@ namespace App\EventListener;
 
 use App\Entity\Pluslet;
 use App\Entity\Faq;
+use App\Entity\MediaAttachment;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use App\Service\MediaService;
 
@@ -28,6 +29,41 @@ class AttachmentManager
             // Manage attachment changes for Faq Answer
             $this->mediaService->removeAttachmentFromHTML($entity->getAnswer(), 'faq', $entity->getFaqId());
             $this->mediaService->createAttachmentFromHTML($entity->getAnswer(), 'faq', $entity->getFaqId());
+        }
+
+        return;
+    }
+
+    public function preRemove(LifecycleEventArgs $args): void
+    {
+        $entity = $args->getObject();
+        $entityManager = $args->getObjectManager();
+
+        if ($entity instanceof Pluslet) {
+            // Removes attachments for the Pluslet
+            $mediaAttachments = $entityManager
+            ->getRepository(MediaAttachment::class)
+            ->findBy(['attachmentType' => 'pluslet', 'attachmentId' => $entity->getPlusletId()]);
+            if (!empty($mediaAttachments)) {
+                foreach($mediaAttachments as $attachment) {
+                    $entityManager->remove($attachment);
+                }
+
+                $entityManager->flush();
+            }
+        } else if ($entity instanceof Faq) {
+            // Removes attachments for the Faq
+            $mediaAttachments = $entityManager
+            ->getRepository(MediaAttachment::class)
+            ->findBy(['attachmentType' => 'faq', 'attachmentId' => $entity->getFaqId()]);
+
+            if (!empty($mediaAttachments)) {
+                foreach($mediaAttachments as $attachment) {
+                    $entityManager->remove($attachment);
+                }
+
+                $entityManager->flush();
+            }
         }
 
         return;

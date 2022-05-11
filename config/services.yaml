@@ -51,6 +51,7 @@ services:
     App\EventListener\AttachmentManager:
         tags:
             - { name: 'doctrine.event_listener', event: 'postPersist' }
+            - { name: 'doctrine.event_listener', event: 'preRemove' }
             - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\Faq', method: 'faqPostUpdate' }
             - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\Pluslet', method: 'plusletPostUpdate' }
     

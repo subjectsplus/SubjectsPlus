@@ -325,13 +325,12 @@ class FaqController extends AbstractController
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->transactional(function() use($faq, $fs, $cls) {
+            $entityManager->transactional(function() use($faq, $entityManager, $cls) {
                 // Preserve before deletion
                 $faqId = $faq->getFaqId();
                 $question = $faq->getQuestion();
 
-                // Delete Faq
-                $fs->deleteFaq($faq);
+                $entityManager->remove($faq);
 
                 // Create new log entry
                 /** @var Staff $staff */
