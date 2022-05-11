@@ -1,20 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DatabaseController!{% endblock %}
+{% block title %}Databases{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h2>New Databases</h2>
+<ul>
+{% for newdb in newestDatabases %}
+    <li>{{ newdb.title }}</li>
+{% else %}
+    <li>no new database</li>
+{% endfor %}
+</ul>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/src/Controller/Frontend/DatabaseController.php'|file_link(0) }}">src/Controller/Frontend/DatabaseController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/cbrownroberts/SubjectsPlus5/SP5-Docker-Symfony/sp5-docker/SubjectsPlus/templates/frontend/database/index.html.twig'|file_link(0) }}">templates/frontend/database/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+
+<h2>Database Trials</h2>
+<ul>
+{% for trialdb in trialDatabases %}
+    <li>{{ trialdb.title }}</li>
+{% else %}
+    <li>no trial databases</li>
+{% endfor %}
+</ul>
+
 {% endblock %}
