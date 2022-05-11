@@ -35,7 +35,11 @@ class ConfigService
      */
     public function getConfigValueByKey($optionKey)
     {
+        $configValue = null;
         $config = $this->configRepository->findOneBy(array('option_key' => $optionKey), array());
-        return $config->getOptionValue();
+        if(isset($config)) {
+            $configValue = $config->getOptionValue();
+        }
+        return $configValue;
     }
 }
