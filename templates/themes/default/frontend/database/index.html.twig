@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Databases{% endblock %}
+
+{% block body %}
+
+<h1>Default Theme<h1>
+<h2>New Databases</h2>
+<ul>
+{% for newdb in newestDatabases %}
+    <li>{{ newdb.title }}</li>
+{% else %}
+    <li>no new database</li>
+{% endfor %}
+</ul>
+
+
+<h2>Database Trials</h2>
+<ul>
+{% for trialdb in trialDatabases %}
+    <li>{{ trialdb.title }}</li>
+{% else %}
+    <li>no trial databases</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
