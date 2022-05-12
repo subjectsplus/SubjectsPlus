@@ -18,6 +18,9 @@ class ThemeService
         $this->projectDir = $projectDir;
     }
 
+    /**
+     * @return string
+     */
     public function getThemeId()
     {
         $themeKey = $this->configService->getConfigValueByKey('theme_id');
@@ -25,17 +28,23 @@ class ThemeService
         return $themeKey ?? 'default';
     }
 
+    /**
+     * @param $filepath
+     *
+     * @return mixed|string
+     */
     public function getThemePath($filepath)
     {
         $themeId = $this->getThemeId();
-
         $templateDir = $this->projectDir . '/templates';
-        // does a theme file exist
-        if(file_exists($templateDir . '/themes/um/' . '/' . $filepath)) {
-            $themeFile = 'themes/' . $themeId . '/' . $filepath;
+        $themeDir = $templateDir . '/frontend/themes/' . $themeId . '/';
 
+        // does a theme file exist
+        if(file_exists($themeDir . '/' . $filepath))
+        {
+            $themeFile =   'frontend/themes/' .$themeId . '/' . $filepath;
         } else {
-            $themeFile = 'themes/default/' . $filepath;
+            $themeFile = 'frontend/' . $filepath;
         }
 
         return $themeFile;

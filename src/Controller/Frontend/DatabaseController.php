@@ -32,7 +32,7 @@ class DatabaseController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render($this->themeService->getThemePath('frontend/database/index.html.twig'), [
+        return $this->render($this->themeService->getThemePath('database/index.html.twig'), [
             'controller_name' => 'DatabaseController',
             //'letters' => getLetters('databases'),
             'newestDatabases' => $this->databaseService->newestDatabases(),
