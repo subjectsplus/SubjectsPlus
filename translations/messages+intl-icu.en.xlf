@@ -857,6 +857,14 @@
         <source>control.media.upload.title</source>
         <target>Upload Media</target>
       </trans-unit>
+      <trans-unit id="6cFhHTa" resname="control.guide_form.keywords">
+        <source>control.guide_form.keywords</source>
+        <target>Keywords</target>
+      </trans-unit>
+      <trans-unit id="2S6D55D" resname="control.guide_form.description">
+        <source>control.guide_form.description</source>
+        <target>Description</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
