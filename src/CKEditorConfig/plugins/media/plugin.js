@@ -7,7 +7,7 @@
 
     const linkTemplate = '<a href="{link}">{title}</a>';
 
-    let mediaTokenOffcanvas = null;
+    window.mediaTokenOffcanvas = null;
 
     CKEDITOR.plugins.add( 'media', {
         icons: 'media',
@@ -17,11 +17,17 @@
                 'exec': function(editor) {
                     const sidebar = document.getElementById('offcanvasMediaToken');
                     if (sidebar) {
-                        if (mediaTokenOffcanvas) {
-                            mediaTokenOffcanvas.toggle();
+                        // hide other offcanvas that may exist
+                        if (window.recordTokenOffcanvas) {
+                            window.recordTokenOffcanvas.hide();
+                        }
+
+                        // toggle the off canvas
+                        if (window.mediaTokenOffcanvas) {
+                            window.mediaTokenOffcanvas.toggle();
                         } else {
-                            mediaTokenOffcanvas = new bootstrap.Offcanvas(sidebar);
-                            mediaTokenOffcanvas.toggle();
+                            window.mediaTokenOffcanvas = new bootstrap.Offcanvas(sidebar);
+                            window.mediaTokenOffcanvas.toggle();
                         }
                     } else {
                         console.error('Media sidebar not found!');

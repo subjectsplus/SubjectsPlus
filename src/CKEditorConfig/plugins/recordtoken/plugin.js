@@ -31,7 +31,8 @@
 
     const minimumTitleLength = 3;
     const titleApi = '/api/titles/{titleId}';
-    let recordTokenOffcanvas = null;
+    
+    window.recordTokenOffcanvas = null;
 
     CKEDITOR.plugins.add('recordtoken', {
         icons: 'record',
@@ -246,12 +247,18 @@
                 'exec': function(editor) {
                     const searchComponent = document.getElementById('offcanvasRecordToken');
                     if (searchComponent) {
-                        if (recordTokenOffcanvas) {
-                            recordTokenOffcanvas.toggle();
+                        // hide other offcanvas that may exist
+                        if (window.mediaTokenOffcanvas) {
+                            window.mediaTokenOffcanvas.hide();
+                        }
+
+                        // toggle the off canvas
+                        if (window.recordTokenOffcanvas) {
+                            window.recordTokenOffcanvas.toggle();
                         }
                         else {
-                            recordTokenOffcanvas = new bootstrap.Offcanvas(searchComponent);
-                            recordTokenOffcanvas.toggle();
+                            window.recordTokenOffcanvas = new bootstrap.Offcanvas(searchComponent);
+                            window.recordTokenOffcanvas.toggle();
                         }
                     } else {
                         console.error('Search component not found!');
