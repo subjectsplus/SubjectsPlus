@@ -2,13 +2,13 @@
 
 namespace App\Controller\Frontend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\Frontend\FrontendBaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\DatabaseService;
 use App\Service\ThemeService;
 
-class DatabaseController extends AbstractController
+class DatabaseController extends FrontendBaseController
 {
     /**
      * @var DatabaseService
@@ -20,11 +20,11 @@ class DatabaseController extends AbstractController
      */
     private $themeService;
 
-    public function __construct(DatabaseService $databaseService,
-        ThemeService $themeService)
+
+    public function __construct(DatabaseService $databaseService, ThemeService $themeService)
     {
+        parent::__construct($themeService);
         $this->databaseService = $databaseService;
-        $this->themeService = $themeService;
     }
 
     /**
@@ -32,7 +32,7 @@ class DatabaseController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render($this->themeService->getThemePath('database/index.html.twig'), [
+        return $this->render('database/index.html.twig', [
             'controller_name' => 'DatabaseController',
             //'letters' => getLetters('databases'),
             'newestDatabases' => $this->databaseService->newestDatabases(),
