@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useUpdatePluslet, useDeletePluslet } from '#api/guide/PlusletAPI';
 import CKEditor from '#components/shared/CKEditor';
+import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDebouncedCallback } from 'use-debounce';
 import DOMPurify from 'dompurify';
@@ -12,6 +13,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const [title, setTitle] = useState(plusletTitle);
     const [body, setBody] = useState(plusletBody);
     const [plusletHovered, setPlusletHovered] = useState(false);
+    const [deletePlusletClicked, setDeletePlusletClicked] = useState(false);
 
     const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
@@ -27,11 +29,16 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     }, [currentEditablePluslet]);
 
     const deletePluslet = () => {
-        const confirmed = confirm('Are you sure you want to delete this pluslet?');
-        if (confirmed) {
-            deletePlusletMutation.mutate({
-                plusletId: plusletId,
-            });
+        deletePlusletMutation.mutate({
+            plusletId: plusletId,
+        });
+    }
+
+    const handlePlusletDelete = () => {
+        if (deletePlusletClicked) {
+            deletePluslet();
+        } else {
+            setDeletePlusletClicked(true);
         }
     }
 
@@ -157,54 +164,57 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         if (editable) {
             return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
         } else {
-            // TODO: Handle Media-Embed being sanitized
-            // TODO: Fix issue where Media-Embed turns every link into an iframe
+            // TODO: Fix issue where Media-Embed turns every link into an iframe (caused by autoembed plugin)
             return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body, { ADD_TAGS: ["oembed"] })}} />);
         }
     }
     
     return (
-        <Draggable type="pluslet" key={plusletId.toString()} draggableId={plusletId.toString()} index={plusletRow}>
-            {(provided, snapshot) => {
-                return (
-                    <div className={getPlusletClassName()} key={plusletId} ref={provided.innerRef} onDoubleClick={toggleEditable}
-                        onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} onMouseLeave={() => setPlusletHovered(false)}
-                        {...provided.draggableProps}
-                        style={{
-                            ...provided.draggableProps.style,
-                            height: 'auto'
-                        }}>
-                        {/* TODO: Add styles when dragging pluslet, reduce height and only show title bar area
-                                  background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent'
-                        */}
+        <>
+            <Draggable type="pluslet" key={plusletId.toString()} draggableId={plusletId.toString()} index={plusletRow}>
+                {(provided, snapshot) => {
+                    return (
+                        <div className={getPlusletClassName()} key={plusletId} ref={provided.innerRef} onDoubleClick={toggleEditable}
+                            onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} onMouseLeave={() => setPlusletHovered(false)}
+                            {...provided.draggableProps}
+                            style={{
+                                ...provided.draggableProps.style,
+                                height: 'auto'
+                            }}>
+                            {/* TODO: Add styles when dragging pluslet, reduce height and only show title bar area
+                                    background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent'
+                            */}
 
-                        <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
-                        <div className="sp-pluslet-actions-container">
-                            <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
-                                <i className={getVisibility('fas fa-arrows-alt')}></i>
-                            </div>
-                            {editableTitle()}
-                            <div className={getVisibility('text-end')}>
-                                {editSaveButton()}
+                            <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
+                            <div className="sp-pluslet-actions-container">
+                                <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
+                                    <i className={getVisibility('fas fa-arrows-alt')}></i>
+                                </div>
+                                {editableTitle()}
+                                <div className={getVisibility('text-end')}>
+                                    {editSaveButton()}
 
-                                <div className="dropdown basic-dropdown d-inline-block ms-1">
-                                    <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i className="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
-                                        <li><a className="dropdown-item">Make Favorite</a></li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" onClick={deletePluslet}><i
-                                            className="fas fa-trash"></i> Delete Pluslet</a></li>
-                                    </ul>
+                                    <div className="dropdown basic-dropdown d-inline-block ms-1">
+                                        <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i className="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
+                                            <li><a className="dropdown-item">Make Favorite</a></li>
+                                            <li><hr className="dropdown-divider" /></li>
+                                            <li><a className="dropdown-item" onClick={handlePlusletDelete}><i
+                                                className="fas fa-trash"></i> Delete Pluslet</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
+                            {editor()}
                         </div>
-                        {editor()}
-                    </div>
-                );
-            }}
-        </Draggable>
+                    );
+                }}
+            </Draggable>
+            <DeleteConfirmModal show={deletePlusletClicked} resourceName="Pluslet" onHide={() => setDeletePlusletClicked(false)}
+                confirmOnClick={handlePlusletDelete} />
+        </>
     )
 }
 
