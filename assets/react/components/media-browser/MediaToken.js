@@ -5,19 +5,26 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 function MediaToken({ media, defaultImageSize, onClick }) {
     const [currentImageSize, setCurrentImageSize] = useState(defaultImageSize);
+    const [isChangingImageSize, setIsChangingImageSize] = useState(false);
 
     const isImage = media.mimeType.includes('image/');
     
+    const imageSizeNameKeys = {
+        small: 'Small',
+        medium: 'Medium',
+        large: 'Large'
+    }
+
     const imageSizeFileNames = {
-        large: media.largeFileName,
+        small: media.smallFileName,
         medium: media.mediumFileName,
-        small: media.smallFileName
+        large: media.largeFileName,
     };
 
     const imageFileDimensions = {
-        large: {width: media.largeImageFileWidth, height: media.largeImageFileHeight},
+        small: {width: media.smallImageFileWidth, height: media.smallImageFileHeight},
         medium: {width: media.mediumImageFileWidth, height: media.mediumImageFileHeight},
-        small: {width: media.smallImageFileWidth, height: media.smallImageFileHeight}
+        large: {width: media.largeImageFileWidth, height: media.largeImageFileHeight}
     };
 
     const fileName = (isImage ? imageSizeFileNames[currentImageSize] : media.fileName);
@@ -26,13 +33,7 @@ function MediaToken({ media, defaultImageSize, onClick }) {
     const handleImageSizeButtonClick = (evt, imageSize) => {
         evt.preventDefault();
         setCurrentImageSize(imageSize);
-    }
-
-    const getActiveButtonClass = (className, imageSize) => {
-        if (currentImageSize === imageSize) {
-            return className + ' active';
-        }
-        return className;
+        setIsChangingImageSize(false);
     }
 
     const getImageSizeTooltip = (imageSize) => {
@@ -49,8 +50,35 @@ function MediaToken({ media, defaultImageSize, onClick }) {
 
         return (
             <Tooltip id={`tooltip-${currentImageSize}`}>
-                Dimensions (width x height): {width + 'x' + height}
+                {width + 'px x ' + height + 'px'}
             </Tooltip>
+        );
+    }
+
+
+    const generateImageSizeComponent = () => {
+        if (isChangingImageSize) {
+            const buttons = Object.keys(imageFileDimensions).map(key => {
+                if (imageSizeFileNames[key]) {
+                    return (
+                        <OverlayTrigger key={'overlay-trigger-' + key} placement="top" overlay={getImageSizeTooltip(key)}>
+                            <a className="link-primary fs-sm" onClick={evt => handleImageSizeButtonClick(evt, key)}>
+                                {imageSizeNameKeys[key]}{' '}
+                            </a>
+                        </OverlayTrigger>
+                    );
+                }
+            });
+
+            return buttons;
+        }
+
+        return (
+            <span>
+                <b>{imageSizeNameKeys[currentImageSize]}</b>
+                {' '}
+                <a href={void(0)} className="link-primary fs-sm" onClick={() => setIsChangingImageSize(true)}>change</a>
+            </span>
         );
     }
 
@@ -67,31 +95,9 @@ function MediaToken({ media, defaultImageSize, onClick }) {
             </span>
             {' '}
             {isImage &&
-                <div className="image-file-sizes">
-                    <OverlayTrigger placement="top" overlay={getImageSizeTooltip('small')}>
-                        <button className={getActiveButtonClass('btn btn-outline-primary fs-sm', 'small')}
-                            disabled={media.smallFileName === null}
-                            onClick={evt => handleImageSizeButtonClick(evt, 'small')}>
-                                Small
-                        </button>
-                    </OverlayTrigger>
-                    {' '}
-                    <OverlayTrigger placement="top" overlay={getImageSizeTooltip('medium')}>
-                        <button className={getActiveButtonClass('btn btn-outline-primary fs-sm', 'medium')}
-                            disabled={media.mediumFileName === null}
-                            onClick={evt => handleImageSizeButtonClick(evt, 'medium')}>
-                                Medium
-                        </button>
-                    </OverlayTrigger>
-                    {' '}
-                    <OverlayTrigger placement="top" overlay={getImageSizeTooltip('large')}>
-                        <button className={getActiveButtonClass('btn btn-outline-primary fs-sm', 'large')}
-                            disabled={media.largeFileName === null}
-                            onClick={evt => handleImageSizeButtonClick(evt, 'large')}>
-                                Large
-                        </button>
-                    </OverlayTrigger>
-                </div>
+                (<div className="image-size-change">
+                    { generateImageSizeComponent() }
+                </div>)
             }
         </div>
     );
