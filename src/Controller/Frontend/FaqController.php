@@ -4,7 +4,7 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Faq;
 use App\Service\ThemeService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\Frontend\FrontendBaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\TokenService;
@@ -12,20 +12,18 @@ use App\Service\TokenService;
 /**
  * @Route("/faq")
  */
-class FaqController extends AbstractController
+class FaqController extends FrontendBaseController
 {
     /**
      * @var ThemeService
      */
     private $themeService;
 
-    /**
-     * @param ThemeService $themeService
-     */
     public function __construct(ThemeService $themeService)
     {
-        $this->themeService = $themeService;
+        parent::__construct($themeService);
     }
+
     /**
      * @Route("/{faqId}", name="frontend_faq_show", methods={"GET"})
      */
@@ -36,7 +34,7 @@ class FaqController extends AbstractController
         $faqAnswer = $tokenService->updateTokens($faq->getAnswer());
         $faq->setAnswer($faqAnswer);
 
-        return $this->render($this->themeService->getThemePath('frontend/faq/show.html.twig'), [
+        return $this->render('faq/show.html.twig', [
             'faq' => $faq,
         ]);
     }
