@@ -41,12 +41,13 @@
                     <tr>
                         <th>Keywords</th>
                         <td>
-                            {% for keyword in guide.keywords %}
+                            {{ guide.keywords }}
+                            {# {% for keyword in guide.keywords %}
                                 {{ keyword }}
                                 {% if not loop.last %}
                                     {{'| '}}
                                 {% endif %}
-                            {% endfor %}
+                            {% endfor %} #}
                         </td>
                     </tr>
                     <tr>
@@ -83,7 +84,7 @@
             <p class="fs-sm">{{ guide.header }}</p>
             <div class="row row-cols-2 mt-5">
                 <div class="col-6">
-                    <a class="btn btn-gradient btn-round" href="#">Edit Guide Details</a>
+                    <a class="btn btn-gradient btn-round" href="{{ path('guide_edit', {'subjectId': guide.subjectId}) }}">Edit Guide Details</a>
                 </div>
                 <div class="col-6 text-end align-self-center">
                     {{ include('backend/guide/_trash_button.html.twig') }}

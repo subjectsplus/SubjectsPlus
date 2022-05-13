@@ -16,12 +16,17 @@
 
         <h5 class="mt-4">Metadata</h5>
         <div class="mb-2">
-            <label for="guideKeywords" class="form-label">Keywords</label> <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide.form.keywords.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
-            <input type="text" class="form-control" id="guideKeywords">
+            {{ form_label(form.keywords, null, {
+                'label': 'control.guide_form.keywords' | trans
+            }) }}
+            <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide.form.keywords.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
+            {{ form_widget(form.keywords) }}
         </div>
         <div class="mb-3">
-            <label for="guideDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="guideDescription"></textarea>
+            {{ form_label(form.description, null, {
+                'label': 'control.guide_form.description' | trans
+            }) }}
+            {{ form_widget(form.description) }}
         </div>
 
 

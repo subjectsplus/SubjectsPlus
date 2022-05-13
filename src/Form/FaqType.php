@@ -45,8 +45,6 @@ class FaqType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // TODO: autosave ckeditor
-        // TODO: flash messages
         $builder
             ->add('question', TextareaType::class, [
                 'required' => true,

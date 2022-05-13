@@ -925,6 +925,14 @@
         <source>control.media.upload.previous_uploads</source>
         <target>__control.media.upload.previous_uploads</target>
       </trans-unit>
+      <trans-unit id="6cFhHTa" resname="control.guide_form.keywords">
+        <source>control.guide_form.keywords</source>
+        <target>__control.guide_form.keywords</target>
+      </trans-unit>
+      <trans-unit id="2S6D55D" resname="control.guide_form.description">
+        <source>control.guide_form.description</source>
+        <target>__control.guide_form.description</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
