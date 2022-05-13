@@ -7,10 +7,10 @@
 <meta name="keywords" content="custom keywords, research guides">
 <style>
     :root {
-{#{% if getconfig('theme_bg_color') is not empty %}
+{% if getconfig('theme_bg_color') %}
     --user-theme-bg-color: {{ getconfig('theme_bg_color') }};
 {% endif %}
-#}
+
 
 
 

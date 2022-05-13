@@ -26,9 +26,9 @@ class ConfigExtension extends \Twig\Extension\AbstractExtension
     /**
      * @param string $configKey
      *
-     * @return string
+     * @return string|null
      */
-    public function getConfigValue( string $configKey): string
+    public function getConfigValue( string $configKey): ?string
     {
         return $this->configService->getConfigValueByKey($configKey);
     }
