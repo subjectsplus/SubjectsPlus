@@ -47,10 +47,10 @@ class Subject
     /**
      * @var int
      *
-     * @ORM\Column(name="active", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="smallint", nullable=false)
      * @Groups({"faq"})
      */
-    private $active = false;
+    private $active = 0;
 
     /**
      * @var string
@@ -211,12 +211,12 @@ class Subject
         return $this->subject;
     }
 
-    public function getActive(): bool
+    public function getActive(): int
     {
         return $this->active;
     }
 
-    public function setActive(bool $active): self
+    public function setActive(int $active): self
     {
         $this->active = $active;
 

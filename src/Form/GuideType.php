@@ -30,16 +30,20 @@ class GuideType extends AbstractType
                     'Placeholder' => 'Placeholder',
                     // TODO: Ability to custom add more choices
                 ],
-                'label' => 'Type',
             ])
             ->add('active', ChoiceType::class, [
                 'choices' => [
                     'Inactive' => 0,
                     'Active' => 1,
+                    'Suppressed' => 2,
                 ],
             ])
-            ->add('keywords', TextType::class)
-            ->add('description', TextareaType::class);
+            ->add('keywords', TextType::class, [
+                'required' => false,
+            ])
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ]);
         ;
     }
 
