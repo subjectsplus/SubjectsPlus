@@ -1,0 +1,13 @@
+// Overwrite the basic Bootstrap variables and add your own variables
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+
+//Custom colors
+:root{
+  --THEME-BG-COLOR: var(--user-theme-bg-color, #FFFFFF);
+}
+
+
+// Bootstrap Default Variables.
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";

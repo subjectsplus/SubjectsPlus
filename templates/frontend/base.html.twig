@@ -1,15 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-    {{ parent }}
-    // TODO: Populate meta content below with values in config file
-    <meta name="description" content="Custom description">
-    <meta name="author" content="Institution name">
-    <meta name="keywords" content="custom keywords, research guides">
-    {% block stylesheets %}{% endblock %}
-    {% block javascripts %}{% endblock %}
+{% block theming %}
+    {% include('frontend/includes/user_theme_values.html.twig') %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('frontend_main') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('frontend_main') }}
 {% endblock %}
 
 {% block body %}
-    {% block main %}{% endblock %}
+<main>
+    {% block header %}
+        <p>Header here</p>
+    {% endblock %}
+    {% block search %}
+        <p>Search here</p>
+    {% endblock %}
+    {% block main %}
+        <p>Content goes here</p>
+    {% endblock %}
+</main>
+{% endblock %}
+
+{% block footer %}
+    <p>Footer here</p>
 {% endblock %}

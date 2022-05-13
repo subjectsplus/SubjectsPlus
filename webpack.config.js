@@ -42,12 +42,12 @@ Encore
     .addEntry('alphabet_list', './assets/react/components/record/AlphabetList.js')
     .addEntry('record_results', './assets/react/components/record/RecordResults.js')
 
-    // Backend JS
+    // Backend CSS & JS
     .addEntry('backend_main', './assets/backend/BackendMain.js')
     .addEntry('mode_switcher', './assets/backend/javascript/ModeSwitcher.js')
     .addEntry('bs_tooltips', './assets/backend/javascript/BSTooltipPopoverInit.js')
 
-    //Front-end Main JS
+    //Front-end Main CSS & JS
     .addEntry('frontend_main', './assets/frontend/FrontendMain.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

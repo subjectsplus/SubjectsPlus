@@ -62,8 +62,7 @@ function EditTabModal(props) {
                 )}
             </Modal.Body>
             <Modal.Footer>
-                {/* TODO: Close button on modal does not work */}
-                <Button variant="link" className="btn-link-default" onClick={props.onToggle}>
+                <Button variant="link" className="btn-link-default" onClick={props.onHide}>
                     Close
                 </Button>
                 <Button variant="primary" className="btn-gradient btn-round" disabled={props.savingChanges} form="settings-form" type="submit">

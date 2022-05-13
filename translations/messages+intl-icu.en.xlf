@@ -811,7 +811,7 @@
       </trans-unit>
       <trans-unit id="eBjdB6_" resname="control.guides.back_to_list">
         <source>control.guides.back_to_list</source>
-        <target>Back to guides</target>
+        <target>Back to Guides</target>
       </trans-unit>
       <trans-unit id="DlS4Gzj" resname="control.guide_meta.edit.header">
         <source>control.guide_meta.edit.header</source>
@@ -856,6 +856,54 @@
       <trans-unit id="csYgWF9" resname="control.media.upload.title">
         <source>control.media.upload.title</source>
         <target>Upload Media</target>
+      </trans-unit>
+      <trans-unit id="IoO7eFh" resname="App Config">
+        <source>App Config</source>
+        <target>__App Config</target>
+      </trans-unit>
+      <trans-unit id="POP0zEo" resname="control.media.back_to_list">
+        <source>control.media.back_to_list</source>
+        <target>Back to Media Manager</target>
+      </trans-unit>
+      <trans-unit id="HihiN1s" resname="control.media_form.title">
+        <source>control.media_form.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="SxoGizj" resname="control.media_form.caption">
+        <source>control.media_form.caption</source>
+        <target>Caption</target>
+      </trans-unit>
+      <trans-unit id="j6GEmQB" resname="control.media_form.alt_text">
+        <source>control.media_form.alt_text</source>
+        <target>Alt Text</target>
+      </trans-unit>
+      <trans-unit id="xxeM4pH" resname="control.media_form.select_file">
+        <source>control.media_form.select_file</source>
+        <target>File</target>
+      </trans-unit>
+      <trans-unit id="cg3yDXF" resname="control.form_form.upload_media">
+        <source>control.form_form.upload_media</source>
+        <target>Upload File</target>
+      </trans-unit>
+      <trans-unit id="3lZtJc6" resname="control.media_form.file.help.text">
+        <source>control.media_form.file.help.text</source>
+        <target>Accepted formats: jpg, png, pdf, docx, xlsx, ppt</target>
+      </trans-unit>
+      <trans-unit id="D_cQhqy" resname="control.guide_form.thumbnail.help.text">
+        <source>control.guide_form.thumbnail.help.text</source>
+        <target>Accepted formats: jpg, png</target>
+      </trans-unit>
+      <trans-unit id="iltCw_n" resname="control.media.upload.previous_uploads">
+        <source>control.media.upload.previous_uploads</source>
+        <target>My Recent Uploads</target>
+      </trans-unit>
+      <trans-unit id="6cFhHTa" resname="control.guide_form.keywords">
+        <source>control.guide_form.keywords</source>
+        <target>Keywords</target>
+      </trans-unit>
+      <trans-unit id="2S6D55D" resname="control.guide_form.description">
+        <source>control.guide_form.description</source>
+        <target>Description</target>
       </trans-unit>
     </body>
   </file>

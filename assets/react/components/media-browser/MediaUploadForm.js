@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MediaUploadForm({ disabled, onSubmit }) {
+function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
     return (
         <form action={void(0)} onSubmit={onSubmit}>
             <div className="mb-2">
@@ -15,20 +15,8 @@ function MediaUploadForm({ disabled, onSubmit }) {
                         id="media-title-field"
                         placeholder="Title"
                         autoComplete="off"
-                        defaultValue="Untitled"
+                        defaultValue={defaultTitle}
                         required="required"
-                    />
-
-                    {/* Media Caption text field */}
-                    <label htmlFor="media-caption-field" className="form-label">
-                        <span className="visually-hidden">Caption</span>
-                    </label>
-                    <input
-                        type="text"
-                        name="caption"
-                        id="media-caption-field"
-                        placeholder="Caption"
-                        autoComplete="off"
                     />
 
                     {/* Media AltText text field */}
@@ -43,6 +31,21 @@ function MediaUploadForm({ disabled, onSubmit }) {
                         autoComplete="off"
                     />
 
+                    {/* Media Caption text field */}
+                    <label htmlFor="media-caption-field" className="form-label">
+                        <span className="visually-hidden">Caption</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="caption"
+                        id="media-caption-field"
+                        placeholder="Caption"
+                        autoComplete="off"
+                    />
+
+                    {/* Cancel Button */}
+                    <button onClick={onCancel}>Cancel Upload</button>
+                    
                     {/* Submit Button */}
                     <input type="submit" value="Upload Media" />
                 </fieldset>

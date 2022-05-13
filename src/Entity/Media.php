@@ -186,6 +186,42 @@ class Media implements \Serializable
      */
     private $directory;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"media"})
+     */
+    private $largeImageFileWidth;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"media"})
+     */
+    private $largeImageFileHeight;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"media"})
+     */
+    private $mediumImageFileWidth;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"media"})
+     */
+    private $mediumImageFileHeight;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"media"})
+     */
+    private $smallImageFileWidth;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"media"})
+     */
+    private $smallImageFileHeight;
+
     public function __construct() {
         $this->createdAt = new \DateTimeImmutable();
     }
@@ -357,6 +393,78 @@ class Media implements \Serializable
     public function setDirectory(string $directory): self
     {
         $this->directory = $directory;
+
+        return $this;
+    }
+    
+    public function getLargeImageFileWidth(): ?int
+    {
+        return $this->largeImageFileWidth;
+    }
+
+    public function setLargeImageFileWidth(?int $largeImageFileWidth): self
+    {
+        $this->largeImageFileWidth = $largeImageFileWidth;
+
+        return $this;
+    }
+
+    public function getLargeImageFileHeight(): ?int
+    {
+        return $this->largeImageFileHeight;
+    }
+
+    public function setLargeImageFileHeight(?int $largeImageFileHeight): self
+    {
+        $this->largeImageFileHeight = $largeImageFileHeight;
+
+        return $this;
+    }
+
+    public function getMediumImageFileWidth(): ?int
+    {
+        return $this->mediumImageFileWidth;
+    }
+
+    public function setMediumImageFileWidth(?int $mediumImageFileWidth): self
+    {
+        $this->mediumImageFileWidth = $mediumImageFileWidth;
+
+        return $this;
+    }
+
+    public function getMediumImageFileHeight(): ?int
+    {
+        return $this->mediumImageFileHeight;
+    }
+
+    public function setMediumImageFileHeight(?int $mediumImageFileHeight): self
+    {
+        $this->mediumImageFileHeight = $mediumImageFileHeight;
+
+        return $this;
+    }
+
+    public function getSmallImageFileWidth(): ?int
+    {
+        return $this->smallImageFileWidth;
+    }
+
+    public function setSmallImageFileWidth(?int $smallImageFileWidth): self
+    {
+        $this->smallImageFileWidth = $smallImageFileWidth;
+
+        return $this;
+    }
+
+    public function getSmallImageFileHeight(): ?int
+    {
+        return $this->smallImageFileHeight;
+    }
+
+    public function setSmallImageFileHeight(?int $smallImageFileHeight): self
+    {
+        $this->smallImageFileHeight = $smallImageFileHeight;
 
         return $this;
     }

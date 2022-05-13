@@ -9,4 +9,4 @@
 import '../styles/frontend/frontend-global.scss';
 
 // Bootstrap JS
-//window.bootstrap = require("bootstrap");
+window.bootstrap = require("bootstrap");
