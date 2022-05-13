@@ -14,15 +14,20 @@
 
 {% block body %}
 <main>
+    {% block navmenu %}
+        <p>Nav menu</p>
+    {% endblock %}
     {% block header %}
         <p>Header here</p>
     {% endblock %}
     {% block search %}
         <p>Search here</p>
     {% endblock %}
-    {% block main %}
-        <p>Content goes here</p>
-    {% endblock %}
+    <div class="container">
+        {% block main %}
+            <p>Content goes here</p>
+        {% endblock %}
+    </div>
 </main>
 {% endblock %}
 
