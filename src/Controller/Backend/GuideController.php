@@ -35,7 +35,7 @@ class GuideController extends AbstractController
     /**
      * @Route("/new", name="guide_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ChangeLogService $cls): Response
+    public function new(Request $request): Response
     {
         // Create a new Guide entry
         $subject = new Subject();
@@ -46,7 +46,10 @@ class GuideController extends AbstractController
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->transactional(function() use($cls, $subject, $entityManager) {
+
+
+            $entityManager->transactional(function() use($form, $subject, $entityManager) {
+
                 // Persist Subject entity
                 $entityManager->persist($subject);
 
@@ -64,9 +67,11 @@ class GuideController extends AbstractController
                 /** @var \App\Entity\Staff $staff */
                 $staff = $this->getUser();
                 $subject->addStaff($staff);
+
+
                 
                 // Create new log entry
-                $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'insert');
+//                $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'insert');
 
                 // Create flash message
                 $this->addFlash('notice', 'Thy will be done. Guide created.');
