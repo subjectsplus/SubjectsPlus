@@ -49,10 +49,9 @@
                     <tr>
                         <td>
                             <div class="btn-group btn-group-sm" role="group" aria-label="{{ 'control.faqs.table.action_buttons.aria' | trans }}">
-                                <a href="{{ path('guide_show', {'subjectId': guide.subjectId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i></a>
-                                <a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.faqs.table.button.guide_builder' | trans }}"><i class="fas fa-pen"></i></a>
-                                {# TODO: link to front-end preview #}
-                                <a href="#" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.guides.table.button.preview' | trans }}"><i class="fas fa-eye fs-sm"></i></a>
+                                <a href="{{ path('guide_edit', {'subjectId': guide.subjectId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i></a>
+                                <a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.guide.table.button.guide_builder' | trans }}"><i class="fas fa-pen"></i></a>
+                                <a href="{{ path('subject_show', {'shortform': guide.shortform}) }}" class="btn btn-icon-default rounded-0" type="button" title="{{ 'control.guides.table.button.preview' | trans }}" target="_blank"><i class="fas fa-eye fs-sm"></i></a>
                             </div>
                         </td>
                         <td><a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn-link-default">{{ guide.subject | raw }}</a></td>

@@ -679,7 +679,7 @@
       </trans-unit>
       <trans-unit id="5iHJLdP" resname="control.guide_form.shortform.info">
         <source>control.guide_form.shortform.info</source>
-        <target>(Slug for friendly URL)</target>
+        <target>(Friendly URL)</target>
       </trans-unit>
       <trans-unit id="ku.Ni0z" resname="control.guide_meta.show.header">
         <source>control.guide_meta.show.header</source>
@@ -745,8 +745,8 @@
         <source>control.guides.table.button.guide_details</source>
         <target>Guide Metadata</target>
       </trans-unit>
-      <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
-        <source>control.faqs.table.button.guide_builder</source>
+      <trans-unit id="__FKFP7" resname="control.guide.table.button.guide_builder">
+        <source>control.guide.table.button.guide_builder</source>
         <target>Guide Builder</target>
       </trans-unit>
       <trans-unit id="keTSog4" resname="control.guides.table.button.preview">
@@ -904,6 +904,14 @@
       <trans-unit id="2S6D55D" resname="control.guide_form.description">
         <source>control.guide_form.description</source>
         <target>Description</target>
+      </trans-unit>
+      <trans-unit id="gcVLYj." resname="control.guide_form.save_guide_details">
+        <source>control.guide_form.save_guide_details</source>
+        <target>Save Guide Metadata</target>
+      </trans-unit>
+      <trans-unit id="XoZXXuQ" resname="control.guide_form.edit_guide_details">
+        <source>control.guide_form.edit_guide_details</source>
+        <target>Edit Guide Metadata</target>
       </trans-unit>
     </body>
   </file>

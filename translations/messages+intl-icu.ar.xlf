@@ -4694,9 +4694,9 @@
         <source>control.guides.table.button.guide_details</source>
         <target>__control.guides.table.button.guide_details</target>
       </trans-unit>
-      <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
-        <source>control.faqs.table.button.guide_builder</source>
-        <target>__control.faqs.table.button.guide_builder</target>
+      <trans-unit id="__FKFP7" resname="control.guide.table.button.guide_builder">
+        <source>control.guide.table.button.guide_builder</source>
+        <target>__control.guide.table.button.guide_builder</target>
       </trans-unit>
       <trans-unit id="keTSog4" resname="control.guides.table.button.preview">
         <source>control.guides.table.button.preview</source>
@@ -4853,6 +4853,18 @@
       <trans-unit id="iltCw_n" resname="control.media.upload.previous_uploads">
         <source>control.media.upload.previous_uploads</source>
         <target>__control.media.upload.previous_uploads</target>
+      </trans-unit>
+      <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
+        <source>control.faqs.table.button.guide_builder</source>
+        <target>__control.faqs.table.button.guide_builder</target>
+      </trans-unit>
+      <trans-unit id="gcVLYj." resname="control.guide_form.save_guide_details">
+        <source>control.guide_form.save_guide_details</source>
+        <target>__control.guide_form.save_guide_details</target>
+      </trans-unit>
+      <trans-unit id="XoZXXuQ" resname="control.guide_form.edit_guide_details">
+        <source>control.guide_form.edit_guide_details</source>
+        <target>__control.guide_form.edit_guide_details</target>
       </trans-unit>
     </body>
   </file>

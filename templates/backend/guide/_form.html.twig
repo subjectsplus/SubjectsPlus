@@ -114,7 +114,7 @@
                     <button class="btn btn-gradient btn-round">{{ button_label|default('control.guide_form.save_guide' | trans) }}</button>
                 </div>
                 <div class="col-6 text-end align-self-center">
-                    {% if delete_faq is defined %}
+                    {% if delete_guide is defined %}
                         {{ include('backend/guide/_trash_button.html.twig') }}
                     {% endif %}
                 </div>
@@ -123,6 +123,6 @@
     </div>
 </div>
 {{ form_end(form) }}
-{% if delete_faq is defined %}
+{% if delete_guide is defined %}
     {{ include('backend/guide/_delete_form.html.twig') }}
 {% endif %}
