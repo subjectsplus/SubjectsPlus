@@ -945,6 +945,10 @@
         <source>control.guide_form.edit_guide_details</source>
         <target>__control.guide_form.edit_guide_details</target>
       </trans-unit>
+      <trans-unit id="LJRj66b" resname="public.subjects.title.label">
+        <source>public.subjects.title.label</source>
+        <target>__public.subjects.title.label</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

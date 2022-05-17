@@ -10,3 +10,67 @@ body {
   background-color: var(--THEME-BG-COLOR);
   color: var(--THEME-TEXT-COLOR);
 }
+
+a {
+  color: var(--THEME-LINK-COLOR);
+  &:hover,
+  &:active,
+  &:focus {
+    @include transition-all();
+    color: var(--THEME-LINK-HOVER-COLOR);
+  }
+
+  &.link-underline {
+    text-decoration: underline;
+  }
+
+  &.link-default {
+    color: var(--THEME-TEXT-COLOR);
+    &:hover,
+    &:active,
+    &:focus {
+      @include transition-all();
+      color: var(--THEME-LINK-HOVER-COLOR);
+      text-decoration: none;
+    }
+  }
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-weight: $font-weight-semi;
+}
+
+h1, .h1 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.75rem;
+  }
+}
+
+h2, .h2 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.5rem;
+  }
+}
+
+h3, .h3 {
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 1.375rem;
+  }
+}
+
+.fw-semi {
+  font-weight: $font-weight-semi;
+}
+
+.fs-sm {
+  font-size: $font-size-sm !important;
+}
+
+.fs-xs {
+  font-size: $font-size-mini !important;
+}

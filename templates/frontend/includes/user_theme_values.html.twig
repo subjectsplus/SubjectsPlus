@@ -12,12 +12,18 @@
 {# Set theme variables #}
 <style>
     :root {
-{% if getconfig('theme_bg_color') %}
-    --user-theme-bg-color: {{ getconfig('theme_bg_color') }};
-{% endif %}
-{% if getconfig('theme_text_color') %}
-    --user-theme-text-color: {{ getconfig('theme_text_color') }};
-{% endif %}
+    {% if getconfig('theme_bg_color') %}
+        --user-theme-bg-color: {{ getconfig('theme_bg_color') }};
+    {% endif %}
+    {% if getconfig('theme_text_color') %}
+        --user-theme-text-color: {{ getconfig('theme_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_link_color') %}
+        --user-theme-link-color: {{ getconfig('theme_link_color') }};
+    {% endif %}
+    {% if getconfig('theme_link_hover_color') %}
+        --user-theme-link-hover-color: {{ getconfig('theme_link_hover_color') }};
+    {% endif %}
 
 
 
