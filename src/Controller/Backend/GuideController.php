@@ -49,6 +49,7 @@ class GuideController extends AbstractController
             $entityManager->transactional(function() use($cls, $subject, $entityManager) {
                 // Persist Subject entity
                 $entityManager->persist($subject);
+                $entityManager->flush();
 
                 // Create new tab
                 $tab = new Tab();
