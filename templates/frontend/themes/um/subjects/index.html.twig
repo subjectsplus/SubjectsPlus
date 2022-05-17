@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SubjectsController!{% endblock %}
+
+{% block body %}
+<h1>UM Theme</h1>
+<h1>Subjects</h1>
+<div>
+<ul>
+{% for subject in subjects %}
+<li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{subject.subject }}</a></li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock %}
