@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+{% block metatitle %}SubjectsPlus{% endblock %}
+    {% if getconfig('meta_author') %}
+        | {{ getconfig('meta_author') }}
+    {% endif %}
+{% endblock %}
+
 {% block theming %}
     {% include('frontend/includes/user_theme_values.html.twig') %}
 {% endblock %}
@@ -32,5 +39,5 @@
 {% endblock %}
 
 {% block footer %}
-    <p>Footer here</p>
+    {% include('frontend/includes/footer.html.twig') %}
 {% endblock %}

@@ -1,16 +1,16 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block title %}Hello SubjectsController!{% endblock %}
+{% block metatitle %}Research Guides{% endblock %}
 
 {% block main %}
 
-<h1>Subjects</h1>
-<div>
-<ul>
+<h1>All Subjects</h1>
+
+<ul class="list-unstyled">
 {% for subject in subjects %}
 <li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{subject.subject }}</a></li>
 {% endfor %}
 </ul>
-</div>
+
 
 {% endblock %}
