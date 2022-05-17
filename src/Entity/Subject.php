@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping\OrderBy;
  * @ORM\Entity(repositoryClass="App\Repository\SubjectRepository")
  * 
  * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"},
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"},
  *     order={"subject": "ASC"}
  * )
  */
