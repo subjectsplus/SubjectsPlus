@@ -23,6 +23,19 @@
 
 // Guide Tab Content Section
 .section-container {
+  .sp-section {
+    position: relative;
+    margin-bottom: 2.5rem;
+    border: 1px dotted #b5b5b5;
+    padding: 0.5rem .75rem;
+    background: transparent;
+  }
+
+  .sp-section-dragging {
+    background: rgba(63,194,198, 0.15);
+    height: 100px;
+  }
+
   .sp-section-drag-handle {
     position: absolute;
     top:0;
@@ -51,8 +64,12 @@
     margin-right: -0.5rem;
   }
 
-  .guide-section-content {
+  .sp-section-content {
     width: calc(100% - 24px);
+  }
+
+  .sp-section-content-dragging-over {
+    background-color: rgba(0,0,0, 0.05);
   }
 
   .sp-guide-column {
