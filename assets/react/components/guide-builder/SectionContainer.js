@@ -107,7 +107,7 @@ function SectionContainer({ tabId }) {
                     <Section key={section.id} sectionId={section.id} 
                         layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} 
                         currentEditablePluslet={currentEditablePluslet}
-                        isCurrentlyDragging={'section-' + section.id === draggingId}
+                        currentDraggingId={draggingId}
                         currentEditablePlusletCallBack={setCurrentEditablePluslet} />
                 );
             });

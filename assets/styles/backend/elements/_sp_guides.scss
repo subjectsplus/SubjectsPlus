@@ -173,6 +173,7 @@
   position: relative;
   margin-bottom: 1.5rem;
   padding: 0.25rem;
+  height: auto;
 
   .sp-pluslet-actions-container{
     display: flex;
@@ -220,6 +221,11 @@
 
 .sp-pluslet-hover-region {
   background-color: #f6f6f6;
+}
+
+.sp-pluslet-dragging {
+  background: rgba(63, 194, 198, 0.15);
+  height: 100px;
 }
 
 [data-mode="dark"] {

@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { v4 as uuidv4 } from 'uuid';
 
-function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, currentEditablePluslet, currentEditablePlusletCallBack }) {
+function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, currentEditablePluslet, currentEditablePlusletCallBack }) {
     const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
 
     const deleteSectionMutation = useDeleteSection(tabId);
@@ -17,14 +17,16 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
     const [addPlusletHovered, setAddPlusletHovered] = useState(null);
     const [deleteSectionClicked, setDeleteSectionClicked] = useState(false);
 
+    const isCurrentlyDragging = (('section-' + sectionId) === currentDraggingId);
+
     const getSectionWindowStyle = (isDragging, draggableStyle) => ({
+        ...draggableStyle,
         position: 'relative',
         marginBottom: '2.5rem',
         border: '1px dotted #b5b5b5',
         padding: '0.5rem .75rem',
         background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent',
-        height: isDragging ? '100px' : '',
-        ...draggableStyle
+        height: isDragging ? '100px' : ''
       });
 
     const getSectionContentStyle = (isDraggingOver) => ({
@@ -82,6 +84,7 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
                         <Pluslet key={pluslet.id} sectionId={sectionId}
                             plusletId={pluslet.id} plusletRow={row}
                             plusletTitle={pluslet.title} plusletBody={pluslet.body}
+                            currentDraggingId={currentDraggingId}
                             currentEditablePluslet={currentEditablePluslet} 
                             currentEditablePlusletCallBack={currentEditablePlusletCallBack} />)
                     );
