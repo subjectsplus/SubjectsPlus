@@ -62,7 +62,7 @@ function MediaToken({ media, defaultImageSize, onClick }) {
                 if (imageSizeFileNames[key]) {
                     return (
                         <OverlayTrigger key={'overlay-trigger-' + key} placement="top" overlay={getImageSizeTooltip(key)}>
-                            <a className="link-primary fs-sm" onClick={evt => handleImageSizeButtonClick(evt, key)}>
+                            <a className="btn-link fs-xs ms-1" onClick={evt => handleImageSizeButtonClick(evt, key)}>
                                 {imageSizeNameKeys[key]}{' '}
                             </a>
                         </OverlayTrigger>
@@ -74,10 +74,10 @@ function MediaToken({ media, defaultImageSize, onClick }) {
         }
 
         return (
-            <span>
-                <b>{imageSizeNameKeys[currentImageSize]}</b>
+            <span className="fs-xs">
+                <b>Size: {imageSizeNameKeys[currentImageSize]}</b>
                 {' '}
-                <a href={void(0)} className="link-primary fs-sm" onClick={() => setIsChangingImageSize(true)}>change</a>
+                <a href={void(0)} className="btn-link ms-1" onClick={() => setIsChangingImageSize(true)}>(change)</a>
             </span>
         );
     }
@@ -88,11 +88,11 @@ function MediaToken({ media, defaultImageSize, onClick }) {
             data-link={relativeUrl}
             data-title={media.title} data-alt-text={media.altText}
             data-caption={media.caption}>
-            <span onClick={onClick}>
+            <div onClick={onClick}>
                 <MediaPreview mimeType={media.mimeType} source={relativeUrl} />
                 {' '}
-                <span>{media.title}</span>
-            </span>
+                <span className="media-label">{media.title}</span>
+            </div>
             {' '}
             {isImage &&
                 (<div className="image-size-change">

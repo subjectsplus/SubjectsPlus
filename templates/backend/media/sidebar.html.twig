@@ -4,36 +4,6 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
     </div>
     <div class="offcanvas-body">
-        <style>
-            #media-list li {
-                background: #FAFAFA;
-                margin-bottom: 1px;
-                cursor: pointer;
-            }
-
-            #media-list li:nth-child(2n) {
-                background: #F3F3F3;
-            }
-
-            #media-list li:hover {
-                background: #FFFDE3;
-                border-left: 5px solid #DCDAC1;
-                margin-left: -5px;
-            }
-
-            .media-token {
-                padding: 0 10px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .media-token .media-picture {
-                display: inline-block;
-                vertical-align: middle;
-                margin-right: 10px;
-            }
-        </style>
         <div id="media-browser-container"></div>
         <script>
             const CURRENT_STAFF_ID = "{{ app.user.staffId }}";
