@@ -55,7 +55,7 @@
   text-overflow: ellipsis;
 
   .media-label {
-    vertical-align: middle;
+    vertical-align: top;
     margin-left: 0.25rem;
     display: inline-block;
   }
@@ -86,5 +86,5 @@
 .image-size-change{
   position: absolute;
   right: .5rem;
-  bottom: 0;
+  bottom: 0.75rem;;
 }

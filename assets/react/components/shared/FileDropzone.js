@@ -11,7 +11,7 @@ function FileDropzone({ onDrop, multiple }) {
       {
         isDragActive ?
           <p>Drop the files here</p> :
-            <p>Drag 'n' drop a file or click to select one</p>
+            <p>Drag & drop or click to select file</p>
       }
     </div>
   );
