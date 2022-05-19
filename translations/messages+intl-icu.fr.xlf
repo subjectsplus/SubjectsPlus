@@ -4827,6 +4827,10 @@
         <source>public.subjects.title.label</source>
         <target>__public.subjects.title.label</target>
       </trans-unit>
+      <trans-unit id="hPlJUbZ" resname="control.flyout.add_media_token.upload">
+        <source>control.flyout.add_media_token.upload</source>
+        <target>__control.flyout.add_media_token.upload</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -879,7 +879,7 @@
       </trans-unit>
       <trans-unit id="xxeM4pH" resname="control.media_form.select_file">
         <source>control.media_form.select_file</source>
-        <target>File</target>
+        <target>Upload File</target>
       </trans-unit>
       <trans-unit id="cg3yDXF" resname="control.form_form.upload_media">
         <source>control.form_form.upload_media</source>
@@ -916,6 +916,10 @@
       <trans-unit id="LJRj66b" resname="public.subjects.title.label">
         <source>public.subjects.title.label</source>
         <target>Research Guides</target>
+      </trans-unit>
+      <trans-unit id="hPlJUbZ" resname="control.flyout.add_media_token.upload">
+        <source>control.flyout.add_media_token.upload</source>
+        <target>Upload</target>
       </trans-unit>
     </body>
   </file>
