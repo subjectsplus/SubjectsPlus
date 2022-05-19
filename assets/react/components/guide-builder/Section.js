@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SectionColumn from './SectionColumn';
 import Pluslet from './Pluslet';
 import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';
 import { useFetchPluslets, useCreatePluslet } from '#api/guide/PlusletAPI';
@@ -14,7 +15,6 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
     const deleteSectionMutation = useDeleteSection(tabId);
     const createPlusletMutation = useCreatePluslet(sectionId);
 
-    const [addPlusletHovered, setAddPlusletHovered] = useState(null);
     const [deleteSectionClicked, setDeleteSectionClicked] = useState(false);
 
     const isCurrentlyDragging = (('section-' + sectionId) === currentDraggingId);
@@ -85,53 +85,17 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
 
                 if (pluslets && pluslets.length > 0) {
                     columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === currentColumn)
-                    .filter(pluslet => pluslet !== undefined)
-                    .map((pluslet, row) => (
-                        <Pluslet key={pluslet.id} sectionId={sectionId}
-                            plusletId={pluslet.id} plusletRow={row}
-                            plusletTitle={pluslet.title} plusletBody={pluslet.body}
-                            currentDraggingId={currentDraggingId}
-                            currentEditablePluslet={currentEditablePluslet} 
-                            currentEditablePlusletCallBack={currentEditablePlusletCallBack} />)
-                    );
+                    .filter(pluslet => pluslet !== undefined);
                 }
 
-                const columnId = `section|${sectionId.toString()}|column|${currentColumn}`;
                 const columnRows = Array.isArray(columnPluslets) ? columnPluslets.length : 0;
+                const columnId = `section|${sectionId.toString()}|column|${column}`;
 
                 return (
-                    // Section Column   
-                    <Col key={columnId} lg={Number(size)} className="mb-3 mb-lg-0">
-                        <Droppable type="pluslet" style={{ transform: 'none' }}
-                            droppableId={columnId} direction="vertical">
-                            {(provided, snapshot) => (
-                                <div className="sp-guide-column" {...provided.droppableProps} ref={provided.innerRef}>
-                                    <span className="visually-hidden">{columnId}</span>
-                                    {columnPluslets}
-                                    {provided.placeholder}
-                                    
-                                    {/* Add Pluslet Button */}
-                                    <div className="text-center mt-2">
-                                        <button
-                                            className="btn btn-muted p-1"
-                                            onClick={() => addPluslet(currentColumn, columnRows)}
-                                            onMouseEnter={e => {
-                                                setAddPlusletHovered(columnId);
-                                            }}
-                                            onMouseLeave={e => {
-                                                setAddPlusletHovered(null);
-                                            }}
-                                        >
-                                            <i className="fas fa-plus-circle d-block"></i>
-                                            <span className={'fs-xs' + (addPlusletHovered === columnId ? '' : ' invisible')}>
-                                                    Add Pluslet
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </Droppable>
-                    </Col>
+                    <SectionColumn key={columnId} columnId={columnId} column={currentColumn} sectionId={sectionId} 
+                        pluslets={columnPluslets} columnSize={Number(size)} currentDraggingId={currentDraggingId} 
+                        addPlusletOnClick={() => addPluslet(currentColumn, columnRows)} currentEditablePluslet={currentEditablePluslet} 
+                        currentEditablePlusletCallBack={currentEditablePlusletCallBack} /> 
                 );
             }
         });
