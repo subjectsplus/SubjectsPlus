@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import SectionColumn from './SectionColumn';
-import Pluslet from './Pluslet';
 import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';
 import { useFetchPluslets, useCreatePluslet } from '#api/guide/PlusletAPI';
-import { useDeleteSection } from '#api/guide/SectionAPI';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
-import Col from 'react-bootstrap/Col';
+import { useConvertSectionLayout, useDeleteSection } from '#api/guide/SectionAPI';
+import { Draggable } from 'react-beautiful-dnd';
 import Row from 'react-bootstrap/Row';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,9 +12,10 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
 
     const deleteSectionMutation = useDeleteSection(tabId);
     const createPlusletMutation = useCreatePluslet(sectionId);
+    const convertSectionLayoutMutation = useConvertSectionLayout(sectionId);
 
     const [deleteSectionClicked, setDeleteSectionClicked] = useState(false);
-
+    
     const isCurrentlyDragging = (('section-' + sectionId) === currentDraggingId);
 
     const getSectionWindowClassName = (isDragging) => {
@@ -52,6 +51,22 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
         } else {
             setDeleteSectionClicked(true);
         }
+    }
+
+    const handleConvertSectionLayout = (newLayout) => {
+        if (layout !== newLayout) {
+            convertSectionLayout(newLayout);
+        }
+    }
+
+    const convertSectionLayout = (newLayout) => {
+        console.log('Conversion from', layout, 'to', newLayout, 'layout');
+        convertSectionLayoutMutation.mutate({
+            sectionId: sectionId,
+            newLayout: newLayout,
+            sectionIndex: sectionIndex,
+            tabId: tabId
+        });
     }
 
     const addPluslet = (column, row) => {
@@ -139,12 +154,12 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
                                                 sp-col-3-sidebars = 3-6-3
                                                 Don't know what to do with the random ones like 7-5-0
                                                 */}
-                                                <li><a className="dropdown-item"><span className="sp-col-1"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-2"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-2-left-sidebar"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-2-right-sidebar"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-3"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-3-sidebars"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('0-12-0')}><span className="sp-col-1"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('6-6-0')}><span className="sp-col-2"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('4-8-0')}><span className="sp-col-2-left-sidebar"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('8-4-0')}><span className="sp-col-2-right-sidebar"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('4-4-4')}><span className="sp-col-3"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('3-6-3')}><span className="sp-col-3-sidebars"></span></a></li>
                                             </ul>
                                         </li>
                                         <li><hr className="dropdown-divider" /></li>
