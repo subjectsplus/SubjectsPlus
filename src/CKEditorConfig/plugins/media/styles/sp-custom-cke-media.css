@@ -1,0 +1,15 @@
+.cke_image_resizer_wrapper img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cke_widget_image figure.image {
+    padding: 0.25rem;
+    margin: 0.25rem 0;
+    text-align: left;
+}
+
+.cke_widget_image img {
+    max-width: 100%;
+    height: auto;
+}

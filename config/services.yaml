@@ -7,6 +7,7 @@ parameters:
     app.upload_destination: '/uploads/' # Relative path from public/ for file uploads
     
     # IMAGE SETTINGS
+    # computed based on width
     app.small_image_dimensions: '264x264' # Maximum dimensions (width x height) in pixels for small image
     app.medium_image_dimensions: '500x500' # Maximum dimensions (width x height) in pixels for medium image
     app.large_image_dimensions: '750x750' # Maximum dimensions (width x height) in pixels for large image
@@ -47,6 +48,13 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\EventListener\AttachmentManager:
+        tags:
+            - { name: 'doctrine.event_listener', event: 'postPersist' }
+            - { name: 'doctrine.event_listener', event: 'preRemove' }
+            - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\Faq', method: 'faqPostUpdate' }
+            - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\Pluslet', method: 'plusletPostUpdate' }
+    
     # monolog doctrine handler
     monolog.db_error_handler:
         class: App\Logger\MonologDBHandler

@@ -16,8 +16,8 @@ use App\Enum\ImageSizeType;
 use Masterminds\HTML5;
 
 
-class MediaService {
-
+class MediaService
+{
     private $entityManager;
     private $fileNamer;
     private $validator;
@@ -72,20 +72,34 @@ class MediaService {
             $directory = $this->getRelativeDirectory($mimeType);
 
             // Variations for image files
+            /** @var File $largeFile */
             $largeFile = $uploadResults['largeFile'];
+            
+            /** @var File $mediumFile */
             $mediumFile = $uploadResults['mediumFile'];
+
+            /** @var File $smallFile */
             $smallFile = $uploadResults['smallFile'];
 
             if ($largeFile !== null) {
+                list($width, $height) = \getimagesize($largeFile->getRealPath());
                 $media->setLargeFileName($largeFile->getFilename());
+                $media->setLargeImageFileWidth($width);
+                $media->setLargeImageFileHeight($height);
             }
 
             if ($mediumFile !== null) {
+                list($width, $height) = \getimagesize($mediumFile->getRealPath());
                 $media->setMediumFileName($mediumFile->getFilename());
+                $media->setMediumImageFileWidth($width);
+                $media->setMediumImageFileHeight($height);
             }
 
             if ($smallFile !== null) {
+                list($width, $height) = \getimagesize($smallFile->getRealPath());
                 $media->setSmallFileName($smallFile->getFilename());
+                $media->setSmallImageFileWidth($width);
+                $media->setSmallImageFileHeight($height);
             }
             
             // Fill Media entity values
@@ -117,7 +131,8 @@ class MediaService {
      * @throws \Exception Upon an error, rollback will occur where file is deleted to preserve
      * the integrity of the file server.
      */
-    public function uploadFile(UploadedFile $file, Media $media) {
+    public function uploadFile(UploadedFile $file, Media $media)
+    {
         try {
             // move file to upload destination
             $name = $this->fileNamer->fileName($file);
@@ -204,7 +219,8 @@ class MediaService {
         }
     }
 
-    private function generateSizedImage(File $file, int $sizeType) {
+    private function generateSizedImage(File $file, int $sizeType)
+    {
         if ($sizeType !== ImageSizeType::SMALL_IMAGE && $sizeType !== ImageSizeType::MEDIUM_IMAGE &&
             $sizeType !== ImageSizeType::LARGE_IMAGE && $sizeType !== ImageSizeType::ORIGINAL_IMAGE) {
             throw new \Exception("Incorrect argument supplied for integer \$sizeType.");
@@ -256,7 +272,8 @@ class MediaService {
         }
     }
 
-    public function generateSizedImages(File $file) {
+    public function generateSizedImages(File $file)
+    {
         try {
             $mimeType = $file->getMimeType();
             if ($mimeType === null || strpos($mimeType, 'image/') === false) {
@@ -311,7 +328,8 @@ class MediaService {
         }
     }
 
-    public function getRelativeDirectory(string $mimeType) {
+    public function getRelativeDirectory(string $mimeType)
+    {
         $subDirName = $this->fileNamer->getSubDirectoryFromMimeType($mimeType);
         
         return join(DIRECTORY_SEPARATOR, [
@@ -369,7 +387,8 @@ class MediaService {
         return ['Default'];
     }
 
-    public static function getValidationGroupsFromMimeType(string $mimeType) {
+    public static function getValidationGroupsFromMimeType(string $mimeType)
+    {
         if (strpos($mimeType, "image/") !== false) {
             return ['image'];
         } else {
@@ -388,7 +407,8 @@ class MediaService {
      * @param integer $attachmentId Id of attachment
      * @return void
      */
-    public function createAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId) {
+    public function createAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId)
+    {
         // Load the html for parsing
         $html5 = new HTML5([
             'disable_html_ns' => true,
@@ -446,6 +466,7 @@ class MediaService {
                             $mediaAttachment->setAttachmentType($attachmentType);
                             $mediaAttachment->setAttachmentId($attachmentId);
                             $this->entityManager->persist($mediaAttachment);
+                            $this->entityManager->flush();
                         }
                     } else {
                         // file exists but no media object associated
@@ -474,7 +495,8 @@ class MediaService {
      * @param integer $attachmentId Id of attachment
      * @return void
      */
-    public function removeAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId) {
+    public function removeAttachmentFromHTML(string $html, string $attachmentType, int $attachmentId)
+    {
         // Get all current media attachments for the attachment id
         $mediaAttachmentRepo = $this->entityManager->getRepository(MediaAttachment::class);
         /** @var MediaAttachment $mediaAttachments */
@@ -482,6 +504,9 @@ class MediaService {
             'attachmentType' => $attachmentType, 
             'attachmentId' => $attachmentId,
         ]);
+
+        // exit if there are no media attachments to parse
+        if (empty($mediaAttachments)) return;
 
         // Load the html for parsing
         $html5 = new HTML5([

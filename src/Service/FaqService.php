@@ -136,28 +136,4 @@ class FaqService {
     public function removeFaqpageFromFaq(Faq $faq, Faqpage $faqpage) {
         $faq->removeFaqpage($faqpage);
     }
-
-    /**
-     * Deletes an Faq entity and removes any subject, faqpage, or media_attachment associations to the Faq.
-     * 
-     * Finds any FaqSubject or FaqFaqpage owned by the $faq and removes them from the 
-     * database before subsequently removing the $faq itself from the database.
-     * 
-     * @param Faq $faq Faq entity.
-     */
-    public function deleteFaq(Faq $faq) {
-        $this->entityManager->transactional(function() use($faq) {
-            // Delete MediaAttachment's associated
-            /** @var MediaAttachmentRepository $mediaAttachment */
-            $mediaAttachments = $this->entityManager
-            ->getRepository(MediaAttachment::class)
-            ->findBy(['attachmentType' => 'faq', 'attachmentId' => $faq->getFaqId()]);
-
-            foreach($mediaAttachments as $attachment) {
-                $this->entityManager->remove($attachment);
-            }
-            
-            $this->entityManager->remove($faq);
-        });
-    }
 }

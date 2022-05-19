@@ -1,0 +1,5 @@
+@mixin transition-all() {
+  -webkit-transition: all $duration ease-in-out;
+  -moz-transition: all $duration ease-in-out;
+  transition: all $duration ease-in-out;
+}

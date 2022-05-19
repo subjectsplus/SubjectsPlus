@@ -10,6 +10,7 @@ use App\Entity\Subject;
 use App\Entity\Tab;
 use App\Entity\Section;
 use App\Form\GuideType;
+use App\Service\ChangeLogService;
 
 /**
  * @Route("/control/guides")
@@ -45,7 +46,10 @@ class GuideController extends AbstractController
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
 
+
+
             $entityManager->transactional(function() use($form, $subject, $entityManager) {
+
                 // Persist Subject entity
                 $entityManager->persist($subject);
 
@@ -64,6 +68,11 @@ class GuideController extends AbstractController
                 $staff = $this->getUser();
                 $subject->addStaff($staff);
 
+
+                
+                // Create new log entry
+//                $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'insert');
+
                 // Create flash message
                 $this->addFlash('notice', 'Thy will be done. Guide created.');
             });
@@ -74,6 +83,33 @@ class GuideController extends AbstractController
         }
 
         return $this->render('backend/guide/new.html.twig', [
+            'guide' => $subject,
+            'form' => $form->createView(),
+        ]);
+    }
+
+        /**
+     * @Route("/{subjectId}/edit", name="guide_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Subject $subject, ChangeLogService $cls): Response
+    {
+        $form = $this->createForm(GuideType::class, $subject);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            
+            // Create new log entry
+            /** @var \App\Entity\Staff $staff */
+            $staff = $this->getUser();
+            $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'edit');
+
+            return $this->redirectToRoute("guide_show", [
+                'subjectId' => $subject->getSubjectId(),
+            ]);
+        }
+
+        return $this->render('backend/guide/edit.html.twig', [
             'guide' => $subject,
             'form' => $form->createView(),
         ]);

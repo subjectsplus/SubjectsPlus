@@ -262,6 +262,7 @@ function GuideTabContainer(props) {
                     </Tab.Content>
                     
                     {/* Modal Form for editing tabs */}
+                    {/* TODO: Refactor to use less props */}
                     <EditTabModal currentTab={currentTab} show={showSettings} onHide={() => setShowSettings(false)}
                         validated={settingsValidated} onSubmit={handleSettingsSubmit}
                         settingsTabNameRef={settingsTabName} settingsTabVisibilityRef={settingsTabVisibility}

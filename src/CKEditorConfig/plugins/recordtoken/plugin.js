@@ -31,7 +31,8 @@
 
     const minimumTitleLength = 3;
     const titleApi = '/api/titles/{titleId}';
-    let recordTokenOffcanvas = null;
+    
+    window.recordTokenOffcanvas = null;
 
     CKEDITOR.plugins.add('recordtoken', {
         icons: 'record',
@@ -246,12 +247,18 @@
                 'exec': function(editor) {
                     const searchComponent = document.getElementById('offcanvasRecordToken');
                     if (searchComponent) {
-                        if (recordTokenOffcanvas) {
-                            recordTokenOffcanvas.toggle();
+                        // hide other offcanvas that may exist
+                        if (window.mediaTokenOffcanvas) {
+                            window.mediaTokenOffcanvas.hide();
+                        }
+
+                        // toggle the off canvas
+                        if (window.recordTokenOffcanvas) {
+                            window.recordTokenOffcanvas.toggle();
                         }
                         else {
-                            recordTokenOffcanvas = new bootstrap.Offcanvas(searchComponent);
-                            recordTokenOffcanvas.toggle();
+                            window.recordTokenOffcanvas = new bootstrap.Offcanvas(searchComponent);
+                            window.recordTokenOffcanvas.toggle();
                         }
                     } else {
                         console.error('Search component not found!');
@@ -273,7 +280,7 @@
                 temp.innerHTML = evt.data.dataValue;
 
                 const recordElement = temp.firstChild;
-                if (!recordElement.dataset['recordId']) {
+                if (!recordElement?.dataset?.recordId) {
                     return;
                 }
 
@@ -309,11 +316,11 @@
 
     CKEDITOR.on('instanceReady', function() {
 
-        // When an item in the contact list is dragged, copy its data into the drag and drop data transfer.
+        // When an item in the record list is dragged, copy its data into the drag and drop data transfer.
         // This data is later read by the editor#paste listener in the record plugin defined above.
         if (CKEDITOR.document.getById('record-list')) {
             CKEDITOR.document.getById('record-list').on('dragstart', function(evt) {
-                // The target may be some element inside the draggable div (e.g. the image), so get the div.media-card.
+                // The target may be some element inside the draggable div (e.g. the image), so get the div.record-token.
                 const target = evt.data.getTarget().getAscendant('div', true);
 
                 // Initialization of the CKEditor 4 data transfer facade is a necessary step to extend and unify native
