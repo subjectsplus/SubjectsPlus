@@ -89,7 +89,7 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
                 }
 
                 const columnRows = Array.isArray(columnPluslets) ? columnPluslets.length : 0;
-                const columnId = `section|${sectionId.toString()}|column|${column}`;
+                const columnId = `section|${sectionId.toString()}|column|${currentColumn}`;
 
                 return (
                     <SectionColumn key={columnId} columnId={columnId} column={currentColumn} sectionId={sectionId} 
