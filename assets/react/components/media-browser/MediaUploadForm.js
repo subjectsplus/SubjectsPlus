@@ -3,11 +3,12 @@ import React from 'react';
 function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
     return (
         <form action={void(0)} onSubmit={onSubmit}>
-            <div className="mb-2">
+            <div className="mb-3">
                 <fieldset disabled={disabled}>
                     {/* Media Title text field */}
-                    <label htmlFor="media-title" className="form-label">
-                        <span className="visually-hidden">Title</span>
+                    <div className="mb-1">
+                    <label htmlFor="media-title" className="form-label visually-hidden">
+                        <span>Title</span>
                     </label>
                     <input
                         type="text"
@@ -17,11 +18,14 @@ function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
                         autoComplete="off"
                         defaultValue={defaultTitle}
                         required="required"
+                        className="form-control form-control-sm"
                     />
+                    </div>
 
                     {/* Media AltText text field */}
-                    <label htmlFor="media-alt-text-field" className="form-label">
-                        <span className="visually-hidden">Alt Text</span>
+                    <div className="mb-1">
+                    <label htmlFor="media-alt-text-field" className="form-label visually-hidden">
+                        <span>Alt Text</span>
                     </label>
                     <input
                         type="text"
@@ -29,11 +33,14 @@ function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
                         id="media-alt-text-field"
                         placeholder="Alt Text"
                         autoComplete="off"
+                        className="form-control form-control-sm"
                     />
+                    </div>
 
                     {/* Media Caption text field */}
-                    <label htmlFor="media-caption-field" className="form-label">
-                        <span className="visually-hidden">Caption</span>
+                    <div className="mb-1">
+                    <label htmlFor="media-caption-field" className="form-label visually-hidden">
+                        <span>Caption</span>
                     </label>
                     <input
                         type="text"
@@ -41,13 +48,16 @@ function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
                         id="media-caption-field"
                         placeholder="Caption"
                         autoComplete="off"
+                        className="form-control form-control-sm"
                     />
+                    </div>
+                    <div className="text-end mt-2">
+                        {/* Cancel Button */}
+                        <button onClick={onCancel} className="btn btn-link-default me-1 fs-sm">Cancel</button>
 
-                    {/* Cancel Button */}
-                    <button onClick={onCancel}>Cancel Upload</button>
-                    
-                    {/* Submit Button */}
-                    <input type="submit" value="Upload Media" />
+                        {/* Submit Button */}
+                        <input type="submit" value="Upload Media" className="btn btn-gradient btn-round btn-sm"/>
+                    </div>
                 </fieldset>
             </div>
         </form>

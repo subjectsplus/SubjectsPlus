@@ -7,6 +7,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
@@ -29,6 +30,9 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
  *      "pcolumn": "exact",
  *      "prow": "exact"
  *  })
+ * 
+ * @ApiFilter(RangeFilter::class, properties={"pcolumn", "prow"})
+ * 
  */
 class Pluslet
 {

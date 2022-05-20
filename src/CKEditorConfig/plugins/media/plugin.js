@@ -12,7 +12,10 @@
     CKEDITOR.plugins.add( 'media', {
         icons: 'media',
         allowedContent: 'img[src,alt,width,height],figure,figcaption,br',
+
         init: function( editor ) {
+            const pluginDirectory = this.path;
+            editor.addContentsCss( pluginDirectory + 'styles/sp-custom-cke-media.css' );
             editor.addCommand('toggleMediaSidebar', {
                 'exec': function(editor) {
                     // TODO: Hide the other off canvas when using the page's insert button
@@ -77,7 +80,7 @@
             });
 
             editor.ui.addButton( 'Media', {
-                label: 'Insert My Media',
+                label: 'Insert Media',
                 command: 'toggleMediaSidebar',
                 toolbar: 'insert,100'
             });

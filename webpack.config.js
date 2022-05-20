@@ -37,6 +37,9 @@ Encore
     // Guide-Bulder component loader
     .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.js')
 
+    // Guide-Metadata component loader
+    .addEntry('guide_metadata_loader', './assets/react/entrypoints/guide_metadata_loader.js')
+
     // Record Component
     .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
     .addEntry('alphabet_list', './assets/react/components/record/AlphabetList.js')

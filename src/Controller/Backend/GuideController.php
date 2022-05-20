@@ -47,8 +47,10 @@ class GuideController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->transactional(function() use($cls, $subject, $entityManager) {
+
                 // Persist Subject entity
                 $entityManager->persist($subject);
+                $entityManager->flush();
 
                 // Create new tab
                 $tab = new Tab();
@@ -64,7 +66,7 @@ class GuideController extends AbstractController
                 /** @var \App\Entity\Staff $staff */
                 $staff = $this->getUser();
                 $subject->addStaff($staff);
-                
+
                 // Create new log entry
                 $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'insert');
 

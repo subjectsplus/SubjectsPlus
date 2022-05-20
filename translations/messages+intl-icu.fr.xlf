@@ -4651,9 +4651,9 @@
         <source>control.guides.table.button.guide_details</source>
         <target>__control.guides.table.button.guide_details</target>
       </trans-unit>
-      <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
-        <source>control.faqs.table.button.guide_builder</source>
-        <target>__control.faqs.table.button.guide_builder</target>
+      <trans-unit id="__FKFP7" resname="control.guide.table.button.guide_builder">
+        <source>control.guide.table.button.guide_builder</source>
+        <target>__control.guiide.table.button.guide_builder</target>
       </trans-unit>
       <trans-unit id="keTSog4" resname="control.guides.table.button.preview">
         <source>control.guides.table.button.preview</source>
@@ -4810,6 +4810,26 @@
       <trans-unit id="2S6D55D" resname="control.guide_form.description">
         <source>control.guide_form.description</source>
         <target>__control.guide_form.description</target>
+      </trans-unit>
+      <trans-unit id="6BY.RSR" resname="control.faqs.table.button.guide_builder">
+        <source>control.faqs.table.button.guide_builder</source>
+        <target>__control.faqs.table.button.guide_builder</target>
+      </trans-unit>
+      <trans-unit id="gcVLYj." resname="control.guide_form.save_guide_details">
+        <source>control.guide_form.save_guide_details</source>
+        <target>__control.guide_form.save_guide_details</target>
+      </trans-unit>
+      <trans-unit id="XoZXXuQ" resname="control.guide_form.edit_guide_details">
+        <source>control.guide_form.edit_guide_details</source>
+        <target>__control.guide_form.edit_guide_details</target>
+      </trans-unit>
+      <trans-unit id="LJRj66b" resname="public.subjects.title.label">
+        <source>public.subjects.title.label</source>
+        <target>__public.subjects.title.label</target>
+      </trans-unit>
+      <trans-unit id="hPlJUbZ" resname="control.flyout.add_media_token.upload">
+        <source>control.flyout.add_media_token.upload</source>
+        <target>__control.flyout.add_media_token.upload</target>
       </trans-unit>
     </body>
   </file>
