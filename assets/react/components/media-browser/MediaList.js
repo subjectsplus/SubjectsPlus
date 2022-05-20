@@ -45,7 +45,7 @@ function MediaList({ refresh, staffId }) {
 
     return (
         <div id="media-list-container">
-            <h3>My Media</h3>
+            <h4>My Media</h4>
             <ul id="media-list" className="list-unstyled">
                 {mediaTokens()}
             </ul>

@@ -6,12 +6,12 @@ function FileDropzone({ onDrop, multiple }) {
   const {getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop: onDrop, multiple: multiple });
 
   return (
-    <div {...getRootProps()}>
+    <div {...getRootProps({className: 'sp-media-dropzone'})}>
       <input {...getInputProps()} />
       {
         isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drop the files here</p> :
+            <p>Drag & drop or click to select file</p>
       }
     </div>
   );
