@@ -125,6 +125,7 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
             console.error(error);
             return (<p>Error: Failed to load sections through API Endpoint!</p>);
         } else {
+            // TODO: While dragging a section, resize other sections for easier reorganization
             return (
                 <>
                     <Draggable type="section" draggableId={'section-' + sectionId} index={sectionIndex}>
