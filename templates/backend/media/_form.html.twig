@@ -3,6 +3,7 @@
     {{ form_row(form.altText, {'label': 'control.media_form.alt_text' | trans }) }}
     {{ form_row(form.caption, {'label': 'control.media_form.caption' | trans }) }}
 
+    {# TODO: form.file errors while trying to edit media #}
     {{ form_label(form.file, null, {
         'label': 'control.media_form.select_file' | trans,
         'label_attr': {'class': 'form-required'}
