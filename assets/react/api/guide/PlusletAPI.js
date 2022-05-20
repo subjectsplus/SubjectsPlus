@@ -303,7 +303,7 @@ export function useReorderPluslet() {
     });
 }
 
-async function fetchPluslets(sectionId, filters = null) {
+export async function fetchPluslets(sectionId, filters = null) {
     const data = await fetch(`/api/sections/${sectionId}/pluslets`
         + (filters ? '?' + new URLSearchParams(filters) : ''));
 

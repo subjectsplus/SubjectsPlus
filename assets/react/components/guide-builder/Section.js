@@ -1,35 +1,42 @@
 import React, { useState } from 'react';
-import Pluslet from './Pluslet';
+import SectionColumn from './SectionColumn';
 import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';
 import { useFetchPluslets, useCreatePluslet } from '#api/guide/PlusletAPI';
-import { useDeleteSection } from '#api/guide/SectionAPI';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
-import Col from 'react-bootstrap/Col';
+import { useConvertSectionLayout, useDeleteSection } from '#api/guide/SectionAPI';
+import { Draggable } from 'react-beautiful-dnd';
 import Row from 'react-bootstrap/Row';
 import { v4 as uuidv4 } from 'uuid';
 
-function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, currentEditablePluslet, currentEditablePlusletCallBack }) {
+function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, currentEditablePluslet, currentEditablePlusletCallBack }) {
     const {isLoading, isError, data, error} = useFetchPluslets(sectionId);
 
     const deleteSectionMutation = useDeleteSection(tabId);
     const createPlusletMutation = useCreatePluslet(sectionId);
+    const convertSectionLayoutMutation = useConvertSectionLayout(sectionId);
 
-    const [addPlusletHovered, setAddPlusletHovered] = useState(null);
     const [deleteSectionClicked, setDeleteSectionClicked] = useState(false);
+    
+    const isCurrentlyDragging = (('section-' + sectionId) === currentDraggingId);
 
-    const getSectionWindowStyle = (isDragging, draggableStyle) => ({
-        position: 'relative',
-        marginBottom: '2.5rem',
-        border: '1px dotted #b5b5b5',
-        padding: '0.5rem .75rem',
-        background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent',
-        height: isDragging ? '100px' : '',
-        ...draggableStyle
-      });
+    const getSectionWindowClassName = (isDragging) => {
+        let className = 'sp-section';
 
-    const getSectionContentStyle = (isDraggingOver) => ({
-        backgroundColor: isDraggingOver ? 'rgba(0,0,0, 5%)' : 'transparent',
-    });
+        if (isDragging) {
+            className += ' sp-section-dragging';
+        }
+
+        return className;
+    }
+
+    const getSectionContentClassName = (isDraggingOver) => {
+        let className = 'sp-section-content';
+
+        if (isDraggingOver) {
+            className += ' sp-section-content-dragging-over';
+        }
+
+        return className;
+    }
 
     const deleteSection = () => {
         deleteSectionMutation.mutate({
@@ -44,6 +51,22 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
         } else {
             setDeleteSectionClicked(true);
         }
+    }
+
+    const handleConvertSectionLayout = (newLayout) => {
+        if (layout !== newLayout) {
+            convertSectionLayout(newLayout);
+        }
+    }
+
+    const convertSectionLayout = (newLayout) => {
+        console.log('Conversion from', layout, 'to', newLayout, 'layout');
+        convertSectionLayoutMutation.mutate({
+            sectionId: sectionId,
+            newLayout: newLayout,
+            sectionIndex: sectionIndex,
+            tabId: tabId
+        });
     }
 
     const addPluslet = (column, row) => {
@@ -77,50 +100,17 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
 
                 if (pluslets && pluslets.length > 0) {
                     columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === currentColumn)
-                    .filter(pluslet => pluslet !== undefined)
-                    .map((pluslet, row) => (
-                        <Pluslet key={pluslet.id} sectionId={sectionId}
-                            plusletId={pluslet.id} plusletRow={row}
-                            plusletTitle={pluslet.title} plusletBody={pluslet.body}
-                            currentEditablePluslet={currentEditablePluslet} 
-                            currentEditablePlusletCallBack={currentEditablePlusletCallBack} />)
-                    );
+                    .filter(pluslet => pluslet !== undefined);
                 }
 
-                const columnId = `section|${sectionId.toString()}|column|${currentColumn}`;
                 const columnRows = Array.isArray(columnPluslets) ? columnPluslets.length : 0;
+                const columnId = `section|${sectionId.toString()}|column|${currentColumn}`;
 
-                return (     
-                    <Col key={columnId} lg={Number(size)} className="mb-3 mb-lg-0">
-                        <Droppable type="pluslet" style={{ transform: 'none' }}
-                            droppableId={columnId} direction="vertical">
-                            {(provided, snapshot) => (
-                                <div className="sp-guide-column" {...provided.droppableProps} ref={provided.innerRef}>
-                                    <span className="visually-hidden">{columnId}</span>
-                                    {columnPluslets}
-                                    {provided.placeholder}
-                                    <div className="text-center mt-2">
-                                        <button
-                                            className="btn btn-muted p-1"
-                                            onClick={() => addPluslet(currentColumn, columnRows)}
-                                            onMouseEnter={e => {
-                                                setAddPlusletHovered(columnId);
-                                            }}
-                                            onMouseLeave={e => {
-                                                setAddPlusletHovered(null);
-                                            }}
-                                        >
-                                            <i className="fas fa-plus-circle d-block"></i>
-                                            <span className="fs-xs" style={{
-                                                visibility: addPlusletHovered === columnId ? 'visible' : 'hidden'}}>
-                                                    Add Pluslet
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </Droppable>
-                    </Col>
+                return (
+                    <SectionColumn key={columnId} columnId={columnId} column={currentColumn} sectionId={sectionId} 
+                        pluslets={columnPluslets} columnSize={Number(size)} currentDraggingId={currentDraggingId} 
+                        addPlusletOnClick={() => addPluslet(currentColumn, columnRows)} currentEditablePluslet={currentEditablePluslet} 
+                        currentEditablePlusletCallBack={currentEditablePlusletCallBack} /> 
                 );
             }
         });
@@ -135,20 +125,27 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
             console.error(error);
             return (<p>Error: Failed to load sections through API Endpoint!</p>);
         } else {
+            // TODO: While dragging a section, resize other sections for easier reorganization
             return (
                 <>
                     <Draggable type="section" draggableId={'section-' + sectionId} index={sectionIndex}>
                         {(provided, snapshot) => (
-                            <div ref={provided.innerRef} {...provided.draggableProps}
-                                style={getSectionWindowStyle(snapshot.isDragging || isCurrentlyDragging, provided.draggableProps.style)}>
+                            <div className={getSectionWindowClassName(snapshot.isDragging || isCurrentlyDragging)}
+                                ref={provided.innerRef} {...provided.draggableProps}>
+                                {/* Section Drag Handle */}
                                 <div className="drag-handle sp-section-drag-handle" {...provided.dragHandleProps} title="Move section">
                                     <i className="fas fa-arrows-alt"></i>
                                 </div>
+
+                                {/* TODO: Refactor into SectionDropdown component, fix flashing for section layout changes by creating
+                                    a loading/performing state for section layout, allowing the UI to "catch up" to spam requests */}
+                                {/* Section Dropdown */}
                                 <div className="dropdown basic-dropdown">
                                     <button className="btn btn-muted dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i className="fas fa-ellipsis-h"></i>
                                     </button>
                                     <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="sectionMenuOptions">
+                                        {/* Change Section Layout */}
                                         <li><span className="dropdown-item-text fw-bold fs-sm">Layout</span>
                                             <ul className="sp-section-layout-list">
                                                 {/* TODO: match column classNames to bootstrap columns
@@ -160,22 +157,24 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
                                                 sp-col-3-sidebars = 3-6-3
                                                 Don't know what to do with the random ones like 7-5-0
                                                 */}
-                                                <li><a className="dropdown-item"><span className="sp-col-1"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-2"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-2-left-sidebar"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-2-right-sidebar"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-3"></span></a></li>
-                                                <li><a className="dropdown-item"><span className="sp-col-3-sidebars"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('0-12-0')}><span className="sp-col-1"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('6-6-0')}><span className="sp-col-2"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('4-8-0')}><span className="sp-col-2-left-sidebar"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('8-4-0')}><span className="sp-col-2-right-sidebar"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('4-4-4')}><span className="sp-col-3"></span></a></li>
+                                                <li><a className="dropdown-item" onClick={() => handleConvertSectionLayout('3-6-3')}><span className="sp-col-3-sidebars"></span></a></li>
                                             </ul>
                                         </li>
                                         <li><hr className="dropdown-divider" /></li>
+
+                                        {/* Delete Section */}
                                         <li><a className="dropdown-item delete-section" onClick={handleSectionDelete}><i
                                             className="fas fa-trash"></i> Delete Section</a></li>
                                     </ul>
                                 </div>
-
-                                <div className="guide-section-content" data-layout={layout}
-                                    style={getSectionContentStyle(snapshot.isDragging || isCurrentlyDragging)}>
+                                
+                                {/* Section Content */}
+                                <div className={getSectionContentClassName(snapshot.isDragging || isCurrentlyDragging)} data-layout={layout}>
                                     <span className="visually-hidden">Section {sectionId}</span>
                                     <Row className={(snapshot.isDragging || isCurrentlyDragging) ? 'visually-hidden' : ''}>
                                         {generateColumns()}
@@ -184,6 +183,8 @@ function Section({ tabId, sectionId, isCurrentlyDragging, layout, sectionIndex, 
                             </div>
                         )}
                     </Draggable>
+
+                    {/* Delete Confirmation Modal */}
                     <DeleteConfirmModal show={deleteSectionClicked} resourceName="Section" onHide={() => setDeleteSectionClicked(false)}
                         confirmOnClick={handleSectionDelete} />
                 </>

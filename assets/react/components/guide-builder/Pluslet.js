@@ -6,7 +6,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { useDebouncedCallback } from 'use-debounce';
 import DOMPurify from 'dompurify';
 
-function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, currentEditablePluslet, 
+function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, currentDraggingId, currentEditablePluslet, 
     currentEditablePlusletCallBack }) {
 
     const [editable, setEditable] = useState(false);
@@ -17,6 +17,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
     const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
+
+    const isCurrentlyDragging = (('pluslet-' + plusletId) === currentDraggingId);
 
     useEffect(() => {
         if (editable && currentEditablePluslet !== plusletId) {
@@ -143,11 +145,23 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         }
     }
 
-    const getPlusletClassName = () => {
+    const getPlusletClassName = (isDragging) => {
         let className = 'pluslet';
 
-        if (plusletHovered || editable) {
+        if (isDragging) {
+            className += ' sp-pluslet-dragging';
+        } else if (plusletHovered || editable) {
             className += ' sp-pluslet-hover-region';
+        }
+
+        return className;
+    }
+
+    const getPlusletBodyClassName = (isDragging) => {
+        let className = 'sp-pluslet-body';
+
+        if (isDragging) {
+            className = 'visually-hidden';
         }
 
         return className;
@@ -160,54 +174,57 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         return className + ' invisible';
     }
 
-    const editor = () => {
-        if (editable) {
-            return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} onChange={onCKEditorChanged} />);
+    const editor = (isDragging) => {
+        if (editable && !isDragging) {
+            return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} 
+                        onChange={onCKEditorChanged} />);
         } else {
-            // TODO: Fix issue where Media-Embed turns every link into an iframe (caused by autoembed plugin)
-            return (<div className="sp-pluslet-body" dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body, { ADD_TAGS: ["oembed"] })}} />);
+            return (<div className={getPlusletBodyClassName(isDragging)}
+                        dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body, { ADD_TAGS: ["oembed"] })}} />);
         }
     }
     
     return (
         <>
-            <Draggable type="pluslet" key={plusletId.toString()} draggableId={plusletId.toString()} index={plusletRow}>
+            <Draggable type="pluslet" key={plusletId.toString()} draggableId={'pluslet-' + plusletId} index={plusletRow}>
                 {(provided, snapshot) => {
                     return (
-                        <div className={getPlusletClassName()} key={plusletId} ref={provided.innerRef} onDoubleClick={toggleEditable}
-                            onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} onMouseLeave={() => setPlusletHovered(false)}
-                            {...provided.draggableProps}
-                            style={{
-                                ...provided.draggableProps.style,
-                                height: 'auto'
-                            }}>
-                            {/* TODO: Add styles when dragging pluslet, reduce height and only show title bar area
-                                    background: isDragging ? 'rgba(63,194,198, 15%)' : 'transparent'
-                            */}
-
+                        <div className={getPlusletClassName(snapshot.isDragging || isCurrentlyDragging)} key={plusletId} 
+                            ref={provided.innerRef} onDoubleClick={toggleEditable}
+                            onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} 
+                            onMouseLeave={() => setPlusletHovered(false)} {...provided.draggableProps}>
                             <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                             <div className="sp-pluslet-actions-container">
+                                {/* Drag Handle */}
                                 <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
                                     <i className={getVisibility('fas fa-arrows-alt')}></i>
                                 </div>
+
+                                {/* Editable Title */}
                                 {editableTitle()}
+
                                 <div className={getVisibility('text-end')}>
+                                    {/* Edit/Save Button */}
                                     {editSaveButton()}
 
+                                    {/* Dropdown */}
                                     <div className="dropdown basic-dropdown d-inline-block ms-1">
                                         <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i className="fas fa-ellipsis-v"></i>
                                         </button>
                                         <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
+                                            {/* Make Favorite */}
                                             <li><a className="dropdown-item">Make Favorite</a></li>
                                             <li><hr className="dropdown-divider" /></li>
+
+                                            {/* Delete Pluslet */}
                                             <li><a className="dropdown-item" onClick={handlePlusletDelete}><i
                                                 className="fas fa-trash"></i> Delete Pluslet</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            {editor()}
+                            {editor(snapshot.isDragging || isCurrentlyDragging)}
                         </div>
                     );
                 }}

@@ -4,7 +4,7 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
     </div>
     <div class="offcanvas-body">
-        {# TODO: Form for offcanvas guide details #}
-        Display guide metadata edit form (formatted for offcanvas, some or all fields?)
+        <div id="guide-metadata-container"></div>
     </div>
+    {{ encore_entry_script_tags('guide_metadata_loader') }}
 </div>

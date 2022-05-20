@@ -1,15 +1,29 @@
-{# Set meta variables #}
+{# Set site meta variables #}
+{% if getconfig('meta_description') %}
+    <meta name="description" content="{{ getconfig('meta_description') }}">
+{% endif %}
+{% if getconfig('meta_author') %}
+    <meta name="author" content="{{ getconfig('meta_author') }}">
+{% endif %}
+{% if getconfig('meta_keywords') %}
+    <meta name="keywords" content="{{ getconfig('meta_keywords') }}">
+{% endif %}
 
 {# Set theme variables #}
-
-<meta name="description" content="Custom description">
-<meta name="author" content="Institution name">
-<meta name="keywords" content="custom keywords, research guides">
 <style>
     :root {
-{% if getconfig('theme_bg_color') %}
-    --user-theme-bg-color: {{ getconfig('theme_bg_color') }};
-{% endif %}
+    {% if getconfig('theme_bg_color') %}
+        --user-theme-bg-color: {{ getconfig('theme_bg_color') }};
+    {% endif %}
+    {% if getconfig('theme_text_color') %}
+        --user-theme-text-color: {{ getconfig('theme_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_link_color') %}
+        --user-theme-link-color: {{ getconfig('theme_link_color') }};
+    {% endif %}
+    {% if getconfig('theme_link_hover_color') %}
+        --user-theme-link-hover-color: {{ getconfig('theme_link_hover_color') }};
+    {% endif %}
 
 
 
