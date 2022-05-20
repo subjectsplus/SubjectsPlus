@@ -136,6 +136,8 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
                                     <i className="fas fa-arrows-alt"></i>
                                 </div>
 
+                                {/* TODO: Refactor into SectionDropdown component, fix flashing for section layout changes by creating
+                                    a loading/performing state for section layout, allowing the UI to "catch up" to spam requests */}
                                 {/* Section Dropdown */}
                                 <div className="dropdown basic-dropdown">
                                     <button className="btn btn-muted dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
