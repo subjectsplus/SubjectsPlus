@@ -2,19 +2,24 @@
 
 namespace App\Service;
 
+use App\Repository\DatabaseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Entity\Title;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class DatabaseService
 {
-    public function __construct(EntityManagerInterface $em, RequestStack $requestStack) {
+    public function __construct(EntityManagerInterface $em, RequestStack $requestStack, DatabaseRepository $databaseRepository, CacheInterface $cache) {
         $this->em = $em;
         $this->requestStack = $requestStack;
+        $this->_dbRepo = $databaseRepository;
+        $this->_cache = $cache;
     }
 
     public function databaseUrl(string $url, int $accessRestrictionId, string $proxyPrefix = ''): string
     {
+        //TODO: add proxyUrl to config
         global $proxyURL;
 
         if (1 == $accessRestrictionId) { // Public resources don't need a proxy
@@ -24,6 +29,20 @@ class DatabaseService
         return $proxyPrefix ? $proxyPrefix.$url : $proxyURL.$url;
     }
 
+    public function getAlphaLetters()
+    {
+        return $this->_dbRepo->getLetters();
+    }
+
+    public function testCache()
+    {
+        $letter = 'A';
+        $result = $this->_cache->get('letter_'.md5($letter), function() use($letter) {
+            return $letter;
+        });
+
+        return $result;
+    }
     public function getTrialDatabases()
     {
         return array_map([$this, 'arrangeDatabaseForDisplay'],

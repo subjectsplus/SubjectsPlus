@@ -26,25 +26,29 @@ class TitleRepository extends ServiceEntityRepository
     public function newestPublicDatabases($numToFetch = 5)
     {
         return $this->baseQuery()
-        ->select($this->basic_fields)
-        ->where("l.eresDisplay = 'Y'")
-        ->orderBy('t.titleId', 'DESC')
-        ->setMaxResults($numToFetch)
-        ->getQuery()
-        ->getResult()
+            ->select($this->basic_fields)
+            ->where("l.eresDisplay = 'Y'")
+            ->orderBy('t.titleId', 'DESC')
+            ->setMaxResults($numToFetch)
+            ->getQuery()
+            ->useQueryCache(true)
+            ->enableResultCache(15)
+            ->getResult()
         ;
     }
 
     public function getTrialDatabases($numToFetch = 5)
     {
         return $this->baseQuery()
-        ->select($this->basic_fields)
-        ->where("l.eresDisplay = 'Y'")
-        ->andWhere("l.recordStatus = 'Trial'")
-        ->orderBy('t.titleId', 'DESC')
-        ->setMaxResults($numToFetch)
-        ->getQuery()
-        ->getResult()
+            ->select($this->basic_fields)
+            ->where("l.eresDisplay = 'Y'")
+            ->andWhere("l.recordStatus = 'Trial'")
+            ->orderBy('t.titleId', 'DESC')
+            ->setMaxResults($numToFetch)
+            ->getQuery()
+            ->useQueryCache(true)
+            ->enableResultCache(15)
+            ->getResult()
         ;
     }
 

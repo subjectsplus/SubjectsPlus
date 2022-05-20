@@ -4,7 +4,16 @@
 
 {% block body %}
 <h1>Default Theme</h1>
+
+<h2>Browse</h2>
+<p>testCache: {{ testCache }} </p>
+<ul class="list-group list-group-horizontal">
+{% for letter in letters %}
+<li class="list-group-item">{{ letter.initial }}</li>
+{% endfor %}
+</ul>
 <h2>New Databases</h2>
+
 <ul>
 {% for newdb in newestDatabases %}
     <li>{{ newdb.title }}</li>
@@ -14,7 +23,6 @@
 </ul>
 
 
-{{ getconfig('smtp_port') }}
 
 <h2>Database Trials</h2>
 <ul>

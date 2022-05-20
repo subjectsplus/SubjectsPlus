@@ -7,7 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\DatabaseService;
 use App\Service\ThemeService;
+use Symfony\Contracts\Cache\CacheInterface;
 
+/**
+ * @Route ("/databases")
+ */
 class DatabaseController extends FrontendBaseController
 {
     /**
@@ -28,16 +32,33 @@ class DatabaseController extends FrontendBaseController
     }
 
     /**
-     * @Route("/databases", name="frontend_database")
+     * @Route("/", name="frontend_database")
      */
     public function index(): Response
     {
+        //dd($this->databaseService->getAlphaLetters());
+
         return $this->render('database/index.html.twig', [
             'controller_name' => 'DatabaseController',
-            //'letters' => getLetters('databases'),
+            'testCache' => $this->databaseService->testCache(),
+            'letters' => $this->databaseService->getAlphaLetters(),
             'newestDatabases' => $this->databaseService->newestDatabases(),
             'trialDatabases' => $this->databaseService->getTrialDatabases(),
 
+        ]);
+    }
+
+    /**
+     * @Route ("/test")
+     * @return Response
+     */
+    public function test(): Response
+    {
+
+        $result = 'result: ';
+
+        return $this->render('database/test.html.twig', [
+            'result' => $result,
         ]);
     }
 }

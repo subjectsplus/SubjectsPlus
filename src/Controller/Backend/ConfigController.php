@@ -7,6 +7,7 @@ use App\Form\ConfigType;
 use App\Repository\ConfigCategoryRepository;
 use App\Repository\ConfigRepository;
 use App\Service\ConfigService;
+use PHPUnit\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,5 +93,23 @@ class ConfigController extends AbstractController
         }
 
         return $this->redirectToRoute('config_index', array('id' => '8'));
+    }
+
+    /**
+     * @return Response
+     * @Route("/clearcache", name="config_clearcache")
+     */
+    public function clearcache(): Response
+    {
+        try {
+            \apcu_clear_cache();
+            $result = "Cache cleared";
+        } catch (Exception $exception) {
+            $result = "Cache not cleared.";
+        }
+
+        return $this->render('backend/config/clearcache.html.twig', [
+            'result' => $result,
+        ]);
     }
 }
