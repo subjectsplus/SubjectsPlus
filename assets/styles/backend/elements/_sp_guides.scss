@@ -32,7 +32,7 @@
   }
 
   .sp-section-dragging {
-    background: rgba(63,194,198, 0.15);
+    background: rgba(var(--sp-accent-color-rgb), 0.15);
     height: 100px;
   }
 
@@ -229,6 +229,7 @@
   }
 
   .sp-pluslet-body{
+    display: flow-root;
     img {
       max-width: 100%;
       height: auto;
@@ -241,7 +242,7 @@
 }
 
 .sp-pluslet-dragging {
-  background: rgba(63, 194, 198, 0.15);
+  background: rgba(var(--sp-accent-color-rgb), 0.15);
   height: 100px;
 }
 
@@ -250,9 +251,3 @@
     background-color: var(--sp-bg-color);
   }
 }
-
-
-
-
-
-

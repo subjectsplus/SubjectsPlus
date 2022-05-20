@@ -4831,6 +4831,10 @@
         <source>control.flyout.add_media_token.upload</source>
         <target>__control.flyout.add_media_token.upload</target>
       </trans-unit>
+      <trans-unit id="S5W3XUf" resname="control.guides.label.edit_guide_details">
+        <source>control.guides.label.edit_guide_details</source>
+        <target>__control.guides.label.edit_guide_details</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
