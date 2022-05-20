@@ -8,6 +8,7 @@ import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 function SectionContainer({ tabId }) {
     const [currentEditablePluslet, setCurrentEditablePluslet] = useState('');
     const [draggingId, setDraggingId] = useState(null);
+    const [addSectionHovered, setAddSectionHovered] = useState(false);
 
     const {isLoading, isError, data, error} = useFetchSections(tabId);
 
@@ -93,8 +94,6 @@ function SectionContainer({ tabId }) {
         }
     }
 
-    const [addSectionStyle, setStyle] = useState({visibility: 'hidden'});
-
     const containerContent = () => {
         if (isLoading) {
             return (<p>Loading Sections...</p>);
@@ -107,7 +106,7 @@ function SectionContainer({ tabId }) {
                     <Section key={section.id} sectionId={section.id} 
                         layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} 
                         currentEditablePluslet={currentEditablePluslet}
-                        isCurrentlyDragging={'section-' + section.id === draggingId}
+                        currentDraggingId={draggingId}
                         currentEditablePlusletCallBack={setCurrentEditablePluslet} />
                 );
             });
@@ -129,15 +128,15 @@ function SectionContainer({ tabId }) {
                             id="add-section"
                             className="btn btn-muted p-1"
                             onClick={addSection}
-                            onMouseEnter={e => {
-                                setStyle({visibility: 'visible'});
+                            onMouseEnter={() => {
+                                setAddSectionHovered(true);
                             }}
-                            onMouseLeave={e => {
-                                setStyle({visibility: 'hidden'})
+                            onMouseLeave={() => {
+                                setAddSectionHovered(false);
                             }}
                         >
                             <i className="fas fa-plus-circle d-block"></i>
-                            <span className="fs-xs" style={addSectionStyle}>Add Section</span>
+                            <span className={'fs-xs' + (addSectionHovered ? '' : ' invisible')}>Add Section</span>
                         </button>
                     </div>
                 </>

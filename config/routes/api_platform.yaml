@@ -2,3 +2,4 @@ api_platform:
     resource: .
     type: api_platform
     prefix: /api
+    # TODO: Change prefix for the api, update the api links in the components, and return /subjects/{shortform} back to /{shortform}

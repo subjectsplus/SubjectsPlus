@@ -61,6 +61,7 @@
                     }) }}
                     <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide_form.shortform.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
                     {{ form_widget(form.shortform) }}
+                    {{ form_errors(form.shortform) }}
                     <span class="fs-xs">{{ 'control.guide_form.shortform.info' | trans }}</span>
                     {{ form_errors(form.shortform) }}
                 </div>

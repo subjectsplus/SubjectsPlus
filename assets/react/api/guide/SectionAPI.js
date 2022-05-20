@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { fetchPluslets } from './PlusletAPI';
 import produce from 'immer';
 
 export function useFetchSections(tabId) {
@@ -137,6 +138,81 @@ export function useReorderSection(tabId) {
     });
 }
 
+export function useConvertSectionLayout(sectionId) {
+    if (sectionId === undefined) throw new Error('"sectionId" field is required to call useConvertSectionLayout.');
+
+    const queryClient = useQueryClient();
+    return useMutation(convertSectionLayout, {
+        onMutate: async updatedSection => {
+            await queryClient.cancelQueries(['pluslets', sectionId]);
+            await queryClient.cancelQueries(['sections', updatedSection.tabId]);
+            const previousPlusletsData = queryClient.getQueryData(['pluslets', sectionId]);
+            const previousSectionsData = queryClient.getQueryData(['sections', updatedSection.tabId]);
+
+            const plusletsOptimisticResult = produce(previousPlusletsData, draftData => {
+                const oldLayout = previousSectionsData['hydra:member'][updatedSection.sectionIndex]['layout'];
+                const oldLayoutSizes = oldLayout.split('-');
+                const oldLayoutTotalColumns = (oldLayoutSizes.filter(layout => Number(layout) !== 0)).length;
+                const newLayoutSizes = updatedSection.newLayout.split('-');
+                const newLayoutTotalColumns = (newLayoutSizes.filter(layout => Number(layout) !== 0)).length;
+                const newLayoutLastColumn = newLayoutTotalColumns - 1;
+                const updates = {};
+
+                if (oldLayoutTotalColumns > newLayoutTotalColumns) {
+                    // If the old layout has more columns than the new layout, any excess pluslets from the old layout
+                    // will join the last column of the new layout.
+                    
+                    // Filter pluslets with pcolumn greater than or equal to last column of the new layout then sort by pcolumn and prow
+                    const columnPluslets = draftData['hydra:member'].filter(pluslet => pluslet.pcolumn >= newLayoutLastColumn)
+                    .sort((plusletA, plusletB) => {
+                        if (plusletA.pcolumn === plusletB.pcolumn) {
+                            return plusletA.prow - plusletB.prow;
+                        }
+                        return plusletA.pcolumn - plusletB.pcolumn;
+                    });
+
+                    columnPluslets.forEach((pluslet, index) => {
+                        if (pluslet.pcolumn !== newLayoutLastColumn || pluslet.prow !== index) {
+                            updates[pluslet.id] = {
+                                pcolumn: newLayoutLastColumn,
+                                prow: index
+                            };
+                        }
+                    });
+
+                    draftData['hydra:member'].forEach(pluslet => {
+                        if (updates[pluslet.id]) {
+                            pluslet.pcolumn = updates[pluslet.id].pcolumn;
+                            pluslet.prow = updates[pluslet.id].prow;
+                        }
+                    });
+                }
+            });
+
+            const sectionsOptimisticResult = produce(previousSectionsData, draftData => {
+                // Update Section layout property to new layout
+                draftData['hydra:member'][updatedSection.sectionIndex]['layout'] = updatedSection.newLayout;
+            });
+            
+            queryClient.setQueryData(['pluslets', sectionId], plusletsOptimisticResult);
+            queryClient.setQueryData(['sections', updatedSection.tabId], sectionsOptimisticResult);
+
+            return { previousPlusletsData, previousSectionsData };
+        },
+        onError: (error, sectionData, context) => {
+            // Perform rollback of section and pluslets mutation
+            console.error(error);
+            queryClient.setQueryData(['pluslets', sectionId], context.previousPlusletsData);
+            queryClient.setQueryData(['sections', sectionData.tabId], context.previousSectionsData);
+        },
+        onSettled: (data, error, sectionData, context) => {
+            // Refetch the section and pluslets data
+            queryClient.invalidateQueries(['pluslets', sectionId]);
+            queryClient.invalidateQueries(['sections', sectionData.tabId]);
+        },
+    });
+}
+
 async function fetchSections(tabId, filters=null) {
     const data = await fetch(`/api/tabs/${tabId}/sections`
         + (filters ? '?' + new URLSearchParams(filters) : ''));
@@ -146,6 +222,58 @@ async function fetchSections(tabId, filters=null) {
     }
 
     return data.json();
+}
+
+async function convertSectionLayout({sectionId, newLayout}) {
+    if (sectionId === undefined) throw new Error('"sectionId" field is required to perform convert section layout operation.');
+    if (newLayout === undefined) throw new Error('"newLayout" field is required to perform convert section layout operation.');
+
+    const section = await fetchSection(sectionId);
+    const oldLayout = section.layout;
+    const oldLayoutSizes = oldLayout.split('-');
+    const oldLayoutTotalColumns = (oldLayoutSizes.filter(layout => Number(layout) !== 0)).length;
+    const newLayoutSizes = newLayout.split('-');
+    const newLayoutTotalColumns = (newLayoutSizes.filter(layout => Number(layout) !== 0)).length;
+    const newLayoutLastColumn = newLayoutTotalColumns - 1;
+
+    // When changing from one layout to another, if the total number of columns are the same,
+    // or the new layout has more columns than the old layout then no change to the Pluslet pcolumn 
+    // or prow is needed.
+    // If the old layout has more columns than the new layout, any excess pluslets from the old layout
+    // will join the last column of the new layout.
+    if (oldLayoutTotalColumns > newLayoutTotalColumns) {
+        // Fetch pluslets with pcolumn greater than or equal to last column of the new layout
+        let {'hydra:member': pluslets } = await fetchPluslets(sectionId, {
+            'pcolumn[gte]': newLayoutLastColumn
+        });
+        
+        // Change the pcolumn and prow indexes for Pluslet to reflect new layout
+        await Promise.all(pluslets.map(async (pluslet, row) => {
+            if (pluslet.pcolumn !== newLayoutLastColumn || pluslet.prow !== row) {
+                return fetch(`/api/pluslets/${pluslet.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/ld+json',
+                    },
+                    body: JSON.stringify({
+                        pcolumn: newLayoutLastColumn,
+                        prow: row
+                    })
+                }).catch(error => {
+                    console.error(error);
+                    throw new Error(error);
+                });
+            }
+        }));
+    }
+
+    // Update Section layout property
+    return updateSection({
+        sectionId: sectionId,
+        data: {
+            layout: newLayout
+        }
+    });
 }
 
 async function fetchSection(sectionId) {
