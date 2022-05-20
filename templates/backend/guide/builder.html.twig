@@ -18,8 +18,7 @@
     <a href="{{ path('guide_index') }}" class="fs-sm d-block"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
         <h1 id="subject-heading" class="fw-light mb-1 me-1 d-inline">{{ guide.subject | raw }}</h1>
         <a class="btn-link fs-4" data-bs-toggle="offcanvas" href="#offcanvasGuideDetails" role="button" aria-controls="offcanvasGuideDetails" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i></a>
-        {# TODO: Display and link to full public URL #}
-        <a href="#" class="btn-link fs-xs d-block" style="max-width:fit-content;" title="{{ 'control.guide.preview.label' | trans }}"><i class="fas fa-eye"></i> <span id="shortform-label">{{ guide.shortform }}</span></a>
+        <a href="{{ path('subject_show', {'shortform': guide.shortform}) }}" class="btn-link fs-xs d-block" style="max-width:fit-content;" title="{{ 'control.guide.preview.label' | trans }}" target="_blank"><i class="fas fa-eye"></i> <span id="shortform-label">{{ guide.shortform }}</span></a>
 
     <div id="guide-builder-container" class="mt-4"></div>
 </div>

@@ -16,7 +16,7 @@ const mimeTypeIcons = {
 
 function MediaPreview({ mimeType, source }) {
     if (mimeType.includes('image/')) {
-        return (<img className="media-preview" src={source} height="50px" width="50px" />);
+        return (<img className="media-preview" src={source} />);
     } else if (mimeType in mimeTypeIcons) {
         return (
             <span className="media-preview">

@@ -80,7 +80,7 @@
             });
 
             editor.ui.addButton( 'Media', {
-                label: 'Insert My Media',
+                label: 'Insert Media',
                 command: 'toggleMediaSidebar',
                 toolbar: 'insert,100'
             });
