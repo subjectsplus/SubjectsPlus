@@ -12,6 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 /**
  * @Route("/control/config")
@@ -103,6 +106,20 @@ class ConfigController extends AbstractController
     {
         try {
             \apcu_clear_cache();
+
+            $kernel = $this->container->get('kernel');
+
+            $application = new Application($kernel);
+            $application->setAutoExit(false);
+
+            $input = new ArrayInput([
+                'command' => 'cache:clear',
+            ]);
+
+            $output = new BufferedOutput();
+            $application->run($input, $output);
+
+
             $result = "Cache cleared";
         } catch (Exception $exception) {
             $result = "Cache not cleared.";

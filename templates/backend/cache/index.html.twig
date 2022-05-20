@@ -1,0 +1,12 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Cache{% endblock %}
+
+{% block content %}
+<h1>Cache</h1>
+<div>APCU Cache Enabled: {{ apcu_enabled }} </div>
+<div>APCU Cache Info:  </div>
+<ul>
+{{ apcu_info }}
+</ul>
+{% endblock %}
