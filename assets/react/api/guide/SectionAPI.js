@@ -236,17 +236,17 @@ async function convertSectionLayout({sectionId, newLayout}) {
     const newLayoutTotalColumns = (newLayoutSizes.filter(layout => Number(layout) !== 0)).length;
     const newLayoutLastColumn = newLayoutTotalColumns - 1;
 
-    // Fetch pluslets with pcolumn greater than or equal to last column of the new layout
-    let {'hydra:member': pluslets } = await fetchPluslets(sectionId, {
-        'pcolumn[gte]': newLayoutLastColumn
-    });
-
     // When changing from one layout to another, if the total number of columns are the same,
     // or the new layout has more columns than the old layout then no change to the Pluslet pcolumn 
     // or prow is needed.
     // If the old layout has more columns than the new layout, any excess pluslets from the old layout
     // will join the last column of the new layout.
     if (oldLayoutTotalColumns > newLayoutTotalColumns) {
+        // Fetch pluslets with pcolumn greater than or equal to last column of the new layout
+        let {'hydra:member': pluslets } = await fetchPluslets(sectionId, {
+            'pcolumn[gte]': newLayoutLastColumn
+        });
+        
         // Change the pcolumn and prow indexes for Pluslet to reflect new layout
         await Promise.all(pluslets.map(async (pluslet, row) => {
             if (pluslet.pcolumn !== newLayoutLastColumn || pluslet.prow !== row) {
