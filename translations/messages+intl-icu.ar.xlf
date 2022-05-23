@@ -4878,6 +4878,18 @@
         <source>control.guides.label.edit_guide_details</source>
         <target>__control.guides.label.edit_guide_details</target>
       </trans-unit>
+      <trans-unit id="L6JgFQp" resname="control.media_form.alt_text.help.text">
+        <source>control.media_form.alt_text.help.text</source>
+        <target>__control.media_form.alt_text.help.text</target>
+      </trans-unit>
+      <trans-unit id="3i0wGkT" resname="control.media_form.caption.help.text">
+        <source>control.media_form.caption.help.text</source>
+        <target>__control.media_form.caption.help.text</target>
+      </trans-unit>
+      <trans-unit id="ey0bZ6i" resname="control.media.show.title">
+        <source>control.media.show.title</source>
+        <target>__control.media.show.title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

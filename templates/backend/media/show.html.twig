@@ -1,57 +1,76 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Media{% endblock %}
+{% block title %}{{ 'control.media.show.title' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
+<div class="container py-5">
     {% for error in app.flashes('error') %}
-        <div class="flash-error">
+        <div class="flash-error alert alert-info text-center mb-4">
             {{ message }}
         </div>
     {% endfor %}
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Title</th>
-                <td>{{ media.title|default('N/A') }}</td>
-            </tr>
-            <tr>
-                <th>Caption</th>
-                <td>{{ media.caption|default('N/A') }}</td>
-            </tr>
-            <tr>
-                <th>Alt Text</th>
-                <td>{{ media.altText|default('N/A') }}</td>
-            </tr>
+
+    <a href="#" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.media.back_to_list' | trans }}</a>
+    <h1 class="fw-light">{{ 'control.media.show.title' | trans }}</h1>
+
+    <div class="row">
+        <div class="text-center text-lg-start col-md-5 col-lg-4 col-xl-3">
             {% if 'image/' in media.mimeType %}
-                <tr>
-                    <th>Image<th>
-                    <td><img src="{{ asset(media | get_media_url('small')) }}"/></td>
-                </tr>
+                <a href="{{ media | get_media_url }}" class="d-inline-block" target="_blank" title="Link to Media">
+                    <img src="{{ asset(media | get_media_url('small')) }}" class="img-thumbnail mb-1"/>
+                </a>
             {% endif %}
-            <tr>
-                <th>MimeType</th>
-                <td>{{ media.mimeType|default('N/A') }}</td>
-            </tr>
-            <tr>
-                <th>Link</th>
-                <td><a href="{{ media | get_media_url }}">Link to Media</a></td>
-            </tr>
-            <tr>
-                <th>Attachments</td>
-                {% for attachment in (media | get_media_attachments) %}
-                    <span>
+            <a href="{{ media | get_media_url }}" target="_blank" class="fs-sm d-block">Link to Media</a>
+
+        </div>
+        <div class="col-md-7 col-lg-7 col-xl-8 offset-lg-1">
+            <table class="table table-borderless table-striped" style="max-width:550px;">
+                <tbody>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ media.title|default('N/A') }}</td>
+                </tr>
+                <tr>
+                    <th>Caption</th>
+                    <td>{{ media.caption|default('N/A') }}</td>
+                </tr>
+                <tr>
+                    <th>Alt Text</th>
+                    <td>{{ media.altText|default('N/A') }}</td>
+                </tr>
+
+                <tr>
+                    <th>MimeType</th>
+                    <td>{{ media.mimeType|default('N/A') }}</td>
+                </tr>
+                <tr>
+                    <th>Link</th>
+                    <td><a href="{{ media | get_media_url }}">Link to Media</a></td>
+                </tr>
+                <tr>
+                    <th>Attachments</td>
+                    {% for attachment in (media | get_media_attachments) %}
+                        <span>
                         <td>
                             <a href="{{ '/control/%s/%s' | format(attachment.attachmentType, attachment.attachmentId) }}">
                                 {{'%s:%s'| format(attachment.attachmentType, attachment.attachmentId) }}
                             </a>
                         </td>
                     </span>
-                {% else %}
-                    <td>N/A</td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
     
     <a href="{{ path('media_upload') }}">back to upload</a>
     
