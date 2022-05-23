@@ -14,7 +14,7 @@ final class Version20220523181039 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Migrate existing shortform to replace special characters with a dash, trim whitespace, and use lowercase letters.';
     }
 
     public function up(Schema $schema): void
