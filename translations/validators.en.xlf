@@ -565,6 +565,10 @@
         <source>media.file.mime_type_error</source>
         <target>File type provided not supported!</target>
       </trans-unit>
+      <trans-unit id="subjects.constraints.shortform.regex">
+        <source>subjects.constraints.shortform.regex</source>
+        <target>Shortform may not contain spaces or special characters other than a dash. Restricted words: api, control</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

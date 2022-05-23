@@ -38,13 +38,10 @@ class SubjectsController extends FrontendBaseController
     }
 
     /**
-     * @Route("/{shortform}", name="subject_show", methods={"GET"}, requirements={"shortform"="^(?!\b(api)\b)\w+"})
-     *
+     * @Route("/{shortform}", name="subject_show", methods={"GET"}, requirements={"shortform"="^(?!\b(api|control)\b(?![\w-]))[a-z0-9-]+$"})
      */
-    public function show(Request $request, $shortform): Response
+    public function show(Request $request, Subject $subject): Response
     {
-        $subject = $this->subjectService->getSubjectByShortForm($shortform);
-
         return $this->render('subjects/show.html.twig', [
             'subject' => $subject
         ]);

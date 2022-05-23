@@ -22,6 +22,15 @@
 ########################################
 
 App\Entity\Subject:
+    properties:
+        shortform:
+            - Regex:
+                # pattern does not allow capital letters, spaces, special characters other than dashes,
+                # the words api or control as the sole shortform,
+                # but allows variants of the words such as api-info, controller, etc.
+                pattern: '/^(?!\b(api|control)\b(?![\w-]))[a-z0-9-]+$/'
+                message: 'subjects.constraints.shortform.regex'
+
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
             fields: [subject]
