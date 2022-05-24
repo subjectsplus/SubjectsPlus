@@ -675,11 +675,11 @@
       </trans-unit>
       <trans-unit id="LgQomEo" resname="control.guide_form.shortform.help.text">
         <source>control.guide_form.shortform.help.text</source>
-        <target>NO spaces, special characters, etc.</target>
+        <target>Please do not include spaces or special characters</target>
       </trans-unit>
       <trans-unit id="5iHJLdP" resname="control.guide_form.shortform.info">
         <source>control.guide_form.shortform.info</source>
-        <target>(Friendly URL)</target>
+        <target>(Shows up at the end of the guide's URL)</target>
       </trans-unit>
       <trans-unit id="ku.Ni0z" resname="control.guide_meta.show.header">
         <source>control.guide_meta.show.header</source>
