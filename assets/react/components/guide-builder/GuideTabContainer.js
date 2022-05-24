@@ -135,7 +135,6 @@ function GuideTabContainer(props) {
         deleteTabMutation.mutate({
             tabId: currentTab.id
         }, {
-            onSuccess: () => toast.success('Deleted tab successfully!'),
             onError: () => toast.error('Error has occurred. Failed to delete tab!')
         });
 
