@@ -1,32 +1,54 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Upload{% endblock %}
+{% block title %}{{ 'control.media.upload.title' | trans }} | SubjectsPlus{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('bs_tooltips') }}
+{% endblock %}
 
 {% block content %}
+<div class="container py-5">
+
     {% for error in app.flashes('error') %}
-        <div class="flash-error">
+        <div class="flash-error alert alert-info text-center mb-4">
             {{ error }}
         </div>
     {% endfor %}
-    {{ include('backend/media/_form.html.twig') }} 
 
-    {# Existing view of staff user's images/files #}
-    {% if staff_media is not null %}
-        <div id="staff-media-view">
-            <div>Your Previous Uploads</div>
-            {% for media_item in staff_media %}
-                <div class="media-item">
-                    <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}">
-                        <img src="
+    <a href="#" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.media.back_to_list' | trans }}</a>
+    <h1 class="fw-light">{{ 'control.media.upload.title' | trans }}</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-7 col-lg-6">
+            <div class="panel-basic border-basic">
+                {{ include('backend/media/_form.html.twig') }}
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-5 offset-md-1">
+            {# Existing view of staff user's images/files #}
+            {% if staff_media is not null %}
+                <div id="staff-media-view">
+                    <h3 class="mt-4 mt-md-0">{{ 'control.media.upload.previous_uploads' | trans }}</h3>
+                    <ul class="list-unstyled d-flex flex-row flex-wrap sp-media-uploads-list">
+                        {% for media_item in staff_media %}
+                            <li class="media-item">
+                                <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}" class="btn-link-default">
+                                {# TODO: Display generic icons for PDF, DOC, PPT, etc file uploads #}
+                                    <img src="
                             {% if 'image/' in media_item.mimeType %}
                                 {# media_item is an image #}
                                 {{ asset(media_item | get_media_url('small')) }}
                             {% endif %}
                         "/>
-                    </a>
-                    <div class="media-item-title">{{ media_item.title }}</div>
+                                    <div class="media-item-title fs-xs lh-sm">{{ media_item.title }}</div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-            {% endfor %}
+            {% endif %}
         </div>
-    {% endif %}
+    </div>
+</div>
 {% endblock %}

@@ -69,7 +69,6 @@ function GuideTabContainer(props) {
             onSuccess: () => {
                 setActiveKey(lastTabIndex + 1);
                 setSettingsValidated(false);
-                toast.success('Created new tab successfully!');
             },
             onError: () => toast.error('Error has occurred. Failed to create new tab!')
         });
@@ -97,7 +96,7 @@ function GuideTabContainer(props) {
             setSavingChanges(true);
 
             updateTabMutation.mutate({
-                id: currentTab.id,
+                tabId: currentTab.id,
                 tabIndex: currentTab.tabIndex,
                 data: changes,
                 optimisticResult: {
@@ -227,9 +226,9 @@ function GuideTabContainer(props) {
             const tabsContent = data.map(tab => {
                 if (currentTab.tabIndex == tab.tabIndex) {
                     return (
-                        <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} className={(activeKey === tab.tabIndex ? 'active': '')}
-                            key={'tab-pane-' + tab.tabIndex} eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}
-                            transition={false}>
+                        <Tab.Pane id={'guide-tabs-tabpane-' + tab.tabIndex} key={'tab-pane-' + tab.tabIndex} 
+                            eventKey={tab.tabIndex} aria-labelledby={'guide-tabs-tab-' + tab.tabIndex}
+                            active={true}>
                                 <SectionContainer tabId={tab.id} />
                         </Tab.Pane>
                     );
@@ -263,6 +262,7 @@ function GuideTabContainer(props) {
                     </Tab.Content>
                     
                     {/* Modal Form for editing tabs */}
+                    {/* TODO: Refactor to use less props */}
                     <EditTabModal currentTab={currentTab} show={showSettings} onHide={() => setShowSettings(false)}
                         validated={settingsValidated} onSubmit={handleSettingsSubmit}
                         settingsTabNameRef={settingsTabName} settingsTabVisibilityRef={settingsTabVisibility}

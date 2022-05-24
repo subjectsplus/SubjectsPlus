@@ -1,15 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-    {{ parent }}
-    // TODO: Populate meta content below with values in config file
-    <meta name="description" content="Custom description">
-    <meta name="author" content="Institution name">
-    <meta name="keywords" content="custom keywords, research guides">
-    {% block stylesheets %}{% endblock %}
-    {% block javascripts %}{% endblock %}
+{% block title %}
+{% block metatitle %}SubjectsPlus{% endblock %}
+    {% if getconfig('meta_author') %}
+        | {{ getconfig('meta_author') }}
+    {% endif %}
+{% endblock %}
+
+{% block theming %}
+    {% include('frontend/includes/user_theme_values.html.twig') %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('frontend_main') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('frontend_main') }}
 {% endblock %}
 
 {% block body %}
-    {% block main %}{% endblock %}
+<main>
+    {% block navmenu %}
+        <p>Nav menu</p>
+    {% endblock %}
+    {% block header %}
+        <p>Header here</p>
+    {% endblock %}
+    {% block search %}
+        <p>Search here</p>
+    {% endblock %}
+    <div class="container">
+        {% block main %}
+            <p>Content goes here</p>
+        {% endblock %}
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}
+    {% include('frontend/includes/footer.html.twig') %}
 {% endblock %}

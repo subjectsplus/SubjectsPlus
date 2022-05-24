@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class GuideType extends AbstractType
 {
@@ -15,12 +17,10 @@ class GuideType extends AbstractType
         // TODO: Validation
         $builder
             ->add('subject', null, [
-                'label' => 'Guide Title',
                 'required' => true,
             ])
             ->add('shortform', null, [
-                'label' => 'Shortform',
-                // TODO: Slug creation unique for shortform
+                'required' => true,
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
@@ -30,15 +30,20 @@ class GuideType extends AbstractType
                     'Placeholder' => 'Placeholder',
                     // TODO: Ability to custom add more choices
                 ],
-                'label' => 'Type',
             ])
             ->add('active', ChoiceType::class, [
                 'choices' => [
                     'Inactive' => 0,
                     'Active' => 1,
+                    'Suppressed' => 2,
                 ],
-                'label' => 'Visibility',
             ])
+            ->add('keywords', TextType::class, [
+                'required' => false,
+            ])
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ]);
         ;
     }
 

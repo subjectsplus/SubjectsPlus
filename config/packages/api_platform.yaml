@@ -10,4 +10,8 @@ api_platform:
     collection:
         pagination:
             enabled_parameter_name: pagination # optional
-
+    formats:
+        jsonld: ['application/ld+json']
+        json: ['application/json']
+        html: ['text/html']
+        multipart: ['multipart/form-data']

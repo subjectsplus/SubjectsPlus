@@ -1,0 +1,10 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block metatitle %}FAQs{% endblock %}
+
+{% block main %}
+<h1>Custom Theme</h1>
+<p>Question: {{ faq.question }}</p>
+<p>Answer:</p>
+<p>{{ faq.answer | raw }}</p>
+{% endblock %}

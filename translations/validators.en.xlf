@@ -549,6 +549,22 @@
         <source>faq.answer.not_null</source>
         <target>Thwarted! Answer field should not be blank.</target>
       </trans-unit>
+      <trans-unit id="BihGYJP" resname="subject.constraints.shortform.unique_entity">
+        <source>subject.constraints.shortform.unique_entity</source>
+        <target>Shortform provided has already been taken!</target>
+      </trans-unit>
+      <trans-unit id="hYsiDBY" resname="subject.constraints.subject_field.unique_entity">
+        <source>subject.constraints.subject_field.unique_entity</source>
+        <target>Guide title provided has already been taken!</target>
+      </trans-unit>
+      <trans-unit id="06E2ViW" resname="media.image.mime_type_error">
+        <source>media.image.mime_type_error</source>
+        <target>Image file provided not supported! Please upload a .apng, .avif, .gif, .jpg, .png, or .webp image file.</target>
+      </trans-unit>
+      <trans-unit id="2aJCpD3" resname="media.file.mime_type_error">
+        <source>media.file.mime_type_error</source>
+        <target>File type provided not supported!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

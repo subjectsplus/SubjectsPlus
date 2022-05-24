@@ -16,12 +16,17 @@
 
         <h5 class="mt-4">Metadata</h5>
         <div class="mb-2">
-            <label for="guideKeywords" class="form-label">Keywords</label> <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide.form.keywords.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
-            <input type="text" class="form-control" id="guideKeywords">
+            {{ form_label(form.keywords, null, {
+                'label': 'control.guide_form.keywords' | trans
+            }) }}
+            <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide.form.keywords.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
+            {{ form_widget(form.keywords) }}
         </div>
         <div class="mb-3">
-            <label for="guideDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="guideDescription"></textarea>
+            {{ form_label(form.description, null, {
+                'label': 'control.guide_form.description' | trans
+            }) }}
+            {{ form_widget(form.description) }}
         </div>
 
 
@@ -56,7 +61,9 @@
                     }) }}
                     <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide_form.shortform.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
                     {{ form_widget(form.shortform) }}
+                    {{ form_errors(form.shortform) }}
                     <span class="fs-xs">{{ 'control.guide_form.shortform.info' | trans }}</span>
+                    {{ form_errors(form.shortform) }}
                 </div>
 
                 <div class="col-4 text-center">
@@ -66,7 +73,7 @@
                     <input class="form-file-upload-hidden" id="guideThumbnail" type="file">
                     <label for="guideThumbnail" class="btn-link-default">
                         <img src="{{ asset('build/images/backend/sp-upload-file75.jpg') }}" class="img-thumbnail" alt="Guide thumbnail" />
-                        <div class="pt-1">Upload thumbnail <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Format: jpg or png"><i class="fas fa-question-circle"></i></button></div>
+                        <div class="pt-1">Upload thumbnail <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide_form.thumbnail.help.text' | trans }}"><i class="fas fa-question-circle"></i></button></div>
                         <span class="d-block fst-italic" id="GuideThumbFileName"></span>
                     </label>
 
@@ -109,7 +116,7 @@
                     <button class="btn btn-gradient btn-round">{{ button_label|default('control.guide_form.save_guide' | trans) }}</button>
                 </div>
                 <div class="col-6 text-end align-self-center">
-                    {% if delete_faq is defined %}
+                    {% if delete_guide is defined %}
                         {{ include('backend/guide/_trash_button.html.twig') }}
                     {% endif %}
                 </div>
@@ -118,6 +125,6 @@
     </div>
 </div>
 {{ form_end(form) }}
-{% if delete_faq is defined %}
+{% if delete_guide is defined %}
     {{ include('backend/guide/_delete_form.html.twig') }}
 {% endif %}

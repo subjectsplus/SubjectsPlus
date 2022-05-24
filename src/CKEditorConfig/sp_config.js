@@ -13,20 +13,19 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simple toolbar configuration.
 	config.toolbar = [
-		[
-			'Bold', 'Italic', '-', 
-			'NumberedList', 'BulletedList', '-', 
-			'RemoveFormat', 'PasteText', 'PasteFromWord', '-', 
-			'Link', 'Anchor', '-', 
-			'Source', '-', 
-			'Image', 'Embed', '-', 
-			'-', 
-			'Record'
-		]
+			['Bold', 'Italic'],
+			['NumberedList', 'BulletedList'],
+			['RemoveFormat', 'PasteText', 'PasteFromWord'],
+			['Link', 'Anchor'],
+			['Maximize'],
+			['Source'],
+			['Image'],
+			'/',
+			['EmbedSemantic', 'Media', 'Record']
 	];
 
 	// Remove unnecessary buttons.
-	config.removeButtons = 'Styles,About,Find,Replace,Strike,Subscript,Superscript,Outdent,Indent,Blockquote,Underline,Maximize,Format,Scayt,Table,HorizontalRule,SpecialChar,Cut,Copy,Paste,Undo,Redo,Unlink';
+	config.removeButtons = 'Styles,About,Find,Replace,Strike,Subscript,Superscript,Outdent,Indent,Blockquote,Underline,Format,Scayt,Table,HorizontalRule,SpecialChar,Cut,Copy,Paste,Undo,Redo,Unlink';
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
@@ -38,13 +37,11 @@ CKEDITOR.editorConfig = function( config ) {
 	config.embed_provider = '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}';
 
 	// Set Extra Plugins.
-	config.extraPlugins = 'recordtoken,image2,embed,autoembed,find';
+	config.extraPlugins = 'media,recordtoken,image2,embedsemantic,find';
 
 	// Remove plugins.
 	config.removePlugins = 'image';
 
 	// Set Base Z-Index
 	config.baseFloatZIndex = 100001;
-
-	// TODO: Tabs not working
 };
