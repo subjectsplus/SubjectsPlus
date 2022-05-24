@@ -647,7 +647,7 @@
       </trans-unit>
       <trans-unit id="XUEKjbJ" resname="control.guide_meta.header">
         <source>control.guide_meta.header</source>
-        <target>New Guide</target>
+        <target>Create New Guide: Metadata</target>
       </trans-unit>
       <trans-unit id="X2ICRbM" resname="control.guide_form.shortform">
         <source>control.guide_form.shortform</source>

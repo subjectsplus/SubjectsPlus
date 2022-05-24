@@ -2,9 +2,7 @@
 {{ form_start(form) }}
 <div class="row mt-4">
     <div class="col-lg-5 col-xl-4 offset-lg-1 order-last">
-        <h3 class="mt-4 mt-lg-0">{{ 'control.guide_form.settings_header' | trans }}</h3>
-
-        <h5 class="d-inline-block">Thumbnail</h5>
+        <h5 class="d-inline-block mb-2">Thumbnail</h5>
         <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.guide_form.thumbnail.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
 
         {# TODO: Add FileType to Symfony form, render input and label with form reference variables. If image has been added for guide, replace img source below (Edit view)  #}
