@@ -969,6 +969,62 @@
         <source>control.media.show.title</source>
         <target>__control.media.show.title</target>
       </trans-unit>
+      <trans-unit id="QnOZCTX" resname="control.upload_media.button.edit">
+        <source>control.upload_media.button.edit</source>
+        <target>__control.upload_media.button.edit</target>
+      </trans-unit>
+      <trans-unit id="vi7tFG9" resname="control.media.delete_media.modal.header">
+        <source>control.media.delete_media.modal.header</source>
+        <target>__control.media.delete_media.modal.header</target>
+      </trans-unit>
+      <trans-unit id="RKll3Uy" resname="control.media.delete_media.modal.text">
+        <source>control.media.delete_media.modal.text</source>
+        <target>__control.media.delete_media.modal.text</target>
+      </trans-unit>
+      <trans-unit id="2d07kRD" resname="control.media.delete_media.cancel_button">
+        <source>control.media.delete_media.cancel_button</source>
+        <target>__control.media.delete_media.cancel_button</target>
+      </trans-unit>
+      <trans-unit id="5lEMRSQ" resname="control.media.delete_media.confirm_button">
+        <source>control.media.delete_media.confirm_button</source>
+        <target>__control.media.delete_media.confirm_button</target>
+      </trans-unit>
+      <trans-unit id="wZt2pkA" resname="control.media_upload.delete_media.label">
+        <source>control.media_upload.delete_media.label</source>
+        <target>__control.media_upload.delete_media.label</target>
+      </trans-unit>
+      <trans-unit id="CySiDg4" resname="control.media.delete_media.active_use.text">
+        <source>control.media.delete_media.active_use.text</source>
+        <target>__control.media.delete_media.active_use.text</target>
+      </trans-unit>
+      <trans-unit id="tsH9XfH" resname="control.media.view_file.label">
+        <source>control.media.view_file.label</source>
+        <target>__control.media.view_file.label</target>
+      </trans-unit>
+      <trans-unit id="VdmapDw" resname="control.media.media_type.label">
+        <source>control.media.media_type.label</source>
+        <target>__control.media.media_type.label</target>
+      </trans-unit>
+      <trans-unit id="_o3Qnqi" resname="control.media_details.title">
+        <source>control.media_details.title</source>
+        <target>__control.media_details.title</target>
+      </trans-unit>
+      <trans-unit id="1dPmyXl" resname="control.media_details.alt_text">
+        <source>control.media_details.alt_text</source>
+        <target>__control.media_details.alt_text</target>
+      </trans-unit>
+      <trans-unit id="KgtpOuQ" resname="control.media_details.caption">
+        <source>control.media_details.caption</source>
+        <target>__control.media_details.caption</target>
+      </trans-unit>
+      <trans-unit id="6mUsyLj" resname="control.media_details.attachments">
+        <source>control.media_details.attachments</source>
+        <target>__control.media_details.attachments</target>
+      </trans-unit>
+      <trans-unit id="29K6DXm" resname="control.not_applicable_label">
+        <source>control.not_applicable_label</source>
+        <target>__control.not_applicable_label</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -937,6 +937,62 @@
         <source>control.media.show.title</source>
         <target>Media Details</target>
       </trans-unit>
+      <trans-unit id="QnOZCTX" resname="control.upload_media.button.edit">
+        <source>control.upload_media.button.edit</source>
+        <target>Edit Media</target>
+      </trans-unit>
+      <trans-unit id="vi7tFG9" resname="control.media.delete_media.modal.header">
+        <source>control.media.delete_media.modal.header</source>
+        <target>Delete Media</target>
+      </trans-unit>
+      <trans-unit id="RKll3Uy" resname="control.media.delete_media.modal.text">
+        <source>control.media.delete_media.modal.text</source>
+        <target>Are you sure you want to delete this item permanently?</target>
+      </trans-unit>
+      <trans-unit id="2d07kRD" resname="control.media.delete_media.cancel_button">
+        <source>control.media.delete_media.cancel_button</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="5lEMRSQ" resname="control.media.delete_media.confirm_button">
+        <source>control.media.delete_media.confirm_button</source>
+        <target>Yes, delete</target>
+      </trans-unit>
+      <trans-unit id="wZt2pkA" resname="control.media_upload.delete_media.label">
+        <source>control.media_upload.delete_media.label</source>
+        <target>Delete Media</target>
+      </trans-unit>
+      <trans-unit id="CySiDg4" resname="control.media.delete_media.active_use.text">
+        <source>control.media.delete_media.active_use.text</source>
+        <target>It is currently being used.</target>
+      </trans-unit>
+      <trans-unit id="tsH9XfH" resname="control.media.view_file.label">
+        <source>control.media.view_file.label</source>
+        <target>View media file</target>
+      </trans-unit>
+      <trans-unit id="VdmapDw" resname="control.media.media_type.label">
+        <source>control.media.media_type.label</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="_o3Qnqi" resname="control.media_details.title">
+        <source>control.media_details.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="1dPmyXl" resname="control.media_details.alt_text">
+        <source>control.media_details.alt_text</source>
+        <target>Alt Text</target>
+      </trans-unit>
+      <trans-unit id="KgtpOuQ" resname="control.media_details.caption">
+        <source>control.media_details.caption</source>
+        <target>Caption</target>
+      </trans-unit>
+      <trans-unit id="6mUsyLj" resname="control.media_details.attachments">
+        <source>control.media_details.attachments</source>
+        <target>Attachments</target>
+      </trans-unit>
+      <trans-unit id="29K6DXm" resname="control.not_applicable_label">
+        <source>control.not_applicable_label</source>
+        <target>N/A</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
