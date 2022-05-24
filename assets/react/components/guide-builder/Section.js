@@ -19,6 +19,8 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
     const [isConvertingLayout, setIsConvertingLayout] = useState(false);
 
     const isCurrentlyDragging = (('section-' + sectionId) === currentDraggingId);
+    const isDraggingOver = (currentDraggingId !== null && currentDraggingId.substring(0, 7) === 'section' 
+        && ('section-' + sectionId) !== currentDraggingId);
 
     const getSectionWindowClassName = (isDragging) => {
         let className = 'sp-section';
@@ -27,14 +29,8 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
             className += ' sp-section-dragging';
         }
 
-        return className;
-    }
-
-    const getSectionContentClassName = (isDraggingOver) => {
-        let className = 'sp-section-content';
-
         if (isDraggingOver) {
-            className += ' sp-section-content-dragging-over';
+            className += ' sp-section-window-dragging-over';
         }
 
         return className;
@@ -138,7 +134,6 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
             console.error(error);
             return (<p>Error: Failed to load sections through API Endpoint!</p>);
         } else {
-            // TODO: While dragging a section, resize other sections for easier reorganization
             return (
                 <>
                     <Draggable type="section" draggableId={'section-' + sectionId} index={sectionIndex}>
@@ -155,7 +150,7 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
                                     convertLayout={handleConvertSectionLayout} />
                                 
                                 {/* Section Content */}
-                                <div className={getSectionContentClassName(snapshot.isDragging || isCurrentlyDragging)} data-layout={layout}>
+                                <div className="sp-section-content" data-layout={layout}>
                                     <span className="visually-hidden">Section {sectionId}</span>
                                     <Row className={(snapshot.isDragging || isCurrentlyDragging) ? 'visually-hidden' : ''}>
                                         {generateColumns()}
