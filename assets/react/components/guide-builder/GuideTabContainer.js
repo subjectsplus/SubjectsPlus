@@ -110,7 +110,6 @@ function GuideTabContainer(props) {
                     setShowSettings(false);
                     setSavingChanges(false);
                 },
-                onSuccess: () => toast.success('Updated tab successfully!'),
                 onError: () => toast.error('Error has occurred. Failed to update tab!')
             });
         } else {
