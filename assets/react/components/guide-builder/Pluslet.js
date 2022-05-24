@@ -9,7 +9,7 @@ import DOMPurify from 'dompurify';
 function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, currentDraggingId, currentEditablePluslet, 
     currentEditablePlusletCallBack }) {
 
-    const [editable, setEditable] = useState(false);
+    const [editable, setEditable] = useState(currentEditablePluslet === plusletId);
     const [title, setTitle] = useState(plusletTitle);
     const [body, setBody] = useState(plusletBody);
     const [plusletHovered, setPlusletHovered] = useState(false);
@@ -111,6 +111,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                         id="edit-pluslet-title"
                         placeholder= "Enter Pluslet Title"
                         className="form-control"
+                        autoFocus={title.trim() === ''}
                         value={title}
                         autoComplete="off"
                         onChange={evt => setTitle(evt.target.value)}

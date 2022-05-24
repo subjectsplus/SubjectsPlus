@@ -85,7 +85,7 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
         if (Array.isArray(data)) {
             const initialPlusletData = {
                 id: uuidv4(),
-                title: "Untitled",
+                title: "",
                 type: "Basic",
                 body: "",
                 pcolumn: column,
@@ -95,6 +95,7 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
 
             console.log('initialPlusletData: ', initialPlusletData);
             createPlusletMutation.mutate(initialPlusletData);
+            currentEditablePlusletCallBack(initialPlusletData.id);
         }
     }
 
