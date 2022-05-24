@@ -14,11 +14,15 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const [body, setBody] = useState(plusletBody);
     const [plusletHovered, setPlusletHovered] = useState(false);
     const [deletePlusletClicked, setDeletePlusletClicked] = useState(false);
+    
+    const plusletDropdownRef = useRef();
 
     const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
 
     const isCurrentlyDragging = (('pluslet-' + plusletId) === currentDraggingId);
+    const isActiveDropdown = plusletDropdownRef?.current?.classList ? 
+        plusletDropdownRef.current.classList.contains('show') : false;
 
     useEffect(() => {
         if (editable && currentEditablePluslet !== plusletId) {
@@ -29,7 +33,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             setEditable(false);
         }
     }, [currentEditablePluslet]);
-
+    
     const deletePluslet = () => {
         deletePlusletMutation.mutate({
             plusletId: plusletId,
@@ -169,7 +173,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     }
 
     const getVisibility = (className) => {
-        if (plusletHovered || editable) {
+        if (plusletHovered || editable || isActiveDropdown) {
             return className;
         }
         return className + ' invisible';
@@ -213,7 +217,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                                         <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i className="fas fa-ellipsis-v"></i>
                                         </button>
-                                        <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
+                                        <ul ref={plusletDropdownRef} className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
                                             {/* Make Favorite */}
                                             <li><a className="dropdown-item">Make Favorite</a></li>
                                             <li><hr className="dropdown-divider" /></li>
