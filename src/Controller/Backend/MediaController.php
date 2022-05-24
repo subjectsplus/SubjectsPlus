@@ -5,7 +5,7 @@ namespace App\Controller\Backend;
 use App\Entity\Media;
 use App\Entity\Staff;
 use App\Repository\MediaRepository;
-use App\Form\MediaType;
+use App\Form\MediaUploadType;
 use App\Form\MediaEditType;
 use App\Service\MediaService;
 use App\Service\ChangeLogService;
@@ -48,7 +48,7 @@ class MediaController extends AbstractController
 
         $media = new Media();
 
-        $form = $this->createForm(MediaType::class, $media);
+        $form = $this->createForm(MediaUploadType::class, $media);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
