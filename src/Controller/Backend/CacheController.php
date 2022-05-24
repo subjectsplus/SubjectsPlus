@@ -29,6 +29,7 @@ class CacheController extends AbstractController
      */
     public function index(): Response
     {
+        ini_set('memory_limit','1024');
         return $this->render('backend/cache/index.html.twig', [
             'controller_name' => 'CacheController',
             'apcu_enabled' => $this->_cs->isApcuEnabled(),

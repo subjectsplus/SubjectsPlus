@@ -16,7 +16,7 @@ class CacheService
 //        } else {
 //            $result['return'] = "APCU Cache not enabled";
 //        }
-        ini_set('memory_limit','512');
-        return apcu_cache_info();
+
+        return apcu_cache_info(true);
     }
 }

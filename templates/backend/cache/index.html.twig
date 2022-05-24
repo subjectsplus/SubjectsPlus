@@ -7,6 +7,8 @@
 <div>APCU Cache Enabled: {{ apcu_enabled }} </div>
 <div>APCU Cache Info:  </div>
 <ul>
-{{ apcu_info }}
+    {% for key in apcu_info|keys %}
+        <li>{{ key }}</li>
+    {% endfor %}
 </ul>
 {% endblock %}

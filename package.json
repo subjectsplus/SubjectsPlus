@@ -38,7 +38,8 @@
     "react-select": "^5.2.2",
     "react-toastify": "^8.2.0",
     "use-debounce": "^7.0.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yarn": "^1.22.18"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
