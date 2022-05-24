@@ -3,6 +3,8 @@
 namespace App\Controller\Frontend;
 
 use App\Controller\Frontend\FrontendBaseController;
+use App\Service\ConfigService;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\DatabaseService;
@@ -17,7 +19,12 @@ class DatabaseController extends FrontendBaseController
     /**
      * @var DatabaseService
      */
-    private $databaseService;
+    private $_databaseService;
+
+    /**
+     * @var ConfigService
+     */
+    private $_configService;
 
     /**
      * @var ThemeService
@@ -25,25 +32,31 @@ class DatabaseController extends FrontendBaseController
     private $themeService;
 
 
-    public function __construct(DatabaseService $databaseService, ThemeService $themeService)
+    public function __construct(
+        DatabaseService $databaseService,
+        ThemeService $themeService,
+        ConfigService $configService)
     {
         parent::__construct($themeService);
-        $this->databaseService = $databaseService;
+        $this->_databaseService = $databaseService;
+        $this->_configService   = $configService;
     }
 
     /**
      * @Route("/", name="frontend_database")
+     * @Route("/letter/{letter}", name="frontend_db_by_letter")
      */
-    public function index(): Response
+    public function index($letter = 'A'): Response
     {
-        //dd($this->databaseService->getAlphaLetters());
 
         return $this->render('database/index.html.twig', [
             'controller_name' => 'DatabaseController',
-            'testCache' => $this->databaseService->testCache(),
-            'letters' => $this->databaseService->getAlphaLetters(),
-            'newestDatabases' => $this->databaseService->newestDatabases(),
-            'trialDatabases' => $this->databaseService->getTrialDatabases(),
+            'testCache' => $this->_databaseService->testCache(),
+            'letters' => $this->_databaseService->getAlphaLetters(),
+            'newestDatabases' => $this->_databaseService->newestDatabases(),
+            'trialDatabases' => $this->_databaseService->getTrialDatabases(),
+            'ctags' => $this->_configService->getConfigValueByKey('ctag'),
+            'dbsByLetter' => $this->_databaseService->getDatabasesByLetter($letter)
 
         ]);
     }

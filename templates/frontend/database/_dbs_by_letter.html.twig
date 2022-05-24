@@ -1,0 +1,10 @@
+<ul>
+{% for db in dbsByLetter %}
+    <li>
+        <div><a href="{{ db.url}}">{{ db.title|raw }}</a></div>
+        <div>{{ db.description|raw }} </div>
+    </li>
+{% else %}
+    <li>no database starting with that letter</li>
+{% endfor %}
+</ul>

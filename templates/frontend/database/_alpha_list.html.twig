@@ -1,0 +1,6 @@
+<ul class="list-group list-group-horizontal">
+{% for letter in letters %}
+<li class="list-group-item">
+    <a href="{{ path('frontend_db_by_letter', {'letter': letter.initial}) }}">{{ letter.initial }}</a></li>
+{% endfor %}
+</ul>

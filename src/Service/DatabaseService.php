@@ -10,17 +10,26 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 class DatabaseService
 {
-    public function __construct(EntityManagerInterface $em, RequestStack $requestStack, DatabaseRepository $databaseRepository, CacheInterface $cache) {
+
+    private $_configService;
+
+    public function __construct(
+                        EntityManagerInterface $em,
+                        RequestStack $requestStack,
+                        DatabaseRepository $databaseRepository,
+                        CacheInterface $cache,
+                        ConfigService $configService) {
         $this->em = $em;
         $this->requestStack = $requestStack;
         $this->_dbRepo = $databaseRepository;
         $this->_cache = $cache;
+        $this->_configService = $configService;
     }
 
     public function databaseUrl(string $url, int $accessRestrictionId, string $proxyPrefix = ''): string
     {
         //TODO: add proxyUrl to config
-        global $proxyURL;
+        $proxyURL = $this->_configService->getConfigValueByKey('proxy_url');
 
         if (1 == $accessRestrictionId) { // Public resources don't need a proxy
             return $url;
@@ -43,6 +52,16 @@ class DatabaseService
 
         return $result;
     }
+
+    public function getDatabasesByLetter($letter) {
+//        return $this->em->getRepository(Title::class)->getDatabasesBy(true, array('letter' => $letter));
+        //dd($$this->em->getRepository(Title::class)->newestPublicDatabases());
+
+        return array_map([$this, 'arrangeDatabaseForDisplay'],
+            $this->em->getRepository(Title::class)->getDatabasesBy(true, array('letter' => $letter)));
+
+    }
+
     public function getTrialDatabases()
     {
         return array_map([$this, 'arrangeDatabaseForDisplay'],
@@ -59,10 +78,27 @@ class DatabaseService
 
     public function arrangeDatabaseForDisplay($database): array
     {
-        return [
-            'title' => $database['title'],
-            'url' => $this->databaseUrl($database['location'], $database['restrictionsId']),
-        ];
+        if(is_object($database)) {
+
+            //dd($database);
+            $values = $database->getLocation()->getValues();
+            $location = $values[0]->getLocation();
+            $restrictionId = $values[0]->getAccessRestrictions()->getRestrictionsId();
+
+            return [
+                'title' => $database->getTitle(),
+                'url' => $this->databaseUrl($location, $restrictionId),
+                'description' => $database->getDescription(),
+            ];
+        } elseif (is_array($database)) {
+            //dd($database);
+            return [
+                'title' => $database['title'],
+                'url' => $this->databaseUrl($database['location'], $database['restrictionsId']),
+                'description' => $database['description']
+            ];
+        }
+
     }
 
     public function searchCriteriaFromParams(): array

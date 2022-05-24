@@ -6,31 +6,16 @@
 <h1>Default Theme</h1>
 
 <h2>Browse</h2>
-<p>testCache: {{ testCache }} </p>
-<ul class="list-group list-group-horizontal">
-{% for letter in letters %}
-<li class="list-group-item">{{ letter.initial }}</li>
-{% endfor %}
-</ul>
-<h2>New Databases</h2>
 
-<ul>
-{% for newdb in newestDatabases %}
-    <li>{{ newdb.title }}</li>
-{% else %}
-    <li>no new database</li>
-{% endfor %}
-</ul>
+{% include 'frontend/database/_alpha_list.html.twig' %}
 
+{% include 'frontend/database/_ctags.html.twig' %}
 
+{% include 'frontend/database/_dbs_by_letter.html.twig' %}
 
-<h2>Database Trials</h2>
-<ul>
-{% for trialdb in trialDatabases %}
-    <li>{{ trialdb.title }}</li>
-{% else %}
-    <li>no trial databases</li>
-{% endfor %}
-</ul>
+{% include 'frontend/database/_new_dbs.html.twig' %}
+
+{% include 'frontend/database/_trial_dbs.html.twig' %}
+
 
 {% endblock %}

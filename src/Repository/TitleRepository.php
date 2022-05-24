@@ -27,6 +27,7 @@ class TitleRepository extends ServiceEntityRepository
     {
         return $this->baseQuery()
             ->select($this->basic_fields)
+            ->addSelect("t.description")
             ->where("l.eresDisplay = 'Y'")
             ->orderBy('t.titleId', 'DESC')
             ->setMaxResults($numToFetch)
@@ -41,6 +42,7 @@ class TitleRepository extends ServiceEntityRepository
     {
         return $this->baseQuery()
             ->select($this->basic_fields)
+            ->addSelect("t.description")
             ->where("l.eresDisplay = 'Y'")
             ->andWhere("l.recordStatus = 'Trial'")
             ->orderBy('t.titleId', 'DESC')

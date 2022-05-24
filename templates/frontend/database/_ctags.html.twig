@@ -1,0 +1,6 @@
+{% set ctags =  ctags|split(',') %}
+<ul class="list-group list-group-horizontal">
+{% for tag in ctags %}
+<li class="list-group-item">{{ tag }}</li>
+{% endfor %}
+</ul>

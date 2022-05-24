@@ -1,0 +1,8 @@
+<h2>Database Trials</h2>
+<ul>
+{% for trialdb in trialDatabases %}
+    <li>{{ trialdb.title }}</li>
+{% else %}
+    <li>no trial databases</li>
+{% endfor %}
+</ul>
