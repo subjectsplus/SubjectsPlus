@@ -10,7 +10,7 @@
         </div>
     {% endfor %}
 
-    <a href="#" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.media.back_to_list' | trans }}</a>
+    <a href="{{ path('media_upload') }}" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.media.back_to_upload' | trans }}</a>
     <h1 class="fw-light">{{ 'control.media.show.title' | trans }}</h1>
 
     <div class="row">
@@ -40,15 +40,15 @@
                 </tr>
                 <tr>
                     <th>{{ 'control.media_details.attachments' | trans }}</th>
-                    {% for attachment in (media | get_media_attachments) %}
-                        <td>
-                            <a href="{{ '/control/%s/%s' | format(attachment.attachmentType, attachment.attachmentId) }}">
+                    <td>
+                        {% for attachment in (media | get_media_attachments) %}
+                            <a href="{{ '/control/%s/%s' | format(attachment.attachmentType, attachment.attachmentId) }}" class="btn-link-default fs-sm">
                                 {{'%s:%s'| format(attachment.attachmentType, attachment.attachmentId) }}
-                            </a>
-                        </td>
-                    {% else %}
-                        <td>{{ 'control.not_applicable_label' | trans }}</td>
-                    {% endfor %}
+                            </a><br/>
+                        {% else %}
+                            {{ 'control.not_applicable_label' | trans }}
+                        {% endfor %}
+                    </td>
                 </tr>
                 </tbody>
             </table>

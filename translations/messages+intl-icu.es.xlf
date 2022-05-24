@@ -1025,6 +1025,22 @@
         <source>control.not_applicable_label</source>
         <target>__control.not_applicable_label</target>
       </trans-unit>
+      <trans-unit id="zwkNHGn" resname="control.media_form.save_media_details">
+        <source>control.media_form.save_media_details</source>
+        <target>__control.media_form.save_media_details</target>
+      </trans-unit>
+      <trans-unit id="SEslb8q" resname="control.media_form.edit_media_details">
+        <source>control.media_form.edit_media_details</source>
+        <target>__control.media_form.edit_media_details</target>
+      </trans-unit>
+      <trans-unit id="9sIJPLn" resname="control.media.edit_details">
+        <source>control.media.edit_details</source>
+        <target>__control.media.edit_details</target>
+      </trans-unit>
+      <trans-unit id="7VwAwL9" resname="control.media.back_to_upload">
+        <source>control.media.back_to_upload</source>
+        <target>__control.media.back_to_upload</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

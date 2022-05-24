@@ -939,7 +939,7 @@
       </trans-unit>
       <trans-unit id="QnOZCTX" resname="control.upload_media.button.edit">
         <source>control.upload_media.button.edit</source>
-        <target>Edit Media</target>
+        <target>Edit Media Details</target>
       </trans-unit>
       <trans-unit id="vi7tFG9" resname="control.media.delete_media.modal.header">
         <source>control.media.delete_media.modal.header</source>
@@ -992,6 +992,18 @@
       <trans-unit id="29K6DXm" resname="control.not_applicable_label">
         <source>control.not_applicable_label</source>
         <target>N/A</target>
+      </trans-unit>
+      <trans-unit id="zwkNHGn" resname="control.media_form.save_media_details">
+        <source>control.media_form.save_media_details</source>
+        <target>Save Media Details</target>
+      </trans-unit>
+      <trans-unit id="9sIJPLn" resname="control.media.edit_details">
+        <source>control.media.edit_details</source>
+        <target>Edit Media Details</target>
+      </trans-unit>
+      <trans-unit id="7VwAwL9" resname="control.media.back_to_upload">
+        <source>control.media.back_to_upload</source>
+        <target>Back to Media Upload</target>
       </trans-unit>
     </body>
   </file>
