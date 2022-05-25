@@ -1,68 +1,61 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.media.show.title' | trans }} | SubjectsPlus{% endblock %}
+{% block title %}Media{% endblock %}
 
 {% block content %}
-<div class="container py-5">
     {% for error in app.flashes('error') %}
-        <div class="flash-error alert alert-info text-center mb-4">
+        <div class="flash-error">
             {{ message }}
         </div>
     {% endfor %}
-
-    <a href="{{ path('media_upload') }}" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.media.back_to_upload' | trans }}</a>
-    <h1 class="fw-light">{{ 'control.media.show.title' | trans }}</h1>
-
-    <div class="row">
-        <div class="text-center text-lg-start col-md-5 col-lg-4 col-xl-3">
-            {# TODO: Display generic icons for PDF, DOC, PPT, etc file uploads #}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ media.title|default('N/A') }}</td>
+            </tr>
+            <tr>
+                <th>Caption</th>
+                <td>{{ media.caption|default('N/A') }}</td>
+            </tr>
+            <tr>
+                <th>Alt Text</th>
+                <td>{{ media.altText|default('N/A') }}</td>
+            </tr>
             {% if 'image/' in media.mimeType %}
-                <a href="{{ media | get_media_url }}" class="d-inline-block" target="_blank" title="{{ 'control.media.view_file.label' | trans }}">
-                    <img src="{{ asset(media | get_media_url('small')) }}" class="img-thumbnail mb-1"/>
-                </a>
+                <tr>
+                    <th>Image<th>
+                    <td><img src="{{ asset(media | get_media_url('small')) }}"/></td>
+                </tr>
             {% endif %}
-            <p class="fs-sm">{{ 'control.media.media_type.label' | trans }}: {{ media.mimeType|default('control.not_applicable_label' | trans ) }} | <a href="{{ media | get_media_url }}" target="_blank">{{ 'control.media.view_file.label' | trans }}</a></p>
-        </div>
-        <div class="col-md-7 col-lg-7 col-xl-6 offset-lg-1">
-            <table class="table table-borderless table-striped">
-                <tbody>
-                <tr>
-                    <th>{{ 'control.media_details.title' | trans }}</th>
-                    <td>{{ media.title|default('N/A') }}</td>
-                </tr>
-                <tr>
-                    <th>{{ 'control.media_details.alt_text' | trans }}</th>
-                    <td>{{ media.altText|default('N/A') }}</td>
-                </tr>
-                <tr>
-                    <th>{{ 'control.media_details.caption' | trans }}</th>
-                    <td>{{ media.caption|default('N/A') }}</td>
-                </tr>
-                <tr>
-                    <th>{{ 'control.media_details.attachments' | trans }}</th>
-                    <td>
-                        {% for attachment in (media | get_media_attachments) %}
-                            <a href="{{ '/control/%s/%s' | format(attachment.attachmentType, attachment.attachmentId) }}" class="btn-link-default fs-sm">
+            <tr>
+                <th>MimeType</th>
+                <td>{{ media.mimeType|default('N/A') }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td><a href="{{ media | get_media_url }}">Link to Media</a></td>
+            </tr>
+            <tr>
+                <th>Attachments</td>
+                {% for attachment in (media | get_media_attachments) %}
+                    <span>
+                        <td>
+                            <a href="{{ '/control/%s/%s' | format(attachment.attachmentType, attachment.attachmentId) }}">
                                 {{'%s:%s'| format(attachment.attachmentType, attachment.attachmentId) }}
-                            </a><br/>
-                        {% else %}
-                            {{ 'control.not_applicable_label' | trans }}
-                        {% endfor %}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <div class="row mt-4">
-                <div class="col-6">
-                    <a href="{{ path('media_edit', {'mediaId': media.mediaId}) }}" class="btn btn-gradient btn-round">{{ 'control.upload_media.button.edit' | trans }}</a>
-                </div>
-                <div class="col-6 text-end align-self-center">
-                    {{ include('backend/media/_trash_button.html.twig') }}
-                    {{ include('backend/media/_delete_form.html.twig') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                            </a>
+                        </td>
+                    </span>
+                {% else %}
+                    <td>N/A</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="{{ path('media_upload') }}">back to upload</a>
+    
+    <a href="{{ path('media_edit', {'mediaId': media.mediaId}) }}">edit</a>
+    
+    {{ include('backend/media/_delete_form.html.twig') }}
 {% endblock %}

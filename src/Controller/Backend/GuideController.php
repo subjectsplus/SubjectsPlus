@@ -71,7 +71,7 @@ class GuideController extends AbstractController
                 $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'insert');
 
                 // Create flash message
-                $this->addFlash('notice', 'Thy will be done. New guide created. Now add some content!');
+                $this->addFlash('notice', 'Thy will be done. Guide created.');
             });
 
             return $this->redirectToRoute('guide_build', [

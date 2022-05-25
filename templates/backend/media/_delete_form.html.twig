@@ -1,26 +1,11 @@
-<div class="modal fade" id="confirmDeleteMedia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmDeleteMediaLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="confirmDeleteMediaLabel"><i class="fas fa-exclamation-circle btn-link-danger"></i> {{ 'control.media.delete_media.modal.header' | trans }}</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'close.aria.label' | trans }}"></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-start">{{ 'control.media.delete_media.modal.text' | trans }}
-                    {% if ((media | get_media_attachments) is not empty) %}
-                        <strong>{{ 'control.media.delete_media.active_use.text' | trans }}</strong>
-                    {% endif %}
-                </p>
-
-                {# TODO: Delete media not working  #}
-                <form method="post" action="{{ path('media_delete', {'mediaId': media.mediaId}) }}">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ media.mediaId) }}">
-                    <div class="text-end">
-                        <button type="button" class="btn btn-link-default me-2" data-bs-dismiss="modal">{{ 'control.media.delete_media.cancel_button' | trans }}</button>
-                        <button type="submit" class="btn btn-danger btn-round"><i class="fas fa-trash"></i> {{ 'control.media.delete_media.confirm_button' | trans }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<form method="post" action="{{ path('media_delete', {'mediaId': media.mediaId}) }}" 
+    onsubmit="return confirm(
+            {% if ((media | get_media_attachments) is empty) %}
+                {{ '\'Are you sure you want to delete this media?\'' }}
+            {% else %}
+                {{ '\'This media is currently being actively used. Are you sure you want to delete this media?\'' }}
+            {% endif %}
+        );">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ media.mediaId) }}">
+    <button class="btn">Delete</button>
+</form>

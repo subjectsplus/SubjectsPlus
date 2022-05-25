@@ -32,7 +32,7 @@
   }
 
   .sp-section-dragging {
-    background: rgba(var(--sp-accent-color-rgb), 0.15);
+    background: rgba(63,194,198, 0.15);
     height: 100px;
   }
 
@@ -191,9 +191,8 @@
 .pluslet {
   position: relative;
   margin-bottom: 1.5rem;
-  padding: 0.25rem 0.25rem 1.25rem 0.25rem;
+  padding: 0.25rem;
   height: auto;
-  border-bottom: 1px dotted rgba(0, 0, 0, 0.15);
 
   .sp-pluslet-actions-container{
     display: flex;
@@ -232,7 +231,6 @@
   }
 
   .sp-pluslet-body{
-    display: flow-root;
     img {
       max-width: 100%;
       height: auto;
@@ -245,25 +243,18 @@
 }
 
 .sp-pluslet-dragging {
-  background: rgba(var(--sp-accent-color-rgb), 0.15);
+  background: rgba(63, 194, 198, 0.15);
   height: 100px;
 }
 
 [data-mode="dark"] {
   .sp-pluslet-hover-region{
-    background-color: var(--sp-border-color-rgba);
-  }
-
-  .pluslet {
-    border-bottom: 1px dotted var(--sp-border-color);
+    background-color: var(--sp-bg-color);
   }
 }
 
-.section-container{
-  .sp-guide-column {
-    div:nth-last-child(2){
-      border-bottom: none;
-    }
-  }
-}
+
+
+
+
 
