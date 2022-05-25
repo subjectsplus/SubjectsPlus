@@ -18,7 +18,6 @@
             editor.addContentsCss( pluginDirectory + 'styles/sp-custom-cke-media.css' );
             editor.addCommand('toggleMediaSidebar', {
                 'exec': function(editor) {
-                    // TODO: Hide the other off canvas when using the page's insert button
                     const sidebar = document.getElementById('offcanvasMediaToken');
                     if (sidebar) {
                         // hide other offcanvas that may exist

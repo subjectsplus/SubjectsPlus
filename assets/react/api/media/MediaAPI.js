@@ -6,7 +6,7 @@ export function useFetchMediaByStaff(staffId) {
 
     return useQuery(['media', staffId], 
         () => fetchMedia({
-            staff: '/api/staff/' + staffId
+            staff: staffId
         }), {
             select: data => data['hydra:member'],
             staleTime: 5000,
