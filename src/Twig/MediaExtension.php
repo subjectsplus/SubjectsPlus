@@ -27,10 +27,27 @@ class MediaExtension extends AbstractExtension
      */
     private $entityManager;
 
-    public function __construct(MediaService $mediaService, EntityManagerInterface $entityManager)
+    /**
+     * Mime Type Icons Config
+     * 
+     * @var array $mimeTypeIcons
+     */
+    private $mimeTypeIcons;
+
+    /**
+     * FontAwesome icon size class
+     * 
+     * @var string $fontSizeIconClass
+     */
+    private $iconsFontSizeClass;
+
+    public function __construct(MediaService $mediaService, EntityManagerInterface $entityManager, 
+        array $mimeTypeIcons, string $iconsFontSizeClass)
     {
         $this->mediaService = $mediaService;
         $this->entityManager = $entityManager;
+        $this->mimeTypeIcons = $mimeTypeIcons;
+        $this->iconsFontSizeClass = $iconsFontSizeClass;
     }
     
     public function getFilters()
@@ -39,6 +56,7 @@ class MediaExtension extends AbstractExtension
             new TwigFilter('get_media_url', [$this, 'getMediaUrl']),
             new TwigFilter('get_media_by_staff', [$this, 'getMediaByStaff']),
             new TwigFilter('get_media_attachments', [$this, 'getMediaAttachments']),
+            new TwigFilter('get_mime_type_icon_class', [$this, 'getMimeTypeIconClass']),
         ];
     }
 
@@ -76,5 +94,19 @@ class MediaExtension extends AbstractExtension
         ->getRepository(MediaAttachment::class);
 
         return $mediaAttRepo->findBy(['media' => $media]);
+    }
+
+    public function getMimeTypeIconClass(Media $media)
+    {
+        $mimeType = $media->getMimeType();
+        //dd('mime type icon: ', $this->mimeTypeIcons[$mimeType]);
+        
+        if (\array_key_exists($mimeType, $this->mimeTypeIcons)) {
+            return $this->mimeTypeIcons[$mimeType] . ' ' . $this->iconsFontSizeClass;
+        } else if (\strlen($mimeType) > 6 && \array_key_exists(substr($mimeType, 0, 6), $this->mimeTypeIcons)) {
+            return $this->mimeTypeIcons[substr($mimeType, 0, 6)] . ' ' . $this->iconsFontSizeClass;
+        } else {
+            return $this->mimeTypeIcons['generic'] . ' ' . $this->iconsFontSizeClass;
+        }
     }
 }
