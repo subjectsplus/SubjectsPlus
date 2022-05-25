@@ -40,7 +40,7 @@
 @import "~bootstrap/scss/tooltip";
 @import "~bootstrap/scss/popover";
 //@import "~bootstrap/scss/carousel";
-//@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/offcanvas";
 @import "~bootstrap/scss/placeholders";
 @import "~bootstrap/scss/helpers";
@@ -67,7 +67,7 @@
 @import 'elements/media-token';
 @import 'elements/sp_dnd';
 @import 'elements/sp_guides';
-@import 'elements/sp_general';
+@import 'elements/sp_media';
 @import 'elements/ckeditor';
 
 // add partials - Layout

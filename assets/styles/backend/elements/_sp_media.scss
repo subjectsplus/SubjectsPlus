@@ -1,0 +1,39 @@
+.sp-media-uploads-list {
+  columns: 2;
+
+  .media-item {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0 0.5rem 0.75rem 0;
+
+    img {
+      height: 50px;
+      width: 50px;
+      padding: .25rem;
+      background-color: transparent;
+      border-radius: $border-radius-sm;
+      border: 1px solid var(--sp-border-color);
+    }
+
+    .media-item-title {
+      align-self: center;
+    }
+  }
+}
+
+.media-upload-input{
+  &:before {
+    content: '';
+    background-image: url('../../../backend/images/sp-upload-file75.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.75rem;
+    margin-top: -2px;
+  }
+}
+

@@ -58,7 +58,6 @@ class Subject
      * @ORM\Column(name="shortform", type="string", length=50, nullable=false)
      * @Groups({"faq"})
      */
-    // TODO: usage for guidecontroller frontend as slug
     private $shortform = '';
 
     /**

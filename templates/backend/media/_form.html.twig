@@ -1,19 +1,38 @@
 {{ form_start(form) }}
-    {{ form_row(form.title, {'label': 'control.media_form.title' | trans }) }}
-    {{ form_row(form.altText, {'label': 'control.media_form.alt_text' | trans }) }}
-    {{ form_row(form.caption, {'label': 'control.media_form.caption' | trans }) }}
+    {% if new_media is defined %}
+        <div class="mb-3">
+            {{ form_label(form.file, null, {
+                'label': 'control.media_form.select_file' | trans,
+                'label_attr': {'class': 'form-required'}
+            }) }}
+            <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.media_form.file.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
+            {{ form_widget(form.file, {
+                'attr': {'class': 'media-upload-input'}
+            }) }}
+            {{ form_errors(form.file) }}
+        </div>
+    {% endif %}
 
-    {# TODO: form.file errors while trying to edit media #}
-    {{ form_label(form.file, null, {
-        'label': 'control.media_form.select_file' | trans,
-        'label_attr': {'class': 'form-required'}
-    }) }}
-    <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.media_form.file.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
-    {{ form_widget(form.file) }}
-    {{ form_errors(form.file) }}
+    {{ form_row(form.title, {'label': 'control.media_form.title' | trans }) }}
+
+    <div class="mb-3">
+        {{ form_label(form.altText, null, {
+            'label': 'control.media_form.alt_text' | trans
+        }) }}
+        <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.media_form.alt_text.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
+        {{ form_widget(form.altText) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.caption, null, {
+            'label': 'control.media_form.caption' | trans
+        }) }}
+        <button type="button" class="btn btn-icon-primary fs-sm p-0" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ 'control.media_form.caption.help.text' | trans }}"><i class="fas fa-question-circle"></i></button>
+        {{ form_widget(form.caption) }}
+    </div>
 
     {{ form_rest(form) }}
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div class="col-6">
             <button class="btn btn-gradient btn-round">{{ button_label|default('control.form_form.upload_media' | trans) }}</button>
         </div>
