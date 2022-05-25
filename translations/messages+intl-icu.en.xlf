@@ -676,7 +676,6 @@
       <trans-unit id="LgQomEo" resname="control.guide_form.shortform.help.text">
         <source>control.guide_form.shortform.help.text</source>
         <target>Please do not include spaces or special characters</target>
-        <target>NO spaces or special characters other than a dash. Restricted words: api, control.</target>
       </trans-unit>
       <trans-unit id="5iHJLdP" resname="control.guide_form.shortform.info">
         <source>control.guide_form.shortform.info</source>
