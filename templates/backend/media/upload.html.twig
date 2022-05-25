@@ -20,30 +20,29 @@
     <h1 class="fw-light">{{ 'control.media.upload.title' | trans }}</h1>
 
     <div class="row mt-4">
-        <div class="col-md-7 col-lg-6 col-xl-5">
+        <div class="col-md-7 col-lg-6">
             <div class="panel-basic border-basic">
-                {% set new_media = 'true' %}
                 {{ include('backend/media/_form.html.twig') }}
             </div>
         </div>
-        <div class="col-md-4 col-lg-5 col-xl-6 offset-md-1">
+        <div class="col-md-4 col-lg-5 offset-md-1">
             {# Existing view of staff user's images/files #}
             {% if staff_media is not null %}
                 <div id="staff-media-view">
                     <h3 class="mt-4 mt-md-0">{{ 'control.media.upload.previous_uploads' | trans }}</h3>
-                    <ul class="list-unstyled sp-media-uploads-list">
+                    <ul class="list-unstyled d-flex flex-row flex-wrap sp-media-uploads-list">
                         {% for media_item in staff_media %}
-                            {# TODO: Display generic icons for PDF, DOC, PPT, etc file uploads #}
                             <li class="media-item">
-                                <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}" class="d-inline-block me-2">
+                                <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}" class="btn-link-default">
+                                {# TODO: Display generic icons for PDF, DOC, PPT, etc file uploads #}
                                     <img src="
-                                        {% if 'image/' in media_item.mimeType %}
-                                            {# media_item is an image #}
-                                            {{ asset(media_item | get_media_url('small')) }}
-                                        {% endif %}
-                                    "/>
+                            {% if 'image/' in media_item.mimeType %}
+                                {# media_item is an image #}
+                                {{ asset(media_item | get_media_url('small')) }}
+                            {% endif %}
+                        "/>
+                                    <div class="media-item-title fs-xs lh-sm">{{ media_item.title }}</div>
                                 </a>
-                                <div class="media-item-title fs-xs lh-sm"><a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}" class="btn-link-default">{{ media_item.title }}</a></div>
                             </li>
                         {% endfor %}
                     </ul>
