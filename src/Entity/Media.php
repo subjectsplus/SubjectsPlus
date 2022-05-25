@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Controller\Backend\Api\MediaUploader;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -59,6 +61,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          }
  *      }
  * )
+ * 
+ * @ApiFilter(SearchFilter::class, properties={
+ *      "staff": "exact"
+ * })
  */
 class Media implements \Serializable
 {

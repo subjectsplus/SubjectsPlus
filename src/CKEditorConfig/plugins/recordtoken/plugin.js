@@ -1,6 +1,4 @@
 (function() {
-    // TODO: Add description to iconTemplate popover
-
     const linkClass = 'record-link';
     const tokenClass = 'record-token';
     const descriptionClass = 'record-description';

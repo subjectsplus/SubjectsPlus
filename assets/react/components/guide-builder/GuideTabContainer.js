@@ -110,7 +110,6 @@ function GuideTabContainer(props) {
                     setShowSettings(false);
                     setSavingChanges(false);
                 },
-                onSuccess: () => toast.success('Updated tab successfully!'),
                 onError: () => toast.error('Error has occurred. Failed to update tab!')
             });
         } else {
@@ -136,7 +135,6 @@ function GuideTabContainer(props) {
         deleteTabMutation.mutate({
             tabId: currentTab.id
         }, {
-            onSuccess: () => toast.success('Deleted tab successfully!'),
             onError: () => toast.error('Error has occurred. Failed to delete tab!')
         });
 

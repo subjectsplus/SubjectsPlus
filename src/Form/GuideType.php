@@ -14,7 +14,6 @@ class GuideType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // TODO: Validation
         $builder
             ->add('subject', null, [
                 'required' => true,
