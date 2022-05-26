@@ -13,6 +13,19 @@ parameters:
     app.large_image_dimensions: '750x750' # Maximum dimensions (width x height) in pixels for large image
     app.upload_original_image: false # Whether to upload the original image in addition to the generated images
     app.image_compression_quality: 85
+    app.mime_type_icons:
+        audio/: 'fas fa-file-audio'
+        video/: 'fas fa-file-video'
+        application/pdf: 'fas fa-file-pdf'
+        application/msword: 'fas fa-file-word'
+        application/vnd.openxmlformats-officedocument.wordprocessingml.document: 'fas fa-file-word'
+        application/vnd.ms-excel: 'fas fa-file-excel'
+        application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: 'fas fa-file-excel'
+        application/vnd.ms-powerpoint: 'fas fa-file-powerpoint'
+        application/vnd.openxmlformats-officedocument.presentationml.presentation: 'fas fa-file-powerpoint'
+        text/csv: 'fas fa-file-csv'
+        generic: 'fas fa-file'
+    app.icons_font_size_class: 'fa-2x'
 
 services:
     # default configuration for services in *this* file
@@ -27,6 +40,8 @@ services:
             $largeImageDimensions: '%app.large_image_dimensions%'
             $uploadOriginalImage: '%app.upload_original_image%'
             $imageCompressionQuality: '%app.image_compression_quality%'
+            $mimeTypeIcons: '%app.mime_type_icons%'
+            $iconsFontSizeClass: '%app.icons_font_size_class%'
 
 
     # makes classes in src/ available to be used as services

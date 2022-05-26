@@ -13,11 +13,11 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simple toolbar configuration.
 	config.toolbar = [
+			['Maximize'],
 			['Bold', 'Italic'],
 			['NumberedList', 'BulletedList'],
 			['RemoveFormat', 'PasteText', 'PasteFromWord'],
 			['Link', 'Anchor'],
-			['Maximize'],
 			['Source'],
 			['Image'],
 			'/',
