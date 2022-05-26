@@ -831,7 +831,7 @@
       </trans-unit>
       <trans-unit id="LFcA838" resname="control.guides.show.type.inactive">
         <source>control.guides.show.type.inactive</source>
-        <target>This guide is NOT public</target>
+        <target>This guide is hidden</target>
       </trans-unit>
       <trans-unit id="Wc1Sxkx" resname="control.faqs.index.active_faqs_label">
         <source>control.faqs.index.active_faqs_label</source>
@@ -1004,6 +1004,14 @@
       <trans-unit id="7VwAwL9" resname="control.media.back_to_upload">
         <source>control.media.back_to_upload</source>
         <target>Back to Media Upload</target>
+      </trans-unit>
+      <trans-unit id="hF8bZsN" resname="control.guides.show.type.suppressed">
+        <source>control.guides.show.type.suppressed</source>
+        <target>This guide is suppressed</target>
+      </trans-unit>
+      <trans-unit id="MDvwBkJ" resname="control.guides.table.type.suppressed">
+        <source>control.guides.table.type.suppressed</source>
+        <target>Suppressed</target>
       </trans-unit>
     </body>
   </file>

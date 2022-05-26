@@ -3,6 +3,10 @@
   display:inline !important;
 }
 
+.cke_button.cke_button__image { 
+  display: none; 
+}
+
 .cke_button__embedsemantic_label{
   display:inline !important;
   visibility: hidden;

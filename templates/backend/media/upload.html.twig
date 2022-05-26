@@ -33,15 +33,14 @@
                     <h3 class="mt-4 mt-md-0">{{ 'control.media.upload.previous_uploads' | trans }}</h3>
                     <ul class="list-unstyled sp-media-uploads-list">
                         {% for media_item in staff_media %}
-                            {# TODO: Display generic icons for PDF, DOC, PPT, etc file uploads #}
                             <li class="media-item">
                                 <a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}" class="d-inline-block me-2">
-                                    <img src="
-                                        {% if 'image/' in media_item.mimeType %}
-                                            {# media_item is an image #}
-                                            {{ asset(media_item | get_media_url('small')) }}
-                                        {% endif %}
-                                    "/>
+                                    {% if 'image/' in media_item.mimeType %}
+                                        {# media_item is an image #}
+                                        <img src="{{ asset(media_item | get_media_url('small')) }}" />
+                                    {% else %}
+                                        <i class="{{ media_item | get_mime_type_icon_class() }}"></i>                        
+                                    {% endif %}
                                 </a>
                                 <div class="media-item-title fs-xs lh-sm"><a href="{{ path('media_show', {'mediaId': media_item.mediaId}) }}" class="btn-link-default">{{ media_item.title }}</a></div>
                             </li>

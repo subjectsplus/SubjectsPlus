@@ -86,6 +86,18 @@
         }
     });
 
+    CKEDITOR.on('dialogDefinition', function (evt) {
+        const dialogName = evt.data.name;
+        const dialogDefinition = evt.data.definition;
+    
+        if (dialogName === 'image2') {        
+            var infoTab = dialogDefinition.getContents('info');
+
+            // Remove "URL" field from dialog
+            infoTab.remove('src');
+        }
+    });
+
     CKEDITOR.on('instanceReady', function() {
         // When an item in the media list is dragged, copy its data into the drag and drop data transfer.
         // This data is later read by the editor#paste listener in the media plugin defined above.
