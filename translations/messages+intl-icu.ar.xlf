@@ -4962,6 +4962,14 @@
         <source>control.media.back_to_upload</source>
         <target>__control.media.back_to_upload</target>
       </trans-unit>
+      <trans-unit id="hF8bZsN" resname="control.guides.show.type.suppressed">
+        <source>control.guides.show.type.suppressed</source>
+        <target>__control.guides.show.type.suppressed</target>
+      </trans-unit>
+      <trans-unit id="MDvwBkJ" resname="control.guides.table.type.suppressed">
+        <source>control.guides.table.type.suppressed</source>
+        <target>__control.guides.table.type.suppressed</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

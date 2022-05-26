@@ -56,10 +56,14 @@
                         </td>
                         <td><a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn-link-default">{{ guide.subject | raw }}</a></td>
                         <td>
-                            {% if guide.active %}
+                            {% if guide.active == 1 %}
                                 {{ 'control.guides.table.type.active' | trans }}
-                            {% else %}
+                            {% elseif guide.active == 0 %}
                                 {{ 'control.guides.table.type.hidden' | trans }}
+                            {% elseif guide.active == 2 %}
+                                {{ 'control.guides.table.type.suppressed' | trans }}
+                            {% else %}
+                                {{ 'control.not_applicable_label' | trans }}
                             {% endif %}
                         </td>
                         <td>{{ guide.type }}</td>
@@ -84,7 +88,6 @@
             <p class="mt-4"><a href="#" class="btn-link">Help with Guides</a></p>
         </div>
     </div>
-
 
 </div>
 {% endblock %}
