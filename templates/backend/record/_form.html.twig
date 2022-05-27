@@ -1,0 +1,12 @@
+{{ dump(form) }}
+<ul>
+{% for locationField in form.location %}
+    <li>
+        {{ form_errors(locationField) }}
+        {{ form_widget(locationField) }}
+    </li>
+{% endfor %}
+</ul>
+{{ form_start(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

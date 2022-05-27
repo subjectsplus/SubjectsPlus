@@ -3,20 +3,45 @@
 {% block title %}Browse Records{% endblock %}
 
 {% block content %}
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
-            {{ message }}
-        </div>
-    {% endfor %}
+    <h1>Title index</h1>
 
-    <h1>Browse Records</h1>
-{#    {{ encore_entry_script_tags('alphabet_list') }}#}
-{#    <div id="AlphabetList"></div>#}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>TitleId</th>
+                <th>Title</th>
+                <th>AlternateTitle</th>
+                <th>Description</th>
+                <th>InternalNotes</th>
+                <th>Pre</th>
+                <th>LastModifiedBy</th>
+                <th>LastModified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for title in titles %}
+            <tr>
+                <td>{{ title.titleId }}</td>
+                <td>{{ title.title }}</td>
+                <td>{{ title.alternateTitle }}</td>
+                <td>{{ title.description }}</td>
+                <td>{{ title.internalNotes }}</td>
+                <td>{{ title.pre }}</td>
+                <td>{{ title.lastModifiedBy }}</td>
+                <td>{{ title.lastModified ? title.lastModified|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('backend_record_show', {'titleId': title.titleId}) }}">show</a>
+                    <a href="{{ path('backend_record_edit', {'titleId': title.titleId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    {{ encore_entry_script_tags('record_results') }}
-    <div id="RecordResults"></div>
-
-
+    <a href="{{ path('backend_record_new') }}">Create new</a>
 {% endblock %}
-
-
