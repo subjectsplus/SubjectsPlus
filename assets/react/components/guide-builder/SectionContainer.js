@@ -135,7 +135,7 @@ function SectionContainer({ tabId }) {
                                 setAddSectionHovered(false);
                             }}
                         >
-                            <i className="fas fa-plus-circle d-block"></i>
+                            <span className="section-icon d-block"></span>
                             <span className={'fs-xs' + (addSectionHovered ? '' : ' invisible')}>Add Section</span>
                         </button>
                     </div>

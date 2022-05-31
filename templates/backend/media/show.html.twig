@@ -41,6 +41,7 @@
                 <tr>
                     <th>{{ 'control.media_details.attachments' | trans }}</th>
                     <td>
+                        {# TODO: Link to attachment if it's a pluslet, FAQ is working fine #}
                         {% for attachment in (media | get_media_attachments) %}
                             <a href="{{ '/control/%s/%s' | format(attachment.attachmentType, attachment.attachmentId) }}" class="btn-link-default fs-sm">
                                 {{'%s:%s'| format(attachment.attachmentType, attachment.attachmentId) }}
