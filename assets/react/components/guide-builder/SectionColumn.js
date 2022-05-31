@@ -21,8 +21,7 @@ function SectionColumn({ columnId, sectionId, pluslets, columnSize, currentDragg
 
     return (
         <Col lg={Number(columnSize)} className="mb-3 mb-lg-0">
-            <Droppable type="pluslet" style={{ transform: 'none' }}
-                droppableId={columnId} direction="vertical">
+            <Droppable type="pluslet" droppableId={columnId} direction="vertical">
                 {(provided, snapshot) => (
                     <div className="sp-guide-column" {...provided.droppableProps} ref={provided.innerRef}>
                         <span className="visually-hidden">{columnId}</span>
