@@ -1,0 +1,13 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}New Record{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Create new Record</h1>
+
+    {{ include('backend/record/_form.html.twig') }}
+
+    <a href="{{ path('backend_record_index') }}">back to list</a>
+    </div>
+{% endblock %}

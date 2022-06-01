@@ -1,0 +1,15 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Edit Record{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Edit Record</h1>
+
+    {{ include('backend/record/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('backend_record_index') }}">back to list</a>
+
+    {{ include('backend/record/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

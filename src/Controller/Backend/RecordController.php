@@ -2,8 +2,12 @@
 
 namespace App\Controller\Backend;
 
-use App\Entity\Title;
+use App\Entity\Record;
+use App\Form\Record1Type;
+use App\Repository\RecordRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,17 +17,77 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecordController extends AbstractController
 {
     /**
-     * @Route("/", name="record_index", methods={"GET"})
-     * @Route("/index.php", methods={"GET"})
+     * @Route("/", name="backend_record_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(RecordRepository $recordRepository): Response
     {
-
-        $records = $this->getDoctrine()
-                     ->getRepository(Title::class)
-                     ->findAll();
         return $this->render('backend/record/index.html.twig', [
-            'records' => $records,
+            'records' => $recordRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/new", name="backend_record_new", methods={"GET", "POST"})
+     */
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $record = new Record();
+        $form = $this->createForm(Record1Type::class, $record);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($record);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('backend_record_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('backend/record/new.html.twig', [
+            'record' => $record,
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="backend_record_show", methods={"GET"})
+     */
+    public function show(Record $record): Response
+    {
+        return $this->render('backend/record/show.html.twig', [
+            'record' => $record,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="backend_record_edit", methods={"GET", "POST"})
+     */
+    public function edit(Request $request, Record $record, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(Record1Type::class, $record);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('backend_record_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('backend/record/edit.html.twig', [
+            'record' => $record,
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="backend_record_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Record $record, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$record->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($record);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('backend_record_index', [], Response::HTTP_SEE_OTHER);
     }
 }

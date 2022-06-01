@@ -1,0 +1,73 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Record{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Record</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ record.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ record.title }}</td>
+            </tr>
+            <tr>
+                <th>Alternate_title</th>
+                <td>{{ record.alternateTitle }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ record.description }}</td>
+            </tr>
+            <tr>
+                <th>Internal_notes</th>
+                <td>{{ record.internalNotes }}</td>
+            </tr>
+            <tr>
+                <th>Pre</th>
+                <td>{{ record.pre }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ record.location }}</td>
+            </tr>
+            <tr>
+                <th>Call_number</th>
+                <td>{{ record.callNumber }}</td>
+            </tr>
+            <tr>
+                <th>Eres_display</th>
+                <td>{{ record.eresDisplay }}</td>
+            </tr>
+            <tr>
+                <th>Display_note</th>
+                <td>{{ record.displayNote }}</td>
+            </tr>
+            <tr>
+                <th>Trial_start</th>
+                <td>{{ record.trialStart ? record.trialStart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Trial_end</th>
+                <td>{{ record.trialEnd ? record.trialEnd|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Record_status</th>
+                <td>{{ record.recordStatus }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_record_index') }}">back to list</a>
+
+    <a href="{{ path('backend_record_edit', {'id': record.id}) }}">edit</a>
+
+    {{ include('backend/record/_delete_form.html.twig') }}
+
+    </div>
+{% endblock %}
