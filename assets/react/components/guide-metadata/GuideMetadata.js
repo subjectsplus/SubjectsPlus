@@ -27,9 +27,11 @@ function GuideMetadata({ subjectId }) {
             onSuccess: (updatedData) => {
                 // Replace the static text labels on page with updated values
                 //const shortformLabel = document.getElementById('shortform-label');
+                const shortformLink = document.getElementById('shortform-link');
                 const subjectHeading = document.getElementById('subject-heading');
 
                 //shortformLabel.innerText = updatedData.shortform;
+                shortformLink.setAttribute('href', '/' + updatedData.shortform);
                 subjectHeading.innerText = updatedData.subject;
             },
             onSettled: () => setIsUpdating(false)
