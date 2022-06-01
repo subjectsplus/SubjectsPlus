@@ -237,7 +237,7 @@ function GuideTabContainer(props) {
                 <>
                     {/* Guide Tab Container consisting of individual tab elements */}
                     <DragDropContext onDragStart={handleOnDragStart} onDragEnd={handleOnDragEnd}>
-                        <Droppable type="tab" style={{ transform: "none" }} droppableId="guide-tabs-container" direction="horizontal">
+                        <Droppable type="tab" droppableId="guide-tabs-container" direction="horizontal">
                             {(provided) => (
                                 <div id="guide-tabs-container" {...provided.droppableProps} ref={provided.innerRef}>
                                     <Tab.Container id="guide-tabs" onSelect={onTabSelect} activeKey={activeKey}>
