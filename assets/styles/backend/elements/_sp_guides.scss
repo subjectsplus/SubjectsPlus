@@ -286,6 +286,29 @@
       max-width: 100%;
       height: auto;
     }
+
+    img[style="float:left"] {
+      margin: 0 1rem 1rem 0;
+    }
+
+    img[style="float:right"] {
+      margin: 0 0 1rem 1rem;
+    }
+
+    .image[style="float:left"] {
+        margin: 0 1rem 1rem 0;
+    }
+
+    .image[style="float:right"] {
+        margin: 0 0 1rem 1rem;
+    }
+
+    figcaption{
+      font-size: $font-size-sm;
+      text-align: center;
+      font-style: italic;
+      margin-top: 0.25rem;
+    }
   }
 }
 
