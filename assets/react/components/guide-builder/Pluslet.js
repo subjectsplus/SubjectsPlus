@@ -21,6 +21,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const deletePlusletMutation = useDeletePluslet(sectionId);
 
     const isCurrentlyDragging = (('pluslet-' + plusletId) === currentDraggingId);
+    const isBeingDraggedOver = (!isCurrentlyDragging && currentDraggingId && 
+        currentDraggingId.substring(0, 8) === 'pluslet-');
     const isActiveDropdown = plusletDropdownRef?.current?.classList ? 
         plusletDropdownRef.current.classList.contains('show') : false;
 
@@ -194,7 +196,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             <Draggable type="pluslet" key={plusletId.toString()} draggableId={'pluslet-' + plusletId} index={plusletRow}>
                 {(provided, snapshot) => {
                     return (
-                        <div className={getPlusletClassName(snapshot.isDragging || isCurrentlyDragging)} key={plusletId} 
+                        <div className={getPlusletClassName(snapshot.isDragging || isCurrentlyDragging || isBeingDraggedOver)} key={plusletId} 
                             ref={provided.innerRef} onDoubleClick={toggleEditable}
                             onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} 
                             onMouseLeave={() => setPlusletHovered(false)} {...provided.draggableProps}>
@@ -229,7 +231,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                                     </div>
                                 </div>
                             </div>
-                            {editor(snapshot.isDragging || isCurrentlyDragging)}
+                            {editor(snapshot.isDragging || isCurrentlyDragging || isBeingDraggedOver)}
                         </div>
                     );
                 }}

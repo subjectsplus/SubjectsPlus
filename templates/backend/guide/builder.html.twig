@@ -19,7 +19,7 @@
 
     <a class="btn-link fs-xs ms-2" data-bs-toggle="offcanvas" href="#offcanvasGuideDetails" role="button" aria-controls="offcanvasGuideDetails" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i> {{ 'control.guides.table.button.guide_details' | trans }}</a>
 
-    <a href="{{ path('subject_show', {'shortform': guide.shortform}) }}" class="btn-link fs-xs ms-2" title="{{ 'control.guide.preview.label' | trans }}" target="_blank"><i class="fas fa-eye"></i> <span id="shortform-label">{{ 'control.guide.preview.label' | trans }}</span></a>
+    <a id="shortform-link" href="{{ path('subject_show', {'shortform': guide.shortform}) }}" class="btn-link fs-xs ms-2" title="{{ 'control.guide.preview.label' | trans }}" target="_blank"><i class="fas fa-eye"></i> <span id="shortform-label">{{ 'control.guide.preview.label' | trans }}</span></a>
 
     <h1 id="subject-heading" class="fw-light">{{ guide.subject | raw }}</h1>
 
