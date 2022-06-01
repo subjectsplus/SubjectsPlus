@@ -297,15 +297,22 @@
 
     .image[style="float:left"] {
         margin: 0 1rem 1rem 0;
+
+      figcaption{
+        text-align: center;
+      }
     }
 
     .image[style="float:right"] {
         margin: 0 0 1rem 1rem;
+
+      figcaption{
+        text-align: center;
+      }
     }
 
     figcaption{
       font-size: $font-size-sm;
-      text-align: center;
       font-style: italic;
       margin-top: 0.25rem;
     }
