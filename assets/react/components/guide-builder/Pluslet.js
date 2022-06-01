@@ -157,6 +157,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
         if (isDragging) {
             className += ' sp-pluslet-dragging';
+        } else if (isBeingDraggedOver) {
+            className += ' sp-pluslet-dragging-over'
         } else if (plusletHovered || editable) {
             className += ' sp-pluslet-hover-region';
         }
@@ -196,7 +198,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             <Draggable type="pluslet" key={plusletId.toString()} draggableId={'pluslet-' + plusletId} index={plusletRow}>
                 {(provided, snapshot) => {
                     return (
-                        <div className={getPlusletClassName(snapshot.isDragging || isCurrentlyDragging || isBeingDraggedOver)} key={plusletId} 
+                        <div className={getPlusletClassName(snapshot.isDragging || isCurrentlyDragging)} key={plusletId} 
                             ref={provided.innerRef} onDoubleClick={toggleEditable}
                             onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} 
                             onMouseLeave={() => setPlusletHovered(false)} {...provided.draggableProps}>
