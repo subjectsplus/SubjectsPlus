@@ -114,7 +114,7 @@ function SectionContainer({ tabId }) {
             return (
                 <>
                     <DragDropContext onDragEnd={handleOnDragEnd} onBeforeCapture={handleOnBeforeCapture}>
-                        <Droppable type="section" style={{ transform: "none" }} droppableId="guide-section-container" direction="vertical">
+                        <Droppable type="section" droppableId="guide-section-container" direction="vertical">
                             {(provided, snapshot) => (
                                 <div className="section-container" {...provided.droppableProps} ref={provided.innerRef}>
                                     {guideSections}
