@@ -19,7 +19,7 @@ CKEDITOR.editorConfig = function( config ) {
 			['RemoveFormat', 'PasteText', 'PasteFromWord'],
 			['Link', 'Anchor'],
 			['Source'],
-			'Image',
+			['Image'],
 			'/',
 			['EmbedSemantic', 'Media', 'Record']
 	];
