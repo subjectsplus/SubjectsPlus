@@ -1,0 +1,13 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}New Title{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Create new Title</h1>
+
+    {{ include('backend/title/_form.html.twig') }}
+
+    <a href="{{ path('backend_title_index') }}">back to list</a>
+    </div>
+{% endblock %}

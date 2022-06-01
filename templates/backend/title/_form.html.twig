@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_row(form.title) }}
+    <ul class="location">
+    {% for tag in form.location %}
+
+        data-index="{{ form.location|length > 0 ? form.location|last.vars.name + 1 : 0 }}"
+                                                 data-prototype="{{ form_widget(form.location.vars.prototype)|e('html_attr') }}"
+    {% endfor %}
+    </ul>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

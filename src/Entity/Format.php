@@ -44,4 +44,7 @@ class Format
 
         return $this;
     }
+    public function __toString(): string {
+        return $this->format;
+    }
 }

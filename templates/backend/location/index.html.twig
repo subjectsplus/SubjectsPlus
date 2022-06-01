@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location index{% endblock %}
+
+{% block body %}
+    <h1>Location index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>LocationId</th>
+                <th>CallNumber</th>
+                <th>Location</th>
+                <th>EresDisplay</th>
+                <th>DisplayNote</th>
+                <th>Helpguide</th>
+                <th>CitationGuide</th>
+                <th>Ctags</th>
+                <th>RecordStatus</th>
+                <th>TrialStart</th>
+                <th>TrialEnd</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for location in locations %}
+            <tr>
+                <td>{{ location.locationId }}</td>
+                <td>{{ location.callNumber }}</td>
+                <td>{{ location.location }}</td>
+                <td>{{ location.eresDisplay }}</td>
+                <td>{{ location.displayNote }}</td>
+                <td>{{ location.helpguide }}</td>
+                <td>{{ location.citationGuide }}</td>
+                <td>{{ location.ctags }}</td>
+                <td>{{ location.recordStatus }}</td>
+                <td>{{ location.trialStart ? location.trialStart|date('Y-m-d') : '' }}</td>
+                <td>{{ location.trialEnd ? location.trialEnd|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('backend_location_show', {'locationId': location.locationId}) }}">show</a>
+                    <a href="{{ path('backend_location_edit', {'locationId': location.locationId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_location_new') }}">Create new</a>
+{% endblock %}

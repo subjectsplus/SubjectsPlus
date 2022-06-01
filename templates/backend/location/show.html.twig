@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location{% endblock %}
+
+{% block body %}
+    <h1>Location</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>LocationId</th>
+                <td>{{ location.locationId }}</td>
+            </tr>
+            <tr>
+                <th>CallNumber</th>
+                <td>{{ location.callNumber }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ location.location }}</td>
+            </tr>
+            <tr>
+                <th>EresDisplay</th>
+                <td>{{ location.eresDisplay }}</td>
+            </tr>
+            <tr>
+                <th>DisplayNote</th>
+                <td>{{ location.displayNote }}</td>
+            </tr>
+            <tr>
+                <th>Helpguide</th>
+                <td>{{ location.helpguide }}</td>
+            </tr>
+            <tr>
+                <th>CitationGuide</th>
+                <td>{{ location.citationGuide }}</td>
+            </tr>
+            <tr>
+                <th>Ctags</th>
+                <td>{{ location.ctags }}</td>
+            </tr>
+            <tr>
+                <th>RecordStatus</th>
+                <td>{{ location.recordStatus }}</td>
+            </tr>
+            <tr>
+                <th>TrialStart</th>
+                <td>{{ location.trialStart ? location.trialStart|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TrialEnd</th>
+                <td>{{ location.trialEnd ? location.trialEnd|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_location_index') }}">back to list</a>
+
+    <a href="{{ path('backend_location_edit', {'locationId': location.locationId}) }}">edit</a>
+
+    {{ include('backend/location/_delete_form.html.twig') }}
+{% endblock %}

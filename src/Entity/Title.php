@@ -113,7 +113,7 @@ class Title
     private $lastModified;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     *
      *
      * @ORM\OneToMany(targetEntity="Location", mappedBy="title", fetch="EAGER")
      * @ApiSubresource(maxDepth=1)
@@ -122,7 +122,7 @@ class Title
     private $location;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Rank", mappedBy="title")
+     * @ORM\OneToMany(targetEntity="Rank", mappedBy="title")
      * @Groups({"title"})
      */
     private $ranks;
@@ -250,5 +250,9 @@ class Title
         }
 
         return $this;
+    }
+
+    public function __toString(): string {
+        return $this->title;
     }
 }
