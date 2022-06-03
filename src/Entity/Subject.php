@@ -229,7 +229,7 @@ class Subject
 
     public function setShortform(string $shortform): self
     {
-        $this->shortform = $shortform;
+        $this->shortform = strtolower($shortform);
 
         return $this;
     }
