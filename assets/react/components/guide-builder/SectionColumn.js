@@ -42,7 +42,7 @@ function SectionColumn({ columnId, sectionId, pluslets, columnSize, currentDragg
                             >
                                 <i className="fas fa-plus-circle d-block"></i>
                                 <span className={'fs-xs' + (addPlusletHovered ? '' : ' invisible')}>
-                                        Add Pluslet
+                                        Add Box
                                 </span>
                             </button>
                         </div>

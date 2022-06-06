@@ -228,7 +228,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
                                             {/* Delete Pluslet */}
                                             <li><a className="dropdown-item" onClick={handlePlusletDelete}><i
-                                                className="fas fa-trash"></i> Delete Pluslet</a></li>
+                                                className="fas fa-trash"></i> Delete Box</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                     );
                 }}
             </Draggable>
-            <DeleteConfirmModal show={deletePlusletClicked} resourceName="Pluslet" onHide={() => setDeletePlusletClicked(false)}
+            <DeleteConfirmModal show={deletePlusletClicked} resourceName="Box" onHide={() => setDeletePlusletClicked(false)}
                 confirmOnClick={handlePlusletDelete} />
         </>
     )
