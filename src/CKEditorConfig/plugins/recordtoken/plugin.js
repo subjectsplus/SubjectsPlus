@@ -304,7 +304,7 @@
             });
 
             editor.ui.addButton( 'Record', {
-                label: 'Insert Record',
+                label: 'Insert Resource',
                 command: 'toggleRecordSearch',
                 toolbar: 'insert,101'
             });

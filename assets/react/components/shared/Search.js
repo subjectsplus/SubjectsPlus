@@ -148,7 +148,7 @@ function Search(props) {
         <div id={props.tokenType + '-search'}>
             {props.extras}
             <SearchBar id={props.tokenType + '-searchbar'} className="form-control"
-                    placeholder={'Search ' + props.tokenType} onChange={onSearchInput} />
+                    placeholder={props.placeholder ?? ('Search ' + props.tokenType)} onChange={onSearchInput} />
             <ul id={props.tokenType + '-list'} ref={listRef} className={`list-unstyled ${results.length > 0 ? "sp-search-results-panel-list" : ""}`}>
                 {resultsMessage}
                 {bottomElement}

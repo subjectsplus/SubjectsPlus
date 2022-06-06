@@ -71,7 +71,7 @@
       </trans-unit>
       <trans-unit id="2Oy8S9a" resname="control.dashboard.create_new_record">
         <source>control.dashboard.create_new_record</source>
-        <target>Record</target>
+        <target>Resource</target>
       </trans-unit>
       <trans-unit id="2a9t2sP" resname="control.dashboard.create_new_guide">
         <source>control.dashboard.create_new_guide</source>
@@ -99,11 +99,11 @@
       </trans-unit>
       <trans-unit id="J62gEvr" resname="control.header.records">
         <source>control.header.records</source>
-        <target>Records</target>
+        <target>Resources</target>
       </trans-unit>
       <trans-unit id="sfouvFI" resname="control.header.records.new_record">
         <source>control.header.records.new_record</source>
-        <target>New record</target>
+        <target>New resource</target>
       </trans-unit>
       <trans-unit id="a1eFlPx" resname="control.header.records.browse_items">
         <source>control.header.records.browse_items</source>
@@ -355,7 +355,7 @@
       </trans-unit>
       <trans-unit id="frBk6HE" resname="control.flyout.add_record_token.heading">
         <source>control.flyout.add_record_token.heading</source>
-        <target>Insert a Record</target>
+        <target>Insert a Resource</target>
       </trans-unit>
       <trans-unit id="u5gZ36W" resname="control.custom_tokens_menu.add_button">
         <source>control.custom_tokens_menu.add_button</source>
@@ -363,7 +363,7 @@
       </trans-unit>
       <trans-unit id="GqmMTUv" resname="control.custom_tokens_menu.add_record_token">
         <source>control.custom_tokens_menu.add_record_token</source>
-        <target>Record</target>
+        <target>Resource</target>
       </trans-unit>
       <trans-unit id="kuKwVOB" resname="control.custom_tokens_menu.add_media_token">
         <source>control.custom_tokens_menu.add_media_token</source>
@@ -419,7 +419,7 @@
       </trans-unit>
       <trans-unit id="7Hlj18x" resname="control.dashboard.records_heading">
         <source>control.dashboard.records_heading</source>
-        <target>Records</target>
+        <target>Resource</target>
       </trans-unit>
       <trans-unit id="NyT6_cQ" resname="control.dashboard.see_all_records">
         <source>control.dashboard.see_all_records</source>
@@ -547,7 +547,7 @@
       </trans-unit>
       <trans-unit id="TBLN5SK" resname="control.faqs.table.no_records">
         <source>control.faqs.table.no_records</source>
-        <target>No records found</target>
+        <target>No resources found</target>
       </trans-unit>
       <trans-unit id="zh2hxIN" resname="control.faqs.table.action_buttons.aria">
         <source>control.faqs.table.action_buttons.aria</source>

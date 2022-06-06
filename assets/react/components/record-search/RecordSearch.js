@@ -23,7 +23,7 @@ function RecordSearch() {
 
     // TODO: Translations for title, label below
     return (
-        <Search tokenType="record" title="Get Records" apiLink={getApiLink}
+        <Search tokenType="record" title="Get Resources" placeholder="Search Resources" apiLink={getApiLink}
             refresh={refresh}
             extras={
                 <div className="form-check form-switch">
