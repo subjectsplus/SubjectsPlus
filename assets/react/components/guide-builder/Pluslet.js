@@ -189,7 +189,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                         onChange={onCKEditorChanged} />);
         } else {
             return (<div className={getPlusletBodyClassName(isDragging)}
-                        dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body, { ADD_TAGS: ["oembed"] })}} />);
+                        dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body, { ADD_TAGS: ["iframe"] })}} />);
         }
     }
     
