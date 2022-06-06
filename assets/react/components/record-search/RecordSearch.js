@@ -16,7 +16,7 @@ function RecordSearch() {
     const getApiLink = (search_term, page=1) => {
         return apiLink + '?' + new URLSearchParams({
             search: search_term,
-            'location.eresDisplay': (azlist ? 'Y' : 'N'),
+            ...(azlist ? {'location.eresDisplay': 'Y'} : {}),
             page: page
         });
     }
