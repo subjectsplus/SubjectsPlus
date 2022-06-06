@@ -104,7 +104,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         }
     }
     
-    const editableTitle = () => {
+    const editableTitle = (dragHandleProps) => {
         if (editable) {
             return (
                 <div className="sp-pluslet-title">
@@ -132,7 +132,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                 </div>
             );
         } else {
-            return (<p className="sp-pluslet-title">{plusletTitle}</p>);
+            return (<p className="sp-pluslet-title" {...dragHandleProps}>{plusletTitle}</p>);
         }
     }
 
@@ -205,12 +205,12 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                             <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                             <div className="sp-pluslet-actions-container">
                                 {/* Drag Handle */}
-                                <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
+                                {/* <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
                                     <i className={getVisibility('fas fa-arrows-alt')}></i>
-                                </div>
+                                </div> */}
 
                                 {/* Editable Title */}
-                                {editableTitle()}
+                                {editableTitle(provided.dragHandleProps)}
 
                                 <div className={getVisibility('text-end')}>
                                     {/* Edit/Save Button */}
