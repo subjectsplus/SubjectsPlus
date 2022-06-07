@@ -4,6 +4,7 @@ import CKEditor from '#components/shared/CKEditor';
 import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDebouncedCallback } from 'use-debounce';
+import { hideAllOffcanvas } from '#utility/Utility';
 import DOMPurify from 'dompurify';
 
 function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, currentDraggingId, currentEditablePluslet, 
@@ -36,6 +37,13 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         }
     }, [currentEditablePluslet]);
     
+    const savePluslet = () => {
+        currentEditablePlusletCallBack('');
+        updatePlusletTitle();
+        updatePlusletBody();
+        hideAllOffcanvas();
+    }
+
     const deletePluslet = () => {
         deletePlusletMutation.mutate({
             plusletId: plusletId,
@@ -56,9 +64,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             currentEditablePlusletCallBack(plusletId);
         } else {
             setEditable(false);
-            currentEditablePlusletCallBack('');
-            updatePlusletTitle();
-            updatePlusletBody();
+            savePluslet();
         }
     }
 
@@ -66,9 +72,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         if (currentEditablePluslet === plusletId) {
             if ((event.ctrlKey || event.metaKey) && event.key === 's') {
                 event.preventDefault();
-                currentEditablePlusletCallBack('');
-                updatePlusletTitle();
-                updatePlusletBody();
+                savePluslet();
             }
         }
     }
