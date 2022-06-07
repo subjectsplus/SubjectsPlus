@@ -110,7 +110,7 @@ function Search(props) {
 
             return (
                 <>
-                    <p className="fs-sm fst-italic"><b>Click</b> or <b>Drag</b> to Pluslet.</p>
+                    <p className="fs-sm fst-italic"><b>Click</b> or <b>drag</b> into box.</p>
                     {resultTokens}
                 </>
             );
