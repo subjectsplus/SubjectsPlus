@@ -261,15 +261,19 @@
   }
 
   .sp-pluslet-title{
-    width: calc(100% - 71px);
+    width: calc(100% - 52px);
     margin-bottom: 1rem;
     font-weight: bold;
     margin-right: 0.5rem;
 
     .form-control {
-      font-weight: bold;
       line-height: 1;
       padding: 0.25rem 0.5rem;
+
+      &::placeholder{
+        font-style: italic;
+        font-size: $font-size-sm;
+      }
     }
   }
 

@@ -136,7 +136,7 @@ function SectionContainer({ tabId }) {
                             }}
                         >
                             <span className="section-icon d-block"></span>
-                            <span className={'fs-xs' + (addSectionHovered ? '' : ' invisible')}>Add Section</span>
+                            <span className="fs-xs">Add Section</span>
                         </button>
                     </div>
                 </>

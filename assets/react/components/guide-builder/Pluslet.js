@@ -110,7 +110,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                 <div className="sp-pluslet-title">
                     {/* Label is for accessibility purposes, will not be visible */}
                     <label htmlFor="edit-pluslet-title" className="form-label visually-hidden">
-                        Enter Pluslet Title
+                        Enter Box Title
                     </label>
                     <input
                         type="text"
@@ -139,13 +139,13 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const editSaveButton = () => {
         if (editable) {
             return (
-                <button onClick={toggleEditable} title="Save pluslet" className="btn btn-muted sp-pluslet-icon-btn">
+                <button onClick={toggleEditable} title="Save box" className="btn btn-link sp-pluslet-icon-btn">
                     <i className="fas fa-save"></i>
                 </button>
             );
         } else {
             return (
-                <button onClick={toggleEditable} title="Edit pluslet" className="btn btn-muted sp-pluslet-icon-btn">
+                <button onClick={toggleEditable} title="Edit box" className="btn btn-muted sp-pluslet-icon-btn">
                     <i className="fas fa-pen"></i>
                 </button>
             );
@@ -203,7 +203,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                             <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
                             <div className="sp-pluslet-actions-container">
                                 {/* Drag Handle */}
-                                <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move pluslet">
+                                <div className="drag-handle btn-muted me-1 fs-sm" {...provided.dragHandleProps} title="Move box">
                                     <i className={getVisibility('fas fa-arrows-alt')}></i>
                                 </div>
 
@@ -216,7 +216,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
                                     {/* Dropdown */}
                                     <div className="dropdown basic-dropdown d-inline-block ms-1">
-                                        <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false" title="Box options">
                                             <i className="fas fa-ellipsis-v"></i>
                                         </button>
                                         <ul ref={plusletDropdownRef} className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">
@@ -226,7 +226,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
                                             {/* Delete Pluslet */}
                                             <li><a className="dropdown-item" onClick={handlePlusletDelete}><i
-                                                className="fas fa-trash"></i> Delete Pluslet</a></li>
+                                                className="fas fa-trash"></i> Delete Box</a></li>
                                         </ul>
                                     </div>
                                 </div>
