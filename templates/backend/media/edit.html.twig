@@ -4,12 +4,6 @@
 
 {% block content %}
     <div class="container py-5">
-        {% for error in app.flashes('error') %}
-            <div class="flash-notice alert alert-info text-center mb-4">
-                {{ message }}
-            </div>
-        {% endfor %}
-
         <a href="{{ path('media_upload') }}" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.media.back_to_upload' | trans }}</a>
         <h1 class="fw-light">{{ 'control.media.edit_details' | trans }}</h1>
 

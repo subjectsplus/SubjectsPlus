@@ -3,12 +3,6 @@
 {% block title %}Browse Records{% endblock %}
 
 {% block content %}
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <h1>Browse Records</h1>
 {#    {{ encore_entry_script_tags('alphabet_list') }}#}
 {#    <div id="AlphabetList"></div>#}

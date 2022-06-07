@@ -9,12 +9,6 @@
 
 {% block content %}
 <div class="container py-5">
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice alert alert-info text-center mb-4">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <a href="{{ path('guide_index') }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
 
     <a class="btn-link fs-xs ms-2" data-bs-toggle="offcanvas" href="#offcanvasGuideDetails" role="button" aria-controls="offcanvasGuideDetails" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i> {{ 'control.guides.table.button.guide_details' | trans }}</a>

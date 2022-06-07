@@ -4,12 +4,6 @@
 
 {% block content %}
 <div class="container py-5">
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice alert alert-info text-center mb-4">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <a href="{{ path('guide_index') }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
 
     <a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn-link fs-xs ms-2"><i class="fas fa-pen"></i> {{ 'control.guide.table.button.guide_builder' | trans }}</a>

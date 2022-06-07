@@ -20,6 +20,9 @@
     {% block search %}
         {% include('backend/includes/search-all.html.twig') %}
     {% endblock %}
+    {% block flash_messages %}
+        {% include('backend/includes/flash_messages.html.twig') %}
+    {% endblock %}
     {% block main %}
         {% block content %}{% endblock %}
     {% endblock %}
