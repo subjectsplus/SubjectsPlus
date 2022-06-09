@@ -78,6 +78,10 @@
     padding: 0.25rem;
     border: 1px dotted #b5b5b5;
   }
+
+  .sp-guide-column-dragging-over {
+    background-color: rgba(var(--sp-primary-color-rgb), 0.15);
+  }
 }
 
 .add-section-container{
@@ -299,7 +303,7 @@
 }
 
 .sp-pluslet-dragging-over {
-  background-color: transparent;
+  background-color: rgba(var(--sp-accent-color-rgb), 0.15);
   height: 100px;
 }
 

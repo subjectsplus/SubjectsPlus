@@ -5,27 +5,40 @@ import { Droppable } from 'react-beautiful-dnd';
 
 function SectionColumn({ columnId, sectionId, pluslets, columnSize, currentDraggingId, addPlusletOnClick, 
     currentEditablePluslet, currentEditablePlusletCallBack }) {
-    const [addPlusletHovered, setAddPlusletHovered] = useState(null);
-    let plusletComponents;
 
-    if (pluslets && pluslets.length > 0) {
-        plusletComponents = pluslets.map((pluslet, row) => (
-            <Pluslet key={pluslet.id} sectionId={sectionId}
-                plusletId={pluslet.id} plusletRow={row}
-                plusletTitle={pluslet.title} plusletBody={pluslet.body}
-                currentDraggingId={currentDraggingId}
-                currentEditablePluslet={currentEditablePluslet} 
-                currentEditablePlusletCallBack={currentEditablePlusletCallBack} />
-        ));
+    const [addPlusletHovered, setAddPlusletHovered] = useState(null);
+    const plusletIsCurrentlyDragging = (currentDraggingId && currentDraggingId.substring(0, 8) === 'pluslet-');
+    
+    const getGuideColumnClassName = () => {
+        let className = 'sp-guide-column';
+
+        if (plusletIsCurrentlyDragging) {
+            className += ' sp-guide-column-dragging-over';
+        }
+
+        return className;
+    }
+
+    const getPlusletComponents = () => {
+        if (pluslets && pluslets.length > 0) {
+            return pluslets.map((pluslet, row) => (
+                <Pluslet key={pluslet.id} sectionId={sectionId}
+                    plusletId={pluslet.id} plusletRow={row}
+                    plusletTitle={pluslet.title} plusletBody={pluslet.body}
+                    currentDraggingId={currentDraggingId}
+                    currentEditablePluslet={currentEditablePluslet} 
+                    currentEditablePlusletCallBack={currentEditablePlusletCallBack} />
+            ));
+        }
     }
 
     return (
         <Col lg={Number(columnSize)} className="mb-3 mb-lg-0">
             <Droppable type="pluslet" droppableId={columnId} direction="vertical">
                 {(provided, snapshot) => (
-                    <div className="sp-guide-column" {...provided.droppableProps} ref={provided.innerRef}>
+                    <div className={getGuideColumnClassName()} {...provided.droppableProps} ref={provided.innerRef}>
                         <span className="visually-hidden">{columnId}</span>
-                        {plusletComponents}
+                        {getPlusletComponents()}
                         {provided.placeholder}
                         
                         {/* Add Pluslet Button */}
