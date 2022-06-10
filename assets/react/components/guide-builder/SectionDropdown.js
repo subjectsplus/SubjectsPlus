@@ -10,7 +10,7 @@ function SectionDropdown({ isConvertingLayout, sectionDelete, convertLayout }) {
 
     const sectionDropdownContent = (
         <div className="dropdown basic-dropdown">
-            <button className="btn btn-muted dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false" title="Section options">
+            <button className="btn btn-muted dropdown-toggle sp-section-menu-btn" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false" title="Section Options">
                 <i className="fas fa-ellipsis-h"></i>
             </button>
             <ul className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="sectionMenuOptions">
