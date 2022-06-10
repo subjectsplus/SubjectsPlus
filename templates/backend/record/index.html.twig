@@ -23,7 +23,8 @@
                 <th>Trial_start</th>
                 <th>Trial_end</th>
                 <th>Record_status</th>
-
+                <th>Format</th>
+                <th>Restriction</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,8 @@
                 <td>{{ record.trialStart ? record.trialStart|date('Y-m-d') : '' }}</td>
                 <td>{{ record.trialEnd ? record.trialEnd|date('Y-m-d') : '' }}</td>
                 <td>{{ record.recordStatus }}</td>
+                <td>{{ record.format }}</td>
+                <td>{{ record.restriction }}</td>
 
             </tr>
         {% else %}

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,12 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Format
 {
+
     /**
      * @var int
-     *
-     * @ORM\Column(name="format_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(name="format_id", type="integer", nullable=false)
      */
     private $formatId;
 
@@ -27,6 +29,18 @@ class Format
      * @ORM\Column(name="format", type="string", length=255, nullable=true)
      */
     private $format;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Record::class, mappedBy="format")
+     */
+    private $records;
+
+    public function __construct()
+    {
+        $this->records = new ArrayCollection();
+    }
+
+
 
     public function getFormatId(): ?int
     {
@@ -47,4 +61,36 @@ class Format
     public function __toString(): string {
         return $this->format;
     }
+
+    /**
+     * @return Collection<int, Record>
+     */
+    public function getRecords(): Collection
+    {
+        return $this->records;
+    }
+
+    public function addRecord(Record $record): self
+    {
+        if (!$this->records->contains($record)) {
+            $this->records[] = $record;
+            $record->setFormat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecord(Record $record): self
+    {
+        if ($this->records->removeElement($record)) {
+            // set the owning side to null (unless already changed)
+            if ($record->getFormat() === $this) {
+                $record->setFormat(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

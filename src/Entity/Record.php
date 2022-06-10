@@ -40,7 +40,7 @@ class Record
     private $internal_notes;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $pre;
 
@@ -65,6 +65,22 @@ class Record
     private $display_note;
 
     /**
+     * @return mixed
+     */
+    public function getDisplayNote()
+    {
+        return $this->display_note;
+    }
+
+    /**
+     * @param mixed $display_note
+     */
+    public function setDisplayNote($display_note): void
+    {
+        $this->display_note = $display_note;
+    }
+
+    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $trial_start;
@@ -75,9 +91,30 @@ class Record
     private $trial_end;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $record_status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Format::class, inversedBy="records")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="format_id", referencedColumnName="format_id")
+     * })
+     */
+    private $format;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Restrictions::class, inversedBy="records")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="restrictions_id", referencedColumnName="restrictions_id")
+     * })
+     */
+    private $restriction;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ctags;
 
     public function getId(): ?int
     {
@@ -180,18 +217,6 @@ class Record
         return $this;
     }
 
-    public function getDisplayNote(): ?string
-    {
-        return $this->display_note;
-    }
-
-    public function setDisplayNote(?string $display_note): self
-    {
-        $this->display_note = $display_note;
-
-        return $this;
-    }
-
     public function getTrialStart(): ?\DateTimeInterface
     {
         return $this->trial_start;
@@ -221,9 +246,45 @@ class Record
         return $this->record_status;
     }
 
-    public function setRecordStatus(string $record_status): self
+    public function setRecordStatus(?string $record_status): self
     {
         $this->record_status = $record_status;
+
+        return $this;
+    }
+
+    public function getFormat(): ?Format
+    {
+        return $this->format;
+    }
+
+    public function setFormat(?Format $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function getRestriction(): ?Restrictions
+    {
+        return $this->restriction;
+    }
+
+    public function setRestriction(?Restrictions $restriction): self
+    {
+        $this->restriction = $restriction;
+
+        return $this;
+    }
+
+    public function getCtags(): ?string
+    {
+        return $this->ctags;
+    }
+
+    public function setCtags(?string $ctags): self
+    {
+        $this->ctags = $ctags;
 
         return $this;
     }

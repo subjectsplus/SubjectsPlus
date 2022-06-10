@@ -24,6 +24,9 @@ class RecordType extends AbstractType
             ->add('trial_start')
             ->add('trial_end')
             ->add('record_status')
+            ->add('ctags')
+            ->add('format')
+            ->add('restriction')
         ;
     }
 

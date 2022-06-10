@@ -3,7 +3,7 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Record;
-use App\Form\Record1Type;
+use App\Form\RecordType;
 use App\Repository\RecordRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +32,7 @@ class RecordController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $record = new Record();
-        $form = $this->createForm(Record1Type::class, $record);
+        $form = $this->createForm(RecordType::class, $record);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
