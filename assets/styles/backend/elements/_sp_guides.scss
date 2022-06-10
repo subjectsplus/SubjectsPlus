@@ -265,15 +265,19 @@
   }
 
   .sp-pluslet-title{
-    width: calc(100% - 71px);
+    width: calc(100% - 52px);
     margin-bottom: 1rem;
     font-weight: bold;
     margin-right: 0.5rem;
 
     .form-control {
-      font-weight: bold;
       line-height: 1;
       padding: 0.25rem 0.5rem;
+
+      &::placeholder{
+        font-style: italic;
+        font-size: $font-size-sm;
+      }
     }
   }
 
@@ -289,6 +293,36 @@
     img {
       max-width: 100%;
       height: auto;
+    }
+
+    img[style="float:left"] {
+      margin: 0 1rem 1rem 0;
+    }
+
+    img[style="float:right"] {
+      margin: 0 0 1rem 1rem;
+    }
+
+    .image[style="float:left"] {
+        margin: 0 1rem 1rem 0;
+
+      figcaption{
+        text-align: center;
+      }
+    }
+
+    .image[style="float:right"] {
+        margin: 0 0 1rem 1rem;
+
+      figcaption{
+        text-align: center;
+      }
+    }
+
+    figcaption{
+      font-size: $font-size-sm;
+      font-style: italic;
+      margin-top: 0.25rem;
     }
   }
 }

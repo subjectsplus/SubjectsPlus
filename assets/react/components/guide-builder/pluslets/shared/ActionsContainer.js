@@ -6,13 +6,13 @@ function ActionsContainer({ isEditMode, editSaveOnClick, deletePlusletOnClick, v
     const EditSaveButton = () => {
         if (isEditMode) {
             return (
-                <button onClick={editSaveOnClick} title="Save pluslet" className="btn btn-muted sp-pluslet-icon-btn">
+                <button onClick={editSaveOnClick} title="Save Box" className="btn btn-link sp-pluslet-icon-btn">
                     <i className="fas fa-save"></i>
                 </button>
             );
         } else {
             return (
-                <button onClick={editSaveOnClick} title="Edit pluslet" className="btn btn-muted sp-pluslet-icon-btn">
+                <button onClick={editSaveOnClick} title="Edit Box" className="btn btn-muted sp-pluslet-icon-btn">
                     <i className="fas fa-pen"></i>
                 </button>
             );
@@ -27,11 +27,12 @@ function ActionsContainer({ isEditMode, editSaveOnClick, deletePlusletOnClick, v
 
             <div className={'text-end' + (visible ? '' : ' invisible')}>
                 {/* Edit/Save Button */}
-                <EditSaveButton />
+                {EditSaveButton()}
 
                 {/* Dropdown */}
                 <div className="dropdown basic-dropdown d-inline-block ms-1">
-                    <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="btn btn-muted sp-pluslet-icon-btn dropdown-toggle" id="sectionMenuOptions" data-bs-toggle="dropdown" 
+                        aria-expanded="false" title="Box Options">
                         <i className="fas fa-ellipsis-v"></i>
                     </button>
                     <ul ref={plusletDropdownRef} className="dropdown-menu dropdown-arrow dropdown-menu-end fs-xs" aria-labelledby="plusletMenuOptions">

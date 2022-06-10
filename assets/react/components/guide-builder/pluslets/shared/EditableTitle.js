@@ -6,12 +6,12 @@ function EditableTitle({isEditMode, dragHandleProps, title, onChange, onKeyDown}
             <div className="sp-pluslet-title">
                 {/* Label is for accessibility purposes, will not be visible */}
                 <label htmlFor="edit-pluslet-title" className="form-label visually-hidden">
-                    Enter Pluslet Title
+                    Enter Box Title
                 </label>
                 <input
                     type="text"
                     id="edit-pluslet-title"
-                    placeholder= "Enter Pluslet Title"
+                    placeholder= "Enter Box Title"
                     className="form-control"
                     autoFocus={title.trim() === ''}
                     value={title}
@@ -22,7 +22,7 @@ function EditableTitle({isEditMode, dragHandleProps, title, onChange, onKeyDown}
             </div>
         );
     } else {
-        return (<p className="sp-pluslet-title" {...dragHandleProps}>{title}</p>);
+        return (<p className="sp-pluslet-title" title="Move Box" {...dragHandleProps}>{title}</p>);
     }
 }
 
