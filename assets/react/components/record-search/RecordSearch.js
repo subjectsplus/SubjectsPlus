@@ -16,14 +16,14 @@ function RecordSearch() {
     const getApiLink = (search_term, page=1) => {
         return apiLink + '?' + new URLSearchParams({
             search: search_term,
-            'location.eresDisplay': (azlist ? 'Y' : 'N'),
+            ...(azlist ? {'location.eresDisplay': 'Y'} : {}),
             page: page
         });
     }
 
     // TODO: Translations for title, label below
     return (
-        <Search tokenType="record" title="Get Records" apiLink={getApiLink}
+        <Search tokenType="record" title="Get Resources" placeholder="Search Resources" apiLink={getApiLink}
             refresh={refresh}
             extras={
                 <div className="form-check form-switch">

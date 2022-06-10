@@ -8,7 +8,6 @@ import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 function SectionContainer({ tabId }) {
     const [currentEditablePluslet, setCurrentEditablePluslet] = useState('');
     const [draggingId, setDraggingId] = useState(null);
-    const [addSectionHovered, setAddSectionHovered] = useState(false);
 
     const {isLoading, isError, data, error} = useFetchSections(tabId);
 
@@ -124,17 +123,7 @@ function SectionContainer({ tabId }) {
                         </Droppable>
                     </DragDropContext>
                     <div className="text-center mt-1 add-section-container">
-                        <button
-                            id="add-section"
-                            className="btn btn-muted p-1"
-                            onClick={addSection}
-                            onMouseEnter={() => {
-                                setAddSectionHovered(true);
-                            }}
-                            onMouseLeave={() => {
-                                setAddSectionHovered(false);
-                            }}
-                        >
+                        <button id="add-section" className="btn btn-muted p-1" onClick={addSection}>
                             <span className="section-icon d-block"></span>
                             <span className="fs-xs">Add Section</span>
                         </button>

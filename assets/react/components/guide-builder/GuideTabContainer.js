@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { htmlEntityDecode, objectIsEmpty } from '#utility/Utility';
+import { htmlEntityDecode, objectIsEmpty, hideAllOffcanvas } from '#utility/Utility';
 import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '#api/guide/TabAPI';
 import SectionContainer from './SectionContainer';
 import DraggableTab from './DraggableTab';
@@ -53,6 +53,8 @@ function GuideTabContainer(props) {
             setActiveKey(Number(eventKey));
             setSettingsValidated(false);
         }
+
+        hideAllOffcanvas();
     }
 
     const newTab = () => {

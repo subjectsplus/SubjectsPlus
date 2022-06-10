@@ -9,13 +9,6 @@
 
 {% block content %}
 <div class="container py-5">
-
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice alert alert-info text-center mb-4">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <a href="{{ path('faq_index') }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.faqs.back_to_list' | trans }}</a>
 
     <a href="{{ path('frontend_faq_show', {'faqId': faq.faqId}) }}" class="btn-link fs-xs ms-2" target="_blank"><i class="fas fa-eye"></i> {{ 'control.faqs.preview.label' | trans }}</a>
