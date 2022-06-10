@@ -35,7 +35,7 @@ export function useCreatePluslet(sectionId) {
             return { previousPlusletsData };
         },
         onError: (error, newPluslet, context) => {
-            // Perform rollback of tab mutation
+            // Perform rollback of pluslet mutation
             console.error(error);
             queryClient.setQueryData(['pluslets', sectionId], context.previousPlusletsData);
         },

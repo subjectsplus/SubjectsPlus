@@ -27,7 +27,6 @@ class GuideType extends AbstractType
                     'Topic' => 'Topic', 
                     'Course' => 'Course',
                     'Placeholder' => 'Placeholder',
-                    // TODO: Ability to custom add more choices
                 ],
             ])
             ->add('active', ChoiceType::class, [

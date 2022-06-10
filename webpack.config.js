@@ -49,7 +49,8 @@ Encore
     .addEntry('backend_main', './assets/backend/BackendMain.js')
     .addEntry('mode_switcher', './assets/backend/javascript/ModeSwitcher.js')
     .addEntry('bs_tooltips', './assets/backend/javascript/BSTooltipPopoverInit.js')
-
+    .addEntry('generate_shortform', './assets/backend/javascript/GenerateShortform.js')
+    
     //Front-end Main CSS & JS
     .addEntry('frontend_main', './assets/frontend/FrontendMain.js')
 

@@ -4,13 +4,6 @@
 
 {% block content %}
 <div class="container py-5">
-
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice alert alert-info text-center mb-4">
-            {{ message }}
-        </div>
-    {% endfor %}
-
     <div class="row">
         <div class="col-8">
             <h1 class="fw-light">{{ 'control.header.faqs.index' | trans }}</h1>

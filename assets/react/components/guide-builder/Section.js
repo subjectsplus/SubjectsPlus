@@ -129,7 +129,7 @@ function Section({ tabId, sectionId, layout, sectionIndex, currentDraggingId, cu
 
     const sectionContent = () => {
         if (isLoading) {
-            return (<p>Loading Pluslets...</p>);
+            return (<p>Loading Boxes...</p>);
         } else if (isError) {
             console.error(error);
             return (<p>Error: Failed to load sections through API Endpoint!</p>);

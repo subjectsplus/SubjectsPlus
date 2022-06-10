@@ -33,3 +33,13 @@ export function removeFileExtension(filename) {
     
     return filename.substring(0, lastDotPosition);
 }
+
+export function hideAllOffcanvas() {
+    if (window.recordTokenOffcanvas) {
+        window.recordTokenOffcanvas.hide();
+    }
+
+    if (window.mediaTokenOffcanvas) {
+        window.mediaTokenOffcanvas.hide();
+    }
+}

@@ -19,9 +19,9 @@ CKEDITOR.editorConfig = function( config ) {
 			['RemoveFormat', 'PasteText', 'PasteFromWord'],
 			['Link', 'Anchor'],
 			['Source'],
-			'Image',
+			['Image'],
 			'/',
-			['EmbedSemantic', 'Media', 'Record']
+			['Embed', 'Media', 'Record']
 	];
 
 	// Remove unnecessary buttons.
@@ -37,7 +37,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.embed_provider = '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}';
 
 	// Set Extra Plugins.
-	config.extraPlugins = 'media,recordtoken,image2,embedsemantic,find';
+	config.extraPlugins = 'media,recordtoken,image2,embed,find';
 
 	// Remove plugins.
 	config.removePlugins = 'image';
