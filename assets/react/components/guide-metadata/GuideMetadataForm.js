@@ -4,30 +4,6 @@ function GuideMetadataForm({ guide, disabled, onSubmit }) {
     return (
         <form action={void(0)} onSubmit={onSubmit}>
                 <fieldset disabled={disabled}>
-                    {/* Guide Shortform text field */}
-                    <div id="guide-shortform" className="mb-2">
-                        <div className="row">
-                            <div className="col-3">
-                                <label htmlFor="guide-shortform-field" className="form-label fs-sm form-required">
-                                    Short Form
-                                </label>
-                                {' '}
-                            </div>
-                            <div className="col-9">
-                                <input
-                                    type="text"
-                                    name="shortform"
-                                    id="guide-shortform-field"
-                                    placeholder="Shortform"
-                                    autoComplete="off"
-                                    defaultValue={guide.shortform}
-                                    required="required"
-                                    className="form-control form-control-sm"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
                     {/* Guide Subject text field */}
                     <div id="guide-subject" className="mb-2">
                         <div className="row">
@@ -51,8 +27,32 @@ function GuideMetadataForm({ guide, disabled, onSubmit }) {
                             </div>
                         </div>
                     </div>
+
+                    {/* Guide Shortform text field */}
+                    <div id="guide-shortform" className="mb-2">
+                        <div className="row">
+                            <div className="col-3">
+                                <label htmlFor="guide-shortform-field" className="form-label fs-sm form-required">
+                                    Short Form
+                                </label>
+                                {' '}
+                            </div>
+                            <div className="col-9">
+                                <input
+                                    type="text"
+                                    name="shortform"
+                                    id="guide-shortform-field"
+                                    placeholder="Shortform"
+                                    autoComplete="off"
+                                    defaultValue={guide.shortform}
+                                    required="required"
+                                    className="form-control form-control-sm text-lowercase"
+                                />
+                            </div>
+                        </div>
+                    </div>
                     
-                     {/* Guide Type select field */}
+                    {/* Guide Type select field */}
                     {/* TODO: Apply react-select style */}
                      <div id="guide-type" className="mb-2">
                          <div className="row">

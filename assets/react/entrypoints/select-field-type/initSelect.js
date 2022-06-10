@@ -79,5 +79,6 @@ Array.from(singleSelectElements).forEach( element => {
         <Select id={element.id} classNamePrefix="sp-react-select" styles={reactSelectCustomStyles} 
             name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} 
             noOptionsMessage={() => element.getAttribute('data-no-options-message')} options={options} 
+            isSearchable={false}
             defaultValue={selectedOptions} />);
 });

@@ -78,6 +78,10 @@
     padding: 0.25rem;
     border: 1px dotted #b5b5b5;
   }
+
+  .sp-guide-column-dragging-over {
+    background-color: rgba(var(--sp-primary-color-rgb), 0.15);
+  }
 }
 
 .add-section-container{
@@ -261,15 +265,19 @@
   }
 
   .sp-pluslet-title{
-    width: calc(100% - 71px);
+    width: calc(100% - 52px);
     margin-bottom: 1rem;
     font-weight: bold;
     margin-right: 0.5rem;
 
     .form-control {
-      font-weight: bold;
       line-height: 1;
       padding: 0.25rem 0.5rem;
+
+      &::placeholder{
+        font-style: italic;
+        font-size: $font-size-sm;
+      }
     }
   }
 
@@ -297,15 +305,22 @@
 
     .image[style="float:left"] {
         margin: 0 1rem 1rem 0;
+
+      figcaption{
+        text-align: center;
+      }
     }
 
     .image[style="float:right"] {
         margin: 0 0 1rem 1rem;
+
+      figcaption{
+        text-align: center;
+      }
     }
 
     figcaption{
       font-size: $font-size-sm;
-      text-align: center;
       font-style: italic;
       margin-top: 0.25rem;
     }
@@ -322,7 +337,7 @@
 }
 
 .sp-pluslet-dragging-over {
-  background-color: transparent;
+  background-color: rgba(var(--sp-accent-color-rgb), 0.15);
   height: 100px;
 }
 

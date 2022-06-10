@@ -72,8 +72,8 @@
                         record = getRecordFromAPI(recordId);
                         if (record) {
                             // sanitize record title and description
-                            record.title = htmlEntityDecode(record.title);
-                            record.description = htmlEntityDecode(record.description);
+                            record.title = sanitizeString(record.title);
+                            record.description = sanitizeString(record.description);
 
                             // set to data and index the record
                             this.setData('record', record);
@@ -119,8 +119,7 @@
                         // Check if description content from DB has changed
                         // and update if applicable
                         if (record) {
-                            // todo: handle spacing that may cause false flags, i.e. record id 177
-                            let descriptionFromDB = htmlEntityDecode(record.description);
+                            let descriptionFromDB = record.description;
                             let descriptionFromLocal = descriptionBlock.getText();
 
                             if (descriptionFromDB !== descriptionFromLocal) {
@@ -297,15 +296,15 @@
                 evt.data.dataValue = dataValue;
 
                 // sanitize record title and description
-                record.title = htmlEntityDecode(record.title);
-                record.description = htmlEntityDecode(record.description);
+                record.title = sanitizeString(record.title);
+                record.description = sanitizeString(record.description);
 
                 // index the record
                 records[record.recordId.toString()] = record;
             });
 
             editor.ui.addButton( 'Record', {
-                label: 'Insert Record',
+                label: 'Insert Resource',
                 command: 'toggleRecordSearch',
                 toolbar: 'insert,101'
             });
@@ -380,6 +379,18 @@
                 'location': record.location[0].location
             }
         }
+    }
+
+    function sanitizeString(str) {
+        if (typeof str !== 'string') return '';
+
+        return removeLineBreaks(htmlEntityDecode(str)).trim();
+    }
+    
+    function removeLineBreaks(str) {
+        if (typeof str !== 'string') return '';
+        
+        return str.replaceAll("\n", '').replaceAll("\r", '');
     }
 
     function htmlEntityDecode(str) {

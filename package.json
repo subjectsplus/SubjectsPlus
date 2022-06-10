@@ -37,6 +37,7 @@
     "react-query": "^3.34.16",
     "react-select": "^5.2.2",
     "react-toastify": "^8.2.0",
+    "slugify": "^1.6.5",
     "use-debounce": "^7.0.1",
     "uuid": "^8.3.2"
   },

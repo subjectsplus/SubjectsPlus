@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import MediaPreview from './MediaPreview';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -29,6 +29,13 @@ function MediaToken({ media, defaultImageSize, onClick }) {
 
     const fileName = (isImage ? imageSizeFileNames[currentImageSize] : media.fileName);
     const relativeUrl = media.directory + '/' + fileName;
+
+    const hasMultipleImageSizes = useMemo(() => {
+        if (!isImage) return false;
+
+        const imageSizes = Object.values(imageSizeFileNames).filter(size => size !== null);
+        return imageSizes.length > 1;
+    }, [imageSizeFileNames, isImage]);
 
     const handleImageSizeButtonClick = (evt, imageSize) => {
         evt.preventDefault();
@@ -72,12 +79,15 @@ function MediaToken({ media, defaultImageSize, onClick }) {
 
             return buttons;
         }
+ 
+        const linkClassName = 'btn-link ms-1' + (hasMultipleImageSizes ? '' : ' disabled');
 
         return (
             <span className="fs-xs">
                 <b>Size: {imageSizeNameKeys[currentImageSize]}</b>
                 {' '}
-                <a href={void(0)} className="btn-link ms-1" onClick={() => setIsChangingImageSize(true)}>(change)</a>
+                <a href={void(0)} className={linkClassName} aria-disabled={!hasMultipleImageSizes}
+                    onClick={() => setIsChangingImageSize(hasMultipleImageSizes)}>(change)</a>
             </span>
         );
     }

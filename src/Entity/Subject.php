@@ -229,7 +229,12 @@ class Subject
 
     public function setShortform(string $shortform): self
     {
-        $this->shortform = $shortform;
+        if ($shortform[-1] === '-') {
+            // Remove the last character from shortform
+            $shortform = \substr($shortform, 0, -1);
+        }
+        
+        $this->shortform = strtolower($shortform);
 
         return $this;
     }

@@ -7,7 +7,8 @@
   display: none; 
 }
 
-.cke_button__embedsemantic_label{
+.cke_button__embedsemantic_label,
+.cke_button__embed_label{
   display:inline !important;
   visibility: hidden;
   max-width: 65px;
