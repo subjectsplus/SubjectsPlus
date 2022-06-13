@@ -95,7 +95,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             updatePlusletMutation.mutate({
                 plusletId: plusletId,
                 data: {
-                    body: DOMPurify.sanitize(body, { ADD_TAGS: ["oembed"] })
+                    body: DOMPurify.sanitize(body, { ADD_TAGS: ["iframe"] })
                 }
             });
         }
