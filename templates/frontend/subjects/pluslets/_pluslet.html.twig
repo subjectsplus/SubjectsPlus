@@ -1,0 +1,7 @@
+<div class="pluslet" data-type="{{ pluslet.type }}">
+    {% if pluslet.type == 'Heading' %}
+        {{ include('frontend/subjects/pluslets/_heading_pluslet.html.twig') }}
+    {% else %}
+        {{ include('frontend/subjects/pluslets/_basic_pluslet.html.twig') }}
+    {% endif %}
+</div>
