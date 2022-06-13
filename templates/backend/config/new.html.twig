@@ -1,14 +1,10 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}New Config Entry{% endblock %}
-
+{% block browser_title %}New Config Option{% endblock %}
 
 {% block content %}
-<div class="container">
+    <a href="{{ path('config_index', {'id': 8}) }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> Back to Config Setup</a>
+    <h1 class="fw-light">New Config Option</h1>
+
     {{ include('backend/config/_form.html.twig', {'button_label': 'Save'}) }}
-
-    <a href="{{ path('config_index', {'id': 8}) }}">back to list</a>
-</div>
 {% endblock %}
-
-

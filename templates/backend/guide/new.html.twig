@@ -1,6 +1,6 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.guide_meta.header' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.guide_meta.header' | trans }}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -8,9 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container py-5">
         <a href="{{ path('guide_index') }}" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
         <h1 class="fw-light">{{ 'control.guide_meta.header' | trans }}</h1>
         {{ include('backend/guide/_form.html.twig') }}
-    </div>
 {% endblock %}

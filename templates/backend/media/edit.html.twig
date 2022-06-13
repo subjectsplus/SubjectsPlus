@@ -1,9 +1,8 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.media.edit_details' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.media.edit_details' | trans }}{% endblock %}
 
 {% block content %}
-    <div class="container py-5">
         <a href="{{ path('media_upload') }}" class="fs-sm"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.media.back_to_upload' | trans }}</a>
         <h1 class="fw-light">{{ 'control.media.edit_details' | trans }}</h1>
 
@@ -43,5 +42,4 @@
 
             </div>
         </div>
-    </div>
 {% endblock %}
