@@ -1,6 +1,6 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.header.guides.guide_builder' | trans }}: {{ guide.subject | raw }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.header.guides.guide_builder' | trans }}: {{ guide.subject | raw }}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
     <a href="{{ path('guide_index') }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
 
     <a class="btn-link fs-xs ms-2" data-bs-toggle="offcanvas" href="#offcanvasGuideDetails" role="button" aria-controls="offcanvasGuideDetails" title="{{ 'control.guides.table.button.guide_details' | trans }}"><i class="fas fa-cog"></i> {{ 'control.guides.table.button.guide_details' | trans }}</a>
@@ -18,7 +17,7 @@
     <h1 id="subject-heading" class="fw-light">{{ guide.subject | raw }}</h1>
 
     <div id="guide-builder-container" class="mt-4"></div>
-</div>
+
 {{ include('backend/guide/_offcanvas_guide_details.html.twig') }}
 {{ include('backend/media/sidebar.html.twig') }}
 {{ include('backend/records/sidebar.html.twig') }}

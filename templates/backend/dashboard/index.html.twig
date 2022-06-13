@@ -1,31 +1,29 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.dashboard' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.dashboard' | trans }}{% endblock %}
 
 {% block content %}
-    <div class="container py-5">
-        <div class="row row-cols-2">
-            <div class="col-7">
-                <h1 class="fw-light mb-0">{{ 'control.dashboard.welcome' | trans  }}, {{ app.user.fname }}</h1>
-                {# TODO: Fix path to edit profile #}
-                <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-link lh-1 fs-sm">
-                    <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
-                </a>
-            </div>
-            <div class="col-5 text-end align-self-end">
-                {{ include('backend/dashboard/_action-menu.html.twig') }}
-            </div>
+    <div class="row row-cols-2">
+        <div class="col-7">
+            <h1 class="fw-light mb-0">{{ 'control.dashboard.welcome' | trans  }}, {{ app.user.fname }}</h1>
+            {# TODO: Fix path to edit profile #}
+            <a href="/control/staff/{{ app.user.staffId }}/edit" class="btn btn-link lh-1 fs-sm">
+                <i class="fas fa-edit"></i> {{ 'control.dashboard.edit_profile' | trans  }}
+            </a>
         </div>
+        <div class="col-5 text-end align-self-end">
+            {{ include('backend/dashboard/_action-menu.html.twig') }}
+        </div>
+    </div>
 
-        <div class="panel-basic border-basic mt-4">
-            <div class="row">
-                <div class="col-lg-6">
-                    {{ include('backend/dashboard/_guides-listing.html.twig') }}
-                </div>
-                <div class="col-lg-5 offset-lg-1 mt-4 mt-lg-0">
-                    {{ include('backend/dashboard/_records-listing.html.twig') }}
-                    {{ include('backend/dashboard/_faq-listing.html.twig') }}
-                </div>
+    <div class="panel-basic border-basic mt-4">
+        <div class="row">
+            <div class="col-lg-6">
+                {{ include('backend/dashboard/_guides-listing.html.twig') }}
+            </div>
+            <div class="col-lg-5 offset-lg-1 mt-4 mt-lg-0">
+                {{ include('backend/dashboard/_records-listing.html.twig') }}
+                {{ include('backend/dashboard/_faq-listing.html.twig') }}
             </div>
         </div>
     </div>

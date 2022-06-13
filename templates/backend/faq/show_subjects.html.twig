@@ -1,10 +1,9 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.faqs.by_subject.heading' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.faqs.by_subject.heading' | trans }}{% endblock %}
 
 {% block content %}
 {# TODO: Will replace this screen with index with active filters #}
-<div class="container py-5">
     <div class="row">
         <div class="col-sm-6 col-md-7 col-lg-8 col-xl-9">
             <h1 class="fw-light">{{ 'control.faqs.by_subject.heading' | trans }}</h1>
@@ -79,5 +78,5 @@
             </table>
         {% endif %}
     {% endfor %}
-</div>
+    </div>
 {% endblock %}
