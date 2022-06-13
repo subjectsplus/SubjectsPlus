@@ -5,5 +5,5 @@
 {% block main %}
 <p>Question: {{ faq.question }}</p>
 <p>Answer:</p>
-<p>{{ faq.answer | raw }}</p>
+<p>{{ faq.answer | update_tokens_from_html | raw }}</p>
 {% endblock %}
