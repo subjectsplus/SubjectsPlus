@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-    {{ parent() }}
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('backend_main') }}
-    {% endblock %}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('backend_main') }}
-        {{ encore_entry_script_tags('mode_switcher') }}
-    {% endblock %}
+{% block title %}{% block browser_title %}{% endblock %} | SubjectsPlus{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('backend_main') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('backend_main') }}
+    {{ encore_entry_script_tags('mode_switcher') }}
 {% endblock %}
 
 {% block body %}
@@ -20,11 +20,13 @@
     {% block search %}
         {% include('backend/includes/search-all.html.twig') %}
     {% endblock %}
-    {% block flash_messages %}
-        {% include('backend/includes/flash_messages.html.twig') %}
-    {% endblock %}
     {% block main %}
-        {% block content %}{% endblock %}
+        <div class="container py-5">
+            {% block flash_messages %}
+                {% include('backend/includes/flash_messages.html.twig') %}
+            {% endblock %}
+            {% block content %}{% endblock %}
+        </div>
     {% endblock %}
     </main>
 {% endblock %}

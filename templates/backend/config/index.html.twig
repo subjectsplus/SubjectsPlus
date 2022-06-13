@@ -1,47 +1,51 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Hello ConfigController!{% endblock %}
-
+{% block browser_title %}Config Setup{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>App Config</h1>
-    <a href="{{ path('config_new') }}">Add New Config</a>
+    <div class="row">
+        <div class="col-6">
+            <h1 class="fw-light">Config Setup</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-gradient btn-pill-icon" type="button" href="{{ path('config_new') }}"><i class="fas fa-plus-circle"></i> New Config Option</a>
+        </div>
+    </div>
 
-    <ul class="list-group list-group-horizontal">
+    <ul class="list-group list-group-horizontal-lg mt-4">
     {% for cat in configCategories %}
-      <li class="list-group-item">
+      <li class="list-group-item fs-sm">
         <a href="/control/config/category/{{ cat.id}}">{{ cat.categoryKey}}</a></li>
     {% endfor %}
     </ul>
-<hr />
-    <table class="table">
+    <table class="table table-striped mt-4">
         <thead>
             <tr>
+                <th>Actions</th>
                 <th>Label</th>
                 <th>Key</th>
                 <th>Value</th>
                 <th>Required</th>
                 <th>Category</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for config in configs %}
                 <tr>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Config action buttons">
+                            <a href="{{ path('config_edit', {'id': config.id}) }}" class="btn btn-icon-default rounded-0" type="button" title="Edit"><i class="fas fa-pen"></i></a>
+                            <a data-bs-toggle="modal" data-bs-target="#confirmDeleteConfig" class="btn btn-icon-default rounded-0" type="button" title="Delete" target="_blank"><i class="fas fa-trash fs-sm"></i></a>
+                        </div>
+                        {{ include('backend/config/_delete_form.html.twig') }}
+                    </td>
                     <td>{{ config.optionLabel }}</td>
                     <td>{{ config.optionKey }}</td>
                     <td>{{ config.optionValue }}</td>
                     <td>{{ config.required }}</td>
                     <td>{{ config.configCategory }}</td>
-                    <td>
-                         <a href="{{ path('config_edit', {'id': config.id}) }}">Edit</a>
-                         &nbsp;|&nbsp;
-                         {{ include('backend/config/_delete_form.html.twig') }}
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
 {% endblock %}

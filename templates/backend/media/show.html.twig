@@ -1,9 +1,8 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.media.show.title' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.media.show.title' | trans }}{% endblock %}
 
 {% block content %}
-<div class="container py-5">
     {% for error in app.flashes('error') %}
         <div class="flash-error alert alert-info text-center mb-4">
             {{ message }}
@@ -66,5 +65,4 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

@@ -1,0 +1,8 @@
+{# Navigation Switcher #}
+{% if getconfig('theme_id') == 'um' %}
+    {% include('frontend/themes/um/includes/navigation.html.twig') %}
+{% elseif getconfig('theme_id') == 'custom' %}
+    {% include('frontend/themes/custom/includes/navigation.html.twig') %}
+{%  else %}
+    {% include('frontend/includes/navigation.html.twig') %}
+{% endif %}
