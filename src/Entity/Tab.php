@@ -98,6 +98,7 @@ class Tab
 
     /**
      * @ORM\OneToMany(targetEntity="Section", mappedBy="tab", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"sectionIndex" = "ASC"})
      * @ApiSubresource(maxDepth=1)
      */
     private $sections;
