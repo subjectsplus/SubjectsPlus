@@ -1,0 +1,18 @@
+<h3 class="pluslet-title">
+    {{ pluslet.title }}
+</h3>
+
+<div class="pluslet-body">
+    <div class="subject-specialists">
+        {% for staff in subject.staff %}
+            <div class="specialists-info">
+                <h4>{{ staff.fname ~ ' ' ~ staff.lname }}</h4>
+                <ul class="staff-details">
+                    <li>{{ staff.title | raw }}</li>
+                    <li>{{ staff.email }}</li>
+                    <li>{{ staff.tel }}</li>
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</div>
