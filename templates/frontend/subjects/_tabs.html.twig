@@ -6,7 +6,7 @@
         {% set tab_content_id = 'tab-content-' ~ loop.index0  %}
 
         <li class="nav-item" role="presentation">
-            <a class="nav-link {{ loop.first ? 'active' : '' }}" id="{{ tab_id }}" href="#{{ tab_id }}" data-bs-toggle="pill" data-bs-target="#{{ tab_content_id }}" type="button" role="tab" 
+            <a class="nav-link" id="{{ tab_id }}" href="#{{ tab_id }}" data-bs-toggle="pill" data-bs-target="#{{ tab_content_id }}" type="button" role="tab" 
                 aria-controls="{{ tab_content_id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}">
                 {{ tab.label }}
             </a>
@@ -20,7 +20,7 @@
         {% set tab_id = 'tab-' ~ loop.index0  %}
         {% set tab_content_id = 'tab-content-' ~ loop.index0  %}
 
-        <div class="tab-pane fade {{ loop.first ? 'show active' : '' }}" id="{{ tab_content_id }}" role="tabpanel" 
+        <div class="tab-pane fade" id="{{ tab_content_id }}" role="tabpanel" 
             aria-labelledby="{{ tab_id }}">
             <div class="container">
                 {% for section in tab.sections %}
@@ -32,3 +32,5 @@
         </div>
     {% endfor %}
 </div>
+
+{{ encore_entry_script_tags('bs_tabs_anchor') }}

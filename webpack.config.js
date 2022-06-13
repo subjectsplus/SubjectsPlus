@@ -53,6 +53,7 @@ Encore
     
     //Front-end Main CSS & JS
     .addEntry('frontend_main', './assets/frontend/FrontendMain.js')
+    .addEntry('bs_tabs_anchor', './assets/frontend/javascript/BootstrapTabsAnchor.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
