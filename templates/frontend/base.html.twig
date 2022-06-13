@@ -22,11 +22,11 @@
 {% block body %}
 <main>
     {% block navmenu %}
-        <p>Nav menu</p>
+        {% include('frontend/includes/navigation-switcher.html.twig') %}
     {% endblock %}
     {% block header %}
         <p>Header here</p>
-        <a href="#">Link example</a>
+        <a href="#" class="link-underline">Link example</a>
     {% endblock %}
     {% block search %}
         <p>Search here</p>

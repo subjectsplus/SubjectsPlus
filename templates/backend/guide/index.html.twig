@@ -1,9 +1,8 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.header.guides.index' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.header.guides.index' | trans }}{% endblock %}
 
 {% block content %}
-<div class="container py-5">
     <div class="row">
         <div class="col-8">
             <h1 class="fw-light">{{ 'control.header.guides.index' | trans }}</h1>
@@ -81,6 +80,4 @@
             <p class="mt-4"><a href="#" class="btn-link">Help with Guides</a></p>
         </div>
     </div>
-
-</div>
 {% endblock %}

@@ -1,9 +1,8 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.guide_meta.show.header' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.guide_meta.show.header' | trans }} | SubjectsPlus{% endblock %}
 
 {% block content %}
-<div class="container py-5">
     <a href="{{ path('guide_index') }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
 
     <a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn-link fs-xs ms-2"><i class="fas fa-pen"></i> {{ 'control.guide.table.button.guide_builder' | trans }}</a>
@@ -97,5 +96,4 @@
         </div>
         <div class="col-xl-1"></div>
     </div>
-</div>
 {% endblock %}

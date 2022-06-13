@@ -1,0 +1,6 @@
+<h3 class="pluslet-title">
+    {{ pluslet.title }}
+</h3>
+<div class="pluslet-body">
+    {{ pluslet.body | update_tokens_from_html | raw }}
+</div>

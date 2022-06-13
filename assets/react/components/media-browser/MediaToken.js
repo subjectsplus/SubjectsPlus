@@ -80,14 +80,14 @@ function MediaToken({ media, defaultImageSize, onClick }) {
             return buttons;
         }
  
-        const linkClassName = 'btn-link ms-1' + (hasMultipleImageSizes ? '' : ' disabled');
+        // const linkClassName = 'btn-link ms-1' + (hasMultipleImageSizes ? '' : ' disabled');
 
         return (
             <span className="fs-xs">
                 <b>Size: {imageSizeNameKeys[currentImageSize]}</b>
                 {' '}
-                <a href={void(0)} className={linkClassName} aria-disabled={!hasMultipleImageSizes}
-                    onClick={() => setIsChangingImageSize(hasMultipleImageSizes)}>(change)</a>
+                {hasMultipleImageSizes && <a href={void(0)} className="btn-link ms-1" 
+                    onClick={() => setIsChangingImageSize(hasMultipleImageSizes)}>(change)</a>}
             </span>
         );
     }

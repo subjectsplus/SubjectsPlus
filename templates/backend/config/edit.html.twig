@@ -1,13 +1,16 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Edit Config{% endblock %}
+{% block browser_title %}Edit Config Option{% endblock %}
 
 {% block content %}
-    <h1>Edit Config</h1>
+    <a href="{{ path('config_index', {'id': 8}) }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> Back to Config Setup</a>
+    <h1 class="fw-light">Edit Config Option</h1>
 
     {{ include('backend/config/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('config_index', {'id': '8'}) }}">back to list</a>
+    <button type="button" class="btn btn-icon-default p-0 mt-1" data-bs-toggle="modal" data-bs-target="#confirmDeleteConfig" title="Delete Config">
+        <i class="fas fa-trash"></i>
+    </button>
 
     {{ include('backend/config/_delete_form.html.twig') }}
 {% endblock %}

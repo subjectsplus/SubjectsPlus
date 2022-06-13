@@ -61,6 +61,7 @@ class Section
     
     /**
      * @ORM\OneToMany(targetEntity=Pluslet::class, mappedBy="section", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"pcolumn" = "ASC", "prow" = "ASC"})
      * @ApiSubresource(maxDepth=1)
      */
     private $pluslets;

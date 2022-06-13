@@ -1,0 +1,16 @@
+<div class="row">
+    {% set split_layout = section.layout|split('-') %}
+    {% set column_index = 0 %}
+    {% for column_size in split_layout %}
+        {% if column_size != 0 %}
+            <div class="mb-3 mb-lg-0 col-lg-{{ column_size }}">
+                {% for pluslet in section.pluslets %}
+                    {% if pluslet.pcolumn == column_index %}
+                            {{ include('frontend/subjects/pluslets/_pluslet.html.twig') }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% set column_index = column_index + 1 %}
+        {% endif %}
+    {% endfor %}
+</div>

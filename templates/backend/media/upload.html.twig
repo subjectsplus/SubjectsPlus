@@ -1,6 +1,6 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.media.upload.title' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.media.upload.title' | trans }}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -8,8 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
-
     {% for error in app.flashes('error') %}
         <div class="flash-error alert alert-info text-center mb-4">
             {{ error }}
@@ -50,5 +48,4 @@
             {% endif %}
         </div>
     </div>
-</div>
 {% endblock %}
