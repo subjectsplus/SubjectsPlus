@@ -29,11 +29,6 @@ class FaqController extends FrontendBaseController
      */
     public function show(Faq $faq): Response
     {
-        // Find tokens in faq answer and provide with updated info
-        $tokenService = new TokenService($this->getDoctrine()->getManager());
-        $faqAnswer = $tokenService->updateTokens($faq->getAnswer());
-        $faq->setAnswer($faqAnswer);
-
         return $this->render('faq/show.html.twig', [
             'faq' => $faq,
         ]);

@@ -3,5 +3,10 @@
 {% block metatitle %}Guide{% endblock %}
 
 {% block main %}
+{# Subject Title #}
 <p>Subject: {{ subject.subject }}</p>
+
+{# Subject Tabs #}
+{{ include('frontend/subjects/_tabs.html.twig') }}
+
 {% endblock %}
