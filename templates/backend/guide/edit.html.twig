@@ -1,6 +1,6 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}{{ 'control.guide_meta.edit.header' | trans }} | SubjectsPlus{% endblock %}
+{% block browser_title %}{{ 'control.guide_meta.edit.header' | trans }}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container py-5">
         <a href="{{ path('guide_index') }}" class="fs-xs"><i class="fas fa-arrow-alt-circle-left"></i> {{ 'control.guides.back_to_list' | trans }}</a>
 
         <a href="{{ path('guide_build', {'subjectId': guide.subjectId}) }}" class="btn-link fs-xs ms-2"><i class="fas fa-pen"></i> {{ 'control.guide.table.button.guide_builder' | trans }}</a>
@@ -20,5 +19,4 @@
         {% set delete_guide = 'true' %}
         {% set update_history = 'true' %}
         {{ include('backend/guide/_form.html.twig', {'button_label': 'control.guide_form.save_guide_details' | trans }) }}
-    </div>
 {% endblock %}
