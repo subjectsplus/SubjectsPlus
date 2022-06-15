@@ -3,11 +3,11 @@ import { useUpdatePluslet, useDeletePluslet } from '#api/guide/PlusletAPI';
 import CKEditor from '#components/shared/CKEditor';
 import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';
 import ActionsContainer from './pluslets/shared/ActionsContainer';
-import EditableTitle from './pluslets/shared/EditableTitle';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDebouncedCallback } from 'use-debounce';
 import { hideAllOffcanvas } from '#utility/Utility';
 import DOMPurify from 'dompurify';
+import { useDraggableInPortal } from '#hooks/useDraggableInPortal';
 
 function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, currentDraggingId, currentEditablePluslet, 
     currentEditablePlusletCallBack }) {
@@ -19,6 +19,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const [deletePlusletClicked, setDeletePlusletClicked] = useState(false);
     
     const plusletDropdownRef = useRef();
+    
+    const renderDraggable = useDraggableInPortal();
 
     const updatePlusletMutation = useUpdatePluslet(sectionId);
     const deletePlusletMutation = useDeletePluslet(sectionId);
@@ -147,7 +149,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     const PlusletWindow = (provided, snapshot) => (
         <div className={getPlusletClassName(snapshot?.isDragging || isCurrentlyDragging)} key={plusletId} 
             ref={provided?.innerRef} onDoubleClick={toggleEditable}
-            onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} 
+            onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)}
+            style={provided ? {...provided.draggableProps.style, position: 'absolute'} : provided.draggableProps.style} 
             onMouseLeave={() => setPlusletHovered(false)} {...provided?.draggableProps}>
             <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
 
@@ -174,13 +177,12 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
                 
             {/* Editor */}
             {Editor(snapshot?.isDragging || isCurrentlyDragging || isBeingDraggedOver)}
-            {/* <Editor isDragging={snapshot?.isDragging || isCurrentlyDragging || isBeingDraggedOver} /> */}
         </div>
     );
     
     const DraggablePluslet = () => (
         <Draggable type="pluslet" key={plusletId.toString()} draggableId={'pluslet-' + plusletId} index={plusletRow}>
-            {(provided, snapshot) => PlusletWindow(provided, snapshot)}
+            {renderDraggable((provided, snapshot) => PlusletWindow(provided, snapshot))};
         </Draggable>
     )
 
