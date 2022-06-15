@@ -1,3 +1,16 @@
 <li>
-    <span>A-Z</span>
+    {% if record.eresDisplay == 'Y' %}
+        <span><i class="fa fa-star"></i></span>
+    {% else %}
+        <span><i class="fa fa-star-o"></i></span>
+    {% endif %}
+    <span>
+        <a href="{{ path('backend_record_show', {'id': record.id}) }}">show</a>
+    </span>
+    <span><a href="{{ path('backend_record_edit', {'id': record.id}) }}">{{ record.title }}</a></span>
+    {% if record.eresDisplay == 'Y' %}
+        <span><a href="{{ getconfig('proxy_url') }}{{ record.location }}" target="_blank">Link</a></span>
+    {% else %}
+        <span><a href="{{ record.location }}" target="_blank">Link</a></span>
+    {%  endif %}
 </li>

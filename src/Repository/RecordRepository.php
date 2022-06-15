@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Record;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use DoctrineExtensions\Query\Mysql\Regexp;
+use Symfony\Component\Finder\Expression\Regex;
+use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * @method Record|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +20,25 @@ class RecordRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Record::class);
+
+        $this->_qb = $this->createQueryBuilder('t', 't.titleId');
+    }
+
+    /**
+     * @return float|int|mixed|string
+     */
+    public function getLetters()
+    {
+        return $this->_qb->select(
+        $this->_qb->expr()->substring('t.title', 1,1) . 'AS initial')
+             ->distinct(true)
+             ->andWhere('REGEXP('. $this->_qb->expr()->substring('t.title', 1,1) .', :regexp) = true')
+             ->setParameter('regexp', '[A-Z]')
+             ->orderBy('initial', 'ASC')
+             ->getQuery()
+             ->useQueryCache(true)
+             ->enableResultCache(15)
+             ->getResult();
     }
 
     // /**

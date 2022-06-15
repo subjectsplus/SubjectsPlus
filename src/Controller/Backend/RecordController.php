@@ -5,6 +5,7 @@ namespace App\Controller\Backend;
 use App\Entity\Record;
 use App\Form\RecordType;
 use App\Repository\RecordRepository;
+use App\Service\RecordService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RecordController extends AbstractController
 {
+
+    private $_rcdSvc;
+
+    public function __construct(RecordService $recordService)
+    {
+        $this->_rcdSvc = $recordService;
+    }
+
     /**
      * @Route("/", name="backend_record_index", methods={"GET"})
      */
@@ -23,6 +32,7 @@ class RecordController extends AbstractController
     {
         return $this->render('backend/record/index.html.twig', [
             'records' => $recordRepository->findAll(),
+            'letters' => $this->_rcdSvc->getLetters(),
         ]);
     }
 
@@ -63,7 +73,7 @@ class RecordController extends AbstractController
      */
     public function edit(Request $request, Record $record, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Record1Type::class, $record);
+        $form = $this->createForm(RecordType::class, $record);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

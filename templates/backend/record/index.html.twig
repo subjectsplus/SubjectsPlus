@@ -6,59 +6,15 @@
 <div class="container">
     <h1>Record index</h1>
 <a href="{{ path('backend_record_new') }}">Create new</a>
-    <table class="table">
-        <thead>
-            <tr>
-            <th>actions</th>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Alternate_title</th>
-                <th>Description</th>
-                <th>Internal_notes</th>
-                <th>Pre</th>
-                <th>Location</th>
-                <th>Call_number</th>
-                <th>Eres_display</th>
-                <th>Display_note</th>
-                <th>Trial_start</th>
-                <th>Trial_end</th>
-                <th>Record_status</th>
-                <th>Format</th>
-                <th>Restriction</th>
-            </tr>
-        </thead>
-        <tbody>
+<ul>
         {% for record in records %}
-            <tr>
-                <td>
-                    <a href="{{ path('backend_record_show', {'id': record.id}) }}">show</a>
-                    <a href="{{ path('backend_record_edit', {'id': record.id}) }}">edit</a>
-                </td>
-                <td>{{ record.id }}</td>
-                <td>{{ record.title }}</td>
-                <td>{{ record.alternateTitle }}</td>
-                <td>{{ record.description }}</td>
-                <td>{{ record.internalNotes }}</td>
-                <td>{{ record.pre }}</td>
-                <td>{{ record.location }}</td>
-                <td>{{ record.callNumber }}</td>
-                <td>{{ record.eresDisplay }}</td>
-                <td>{{ record.displayNote }}</td>
-                <td>{{ record.trialStart ? record.trialStart|date('Y-m-d') : '' }}</td>
-                <td>{{ record.trialEnd ? record.trialEnd|date('Y-m-d') : '' }}</td>
-                <td>{{ record.recordStatus }}</td>
-                <td>{{ record.format }}</td>
-                <td>{{ record.restriction }}</td>
-
-            </tr>
+            {% include 'backend/record/_record_list_item.html.twig' %}
         {% else %}
-            <tr>
-                <td colspan="14">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
+                <li >no records found</li>
+
+        {% endfor %}
+</ul>
 
     </div>
 {% endblock %}
