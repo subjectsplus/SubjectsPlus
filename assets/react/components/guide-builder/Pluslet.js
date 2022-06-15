@@ -150,7 +150,6 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
         <div className={getPlusletClassName(snapshot?.isDragging || isCurrentlyDragging)} key={plusletId} 
             ref={provided?.innerRef} onDoubleClick={toggleEditable}
             onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)}
-            style={provided ? {...provided.draggableProps.style, position: 'absolute'} : provided.draggableProps.style} 
             onMouseLeave={() => setPlusletHovered(false)} {...provided?.draggableProps}>
             <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
 
