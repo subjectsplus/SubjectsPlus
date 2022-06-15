@@ -182,7 +182,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     
     const DraggablePluslet = () => (
         <Draggable type="pluslet" key={plusletId.toString()} draggableId={'pluslet-' + plusletId} index={plusletRow}>
-            {renderDraggable((provided, snapshot) => PlusletWindow(provided, snapshot))};
+            {renderDraggable((provided, snapshot) => PlusletWindow(provided, snapshot))}
         </Draggable>
     )
 
