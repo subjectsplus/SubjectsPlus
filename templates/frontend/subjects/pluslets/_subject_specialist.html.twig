@@ -1,49 +1,43 @@
-<h3 class="pluslet-title">
-    {{ pluslet.title }}
-</h3>
+<div class="subject-specialists">
+    {% if pluslet.extra is not null and pluslet.extra is not empty %}
+        {% for staff in subject.staff %}
+            {% set showName = (pluslet.extra['showName' ~ staff.staffId] is defined and 
+                pluslet.extra['showName' ~ staff.staffId] is not empty) %}
+            {% set showEmail = (pluslet.extra['showEmail' ~ staff.staffId] is defined and
+                pluslet.extra['showEmail' ~ staff.staffId] is not empty) %}
+            {% set showPhone = (pluslet.extra['showPhone' ~ staff.staffId] is defined and 
+                pluslet.extra['showPhone' ~ staff.staffId] is not empty) %}
+            {% set showPhoto = (pluslet.extra['showPhoto' ~ staff.staffId] is defined and 
+                pluslet.extra['showPhoto' ~ staff.staffId] is not empty) %}
+            {% set showTitle = (pluslet.extra['showTitle' ~ staff.staffId] is defined and 
+                pluslet.extra['showTitle' ~ staff.staffId] is not empty) %}
+            {% set showTwitter = (pluslet.extra['showTwitter' ~ staff.staffId] is defined and
+                pluslet.extra['showTwitter' ~ staff.staffId] is not empty) %}
+            {% set showFacebook = (pluslet.extra['showFacebook' ~ staff.staffId] is defined and 
+                pluslet.extra['showFacebook' ~ staff.staffId] is not empty) %}
+            {% set showInstagram = (pluslet.extra['showInstagram' ~ staff.staffId] is defined and 
+                pluslet.extra['showInstagram' ~ staff.staffId] is not empty) %}
+            {% set showPinterest = (pluslet.extra['showPinterest' ~ staff.staffId] is defined and 
+                pluslet.extra['showPinterest' ~ staff.staffId] is not empty) %}
 
-<div class="pluslet-body">
-    <div class="subject-specialists">
-        {% if pluslet.extra is not null and pluslet.extra is not empty %}
-            {% for staff in subject.staff %}
-                {% set showName = (pluslet.extra['showName' ~ staff.staffId] is defined and 
-                    pluslet.extra['showName' ~ staff.staffId] is not empty) %}
-                {% set showEmail = (pluslet.extra['showEmail' ~ staff.staffId] is defined and
-                    pluslet.extra['showEmail' ~ staff.staffId] is not empty) %}
-                {% set showPhone = (pluslet.extra['showPhone' ~ staff.staffId] is defined and 
-                    pluslet.extra['showPhone' ~ staff.staffId] is not empty) %}
-                {% set showPhoto = (pluslet.extra['showPhoto' ~ staff.staffId] is defined and 
-                    pluslet.extra['showPhoto' ~ staff.staffId] is not empty) %}
-                {% set showTitle = (pluslet.extra['showTitle' ~ staff.staffId] is defined and 
-                    pluslet.extra['showTitle' ~ staff.staffId] is not empty) %}
-                {% set showTwitter = (pluslet.extra['showTwitter' ~ staff.staffId] is defined and
-                    pluslet.extra['showTwitter' ~ staff.staffId] is not empty) %}
-                {% set showFacebook = (pluslet.extra['showFacebook' ~ staff.staffId] is defined and 
-                    pluslet.extra['showFacebook' ~ staff.staffId] is not empty) %}
-                {% set showInstagram = (pluslet.extra['showInstagram' ~ staff.staffId] is defined and 
-                    pluslet.extra['showInstagram' ~ staff.staffId] is not empty) %}
-                {% set showPinterest = (pluslet.extra['showPinterest' ~ staff.staffId] is defined and 
-                    pluslet.extra['showPinterest' ~ staff.staffId] is not empty) %}
-
-                <div class="specialists-info">
-                    {% if showName %}
-                        <h4>{{ staff.fname ~ ' ' ~ staff.lname }}</h4>
+            <div class="specialists-info">
+                {% if showName %}
+                    <h4>{{ staff.fname ~ ' ' ~ staff.lname }}</h4>
+                {% endif %}
+                <ul class="staff-details">
+                    {% if showTitle %}
+                        <li>{{ staff.title | raw }}</li>
                     {% endif %}
-                    <ul class="staff-details">
-                        {% if showTitle %}
-                            <li>{{ staff.title | raw }}</li>
-                        {% endif %}
-                        
-                        {% if showEmail %}
-                            <li>{{ staff.email }}</li>
-                        {% endif %}
-                        
-                        {% if showPhone %}
-                            <li>{{ staff.tel }}</li>
-                        {% endif %} 
-                    </ul>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
+                    
+                    {% if showEmail %}
+                        <li>{{ staff.email }}</li>
+                    {% endif %}
+                    
+                    {% if showPhone %}
+                        <li>{{ staff.tel }}</li>
+                    {% endif %} 
+                </ul>
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>

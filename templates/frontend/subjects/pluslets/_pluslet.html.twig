@@ -1,10 +1,17 @@
 <div class="pluslet" data-type="{{ pluslet.type }}">
     <span class="visually-hidden">{{ 'plusletId: ' ~ pluslet.plusletId }}</span>
-    {% if pluslet.type == 'Heading' %}
-        {{ include('frontend/subjects/pluslets/_heading_pluslet.html.twig') }}
-    {% elseif pluslet.type == 'SubjectSpecialist' %}
-        {{ include('frontend/subjects/pluslets/_subject_specialist.html.twig') }}
-    {% else %}
-        {{ include('frontend/subjects/pluslets/_basic_pluslet.html.twig') }}
+    <h3 class="pluslet-title">
+        {{ pluslet.title }}
+    </h3>
+    {% if pluslet.type != 'Heading' %}
+        <div class="pluslet-body">
+            {% if pluslet.type == 'SubjectSpecialist' %}
+                {{ include('frontend/subjects/pluslets/_subject_specialist.html.twig') }}
+            {% elseif pluslet.type == 'GoogleSearch' %}
+                {{ include('frontend/subjects/pluslets/_google_search.html.twig') }}
+            {% else %}
+                {{ include('frontend/subjects/pluslets/_basic_pluslet.html.twig') }}
+            {% endif %}
+        </div>
     {% endif %}
 </div>
