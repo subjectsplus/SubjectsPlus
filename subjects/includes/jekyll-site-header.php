@@ -879,8 +879,9 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/talkback.php">Comments
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/departments/index.html">Departments
-												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/departments/index.html">Departments</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/diversity-statement.html">Diversity Statement</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/workhere/index.html">Employment
 												</a></li>
