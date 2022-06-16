@@ -2,27 +2,30 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 export const useDraggableInPortal = () => {
-    const self = useRef({}).current;
+    const element = useRef(document.createElement('div')).current;
 
     useEffect(() => {
-        const div = document.createElement('div');
-        div.style.position = 'absolute';
-        div.style.pointerEvents = 'none';
-        div.style.top = '0';
-        div.style.width = '100%';
-        div.style.height = '100%';
-        self.elt = div;
-        document.body.appendChild(div);
-        return () => {
-            document.body.removeChild(div);
-        };
-    }, [self]);
+        if (element) {
+          element.style.pointerEvents = 'none'
+          element.style.position = 'absolute'
+          element.style.height = '100%'
+          element.style.width = '100%'
+          element.style.top = '0'
+    
+          document.body.appendChild(element)
+    
+          return () => {
+            document.body.removeChild(element)
+          }
+        }
+      }, [element]);
 
     return (render) => (provided, ...args) => {
-        const element = render(provided, ...args);
-        if (provided.draggableProps.style.position === 'fixed') {
-            return createPortal(element, self.elt);
+        const result = render(provided, ...args);
+        const style = provided.draggableProps.style
+        if (style.position === 'fixed') {
+            return createPortal(result, element);
         }
-        return element;
+        return result;
     };
 };
