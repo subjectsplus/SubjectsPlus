@@ -1,7 +1,22 @@
 <div class="google-search">
-	<form method="get" action="https://google.com/search" target="_blank">
-		<legend>Find items in Google Search</legend>
+    {% if pluslet.type == 'GoogleScholar' %}
+        {% set actionUrl = 'https://scholar.google.com/scholar?q=' %}
+    {% else %}
+        {% set actionUrl = 'https://google.com/search' %}
+    {% endif %}
+
+	<form method="get" action="{{ actionUrl }}" target="_blank">
+        {% if pluslet.type == 'GoogleScholar' %}
+            <legend>{{'public.pluslet.google_scholar.legend' | trans}}</legend>
+        {% elseif pluslet.type == 'GoogleBooks' %}
+            <legend>{{'public.pluslet.google_books.legend' | trans}}</legend>
+            <input type="hidden" name="tbm" value="bks"/>
+        {% else %}
+            <legend>{{'public.pluslet.google_search.legend' | trans}}</legend>
+        {% endif %}
+
 		<input type="text"   name="q"  value="" />
-		<input type="submit" value="Search" />       
+		<input type="submit" value="Search" />
+        <div class="google-attribution" align="left"></div>
 	</form>
 </div>

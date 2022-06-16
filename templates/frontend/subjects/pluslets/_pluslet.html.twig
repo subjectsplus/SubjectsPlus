@@ -7,7 +7,7 @@
         <div class="pluslet-body">
             {% if pluslet.type == 'SubjectSpecialist' %}
                 {{ include('frontend/subjects/pluslets/_subject_specialist.html.twig') }}
-            {% elseif pluslet.type == 'GoogleSearch' %}
+            {% elseif pluslet.type == 'GoogleSearch' or pluslet.type == 'GoogleScholar' or pluslet.type == 'GoogleBooks' %}
                 {{ include('frontend/subjects/pluslets/_google_search.html.twig') }}
             {% else %}
                 {{ include('frontend/subjects/pluslets/_basic_pluslet.html.twig') }}
