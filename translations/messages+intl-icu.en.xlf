@@ -1013,6 +1013,18 @@
         <source>control.guides.table.type.suppressed</source>
         <target>Suppressed</target>
       </trans-unit>
+      <trans-unit id="i2qrbsn" resname="public.pluslet.google_scholar.legend">
+        <source>public.pluslet.google_scholar.legend</source>
+        <target>Find items in Google Scholar</target>
+      </trans-unit>
+      <trans-unit id="MEIiGCb" resname="public.pluslet.google_books.legend">
+        <source>public.pluslet.google_books.legend</source>
+        <target>Find items in Google Books</target>
+      </trans-unit>
+      <trans-unit id="PixzDwq" resname="public.pluslet.google_search.legend">
+        <source>public.pluslet.google_search.legend</source>
+        <target>Find items in Google Search</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

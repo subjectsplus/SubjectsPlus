@@ -82,9 +82,9 @@ class Pluslet
     private $type;
 
     /**
-     * @var string|null
+     * @var array|null
      *
-     * @ORM\Column(name="extra", type="text", length=16777215, nullable=true)
+     * @ORM\Column(name="extra", type="json", nullable=true)
      */
     private $extra;
 
@@ -226,14 +226,34 @@ class Pluslet
         return $this;
     }
 
-    public function getExtra(): ?string
+    public function getExtra(): ?array
     {
         return $this->extra;
     }
 
-    public function setExtra(?string $extra): self
-    {
+    public function setExtra(array $extra): self {
         $this->extra = $extra;
+
+        return $this;
+    }
+
+    public function addExtra(string $key, string $value): self
+    {
+        if (!$this->extra)
+            $this->extra = array();
+
+        if (!array_key_exists($key, $this->extra)) {
+            $this->extra[$key] = $value;
+        }
+
+        return $this;
+    }
+
+    public function removeExtra(string $key): self
+    {
+        if (array_key_exists($key, $this->extra)) {
+            unset($this->extra[$key]);
+        }
 
         return $this;
     }

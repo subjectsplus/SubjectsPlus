@@ -1,0 +1,30 @@
+
+{% if pluslet.extra['mp4'] is not empty %}
+    <video width="320" height="240" controls>
+        <source src="{{ pluslet.extra['mp4'] }}" type="video/mp4">
+    </video>
+{% elseif pluslet.extra['ogg'] is not empty %}
+    <video width="320" height="240" controls>
+        <source src="{{ pluslet.extra['ogg'] }}" type="video/ogg">
+    </video>
+{% elseif pluslet.extra['vimeo'] is not empty %}
+    <div>
+        <iframe src="{{ pluslet.extra['vimeo'] | get_embed_link('vimeo') }}" width="320" height="240" webkitallowfullscreen 
+            mozallowfullscreen allowfullscreen>
+        </iframe>
+    </div>
+{% elseif pluslet.extra['youtube'] is not empty %}
+    <div>
+        <iframe width="560" height="315" src="{{ pluslet.extra['youtube'] | get_embed_link('youtube') }}" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+{% elseif pluslet.extra['kaltura'] is not empty %}
+        <div>
+            <iframe src="{{ pluslet.extra['kaltura'] | get_embed_link('kaltura') }}" width="320" height="240" webkitallowfullscreen 
+                mozallowfullscreen allowfullscreen>
+            </iframe>
+        </div>
+{% endif %}
