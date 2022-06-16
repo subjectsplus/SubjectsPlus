@@ -4927,6 +4927,18 @@
         <source>control.guides.table.type.suppressed</source>
         <target>__control.guides.table.type.suppressed</target>
       </trans-unit>
+      <trans-unit id="i2qrbsn" resname="public.pluslet.google_scholar.legend">
+        <source>public.pluslet.google_scholar.legend</source>
+        <target>__public.pluslet.google_scholar.legend</target>
+      </trans-unit>
+      <trans-unit id="MEIiGCb" resname="public.pluslet.google_books.legend">
+        <source>public.pluslet.google_books.legend</source>
+        <target>__public.pluslet.google_books.legend</target>
+      </trans-unit>
+      <trans-unit id="PixzDwq" resname="public.pluslet.google_search.legend">
+        <source>public.pluslet.google_search.legend</source>
+        <target>__public.pluslet.google_search.legend</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
