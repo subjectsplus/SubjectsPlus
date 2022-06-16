@@ -1,4 +1,5 @@
 <div class="pluslet" data-type="{{ pluslet.type }}">
+    <span class="visually-hidden">{{ 'plusletId: ' ~ pluslet.plusletId }}</span>
     {% if pluslet.type == 'Heading' %}
         {{ include('frontend/subjects/pluslets/_heading_pluslet.html.twig') }}
     {% elseif pluslet.type == 'SubjectSpecialist' %}
