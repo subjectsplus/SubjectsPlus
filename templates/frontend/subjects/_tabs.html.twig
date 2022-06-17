@@ -5,7 +5,7 @@
         {% set tab_id = 'tab-' ~ loop.index0  %}
         {% set tab_content_id = 'tab-content-' ~ loop.index0  %}
 
-        <li class="nav-item" role="presentation">
+        <li class="nav-item" role="presentation" data-tab-id="{{ tab.tabId }}">
             <a class="nav-link" id="{{ tab_id }}" href="#{{ tab_id }}" data-bs-toggle="pill" data-bs-target="#{{ tab_content_id }}" type="button" role="tab" 
                 aria-controls="{{ tab_content_id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}">
                 {{ tab.label }}
@@ -21,7 +21,7 @@
         {% set tab_content_id = 'tab-content-' ~ loop.index0  %}
 
         <div class="tab-pane fade" id="{{ tab_content_id }}" role="tabpanel" 
-            aria-labelledby="{{ tab_id }}">
+            aria-labelledby="{{ tab_id }}" data-tab-id="{{ tab.tabId }}>
             <div class="container">
                 {% for section in tab.sections %}
                     {% if section.pluslets is not empty %}

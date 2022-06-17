@@ -1,6 +1,4 @@
-<div class="row">
-    <span class="visually-hidden">{{ 'sectionId: ' ~ section.sectionId }}</span>
-    
+<div class="section row" data-section-id="{{ section.sectionId }}">    
     {% set split_layout = section.layout|split('-') %}
     {% set column_index = 0 %}
     {% for column_size in split_layout %}
