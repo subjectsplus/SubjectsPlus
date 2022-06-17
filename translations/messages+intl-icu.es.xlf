@@ -1061,6 +1061,10 @@
         <source>public.pluslet.google_search.legend</source>
         <target>__public.pluslet.google_search.legend</target>
       </trans-unit>
+      <trans-unit id="5oWTH8D" resname="public.guide.tab.external_link.title">
+        <source>public.guide.tab.external_link.title</source>
+        <target>__public.guide.tab.external_link.title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

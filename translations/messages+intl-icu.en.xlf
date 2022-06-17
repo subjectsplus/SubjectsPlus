@@ -1025,6 +1025,10 @@
         <source>public.pluslet.google_search.legend</source>
         <target>Find items in Google Search</target>
       </trans-unit>
+      <trans-unit id="5oWTH8D" resname="public.guide.tab.external_link.title">
+        <source>public.guide.tab.external_link.title</source>
+        <target>Opens in new tab or window</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
