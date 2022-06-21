@@ -61,7 +61,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
             setDeletePlusletClicked(true);
         }
     }
-
+    
     const toggleEditable = () => {
         if (currentEditablePluslet !== plusletId) {
             setEditable(true);
@@ -148,7 +148,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     
     const PlusletWindow = (provided, snapshot) => (
         <div className={getPlusletClassName(snapshot?.isDragging || isCurrentlyDragging)} key={plusletId} 
-            ref={provided?.innerRef} onDoubleClick={toggleEditable}
+            ref={provided?.innerRef} onDoubleClick={() => !editable && toggleEditable()}
             onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)}
             onMouseLeave={() => setPlusletHovered(false)} {...provided?.draggableProps}>
             <span className="visually-hidden">{'Pluslet ' + plusletId}</span>
