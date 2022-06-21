@@ -40,8 +40,12 @@
             const pluginDirectory = this.path;
             editor.addContentsCss( pluginDirectory + 'styles/sp-custom-cke-recordtoken.css' );
 
-            const records = {};
             let notifiedToSave = false;
+
+            // Set global records if not initialized
+            if (window.records == null) {
+                window.records = {};
+            }
 
             // Create record token widget
             editor.widgets.add('recordtoken', {
@@ -55,20 +59,22 @@
                 },
 
                 init: function() {
-
                     // Add widget reference to dialog data
                     this.on('dialog', function(evt) {
                         evt.data.widget = this;
                     });
 
-                    const recordId = this.element.data('record-id');
+                    const recordId = this.element.data('record-id').toString();
                     let record = null;
 
                     // Set record data, call api and index if unavailable
-                    if (records[recordId]) {
-                        record = records[recordId];
+                    if (window.records[recordId]) {
+                        console.log('Record for id', recordId, ' already indexed, skipping retrieval.');
+                        record = window.records[recordId];
                         this.setData('record', record);
                     } else {
+                        console.log('Obtaining record for id', recordId);
+
                         record = getRecordFromAPI(recordId);
                         if (record) {
                             // sanitize record title and description
@@ -77,7 +83,7 @@
 
                             // set to data and index the record
                             this.setData('record', record);
-                            records[recordId] = record;
+                            window.records[recordId] = record;
                         } else {
                             this.setData('record', null);
                         }
@@ -300,7 +306,7 @@
                 record.description = sanitizeString(record.description);
 
                 // index the record
-                records[record.recordId.toString()] = record;
+                window.records[record.recordId.toString()] = record;
             });
 
             editor.ui.addButton( 'Record', {
