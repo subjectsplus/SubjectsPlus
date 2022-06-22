@@ -1,22 +1,22 @@
 {# Default Nav #}
+
+    {# Set site logo  and site author#}
+    {% if getconfig('site_logo') %} {# TODO: Configure path for logo image set in config #}
+        {% set logoSrc = getconfig('site_logo') %}
+    {% else %}
+        {% set logoSrc = asset('build/images/frontend/sp_logo.png') %}
+    {% endif %}
+
+    {% if getconfig('meta_author') %}
+        {% set logoAlt = getconfig('meta_author') %}
+    {% else %}
+        alt="SubjectsPlus logo"
+    {% endif %}
+
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ path('frontend_subjects') }}">
-            <img
-            {# TODO: Configure path for logo image set in config #}
-            {#{% if getconfig('site_logo') %}
-                src="{{ getconfig('site_logo') }}"
-            {% else %}#}
-                src="{{ asset('build/images/frontend/sp_logo.png') }}"
-            {#{% endif %}#}
-
-            {% if getconfig('meta_author') %}
-                alt="{{ getconfig('meta_author') }} logo"
-            {% else %}
-                alt="SubjectsPlus logo"
-            {% endif %}
-
-            class="img-fluid" style="width: 200px;" />
+            <img src="{{ logoSrc }}" alt="{{ logoAlt }} logo" class="img-fluid" style="width: 200px;" />
         </a>
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mainNav">
         <div class="offcanvas-header justify-content-end pb-2">
@@ -25,19 +25,19 @@
         <div class="offcanvas-body pt-0 justify-content-lg-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('frontend_subjects') }}">Guides</a>
+                    <a class="nav-link" href="{{ path('frontend_subjects') }}">{{ 'public.default_nav.guides' | trans }}Guides</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('frontend_database') }}">Resources</a>
+                    <a class="nav-link" href="{{ path('frontend_database') }}">{{ 'public.default_nav.databases' | trans }}Resources</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('frontend_staff') }}">Staff</a>
+                    <a class="nav-link" href="{{ path('frontend_staff') }}">{{ 'public.default_nav.staff' | trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">FAQs</a>
+                    <a class="nav-link" href="#">{{ 'public.default_nav.faqs' | trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Talkback</a>
+                    <a class="nav-link" href="#">{{ 'public.default_nav.talkback' | trans }}</a>
                 </li>
             </ul>
         </div>
@@ -46,7 +46,7 @@
         <button class="sp-navbar-toggler navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="search-icon-nav ms-1" data-bs-toggle="offcanvas" href="#offcanvasSearchAll" role="button" aria-controls="offcanvasSearchAll" title="{{ 'control.header.search_icon' | trans  }}"><i class="fas fa-search"></i></a>
+        <a class="search-icon-nav ms-1" data-bs-toggle="offcanvas" href="#offcanvasSearchAll" role="button" aria-controls="offcanvasSearchAll" title="{{ 'public.default_nav.search' | trans }}"><i class="fas fa-search"></i></a>
         </div>
     </div>
 </nav>
