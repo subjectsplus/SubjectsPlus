@@ -47,13 +47,13 @@ class TokenService {
 
                     // update title to database value if no override is present
                     if (!$recordElement->hasAttribute('data-record-title-override')) {
-                        $childNode->nodeValue = $recordInfo->getTitle();
+                        $childNode->nodeValue = UtilityService::cleanString($recordInfo->getTitle());
                     }
                 }
 
                 // check for description blocks
                 if (strtolower($childNode->nodeName) === 'span' && $childNode->getAttribute('class') === self::DESCRIPTION_BLOCK_CLASS_NAME) {
-                    $childNode->nodeValue = $recordInfo->getDescription();
+                    $childNode->nodeValue = UtilityService::cleanString($recordInfo->getDescription());
                 }
             }
         }
