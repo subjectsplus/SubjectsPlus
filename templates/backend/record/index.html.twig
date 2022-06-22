@@ -5,16 +5,24 @@
 {% block content %}
 <div class="container">
     <h1>Record index</h1>
-<a href="{{ path('backend_record_new') }}">Create new</a>
-<ul>
+    <a href="{{ path('backend_record_new') }}">Create new</a>
+    <div>Is Query Cache Active: </div>
+    {% include 'backend/record/_letters_list.html.twig' %}
+    <ul>
         {% for record in records %}
             {% include 'backend/record/_record_list_item.html.twig' %}
         {% else %}
-
                 <li >no records found</li>
-
         {% endfor %}
-</ul>
+    </ul>
 
-    </div>
+    <h3>Test Record Queries</h3>
+    <ul>
+        {%  for db in dbs %}
+        <li>{{ db.title }}</li>
+        {% else %}
+        <li>no results</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

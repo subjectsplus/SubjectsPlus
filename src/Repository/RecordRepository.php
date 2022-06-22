@@ -17,12 +17,20 @@ use Symfony\Contracts\Cache\CacheInterface;
  */
 class RecordRepository extends ServiceEntityRepository
 {
+
+    private $basic_fields = ['r.title', 'r.location'];
+
+
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Record::class);
 
-        $this->_qb = $this->createQueryBuilder('t', 't.titleId');
+        $this->_qb = $this->createQueryBuilder('r', 'r.id');
+
     }
+
+
 
     /**
      * @return float|int|mixed|string
@@ -30,15 +38,36 @@ class RecordRepository extends ServiceEntityRepository
     public function getLetters()
     {
         return $this->_qb->select(
-        $this->_qb->expr()->substring('t.title', 1,1) . 'AS initial')
+        $this->_qb->expr()->substring('r.title', 1,1) . 'AS initial')
              ->distinct(true)
-             ->andWhere('REGEXP('. $this->_qb->expr()->substring('t.title', 1,1) .', :regexp) = true')
+             ->andWhere('REGEXP('. $this->_qb->expr()->substring('r.title', 1,1) .', :regexp) = true')
              ->setParameter('regexp', '[A-Z]')
              ->orderBy('initial', 'ASC')
              ->getQuery()
              ->useQueryCache(true)
              ->enableResultCache(15)
              ->getResult();
+    }
+
+    public function getDatabases()
+    {
+        return $this->_qb->addSelect(array('r.title', 'r.location'));
+    }
+    /*
+     * ->andWhere('r.eres_display = :eresDisplay')
+                    ->setParameter('eresDisplay', 'Y')
+                    ->setMaxResults($numToFetch);
+     */
+
+    public function getDbsByEresDisplay($eresDisplay, $useQueryCache = true, $enableResultCache = 15)
+    {
+        return $this->getDatabases()
+                    ->andWhere('r.eres_display = :eresDisplay')
+                    ->setParameter('eresDisplay', $eresDisplay)
+                    ->getQuery()
+                    ->useQueryCache($useQueryCache)
+                    ->enableResultCache($enableResultCache)
+                    ->getResult();
     }
 
     // /**

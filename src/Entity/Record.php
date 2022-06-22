@@ -65,22 +65,6 @@ class Record
     private $display_note;
 
     /**
-     * @return mixed
-     */
-    public function getDisplayNote()
-    {
-        return $this->display_note;
-    }
-
-    /**
-     * @param mixed $display_note
-     */
-    public function setDisplayNote($display_note): void
-    {
-        $this->display_note = $display_note;
-    }
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $trial_start;
@@ -215,6 +199,22 @@ class Record
         $this->eres_display = $eres_display;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDisplayNote()
+    {
+        return $this->display_note;
+    }
+
+    /**
+     * @param mixed $display_note
+     */
+    public function setDisplayNote($display_note): void
+    {
+        $this->display_note = $display_note;
     }
 
     public function getTrialStart(): ?\DateTimeInterface
