@@ -20,7 +20,8 @@ final class Version20220621134441 extends AbstractMigration
 
     private function isLinkListDisplay(string $html): bool {
         return str_contains($html, '<ul class="link-list-display">') ||
-            str_contains($html, "<ul class='link-list-display'>");
+            str_contains($html, "<ul class='link-list-display'>") ||
+            str_contains($html, '<li>{{dab}');
     }
 
     private function cleanString(string $str): string {
