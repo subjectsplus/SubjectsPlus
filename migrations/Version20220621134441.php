@@ -50,7 +50,7 @@ final class Version20220621134441 extends AbstractMigration
         $oldListItems = $xpath->query('//li');
 
         foreach ($oldListItems as $oldListItem) {
-            // Token configuration with format {{dab},{title_id},{title}}
+            // Token configuration with format {{dab},{title_id},{title},{extraConfig}}
             $tokenString = trim($oldListItem->nodeValue, '{}');
             $tokenConfig = preg_split('/},\s?{/', $tokenString);
             echo 'tokenConfig: ' . implode(',', $tokenConfig) . "\n";
@@ -81,6 +81,7 @@ final class Version20220621134441 extends AbstractMigration
                     // Create and append the token link element
                     $recordLink = $doc->createElement('a');
                     $recordLink->nodeValue = $this->cleanString($recordData['title']);
+                    $recordLink->setAttribute('class', 'record-link');
                     $recordLink->setAttribute('href', $recordData['location']);
                     $tokenElement->appendChild($recordLink);
                     
