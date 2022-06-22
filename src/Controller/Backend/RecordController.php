@@ -33,7 +33,8 @@ class RecordController extends AbstractController
         return $this->render('backend/record/index.html.twig', [
             'records' => $recordRepository->findAll(),
             'letters' => $this->_rcdSvc->getLetters(),
-            'dbs' => $this->_rcdSvc->getDbsByEresDisplay("Y"),
+            'eresYesDbs' => $this->_rcdSvc->getDbsByEresDisplay("Y"),
+            'eresNoDbs' => $this->_rcdSvc->getDbsByEresDisplay("N"),
         ]);
     }
 

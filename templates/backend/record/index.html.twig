@@ -16,12 +16,21 @@
         {% endfor %}
     </ul>
 
-    <h3>Test Record Queries</h3>
+    <h3>Eres Display Y</h3>
     <ul>
-        {%  for db in dbs %}
+        {%  for db in eresYesDbs %}
         <li>{{ db.title }}</li>
         {% else %}
         <li>no results</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Eres Display N</h3>
+    <ul>
+        {%  for db in eresNoDbs %}
+            <li>{{ db.title }}</li>
+        {% else %}
+            <li>no results</li>
         {% endfor %}
     </ul>
 </div>

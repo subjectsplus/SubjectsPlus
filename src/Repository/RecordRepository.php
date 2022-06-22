@@ -30,8 +30,6 @@ class RecordRepository extends ServiceEntityRepository
 
     }
 
-
-
     /**
      * @return float|int|mixed|string
      */
@@ -59,14 +57,12 @@ class RecordRepository extends ServiceEntityRepository
                     ->setMaxResults($numToFetch);
      */
 
-    public function getDbsByEresDisplay($eresDisplay, $useQueryCache = true, $enableResultCache = 15)
+    public function getDbsByEresDisplay($eresDisplay)
     {
         return $this->getDatabases()
                     ->andWhere('r.eres_display = :eresDisplay')
                     ->setParameter('eresDisplay', $eresDisplay)
                     ->getQuery()
-                    ->useQueryCache($useQueryCache)
-                    ->enableResultCache($enableResultCache)
                     ->getResult();
     }
 
