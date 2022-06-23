@@ -1,11 +1,4 @@
 <div class="pluslet" data-type="{{ pluslet.type }}" data-pluslet-id="{{ pluslet.plusletId }}">
-    {% if pluslet.type == 'Clone' %}
-        {% set pluslet = get_pluslet(pluslet.extra['master']) %}
-        {% set section = pluslet.section %}
-        {% set tab = section.tab %}
-        {% set subject = tab.subject %}
-    {% endif %}
-    
     <h3 class="pluslet-title">
         {{ pluslet.title }}
     </h3>
