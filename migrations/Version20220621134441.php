@@ -7,6 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Masterminds\HTML5;
+use App\Service\UtilityService;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -22,10 +23,6 @@ final class Version20220621134441 extends AbstractMigration
         return str_contains($html, '<ul class="link-list-display">') ||
             str_contains($html, "<ul class='link-list-display'>") ||
             str_contains($html, '<li>{{dab}');
-    }
-
-    private function cleanString(string $str): string {
-        return htmlspecialchars(trim(strip_tags($str)));
     }
 
     private function getRecord(string $recordId) {
@@ -81,7 +78,7 @@ final class Version20220621134441 extends AbstractMigration
 
                     // Create and append the token link element
                     $recordLink = $doc->createElement('a');
-                    $recordLink->nodeValue = $this->cleanString($recordData['title']);
+                    $recordLink->nodeValue = UtilityService::cleanString($recordData['title']);
                     $recordLink->setAttribute('class', 'record-link');
                     $recordLink->setAttribute('href', $recordData['location']);
                     $tokenElement->appendChild($recordLink);
@@ -91,7 +88,7 @@ final class Version20220621134441 extends AbstractMigration
                         $tokenElement->setAttribute('data-description-type', 'block');
                         
                         $descriptionElement = $doc->createElement('span');
-                        $descriptionElement->nodeValue = $this->cleanString($recordData['description']);
+                        $descriptionElement->nodeValue = UtilityService::cleanString($recordData['description']);
                         $descriptionElement->setAttribute('class', 'record-description');
                         
                         $brElement = $doc->createElement('br');
@@ -121,6 +118,7 @@ final class Version20220621134441 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+
         $linkLists = $this->connection->fetchAllAssociative('SELECT pluslet_id, body FROM pluslet WHERE type = "LinkList"');
 
         foreach ($linkLists as $linkList) {

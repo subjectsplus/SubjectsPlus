@@ -9,6 +9,6 @@ class UtilityService {
             $str = str_replace(["\r\n", "\r", "\n"], "", $str);
         }
 
-        return html_entity_decode(trim(strip_tags($str)));
+        return htmlspecialchars(trim(strip_tags($str)));
     }
 }
