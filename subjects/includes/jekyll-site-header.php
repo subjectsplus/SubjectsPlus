@@ -391,13 +391,16 @@ if (is_null($header_type)
 
 
 
-										<h5>Fellowships</h5>
+										<h5>Fellowships & Grants</h5>
 										<hr align="left" class="hr-decoration">
 										<ul>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/specialcollections/abrams-banning-grant.html">Dave Abrams and Gene Banning Pan Am Research Grant</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/library-research-scholars.html">Library Research Scholars & Adobe Scholars
-												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/chc/fellows.html">Goizueta Foundation Graduate Fellowship Program</a></li>
 
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/library-research-scholars.html">Library Research Scholars &amp; Adobe Scholars</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/specialcollections/world-wings-grant.html">The World Wings International, Inc. Research Grant</a></li>
 										</ul>
 
 
@@ -578,6 +581,9 @@ if (is_null($header_type)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/kislak-center/index.html">Kislak Center
+												</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/meditation-room.html">Meditation Room
 												</a></li>
 
 										</ul>
@@ -873,8 +879,9 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/talkback.php">Comments
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/departments/index.html">Departments
-												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/departments/index.html">Departments</a></li>
+
+											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/about/diversity-statement.html">Diversity Statement</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/workhere/index.html">Employment
 												</a></li>
