@@ -1,6 +1,7 @@
 <div class="section row" data-section-id="{{ section.sectionId }}">    
     {% set split_layout = section.layout|split('-') %}
     {% set column_index = 0 %}
+    {# TODO: Handle incorrect pcolumn  #}
     {% for column_size in split_layout %}
         {% if column_size != 0 %}
             <div class="mb-3 mb-lg-0 col-lg-{{ column_size }}">
