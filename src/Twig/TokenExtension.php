@@ -28,6 +28,6 @@ class TokenExtension extends AbstractExtension
     }
 
     public function updateTokensFromHTML(string $html) {
-        return $this->tokenService->updateTokens($html);
+        return \html_entity_decode($this->tokenService->updateTokens($html));
     }
 }
