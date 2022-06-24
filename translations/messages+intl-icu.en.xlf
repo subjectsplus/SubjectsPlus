@@ -1025,6 +1025,30 @@
         <source>public.pluslet.google_search.legend</source>
         <target>Find items in Google Search</target>
       </trans-unit>
+      <trans-unit id="wFdzaZx" resname="public.default_nav.guides">
+        <source>public.default_nav.guides</source>
+        <target>Guides</target>
+      </trans-unit>
+      <trans-unit id="YgEa8zG" resname="public.default_nav.databases">
+        <source>public.default_nav.databases</source>
+        <target>Resources</target>
+      </trans-unit>
+      <trans-unit id="2eWQ5JV" resname="public.default_nav.staff">
+        <source>public.default_nav.staff</source>
+        <target>Staff</target>
+      </trans-unit>
+      <trans-unit id="iKAJoeb" resname="public.default_nav.faqs">
+        <source>public.default_nav.faqs</source>
+        <target>FAQs</target>
+      </trans-unit>
+      <trans-unit id="l7_qsFo" resname="public.default_nav.talkback">
+        <source>public.default_nav.talkback</source>
+        <target>Talkback</target>
+      </trans-unit>
+      <trans-unit id="DRBq5eD" resname="public.default_nav.search">
+        <source>public.default_nav.search</source>
+        <target>Search</target>
+      </trans-unit>
       <trans-unit id="5oWTH8D" resname="public.guide.tab.external_link.title">
         <source>public.guide.tab.external_link.title</source>
         <target>Opens in new tab or window</target>

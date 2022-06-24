@@ -107,6 +107,11 @@ Encore
         from: './assets/backend/images',
         to: 'images/backend/[path][name].[ext]'
     })
+
+    .copyFiles({
+        from: './assets/frontend/images',
+        to: 'images/frontend/[path][name].[ext]'
+    })
     
     // CKEditor 4
     .copyFiles([

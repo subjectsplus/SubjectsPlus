@@ -9,7 +9,7 @@
     <a href="#" class="link-default">Link default</a>
 <ul class="list-unstyled">
 {% for subject in subjects %}
-<li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{subject.subject }}</a></li>
+<li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{ subject.subject | raw }}</a></li>
 {% endfor %}
 </ul>
 
