@@ -51,13 +51,10 @@ final class Version20220621134441 extends AbstractMigration
             // Token configuration with format {{dab},{title_id},{title},{extraConfig}}
             $tokenString = trim($oldListItem->nodeValue, '{}');
             $tokenConfig = preg_split('/},\s?{/', $tokenString);
-            echo 'tokenConfig: ' . implode(',', $tokenConfig) . "\n";
             $recordId = isset($tokenConfig[1]) ? $tokenConfig[1] : null;
             
             if ($recordId) {
-                echo 'recordId: ' . $recordId . "\n";
                 $extraConfig = str_split($tokenConfig[3]);
-                echo 'extraConfig: ' . implode($extraConfig) . "\n";
                 $showIcon = isset($extraConfig[0]) ? $extraConfig[0] : false;
                 $showDescription = isset($extraConfig[1]) ? $extraConfig[1] : false;
                 $showNotes = isset($extraConfig[2]) ? $extraConfig[2] : false;
@@ -66,7 +63,6 @@ final class Version20220621134441 extends AbstractMigration
                 $recordData = $this->getRecord($recordId);
 
                 if ($recordData) {
-                    echo 'recordData: ' . implode(',', $recordData) . "\n";
                     // Create the token span element
                     $tokenElement = $doc->createElement('span');
                     $tokenElement->setAttribute('class', 'record-token');
@@ -127,10 +123,8 @@ final class Version20220621134441 extends AbstractMigration
 
             if ($body) {
                 if ($this->isLinkListDisplay($body)) {
-                    echo "-------------------------------\n";
-                    echo 'Pluslet ' . $plusletId . "\n";
-                    echo "-------------------------------\n";
                     $newBody = $this->getUpdatedLinkListDisplay($body);
+
                     if ($newBody) {
                         $this->addSql('UPDATE pluslet SET body = :body, type = "Basic" WHERE pluslet_id = :pluslet_id', [
                             ':body' => $newBody,
