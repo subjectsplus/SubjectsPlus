@@ -5006,6 +5006,10 @@
         <source>public.default_nav.search</source>
         <target>__public.default_nav.search</target>
       </trans-unit>
+      <trans-unit id="5oWTH8D" resname="public.guide.tab.external_link.title">
+        <source>public.guide.tab.external_link.title</source>
+        <target>__public.guide.tab.external_link.title</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,15 +1,21 @@
 {# Tabs #}
-{# TODO: Implement tab redirect #}
 <ul class="nav nav-pills mb-3" id="guide-tabs" role="tablist">
     {% for tab in subject.tabs %}
         {% set tab_id = 'tab-' ~ loop.index0  %}
         {% set tab_content_id = 'tab-content-' ~ loop.index0  %}
 
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="{{ tab_id }}" href="#{{ tab_id }}" data-bs-toggle="pill" data-bs-target="#{{ tab_content_id }}" type="button" role="tab" 
-                aria-controls="{{ tab_content_id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}">
-                {{ tab.label }}
-            </a>
+        <li class="nav-item" role="presentation" data-tab-id="{{ tab.tabId }}">
+            {% if tab.externalUrl is not null and tab.externalUrl is not empty %}
+                <a class="nav-link" id="{{ tab_id }}" href="{{ tab.externalUrl }}" target="_blank" rel="noopener noreferrer">
+                    {{ tab.label }}
+                    <i class="fas fa-external-link-alt" title="{{ 'public.guide.tab.external_link.title' | trans}}"></i>
+                </a>
+            {% else %}
+                <a class="nav-link" id="{{ tab_id }}" href="#{{ tab_id }}" data-bs-toggle="pill" data-bs-target="#{{ tab_content_id }}" type="button" role="tab" 
+                    aria-controls="{{ tab_content_id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}">
+                    {{ tab.label }}
+                </a>
+            {% endif %}
         </li>
     {% endfor %}
 </ul>
@@ -21,7 +27,7 @@
         {% set tab_content_id = 'tab-content-' ~ loop.index0  %}
 
         <div class="tab-pane fade" id="{{ tab_content_id }}" role="tabpanel" 
-            aria-labelledby="{{ tab_id }}">
+            aria-labelledby="{{ tab_id }}" data-tab-id="{{ tab.tabId }}">
             {% for section in tab.sections %}
                 {% if section.pluslets is not empty %}
                     {{ include('frontend/subjects/_section.html.twig') }}

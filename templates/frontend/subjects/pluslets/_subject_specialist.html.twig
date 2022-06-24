@@ -1,5 +1,9 @@
 <div class="subject-specialists">
     {% if pluslet.extra is not null and pluslet.extra is not empty %}
+        {% set section = pluslet.section %}
+        {% set tab = section.tab %}
+        {% set subject = tab.subject %}
+        
         {% for staff in subject.staff %}
             {% set showName = (pluslet.extra['showName' ~ staff.staffId] is defined and 
                 pluslet.extra['showName' ~ staff.staffId] is not empty) %}
