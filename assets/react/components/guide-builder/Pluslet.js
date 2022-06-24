@@ -105,6 +105,10 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
     const debouncedUpdatePlusletBody = useDebouncedCallback(updatePlusletBody, 1000);
 
+    const handleCKEditorInstanceReady = evt => {
+        evt.editor.setData(body);
+    }
+
     const onCKEditorChanged = evt => {
         if (evt.editor) {
             setBody(evt.editor.getData())
@@ -138,8 +142,8 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
 
     const Editor = (isDragging) => {
         if (editable && !isDragging) {
-            return (<CKEditor name="pluslet_ckeditor" initData={body} onKey={evt => handleSaveKey(evt.data.domEvent.$)} 
-                        onChange={onCKEditorChanged} />);
+            return (<CKEditor name="pluslet_ckeditor" onKey={evt => handleSaveKey(evt.data.domEvent.$)} 
+                        onInstanceReady={handleCKEditorInstanceReady} onChange={onCKEditorChanged} />);
         } else {
             return (<div className={getPlusletBodyClassName(isDragging)}
                         dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(body, { ADD_TAGS: ["iframe"] })}} />);
@@ -148,7 +152,7 @@ function Pluslet({ plusletId, plusletTitle, plusletBody, plusletRow, sectionId, 
     
     const PlusletWindow = (provided, snapshot) => (
         <div className={getPlusletClassName(snapshot?.isDragging || isCurrentlyDragging)} key={plusletId} 
-            ref={provided?.innerRef} onDoubleClick={toggleEditable}
+            ref={provided?.innerRef} onDoubleClick={() => !editable && toggleEditable()}
             onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)}
             onMouseLeave={() => setPlusletHovered(false)} {...provided?.draggableProps}>
             <span className="visually-hidden">{'Pluslet ' + plusletId}</span>

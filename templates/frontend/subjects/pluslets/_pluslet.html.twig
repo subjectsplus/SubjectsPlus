@@ -1,5 +1,4 @@
-<div class="pluslet" data-type="{{ pluslet.type }}">
-    <span class="visually-hidden">{{ 'plusletId: ' ~ pluslet.plusletId }}</span>
+<div class="pluslet" data-type="{{ pluslet.type }}" data-pluslet-id="{{ pluslet.plusletId }}">
     <h3 class="pluslet-title">
         {{ pluslet.title }}
     </h3>
@@ -11,6 +10,8 @@
                 {{ include('frontend/subjects/pluslets/_google_search.html.twig') }}
            {% elseif pluslet.type == 'HTML5Video' %}
                 {{ include('frontend/subjects/pluslets/_html5_video.html.twig') }}
+           {% elseif pluslet.type == 'Card' %}
+               {{ include('frontend/subjects/pluslets/_card_pluslet.html.twig') }}
            {% else %}
                 {{ include('frontend/subjects/pluslets/_basic_pluslet.html.twig') }}
             {% endif %}

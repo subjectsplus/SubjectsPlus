@@ -9,17 +9,17 @@
     const linkTemplate = '<a class="' + linkClass + '" href="{recordLink}">{recordTitle}</a>',
         descriptionTemplate = '<span class="' + descriptionClass + '">{recordDescription}</span>',
         iconTemplate = '<button class="' + iconClass + '" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="{recordDescription}"><img src="' + iconSource +'" /></button>',
-        template = '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
+        template = '<span class="' + tokenClass + '" data-record-id="{recordId}" data-description-type="none">' +
                     linkTemplate +
                     '</span>&nbsp;';
     
     const templateBlock = new CKEDITOR.template(function(data) {
         if (data.descriptionType == 'block') {
-            return '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
+            return '<span class="' + tokenClass + '" data-record-id="{recordId}" data-description-type="block">' +
                 linkTemplate + descriptionTemplate +
                     '</span>&nbsp;';
         } else if (data.descriptionType == 'icon') {
-            return '<span class="' + tokenClass + '" data-record-id="{recordId}">' +
+            return '<span class="' + tokenClass + '" data-record-id="{recordId}" data-description-type="icon">' +
             linkTemplate + iconTemplate +
                 '</span>&nbsp;';
         } else {
@@ -40,8 +40,12 @@
             const pluginDirectory = this.path;
             editor.addContentsCss( pluginDirectory + 'styles/sp-custom-cke-recordtoken.css' );
 
-            const records = {};
             let notifiedToSave = false;
+
+            // Set global records if not initialized
+            if (window.records == null) {
+                window.records = {};
+            }
 
             // Create record token widget
             editor.widgets.add('recordtoken', {
@@ -55,20 +59,22 @@
                 },
 
                 init: function() {
-
                     // Add widget reference to dialog data
                     this.on('dialog', function(evt) {
                         evt.data.widget = this;
                     });
 
-                    const recordId = this.element.data('record-id');
+                    const recordId = this.element.data('record-id').toString();
                     let record = null;
 
                     // Set record data, call api and index if unavailable
-                    if (records[recordId]) {
-                        record = records[recordId];
+                    if (window.records[recordId]) {
+                        console.log('Record for id', recordId, 'already indexed, skipping retrieval.');
+                        record = window.records[recordId];
                         this.setData('record', record);
                     } else {
+                        console.log('Obtaining record for id', recordId);
+
                         record = getRecordFromAPI(recordId);
                         if (record) {
                             // sanitize record title and description
@@ -77,7 +83,7 @@
 
                             // set to data and index the record
                             this.setData('record', record);
-                            records[recordId] = record;
+                            window.records[recordId] = record;
                         } else {
                             this.setData('record', null);
                         }
@@ -179,6 +185,7 @@
                         // Description is null or empty
                         // Set description type to none
                         this.setData('descriptionType', 'none');
+                        this.element.data('description-type', 'none');
                         return;
                     }
 
@@ -209,6 +216,7 @@
                         this.element.appendHtml(html);
                     }
 
+                    this.element.data('description-type', newDescriptionType);
                     this.oldDescriptionType = newDescriptionType;
 
                     editor.fire('saveSnapshot');
@@ -300,7 +308,7 @@
                 record.description = sanitizeString(record.description);
 
                 // index the record
-                records[record.recordId.toString()] = record;
+                window.records[record.recordId.toString()] = record;
             });
 
             editor.ui.addButton( 'Record', {

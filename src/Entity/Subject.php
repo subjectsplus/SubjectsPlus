@@ -371,47 +371,6 @@ class Subject
         return $this;
     }
 
-    // TODO: test!  And probably refactor for SOC
-    public function toPublicArray(PlusletService $plusletService): array
-    {
-        $tabs = [];
-        foreach ($this->getTabs() as $key => $tab) {
-            $tab_array = $tab->toArray();
-            $tab_array['id'] = "tab-$key";
-            $sections = $tab->getSections();
-            foreach ($sections as $section) {
-                $columns = [];
-                $plusletSections = $section->getPlusletSections();
-                foreach ($plusletSections as $plusletSection) {
-                    $pluslet_model = $plusletSection->getPluslet();
-                    if ($pluslet_model) {
-                        $pluslet_obj = $plusletService->plusletClassName($pluslet_model->getType());
-                        if (class_exists($pluslet_obj, true)) {
-                            $pluslet_id = $pluslet_model->getPlusletId();
-                            $pluslet = new $pluslet_obj($pluslet_id, '', $this->getSubjectId());
-                            $columns[$plusletSection->getPcolumn()]['pluslets'][] = [
-                                'title' => $pluslet_model->getTitle(),
-                                'body' => $pluslet->output('view', 'public'),
-                                'row' => $plusletSection->getProw()
-                            ];
-                        } else {
-                            if ($this->logger) {
-                                $this->logger->error("Could not autoload pluslet class $pluslet_obj in ".$this->getShortform().' guide');
-                            }
-                        }
-                    }
-                }
-                $tab_array['sections'][] = [
-                    'layout' => $section->getLayout(),
-                    'columns' => $columns,
-                ];
-            }
-            $tabs[] = $tab_array;
-        }
-
-        return $tabs;
-    }
-
     public function addTab(Tab $tab): self
     {
         if (!$this->tabs->contains($tab)) {

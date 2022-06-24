@@ -1,14 +1,20 @@
-<div class="row">
-    <span class="visually-hidden">{{ 'sectionId: ' ~ section.sectionId }}</span>
-    
+<div class="section row" data-section-id="{{ section.sectionId }}">    
     {% set split_layout = section.layout|split('-') %}
     {% set column_index = 0 %}
+    {# TODO: Handle incorrect pcolumn  #}
     {% for column_size in split_layout %}
         {% if column_size != 0 %}
             <div class="mb-3 mb-lg-0 col-lg-{{ column_size }}">
                 {% for pluslet in section.pluslets %}
                     {% if pluslet.pcolumn == column_index %}
-                            {{ include('frontend/subjects/pluslets/_pluslet.html.twig') }}
+                            {% if pluslet.type == 'Clone' %}
+                                {% set master_pluslet = pluslet.extra['master'] %}
+                                {% set pluslet = get_pluslet(master_pluslet) %}
+                            {% endif %}
+                            {% if pluslet is not null and pluslet.section is not null and pluslet.section.tab is not null 
+                                and pluslet.section.tab.subject is not null %}
+                                {{ include('frontend/subjects/pluslets/_pluslet.html.twig') }}
+                            {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
