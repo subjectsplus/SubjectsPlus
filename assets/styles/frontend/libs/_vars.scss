@@ -10,20 +10,26 @@
   --THEME-TEXT-COLOR: var(--user-theme-text-color, #333333);
   --THEME-LINK-COLOR: var(--user-theme-link-color, #005A8F);
   --THEME-LINK-HOVER-COLOR: var(--user-theme-link-hover-color, #0078BD);
-  --THEME-MENU-BG-COLOR: var(--user-theme-menu-bg-color, #0078BD);
+
+  --THEME-MENU-BG-COLOR: var(--user-theme-menu-bg-color, #00243c);
   --THEME-MENU-TEXT-COLOR: var(--user-theme-menu-text-color, #FFFFFF);
   --THEME-MENU-LINK-COLOR: var(--user-theme-menu-link-color, #FFFFFF);
-  --THEME-MENU-LINK-HOVER-COLOR:var(--user-theme-menu-link-hover-color, #09ADC7);
+  --THEME-MENU-LINK-HOVER-COLOR:var(--user-theme-menu-link-hover-color, #09adc7);
+
   // --THEME-GUIDES-LINK-COLOR
   // --THEME-GUIDES-LINK-HOVER-COLOR
+
   // --THEME-HEADER-BG-COLOR
   // --THEME-HEADER-TEXT-COLOR
   // --THEME-HEADER-LINK-COLOR
   // --THEME-HEADER-LINK-HOVER-COLOR
+
   // --THEME-PRIMARY-COLOR
   // --THEME-SECONDARY-COLOR
+
   // --THEME-UI-BASE-COLOR
   // --THEME-UI-ACTIVE-COLOR
+  --THEME-UI-NEUTRAL-COLOR: #ced4da;
   // --THEME-UI-BORDER-COLOR
 
 
@@ -95,6 +101,11 @@ $headings-margin-bottom:      	$spacer;
 // Borders
 $border-radius:               .25rem;
 $border-radius-circle:        50%;
+
+// Offcanvas
+$offcanvas-border-color:      var(--THEME-UI-NEUTRAL-COLOR);
+$offcanvas-bg-color:          var(--THEME-MENU-BG-COLOR);
+$offcanvas-color:             var(--THEME-MENU-LINK-COLOR);
 
 // Bootstrap Default Variables
 @import "~bootstrap/scss/functions";
