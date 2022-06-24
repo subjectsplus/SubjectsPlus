@@ -11,6 +11,8 @@
                 {{ include('frontend/subjects/pluslets/_google_search.html.twig') }}
            {% elseif pluslet.type == 'HTML5Video' %}
                 {{ include('frontend/subjects/pluslets/_html5_video.html.twig') }}
+           {% elseif pluslet.type == 'Card' %}
+               {{ include('frontend/subjects/pluslets/_card_pluslet.html.twig') }}
            {% else %}
                 {{ include('frontend/subjects/pluslets/_basic_pluslet.html.twig') }}
             {% endif %}
