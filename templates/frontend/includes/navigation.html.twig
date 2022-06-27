@@ -44,9 +44,13 @@
         </div>
         <div>
         <button class="sp-navbar-toggler navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav">
-            <span class="navbar-toggler-icon"></span>
+            <span class="sp-navbar-toggler-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                    <path stroke="var(--THEME-MENU-LINK-COLOR)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" />
+                </svg>
+            </span>
         </button>
-        <a class="search-icon-nav ms-1" data-bs-toggle="offcanvas" href="#offcanvasSearchAll" role="button" aria-controls="offcanvasSearchAll" title="{{ 'public.default_nav.search' | trans }}"><i class="fas fa-search"></i></a>
+        <a class="search-icon-nav ms-2" data-bs-toggle="offcanvas" href="#offcanvasSearchAll" role="button" aria-controls="offcanvasSearchAll" title="{{ 'public.default_nav.search' | trans }}"><i class="fas fa-search"></i></a>
         </div>
     </div>
 </nav>
