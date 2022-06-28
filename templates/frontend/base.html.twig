@@ -25,15 +25,21 @@
         {% include('frontend/includes/navigation-switcher.html.twig') %}
     {% endblock %}
     {% block header %}
-        <p>Header here</p>
-        <a href="#" class="link-underline">Link example</a>
+        <div class="page-header">
+            <div class="container py-4">
+                {% block header_actions %}{% endblock %}
+                {% block header_backto %}{% endblock %}
+                <h1 class="text-center fw-light">{% block header_title %}{% endblock %}</h1>
+                <div class="header-content">{% block header_content %}{% endblock %}</div>
+            </div>
+        </div>
     {% endblock %}
-    {% block search %}
-        <p>Search here</p>
-    {% endblock %}
+    {% block search %}{% endblock %}
     <div class="container">
         {% block main %}
-            <p>Content goes here</p>
+            <p>Content goes here:
+                <a href="#" class="link-underline">Link with underline</a> | <a href="#" class="link-default">Link default</a>
+            </p>
         {% endblock %}
     </div>
 </main>

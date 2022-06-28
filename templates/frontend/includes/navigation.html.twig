@@ -1,18 +1,4 @@
 {# Default Nav #}
-
-    {# Set site logo  and site author#}
-    {% if getconfig('site_logo') %} {# TODO: Configure path for logo image set in config #}
-        {% set logoSrc = getconfig('site_logo') %}
-    {% else %}
-        {% set logoSrc = asset('build/images/frontend/sp_logo.png') %}
-    {% endif %}
-
-    {% if getconfig('meta_author') %}
-        {% set logoAlt = getconfig('meta_author') %}
-    {% else %}
-        {% set logoAlt = "SubjectsPlus" %}
-    {% endif %}
-
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ path('frontend_subjects') }}">
@@ -20,7 +6,7 @@
         </a>
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mainNav">
         <div class="offcanvas-header justify-content-end pb-2">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
+            {% include('frontend/includes/_offcanvas_close_btn.html.twig') %}
         </div>
         <div class="offcanvas-body pt-0 justify-content-lg-end">
             <ul class="navbar-nav">
@@ -50,7 +36,10 @@
                 </svg>
             </span>
         </button>
-        <a class="search-icon-nav ms-2" data-bs-toggle="offcanvas" href="#offcanvasSearchAll" role="button" aria-controls="offcanvasSearchAll" title="{{ 'public.default_nav.search' | trans }}"><i class="fas fa-search"></i></a>
+        {# TODO: Add link/action for search button #}
+        <a class="search-icon-nav ms-2" href="#" role="button" title="{{ 'public.default_nav.search' | trans }}">
+            <i class="fas fa-search"></i>
+        </a>
         </div>
     </div>
 </nav>
