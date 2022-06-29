@@ -1031,7 +1031,7 @@
       </trans-unit>
       <trans-unit id="YgEa8zG" resname="public.default_nav.databases">
         <source>public.default_nav.databases</source>
-        <target>Resources</target>
+        <target>Databases</target>
       </trans-unit>
       <trans-unit id="2eWQ5JV" resname="public.default_nav.staff">
         <source>public.default_nav.staff</source>

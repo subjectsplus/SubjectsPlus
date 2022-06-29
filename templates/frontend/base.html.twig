@@ -29,13 +29,13 @@
             <div class="container py-4">
                 {% block header_actions %}{% endblock %}
                 {% block header_backto %}{% endblock %}
-                <h1 class="text-center fw-light">{% block header_title %}{% endblock %}</h1>
-                <div class="header-content">{% block header_content %}{% endblock %}</div>
+                <h1 class="text-center fw-light mb-0">{% block header_title %}{% endblock %}</h1>
+                {% block header_content %}{% endblock %}
             </div>
         </div>
     {% endblock %}
     {% block search %}{% endblock %}
-    <div class="container">
+    <div class="container py-4">
         {% block main %}
             <p>Content goes here:
                 <a href="#" class="link-underline">Link with underline</a> | <a href="#" class="link-default">Link default</a>
