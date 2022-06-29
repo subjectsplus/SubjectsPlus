@@ -1,5 +1,3 @@
-import React from 'react';
-
 function SearchBar(props) {
     const ignoreEnterKey = evt => {
         if (evt.keyCode === 13)

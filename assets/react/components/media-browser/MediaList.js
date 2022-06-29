@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFetchMediaByStaff } from '#api/media/MediaAPI';
 import MediaToken from './MediaToken';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Pluslet from './Pluslet';
 import Col from 'react-bootstrap/Col';
 import { Droppable } from 'react-beautiful-dnd';

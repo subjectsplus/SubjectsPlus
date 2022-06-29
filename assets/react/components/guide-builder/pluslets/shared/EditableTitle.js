@@ -1,5 +1,3 @@
-import React from 'react';
-
 function EditableTitle({isEditMode, dragHandleProps, title, onChange, onKeyDown}) {
     if (isEditMode) {
         return (

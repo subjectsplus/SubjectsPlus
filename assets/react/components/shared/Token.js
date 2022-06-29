@@ -1,4 +1,3 @@
-import React from 'react';
 import { htmlEntityDecode } from '#utility/Utility';
 
 function Token({ token, tokenType, onClick }) {

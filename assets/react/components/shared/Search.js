@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import Token from './Token';
 import SearchBar from './SearchBar';
 import { useDebouncedCallback } from 'use-debounce';

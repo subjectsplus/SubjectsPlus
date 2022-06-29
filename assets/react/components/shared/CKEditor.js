@@ -1,4 +1,3 @@
-import React from 'react';
 import { CKEditor as Editor } from 'ckeditor4-react';
 
 const CONFIG = {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import ReactDOM from 'react-dom'
 import Search from '#components/shared/Search';
 

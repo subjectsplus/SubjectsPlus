@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import FileDropzone from '#components/shared/FileDropzone.js';
 import MediaUploadForm from './MediaUploadForm';
 import { createMedia } from '#api/media/MediaAPI';

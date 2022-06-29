@@ -1,5 +1,3 @@
-import React from 'react';
-
 function GuideMetadataForm({ guide, disabled, onSubmit }) {
     return (
         <form action={void(0)} onSubmit={onSubmit}>

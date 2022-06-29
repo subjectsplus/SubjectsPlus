@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import ErrorBoundary from '#components/shared/ErrorBoundary';
 import GuideBuilder from '#components/guide-builder/GuideBuilder';

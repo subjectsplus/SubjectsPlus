@@ -1,4 +1,3 @@
-import React from 'react';
 import { htmlEntityDecode } from '#utility/Utility';
 import Nav from 'react-bootstrap/Nav';
 import { Draggable } from 'react-beautiful-dnd';

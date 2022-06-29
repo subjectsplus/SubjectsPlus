@@ -1,5 +1,3 @@
-import React from 'react';
-
 function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
     return (
         <form action={void(0)} onSubmit={onSubmit}>

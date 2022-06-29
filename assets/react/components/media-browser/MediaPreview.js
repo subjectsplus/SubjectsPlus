@@ -1,6 +1,4 @@
 
-import React from 'react';
-
 const mimeTypeIcons = {
     'audio/': 'fas fa-file-audio',
     'video/': 'fas fa-file-video',

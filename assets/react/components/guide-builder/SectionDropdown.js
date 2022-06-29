@@ -1,5 +1,3 @@
-import React from 'react';
-
 function SectionDropdown({ isConvertingLayout, sectionDelete, convertLayout }) {
 
     const spinner = (

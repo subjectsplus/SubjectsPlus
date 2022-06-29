@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useUpdatePluslet, useDeletePluslet } from '#api/guide/PlusletAPI';
 import CKEditor from '#components/shared/CKEditor';
 import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';

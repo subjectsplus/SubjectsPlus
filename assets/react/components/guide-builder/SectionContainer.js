@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
 import { useReorderPluslet } from '#api/guide/PlusletAPI';
 import Section from './Section';

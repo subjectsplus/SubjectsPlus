@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFetchGuide, useUpdateGuide } from '#api/guide/GuideAPI';
 import GuideMetadataForm from './GuideMetadataForm';
 

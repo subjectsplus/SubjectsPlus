@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { htmlEntityDecode, objectIsEmpty, hideAllOffcanvas } from '#utility/Utility';
 import { useReorderTab, useFetchTabs, useCreateTab, useUpdateTab, useDeleteTab } from '#api/guide/TabAPI';
 import SectionContainer from './SectionContainer';

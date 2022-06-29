@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SectionColumn from './SectionColumn';
 import SectionDropdown from './SectionDropdown';
 import DeleteConfirmModal from '#components/shared/DeleteConfirmModal';

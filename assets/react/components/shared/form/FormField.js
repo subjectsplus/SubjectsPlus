@@ -1,6 +1,4 @@
 
-import React from 'react';
-
 function FormField({fieldId, label, defaultValue, minLength, invalidFeedbackText, required=false}) {
     return (
         <Form.Group className="mb-3" controlId={'formGroup' + fieldId}>

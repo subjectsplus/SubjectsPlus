@@ -1,4 +1,3 @@
-import React from 'react';
 import EditableTitle from './EditableTitle';
 
 function ActionsContainer({ isEditMode, editSaveOnClick, deletePlusletOnClick, visible, plusletDropdownRef, 

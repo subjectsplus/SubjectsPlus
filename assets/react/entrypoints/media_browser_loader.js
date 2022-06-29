@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import ErrorBoundary from '#components/shared/ErrorBoundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
