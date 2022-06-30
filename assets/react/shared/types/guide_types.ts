@@ -1,0 +1,15 @@
+export type GuideType = {
+    subjectId?: number,
+    subject?: string,
+    active?: number,
+    shortform?: string,
+    redirectUrl?: string,
+    header?: string,
+    description?: string,
+    keywords?: string,
+    type?: string,
+    lastModified?: string,
+    extra?: string,
+    courseCode?: string,
+    instructor?: string,
+}
