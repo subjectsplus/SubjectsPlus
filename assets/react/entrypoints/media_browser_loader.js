@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom';
 import ErrorBoundary from '#components/shared/ErrorBoundary';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 import MediaBrowser from '#components/media-browser/MediaBrowser';
 
 // Create a client
-const queryClient = new QueryClient();
+const queryClient = window.queryClient;
 
 // Construct the MediaBrowser component
 const mediaBrowser = (<MediaBrowser />);
