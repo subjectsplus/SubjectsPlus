@@ -1,17 +1,16 @@
 import { useState, useMemo } from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { MediaPreview } from './MediaPreview';
+import { MediaPreview } from '../../media-browser/MediaPreview';
 import { MediaType, ImageSizeType, ImageFileDimensions } from '@shared/types/media_types';
 
 type MediaTokenProps = {
     media: MediaType,
-    defaultImageSize: 'small'|'medium'|'large',
     onClick: React.MouseEventHandler<HTMLDivElement>
 }
 
-export const MediaToken = ({ media, defaultImageSize, onClick }: MediaTokenProps) => {
-    const [currentImageSize, setCurrentImageSize] = useState(defaultImageSize);
+export const MediaToken = ({ media, onClick }: MediaTokenProps) => {
+    const [currentImageSize, setCurrentImageSize] = useState<ImageSizeType>('small');
     const [isChangingImageSize, setIsChangingImageSize] = useState(false);
 
     const isImage = media.mimeType.includes('image/');

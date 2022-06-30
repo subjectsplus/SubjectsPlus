@@ -1,27 +1,35 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
-import Token from './Token';
-import SearchBar from './SearchBar';
+import { Token } from './token/Token';
+import { SearchBar } from './SearchBar';
 import { useDebouncedCallback } from 'use-debounce';
 
-function Search(props) {
-    const [results, setResults] = useState([]);
-    const [page, setPage] = useState(1);
-    const [hasNextPage, setHasNextPage] = useState(false);
-    const [previousInput, setPreviousInput] = useState(null);
-    const [inputEmpty, setInputEmpty] = useState(true);
-    const [isErrored, setIsErrored] = useState(false);
-    const [loading, setLoading] = useState(false);
+type SearchProps = {
+    tokenType: string,
+    refresh: number,
+    apiLink: (arg0: string, arg1: number) => string,
+    placeholder?: string,
+    extras?: JSX.Element
+}
+
+function Search({tokenType, refresh, apiLink, placeholder, extras}: SearchProps) {
+    const [results, setResults] = useState<Array<Record<string, any>>>([]);
+    const [page, setPage] = useState<number>(1);
+    const [hasNextPage, setHasNextPage] = useState<boolean>(false);
+    const [previousInput, setPreviousInput] = useState<string|null>(null);
+    const [inputEmpty, setInputEmpty] = useState<boolean>(true);
+    const [isErrored, setIsErrored] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const debouncedGetResults = useDebouncedCallback(
         (input, page=1, append=false) => getResults(input, page, append), 400);
 
-    const listRef = useRef();
+    const listRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
-        if (props.refresh !== 0) refresh();
-      }, [props.refresh]);
+        if (refresh !== 0) performRefresh();
+      }, [refresh]);
 
-    const onSearchInput = (evt) => {
+    const onSearchInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
         const userInput = evt.target.value;
         if (typeof userInput === 'string' && userInput.length >= 3) {
             if (userInput !== previousInput) {
@@ -38,9 +46,9 @@ function Search(props) {
         }
     }
 
-    const getResults = (search_term, page=1, append=false) => {
+    const getResults = (search_term: string, page:number = 1, append:boolean = false) => {
         // formulate the results api link
-        const resLink = props.apiLink(search_term, page);
+        const resLink = apiLink(search_term, page);
 
         // only append results from subsequent pages
         if (page === 1) append = false;
@@ -69,26 +77,30 @@ function Search(props) {
         })
     }
 
-    const refresh = () => {
+    const performRefresh = () => {
         setLoading(true);
         setResults([]);
         debouncedGetResults(previousInput);
     }
 
     const loadNextPage = () => {
-        setLoading(true);
-        getResults(previousInput, page + 1, true);
+        if (previousInput) {
+            setLoading(true);
+            getResults(previousInput, page + 1, true);
+        }
     }
 
     const scrollToTop = () => {
-        listRef.current.scrollTop = 0;
+        if (listRef.current) {
+            listRef.current.scrollTop = 0;
+        }
     }
 
-    const pasteToCKEditor = evt => {
+    const pasteToCKEditor = (evt: React.MouseEvent<Element>) => {
         if (CKEDITOR?.instances['pluslet_ckeditor']) {
-            CKEDITOR.instances['pluslet_ckeditor'].insertHtml(evt.target.outerHTML);
+            CKEDITOR.instances['pluslet_ckeditor'].insertHtml(evt.currentTarget.outerHTML);
         } else if (CKEDITOR?.instances['faq_answer']) {
-            CKEDITOR.instances['faq_answer'].insertHtml(evt.target.outerHTML);
+            CKEDITOR.instances['faq_answer'].insertHtml(evt.currentTarget.outerHTML);
         }
     }
 
@@ -104,7 +116,7 @@ function Search(props) {
         } else if (results.length > 0) {
             const resultTokens = results.map(result => (
                 <li key={result['@id']}>
-                    <Token tokenType={props.tokenType} token={result} onClick={pasteToCKEditor} />
+                    <Token tokenType={tokenType} token={result} onClick={pasteToCKEditor} />
                 </li>
             ));
 
@@ -145,11 +157,11 @@ function Search(props) {
     }, [loading, hasNextPage, inputEmpty]);
 
     return (
-        <div id={props.tokenType + '-search'}>
-            {props.extras}
-            <SearchBar id={props.tokenType + '-searchbar'} className="form-control"
-                    placeholder={props.placeholder ?? ('Search ' + props.tokenType)} onChange={onSearchInput} />
-            <ul id={props.tokenType + '-list'} ref={listRef} className={`list-unstyled ${results.length > 0 ? "sp-search-results-panel-list" : ""}`}>
+        <div id={tokenType + '-search'}>
+            {extras}
+            <SearchBar id={tokenType + '-searchbar'} className="form-control"
+                    placeholder={placeholder ?? ('Search ' + tokenType)} onChange={onSearchInput} />
+            <ul id={tokenType + '-list'} ref={listRef} className={`list-unstyled ${results.length > 0 ? "sp-search-results-panel-list" : ""}`}>
                 {resultsMessage}
                 {bottomElement}
             </ul>

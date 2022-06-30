@@ -13,8 +13,6 @@ export const MediaBrowser = ({ staffId }: MediaBrowserProps) => {
         setRefresh(prev => prev + 1);
     }
 
-    console.log('refresh:', refresh);
-
     return (
         <div id="media-browser">
             <MediaUploader fileUploadedCallback={performRefresh}/>

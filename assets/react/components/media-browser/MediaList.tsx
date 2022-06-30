@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useFetchMediaByStaff } from '@hooks/useFetchMediaByStaff';
-import { MediaToken } from './MediaToken';
+import { Token } from '@components/shared/token/Token';
 import { MediaType } from '@shared/types/media_types';
+
 type MediaListProps = {
     refresh: number,
     staffId: number
@@ -41,8 +42,7 @@ export const MediaList = ({ refresh, staffId }: MediaListProps) => {
                 return data.map((media: MediaType) => {
                     return (
                         <li key={media.mediaId}>
-                            <MediaToken media={media} defaultImageSize="small" 
-                                onClick={pasteToCKEditor} />
+                            <Token token={media} tokenType="media" onClick={pasteToCKEditor} />
                         </li>
                     );
                 });
