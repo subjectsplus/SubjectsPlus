@@ -19,15 +19,17 @@ export const GuideMetadata = ({ subjectId }: GuideMetadataProps) => {
         evt.preventDefault();
 
         setIsUpdating(true);
-
+        
+        const form = new FormData(evt.currentTarget);
+        
         updateGuideMutation.mutate({
             subjectId: subjectId,
             data: {
-                shortform: evt.currentTarget.shortform.value,
-                subject: evt.currentTarget.subject.value,
-                type: evt.currentTarget.type.value,
-                active: Number(evt.currentTarget.active.value),
-                description: evt.currentTarget.description.value
+                shortform: form.get('shortform') as string,
+                subject: form.get('subject') as string,
+                type: form.get('type') as string,
+                active: Number(form.get('active') as string),
+                description: form.get('description') as string
             }
         }, {
             onSuccess: (updatedData: GuideType) => {
