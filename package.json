@@ -53,6 +53,7 @@
     "@tsconfig/recommended": "^1.0.1",
     "@types/node": "^18.0.0",
     "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "alias-hq": "^5.4.0",

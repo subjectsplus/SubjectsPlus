@@ -10,7 +10,3 @@ import '../styles/backend/global.scss';
 
 // Bootstrap JS
 window.bootstrap = require("bootstrap");
-
-// React Query
-import { QueryClient } from 'react-query'
-window.queryClient = new QueryClient();

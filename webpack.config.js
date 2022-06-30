@@ -29,7 +29,7 @@ Encore
     .addEntry('react_select_init', './assets/react/entrypoints/select-field-type/initSelect.js')
 
     // Media-Browser component loader
-    .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.js')
+    .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.tsx')
 
     // Guide-Bulder component loader
     .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.js')
