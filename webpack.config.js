@@ -32,7 +32,7 @@ Encore
     .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.tsx')
 
     // Guide-Bulder component loader
-    .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.js')
+    .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.tsx')
 
     // Guide-Metadata component loader
     .addEntry('guide_metadata_loader', './assets/react/entrypoints/guide_metadata_loader.tsx')
