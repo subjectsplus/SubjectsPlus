@@ -16,7 +16,7 @@
 
     <h1 id="subject-heading" class="fw-light">{{ guide.subject | raw }}</h1>
 
-    <div id="guide-builder-container" class="mt-4"></div>
+    <div id="guide-builder-container" class="mt-4" data-subject-id="{{ guide.subjectId }}"></div>
 
 {{ include('backend/guide/_offcanvas_guide_details.html.twig') }}
 {{ include('backend/media/sidebar.html.twig') }}
