@@ -51,16 +51,16 @@ export const GuideMetadata = ({ subjectId }: GuideMetadataProps) => {
         });
     }
     
-    const metadataContent = () => {
-        if (isLoading) {
-            return (<p>Loading Guide Details...</p>);
-        } else if (isError) {
-            console.error(error);
-            return (<p>Error: Failed to load guide through API Endpoint!</p>);
-        } else if (data) {
+    if (isLoading) {
+        return (<p>Loading Guide Details...</p>);
+    } else if (isError) {
+        console.error(error);
+        return (<p>Error: Failed to load guide through API Endpoint!</p>);
+    } else {
+        if (data) {
             return (<GuideMetadataForm guide={data} disabled={isUpdating} onSubmit={onMetadataSubmit} />);
+        } else {
+            return (<p>Error: Guide does not exist.</p>);
         }
     }
-
-    return metadataContent();
 }

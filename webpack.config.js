@@ -35,7 +35,7 @@ Encore
     .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.js')
 
     // Guide-Metadata component loader
-    .addEntry('guide_metadata_loader', './assets/react/entrypoints/guide_metadata_loader.js')
+    .addEntry('guide_metadata_loader', './assets/react/entrypoints/guide_metadata_loader.tsx')
 
     // Record Component
     .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
