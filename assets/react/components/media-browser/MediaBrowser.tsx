@@ -1,18 +1,24 @@
 import { useState } from 'react';
-import MediaUploader from './MediaUploader';
-import MediaList from './MediaList';
+import { MediaUploader } from './MediaUploader';
+import { MediaList } from './MediaList';
 
-function MediaBrowser() {
+type MediaBrowserProps = {
+    staffId: number
+};
+
+export const MediaBrowser = ({ staffId }: MediaBrowserProps) => {
     const [refresh, setRefresh] = useState(0);
 
     const performRefresh = () => {
         setRefresh(prev => prev + 1);
     }
 
+    console.log('refresh:', refresh);
+
     return (
         <div id="media-browser">
             <MediaUploader fileUploadedCallback={performRefresh}/>
-            <MediaList refresh={refresh} staffId={CURRENT_STAFF_ID} />
+            <MediaList refresh={refresh} staffId={staffId} />
         </div>
     );
 }

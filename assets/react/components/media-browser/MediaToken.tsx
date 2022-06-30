@@ -1,27 +1,34 @@
 import { useState, useMemo } from 'react';
-import MediaPreview from './MediaPreview';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import { MediaPreview } from './MediaPreview';
+import { MediaType, ImageSizeType, ImageFileDimensions } from '@shared/types/media_types';
 
-function MediaToken({ media, defaultImageSize, onClick }) {
+type MediaTokenProps = {
+    media: MediaType,
+    defaultImageSize: 'small'|'medium'|'large',
+    onClick: React.MouseEventHandler<HTMLDivElement>
+}
+
+export const MediaToken = ({ media, defaultImageSize, onClick }: MediaTokenProps) => {
     const [currentImageSize, setCurrentImageSize] = useState(defaultImageSize);
     const [isChangingImageSize, setIsChangingImageSize] = useState(false);
 
     const isImage = media.mimeType.includes('image/');
     
-    const imageSizeNameKeys = {
+    const imageSizeNameKeys:Record<ImageSizeType, string> = {
         small: 'Small',
         medium: 'Medium',
         large: 'Large'
     }
 
-    const imageSizeFileNames = {
+    const imageSizeFileNames:Record<ImageSizeType, string|undefined> = {
         small: media.smallFileName,
         medium: media.mediumFileName,
         large: media.largeFileName,
     };
 
-    const imageFileDimensions = {
+    const imageFileDimensions:Record<ImageSizeType, ImageFileDimensions> = {
         small: {width: media.smallImageFileWidth, height: media.smallImageFileHeight},
         medium: {width: media.mediumImageFileWidth, height: media.mediumImageFileHeight},
         large: {width: media.largeImageFileWidth, height: media.largeImageFileHeight}
@@ -37,13 +44,13 @@ function MediaToken({ media, defaultImageSize, onClick }) {
         return imageSizes.length > 1;
     }, [imageSizeFileNames, isImage]);
 
-    const handleImageSizeButtonClick = (evt, imageSize) => {
+    const handleImageSizeButtonClick = (evt: React.MouseEvent, imageSize:ImageSizeType) => {
         evt.preventDefault();
         setCurrentImageSize(imageSize);
         setIsChangingImageSize(false);
     }
 
-    const getImageSizeTooltip = (imageSize) => {
+    const getImageSizeTooltip = (imageSize:ImageSizeType) => {
         const width = imageFileDimensions[imageSize]['width'];
         const height = imageFileDimensions[imageSize]['height'];
         
@@ -65,11 +72,12 @@ function MediaToken({ media, defaultImageSize, onClick }) {
 
     const generateImageSizeComponent = () => {
         if (isChangingImageSize) {
-            const buttons = Object.keys(imageFileDimensions).map(key => {
+            const sizes = Object.keys(imageFileDimensions) as ImageSizeType[];
+            const buttons = sizes.map((key:ImageSizeType) => {
                 if (imageSizeFileNames[key]) {
                     return (
                         <OverlayTrigger key={'overlay-trigger-' + key} placement="top" overlay={getImageSizeTooltip(key)}>
-                            <a className="btn-link fs-xs ms-1" onClick={evt => handleImageSizeButtonClick(evt, key)}>
+                            <a className="btn-link fs-xs ms-1" onClick={(evt) => handleImageSizeButtonClick(evt, key)}>
                                 {imageSizeNameKeys[key]}{' '}
                             </a>
                         </OverlayTrigger>
@@ -79,8 +87,6 @@ function MediaToken({ media, defaultImageSize, onClick }) {
 
             return buttons;
         }
- 
-        // const linkClassName = 'btn-link ms-1' + (hasMultipleImageSizes ? '' : ' disabled');
 
         return (
             <span className="fs-xs">
@@ -112,5 +118,3 @@ function MediaToken({ media, defaultImageSize, onClick }) {
         </div>
     );
 }
-
-export default MediaToken;

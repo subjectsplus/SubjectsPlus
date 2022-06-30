@@ -1,30 +1,38 @@
 import { useCallback, useState } from 'react';
-import FileDropzone from '#components/shared/FileDropzone.js';
-import MediaUploadForm from './MediaUploadForm';
-import { createMedia } from '#api/media/MediaAPI';
-import { removeFileExtension } from '#utility/Utility';
+import { FileDropzone } from '@components/shared/FileDropzone';
+import { MediaUploadForm } from './MediaUploadForm';
+import { createMedia } from '@api/media/MediaAPI';
+import { removeFileExtension } from '@utility/Utility';
 
-function MediaUploader({ fileUploadedCallback }) {
-    const [fileDropped, setFileDropped] = useState(null);
+type MediaUploaderProps = {
+    fileUploadedCallback: () => void
+}
+
+export const MediaUploader = ({ fileUploadedCallback }: MediaUploaderProps) => {
+    const [fileDropped, setFileDropped] = useState<File|null>(null);
     const [isUploading, setIsUploading] = useState(false);
     const [isErrored, setIsErrored] = useState(false);
 
-    const onDrop = useCallback(acceptedFiles => {
+    const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles?.length > 0) {
             setFileDropped(acceptedFiles[0]);
         }
       }, []);
     
-    const onUploadSubmit = evt => {
+    const onUploadSubmit = (evt:React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         setIsErrored(false);
         setIsUploading(true);
+        
+        const form = new FormData(evt.currentTarget);
+
         const initialMediaData = { 
-            title: evt.target.title.value || 'Untitled',
-            caption: evt.target.caption.value,
-            altText: evt.target.altText.value,
+            title: form.get('title') as string,
+            caption: form.get('caption') as string,
+            altText: form.get('altText') as string,
             file: fileDropped
         };
+
         // TODO: Handle bad request errors
         createMedia(initialMediaData).then(
             () => {
@@ -40,13 +48,12 @@ function MediaUploader({ fileUploadedCallback }) {
         });
     }
 
-    const onCancel = evt => {
-        evt.preventDefault();
+    const onCancel = () => {
         setFileDropped(null);
         setIsUploading(false);
     }
 
-    const getDefaultTitle = () => {
+    const getDefaultTitle = (): string => {
         if (fileDropped?.name) {
             return removeFileExtension(fileDropped.name);
         }
@@ -71,5 +78,3 @@ function MediaUploader({ fileUploadedCallback }) {
 
     return getContent();
 }
-
-export default MediaUploader;

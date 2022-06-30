@@ -1,8 +1,8 @@
-import { useDropzone } from 'react-dropzone';
+import { DropzoneOptions, useDropzone } from 'react-dropzone';
 
-function FileDropzone({ onDrop, multiple }) {
+export const FileDropzone = ({ onDrop, multiple }: DropzoneOptions) => {
 
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop: onDrop, multiple: multiple });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: onDrop, multiple: multiple });
 
   return (
     <div {...getRootProps({className: 'sp-media-dropzone'})}>
@@ -15,5 +15,3 @@ function FileDropzone({ onDrop, multiple }) {
     </div>
   );
 }
-
-export default FileDropzone;

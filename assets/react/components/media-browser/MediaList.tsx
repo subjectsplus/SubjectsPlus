@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { useFetchMediaByStaff } from '#api/media/MediaAPI';
-import MediaToken from './MediaToken';
+import { useFetchMediaByStaff } from '@hooks/useFetchMediaByStaff';
+import { MediaToken } from './MediaToken';
+import { MediaType } from '@shared/types/media_types';
+type MediaListProps = {
+    refresh: number,
+    staffId: number
+};
 
-function MediaList({ refresh, staffId }) {
+export const MediaList = ({ refresh, staffId }: MediaListProps) => {
     const {isLoading, isError, data, error, refetch} = useFetchMediaByStaff(staffId);
     const [currentRefresh, setCurrentRefresh] = useState(refresh);
 
@@ -11,13 +16,15 @@ function MediaList({ refresh, staffId }) {
         refetch();
     }
 
-    const pasteToCKEditor = evt => {
-        const mediaElement = evt.target.closest('div.media-token');
-
-        if (CKEDITOR?.instances['pluslet_ckeditor']) {
-            CKEDITOR.instances['pluslet_ckeditor'].insertHtml(mediaElement.outerHTML);
-        } else if (CKEDITOR?.instances['faq_answer']) {
-            CKEDITOR.instances['faq_answer'].insertHtml(mediaElement.outerHTML);
+    const pasteToCKEditor = (evt: React.MouseEvent<HTMLDivElement>) => {
+        const mediaElement = evt.currentTarget.closest('div.media-token');
+        
+        if (mediaElement) {
+            if (CKEDITOR?.instances['pluslet_ckeditor']) {
+                CKEDITOR.instances['pluslet_ckeditor'].insertHtml(mediaElement.outerHTML);
+            } else if (CKEDITOR?.instances['faq_answer']) {
+                CKEDITOR.instances['faq_answer'].insertHtml(mediaElement.outerHTML);
+            }
         }
     }
 
@@ -31,7 +38,7 @@ function MediaList({ refresh, staffId }) {
             if (!data?.length) {
                 return (<p>No media found.</p>);
             } else {
-                return data.map(media => {
+                return data.map((media: MediaType) => {
                     return (
                         <li key={media.mediaId}>
                             <MediaToken media={media} defaultImageSize="small" 
@@ -52,5 +59,3 @@ function MediaList({ refresh, staffId }) {
         </div>
     )
 }
-
-export default MediaList;

@@ -1,5 +1,9 @@
+type MediaPreviewProps = {
+    mimeType: string,
+    source: string
+};
 
-const mimeTypeIcons = {
+const mimeTypeIcons:Record<string, string> = {
     'audio/': 'fas fa-file-audio',
     'video/': 'fas fa-file-video',
     'application/pdf': 'fas fa-file-pdf',
@@ -12,7 +16,7 @@ const mimeTypeIcons = {
     'text/csv': 'fas fa-file-csv'
 };
 
-function MediaPreview({ mimeType, source }) {
+export const MediaPreview = ({ mimeType, source }: MediaPreviewProps) => {
     if (mimeType.includes('image/')) {
         return (<img className="media-preview" src={source} />);
     } else if (mimeType in mimeTypeIcons) {
@@ -35,5 +39,3 @@ function MediaPreview({ mimeType, source }) {
         );
     }
 }
-
-export default MediaPreview;

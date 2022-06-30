@@ -1,4 +1,11 @@
-function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
+type MediaUploadFormProps = {
+    defaultTitle: string,
+    disabled: boolean,
+    onSubmit: React.FormEventHandler<HTMLFormElement>,
+    onCancel: React.MouseEventHandler<HTMLButtonElement>
+}
+
+export const MediaUploadForm = ({ defaultTitle, disabled, onSubmit, onCancel }: MediaUploadFormProps) => {
     return (
         <form action={void(0)} onSubmit={onSubmit}>
             <div className="mb-3">
@@ -15,7 +22,7 @@ function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
                         placeholder="Title"
                         autoComplete="off"
                         defaultValue={defaultTitle}
-                        required="required"
+                        required={true}
                         className="form-control form-control-sm"
                     />
                     </div>
@@ -61,5 +68,3 @@ function MediaUploadForm({ defaultTitle, disabled, onSubmit, onCancel }) {
         </form>
     );
 }
-
-export default MediaUploadForm;

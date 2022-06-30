@@ -1,20 +1,6 @@
+import { MediaType } from '@shared/types/media_types';
 
-import { useQuery } from 'react-query';
-
-export function useFetchMediaByStaff(staffId) {
-    if (staffId === undefined) throw new Error('"staffId" field is required to call useFetchMediaByStaff.');
-
-    return useQuery(['media', staffId], 
-        () => fetchMedia({
-            staff: staffId
-        }), {
-            select: data => data['hydra:member'],
-            staleTime: 5000,
-        }
-    );
-}
-
-async function fetchMedia(filters = null) {
+export const fetchMedia = async (filters: Record<string, any>|null  = null): Promise<MediaType> => {
     const data = await fetch(`/api/media`
     + (filters ? '?' + new URLSearchParams(filters) : ''));
 
@@ -25,7 +11,7 @@ async function fetchMedia(filters = null) {
     return data.json();
 }
 
-export async function createMedia(initialMediaData) {
+export const createMedia = async (initialMediaData: Record<string, any>): Promise<MediaType> => {
     if (!('file' in initialMediaData)) throw new Error('"file" field is required to perform create media request');
 
     const form = new FormData();
