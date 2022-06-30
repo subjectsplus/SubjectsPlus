@@ -15,7 +15,7 @@ if (container) {
         const numericSubjectId = Number(subjectId);
 
         if (!isNaN(numericSubjectId)) {
-            const guideBuilder = (<GuideBuilder subjectId={subjectId} />);
+            const guideBuilder = (<GuideBuilder subjectId={numericSubjectId} />);
 
             ReactDOM.render(
                 <QueryClientProvider client={queryClient}>
