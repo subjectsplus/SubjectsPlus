@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const hq = require('alias-hq');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -19,10 +20,6 @@ Encore
      *
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
-     */
-
-    /*
-    * React
      */
 
     // Record-Search component
@@ -85,8 +82,6 @@ Encore
     .enableSassLoader()
 
     // enables PostCSS, autoprefixing
-    //.enablePostCssLoader()
-
     .enablePostCssLoader((options) => {
         options.postcssOptions = {
             config: './postcss.config.js',
@@ -118,9 +113,13 @@ Encore
         {from: './src/CKEditorConfig/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
     ])
 
-
     // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+    .enableTypeScriptLoader()
+
+    // optionally enable forked type script for faster builds
+    // https://www.npmjs.com/package/fork-ts-checker-webpack-plugin
+    // requires that you have a tsconfig.json file that is setup correctly.
+    .enableForkedTypeScriptTypesChecking()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
@@ -130,4 +129,8 @@ Encore
     //.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
+let config = Encore.getWebpackConfig();
+
+config.resolve.alias = hq.get('webpack');
+
+module.exports = config;
