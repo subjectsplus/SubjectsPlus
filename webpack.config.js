@@ -23,7 +23,7 @@ Encore
      */
 
     // Record-Search component
-    .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
+    .addEntry('record_search', './assets/react/components/record-search/RecordSearch.tsx')
 
     // React-Select component intializer
     .addEntry('react_select_init', './assets/react/entrypoints/select-field-type/initSelect.js')

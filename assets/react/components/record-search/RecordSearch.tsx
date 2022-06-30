@@ -1,29 +1,29 @@
 import { useState, useRef } from 'react';
 import ReactDOM from 'react-dom'
-import Search from '#components/shared/Search';
+import { Search } from '@components/shared/Search';
 
-function RecordSearch() {
+export const RecordSearch = () => {
     const apiLink = '/api/titles';
 
     const [azlist, setAZList] = useState(true);
     const [refresh, performRefresh] = useState(0);
 
-    const onAZListCheckBoxInput = (evt) => {
-        setAZList(evt.target.checked);
+    const onAZListCheckBoxInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        setAZList(evt.currentTarget.checked);
         performRefresh(prev => prev + 1);
     }
 
-    const getApiLink = (search_term, page=1) => {
+    const getApiLink = (search_term: string, page: number = 1) => {
         return apiLink + '?' + new URLSearchParams({
             search: search_term,
             ...(azlist ? {'location.eresDisplay': 'Y'} : {}),
-            page: page
+            page: String(page)
         });
     }
 
     // TODO: Translations for title, label below
     return (
-        <Search tokenType="record" title="Get Resources" placeholder="Search Resources" apiLink={getApiLink}
+        <Search tokenType="record" placeholder="Search Resources" apiLink={getApiLink}
             refresh={refresh}
             extras={
                 <div className="form-check form-switch">

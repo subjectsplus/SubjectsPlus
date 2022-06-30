@@ -11,7 +11,7 @@ type SearchProps = {
     extras?: JSX.Element
 }
 
-function Search({tokenType, refresh, apiLink, placeholder, extras}: SearchProps) {
+export const Search = ({tokenType, refresh, apiLink, placeholder, extras}: SearchProps) => {
     const [results, setResults] = useState<Array<Record<string, any>>>([]);
     const [page, setPage] = useState<number>(1);
     const [hasNextPage, setHasNextPage] = useState<boolean>(false);
@@ -173,5 +173,3 @@ function Search({tokenType, refresh, apiLink, placeholder, extras}: SearchProps)
         </div>
     );
 }
-
-export default Search;
