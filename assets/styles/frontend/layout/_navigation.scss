@@ -1,3 +1,78 @@
 .navbar {
   background-color: var(--THEME-MENU-BG-COLOR);
+  color: var(--THEME-MENU-TEXT-COLOR);
+
+  .navbar-nav {
+    .nav-link {
+      color: var(--THEME-MENU-LINK-COLOR);
+      padding-left: 0.25rem;
+
+      &:hover,
+      &:focus,
+      &:active{
+        color: var(--THEME-MENU-LINK-HOVER-COLOR);
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 0.2rem;
+      }
+
+      @media (min-width: map-get($grid-breakpoints, lg)) {
+        padding-left:0;
+
+        &:hover,
+        &:focus,
+        &:active{
+          background-color: transparent;
+          border-radius: 0;
+        }
+
+      }
+    }
+  }
+
+  .search-icon-nav{
+    background-color: var(--THEME-MENU-LINK-COLOR);
+    border-radius: $border-radius-circle;
+    font-size: 1rem;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+
+    i {
+      color: var(--THEME-MENU-BG-COLOR);
+      padding: .375rem;
+      font-size: 1.125rem;
+    }
+
+    &:hover,
+    &:focus,
+    &:active{
+      @include transition-all();
+      background-color: var(--THEME-MENU-LINK-HOVER-COLOR);
+
+      i {
+        @include transition-all();
+        color: var(--THEME-MENU-LINK-COLOR);
+      }
+    }
+  }
+}
+
+.sp-navbar-toggler {
+  &.navbar-toggler {
+    border: 2px solid var(--THEME-MENU-LINK-COLOR);
+    padding: 0.125rem 0.25rem;
+
+    .sp-navbar-toggler-icon {
+      display: inline-block;
+      width: 1.125em;
+      height: 1.125em;
+      vertical-align: middle;
+    }
+
+    &:focus{
+      box-shadow: 0 0 0 0.125rem rgba(0, 0, 0, .15);
+    }
+  }
 }

@@ -16,13 +16,17 @@
   --THEME-MENU-LINK-COLOR: var(--user-theme-menu-link-color, #FFFFFF);
   --THEME-MENU-LINK-HOVER-COLOR:var(--user-theme-menu-link-hover-color, #09adc7);
 
+  --THEME-HEADER-BG-COLOR: var(--user-theme-header-bg-color, #FFFFFF);
+  --THEME-HEADER-TEXT-COLOR: var(--user-theme_header_text_color, #333333);
+  --THEME-HEADER-LINK-COLOR: var(--user-theme_header_link_color, #005A8F);
+  --THEME-HEADER-LINK-HOVER-COLOR: var(--user-theme_header_link_hover_color, #0078BD);
+
+
+
   // --THEME-GUIDES-LINK-COLOR
   // --THEME-GUIDES-LINK-HOVER-COLOR
 
-  // --THEME-HEADER-BG-COLOR
-  // --THEME-HEADER-TEXT-COLOR
-  // --THEME-HEADER-LINK-COLOR
-  // --THEME-HEADER-LINK-HOVER-COLOR
+
 
   // --THEME-PRIMARY-COLOR
   // --THEME-SECONDARY-COLOR
@@ -92,6 +96,7 @@ $h4-font-size:                	$font-size-base * 1.25; // 20px
 $h5-font-size:                	$font-size-base * 1.125; // 18px
 $h6-font-size:                	$font-size-base;
 
+$line-height-base:              1.2;
 $line-height-lg:              	1.4;
 $line-height-sm:              	1.2;
 $line-height-xs:                1;

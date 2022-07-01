@@ -1,18 +1,4 @@
 {# Default Nav #}
-
-    {# Set site logo  and site author#}
-    {% if getconfig('site_logo') %} {# TODO: Configure path for logo image set in config #}
-        {% set logoSrc = getconfig('site_logo') %}
-    {% else %}
-        {% set logoSrc = asset('build/images/frontend/sp_logo.png') %}
-    {% endif %}
-
-    {% if getconfig('meta_author') %}
-        {% set logoAlt = getconfig('meta_author') %}
-    {% else %}
-        {% set logoAlt = "SubjectsPlus logo" %}
-    {% endif %}
-
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="{{ path('frontend_subjects') }}">
@@ -20,7 +6,7 @@
         </a>
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mainNav">
         <div class="offcanvas-header justify-content-end pb-2">
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
+            {% include('frontend/includes/_offcanvas_close_btn.html.twig') %}
         </div>
         <div class="offcanvas-body pt-0 justify-content-lg-end">
             <ul class="navbar-nav">
@@ -44,9 +30,16 @@
         </div>
         <div>
         <button class="sp-navbar-toggler navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav">
-            <span class="navbar-toggler-icon"></span>
+            <span class="sp-navbar-toggler-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                    <path stroke="var(--THEME-MENU-LINK-COLOR)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" />
+                </svg>
+            </span>
         </button>
-        <a class="search-icon-nav ms-1" data-bs-toggle="offcanvas" href="#offcanvasSearchAll" role="button" aria-controls="offcanvasSearchAll" title="{{ 'public.default_nav.search' | trans }}"><i class="fas fa-search"></i></a>
+        {# TODO: Add link/action for search button #}
+        <a class="search-icon-nav ms-2" href="#" role="button" title="{{ 'public.default_nav.search' | trans }}">
+            <i class="fas fa-search"></i>
+        </a>
         </div>
     </div>
 </nav>
