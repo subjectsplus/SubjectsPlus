@@ -1,13 +1,27 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}Guide{% endblock %}
+{% block metatitle %}
+    {{ subject.subject }}
+{% endblock %}
+
+{% block header_actions %}
+    {{ include('frontend/includes/_print_action.html.twig') }}
+{% endblock %}
+
+{% block header_backto %}
+    <h6 class="text-center mb-1 lh-sm">
+        <a href="{{ path('frontend_subjects') }}" class="link-default">{{ 'public.subjects.title.label' | trans }}</a>
+    </h6>
+{% endblock %}
+
+{% block header_title %}
+    {{ subject.subject }}
+    <span class="visually-hidden">{{ 'subjectId: ' ~ subject.subjectId }}</span>
+{% endblock %}
 
 {% block main %}
-<span class="visually-hidden">{{ 'subjectId: ' ~ subject.subjectId }}</span>
-{# Subject Title #}
-<p>Subject: {{ subject.subject }}</p>
+    <span class="visually-hidden">{{ 'subjectId: ' ~ subject.subjectId }}</span>
 
-{# Subject Tabs #}
-{{ include('frontend/subjects/_tabs.html.twig') }}
-
+    {# Subject Tabs #}
+    {{ include('frontend/subjects/_tabs.html.twig') }}
 {% endblock %}

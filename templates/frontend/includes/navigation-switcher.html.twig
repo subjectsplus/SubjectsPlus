@@ -1,3 +1,16 @@
+{# Set site logo  and site author#}
+    {% if getconfig('site_logo') %} {# TODO: Configure path for logo image set in config #}
+        {% set logoSrc = getconfig('site_logo') %}
+    {% else %}
+        {% set logoSrc = asset('build/images/frontend/sp_logo.png') %}
+    {% endif %}
+
+    {% if getconfig('meta_author') %}
+        {% set logoAlt = getconfig('meta_author') %}
+    {% else %}
+        {% set logoAlt = "SubjectsPlus" %}
+    {% endif %}
+
 {# Navigation Switcher #}
 {% if getconfig('theme_id') == 'um' %}
     {% include('frontend/themes/um/includes/navigation.html.twig') %}

@@ -1,17 +1,21 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}{{ 'public.subjects.title.label' | trans }}{% endblock %}
+{% block metatitle %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block header_title %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block search %}
+    {# TODO: Add search UI for guides #}
+{% endblock %}
 
 {% block main %}
-
-<h1>All Subjects</h1>
-    <a href="#" class="link-underline">Link with underline</a>
-    <a href="#" class="link-default">Link default</a>
-<ul class="list-unstyled">
-{% for subject in subjects %}
-<li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{ subject.subject | raw }}</a></li>
-{% endfor %}
-</ul>
-
-
+    <ul class="list-unstyled">
+    {% for subject in subjects %}
+    <li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{ subject.subject | raw }}</a></li>
+    {% endfor %}
+    </ul>
 {% endblock %}
