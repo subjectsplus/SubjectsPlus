@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import ErrorBoundary from '@components/shared/ErrorBoundary';
-import GuideBuilder from '@components/guide-builder/GuideBuilder';
+import { GuideBuilder } from '@components/guide-builder/GuideBuilder';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { queryClient } from '@utility/queryClient';
