@@ -84,3 +84,9 @@ h3, .h3 {
 .fs-xs {
   font-size: $font-size-mini !important;
 }
+
+.list-columns2 {
+  @media (min-width: map-get($grid-breakpoints, md)) {
+    columns: 2;
+  }
+}
