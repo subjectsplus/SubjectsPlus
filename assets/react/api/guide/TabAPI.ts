@@ -1,4 +1,5 @@
 import { GuideTabType } from '@shared/types/guide_types';
+import { UpdateTabMutationArgs } from '@shared/types/guide_mutation_types';
 
 export const fetchTabs = async (subjectId: number, filters: Record<string, any>|null = null) => {
     const data = await fetch(`/api/subjects/${subjectId}/tabs`
@@ -54,7 +55,7 @@ export const createTab = async (initialTabData: Record<string, any>) => {
     return sectionReq.json();
 }
     
-export const updateTab = async ({tabUUID, data}: {tabUUID: string, data: Record<string, any>}) => {
+export const updateTab = async ({tabUUID, data}: UpdateTabMutationArgs) => {
     const req = await fetch(`/api/tabs/${tabUUID}`, {
         method: 'PUT',
         headers: {
