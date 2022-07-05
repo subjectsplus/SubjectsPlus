@@ -13,3 +13,16 @@ export type GuideType = {
     courseCode?: string,
     instructor?: string,
 }
+
+export type GuideTabType = {
+    id: string,
+    tabId?: number,
+    label: string,
+    tabIndex: number,
+    externalUrl?: string,
+    visibility?: boolean,
+    parent?: string,
+    children?: string,
+    extra?: string,
+    subject: string,
+}
