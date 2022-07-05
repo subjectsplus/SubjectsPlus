@@ -61,6 +61,18 @@
     {% endif %}
 
     {# footer #}
+    {% if getconfig('theme_footer_bg_color') %}
+        --user-theme-footer-bg-color: {{ getconfig('theme_footer_bg_color') }};
+    {% endif %}
+    {% if getconfig('theme_footer_text_color') %}
+        --user-theme_footer_text_color: {{ getconfig('theme_footer_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_footer_link_color') %}
+        --user-theme_footer_link_color: {{ getconfig('theme_footer_link_color') }};
+    {% endif %}
+    {% if getconfig('theme_footer_link_hover_color') %}
+        --user-theme_footer_link_hover_color: {{ getconfig('theme_footer_link_hover_color') }};
+    {% endif %}
 
     {# guides #}
 

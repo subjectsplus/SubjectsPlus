@@ -1,8 +1,15 @@
 <footer class="mt-auto">
     <div class="container text-center">
-        <p class="fs-xs">&copy;{{ 'now' | date('Y') }} Powered by SubjectsPlus</p>
+        <p class="fs-xs mb-1">Powered by SubjectsPlus</p>
     </div>
     <section class="footer-content">
-
+        {# Footer Switcher #}
+        {% if getconfig('theme_id') == 'um' %}
+            {% include('frontend/themes/um/includes/_footer_content.html.twig') %}
+        {% elseif getconfig('theme_id') == 'custom' %}
+            {% include('frontend/themes/custom/includes/_footer_content.html.twig') %}
+        {%  else %}
+            {% include('frontend/includes/_footer_content.html.twig') %}
+        {% endif %}
     </section>
 </footer>
