@@ -10,14 +10,13 @@ import { GuideTabFormInputs } from '@shared/types/guide_form_types';
 type EditTabModalProps = {
     currentTab: GuideTabType,
     show: boolean,
-    validated: boolean,
     onHide: () => void,
     onSubmit: SubmitHandler<GuideTabFormInputs>,
     deleteButtonOnClick: React.MouseEventHandler<HTMLButtonElement>,
     savingChanges: boolean
 }
 
-export const EditTabModal = ({ currentTab, show, validated, onHide, onSubmit, deleteButtonOnClick, savingChanges }: EditTabModalProps) => {
+export const EditTabModal = ({ currentTab, show, onHide, onSubmit, deleteButtonOnClick, savingChanges }: EditTabModalProps) => {
     const [deleteButtonClicked, setDeleteButtonClicked] = useState<boolean>(false);
 
     const modalTitle = (<>Edit Tab <span className="fs-xs d-block">{'ID:' + currentTab.tabId}</span></>);
@@ -34,7 +33,7 @@ export const EditTabModal = ({ currentTab, show, validated, onHide, onSubmit, de
 
     return (
         <ModalContainer title={modalTitle} footer={modalFooter} show={show} onHide={onHide}>
-            <TabForm currentTab={currentTab} validated={validated} onSubmit={onSubmit} />    
+            <TabForm currentTab={currentTab} onSubmit={onSubmit} />    
             <Button variant="link" className="btn-icon-default p-0 fs-sm" onClick={() => setDeleteButtonClicked(true)} disabled={deleteButtonClicked} title="Delete Tab">
                 <i className="fas fa-trash"></i>{' '}
                 Delete Tab

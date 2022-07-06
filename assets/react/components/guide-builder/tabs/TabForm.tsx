@@ -6,21 +6,16 @@ import { GuideTabFormInputs } from '@shared/types/guide_form_types';
 
 type TabFormProps = {
     currentTab: GuideTabType,
-    validated: boolean,
     onSubmit: SubmitHandler<GuideTabFormInputs>
 };
 
-export const TabForm = ({ currentTab, validated, onSubmit }: TabFormProps) => {
+export const TabForm = ({ currentTab, onSubmit }: TabFormProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm<GuideTabFormInputs>();
 
     return (
-        <Form noValidate={true} validated={validated} onSubmit={handleSubmit(onSubmit)} id="settings-form">
+        <Form noValidate={true} onSubmit={handleSubmit(onSubmit)} id="settings-form">
             <Form.Group className="mb-3" controlId="formGroupTabName">
-                <FloatingLabel
-                    controlId="floatingTabName"
-                    label="Tab Name"
-                    className="mb-3"
-                >
+                <FloatingLabel controlId="floatingTabName" label="Tab Name" className="mb-3">
                     <Form.Control defaultValue={currentTab.label || ''} autoComplete="off" 
                         isInvalid={errors.hasOwnProperty('label')} {...register('label', { required: true, minLength: 3})} />
                     <Form.Control.Feedback type="invalid">

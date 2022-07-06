@@ -17,7 +17,6 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
     const { subjectId, currentTab, activeKey, setActiveKey } = useGuideTabContainer() as GuideTabContainerType;
     const [showSettings, setShowSettings] = useState<boolean>(false);
     const [isSaving, setIsSaving] = useState<boolean>(false);
-    const [validated, setValidated] = useState<boolean>(false);
 
     const updateTabMutation = useUpdateTab(subjectId);
     const deleteTabMutation = useDeleteTab(subjectId);
@@ -41,7 +40,6 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
                 onSettled: () => {
                     setShowSettings(false);
                     setIsSaving(false);
-                    setValidated(false);
                 },
                 onError: () => {
                     toast.error('Error has occurred. Failed to update tab!');
@@ -92,7 +90,6 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
         });
 
         setShowSettings(false);
-        setValidated(false);
     }
 
     const handleTabDelete = (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -105,7 +102,7 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
             <DraggableTab tabId={tab.id} tabIndex={tab.tabIndex} label={tab.label}
                     active={isCurrentTab} settingsButtonOnClick={() => setShowSettings(!showSettings)} />
             
-            {isCurrentTab && <EditTabModal currentTab={tab} show={showSettings} validated={validated} onHide={() => setShowSettings(false)}
+            {isCurrentTab && <EditTabModal currentTab={tab} show={showSettings} onHide={() => setShowSettings(false)}
                 onSubmit={handleUpdateTab} deleteButtonOnClick={handleTabDelete} savingChanges={isSaving}
             />}
         </>
