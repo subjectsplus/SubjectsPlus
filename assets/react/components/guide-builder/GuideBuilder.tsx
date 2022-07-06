@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { GuideTabContainer } from './GuideTabContainer';
+import { GuideTabContainer } from './tabs/GuideTabContainer';
 import { ToastContainer } from 'react-toastify';
 
 type GuideBuilderProps = {

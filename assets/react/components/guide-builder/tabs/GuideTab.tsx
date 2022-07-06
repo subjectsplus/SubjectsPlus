@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import DraggableTab from './DraggableTab';
 import { GuideTabType } from '@shared/types/guide_types';
 import { useGuideTabContainer, GuideTabContainerType } from '@context/GuideTabContainerContext';
-import { EditTabModal } from './tabs/EditTabModal';
+import { EditTabModal } from './EditTabModal';
 import { htmlEntityDecode, objectIsEmpty } from '@utility/Utility';
 import { useUpdateTab } from '@hooks/useUpdateTab';
 import { useDeleteTab } from '@hooks/useDeleteTab';
@@ -13,14 +13,15 @@ type GuideTabProps = {
 }
 
 export const GuideTab = ({ tab }: GuideTabProps) => {
-    const { subjectId, currentTab } = useGuideTabContainer() as GuideTabContainerType;
+    const { subjectId, currentTab, activeKey, setActiveKey } = useGuideTabContainer() as GuideTabContainerType;
     const [showSettings, setShowSettings] = useState<boolean>(false);
     const [isSaving, setIsSaving] = useState<boolean>(false);
+    const [validated, setValidated] = useState<boolean>(false);
 
     const updateTabMutation = useUpdateTab(subjectId);
     const deleteTabMutation = useDeleteTab(subjectId);
 
-    const isCurrentTab = currentTab.tabIndex === tab.tabIndex;
+    const isCurrentTab = currentTab.id === tab.id;
 
     const updateTab = (changes: Record<string, any>) => {
         setIsSaving(true);
@@ -39,6 +40,7 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
                 onSettled: () => {
                     setShowSettings(false);
                     setIsSaving(false);
+                    setValidated(false);
                 },
                 onError: () => {
                     toast.error('Error has occurred. Failed to update tab!');
@@ -53,39 +55,62 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
         const form = evt.currentTarget;
 
         if (form.checkValidity() === false) {
-          evt.stopPropagation();
-          return;
-        }
-
-        const formData = new FormData(evt.currentTarget);
-        const changes: Record<string, any> = {};
-        const newLabel = htmlEntityDecode(formData.get('label') as string);
-        const newVisibility = ((formData.get('visibility') as string) === '1');
-        const newExternalUrl = htmlEntityDecode(formData.get('externalUrl') as string);
-
-        // Check for any changes in tab data
-        if (newLabel !== currentTab.label) changes['label'] = newLabel;
-        if (newExternalUrl !== currentTab.externalUrl) changes['externalUrl'] = newExternalUrl;
-        if (newVisibility !== currentTab.visibility) changes['visibility'] = newVisibility;
-
-        if (!objectIsEmpty(changes)) {
-            updateTab(changes);
+            evt.stopPropagation();
         } else {
-            setShowSettings(false);
+            const formData = new FormData(evt.currentTarget);
+            const changes: Record<string, any> = {};
+            const newLabel = htmlEntityDecode(formData.get('label') as string);
+            const newVisibility = ((formData.get('visibility') as string) === '1');
+            const newExternalUrl = htmlEntityDecode(formData.get('externalUrl') as string);
+
+            // Check for any changes in tab data
+            if (newLabel !== currentTab.label) changes['label'] = newLabel;
+            if (newExternalUrl !== currentTab.externalUrl) changes['externalUrl'] = newExternalUrl;
+            if (newVisibility !== currentTab.visibility) changes['visibility'] = newVisibility;
+
+            if (!objectIsEmpty(changes)) {
+                updateTab(changes);
+            } else {
+                setShowSettings(false);
+            }
         }
+
+        setValidated(true);
+        return false;
+    }
+
+    const deleteTab = () => {
+        let newActiveKey = 0;
+
+        if (activeKey !== 0) {
+            newActiveKey = activeKey - 1;
+        }
+
+        setActiveKey(newActiveKey);
+
+        deleteTabMutation.mutate({
+            tabUUID: currentTab.id
+        }, {
+            onError: () => {
+                toast.error('Error has occurred. Failed to delete tab!');
+            }
+        });
+
+        setShowSettings(false);
+        setValidated(false);
     }
 
     const handleTabDelete = (evt: React.MouseEvent<HTMLButtonElement>) => {
         evt.preventDefault();
-        console.log('handleTabDelete evt:', evt);
+        deleteTab();
     }
     
     return (
         <>
             <DraggableTab tabId={tab.id} tabIndex={tab.tabIndex} label={tab.label}
-                    active={isCurrentTab} onClick={() => setShowSettings(!showSettings)} />
+                    active={isCurrentTab} settingsButtonOnClick={() => setShowSettings(!showSettings)} />
             
-            {isCurrentTab && <EditTabModal currentTab={tab} show={showSettings} onHide={() => setShowSettings(false)}
+            {isCurrentTab && <EditTabModal currentTab={tab} show={showSettings} validated={validated} onHide={() => setShowSettings(false)}
                 onSubmit={handleUpdateTab} deleteButtonOnClick={handleTabDelete} savingChanges={isSaving}
             />}
         </>

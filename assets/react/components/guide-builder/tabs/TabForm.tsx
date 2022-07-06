@@ -4,12 +4,13 @@ import { GuideTabType } from '@shared/types/guide_types';
 
 type TabFormProps = {
     currentTab: GuideTabType,
+    validated: boolean,
     onSubmit: React.FormEventHandler<HTMLFormElement>
 };
 
-export const TabForm = ({ currentTab, onSubmit }: TabFormProps) => {
+export const TabForm = ({ currentTab, validated, onSubmit }: TabFormProps) => {
     return (
-        <Form noValidate onSubmit={onSubmit} id="settings-form">
+        <Form noValidate validated={validated} onSubmit={onSubmit} id="settings-form">
             <Form.Group className="mb-3" controlId="formGroupTabName">
                 <FloatingLabel
                     controlId="floatingTabName"
