@@ -11,7 +11,8 @@
       "@components/*": ["./assets/react/components/*"],
       "@api/*": ["./assets/react/api/*"],
       "@hooks/*": ["./assets/react/hooks/*"],
-      "@shared/*": ["./assets/react/shared/*"]
+      "@shared/*": ["./assets/react/shared/*"],
+      "@context/*": ["./assets/react/context/*"]
     }
   },
   "include": ["./assets/react/**/*"],
