@@ -3,7 +3,7 @@ import produce from 'immer';
 import { GuideType } from '@shared/types/guide_types';
 import { updateGuide } from '@api/guide/GuideAPI';
 
-export function useUpdateGuide(subjectId: number) {
+export const useUpdateGuide = (subjectId: number) => {
     const queryClient = useQueryClient();
     return useMutation(updateGuide, {
         onMutate: async (updatedGuide:Record<string, any>) => {
