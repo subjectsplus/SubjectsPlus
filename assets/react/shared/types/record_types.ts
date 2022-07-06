@@ -11,7 +11,7 @@ export type TitleType = {
 }
 
 export type LocationType = {
-    locationId: 0,
+    locationId: number,
     callNumber?: string,
     location: string,
     eresDisplay?: string,
