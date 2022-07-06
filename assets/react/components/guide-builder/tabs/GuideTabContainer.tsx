@@ -1,31 +1,45 @@
 import { useState, useEffect } from 'react';
-import { hideAllOffcanvas } from '@utility/Utility';
-import { useFetchTabs } from '@hooks/useFetchTabs';
-import { useCreateTab } from '@hooks/useCreateTab';
-import { useReorderTab } from '@hooks/useReorderTab';
+import produce from 'immer';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import { DragDropContext, Droppable, DragStart, DropResult } from 'react-beautiful-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
+import { hideAllOffcanvas } from '@utility/Utility';
+import { useFetchTabs } from '@hooks/useFetchTabs';
+import { useCreateTab } from '@hooks/useCreateTab';
+import { useReorderTab } from '@hooks/useReorderTab';
 import { GuideTabContainerProvider } from '@context/GuideTabContainerContext';
 import { GuideTab } from './GuideTab';
 import { GuideTabContent } from './GuideTabContent';
 import { GuideTabType } from '@shared/types/guide_types';
+import { CreateTabModal } from './CreateTabModal';
+import { GuideTabFormInputs } from '@shared/types/guide_form_types';
 
 type GuideTabContainerProps = {
     subjectId: number
 }
 
 export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
-    const [lastTabIndex, setLastTabIndex] = useState(0);
-    const [activeKey, setActiveKey] = useState(0);
-    const [draggingTab, setDraggingTab] = useState(false);
+    const [lastTabIndex, setLastTabIndex] = useState<number>(0);
+    const [activeKey, setActiveKey] = useState<number>(0);
+    const [draggingTab, setDraggingTab] = useState<boolean>(false);
+    const [showNewTabForm, setShowNewTabForm] = useState<boolean>(false);
+    const [isCreatingNewTab, setIsCreatingNewTab] = useState<boolean>(false);
 
     const {isLoading, isError, data, error} = useFetchTabs(subjectId, !draggingTab);
     
     const reorderTabMutation = useReorderTab(subjectId);
     const createTabMutation = useCreateTab(subjectId);
+
+    const initialTabData = {
+        id: '',
+        label: '',
+        tabIndex: 0,
+        visibility: true,
+        externalUrl: '',
+        subject: '/api/subjects/' + subjectId
+    };
 
     useEffect(() => {
         if (data) {
@@ -39,7 +53,7 @@ export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
     const onTabSelect = (eventKey: string|null) => {
         if (eventKey === 'new-tab') {
             // Create new tab
-            newTab();
+            setShowNewTabForm(true);
             hideAllOffcanvas();
         } else if (activeKey.toString() !== eventKey) {
             setActiveKey(Number(eventKey));
@@ -47,21 +61,32 @@ export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
         }
     }
 
-    const newTab = () => {
-        const initialTabData = {
-            id: uuidv4(),
-            label: 'Untitled',
-            tabIndex: lastTabIndex + 1,
-            visibility: true,
-            subject: '/api/subjects/' + subjectId
-        };
+    const handleNewTab = (data: GuideTabFormInputs) => {
+        setIsCreatingNewTab(true);
+        
+        const newTabData = produce<GuideTabType>(initialTabData, draftTabData => {
+            draftTabData['id'] = uuidv4();
+            draftTabData['label'] = data['label'];
+            draftTabData['visibility'] = (data['visibility'] === '1');
+            draftTabData['tabIndex'] = lastTabIndex + 1;
 
-        createTabMutation.mutate(initialTabData, {
+            if (data['externalUrl'].trim() !== '') {
+                draftTabData['externalUrl'] = data['externalUrl'];
+            } else {
+                draftTabData['externalUrl'] = null;
+            }
+        });
+
+        createTabMutation.mutate(newTabData, {
             onSuccess: () => {
                 setActiveKey(lastTabIndex + 1);
             },
             onError: () => {
                 toast.error('Error has occurred. Failed to create new tab!');
+            },
+            onSettled: () => {
+                setShowNewTabForm(false);
+                setIsCreatingNewTab(false);
             }
         });
     }
@@ -147,6 +172,10 @@ export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
                 <Tab.Content className="sp-tab-content">
                     {tabsContent}
                 </Tab.Content>
+
+                {/* Create New Tab Modal */}
+                <CreateTabModal currentTab={initialTabData} show={showNewTabForm} onHide={() => setShowNewTabForm(false)}
+                    onSubmit={handleNewTab} savingChanges={isCreatingNewTab} />
             </GuideTabContainerProvider>
         );
     } else {

@@ -16,7 +16,7 @@ export const TabForm = ({ currentTab, onSubmit }: TabFormProps) => {
         <Form noValidate={true} onSubmit={handleSubmit(onSubmit)} id="settings-form">
             <Form.Group className="mb-3" controlId="formGroupTabName">
                 <FloatingLabel controlId="floatingTabName" label="Tab Name" className="mb-3">
-                    <Form.Control defaultValue={currentTab.label || ''} autoComplete="off" 
+                    <Form.Control defaultValue={currentTab.label || ''} autoComplete="off" autoFocus={true}
                         isInvalid={errors.hasOwnProperty('label')} {...register('label', { required: true, minLength: 3})} />
                     <Form.Control.Feedback type="invalid">
                         Please enter a tab name with a minimum of 3 characters.

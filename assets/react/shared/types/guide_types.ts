@@ -19,7 +19,7 @@ export type GuideTabType = {
     tabId?: number,
     label: string,
     tabIndex: number,
-    externalUrl?: string,
+    externalUrl?: string|null,
     visibility?: boolean,
     parent?: string,
     children?: string,
