@@ -7,6 +7,7 @@ import { EditTabModal } from './EditTabModal';
 import { htmlEntityDecode, objectIsEmpty } from '@utility/Utility';
 import { useUpdateTab } from '@hooks/useUpdateTab';
 import { useDeleteTab } from '@hooks/useDeleteTab';
+import { GuideTabFormInputs } from '@shared/types/guide_form_types';
 
 type GuideTabProps = {
     tab: GuideTabType
@@ -49,34 +50,28 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
         );
     }
 
-    const handleUpdateTab = (evt: React.FormEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-        
-        const form = evt.currentTarget;
+    const handleUpdateTab = (data: GuideTabFormInputs) => {
+        const changes: Record<string, any> = {};
+        const newLabel = htmlEntityDecode(data['label']);
+        const newVisibility = (data['visibility'] === '1');
+        const newExternalUrl = htmlEntityDecode(data['externalUrl']);
 
-        if (form.checkValidity() === false) {
-            evt.stopPropagation();
-        } else {
-            const formData = new FormData(evt.currentTarget);
-            const changes: Record<string, any> = {};
-            const newLabel = htmlEntityDecode(formData.get('label') as string);
-            const newVisibility = ((formData.get('visibility') as string) === '1');
-            const newExternalUrl = htmlEntityDecode(formData.get('externalUrl') as string);
+        if (newLabel !== currentTab.label) changes['label'] = newLabel;
 
-            // Check for any changes in tab data
-            if (newLabel !== currentTab.label) changes['label'] = newLabel;
-            if (newExternalUrl !== currentTab.externalUrl) changes['externalUrl'] = newExternalUrl;
-            if (newVisibility !== currentTab.visibility) changes['visibility'] = newVisibility;
-
-            if (!objectIsEmpty(changes)) {
-                updateTab(changes);
-            } else {
-                setShowSettings(false);
-            }
+        if (newExternalUrl.trim() === '' && currentTab.externalUrl !== null) {
+            // new external url is empty, therefore set to null
+            changes['externalUrl'] = null;
+        } else if (newExternalUrl !== currentTab.externalUrl) {
+            changes['externalUrl'] = newExternalUrl;
         }
 
-        setValidated(true);
-        return false;
+        if (newVisibility !== currentTab.visibility) changes['visibility'] = newVisibility;
+
+        if (!objectIsEmpty(changes)) {
+            updateTab(changes);
+        } else {
+            setShowSettings(false);
+        }
     }
 
     const deleteTab = () => {

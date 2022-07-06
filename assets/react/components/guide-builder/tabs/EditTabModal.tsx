@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import { SubmitHandler } from "react-hook-form"
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { GuideTabType } from '@shared/types/guide_types';
 import { ModalContainer } from '@components/shared/ModalContainer';
 import { TabForm } from './TabForm';
+import { GuideTabFormInputs } from '@shared/types/guide_form_types';
 
 type EditTabModalProps = {
     currentTab: GuideTabType,
     show: boolean,
     validated: boolean,
     onHide: () => void,
-    onSubmit: React.FormEventHandler<HTMLFormElement>,
+    onSubmit: SubmitHandler<GuideTabFormInputs>,
     deleteButtonOnClick: React.MouseEventHandler<HTMLButtonElement>,
     savingChanges: boolean
 }

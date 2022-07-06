@@ -1,23 +1,28 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { GuideTabType } from '@shared/types/guide_types';
+import { GuideTabFormInputs } from '@shared/types/guide_form_types';
 
 type TabFormProps = {
     currentTab: GuideTabType,
     validated: boolean,
-    onSubmit: React.FormEventHandler<HTMLFormElement>
+    onSubmit: SubmitHandler<GuideTabFormInputs>
 };
 
 export const TabForm = ({ currentTab, validated, onSubmit }: TabFormProps) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<GuideTabFormInputs>();
+
     return (
-        <Form noValidate validated={validated} onSubmit={onSubmit} id="settings-form">
+        <Form noValidate={true} validated={validated} onSubmit={handleSubmit(onSubmit)} id="settings-form">
             <Form.Group className="mb-3" controlId="formGroupTabName">
                 <FloatingLabel
                     controlId="floatingTabName"
                     label="Tab Name"
                     className="mb-3"
                 >
-                    <Form.Control name="label" required={true} minLength={3} defaultValue={currentTab.label || ''} />
+                    <Form.Control defaultValue={currentTab.label || ''} autoComplete="off" 
+                        isInvalid={errors.hasOwnProperty('label')} {...register('label', { required: true, minLength: 3})} />
                     <Form.Control.Feedback type="invalid">
                         Please enter a tab name with a minimum of 3 characters.
                     </Form.Control.Feedback>
@@ -25,8 +30,8 @@ export const TabForm = ({ currentTab, validated, onSubmit }: TabFormProps) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupTabVisibility">
                 <FloatingLabel controlId="floatingTabVisibility" label="Visibility">
-                    <Form.Select name="visibility" size="sm" 
-                        aria-label="Set visibility of tab" defaultValue={currentTab.visibility ? '1' : '0'}>
+                    <Form.Select size="sm" aria-label="Set visibility of tab" defaultValue={currentTab.visibility ? '1' : '0'}
+                        isInvalid={errors.hasOwnProperty('visibility')} {...register('visibility', { required: true })}>
                         <option value="0">Hidden</option>
                         <option value="1">Public</option>
                     </Form.Select>
@@ -34,7 +39,8 @@ export const TabForm = ({ currentTab, validated, onSubmit }: TabFormProps) => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupExternalUrl">
                 <FloatingLabel controlId="floatingExternalUrl" label="Redirect URL (Optional)">
-                    <Form.Control name="externalUrl" type="url" defaultValue={currentTab.externalUrl || ''} />
+                    <Form.Control type="url" defaultValue={currentTab.externalUrl || ''} autoComplete="off"
+                        isInvalid={errors.hasOwnProperty('externalUrl')} {...register('externalUrl')}/>
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid URL.
                         </Form.Control.Feedback>
