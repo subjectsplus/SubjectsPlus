@@ -42,3 +42,15 @@ export const hideAllOffcanvas = () => {
         (<any> window).mediaTokenOffcanvas.hide();
     }
 }
+
+export const isValidHttpUrl = (candidate: string) => {
+    let url;
+    
+    try {
+      url = new URL(candidate);
+    } catch (_) {
+      return false;  
+    }
+  
+    return url.protocol === "http:" || url.protocol === "https:";
+  }

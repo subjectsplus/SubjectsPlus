@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { GuideTabType } from '@shared/types/guide_types';
 import { GuideTabFormInputs } from '@shared/types/guide_form_types';
+import { isValidHttpUrl } from '@utility/Utility';
 
 type TabFormProps = {
     currentTab: GuideTabType,
@@ -35,9 +36,9 @@ export const TabForm = ({ currentTab, onSubmit }: TabFormProps) => {
             <Form.Group className="mb-3" controlId="formGroupExternalUrl">
                 <FloatingLabel controlId="floatingExternalUrl" label="Redirect URL (Optional)">
                     <Form.Control type="url" defaultValue={currentTab.externalUrl || ''} autoComplete="off"
-                        isInvalid={errors.hasOwnProperty('externalUrl')} {...register('externalUrl')}/>
+                        isInvalid={errors.hasOwnProperty('externalUrl')} {...register('externalUrl', { validate: url => url === '' || isValidHttpUrl(url) })}/>
                         <Form.Control.Feedback type="invalid">
-                            Please provide a valid URL.
+                            Please provide a valid URL. (Ex: https://www.subjectsplus.com)
                         </Form.Control.Feedback>
                 </FloatingLabel>
             </Form.Group>
