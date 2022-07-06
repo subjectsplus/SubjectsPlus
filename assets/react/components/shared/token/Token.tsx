@@ -30,8 +30,10 @@ export const Token = ({ token, tokenType, onClick }: TokenProps) => {
             dataAttributes[attributeName] = String(token[tokenKey]);
         }
 
-        return (<div className="token" draggable="true" onClick={onClick} {...dataAttributes}>
-            {htmlEntityDecode((token as GenericTokenType).title)}
-    </div> )
+        return (
+            <div className="token" draggable="true" onClick={onClick} {...dataAttributes}>
+                {htmlEntityDecode((token as GenericTokenType).title)}
+            </div>
+        );
     }
 }
