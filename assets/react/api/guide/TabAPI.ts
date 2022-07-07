@@ -1,5 +1,5 @@
 import { GuideTabType } from '@shared/types/guide_types';
-import { UpdateTabMutationArgs, DeleteTabMutationArgs } from '@shared/types/guide_mutation_types';
+import { UpdateTabMutationArgs, DeleteTabMutationArgs, ReorderTabMutationArgs } from '@shared/types/guide_mutation_types';
 
 export const fetchTabs = async (subjectId: number, filters: Record<string, any>|null = null) => {
     const data = await fetch(`/api/subjects/${subjectId}/tabs`
@@ -111,7 +111,7 @@ export const deleteTab = async ({ tabUUID }: DeleteTabMutationArgs) => {
     return req.text();
 }
 
-export const reorderTab = async ({subjectId, sourceTabIndex, destinationTabIndex}: {subjectId: number, sourceTabIndex: number, destinationTabIndex: number}) => {
+export const reorderTab = async ({subjectId, sourceTabIndex, destinationTabIndex}: ReorderTabMutationArgs) => {
     // fetch current tabs
     const {'hydra:member': tabs}: {'hydra:member': GuideTabType[]} = await fetchTabs(subjectId, {pagination: false});
 

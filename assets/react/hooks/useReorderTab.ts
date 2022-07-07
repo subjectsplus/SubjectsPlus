@@ -2,13 +2,14 @@ import { useQueryClient, useMutation } from 'react-query';
 import produce from 'immer';
 import { GuideTabType } from '@shared/types/guide_types';
 import { reorderTab } from '@api/guide/TabAPI';
+import { ReorderTabMutationArgs } from '@shared/types/guide_mutation_types';
 
 export function useReorderTab(subjectId: number) {
     if (subjectId === undefined) throw new Error('"subjectId" field is required to call useReorderTab.');
 
     const queryClient = useQueryClient();
     return useMutation(reorderTab, {
-        onMutate: async (tabData: Record<string, any>) => {
+        onMutate: async (tabData: ReorderTabMutationArgs) => {
             await queryClient.cancelQueries(['tabs', subjectId]);
             const previousTabsData = queryClient.getQueryData<Record<string, any>>(['tabs', subjectId]);
 
