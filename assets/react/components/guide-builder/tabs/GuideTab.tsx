@@ -21,20 +21,20 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
     const updateTabMutation = useUpdateTab(subjectId);
     const deleteTabMutation = useDeleteTab(subjectId);
 
-    const isCurrentTab = currentTab.id === tab.id;
+    const isCurrentTab = currentTab?.id === tab.id;
 
     const updateTab = (changes: Record<string, any>) => {
         setIsSaving(true);
 
         updateTabMutation.mutate({
-                tabUUID: currentTab.id,
-                tabIndex: currentTab.tabIndex,
+                tabUUID: tab.id,
+                tabIndex: tab.tabIndex,
                 data: changes,
                 optimisticResult: {
-                    ...currentTab,
-                    'label': changes['label'] ?? currentTab['label'],
-                    'externalUrl': changes['externalUrl'] ?? currentTab['externalUrl'],
-                    'visibility': changes['visibility'] ?? currentTab['visibility']
+                    ...tab,
+                    'label': changes['label'] ?? tab['label'],
+                    'externalUrl': changes['externalUrl'] ?? tab['externalUrl'],
+                    'visibility': changes['visibility'] ?? tab['visibility']
                 }
             }, {
                 onSettled: () => {
@@ -54,16 +54,16 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
         const newVisibility = (data['visibility'] === '1');
         const newExternalUrl = htmlEntityDecode(data['externalUrl']);
 
-        if (newLabel !== currentTab.label) changes['label'] = newLabel;
+        if (newLabel !== tab.label) changes['label'] = newLabel;
 
-        if (newExternalUrl.trim() === '' && currentTab.externalUrl !== null) {
+        if (newExternalUrl.trim() === '' && tab.externalUrl !== null) {
             // new external url is empty, therefore set to null
             changes['externalUrl'] = null;
-        } else if (newExternalUrl !== currentTab.externalUrl) {
+        } else if (newExternalUrl !== tab.externalUrl) {
             changes['externalUrl'] = newExternalUrl;
         }
 
-        if (newVisibility !== currentTab.visibility) changes['visibility'] = newVisibility;
+        if (newVisibility !== tab.visibility) changes['visibility'] = newVisibility;
 
         if (!objectIsEmpty(changes)) {
             updateTab(changes);
@@ -82,7 +82,7 @@ export const GuideTab = ({ tab }: GuideTabProps) => {
         setActiveKey(newActiveKey);
 
         deleteTabMutation.mutate({
-            tabUUID: currentTab.id
+            tabUUID: tab.id
         }, {
             onError: () => {
                 toast.error('Error has occurred. Failed to delete tab!');
