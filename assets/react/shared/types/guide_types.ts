@@ -12,7 +12,7 @@ export type GuideType = {
     extra?: string,
     courseCode?: string,
     instructor?: string,
-}
+};
 
 export type GuideTabType = {
     id: string,
@@ -25,4 +25,25 @@ export type GuideTabType = {
     children?: string,
     extra?: string,
     subject: string,
+};
+
+export type GuideSectionType = {
+    id: string,
+    sectionId?: number,
+    sectionIndex: number,
+    layout: string,
+    tab: string
+};
+
+export type PlusletType = {
+    id: string,
+    plusletId?: number,
+    title: string,
+    body: string,
+    type: string,
+    extra?: string,
+    favoriteBox?: boolean,
+    pcolumn: number,
+    prow: number,
+    section?: string
 }
