@@ -87,6 +87,8 @@ h3, .h3 {
 
 .list-columns2 {
   @media (min-width: map-get($grid-breakpoints, md)) {
-    columns: 2;
+    column-count: 2;
+    column-break-before: always;
+    break-before: column;
   }
 }

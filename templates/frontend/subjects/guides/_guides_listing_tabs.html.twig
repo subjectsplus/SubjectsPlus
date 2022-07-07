@@ -1,0 +1,103 @@
+{% set guides_list_first_half = subjects|slice(0, subjects|length / 2) %}
+{% set guides_list_second_half = subjects|slice(subjects|length / 2) %}
+
+<ul class="nav nav-pills" id="ResearchGuidesTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="guide-collections-tab" data-bs-toggle="tab" data-bs-target="#guide-collections" type="button" role="tab" aria-controls="guide-collections" aria-selected="false">Guide Collections</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="subject-guides-tab" data-bs-toggle="tab" data-bs-target="#subject-guides" type="button" role="tab" aria-controls="subject-guides" aria-selected="true">Subject Guides</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="course-guides-tab" data-bs-toggle="tab" data-bs-target="#course-guides" type="button" role="tab" aria-controls="course-guides" aria-selected="false">Course Guides</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="topic-guides-tab" data-bs-toggle="tab" data-bs-target="#topic-guides" type="button" role="tab" aria-controls="topic-guides" aria-selected="false">Topic Guides</a>
+    </li>
+</ul>
+<div class="tab-content mt-4" id="ResearchGuidesTabContent">
+    <div class="tab-pane fade" id="guide-collections" role="tabpanel" aria-labelledby="guide-collections-tab">
+        <h3 class="d-inline-block">Guide Collections</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-sub" aria-expanded="false" aria-controls="Multi Collapse">(Expand/hide all)</a>
+        <ul class="list-unstyled">
+            {% for subject in subjects %}
+                <li class="mb-3"><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}" class="link-default">{{ subject.subject | raw }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="tab-pane fade show active" id="subject-guides" role="tabpanel" aria-labelledby="subject-guides-tab">
+        <h3 class="d-inline-block">Subject</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="Multi Collapse">(Expand/hide all)</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="list-unstyled">
+                {% for subject in guides_list_first_half  %}
+                    {% if subject.type == "Subject" %}
+                        {% include('frontend/subjects/guides/_guides_list_item.html.twig') %}
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul class="list-unstyled">
+                {% for subject in guides_list_second_half %}
+                    {% if subject.type == "Subject" %}
+                        {% include('frontend/subjects/guides/_guides_list_item.html.twig') %}
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="course-guides" role="tabpanel" aria-labelledby="course-guides-tab">
+        <h3 class="d-inline-block">Course</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="Multi Collapse">(Expand/hide all)</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="list-unstyled">
+                    {% for subject in guides_list_first_half  %}
+                        {% if subject.type == "Course" %}
+                            {% include('frontend/subjects/guides/_guides_list_item.html.twig') %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul class="list-unstyled">
+                    {% for subject in guides_list_second_half %}
+                        {% if subject.type == "Course" %}
+                            {% include('frontend/subjects/guides/_guides_list_item.html.twig') %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="topic-guides" role="tabpanel" aria-labelledby="topic-guides-tab">
+        <h3 class="d-inline-block">Topic</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="Multi Collapse">(Expand/hide all)</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="list-unstyled">
+                    {% for subject in guides_list_first_half  %}
+                        {% if subject.type == "Topic" %}
+                            {% include('frontend/subjects/guides/_guides_list_item.html.twig') %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul class="list-unstyled">
+                    {% for subject in guides_list_second_half %}
+                        {% if subject.type == "Topic" %}
+                            {% include('frontend/subjects/guides/_guides_list_item.html.twig') %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
