@@ -1,4 +1,10 @@
-function SectionDropdown({ isConvertingLayout, sectionDelete, convertLayout }) {
+type SectionDropdownProps = {
+    isConvertingLayout: boolean,
+    deleteSectionOnClick: React.MouseEventHandler<HTMLAnchorElement>,
+    convertLayoutCallback: (newLayout: string) => void
+}
+
+export const SectionDropdown = ({ isConvertingLayout, deleteSectionOnClick, convertLayoutCallback }: SectionDropdownProps) => {
 
     const spinner = (
         <div className="spinner-border spinner-border-sm float-end" role="status">
@@ -23,19 +29,19 @@ function SectionDropdown({ isConvertingLayout, sectionDelete, convertLayout }) {
                             sp-col-3 = 4-4-4
                             sp-col-3-sidebars = 3-6-3
                         */}
-                        <li><a className="dropdown-item" onClick={() => convertLayout('0-12-0')}><span className="sp-col-1"></span></a></li>
-                        <li><a className="dropdown-item" onClick={() => convertLayout('6-6-0')}><span className="sp-col-2"></span></a></li>
-                        <li><a className="dropdown-item" onClick={() => convertLayout('4-8-0')}><span className="sp-col-2-left-sidebar"></span></a></li>
-                        <li><a className="dropdown-item" onClick={() => convertLayout('8-4-0')}><span className="sp-col-2-right-sidebar"></span></a></li>
-                        <li><a className="dropdown-item" onClick={() => convertLayout('4-4-4')}><span className="sp-col-3"></span></a></li>
-                        <li><a className="dropdown-item" onClick={() => convertLayout('3-6-3')}><span className="sp-col-3-sidebars"></span></a></li>
+                        <li><a className="dropdown-item" onClick={() => convertLayoutCallback('0-12-0')}><span className="sp-col-1"></span></a></li>
+                        <li><a className="dropdown-item" onClick={() => convertLayoutCallback('6-6-0')}><span className="sp-col-2"></span></a></li>
+                        <li><a className="dropdown-item" onClick={() => convertLayoutCallback('4-8-0')}><span className="sp-col-2-left-sidebar"></span></a></li>
+                        <li><a className="dropdown-item" onClick={() => convertLayoutCallback('8-4-0')}><span className="sp-col-2-right-sidebar"></span></a></li>
+                        <li><a className="dropdown-item" onClick={() => convertLayoutCallback('4-4-4')}><span className="sp-col-3"></span></a></li>
+                        <li><a className="dropdown-item" onClick={() => convertLayoutCallback('3-6-3')}><span className="sp-col-3-sidebars"></span></a></li>
                     </ul>
                 </li>
                 
                 <li><hr className="dropdown-divider" /></li>
 
                 {/* Delete Section */}
-                <li><a className="dropdown-item delete-section" onClick={sectionDelete}><i
+                <li><a className="dropdown-item delete-section" onClick={deleteSectionOnClick}><i
                     className="fas fa-trash"></i> Delete Section</a></li>
             </ul>
         </div>
@@ -47,5 +53,3 @@ function SectionDropdown({ isConvertingLayout, sectionDelete, convertLayout }) {
         return sectionDropdownContent;
     }
 }
-
-export default SectionDropdown;

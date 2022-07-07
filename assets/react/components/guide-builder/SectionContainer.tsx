@@ -1,16 +1,19 @@
 import { useState } from 'react';
+import { DragDropContext, Droppable, DropResult, BeforeCapture } from 'react-beautiful-dnd';
+import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { useReorderSection } from '@hooks/useReorderSection';
 import { useCreateSection } from '@hooks/useCreateSection';
 import { useFetchSections } from '@hooks/useFetchSections';
 import { useReorderPluslet } from '@api/guide/PlusletAPI';
-import Section from './Section';
-import { DragDropContext, Droppable, DropResult, BeforeCapture } from 'react-beautiful-dnd';
-import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { GuideSectionType } from '@shared/types/guide_types';
-import { useGuideTabContainer, GuideTabContainerType } from '@context/GuideTabContainerContext';
+import { SectionContainerProvider } from '@context/SectionContainerContext';
+import { Section } from './Section';
 
-export const SectionContainer = () => {
-    const { currentTab: { id: tabUUID } } = useGuideTabContainer() as GuideTabContainerType;
+type SectionContainerProps = {
+    tabUUID: string
+};
+
+export const SectionContainer = ({ tabUUID }: SectionContainerProps) => {
     const [draggingId, setDraggingId] = useState<string|null>(null);
 
     const {isLoading, isError, data, error} = useFetchSections(tabUUID);
@@ -106,12 +109,12 @@ export const SectionContainer = () => {
         const guideSections = data.map((section: GuideSectionType, index: number) => {
             return (
                 <Section key={section.id} sectionUUID={section.id}
-                    layout={section.layout} sectionIndex={section.sectionIndex} />
+                    layout={section.layout} sectionIndex={section.sectionIndex} tabUUID={tabUUID} />
             );
         });
 
         return (
-            <>
+            <SectionContainerProvider currentDraggingId={draggingId}>
                 <DragDropContext onDragEnd={handleOnDragEnd} onBeforeCapture={handleOnBeforeCapture}>
                     <Droppable type="section" droppableId="guide-section-container" direction="vertical">
                         {(provided, snapshot) => (
@@ -128,7 +131,7 @@ export const SectionContainer = () => {
                         <span className="fs-xs">Add Section</span>
                     </button>
                 </div>
-            </>
+            </SectionContainerProvider>
         );
     } else {
         return (<p>Error: No sections exist for this guide!</p>);

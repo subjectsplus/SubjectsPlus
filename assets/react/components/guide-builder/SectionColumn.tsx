@@ -2,11 +2,21 @@ import { useState } from 'react';
 import Pluslet from './Pluslet';
 import Col from 'react-bootstrap/Col';
 import { Droppable } from 'react-beautiful-dnd';
+import { PlusletType } from '@shared/types/guide_types';
+import { useSectionContainer, SectionContainerType } from '@context/SectionContainerContext';
 
-function SectionColumn({ columnId, sectionId, pluslets, columnSize, currentDraggingId, addPlusletOnClick, 
-    currentEditablePluslet, currentEditablePlusletCallBack }) {
+type SectionColumnProps = {
+    columnId: string,
+    sectionUUID: string,
+    pluslets: PlusletType[]|null,
+    columnSize: number,
+    addPlusletOnClick: React.MouseEventHandler<HTMLButtonElement>
+}
 
-    const [addPlusletHovered, setAddPlusletHovered] = useState(null);
+export const SectionColumn = ({ columnId, sectionUUID, pluslets, columnSize, addPlusletOnClick }: SectionColumnProps) => {
+    const [addPlusletHovered, setAddPlusletHovered] = useState<boolean>(false);
+    const { currentDraggingId } = useSectionContainer() as SectionContainerType;
+
     const plusletIsCurrentlyDragging = (currentDraggingId && currentDraggingId.substring(0, 8) === 'pluslet-');
     
     const getGuideColumnClassName = () => {
@@ -22,12 +32,9 @@ function SectionColumn({ columnId, sectionId, pluslets, columnSize, currentDragg
     const getPlusletComponents = () => {
         if (pluslets && pluslets.length > 0) {
             return pluslets.map((pluslet, row) => (
-                <Pluslet key={pluslet.id} sectionId={sectionId}
-                    plusletId={pluslet.id} plusletRow={row}
-                    plusletTitle={pluslet.title} plusletBody={pluslet.body}
-                    currentDraggingId={currentDraggingId}
-                    currentEditablePluslet={currentEditablePluslet} 
-                    currentEditablePlusletCallBack={currentEditablePlusletCallBack} />
+                <Pluslet key={pluslet.id} plusletUUID={pluslet.id}
+                    plusletRow={row} plusletTitle={pluslet.title} 
+                    plusletBody={pluslet.body} sectionUUID={sectionUUID} />
             ));
         }
     }
@@ -65,5 +72,3 @@ function SectionColumn({ columnId, sectionId, pluslets, columnSize, currentDragg
         </Col>
     );
 }
-
-export default SectionColumn;
