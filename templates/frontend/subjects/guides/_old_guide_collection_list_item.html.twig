@@ -1,0 +1,14 @@
+<li class="mb-3">
+    <a class="btn-link fs-sm guide-list-toggle-plus-icon" data-bs-toggle="collapse" href="#{{ subject.shortform | capitalize }}MoreInfo" role="button" aria-expanded="false" aria-controls="{{ subject.shortform | capitalize }}MoreInfo" title="See all guides in this collection"><i class="fas fa-plus-circle"></i></a>
+
+    {# TODO: Replace subject link with collection page link #}
+    <a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}" class="link-default ms-2">{{ subject.subject | raw }}</a>
+
+    <div class="collapse multi-collapse-collections mt-3 mb-4 fs-sm" id="{{ subject.shortform | capitalize }}MoreInfo">
+        <ul class="ms-3">
+            {# TODO: Add subject link for items under collection  #}
+            <li class="mb-2"><a href="#" class="link-default">guide 1</a></li>
+            <li class="mb-2"><a href="#" class="link-default">guide 2</a></li>
+        </ul>
+    </div>
+</li>

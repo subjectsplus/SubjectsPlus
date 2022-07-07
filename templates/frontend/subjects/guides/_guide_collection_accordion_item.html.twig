@@ -1,0 +1,18 @@
+<div class="accordion-item">
+    <div class="accordion-header" id="flush-headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ subject.shortform | capitalize }}ShowList" aria-expanded="false" aria-controls="{{ subject.shortform | capitalize }}ShowList">
+        </button>
+
+        {# TODO: Replace subject link with collection page link #}
+        <a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}" class="link-default ms-2">{{ subject.subject | raw }}</a>
+    </div>
+    <div id="{{ subject.shortform | capitalize }}ShowList" class="accordion-collapse collapse multi-collapse-collections" aria-labelledby="{{ subject.shortform | capitalize }}ShowList">
+        <div class="accordion-body">
+            <ul class="ms-3">
+                {# TODO: Add subject link for items under collection  #}
+                <li class="mb-2"><a href="#" class="link-default">guide 1</a></li>
+                <li class="mb-2"><a href="#" class="link-default">guide 2</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
