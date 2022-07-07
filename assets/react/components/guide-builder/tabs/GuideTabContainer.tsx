@@ -9,24 +9,20 @@ import { hideAllOffcanvas } from '@utility/Utility';
 import { useFetchTabs } from '@hooks/useFetchTabs';
 import { useCreateTab } from '@hooks/useCreateTab';
 import { useReorderTab } from '@hooks/useReorderTab';
-import { GuideTabContainerProvider } from '@context/GuideTabContainerContext';
+import { useGuideTabContainer, GuideTabContainerType } from '@context/GuideTabContainerContext';
 import { GuideTab } from './GuideTab';
 import { GuideTabContent } from './GuideTabContent';
 import { GuideTabType } from '@shared/types/guide_types';
 import { CreateTabModal } from './CreateTabModal';
 import { GuideTabFormInputs } from '@shared/types/guide_form_types';
 
-type GuideTabContainerProps = {
-    subjectId: number
-}
-
-export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
+export const GuideTabContainer = () => {
     const [lastTabIndex, setLastTabIndex] = useState<number>(0);
-    const [activeKey, setActiveKey] = useState<number>(0);
     const [draggingTab, setDraggingTab] = useState<boolean>(false);
     const [showNewTabForm, setShowNewTabForm] = useState<boolean>(false);
     const [isCreatingNewTab, setIsCreatingNewTab] = useState<boolean>(false);
 
+    const { subjectId, setCurrentTab, activeKey, setActiveKey } = useGuideTabContainer() as GuideTabContainerType;
     const {isLoading, isError, data, error} = useFetchTabs(subjectId, !draggingTab);
     
     const reorderTabMutation = useReorderTab(subjectId);
@@ -47,6 +43,8 @@ export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
             if (lastTab) {
                 setLastTabIndex(lastTab['tabIndex']);
             }
+
+            setCurrentTab(data[activeKey]);
         }
     }, [data]);
 
@@ -133,8 +131,6 @@ export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
         console.error(error);
         return (<p>Error: Failed to load tabs through API Endpoint!</p>);
     } else if (data) {
-        const currentTab = data[activeKey] as GuideTabType;
-        
         // convert tabs data to draggable nav links
         const guideTabs = data.map((tab: GuideTabType) => (
             <GuideTab key={'tab-' + tab.tabIndex} tab={tab} />
@@ -148,7 +144,7 @@ export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
         });
 
         return (
-            <GuideTabContainerProvider subjectId={subjectId} currentTab={currentTab} activeKey={activeKey} setActiveKey={setActiveKey}>
+            <>
                 {/* Guide Tab Container consisting of individual tab elements */}
                 <DragDropContext onDragStart={handleOnDragStart} onDragEnd={handleOnDragEnd}>
                     <Droppable type="tab" droppableId="guide-tabs-container" direction="horizontal">
@@ -176,7 +172,7 @@ export const GuideTabContainer = ({ subjectId }: GuideTabContainerProps) => {
                 {/* Create New Tab Modal */}
                 <CreateTabModal currentTab={initialTabData} show={showNewTabForm} onHide={() => setShowNewTabForm(false)}
                     onSubmit={handleNewTab} savingChanges={isCreatingNewTab} />
-            </GuideTabContainerProvider>
+            </>
         );
     } else {
         return (<p>Error: No tabs exist for this guide!</p>);
