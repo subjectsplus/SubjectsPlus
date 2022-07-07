@@ -1,4 +1,44 @@
 // Guides Listing
-#accordionGuideCollections {
+.sp-guide-list-toggle-plus-icon{
+  &:not(.collapsed){
+    .fa-plus-circle {
+      &:before {
+        content:"\f056";
+      }
+    }
+  }
+}
 
+.sp-guide-list-icon {
+  i {
+    color: var(--THEME-UI-ACTIVE-COLOR);
+  }
+}
+
+.sp-guide-tabs {
+  &.nav-pills {
+
+    .nav-item {
+      margin-right: 0.5rem;
+      font-size: $font-size-sm;
+    }
+
+    .nav-link {
+      background-color: var(--THEME-UI-BASE-COLOR);
+      color: var(--THEME-UI-BASE-TEXT-COLOR);
+      font-weight: $font-weight-semi;
+
+      &:focus,
+      &:hover {
+        color: var(--THEME-UI-ACTIVE-COLOR);
+      }
+
+      &.active {
+        color: var(--THEME-UI-ACTIVE-TEXT-COLOR);
+        background-color: var(--THEME-UI-ACTIVE-COLOR);
+      }
+
+
+    }
+  }
 }

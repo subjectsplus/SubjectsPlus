@@ -90,3 +90,21 @@ h3, .h3 {
     column-count: 2;
   }
 }
+
+.feature-neutral {
+  background-color: var(--THEME-UI-NEUTRAL-COLOR) ;
+  color: var(--THEME-UI-BASE-TEXT-COLOR);
+
+  a {
+
+  }
+}
+
+.feature-primary {
+  background-color: var(--THEME-UI-ACTIVE-COLOR);
+  color: var(--THEME-UI-ACTIVE-TEXT-COLOR);
+
+  a {
+
+  }
+}

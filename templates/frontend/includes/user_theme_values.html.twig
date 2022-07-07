@@ -74,10 +74,20 @@
         --user-theme_footer_link_hover_color: {{ getconfig('theme_footer_link_hover_color') }};
     {% endif %}
 
-    {# guides #}
-
-
-
-
-}
+    {# UI  #}
+    {% if getconfig('theme_ui_base_color') %}
+        --user-theme-ui-base-color: {{ getconfig('theme_ui_base_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_base_text_color') %}
+        --user-theme-ui-base-text-color: {{ getconfig('theme_ui_base_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_active_color') %}
+        --user-theme-ui-active-color: {{ getconfig('theme_ui_active_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_active_text_color') %}
+        --user-theme-ui-active-text-color: {{ getconfig('theme_ui_active_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_active_hover_color') %}
+        --user-theme-ui-active-hover-color: {{ getconfig('theme_ui_active_hover_color') }};
+    {% endif %}}
 </style>

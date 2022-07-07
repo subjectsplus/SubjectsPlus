@@ -4,19 +4,19 @@
 {% set guide_collections_first_half = subjects|slice(0, subjects|length / 2) %}
 {% set guide_collections_second_half = subjects|slice(subjects|length / 2) %}
 
-<div class="accordion accordion-flush" id="accordionGuideCollections">
-    <div class="row mt-3">
-        <div class="col-sm-6">
+<div class="row mt-3">
+    <div class="col-sm-6">
+        <ul class="list-unstyled">
             {% for subject in guide_collections_first_half %}
-                {% include('frontend/subjects/guides/_guide_collection_accordion_item.html.twig') %}
+                {% include('frontend/subjects/guides/_guide_collection_list_item.html.twig') %}
             {% endfor %}
-        </div>
-        <div class="col-sm-6">
-            <ul class="list-unstyled">
-                {% for subject in guide_collections_second_half %}
-                    {% include('frontend/subjects/guides/_guide_collection_accordion_item.html.twig') %}
-                {% endfor %}
-            </ul>
-        </div>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        <ul class="list-unstyled">
+            {% for subject in guide_collections_second_half %}
+                {% include('frontend/subjects/guides/_guide_collection_list_item.html.twig') %}
+            {% endfor %}
+        </ul>
     </div>
 </div>

@@ -5,18 +5,18 @@
 {# TODO: Loop through guide types as set in the config to create the tabs and related elements in the markup #}
 
 {# Tab pills  #}
-<ul class="nav nav-pills" id="ResearchGuidesTabs" role="tablist">
+<ul class="nav nav-pills sp-guide-tabs" id="ResearchGuidesTabs" role="tablist">
     <li class="nav-item" role="presentation">
-        <a class="nav-link" id="guide-collections-tab" data-bs-toggle="tab" data-bs-target="#guide-collections" type="button" role="tab" aria-controls="guide-collections" aria-selected="true">Guide Collections</a>
+        <a class="nav-link active" id="guide-collections-tab" data-bs-toggle="tab" data-bs-target="#guide-collections" type="button" role="tab" aria-controls="guide-collections" aria-selected="true">{{ 'public.guides.guide_collections.label' | trans }}</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="subject-guides-tab" data-bs-toggle="tab" data-bs-target="#subject-guides" type="button" role="tab" aria-controls="subject-guides" aria-selected="false">Subject Guides</a>
+        <a class="nav-link" id="subject-guides-tab" data-bs-toggle="tab" data-bs-target="#subject-guides" type="button" role="tab" aria-controls="subject-guides" aria-selected="false">{{ 'public.guides.subject_guides.label' | trans }}</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link" id="course-guides-tab" data-bs-toggle="tab" data-bs-target="#course-guides" type="button" role="tab" aria-controls="course-guides" aria-selected="false">Course Guides</a>
+        <a class="nav-link" id="course-guides-tab" data-bs-toggle="tab" data-bs-target="#course-guides" type="button" role="tab" aria-controls="course-guides" aria-selected="false">{{ 'public.guides.course_guides.label' | trans }}</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link" id="topic-guides-tab" data-bs-toggle="tab" data-bs-target="#topic-guides" type="button" role="tab" aria-controls="topic-guides" aria-selected="false">Topic Guides</a>
+        <a class="nav-link" id="topic-guides-tab" data-bs-toggle="tab" data-bs-target="#topic-guides" type="button" role="tab" aria-controls="topic-guides" aria-selected="false">{{ 'public.guides.topic_guides.label' | trans }}</a>
     </li>
 </ul>
 
@@ -24,15 +24,15 @@
 <div class="tab-content mt-4" id="ResearchGuidesTabContent">
     {# Guide Collections  #}
     <div class="tab-pane fade show active" id="guide-collections" role="tabpanel" aria-labelledby="guide-collections-tab">
-        <h3 class="d-inline-block">Guide Collections</h3>
-        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-collections" aria-expanded="false" aria-controls="Multi Collapse Guide Collections">(Expand/hide all)</a>
+        <h3 class="d-inline-block">{{ 'public.guides.guide_collections.label' | trans }}</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-collections" aria-expanded="true" aria-controls="Multi Collapse Guide Collections">({{ 'public.guides.expand_hide.label' | trans }})</a>
         {% include('frontend/subjects/guides/_guide_collections_list.html.twig') %}
     </div>
 
     {# Subject Guides  #}
     <div class="tab-pane fade" id="subject-guides" role="tabpanel" aria-labelledby="subject-guides-tab">
-        <h3 class="d-inline-block">Subject</h3>
-        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-subject" aria-expanded="false" aria-controls="Multi Collapse Subject Guides">(Expand/hide all)</a>
+        <h3 class="d-inline-block">{{ 'public.guides.subject.label' | trans }}</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-subject" aria-expanded="false" aria-controls="Multi Collapse Subject Guides">({{ 'public.guides.expand_hide.label' | trans }})</a>
         <div class="row mt-3">
             <div class="col-sm-6">
                 <ul class="list-unstyled">
@@ -57,8 +57,8 @@
 
     {# Course Guides  #}
     <div class="tab-pane fade" id="course-guides" role="tabpanel" aria-labelledby="course-guides-tab">
-        <h3 class="d-inline-block">Course</h3>
-        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-course" aria-expanded="false" aria-controls="Multi Collapse Course Guides">(Expand/hide all)</a>
+        <h3 class="d-inline-block">{{ 'public.guides.course.label' | trans }}</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-course" aria-expanded="false" aria-controls="Multi Collapse Course Guides">({{ 'public.guides.expand_hide.label' | trans }})</a>
         <div class="row mt-3">
             <div class="col-sm-6">
                 <ul class="list-unstyled">
@@ -83,8 +83,8 @@
 
     {# Topic Guides  #}
     <div class="tab-pane fade" id="topic-guides" role="tabpanel" aria-labelledby="topic-guides-tab">
-        <h3 class="d-inline-block">Topic</h3>
-        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-topic" aria-expanded="false" aria-controls="Multi Collapse Topic Guides">(Expand/hide all)</a>
+        <h3 class="d-inline-block">{{ 'public.guides.topic.label' | trans }}</h3>
+        <a class="link-default d-inline-block fs-sm ms-3" data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse-topic" aria-expanded="false" aria-controls="Multi Collapse Topic Guides">({{ 'public.guides.expand_hide.label' | trans }})</a>
         <div class="row mt-3">
             <div class="col-sm-6">
                 <ul class="list-unstyled">

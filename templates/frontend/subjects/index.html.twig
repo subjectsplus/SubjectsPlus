@@ -20,11 +20,20 @@
 
         <div class="col-lg-4">
         {% if getconfig('display_experts') == 'true' %}
-            <p>show experts</p>
+            {% include('frontend/subjects/guides/_show_experts.html.twig') %}
         {% endif %}
 
         {% if getconfig('display_new_databases') == 'true' or getconfig('display_new_guides') == 'true' %}
-            <p>show new databases and/or new guides </p>
+            {# TODO: Assign different feature class based on theme #}
+            <div class="feature-neutral p-3 mt-5">
+                {% if getconfig('display_new_databases') == 'true' %}
+                    {% include('frontend/subjects/guides/_show_new_databases.html.twig') %}
+                {% endif %}
+
+                {% if getconfig('display_new_guides') == 'true' %}
+                    {% include('frontend/subjects/guides/_show_new_guides.html.twig') %}
+                {% endif %}
+            </div>
         {% endif %}
         </div>
     </div>

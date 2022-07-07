@@ -8,7 +8,7 @@
 
 <li class="mb-3">
     {% if subject.keywords or subject.description %}
-        <a class="btn-link fs-sm" data-bs-toggle="collapse" href="#{{ subject.shortform | capitalize }}MoreInfo" role="button" aria-expanded="false" aria-controls="{{ subject.shortform | capitalize }}MoreInfo" title="See guide description/keywords"><i class="fas fa-info-circle"></i></a>
+        <a class="btn-link fs-sm sp-guide-list-icon" data-bs-toggle="collapse" href="#{{ subject.shortform | capitalize }}MoreInfo" role="button" aria-expanded="false" aria-controls="{{ subject.shortform | capitalize }}MoreInfo" title="{{ 'public.guides.icon_help_text' | trans }}"><i class="fas fa-info-circle"></i></a>
 
         <a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}" class="link-default ms-2">{{ subject.subject | raw }}</a>
 
@@ -18,7 +18,7 @@
             {% endif %}
 
             {% if subject.keywords %}
-                <p style="margin-left:1.625rem;"><strong>Keywords:</strong> {{ subject.keywords }}</p>
+                <p style="margin-left:1.625rem;"><strong>{{ 'public.guides.keywords.label' | trans }}:</strong> {{ subject.keywords }}</p>
             {% endif %}
         </div>
 
