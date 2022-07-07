@@ -1,29 +1,33 @@
 import { useState } from 'react';
-import { useFetchSections, useCreateSection, useReorderSection } from '#api/guide/SectionAPI';
-import { useReorderPluslet } from '#api/guide/PlusletAPI';
+import { useReorderSection } from '@hooks/useReorderSection';
+import { useCreateSection } from '@hooks/useCreateSection';
+import { useFetchSections } from '@hooks/useFetchSections';
+import { useReorderPluslet } from '@api/guide/PlusletAPI';
 import Section from './Section';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult, BeforeCapture } from 'react-beautiful-dnd';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
+import { GuideSectionType } from '@shared/types/guide_types';
+import { useGuideTabContainer, GuideTabContainerType } from '@context/GuideTabContainerContext';
 
-function SectionContainer({ tabId }) {
-    const [currentEditablePluslet, setCurrentEditablePluslet] = useState('');
-    const [draggingId, setDraggingId] = useState(null);
+export const SectionContainer = () => {
+    const { currentTab: { id: tabUUID } } = useGuideTabContainer() as GuideTabContainerType;
+    const [draggingId, setDraggingId] = useState<string|null>(null);
 
-    const {isLoading, isError, data, error} = useFetchSections(tabId);
+    const {isLoading, isError, data, error} = useFetchSections(tabUUID);
 
-    const createSectionMutation = useCreateSection(tabId);
-    const reorderSectionMutation = useReorderSection(tabId);
+    const createSectionMutation = useCreateSection(tabUUID);
+    const reorderSectionMutation = useReorderSection(tabUUID);
     const reorderPlusletMutation = useReorderPluslet();
     
-    const reorderSection = (sourceIndex, destinationIndex) => {
+    const reorderSection = (sourceIndex: number, destinationIndex: number) => {
         reorderSectionMutation.mutate({
-            tabId: tabId,
+            tabUUID: tabUUID,
             sourceSectionIndex: sourceIndex,
             destinationSectionIndex: destinationIndex
         })
     }
 
-    const handleOnDragEnd = (result) => {
+    const handleOnDragEnd = (result: DropResult) => {
         // reset dragging id
         setDraggingId(null);
 
@@ -76,7 +80,7 @@ function SectionContainer({ tabId }) {
         }
     }
 
-    const handleOnBeforeCapture = (beforeCapture) => {
+    const handleOnBeforeCapture = (beforeCapture: BeforeCapture) => {
         setDraggingId(beforeCapture.draggableId);
     }
 
@@ -86,54 +90,47 @@ function SectionContainer({ tabId }) {
                 id: uuidv4(),
                 sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
                 layout: '4-4-4',
-                tab: '/api/tabs/' + tabId
+                tab: '/api/tabs/' + tabUUID
             };
 
             createSectionMutation.mutate(initialSectionData);
         }
     }
 
-    const containerContent = () => {
-        if (isLoading) {
-            return (<p>Loading Sections...</p>);
-        } else if (isError) {
-            console.error(error);
-            return (<p>Error: Failed to load sections through API Endpoint!</p>);
-        } else {
-            const guideSections = data.map((section, index) => {
-                return (
-                    <Section key={section.id} sectionId={section.id} 
-                        layout={section.layout} sectionIndex={section.sectionIndex} tabId={tabId} 
-                        currentEditablePluslet={currentEditablePluslet}
-                        currentDraggingId={draggingId}
-                        currentEditablePlusletCallBack={setCurrentEditablePluslet} />
-                );
-            });
-
+    if (isLoading) {
+        return (<p>Loading Sections...</p>);
+    } else if (isError) {
+        console.error(error);
+        return (<p>Error: Failed to load sections through API Endpoint!</p>);
+    } else if (data) {
+        const guideSections = data.map((section: GuideSectionType, index: number) => {
             return (
-                <>
-                    <DragDropContext onDragEnd={handleOnDragEnd} onBeforeCapture={handleOnBeforeCapture}>
-                        <Droppable type="section" droppableId="guide-section-container" direction="vertical">
-                            {(provided, snapshot) => (
-                                <div className="section-container" {...provided.droppableProps} ref={provided.innerRef}>
-                                    {guideSections}
-                                    {provided.placeholder}
-                                </div> 
-                            )}
-                        </Droppable>
-                    </DragDropContext>
-                    <div className="text-center mt-1 add-section-container">
-                        <button id="add-section" className="btn btn-muted p-1" onClick={addSection}>
-                            <span className="section-icon d-block"></span>
-                            <span className="fs-xs">Add Section</span>
-                        </button>
-                    </div>
-                </>
+                <Section key={section.id} sectionUUID={section.id}
+                    layout={section.layout} sectionIndex={section.sectionIndex} />
             );
-        }
-    };
+        });
 
-    return containerContent();
+        return (
+            <>
+                <DragDropContext onDragEnd={handleOnDragEnd} onBeforeCapture={handleOnBeforeCapture}>
+                    <Droppable type="section" droppableId="guide-section-container" direction="vertical">
+                        {(provided, snapshot) => (
+                            <div className="section-container" {...provided.droppableProps} ref={provided.innerRef}>
+                                {guideSections}
+                                {provided.placeholder}
+                            </div> 
+                        )}
+                    </Droppable>
+                </DragDropContext>
+                <div className="text-center mt-1 add-section-container">
+                    <button id="add-section" className="btn btn-muted p-1" onClick={addSection}>
+                        <span className="section-icon d-block"></span>
+                        <span className="fs-xs">Add Section</span>
+                    </button>
+                </div>
+            </>
+        );
+    } else {
+        return (<p>Error: No sections exist for this guide!</p>);
+    }
 }
-
-export default SectionContainer;
