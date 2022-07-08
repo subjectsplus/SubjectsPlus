@@ -1,37 +1,22 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import produce from 'immer';
+import { PlusletType } from '@shared/types/guide_types';
 
-export function useFetchPluslets(sectionId) {
-    if (sectionId === undefined) throw new Error('"sectionId" argument is required to call useFetchPluslets.');
-
-    return useQuery(['pluslets', sectionId],
-        () => fetchPluslets(sectionId, { pagination: false }), {
-        select: data => data['hydra:member'],
-        staleTime: 5000
-    });
-}
-
-export function useFetchPluslet(plusletId) {
-    if (plusletId === undefined) throw new Error('"plusletId" argument is required to call useFetchPluslet.');
-
-    return useQuery(['pluslet', plusletId], () => fetchPluslet(plusletId));
-}
-
-export function useCreatePluslet(sectionId) {
-    if (sectionId === undefined) throw new Error('"sectionId" field is required to call useCreatePluslet.');
-
+export function useCreatePluslet(sectionUUID: string) {
     const queryClient = useQueryClient();
     return useMutation(createPluslet, {
         onMutate: async newPluslet => {
-            await queryClient.cancelQueries(['pluslets', sectionId]);
-            const previousPlusletsData = queryClient.getQueryData(['pluslets', sectionId]);
+            await queryClient.cancelQueries(['pluslets', sectionUUID]);
+            const previousPlusletsData = queryClient.getQueryData<Record<string, any>>(['pluslets', sectionUUID]);
             
-            const optimisticResult = produce(previousPlusletsData, draftData => {
-                draftData['hydra:member'].push(newPluslet);
-            });
+            if (previousPlusletsData) {
+                const optimisticResult = produce<Record<string, any>>(previousPlusletsData, draftData => {
+                    draftData['hydra:member'].push(newPluslet);
+                });
+    
+                queryClient.setQueryData(['pluslets', sectionUUID], optimisticResult);
+            }
 
-            queryClient.setQueryData(['pluslets', sectionId], optimisticResult);
-            
             return { previousPlusletsData };
         },
         onError: (error, newPluslet, context) => {
@@ -309,8 +294,8 @@ export function useReorderPluslet() {
     });
 }
 
-export async function fetchPluslets(sectionId, filters = null) {
-    const data = await fetch(`/api/sections/${sectionId}/pluslets`
+export const fetchPluslets = async (sectionUUID: string, filters: Record<string, any>|null = null) => {
+    const data = await fetch(`/api/sections/${sectionUUID}/pluslets`
         + (filters ? '?' + new URLSearchParams(filters) : ''));
 
     if (!data.ok) {
@@ -320,8 +305,8 @@ export async function fetchPluslets(sectionId, filters = null) {
     return data.json();
 }
 
-async function fetchPluslet(plusletId) {
-    const data = await fetch(`/api/pluslets/${plusletId}`);
+export const fetchPluslet = async (plusletUUID: string) => {
+    const data = await fetch(`/api/pluslets/${plusletUUID}`);
 
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
@@ -330,7 +315,7 @@ async function fetchPluslet(plusletId) {
     return data.json();
 }
 
-async function createPluslet(initialPlusletData) {
+export const createPluslet = async (initialPlusletData: Record<string, any>): Promise<PlusletType> => {
     const plusletReq = await fetch('/api/pluslets', {
         method: 'POST',
         headers: {
