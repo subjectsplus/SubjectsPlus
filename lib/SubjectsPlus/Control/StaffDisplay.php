@@ -136,9 +136,13 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                 }
 
                 $items .= "</h4>
-                <p><em>$title</em></p>    			
-                <p>$tel_prefix $tel </p>
-                <p><a href=\"mailto:$email\">$email</a></p>
+                <p><em>$title</em></p>";
+                
+                if ($tel !== null && trim($tel) !== '') {
+                  $items .= "<p>$tel_prefix $tel </p>";
+                }
+                
+                $items .= "<p><a href=\"mailto:$email\">$email</a></p>
                 <p class=\"staff-subjects\">$assoc_subjects</p></div></li>";
 
                 $current_dept = $dept_id;
@@ -273,9 +277,13 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           }
 
           $items .= "</span></td>
-            <td class=\"$row_colour\">$title $assoc_subjects</td>
-            <td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
-            <td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
+            <td class=\"$row_colour\">$title $assoc_subjects</td>";
+
+          if ($tel !== null && trim($tel) !== '') {
+            $items .= "<td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>";
+          }
+
+          $items .= "<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
         }
@@ -337,7 +345,11 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           }
 
           if ($current_dept != $dept_id) {
-            $items .= "<tr><td class=\"dept_label\" colspan=\"5\"><a name=\"$dept_id\"></a><h2 class=\"dept_header\">$dept_name&nbsp; &nbsp;" . $tel_prefix . " " . $dept_tel . "</h2></td></tr>";
+            $items .= "<tr><td class=\"dept_label\" colspan=\"5\"><a name=\"$dept_id\"></a><h2 class=\"dept_header\">$dept_name&nbsp; &nbsp;";
+            if ($dept_tel !== null && trim($dept_tel) !== '') {
+              $items .=  $tel_prefix . " " . $dept_tel;
+            } 
+            $items .= "</h2></td></tr>";
           }
 
           $items .= "<tr class=\"$row_colour\">
@@ -356,9 +368,15 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           }
 
           $items .= "</span></td>
-                <td class=\"$row_colour\">$title $assoc_subjects</td>
-                <td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>
-                <td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
+                <td class=\"$row_colour\">$title $assoc_subjects</td>";
+          
+          if ($tel !== null && trim($tel) !== '') {
+            $items .= "<td class=\"$row_colour staff-tel-row\">$tel_prefix $tel </td>";
+          } else {
+            $items .= "<td class=\"$row_colour staff-tel-row\"></td>";
+          }
+                
+          $items .= "<td class=\"$row_colour\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
           $current_dept = $dept_id;
@@ -513,9 +531,13 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           }
 
           $items .= "<a href=\"$linky\">$full_name</a></td>";
+
           $items .= "<td class=\"staff-tel-row\">";
-          $items .= $tel;
+          if ($myrow["tel"] !== null && trim($myrow["tel"]) !== '') {
+            $items .= $tel;
+          }
           $items .= "</td>";
+
           $items .= "<td>";
           $items .= "<a href=\"mailto:$email\">$email</a>";
           $items .= "</td>
@@ -597,10 +619,15 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
           }
 
           $items .= "</td>
-            <td class=\"staff-title-row\">$title $assoc_subjects</td>
-            <td  class=\"staff-tel-row\">$tel &nbsp;</td>
-            <td  class=\"staff-email-row\"><a href=\"mailto:$email\">$email</a></td>
-        </tr>";
+            <td class=\"staff-title-row\">$title $assoc_subjects</td>";
+          
+          $items .= "<td class=\"staff-tel-row\">";
+          if ($myrow["tel"] !== null && trim($myrow["tel"]) !== '') {
+            $items .= "$tel &nbsp;";
+          }
+          $items .= "</td>";
+            
+          $items .= "<td class=\"staff-email-row\"><a href=\"mailto:$email\">$email</a></td></tr>";
 
           $row_count++;
         }

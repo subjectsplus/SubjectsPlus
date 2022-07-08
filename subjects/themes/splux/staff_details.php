@@ -63,9 +63,13 @@ title=\"Picture: {$staffmem[0][2]} {$staffmem[0][1]}\" />
     <div class=\"staff-meta\">
         <h2>$fullname</h2>
         <p><em>{$staffmem[0][3]}</em></p>
-        <p><a href=\"mailto:{$staffmem[0][5]}\">{$staffmem[0][5]}</a></p>
-        <p>$tel</p>
-    </div>";
+        <p><a href=\"mailto:{$staffmem[0][5]}\">{$staffmem[0][5]}</a></p>";
+
+if ($staffmem[0][4] !== null && trim($staffmem[0][4]) !== '') {
+    $info .= "<p>$tel</p>";
+}
+
+$info .= "</div>";
 
 if ($staffmem[0][7] != "") {
     $info .= "<div class=\"staff-bio\">" . $staffmem[0][7] . "</div>";

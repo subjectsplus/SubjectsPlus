@@ -1002,7 +1002,13 @@ function showStaff( $email, $picture = 1, $pic_size = "medium", $link_name = 0 )
 		$staffer = "<div class=\"staffpic\">";
 		$staffer .= $img_link;
 		$staffer .= getHeadshot( $email, $pic_size );
-		$staffer .= "</a></div><div class=\"staff-meta\"><h4>$full_name</h4><p><em>$myrow[2]</em></p><p>$tel_prefix $myrow[3]</p><p><a href=\"mailto:$myrow[4]\">$myrow[4]</a></p></div></td>";
+		$staffer .= "</a></div><div class=\"staff-meta\"><h4>$full_name</h4><p><em>$myrow[2]</em></p>";
+		
+		if ($myrow[3] !== null && trim($myrow[3]) !== '') {
+			$staffer .= "<p>$tel_prefix $myrow[3]</p>";
+		}
+		
+		$staffer .= "<p><a href=\"mailto:$myrow[4]\">$myrow[4]</a></p></div></td>";
 	}
 
 	return $staffer;
