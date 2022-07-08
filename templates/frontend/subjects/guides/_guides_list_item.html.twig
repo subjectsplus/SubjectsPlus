@@ -1,0 +1,29 @@
+{% if subject.type == "Subject" %}
+    {% set multiCollapseClass = "multi-collapse-subject" %}
+{% elseif subject.type == "Course" %}
+    {% set multiCollapseClass = "multi-collapse-course" %}
+{% elseif subject.type == "Topic" %}
+    {% set multiCollapseClass = "multi-collapse-topic" %}
+{% endif %}
+
+<li class="mb-3">
+    {% if subject.keywords or subject.description %}
+        <a class="btn-link fs-sm sp-guide-list-icon" data-bs-toggle="collapse" href="#{{ subject.shortform | capitalize }}MoreInfo" role="button" aria-expanded="false" aria-controls="{{ subject.shortform | capitalize }}MoreInfo" title="{{ 'public.guides.icon_help_text' | trans }}"><i class="fas fa-info-circle"></i></a>
+
+        <a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}" class="link-default ms-2">{{ subject.subject | raw }}</a>
+
+        <div class="collapse {{ multiCollapseClass }} mt-2 mb-4 fs-sm" id="{{ subject.shortform | capitalize }}MoreInfo">
+            {% if subject.description %}
+                <p style="margin-left:1.625rem;">{{ subject.description }}</p>
+            {% endif %}
+
+            {% if subject.keywords %}
+                <p style="margin-left:1.625rem;"><strong>{{ 'public.guides.keywords.label' | trans }}:</strong> {{ subject.keywords }}</p>
+            {% endif %}
+        </div>
+
+    {%  else %}
+        <a class="btn-link fs-sm disabled" aria-disabled="true"><i class="fas fa-info-circle"></i></a>
+        <a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}" class="link-default ms-2">{{ subject.subject | raw }}</a>
+    {% endif %}
+</li>

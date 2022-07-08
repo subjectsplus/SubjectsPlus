@@ -1,7 +1,7 @@
 {% extends 'frontend/base.html.twig' %}
 
 {% block metatitle %}
-    {{ subject.subject }}
+    {{ subject.subject | raw }}
 {% endblock %}
 
 {% block header_actions %}
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block header_title %}
-    {{ subject.subject }}
+    {{ subject.subject | raw }}
     <span class="visually-hidden">{{ 'subjectId: ' ~ subject.subjectId }}</span>
 {% endblock %}
 
