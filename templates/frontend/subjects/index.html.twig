@@ -13,9 +13,28 @@
 {% endblock %}
 
 {% block main %}
-    <ul class="list-unstyled">
-    {% for subject in subjects %}
-    <li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{ subject.subject | raw }}</a></li>
-    {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col-lg-8">
+            {% include('frontend/subjects/guides/_guides_listing_tabs.html.twig') %}
+        </div>
+
+        <div class="col-lg-4">
+        {% if getconfig('display_experts') == 'true' %}
+            {% include('frontend/subjects/guides/_show_experts.html.twig') %}
+        {% endif %}
+
+        {% if getconfig('display_new_databases') == 'true' or getconfig('display_new_guides') == 'true' %}
+            {# TODO: Assign different feature class based on theme #}
+            <div class="feature-neutral p-3 mt-5">
+                {% if getconfig('display_new_databases') == 'true' %}
+                    {% include('frontend/subjects/guides/_show_new_databases.html.twig') %}
+                {% endif %}
+
+                {% if getconfig('display_new_guides') == 'true' %}
+                    {% include('frontend/subjects/guides/_show_new_guides.html.twig') %}
+                {% endif %}
+            </div>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}

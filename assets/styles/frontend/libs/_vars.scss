@@ -14,28 +14,32 @@
   --THEME-MENU-BG-COLOR: var(--user-theme-menu-bg-color, #00243c);
   --THEME-MENU-TEXT-COLOR: var(--user-theme-menu-text-color, #FFFFFF);
   --THEME-MENU-LINK-COLOR: var(--user-theme-menu-link-color, #FFFFFF);
-  --THEME-MENU-LINK-HOVER-COLOR:var(--user-theme-menu-link-hover-color, #09adc7);
+  --THEME-MENU-LINK-HOVER-COLOR:var(--user-theme-menu-link-hover-color, #089DB4);
 
   --THEME-HEADER-BG-COLOR: var(--user-theme-header-bg-color, #FFFFFF);
   --THEME-HEADER-TEXT-COLOR: var(--user-theme_header_text_color, #333333);
   --THEME-HEADER-LINK-COLOR: var(--user-theme_header_link_color, #005A8F);
   --THEME-HEADER-LINK-HOVER-COLOR: var(--user-theme_header_link_hover_color, #0078BD);
 
+  --THEME-FOOTER-BG-COLOR: var(--user-theme-footer-bg-color, #00243c);
+  --THEME-FOOTER-TEXT-COLOR: var(--user-theme_footer_text_color, #FFFFFF);
+  --THEME-FOOTER-LINK-COLOR: var(--user-theme_footer_link_color, #FFFFFF);
+  --THEME-FOOTER-LINK-HOVER-COLOR: var(--user-theme_footer_link_hover_color, #089DB4);
 
+  --THEME-UI-BASE-COLOR: var(--user-theme-ui-base-color, #e9ecef);
+  --THEME-UI-BASE-TEXT-COLOR: var(--user-theme-ui-base-text-color, #333333);
+  --THEME-UI-ACTIVE-COLOR: var(--user-theme-ui-active-color, #089DB4);
+  --THEME-UI-ACTIVE-TEXT-COLOR: var(--user-theme-ui-active-text-color, #FFFFFF);
+  --THEME-UI-ACTIVE-HOVER-COLOR: var(--user-theme-ui-active-hover-color, #0A8194);
+
+  --THEME-UI-BORDER-COLOR: #e9ecef;
+  --THEME-UI-NEUTRAL-COLOR: #f8f9fa;
 
   // --THEME-GUIDES-LINK-COLOR
   // --THEME-GUIDES-LINK-HOVER-COLOR
 
-
-
   // --THEME-PRIMARY-COLOR
   // --THEME-SECONDARY-COLOR
-
-  // --THEME-UI-BASE-COLOR
-  // --THEME-UI-ACTIVE-COLOR
-  --THEME-UI-NEUTRAL-COLOR: #ced4da;
-  // --THEME-UI-BORDER-COLOR
-
 
 }
 
@@ -111,6 +115,16 @@ $border-radius-circle:        50%;
 $offcanvas-border-color:      var(--THEME-UI-NEUTRAL-COLOR);
 $offcanvas-bg-color:          var(--THEME-MENU-BG-COLOR);
 $offcanvas-color:             var(--THEME-MENU-LINK-COLOR);
+
+// Tabs
+$nav-tabs-border-color:             var(--THEME-UI-BORDER-COLOR);
+$nav-tabs-link-hover-border-color:  var(--THEME-UI-BORDER-COLOR) var(--THEME-UI-BORDER-COLOR) var(--THEME-UI-BORDER-COLOR);
+$nav-tabs-link-active-color:        var(--THEME-UI-ACTIVE-TEXT-COLOR);
+$nav-tabs-link-active-bg:           var(--THEME-UI-ACTIVE-COLOR);
+$nav-tabs-link-active-border-color: var(--THEME-UI-BORDER-COLOR) var(--THEME-UI-BORDER-COLOR) $nav-tabs-link-active-bg;
+
+$nav-pills-link-active-color:       var(--THEME-UI-ACTIVE-TEXT-COLOR);
+$nav-pills-link-active-bg:          var(--THEME-UI-ACTIVE-COLOR);
 
 // Bootstrap Default Variables
 @import "~bootstrap/scss/functions";

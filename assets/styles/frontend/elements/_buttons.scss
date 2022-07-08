@@ -16,3 +16,32 @@
     box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.15);
   }
 }
+
+.btn-link{
+  color: var(--THEME-LINK-COLOR);
+
+  &:hover,
+  &:focus,
+  &:active {
+    @include transition-all();
+    color: var(--THEME-LINK-HOVER-COLOR);
+  }
+
+  &:disabled,
+  &.disabled {
+    color: rgba(0,0,0, 0.25);
+  }
+}
+
+.btn-primary{
+  background-color: var(--THEME-UI-ACTIVE-COLOR);
+  color: var(--THEME-UI-ACTIVE-TEXT-COLOR);
+
+  &:hover,
+  &:focus,
+  &:active {
+    @include transition-all();
+    background-color: var(--THEME-UI-ACTIVE-HOVER-COLOR);
+  }
+}
+

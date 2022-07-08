@@ -6,6 +6,7 @@ use App\Entity\Config;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ConfigType extends AbstractType
 {
@@ -14,7 +15,10 @@ class ConfigType extends AbstractType
         $builder
             ->add('option_key')
             ->add('option_label')
-            ->add('option_value')
+            ->add('option_value', TextType::class, [
+                'required' => false,
+                'empty_data' => null
+            ])
             ->add('required')
             ->add('configCategory')
         ;
