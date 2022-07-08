@@ -38,3 +38,21 @@ export type ConvertSectionLayoutMutationArgs = {
 export type DeleteSectionMutationArgs = {
     sectionUUID: string
 }
+
+export type UpdatePlusletMutationArgs = {
+    plusletUUID: string,
+    data: Record<string, any>
+}
+
+export type ReorderPlusletMutationArgs = {
+    sourceSection: string,
+    sourceColumn: number,
+    sourceIndex: number,
+    destinationSection: string,
+    destinationColumn: number,
+    destinationIndex: number
+}
+
+export type DeletePlusletMutationArgs = {
+    plusletUUID: string
+}

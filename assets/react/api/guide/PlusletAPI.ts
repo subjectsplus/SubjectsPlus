@@ -1,298 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import produce from 'immer';
 import { PlusletType } from '@shared/types/guide_types';
-
-export function useCreatePluslet(sectionUUID: string) {
-    const queryClient = useQueryClient();
-    return useMutation(createPluslet, {
-        onMutate: async newPluslet => {
-            await queryClient.cancelQueries(['pluslets', sectionUUID]);
-            const previousPlusletsData = queryClient.getQueryData<Record<string, any>>(['pluslets', sectionUUID]);
-            
-            if (previousPlusletsData) {
-                const optimisticResult = produce<Record<string, any>>(previousPlusletsData, draftData => {
-                    draftData['hydra:member'].push(newPluslet);
-                });
-    
-                queryClient.setQueryData(['pluslets', sectionUUID], optimisticResult);
-            }
-
-            return { previousPlusletsData };
-        },
-        onError: (error, newPluslet, context) => {
-            // Perform rollback of pluslet mutation
-            console.error(error);
-            queryClient.setQueryData(['pluslets', sectionId], context.previousPlusletsData);
-        },
-        onSettled: () => {
-            // Refetch the tab data
-            queryClient.invalidateQueries(['pluslets', sectionId]);
-        },
-    });
-}
-
-export function useUpdatePluslet(sectionId) {
-    if (sectionId === undefined) throw new Error('"sectionId" field is required to call useUpdatePluslet.');
-
-    const queryClient = useQueryClient();
-    return useMutation(updatePluslet, {
-        onMutate: async updatedPluslet => {
-            await queryClient.cancelQueries(['pluslets', sectionId]);
-            const previousPlusletsData = queryClient.getQueryData(['pluslets', sectionId]);
-
-            const optimisticResult = produce(previousPlusletsData, draftData => {
-                const index = draftData['hydra:member'].findIndex(pluslet => pluslet.id === updatedPluslet.plusletId);
-                Object.keys(updatedPluslet.data).map(key => {
-                    draftData['hydra:member'][index][key] = updatedPluslet.data[key];
-                });
-            });
-            
-            queryClient.setQueryData(['pluslets', sectionId], optimisticResult);
-            return { previousPlusletsData };
-        },
-        onError: (error, plusletData, context) => {
-            // Perform rollback of pluslets mutation
-            console.error(error);
-            queryClient.setQueryData(['pluslets', sectionId], context.previousPlusletsData);
-        },
-        onSettled: () => {
-            // Refetch the pluslets data
-            queryClient.invalidateQueries(['pluslets', sectionId]);
-        },
-    });
-}
-
-export function useDeletePluslet(sectionId) {
-    if (sectionId === undefined) throw new Error('"sectionId" field is required to call useDeletePluslet.');
-
-    const queryClient = useQueryClient();
-    return useMutation(deletePluslet, {
-        onMutate: async deletedPluslet => {
-            await queryClient.cancelQueries(['pluslets', sectionId]);
-            const previousPlusletsData = queryClient.getQueryData(['pluslets', sectionId]);
-
-            const optimisticResult = produce(previousPlusletsData, draftData => {
-                const updates = {};
-                const columnPluslets = draftData['hydra:member'].filter(pluslet => pluslet.pcolumn === deletedPluslet.pcolumn)
-                .filter(pluslet => pluslet.id !== deletedPluslet.id);
-
-                columnPluslets.forEach((pluslet, index) => {
-                    if (pluslet.prow !== index) {
-                        updates[pluslet.id] = {
-                            prow: index
-                        };
-                    }
-                });
-
-                draftData['hydra:member'] = draftData['hydra:member'].filter((pluslet) => pluslet.id !== deletedPluslet.plusletId);
-                draftData['hydra:member'].forEach(pluslet => {
-                    if (updates[pluslet.id]) {
-                        pluslet.prow = updates[pluslet.id].prow;
-                    }
-                });
-                draftData['hydra:totalItems'] = draftData['hydra:member'].length;
-            });
-            
-            queryClient.setQueryData(['pluslets', sectionId], optimisticResult);
-            
-            return { previousPlusletsData };
-        },
-        onError: (error, plusletData, context) => {
-            // Perform rollback of tab mutation
-            console.error(error);
-            queryClient.setQueryData(['pluslets', sectionId], context.previousPlusletsData);
-        },
-        onSettled: () => {
-            // Refetch the tab data
-            queryClient.invalidateQueries(['pluslets', sectionId]);
-        }
-    });
-}
-
-export function useReorderPluslet() {
-    const queryClient = useQueryClient();
-    return useMutation(reorderPluslet, {
-        onMutate: async plusletData => {
-            const sourceSection = plusletData.sourceSection;
-            const sourceColumn = plusletData.sourceColumn;
-            const sourceIndex = plusletData.sourceIndex;
-            const destinationSection = plusletData.destinationSection;
-            const destinationColumn = plusletData.destinationColumn;
-            const destinationIndex = plusletData.destinationIndex;
-
-            await queryClient.cancelQueries(['pluslets', sourceSection]);
-            await queryClient.cancelQueries(['pluslets', destinationSection]);
-
-            const sourcePlusletsData = queryClient.getQueryData(['pluslets', sourceSection]);
-            const destinationPlusletsData = queryClient.getQueryData(['pluslets', destinationSection]);
-
-            // Produce optimistic result
-            if (sourceSection === destinationSection && sourceColumn === destinationColumn) {
-                const optimisticDestinationPluslets = produce(destinationPlusletsData, draftData => {
-                    const columnPluslets = draftData['hydra:member'].filter(
-                        pluslet => pluslet.pcolumn === destinationColumn).filter(
-                        pluslet => pluslet !== undefined
-                    );
-
-                    const updatedPluslets = {};
-
-                    // Move pluslet within the same column
-                    const [reorderedPluslet] = columnPluslets.splice(sourceIndex, 1);
-
-                    if (!reorderedPluslet) throw new Error('Failed to find source pluslet to reorder for optimistic result.');
-
-                    columnPluslets.splice(destinationIndex, 0, reorderedPluslet);
-
-                    // Index the updated prow
-                    columnPluslets.forEach((pluslet, index) => {
-                        if (pluslet.prow !== index) {
-                            updatedPluslets[pluslet.id] = {
-                                prow: index
-                            };
-                        }
-                    });
-
-                    // Set the updated prow
-                    draftData['hydra:member'].forEach((pluslet, index) => {
-                        if (updatedPluslets[pluslet.id]) {
-                            draftData['hydra:member'][index] = produce(pluslet, draftPluslet => {
-                                draftPluslet.prow = updatedPluslets[pluslet.id].prow;
-                            });
-                        }
-                    });
-
-                    // Resort the pluslets
-                    draftData['hydra:member'].sort((plusletA, plusletB) => {
-                        if (plusletA.pcolumn === plusletB.pcolumn) {
-                            return plusletA.prow - plusletB.prow;
-                        }
-                        return plusletA.pcolumn - plusletB.pcolumn;
-                    });
-                });
-    
-                queryClient.setQueryData(['pluslets', destinationSection], optimisticDestinationPluslets);
-    
-                return { destinationPlusletsData };
-            } else {
-                const sourceColumnPluslets = sourcePlusletsData['hydra:member'].filter(
-                    pluslet => pluslet.pcolumn === sourceColumn).filter(
-                    pluslet => pluslet !== undefined
-                );
-
-                const updatedPluslets = {};
-
-                // Remove pluslet from source column
-                const [reorderedPluslet] = sourceColumnPluslets.splice(sourceIndex, 1);
-                
-                if (!reorderedPluslet) throw new Error('Failed to find source pluslet to reorder for optimistic result.');
-
-                // Set the updated prow for source column pluslets
-                sourceColumnPluslets.forEach((pluslet, index) => {
-                    if (pluslet.prow !== index) {
-                        updatedPluslets[pluslet.id] = {
-                            prow: index,
-                            pcolumn: sourceColumn
-                        };
-                    }
-                });
-
-                // Move pluslet to a different section/column
-                const destinationColumnPluslets = destinationPlusletsData['hydra:member'].filter(
-                    pluslet => pluslet.pcolumn === destinationColumn).filter(
-                        pluslet => pluslet !== undefined
-                );
-
-                // Add to destination column and reorder destination column pluslets 
-                destinationColumnPluslets.splice(destinationIndex, 0, reorderedPluslet);
-
-                // Set the updated prow/pcolumn for destination column pluslets
-                destinationColumnPluslets.forEach((pluslet, index) => {
-                    if (pluslet.prow !== index || pluslet.pcolumn !== destinationColumn
-                        || pluslet.id === reorderedPluslet.id) {
-                        updatedPluslets[pluslet.id] = {
-                            prow: index,
-                            pcolumn: destinationColumn
-                        };
-                    }
-                });
-
-                const optimisticSourcePluslets = produce(sourcePlusletsData, draftData => {
-                    // Pluslet must be removed from sourcePluslets if not the same section
-                    if (sourceSection !== destinationSection) {
-                        const plusletIndex = draftData['hydra:member'].findIndex(pluslet => pluslet.id === reorderedPluslet.id);
-                        draftData['hydra:member'].splice(plusletIndex, 1);
-                    }
-
-                    // Set the updated prow/pcolumn
-                    draftData['hydra:member'].forEach((pluslet, index) => {
-                        if (updatedPluslets[pluslet.id]) {
-                            draftData['hydra:member'][index] = produce(pluslet, draftPluslet => {
-                                draftPluslet.prow = updatedPluslets[pluslet.id].prow;
-                                draftPluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
-                            });
-                        }
-                    });
-
-                    // Resort the pluslets
-                    draftData['hydra:member'].sort((plusletA, plusletB) => {
-                        if (plusletA.pcolumn === plusletB.pcolumn) {
-                            return plusletA.prow - plusletB.prow;
-                        }
-                        return plusletA.pcolumn - plusletB.pcolumn;
-                    });
-                });
-
-                const optimisticDestinationPluslets = produce(destinationPlusletsData, draftData => {
-                    // Pluslet must be added to destinationPluslets if not the same section
-                    if (sourceSection !== destinationSection) {
-                        draftData['hydra:member'].push(reorderedPluslet);
-                    }
-
-                    // Set the updated prow/pcolumn
-                    draftData['hydra:member'].forEach((pluslet, index) => {
-                        if (updatedPluslets[pluslet.id]) {
-                            draftData['hydra:member'][index] = produce(pluslet, draftPluslet => {
-                                draftPluslet.prow = updatedPluslets[pluslet.id].prow;
-                                draftPluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
-                            });
-                        }
-                    });
-
-                    // Resort the pluslets
-                    draftData['hydra:member'].sort((plusletA, plusletB) => {
-                        if (plusletA.pcolumn === plusletB.pcolumn) {
-                            return plusletA.prow - plusletB.prow;
-                        }
-                        return plusletA.pcolumn - plusletB.pcolumn;
-                    });
-                });
-
-                // Set optimistic result to query data
-                queryClient.setQueryData(['pluslets', sourceSection], optimisticSourcePluslets);
-                queryClient.setQueryData(['pluslets', destinationSection], optimisticDestinationPluslets);
-
-                return { sourcePlusletsData, destinationPlusletsData };
-            }
-        },
-        onError: (error, plusletData, context) => {
-            // Perform rollback of pluslet order mutation
-            console.error(error);
-            
-            if (context.sourcePlusletsData) {
-                queryClient.setQueryData(['pluslets', plusletData.sourceSection], context.sourcePlusletsData);
-            }
-
-            queryClient.setQueryData(['pluslets', plusletData.destinationSection], context.destinationPlusletsData);
-        },
-        onSettled: (data, error, plusletData) => {
-            // Refetch the pluslet order data
-            if (plusletData.sourceSection !== plusletData.destinationSection) {
-                queryClient.invalidateQueries(['pluslets', plusletData.sourceSection]);
-            }
-            queryClient.invalidateQueries(['pluslets', plusletData.destinationSection]);
-        }
-    });
-}
+import { UpdatePlusletMutationArgs, ReorderPlusletMutationArgs, DeletePlusletMutationArgs } from '@shared/types/guide_mutation_types';
 
 export const fetchPluslets = async (sectionUUID: string, filters: Record<string, any>|null = null) => {
     const data = await fetch(`/api/sections/${sectionUUID}/pluslets`
@@ -305,7 +12,7 @@ export const fetchPluslets = async (sectionUUID: string, filters: Record<string,
     return data.json();
 }
 
-export const fetchPluslet = async (plusletUUID: string) => {
+export const fetchPluslet = async (plusletUUID: string): Promise<PlusletType> => {
     const data = await fetch(`/api/pluslets/${plusletUUID}`);
 
     if (!data.ok) {
@@ -331,11 +38,8 @@ export const createPluslet = async (initialPlusletData: Record<string, any>): Pr
     return plusletReq.json();
 }
 
-async function updatePluslet({ plusletId, data }) {
-    if (plusletId === undefined) throw new Error('"plusletId" field is required to perform update pluslet request.');
-    if (data === undefined) throw new Error('"data" field is required to perform update pluslet request');
-
-    const req = await fetch(`/api/pluslets/${plusletId}`, {
+export const updatePluslet = async ({ plusletUUID, data }: UpdatePlusletMutationArgs) => {
+    const req = await fetch(`/api/pluslets/${plusletUUID}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/ld+json',
@@ -350,38 +54,39 @@ async function updatePluslet({ plusletId, data }) {
     return req.json();
 }
 
-async function deletePluslet({ plusletId }) {
-    if (plusletId === undefined) throw new Error('"plusletId" field is required to perform delete pluslet request.');
+export const deletePluslet = async ({ plusletUUID }: DeletePlusletMutationArgs) => {
+    const plusletToDelete = await fetchPluslet(plusletUUID);
+    const sectionUUID = plusletToDelete['section'].split("/").pop();
 
-    const plusletToDelete = await fetchPluslet(plusletId);
-    const sectionId = plusletToDelete['section'].split("/").pop();
-    const {'hydra:member': pluslets } = await fetchPluslets(sectionId, {
-        pagination: false,
-        pcolumn: plusletToDelete['pcolumn']
-    });
-    const newPluslets = [...pluslets];
-   
-    // update the row index of the pluslets within the column
-    newPluslets.splice(plusletToDelete.prow, 1);
-    await Promise.all(newPluslets.map(async (pluslet, index) => {
-        if (pluslet.prow !== index) {
-            return fetch(`/api/pluslets/${pluslet.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/ld+json',
-                },
-                body: JSON.stringify({
-                    prow: index
-                })
-            }).catch(error => {
-                console.error(error);
-                throw new Error(error);
-            });
-        }
-    }));
+    if (sectionUUID) {
+        const {'hydra:member': pluslets }: {'hydra:member': PlusletType[]} = await fetchPluslets(sectionUUID, {
+            pagination: false,
+            pcolumn: plusletToDelete['pcolumn']
+        });
+        const newPluslets = [...pluslets];
+    
+        // update the row index of the pluslets within the column
+        newPluslets.splice(plusletToDelete.prow, 1);
+        await Promise.all(newPluslets.map(async (pluslet, index) => {
+            if (pluslet.prow !== index) {
+                return fetch(`/api/pluslets/${pluslet.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/ld+json',
+                    },
+                    body: JSON.stringify({
+                        prow: index
+                    })
+                }).catch(error => {
+                    console.error(error);
+                    throw new Error(error);
+                });
+            }
+        }));
+    }
 
     // delete the section
-    const req = await fetch(`/api/pluslets/${plusletId}`, {
+    const req = await fetch(`/api/pluslets/${plusletUUID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': '*/*',
@@ -395,8 +100,8 @@ async function deletePluslet({ plusletId }) {
     return req.text();
 }
 
-async function reorderPlusletWithinColumn(sectionId, column, sourceIndex, destinationIndex) {
-    const { 'hydra:member': pluslets } = await fetchPluslets(sectionId, {
+export const reorderPlusletWithinColumn = async (sectionUUID: string, column: number, sourceIndex: number, destinationIndex: number) => {
+    const { 'hydra:member': pluslets }: { 'hydra:member': PlusletType[] } = await fetchPluslets(sectionUUID, {
         pcolumn: column,
         pagination: false
     });
@@ -427,9 +132,9 @@ async function reorderPlusletWithinColumn(sectionId, column, sourceIndex, destin
     }));
 }
 
-async function reorderPlusletAcrossSections(sourceSection, sourceColumn, sourceIndex, destinationSection,
-    destinationColumn, destinationIndex) {
-    const { 'hydra:member': sourceColumnPluslets } = await fetchPluslets(sourceSection, {
+export const reorderPlusletAcrossSections = async (sourceSection: string, sourceColumn: number, sourceIndex: number, destinationSection: string,
+    destinationColumn: number, destinationIndex: number) => {
+    const { 'hydra:member': sourceColumnPluslets }: { 'hydra:member': PlusletType[] } = await fetchPluslets(sourceSection, {
         pcolumn: sourceColumn,
         pagination: false
     });
@@ -461,7 +166,7 @@ async function reorderPlusletAcrossSections(sourceSection, sourceColumn, sourceI
     }));
 
     // Move pluslet to a different section
-    const { 'hydra:member': destinationColumnPluslets } = await fetchPluslets(destinationSection, {
+    const { 'hydra:member': destinationColumnPluslets }: { 'hydra:member': PlusletType[] } = await fetchPluslets(destinationSection, {
         pcolumn: destinationColumn,
         pagination: false
     });
@@ -489,19 +194,11 @@ async function reorderPlusletAcrossSections(sourceSection, sourceColumn, sourceI
     }));
 }
 
-async function reorderPlusletWithinSection(sectionId, sourceColumn, sourceIndex, destinationColumn, destinationIndex) {
-    return reorderPlusletAcrossSections(sectionId, sourceColumn, sourceIndex, sectionId,
-        destinationColumn, destinationIndex);
+export const reorderPlusletWithinSection = (sectionUUID: string, sourceColumn: number, sourceIndex: number, destinationColumn: number, destinationIndex: number) => {
+    return reorderPlusletAcrossSections(sectionUUID, sourceColumn, sourceIndex, sectionUUID, destinationColumn, destinationIndex);
 }
 
-async function reorderPluslet({ sourceSection, sourceColumn, sourceIndex, destinationSection, destinationColumn, destinationIndex }) {
-    if (sourceSection === undefined) throw new Error('"sourceSection" field is required to perform reorder pluslet request.');
-    if (sourceColumn === undefined) throw new Error('"sourceColumn" field is required to perform reorder pluslet request.');
-    if (sourceIndex === undefined) throw new Error('"sourceIndex" field is required to perform reorder pluslet request.');
-    if (destinationSection === undefined) throw new Error('"destinationSection" field is required to perform reorder pluslet request.');
-    if (destinationColumn === undefined) throw new Error('"destinationColumn" field is required to perform reorder pluslet request.');
-    if (destinationIndex === undefined) throw new Error('"destinationIndex" field is required to perform reorder pluslet request.');
-
+export const reorderPluslet = ({ sourceSection, sourceColumn, sourceIndex, destinationSection, destinationColumn, destinationIndex }: ReorderPlusletMutationArgs) => {
     if (sourceSection === destinationSection) {
         if (sourceColumn === destinationColumn) {
             // Move pluslet within the same column within the same section

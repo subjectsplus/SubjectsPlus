@@ -45,5 +45,5 @@ export type PlusletType = {
     favoriteBox?: boolean,
     pcolumn: number,
     prow: number,
-    section?: string
+    section: string
 }
