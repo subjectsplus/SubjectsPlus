@@ -37,6 +37,7 @@ class Config
     /**
      * @ORM\Column(type="boolean")
      */
+    // TODO: Rethink name/terminology
     private $required;
 
 //    /**
