@@ -5,7 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { SectionColumn } from './SectionColumn';
 import { SectionDropdown } from './SectionDropdown';
 import { DeleteConfirmModal } from '@components/shared/DeleteConfirmModal';
-import { useFetchPluslets, useCreatePluslet } from '@api/guide/PlusletAPI';
+import { useFetchPluslets } from '@hooks/useFetchPluslets';
+import { useCreatePluslet } from '@hooks/useCreatePluslet';
 import { useConvertSectionLayout } from '@hooks/useConvertSectionLayout';
 import { useDeleteSection } from '@hooks/useDeleteSection';
 import { PlusletType } from '@shared/types/guide_types';
@@ -93,9 +94,9 @@ export const Section = ({ sectionUUID, layout, sectionIndex, tabUUID }: SectionP
         if (Array.isArray(data)) {
             const initialPlusletData = {
                 id: uuidv4(),
-                title: "",
-                type: "Basic",
-                body: "",
+                title: '',
+                type: 'Basic',
+                body: '',
                 pcolumn: column,
                 prow: row,
                 section: '/api/sections/' + sectionUUID
