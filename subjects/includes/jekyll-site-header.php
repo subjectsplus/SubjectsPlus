@@ -361,7 +361,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/citation-help.html">Citation Management Tools
+											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/guide.php?subject=citation-management-systems">Citation Management Systems
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data Management Strategies
