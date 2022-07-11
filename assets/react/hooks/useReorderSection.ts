@@ -7,15 +7,15 @@ import { ReorderSectionMutationArgs } from '@shared/types/guide_mutation_types';
 export const useReorderSection = (tabUUID: string) => {
     const queryClient = useQueryClient();
     return useMutation(reorderSection, {
-        onMutate: async (sectionData: ReorderSectionMutationArgs) => {
+        onMutate: async sectionData => {
             await queryClient.cancelQueries(['sections', tabUUID]);
-            const previousSectionsData = queryClient.getQueryData<Record<string, any>>(['sections', tabUUID]);
+            const previousSectionsData = queryClient.getQueryData<GuideSectionType[]>(['sections', tabUUID]);
 
             if (previousSectionsData) {
-                const optimisticResult = produce<Record<string, any>>(previousSectionsData, draftData => {
-                    const [reorderedSection]: [GuideSectionType] = draftData['hydra:member'].splice(sectionData.sourceSectionIndex, 1);
-                    draftData['hydra:member'].splice(sectionData.destinationSectionIndex, 0, reorderedSection);
-                    draftData['hydra:member'].forEach((section: GuideSectionType, index: number) => section.sectionIndex = index);
+                const optimisticResult = produce<GuideSectionType[]>(previousSectionsData, draftData => {
+                    const [reorderedSection] = draftData.splice(sectionData.sourceSectionIndex, 1);
+                    draftData.splice(sectionData.destinationSectionIndex, 0, reorderedSection);
+                    draftData.forEach((section, index) => section.sectionIndex = index);
                 });
     
                 queryClient.setQueryData(['sections', tabUUID], optimisticResult);

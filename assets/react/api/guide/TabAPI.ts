@@ -1,9 +1,15 @@
 import { GuideTabType } from '@shared/types/guide_types';
 import { UpdateTabMutationArgs, DeleteTabMutationArgs, ReorderTabMutationArgs } from '@shared/types/guide_mutation_types';
 
-export const fetchTabs = async (subjectId: number, filters: Record<string, any>|null = null) => {
+export const fetchTabs = async (subjectId: number, filters: Record<string, any>|null = null): Promise<GuideTabType[]> => {
     const data = await fetch(`/api/subjects/${subjectId}/tabs`
-        + (filters ? '?' + new URLSearchParams(filters) : ''));
+        + (filters ? '?' + new URLSearchParams(filters) : ''), {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
 
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
@@ -13,7 +19,13 @@ export const fetchTabs = async (subjectId: number, filters: Record<string, any>|
 }
 
 export const fetchTab = async (tabUUID: string): Promise<GuideTabType> => {
-    const data = await fetch(`/api/tabs/${tabUUID}`);
+    const data = await fetch(`/api/tabs/${tabUUID}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
 
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
@@ -74,7 +86,7 @@ export const updateTab = async ({tabUUID, data}: UpdateTabMutationArgs) => {
 export const deleteTab = async ({ tabUUID }: DeleteTabMutationArgs) => {
     const tabToDelete = await fetchTab(tabUUID);
     const subjectId = Number(tabToDelete['subject'].split("/").pop());
-    const {'hydra:member': tabs }: {'hydra:member': GuideTabType[]} = await fetchTabs(subjectId, {pagination: false});
+    const tabs = await fetchTabs(subjectId, {pagination: false});
     const newTabs = [...tabs];
    
     // update the tab index
@@ -113,7 +125,7 @@ export const deleteTab = async ({ tabUUID }: DeleteTabMutationArgs) => {
 
 export const reorderTab = async ({subjectId, sourceTabIndex, destinationTabIndex}: ReorderTabMutationArgs) => {
     // fetch current tabs
-    const {'hydra:member': tabs}: {'hydra:member': GuideTabType[]} = await fetchTabs(subjectId, {pagination: false});
+    const tabs = await fetchTabs(subjectId, {pagination: false});
 
     // copy existing tabs
     const newTabs = [...tabs];

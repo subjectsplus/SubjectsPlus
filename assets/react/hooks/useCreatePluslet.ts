@@ -8,11 +8,11 @@ export const useCreatePluslet = (sectionUUID: string) => {
     return useMutation(createPluslet, {
         onMutate: async (newPluslet: PlusletType) => {
             await queryClient.cancelQueries(['pluslets', sectionUUID]);
-            const previousPlusletsData = queryClient.getQueryData<Record<string, any>>(['pluslets', sectionUUID]);
+            const previousPlusletsData = queryClient.getQueryData<PlusletType[]>(['pluslets', sectionUUID]);
             
             if (previousPlusletsData) {
-                const optimisticResult = produce<Record<string, any>>(previousPlusletsData, draftData => {
-                    (draftData['hydra:member'] as PlusletType[]).push(newPluslet);
+                const optimisticResult = produce<PlusletType[]>(previousPlusletsData, draftData => {
+                    draftData.push(newPluslet);
                 });
     
                 queryClient.setQueryData(['pluslets', sectionUUID], optimisticResult);

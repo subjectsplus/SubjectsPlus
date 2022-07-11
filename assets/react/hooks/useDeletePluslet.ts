@@ -8,16 +8,15 @@ export const useDeletePluslet = (sectionUUID: string) => {
     return useMutation(deletePluslet, {
         onMutate: async deletedPluslet => {
             await queryClient.cancelQueries(['pluslets', sectionUUID]);
-            const previousPlusletsData = queryClient.getQueryData<Record<string, any>>(['pluslets', sectionUUID]);
+            const previousPlusletsData = queryClient.getQueryData<PlusletType[]>(['pluslets', sectionUUID]);
 
             if (previousPlusletsData) {
-                const optimisticResult = produce<Record<string, any>>(previousPlusletsData, draftData => {
+                const optimisticResult = produce<PlusletType[]>(previousPlusletsData, draftData => {
                     const updates: Record<string, any> = {};
-                    const pluslets = draftData['hydra:member'] as PlusletType[];
-                    const plusletToRemove = pluslets.find(pluslet => pluslet.id === deletedPluslet.plusletUUID);
+                    const plusletToRemove = draftData.find(pluslet => pluslet.id === deletedPluslet.plusletUUID);
 
                     if (plusletToRemove) {
-                        const columnPluslets = pluslets.filter(pluslet => pluslet.pcolumn === plusletToRemove.pcolumn)
+                        const columnPluslets = draftData.filter(pluslet => pluslet.pcolumn === plusletToRemove.pcolumn)
                         .filter(pluslet => pluslet.id !== plusletToRemove.id);
         
                         columnPluslets.forEach((pluslet, index) => {
@@ -28,14 +27,12 @@ export const useDeletePluslet = (sectionUUID: string) => {
                             }
                         });
         
-                        draftData['hydra:member'] = pluslets.filter(pluslet => pluslet.id !== plusletToRemove.id)
-                        .forEach(pluslet => {
+                        draftData = draftData.filter(pluslet => pluslet.id !== plusletToRemove.id);
+                        draftData.forEach(pluslet => {
                             if (updates[pluslet.id]) {
                                 pluslet.prow = updates[pluslet.id].prow;
                             }
                         });
-                        
-                        draftData['hydra:totalItems'] = draftData['hydra:member'].length;
                     }
                 });
                 

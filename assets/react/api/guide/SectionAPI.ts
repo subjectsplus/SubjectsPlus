@@ -2,9 +2,15 @@ import { fetchPluslets } from './PlusletAPI';
 import { GuideSectionType, PlusletType } from '@shared/types/guide_types';
 import { ReorderSectionMutationArgs, UpdateSectionMutationArgs, DeleteSectionMutationArgs, ConvertSectionLayoutMutationArgs } from '@shared/types/guide_mutation_types';
 
-export const fetchSections = async (tabUUID: string, filters: Record<string, any>|null = null) => {
+export const fetchSections = async (tabUUID: string, filters: Record<string, any>|null = null): Promise<GuideSectionType[]> => {
     const data = await fetch(`/api/tabs/${tabUUID}/sections`
-        + (filters ? '?' + new URLSearchParams(filters) : ''));
+        + (filters ? '?' + new URLSearchParams(filters) : ''), {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
     
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
@@ -14,7 +20,13 @@ export const fetchSections = async (tabUUID: string, filters: Record<string, any
 }
 
 export const fetchSection = async (sectionUUID: string): Promise<GuideSectionType> => {
-    const data = await fetch(`/api/sections/${sectionUUID}`);
+    const data = await fetch(`/api/sections/${sectionUUID}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
 
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
@@ -60,7 +72,7 @@ export const deleteSection = async ({ sectionUUID }: DeleteSectionMutationArgs) 
     const tabUUID = sectionToDelete['tab'].split("/").pop();
     
     if (tabUUID) {
-        const {'hydra:member': sections }:{'hydra:member': GuideSectionType[]} = await fetchSections(tabUUID, {pagination: false});
+        const sections = await fetchSections(tabUUID, {pagination: false});
         const newSections = [...sections];
     
         // update the section index
@@ -100,7 +112,7 @@ export const deleteSection = async ({ sectionUUID }: DeleteSectionMutationArgs) 
 
 export const reorderSection = async ({ tabUUID, sourceSectionIndex, destinationSectionIndex }: ReorderSectionMutationArgs) => {
     // fetch current sections
-    const {'hydra:member': sections}: {'hydra:member': GuideSectionType[]} = await fetchSections(tabUUID, {pagination: false});
+    const sections = await fetchSections(tabUUID, {pagination: false});
 
     // copy existing sections
     const newSections = [...sections];
@@ -144,12 +156,12 @@ export const convertSectionLayout = async ({sectionUUID, newLayout}: ConvertSect
     // will join the last column of the new layout.
     if (oldLayoutTotalColumns > newLayoutTotalColumns) {
         // Fetch pluslets with pcolumn greater than or equal to last column of the new layout
-        let {'hydra:member': pluslets } = await fetchPluslets(sectionUUID, {
+        const pluslets = await fetchPluslets(sectionUUID, {
             'pcolumn[gte]': newLayoutLastColumn
         });
         
         // Change the pcolumn and prow indexes for Pluslet to reflect new layout
-        await Promise.all(pluslets.map(async (pluslet: PlusletType, row: number) => {
+        await Promise.all(pluslets.map(async (pluslet, row) => {
             if (pluslet.pcolumn !== newLayoutLastColumn || pluslet.prow !== row) {
                 return fetch(`/api/pluslets/${pluslet.id}`, {
                     method: 'PUT',

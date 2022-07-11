@@ -11,10 +11,11 @@ export const useUpdateGuide = (subjectId: number) => {
             const previousGuideData = queryClient.getQueryData<GuideType>(['guide', subjectId]);
             
             if (previousGuideData) {
-                const optimisticResult = produce<GuideType, any>(previousGuideData, draftData => {
-                    Object.keys(updatedGuide.data).map((key: string) => {
-                        draftData[key] = updatedGuide.data[key];
-                    });
+                const optimisticResult = produce<GuideType>(previousGuideData, draftData => {
+                    draftData = {
+                        ...draftData,
+                        ...updatedGuide.data
+                    };
                 });
 
                 queryClient.setQueryData(['guide', subjectId], optimisticResult);

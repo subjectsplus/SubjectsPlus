@@ -1,9 +1,15 @@
 import { PlusletType } from '@shared/types/guide_types';
 import { UpdatePlusletMutationArgs, ReorderPlusletMutationArgs, DeletePlusletMutationArgs } from '@shared/types/guide_mutation_types';
 
-export const fetchPluslets = async (sectionUUID: string, filters: Record<string, any>|null = null) => {
+export const fetchPluslets = async (sectionUUID: string, filters: Record<string, any>|null = null): Promise<PlusletType[]> => {
     const data = await fetch(`/api/sections/${sectionUUID}/pluslets`
-        + (filters ? '?' + new URLSearchParams(filters) : ''));
+        + (filters ? '?' + new URLSearchParams(filters) : ''), {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
 
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
@@ -13,7 +19,13 @@ export const fetchPluslets = async (sectionUUID: string, filters: Record<string,
 }
 
 export const fetchPluslet = async (plusletUUID: string): Promise<PlusletType> => {
-    const data = await fetch(`/api/pluslets/${plusletUUID}`);
+    const data = await fetch(`/api/pluslets/${plusletUUID}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
 
     if (!data.ok) {
         throw new Error(data.status + ' ' + data.statusText);
@@ -59,7 +71,7 @@ export const deletePluslet = async ({ plusletUUID }: DeletePlusletMutationArgs) 
     const sectionUUID = plusletToDelete['section'].split("/").pop();
 
     if (sectionUUID) {
-        const {'hydra:member': pluslets }: {'hydra:member': PlusletType[]} = await fetchPluslets(sectionUUID, {
+        const pluslets = await fetchPluslets(sectionUUID, {
             pagination: false,
             pcolumn: plusletToDelete['pcolumn']
         });
@@ -101,7 +113,7 @@ export const deletePluslet = async ({ plusletUUID }: DeletePlusletMutationArgs) 
 }
 
 export const reorderPlusletWithinColumn = async (sectionUUID: string, column: number, sourceIndex: number, destinationIndex: number) => {
-    const { 'hydra:member': pluslets }: { 'hydra:member': PlusletType[] } = await fetchPluslets(sectionUUID, {
+    const pluslets = await fetchPluslets(sectionUUID, {
         pcolumn: column,
         pagination: false
     });
@@ -134,7 +146,7 @@ export const reorderPlusletWithinColumn = async (sectionUUID: string, column: nu
 
 export const reorderPlusletAcrossSections = async (sourceSection: string, sourceColumn: number, sourceIndex: number, destinationSection: string,
     destinationColumn: number, destinationIndex: number) => {
-    const { 'hydra:member': sourceColumnPluslets }: { 'hydra:member': PlusletType[] } = await fetchPluslets(sourceSection, {
+    const sourceColumnPluslets = await fetchPluslets(sourceSection, {
         pcolumn: sourceColumn,
         pagination: false
     });
@@ -166,7 +178,7 @@ export const reorderPlusletAcrossSections = async (sourceSection: string, source
     }));
 
     // Move pluslet to a different section
-    const { 'hydra:member': destinationColumnPluslets }: { 'hydra:member': PlusletType[] } = await fetchPluslets(destinationSection, {
+    const destinationColumnPluslets = await fetchPluslets(destinationSection, {
         pcolumn: destinationColumn,
         pagination: false
     });

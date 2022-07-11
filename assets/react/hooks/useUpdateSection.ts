@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from 'react-query';
 import produce from 'immer';
 import { updateSection } from '@api/guide/SectionAPI';
-import { UpdateSectionMutationArgs } from '@shared/types/guide_mutation_types';
+import { GuideSectionType } from '@shared/types/guide_types';
 
 export const useUpdateSection = (tabUUID: string) => {
     const queryClient = useQueryClient();
     return useMutation(updateSection, {
-        onMutate: async (updatedSection: UpdateSectionMutationArgs) => {
+        onMutate: async updatedSection => {
             await queryClient.cancelQueries(['sections', tabUUID]);
-            const previousSectionsData = queryClient.getQueryData<Record<string, any>>(['sections', tabUUID]);
+            const previousSectionsData = queryClient.getQueryData<GuideSectionType[]>(['sections', tabUUID]);
 
             if (previousSectionsData) {
-                const optimisticResult = produce<Record<string, any>>(previousSectionsData, draftData => {
+                const optimisticResult = produce<GuideSectionType[]>(previousSectionsData, draftData => {
                     if (typeof updatedSection.sectionIndex !== 'undefined' && updatedSection.optimisticResult) {
-                        draftData['hydra:member'][updatedSection.sectionIndex] = updatedSection.optimisticResult;
+                        draftData[updatedSection.sectionIndex] = updatedSection.optimisticResult;
                     }
                 });
                 

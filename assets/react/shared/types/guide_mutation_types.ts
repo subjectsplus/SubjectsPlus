@@ -1,8 +1,10 @@
+import { GuideTabType, GuideSectionType } from './guide_types';
+
 export type UpdateTabMutationArgs = {
     tabUUID: string,
     tabIndex?: number,
     data: Record<string, any>,
-    optimisticResult?: Record<string, any>
+    optimisticResult?: GuideTabType
 }
 
 export type DeleteTabMutationArgs = {
@@ -19,7 +21,7 @@ export type UpdateSectionMutationArgs = {
     sectionUUID: string,
     sectionIndex?: number,
     data: Record<string, any>,
-    optimisticResult?: Record<string, any>
+    optimisticResult?: GuideSectionType
 }
 
 export type ReorderSectionMutationArgs = {

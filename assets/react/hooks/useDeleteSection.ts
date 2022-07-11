@@ -8,13 +8,12 @@ export const useDeleteSection = (tabUUID: string) => {
     return useMutation(deleteSection, {
         onMutate: async deletedSection => {
             await queryClient.cancelQueries(['sections', tabUUID]);
-            const previousSectionsData = queryClient.getQueryData<Record<string, any>>(['sections', tabUUID]);
+            const previousSectionsData = queryClient.getQueryData<GuideSectionType[]>(['sections', tabUUID]);
 
             if (previousSectionsData) {
-                const optimisticResult = produce<Record<string, any>>(previousSectionsData, draftData => {
-                    draftData['hydra:member'] = draftData['hydra:member'].filter((section: GuideSectionType) => section.id !== deletedSection.sectionUUID);
-                    draftData['hydra:member'].forEach((section: GuideSectionType, index: number) => section.sectionIndex = index);
-                    draftData['hydra:totalItems'] = draftData['hydra:member'].length;
+                const optimisticResult = produce<GuideSectionType[]>(previousSectionsData, draftData => {
+                    draftData = draftData.filter(section => section.id !== deletedSection.sectionUUID);
+                    draftData.forEach((section, index) => section.sectionIndex = index);
                 });
                 
                 queryClient.setQueryData(['sections', tabUUID], optimisticResult);

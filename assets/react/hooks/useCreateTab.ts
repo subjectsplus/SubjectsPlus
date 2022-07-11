@@ -8,11 +8,11 @@ export const useCreateTab = (subjectId: number) => {
     return useMutation(createTab, {
         onMutate: async (newTab: GuideTabType) => {
             await queryClient.cancelQueries(['tabs', subjectId]);
-            const previousTabsData = queryClient.getQueryData<Record<string, any>>(['tabs', subjectId]);
+            const previousTabsData = queryClient.getQueryData<GuideTabType[]>(['tabs', subjectId]);
 
             if (previousTabsData) {
-                const optimisticResult = produce<Record<string, any>>(previousTabsData, draftData => {
-                    (draftData['hydra:member'] as GuideTabType[]).push(newTab);
+                const optimisticResult = produce<GuideTabType[]>(previousTabsData, draftData => {
+                    draftData.push(newTab);
                 });
 
                 queryClient.setQueryData(['tabs', subjectId], optimisticResult);

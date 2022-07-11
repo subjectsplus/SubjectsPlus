@@ -17,19 +17,19 @@ export function useReorderPluslet() {
             await queryClient.cancelQueries(['pluslets', sourceSection]);
             await queryClient.cancelQueries(['pluslets', destinationSection]);
 
-            const sourcePlusletsData = queryClient.getQueryData<Record<string, any>>(['pluslets', sourceSection]);
-            const destinationPlusletsData = queryClient.getQueryData<Record<string, any>>(['pluslets', destinationSection]);
+            const sourcePlusletsData = queryClient.getQueryData<PlusletType[]>(['pluslets', sourceSection]);
+            const destinationPlusletsData = queryClient.getQueryData<PlusletType[]>(['pluslets', destinationSection]);
 
             // Produce optimistic result
             if (sourcePlusletsData && destinationPlusletsData) {
                 if (sourceSection === destinationSection && sourceColumn === destinationColumn) {
-                    const optimisticDestinationPluslets = produce<Record<string, any>>(destinationPlusletsData, draftData => {
-                        const columnPluslets = (draftData['hydra:member'] as PlusletType[]).filter(
+                    const optimisticDestinationPluslets = produce<PlusletType[]>(destinationPlusletsData, draftData => {
+                        const columnPluslets = draftData.filter(
                             pluslet => pluslet.pcolumn === destinationColumn).filter(
                             pluslet => pluslet !== undefined
                         );
     
-                        const updatedPluslets: Record<string, any>= {};
+                        const updatedPluslets: Record<string, Record<'prow', number>>= {};
     
                         // Move pluslet within the same column
                         const [reorderedPluslet] = columnPluslets.splice(sourceIndex, 1);
@@ -48,16 +48,16 @@ export function useReorderPluslet() {
                         });
     
                         // Set the updated prow
-                        (draftData['hydra:member'] as PlusletType[]).forEach((pluslet, index) => {
+                        draftData.forEach((pluslet, index) => {
                             if (updatedPluslets[pluslet.id]) {
-                                draftData['hydra:member'][index] = produce<PlusletType>(pluslet, draftPluslet => {
+                                draftData[index] = produce<PlusletType>(pluslet, draftPluslet => {
                                     draftPluslet.prow = updatedPluslets[pluslet.id].prow;
                                 });
                             }
                         });
     
                         // Resort the pluslets
-                        (draftData['hydra:member'] as PlusletType[]).sort((plusletA, plusletB) => {
+                        draftData.sort((plusletA, plusletB) => {
                             if (plusletA.pcolumn === plusletB.pcolumn) {
                                 return plusletA.prow - plusletB.prow;
                             }
@@ -69,12 +69,12 @@ export function useReorderPluslet() {
         
                     return { destinationPlusletsData };
                 } else {
-                    const sourceColumnPluslets = (sourcePlusletsData['hydra:member'] as PlusletType[]).filter(
+                    const sourceColumnPluslets = sourcePlusletsData.filter(
                         pluslet => pluslet.pcolumn === sourceColumn).filter(
                         pluslet => pluslet !== undefined
                     );
     
-                    const updatedPluslets: Record<string, any>= {};
+                    const updatedPluslets: Record<string, Record<'pcolumn'|'prow', number>> = {};
     
                     // Remove pluslet from source column
                     const [reorderedPluslet] = sourceColumnPluslets.splice(sourceIndex, 1);
@@ -92,7 +92,7 @@ export function useReorderPluslet() {
                     });
     
                     // Move pluslet to a different section/column
-                    const destinationColumnPluslets = (destinationPlusletsData['hydra:member'] as PlusletType[]).filter(
+                    const destinationColumnPluslets = destinationPlusletsData.filter(
                         pluslet => pluslet.pcolumn === destinationColumn).filter(
                             pluslet => pluslet !== undefined
                     );
@@ -111,17 +111,17 @@ export function useReorderPluslet() {
                         }
                     });
     
-                    const optimisticSourcePluslets = produce<Record<string, any>>(sourcePlusletsData, draftData => {
+                    const optimisticSourcePluslets = produce<PlusletType[]>(sourcePlusletsData, draftData => {
                         // Pluslet must be removed from sourcePluslets if not the same section
                         if (sourceSection !== destinationSection) {
-                            const plusletIndex = (draftData['hydra:member'] as PlusletType[]).findIndex(pluslet => pluslet.id === reorderedPluslet.id);
-                            (draftData['hydra:member'] as PlusletType[]).splice(plusletIndex, 1);
+                            const plusletIndex = draftData.findIndex(pluslet => pluslet.id === reorderedPluslet.id);
+                            draftData.splice(plusletIndex, 1);
                         }
     
                         // Set the updated prow/pcolumn
-                        (draftData['hydra:member'] as PlusletType[]).forEach((pluslet, index) => {
+                        draftData.forEach((pluslet, index) => {
                             if (updatedPluslets[pluslet.id]) {
-                                draftData['hydra:member'][index] = produce(pluslet, draftPluslet => {
+                                draftData[index] = produce(pluslet, draftPluslet => {
                                     draftPluslet.prow = updatedPluslets[pluslet.id].prow;
                                     draftPluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
                                 });
@@ -129,7 +129,7 @@ export function useReorderPluslet() {
                         });
     
                         // Resort the pluslets
-                        (draftData['hydra:member'] as PlusletType[]).sort((plusletA, plusletB) => {
+                        draftData.sort((plusletA, plusletB) => {
                             if (plusletA.pcolumn === plusletB.pcolumn) {
                                 return plusletA.prow - plusletB.prow;
                             }
@@ -137,16 +137,16 @@ export function useReorderPluslet() {
                         });
                     });
     
-                    const optimisticDestinationPluslets = produce<Record<string, any>>(destinationPlusletsData, draftData => {
+                    const optimisticDestinationPluslets = produce<PlusletType[]>(destinationPlusletsData, draftData => {
                         // Pluslet must be added to destinationPluslets if not the same section
                         if (sourceSection !== destinationSection) {
-                            (draftData['hydra:member'] as PlusletType[]).push(reorderedPluslet);
+                            draftData.push(reorderedPluslet);
                         }
     
                         // Set the updated prow/pcolumn
-                        (draftData['hydra:member'] as PlusletType[]).forEach((pluslet, index) => {
+                        draftData.forEach((pluslet, index) => {
                             if (updatedPluslets[pluslet.id]) {
-                                draftData['hydra:member'][index] = produce(pluslet, draftPluslet => {
+                                draftData[index] = produce(pluslet, draftPluslet => {
                                     draftPluslet.prow = updatedPluslets[pluslet.id].prow;
                                     draftPluslet.pcolumn = updatedPluslets[pluslet.id].pcolumn;
                                 });
@@ -154,7 +154,7 @@ export function useReorderPluslet() {
                         });
     
                         // Resort the pluslets
-                        (draftData['hydra:member'] as PlusletType[]).sort((plusletA, plusletB) => {
+                        draftData.sort((plusletA, plusletB) => {
                             if (plusletA.pcolumn === plusletB.pcolumn) {
                                 return plusletA.prow - plusletB.prow;
                             }

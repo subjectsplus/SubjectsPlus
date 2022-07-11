@@ -8,11 +8,11 @@ export const useCreateSection = (tabUUID: string) => {
     return useMutation(createSection, {
         onMutate: async (newSection: GuideSectionType) => {
             await queryClient.cancelQueries(['sections', tabUUID]);
-            const previousSectionsData = queryClient.getQueryData<Record<string, any>>(['sections', tabUUID]);
+            const previousSectionsData = queryClient.getQueryData<GuideSectionType[]>(['sections', tabUUID]);
 
             if (previousSectionsData) {
-                const optimisticResult = produce<Record<string, any>>(previousSectionsData, draftData => {
-                    (draftData['hydra:member'] as GuideSectionType[]).push(newSection);
+                const optimisticResult = produce<GuideSectionType[]>(previousSectionsData, draftData => {
+                    draftData.push(newSection);
                 });
                 
                 queryClient.setQueryData(['sections', tabUUID], optimisticResult);
