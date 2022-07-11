@@ -1,4 +1,14 @@
-function EditableTitle({isEditMode, dragHandleProps, title, onChange, onKeyDown}) {
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
+
+type EditableTitleProps = {
+    isEditMode: boolean,
+    dragHandleProps?: DraggableProvidedDragHandleProps,
+    title: string,
+    onChange: React.ChangeEventHandler<HTMLInputElement>,
+    onKeyDown: React.KeyboardEventHandler<HTMLInputElement>
+};
+
+export const EditableTitle = ({isEditMode, dragHandleProps, title, onChange, onKeyDown}: EditableTitleProps) => {
     if (isEditMode) {
         return (
             <div className="sp-pluslet-title">
@@ -23,5 +33,3 @@ function EditableTitle({isEditMode, dragHandleProps, title, onChange, onKeyDown}
         return (<p className="sp-pluslet-title" title="Move Box" {...dragHandleProps}>{title}</p>);
     }
 }
-
-export default EditableTitle;

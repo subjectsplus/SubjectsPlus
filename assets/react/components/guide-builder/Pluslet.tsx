@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import DOMPurify from 'dompurify';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
+import { CKEditorEventPayload } from 'ckeditor4-react';
 import { useDebouncedCallback } from 'use-debounce';
-import { useUpdatePluslet, useDeletePluslet } from '@api/guide/PlusletAPI';
-import CKEditor from '@components/shared/CKEditor';
+import { useUpdatePluslet } from '@hooks/useUpdatePluslet';
+import { useDeletePluslet } from '@hooks/useDeletePluslet';
+import { CKEditor } from '@components/shared/CKEditor';
 import { DeleteConfirmModal } from '@components/shared/DeleteConfirmModal';
-import ActionsContainer from './pluslets/shared/ActionsContainer';
+import { ActionsContainer}  from './pluslets/shared/ActionsContainer';
 import { hideAllOffcanvas } from '@utility/Utility';
 import { useDraggableInPortal } from '@hooks/useDraggableInPortal';
 import { useSectionContainer, SectionContainerType } from '@context/SectionContainerContext';
@@ -35,7 +37,7 @@ export const Pluslet = ({ plusletUUID, plusletTitle, plusletBody, plusletRow, se
     const deletePlusletMutation = useDeletePluslet(sectionUUID);
 
     const isCurrentlyDragging = (('pluslet-' + plusletUUID) === currentDraggingId);
-    const isBeingDraggedOver = (!isCurrentlyDragging && currentDraggingId && 
+    const isBeingDraggedOver = (!isCurrentlyDragging && typeof currentDraggingId === 'string' && 
         currentDraggingId.substring(0, 8) === 'pluslet-');
     const isActiveDropdown = plusletDropdownRef?.current?.classList ? 
         plusletDropdownRef.current.classList.contains('show') : false;
@@ -81,10 +83,26 @@ export const Pluslet = ({ plusletUUID, plusletTitle, plusletBody, plusletRow, se
         }
     }
 
-    const handleSaveKey = (event) => {
+    const handleCKEditorSaveKey = (evt: CKEditorEventPayload<'key'>) => {
         if (currentEditablePluslet === plusletUUID) {
-            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
-                event.preventDefault();
+            if (evt.data && evt.data.hasOwnProperty('domEvent')) {
+                const data: Record<string, any> = evt.data;
+                const domEvent = data['domEvent'].$;
+
+                if (domEvent) {
+                    if ((domEvent.ctrlKey || domEvent.metaKey) && domEvent.key === 's') {
+                        domEvent.preventDefault();
+                        savePluslet();
+                    }
+                }
+            }
+        }
+    }
+
+    const handleSaveKey = (evt: React.KeyboardEvent) => {
+        if (currentEditablePluslet === plusletUUID) {
+            if ((evt.ctrlKey || evt.metaKey) && evt.key === 's') {
+                evt.preventDefault();
                 savePluslet();
             }
         }
@@ -114,18 +132,20 @@ export const Pluslet = ({ plusletUUID, plusletTitle, plusletBody, plusletRow, se
 
     const debouncedUpdatePlusletBody = useDebouncedCallback(updatePlusletBody, 1000);
 
-    const handleCKEditorInstanceReady = evt => {
-        evt.editor.setData(body);
+    const handleCKEditorInstanceReady = (evt: CKEditorEventPayload<'instanceReady'>) => {
+        if (evt.editor) {
+            evt.editor.setData(body);
+        }
     }
 
-    const onCKEditorChanged = evt => {
+    const onCKEditorChanged = (evt: CKEditorEventPayload<'change'>) => {
         if (evt.editor) {
             setBody(evt.editor.getData())
             debouncedUpdatePlusletBody();
         }
     }
 
-    const getPlusletClassName = (isDragging) => {
+    const getPlusletClassName = (isDragging: boolean) => {
         let className = 'pluslet';
 
         if (isDragging) {
@@ -139,7 +159,7 @@ export const Pluslet = ({ plusletUUID, plusletTitle, plusletBody, plusletRow, se
         return className;
     }
 
-    const getPlusletBodyClassName = (isDragging) => {
+    const getPlusletBodyClassName = (isDragging: boolean) => {
         let className = 'sp-pluslet-body';
 
         if (isDragging) {
@@ -149,9 +169,9 @@ export const Pluslet = ({ plusletUUID, plusletTitle, plusletBody, plusletRow, se
         return className;
     }
 
-    const Editor = (isDragging) => {
+    const Editor = (isDragging: boolean) => {
         if (editable && !isDragging) {
-            return (<CKEditor name="pluslet_ckeditor" onKey={evt => handleSaveKey(evt.data.domEvent.$)} 
+            return (<CKEditor name="pluslet_ckeditor" onKey={handleCKEditorSaveKey} 
                         onInstanceReady={handleCKEditorInstanceReady} onChange={onCKEditorChanged} />);
         } else {
             return (<div className={getPlusletBodyClassName(isDragging)}
@@ -159,7 +179,7 @@ export const Pluslet = ({ plusletUUID, plusletTitle, plusletBody, plusletRow, se
         }
     }
     
-    const PlusletWindow = (provided, snapshot) => (
+    const PlusletWindow = (provided: DraggableProvided|null = null, snapshot: DraggableStateSnapshot|null = null) => (
         <div className={getPlusletClassName(snapshot?.isDragging || isCurrentlyDragging)} key={plusletUUID} 
             ref={provided?.innerRef} onDoubleClick={() => !editable && toggleEditable()}
             onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)}
@@ -193,7 +213,7 @@ export const Pluslet = ({ plusletUUID, plusletTitle, plusletBody, plusletRow, se
     );
     
     const DraggablePluslet = () => (
-        <Draggable type="pluslet" key={plusletUUID.toString()} draggableId={'pluslet-' + plusletUUID} index={plusletRow}>
+        <Draggable key={plusletUUID.toString()} draggableId={'pluslet-' + plusletUUID} index={plusletRow}>
             {renderDraggable((provided, snapshot) => PlusletWindow(provided, snapshot))}
         </Draggable>
     )

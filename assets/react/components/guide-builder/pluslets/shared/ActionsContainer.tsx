@@ -1,7 +1,20 @@
-import EditableTitle from './EditableTitle';
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
+import { EditableTitle } from './EditableTitle';
 
-function ActionsContainer({ isEditMode, editSaveOnClick, deletePlusletOnClick, visible, plusletDropdownRef, 
-    title, dragHandleProps, onEditableTitleChange, onEditableTitleKeyDown}) {
+type ActionsContainerProps = {
+    isEditMode: boolean,
+    editSaveOnClick: React.MouseEventHandler<HTMLButtonElement>,
+    deletePlusletOnClick: React.MouseEventHandler<HTMLAnchorElement>,
+    visible: boolean,
+    plusletDropdownRef: React.RefObject<HTMLUListElement>,
+    title: string,
+    dragHandleProps?: DraggableProvidedDragHandleProps,
+    onEditableTitleChange: React.ChangeEventHandler<HTMLInputElement>
+    onEditableTitleKeyDown: React.KeyboardEventHandler<HTMLInputElement>
+}
+
+export const ActionsContainer = ({ isEditMode, editSaveOnClick, deletePlusletOnClick, visible, plusletDropdownRef, 
+    title, dragHandleProps, onEditableTitleChange, onEditableTitleKeyDown}: ActionsContainerProps) => {
     const EditSaveButton = () => {
         if (isEditMode) {
             return (
@@ -48,5 +61,3 @@ function ActionsContainer({ isEditMode, editSaveOnClick, deletePlusletOnClick, v
         </div>
     );
 }
-
-export default ActionsContainer;
