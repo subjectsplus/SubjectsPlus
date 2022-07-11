@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block header_content %}
-    <div class="header-content fs-sm text-center">
+    <div class="header-content text-center">
         <p class="mt-4">Research Guides point you to materials and resources appropriate for particular disciplines, courses, and special topics. These guides are curated by UM librarians and experts-in-training, including Library Research Scholars and Peer Research Consultants. In a world of abundant information resources, librarians create research guides to save you time and energy.</p>
         <p class="mb-0">If you would like to request a guide for a course or topic, <a href="https://www.google.com" target="_blank">please contact your librarian</a>.</p>
     </div>
@@ -21,9 +21,28 @@
 
 {% block main %}
 <h1>UM Theme</h1>
-<ul class="list-unstyled">
-{% for subject in subjects %}
-<li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{subject.subject }}</a></li>
-{% endfor %}
-</ul>
+    <div class="row">
+        <div class="col-lg-8">
+            {% include('frontend/subjects/guides/_guides_listing_tabs.html.twig') %}
+        </div>
+
+        <div class="col-lg-4">
+            {% if getconfig('display_experts') == 'true' %}
+                {% include('frontend/subjects/guides/_show_experts.html.twig') %}
+            {% endif %}
+
+            {% if getconfig('display_new_databases') == 'true' or getconfig('display_new_guides') == 'true' %}
+                {# TODO: Assign different feature class based on theme #}
+                <div class="feature-neutral p-3 mt-5">
+                    {% if getconfig('display_new_databases') == 'true' %}
+                        {% include('frontend/subjects/guides/_show_new_databases.html.twig') %}
+                    {% endif %}
+
+                    {% if getconfig('display_new_guides') == 'true' %}
+                        {% include('frontend/subjects/guides/_show_new_guides.html.twig') %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

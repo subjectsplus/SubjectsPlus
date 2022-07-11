@@ -2,7 +2,7 @@
     {% if getconfig('site_logo') %} {# TODO: Configure path for logo image set in config #}
         {% set logoSrc = getconfig('site_logo') %}
     {% else %}
-        {% set logoSrc = asset('build/images/frontend/sp_logo.png') %}
+        {% set logoSrc = asset('build/images/frontend/sp_logo.png')%}
     {% endif %}
 
     {% if getconfig('meta_author') %}

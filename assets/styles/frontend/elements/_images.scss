@@ -1,0 +1,18 @@
+// Staff Images
+.sp-staff-img,
+.sp-staff-img-round{
+  width: 125px;
+  height: 125px;
+}
+
+.sp-staff-img {
+  border: 1px solid var(--THEME-UI-ACTIVE-COLOR);
+  padding: .25rem;
+  background-color: var(--THEME-UI-NEUTRAL-COLOR);
+}
+
+.sp-staff-img-round {
+  border-radius: $border-radius-circle;
+  padding: 0 .25rem .25rem 0;
+  background-color: var(--THEME-UI-ACTIVE-COLOR);
+}

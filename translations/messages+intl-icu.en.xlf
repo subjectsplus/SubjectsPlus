@@ -1097,6 +1097,22 @@
         <source>public.guides.icon_help_text</source>
         <target>See guide description/keywords</target>
       </trans-unit>
+      <trans-unit id="4qaFI8U" resname="public.new_databases.no_results.label">
+        <source>public.new_databases.no_results.label</source>
+        <target>There are no new databases</target>
+      </trans-unit>
+      <trans-unit id="yy0rgwh" resname="public.new_databases.see_all.label">
+        <source>public.new_databases.see_all.label</source>
+        <target>See all</target>
+      </trans-unit>
+      <trans-unit id="OB9HZ3M" resname="public.new_databases.label">
+        <source>public.new_databases.label</source>
+        <target>New Databases</target>
+      </trans-unit>
+      <trans-unit id="Ys5NgP9" resname="public.new_guides.label">
+        <source>public.new_guides.label</source>
+        <target>New Guides</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

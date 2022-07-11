@@ -10,6 +10,7 @@ use App\Controller\Frontend\FrontendBaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\DatabaseService;
 
 /**
  * @Route("/")
@@ -18,10 +19,11 @@ class SubjectsController extends FrontendBaseController
 {
     private $subjectService;
 
-    public function __construct(ThemeService $themeService, SubjectService $subjectService)
+    public function __construct(ThemeService $themeService, SubjectService $subjectService, DatabaseService $databaseService)
     {
         parent::__construct($themeService);
         $this->subjectService = $subjectService;
+        $this->databaseService = $databaseService;
     }
 
     /**
@@ -33,7 +35,8 @@ class SubjectsController extends FrontendBaseController
 
         return $this->render('subjects/index.html.twig', [
             'controller_name' => 'SubjectsController',
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'newestDatabases' => $this->databaseService->newestDatabases()
         ]);
     }
 

@@ -1,4 +1,12 @@
-<h4 class="text-center">New Databases</h4>
+<h4 class="text-center">- {{ 'public.new_databases.label' | trans }} -</h4>
 <ul class="list-unstyled fs-sm">
-    <li><a href="#" class="link-default">database 1</a></li>
+    {% for newdb in newestDatabases | slice(0,5) %}
+        <li class="mb-1"><a href="{{ newdb.url }}" class="link-default">{{ newdb.title }}</a></li>
+    {% else %}
+        <li>{{ 'public.new_databases.no_results.label' | trans }}</li>
+    {% endfor %}
 </ul>
+<div class="text-center mt-4">
+        {# TODO: Add link for all new databases #}
+        <a href="#" class="btn btn-primary fs-sm">{{ 'public.new_databases.see_all.label' | trans }}</a>
+</div>
