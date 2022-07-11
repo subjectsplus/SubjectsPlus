@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult, BeforeCapture } from 'react-beautiful-dnd';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { useReorderSection } from '@hooks/useReorderSection';
 import { useCreateSection } from '@hooks/useCreateSection';
 import { useFetchSections } from '@hooks/useFetchSections';
-import { useReorderPluslet } from '@api/guide/PlusletAPI';
+import { useReorderPluslet } from '@hooks/useReorderPluslet';
 import { GuideSectionType } from '@shared/types/guide_types';
 import { SectionContainerProvider } from '@context/SectionContainerContext';
 import { Section } from './Section';
@@ -15,6 +15,7 @@ type SectionContainerProps = {
 
 export const SectionContainer = ({ tabUUID }: SectionContainerProps) => {
     const [draggingId, setDraggingId] = useState<string|null>(null);
+    const [lastSectionIndex, setLastSectionIndex] = useState<number>(0);
 
     const {isLoading, isError, data, error} = useFetchSections(tabUUID);
 
@@ -22,6 +23,15 @@ export const SectionContainer = ({ tabUUID }: SectionContainerProps) => {
     const reorderSectionMutation = useReorderSection(tabUUID);
     const reorderPlusletMutation = useReorderPluslet();
     
+    useEffect(() => {
+        if (data) {
+            const lastSection = data.at(-1);
+            if (lastSection) {
+                setLastSectionIndex(lastSection['sectionIndex']);
+            }
+        }
+    }, [data]);
+
     const reorderSection = (sourceIndex: number, destinationIndex: number) => {
         reorderSectionMutation.mutate({
             tabUUID: tabUUID,
@@ -91,7 +101,7 @@ export const SectionContainer = ({ tabUUID }: SectionContainerProps) => {
         if (Array.isArray(data)) {
             const initialSectionData = {
                 id: uuidv4(),
-                sectionIndex: (data.length > 0 ? data.at(-1).sectionIndex + 1 : 0),
+                sectionIndex: lastSectionIndex + 1,
                 layout: '4-4-4',
                 tab: '/api/tabs/' + tabUUID
             };
