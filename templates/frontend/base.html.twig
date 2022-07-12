@@ -1,5 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% if getconfig('theme_id') %}
+    {% set dataTheme = getconfig('theme_id') %}
+{% endif %}
+
+{% block html_open_tag %}
+    <html lang="{{ app.request.locale }}" data-theme="{{ dataTheme }}">
+{% endblock %}
+
 {% block title %}
 {% block metatitle %}SubjectsPlus{% endblock %}
     {% if getconfig('meta_author') %}
@@ -13,6 +21,13 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('frontend_main') }}
+
+    {% if getconfig('theme_id') == 'um' %}
+        {{ encore_entry_link_tags('um') }}
+    {% elseif getconfig('theme_id') == 'custom' %}
+        {{ encore_entry_link_tags('custom') }}
+    {% endif %}
+
 {% endblock %}
 
 {% block javascripts %}
@@ -20,7 +35,7 @@
 {% endblock %}
 
 {% block body %}
-<main>
+    <main>
     {% block navmenu %}
         {% include('frontend/includes/navigation_switcher.html.twig') %}
     {% endblock %}

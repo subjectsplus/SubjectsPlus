@@ -1,0 +1,45 @@
+// Add styles/overrides for UM theme only
+[data-theme="um"] {
+   //general
+   body {
+      @media screen and (min-width: 992px){
+         font-size: 1.125rem;
+      }
+   }
+
+   h1,h2,h3,h4,h5{
+      &.fw-light {
+         font-weight:600 !important;
+      }
+   }
+
+   h1{
+      position: relative;
+      &::after{
+         content:'';
+         position: absolute;
+         bottom:0;
+         background-color: var(--THEME-UI-ACTIVE-COLOR);
+         height:.25rem;
+         width: 2.5rem;
+         display: block;
+         left: calc(50% - 1.25rem);
+         margin-bottom: -5px;
+      }
+   }
+
+   .fs-sm {
+      font-size: 1rem !important;
+   }
+
+   .fs-xs {
+      font-size: 0.875rem !important;
+   }
+
+   //guides
+   .sp-guide-tabs.nav-pills .nav-item{
+      font-size: 1rem;
+   }
+
+
+} // end data-theme

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+{% block html_open_tag %}
+    <html lang="{{ app.request.locale }}">
+{% endblock %}
     <head>
         {% block head %}
             <meta charset="UTF-8">

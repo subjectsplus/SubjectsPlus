@@ -55,6 +55,10 @@ Encore
     .addEntry('frontend_main', './assets/frontend/FrontendMain.js')
     .addEntry('bs_tabs_anchor', './assets/frontend/javascript/BootstrapTabsAnchor.js')
 
+    //Theme CSS only
+    .addEntry('um', './assets/frontend/themes/UM.js')
+    .addEntry('custom', './assets/frontend/themes/Custom.js')
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
