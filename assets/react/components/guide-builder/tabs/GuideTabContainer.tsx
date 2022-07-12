@@ -46,16 +46,18 @@ export const GuideTabContainer = () => {
 
             setCurrentTab(data[activeKey]);
         }
-    }, [data]);
+    }, [data, activeKey]);
 
     const onTabSelect = (eventKey: string|null) => {
-        if (eventKey === 'new-tab') {
-            // Create new tab
-            setShowNewTabForm(true);
-            hideAllOffcanvas();
-        } else if (activeKey.toString() !== eventKey) {
-            setActiveKey(Number(eventKey));
-            hideAllOffcanvas();
+        if (eventKey) {
+            if (eventKey === 'new-tab') {
+                // Create new tab
+                setShowNewTabForm(true);
+                hideAllOffcanvas();
+            } else if (activeKey.toString() !== eventKey) {
+                setActiveKey(Number(eventKey));
+                hideAllOffcanvas();
+            }
         }
     }
 
@@ -132,12 +134,12 @@ export const GuideTabContainer = () => {
         return (<p>Error: Failed to load tabs through API Endpoint!</p>);
     } else if (data) {
         // convert tabs data to draggable nav links
-        const guideTabs = data.map((tab: GuideTabType) => (
+        const guideTabs = data.map(tab => (
             <GuideTab key={'tab-' + tab.tabIndex} tab={tab} />
         ));
 
         // generate tab content
-        const tabsContent = data.map((tab: GuideTabType) => {
+        const tabsContent = data.map(tab => {
             return (
                 <GuideTabContent key={'tab-content-' + tab.tabIndex} tab={tab} />
             );
