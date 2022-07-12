@@ -13,12 +13,14 @@ export const useDeletePluslet = (sectionUUID: string) => {
             if (previousPlusletsData) {
                 const optimisticResult = produce<PlusletType[]>(previousPlusletsData, draftData => {
                     const updates: Record<string, any> = {};
-                    const plusletToRemove = draftData.find(pluslet => pluslet.id === deletedPluslet.plusletUUID);
+                    const index = draftData.findIndex(pluslet => pluslet.id === deletedPluslet.plusletUUID);
 
-                    if (plusletToRemove) {
+                    if (index !== -1) {
+                        const plusletToRemove = draftData[index];
                         const columnPluslets = draftData.filter(pluslet => pluslet.pcolumn === plusletToRemove.pcolumn)
                         .filter(pluslet => pluslet.id !== plusletToRemove.id);
-        
+                        
+                        // Find which pluslets need prow to be updated
                         columnPluslets.forEach((pluslet, index) => {
                             if (pluslet.prow !== index) {
                                 updates[pluslet.id] = {
@@ -26,8 +28,9 @@ export const useDeletePluslet = (sectionUUID: string) => {
                                 };
                             }
                         });
-        
-                        draftData = draftData.filter(pluslet => pluslet.id !== plusletToRemove.id);
+                        
+                        // Remove pluslet from array, then update prow
+                        draftData.splice(index, 1);
                         draftData.forEach(pluslet => {
                             if (updates[pluslet.id]) {
                                 pluslet.prow = updates[pluslet.id].prow;

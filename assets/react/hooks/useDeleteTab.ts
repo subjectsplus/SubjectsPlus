@@ -12,8 +12,11 @@ export const useDeleteTab = (subjectId: number) => {
             
             if (previousTabsData) {
                 const optimisticResult = produce<GuideTabType[]>(previousTabsData, draftData => {
-                    draftData = draftData.filter(tab => tab.id !== deletedTab.tabUUID);
-                    draftData.forEach((tab, index) => tab.tabIndex = index);
+                    const index = draftData.findIndex(tab => tab.id === deletedTab.tabUUID);
+                    if (index !== -1) {
+                        draftData.splice(index, 1);
+                        draftData.forEach((tab, index) => tab.tabIndex = index);
+                    }
                 });
 
                 queryClient.setQueryData(['tabs', subjectId], optimisticResult);

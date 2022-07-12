@@ -12,8 +12,11 @@ export const useDeleteSection = (tabUUID: string) => {
 
             if (previousSectionsData) {
                 const optimisticResult = produce<GuideSectionType[]>(previousSectionsData, draftData => {
-                    draftData = draftData.filter(section => section.id !== deletedSection.sectionUUID);
-                    draftData.forEach((section, index) => section.sectionIndex = index);
+                    const index = draftData.findIndex(section => section.id === deletedSection.sectionUUID);
+                    if (index !== -1) {
+                        draftData.splice(index, 1);
+                        draftData.forEach((section, index) => section.sectionIndex = index);
+                    }
                 });
                 
                 queryClient.setQueryData(['sections', tabUUID], optimisticResult);
