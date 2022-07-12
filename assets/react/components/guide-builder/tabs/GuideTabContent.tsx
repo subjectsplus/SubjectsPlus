@@ -1,7 +1,7 @@
 import Tab from 'react-bootstrap/Tab';
 import { GuideTabType } from '@shared/types/guide_types';
 import { useGuideTabContainer, GuideTabContainerType } from '@context/GuideTabContainerContext';
-import { SectionContainer } from '../SectionContainer';
+import { SectionContainer } from '../sections/SectionContainer';
 
 type GuideTabContentProps = {
     tab: GuideTabType,
