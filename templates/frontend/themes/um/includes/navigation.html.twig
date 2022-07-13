@@ -1,1 +1,75 @@
-<p>This is the UM nav</p>
+<section class="slivernav">
+    <div class="row g-0">
+        <div class="col-1">
+            <button class="btn sliverbutton p-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sliverAccessibility" aria-expanded="false" aria-controls="sliverAccessibility" title="Toggle Accessibility Options">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+        <div class="col-10 text-center">
+            <a href="http://www.miami.edu/" target="_blank" title="University of Miami">
+                <img src="https://www.library.miami.edu/assets/common-images/um-logo-sliver.svg" alt="University of Miami Sliver-logo" style="width: 220px; height: 10px;">
+            </a>
+        </div>
+        <div class="col-1 text-end">
+            <button class="btn sliverbutton p-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sliverContent" aria-expanded="false" aria-controls="sliverContent" title="Toggle Sliver Menu">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+
+    {# Accessibility #}
+    <div class="sliver-accessibility collapse" id="sliverAccessibility" style="background-color:#212121;">
+        <div class="container p-3">
+            <h6 class="mb-4 mb-sm-1">Accessibility Options:</h6>
+            <ul class="list-unstyled fs-sm mb-sm-0 d-sm-flex flex-sm-nowrap flex-sm-row justify-content-sm-start">
+                <li class="mb-2 me-sm-4"><a href="https://camnercenter.miami.edu/disability-services/index.html">Office of Disability Services</a></li>
+                <li class="mb-2 me-sm-4"><a href="https://camnercenter.miami.edu/disability-services/request-services/index.html">Request Assistance</a></li>
+                <li>305-284-2374</li>
+            </ul>
+        </div>
+    </div>
+
+    {# Content #}
+    <div class="sliver-content collapse" id="sliverContent" style="background-color:#212121;">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <form action="https://welcome.miami.edu/search/search-results.html">
+                        <input name="client" value="$sSearchClient" type="hidden">
+                        <input name="resTemp" value="/search/search-results.html" type="hidden">
+                        <input name="domain" value="https://library.miami.edu" type="hidden">
+                        <label class="sr-only" for="sliverSearch">Search University of Miami</label>
+                        <input class="umsearchfield" id="sliverSearch" name="q" placeholder="Search UM" type="text">
+                        <button aria-label="Search" class="btn umsearchbutton"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="col-md-8 order-md-first">
+                    <ul class="list-unstyled fs-sm mt-3 my-md-0 d-md-flex flex-md-nowrap flex-md-row justify-content-md-between align-items-md-center justify-content-lg-start">
+                        <li class="mb-3 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/apply-now/index.html" class="btn apply-btn"><strong>Apply</strong></a></li>
+                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/about-um/index.html">About UM</a></li>
+                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/give/index.html">Give to UM</a></li>
+                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/academics/schools-and-colleges/index.html">Schools</a></li>
+                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://alumni.miami.edu/index.html">Alumni</a></li>
+                        <li class="mb-2 mb-md-0"><a href="http://roadmap.miami.edu/index.html">Roadmap</a></li>
+                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/academics/index.html">Academics</a></li>
+                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/admissions/index.html">Admissions</a></li>
+                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/student-life/index.html">Student Life</a></li>
+                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/research/index.html">Research</a></li>
+                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/uhealth/index.html">UHealth</a></li>
+                        <li class="d-md-none"><a href="https://welcome.miami.edu/athletics/index.html">Athletics</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-1 align-self-md-center">
+                    <a href="https://welcome.miami.edu/tools/index.html" class="fs-sm">Tools</a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+
+

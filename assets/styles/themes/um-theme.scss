@@ -36,10 +36,115 @@
       font-size: 0.875rem !important;
    }
 
+   // sliver
+   .slivernav {
+      background-color: #000000;
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+      color: #FFFFFF;
+      @media screen and (min-width: 992px){
+         position: initial;
+      }
+
+      .sliverbutton {
+         background-color: #636466;
+         border-color: #636466;
+         border-radius: 0;
+         width: 40px;
+         color: #FFFFFF;
+         height: 22px;
+         line-height: 1;
+
+         &:not(.collapsed){
+            background-image: url('https://cdn.miami.edu/_assets-common/images/system/btn-over-15.png');
+            background-repeat: repeat;
+            background-position: 0 0;
+            .fa-plus {
+               &::before {
+                  content:"\f068";
+               }
+            }
+         }
+
+         &:focus{ box-shadow: none; }
+      }
+
+      a {
+         color: #FFFFFF;
+
+         &:hover,
+         &:active {
+            color: rgba(255,255,255, 0.8);
+         }
+      }
+
+      .umsearchbutton,
+      .umsearchfield {
+         background-color: rgba(255,255,255,0.25);
+         border: solid 3px rgba(255,255,255,0.5);
+         font-size: .875rem;
+         line-height: 1;
+      }
+
+      .umsearchfield {
+         padding: 0.25rem 0.75rem;
+         width: calc(100% - 40px);
+         color: #FFFFFF;
+
+         &::placeholder { color: #FFFFFF; }
+
+         &:focus { background-color: rgba(255,255,255,0.9); color: #333333;
+            &::placeholder { color: #333333; }
+         }
+      }
+
+      .umsearchbutton {
+         color: #FFFFFF;
+         padding: 0.375rem 0.5rem;
+         border-radius: 0;
+         vertical-align: baseline;
+
+         &:focus{ box-shadow: none; }
+      }
+
+      .apply-btn {
+         text-transform: uppercase;
+         border: solid 3px #fff;
+         background-color: #005030;
+         color: #FFFFFF;
+         border-radius: 0;
+         padding: 0.125rem 0.5rem;
+
+         &:hover,
+         &:focus {
+            background-image: url('https://cdn.miami.edu/_assets-common/images/system/btn-over-15.png');
+            background-repeat: repeat;
+            background-position: 0 0;
+         }
+      }
+
+      .sliver-accessibility,
+      .sliver-content{
+         &.show {
+
+         }
+
+
+
+
+      }
+
+   }
+
+
+
    //guides
    .sp-guide-tabs.nav-pills .nav-item{
       font-size: 1rem;
    }
+
+   //
 
 
 } // end data-theme
