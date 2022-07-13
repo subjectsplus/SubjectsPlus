@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CKEditorEventPayload } from 'ckeditor4-react';
 import DOMPurify from 'dompurify';
 import { useDebouncedCallback } from 'use-debounce';
@@ -11,8 +11,14 @@ type BasicPlusletProps = {
 }
 
 export const BasicPluslet = ({ plusletBody }: BasicPlusletProps) => {
-    const { isEditMode, savePlusletCallback } = usePlusletWindow() as PlusletWindowType;
+    const { isEditMode, savePlusletCallback, isSaveRequested } = usePlusletWindow() as PlusletWindowType;
     const [body, setBody] = useState<string>(plusletBody);
+
+    useEffect(() => {
+        if (isSaveRequested) {
+            savePluslet(body, true);
+        }
+    }, [isSaveRequested]);
 
     const savePluslet = (newBody: string, toggleEditMode: boolean = false) => {
         savePlusletCallback({
@@ -20,7 +26,7 @@ export const BasicPluslet = ({ plusletBody }: BasicPlusletProps) => {
         }, toggleEditMode);
     }
 
-    const debouncedSavePluslet = useDebouncedCallback(savePluslet, 400);
+    const debouncedSavePluslet = useDebouncedCallback(savePluslet, 1000);
 
     const handleCKEditorInstanceReady = (evt: CKEditorEventPayload<'instanceReady'>) => {
         if (evt.editor) {

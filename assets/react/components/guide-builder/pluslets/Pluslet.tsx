@@ -1,10 +1,7 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
-import DOMPurify from 'dompurify';
+import { useState, useRef } from 'react';
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
-import { CKEditorEventPayload } from 'ckeditor4-react';
 import { useUpdatePluslet } from '@hooks/useUpdatePluslet';
 import { useDeletePluslet } from '@hooks/useDeletePluslet';
-import { CKEditor } from '@components/shared/CKEditor';
 import { DeleteConfirmModal } from '@components/shared/DeleteConfirmModal';
 import { ActionsContainer}  from './shared/ActionsContainer';
 import { hideAllOffcanvas } from '@utility/Utility';
@@ -13,7 +10,6 @@ import { useSectionContainer, SectionContainerType } from '@context/SectionConta
 import { PlusletBody } from './shared/PlusletBody';
 import { PlusletType } from '@shared/types/guide_types';
 import { PlusletWindowProvider } from '@context/PlusletWindowContext';
-import { useDebouncedCallback } from 'use-debounce';
 
 type PlusletProps = {
     pluslet: PlusletType,
@@ -27,7 +23,8 @@ export const Pluslet = ({ pluslet, plusletRow, sectionUUID}: PlusletProps) => {
     const [isEditMode, setIsEditMode] = useState(currentEditablePluslet === pluslet.id);
     const [plusletHovered, setPlusletHovered] = useState(false);
     const [deletePlusletClicked, setDeletePlusletClicked] = useState(false);
-    
+    const [isSaveRequested, setIsSaveRequested] = useState(false);
+
     const plusletDropdownRef = useRef<HTMLUListElement>(null);
 
     const renderDraggable = useDraggableInPortal();
@@ -50,6 +47,7 @@ export const Pluslet = ({ pluslet, plusletRow, sectionUUID}: PlusletProps) => {
         if (toggleEditMode) {
             setIsEditMode(false);
             setCurrentEditablePluslet('');
+            setIsSaveRequested(false);
         }
     }
 
@@ -72,18 +70,24 @@ export const Pluslet = ({ pluslet, plusletRow, sectionUUID}: PlusletProps) => {
             setIsEditMode(true);
             setCurrentEditablePluslet(pluslet.id);
         } else {
-            setIsEditMode(false);
-            setCurrentEditablePluslet('');
+            setIsSaveRequested(true);
         }
     }
 
-    const handleSaveKey = (evt: React.KeyboardEvent) => {
+    const handleSaveKey = (evt: React.KeyboardEvent<HTMLDivElement>) => {
         if (currentEditablePluslet === pluslet.id) {
             if ((evt.ctrlKey || evt.metaKey) && evt.key === 's') {
                 evt.preventDefault();
                 toggleEditable();
                 hideAllOffcanvas();
             }
+        }
+    }
+
+    const handleDoubleClick = (evt: React.MouseEvent<HTMLDivElement>) => {
+        if (!isEditMode) {
+            evt.preventDefault();
+            toggleEditable();
         }
     }
 
@@ -103,8 +107,9 @@ export const Pluslet = ({ pluslet, plusletRow, sectionUUID}: PlusletProps) => {
     
     const PlusletWindow = (provided: DraggableProvided|null = null, snapshot: DraggableStateSnapshot|null = null) => (
         <div className={getPlusletClassName(snapshot?.isDragging || isCurrentlyDragging)} key={pluslet.id} 
-            ref={provided?.innerRef} onDoubleClick={() => !isEditMode && toggleEditable()}
-            onKeyDown={handleSaveKey} onMouseEnter={() => setPlusletHovered(true)} onMouseLeave={() => setPlusletHovered(false)} {...provided?.draggableProps}>
+            ref={provided?.innerRef} onDoubleClick={handleDoubleClick} onKeyDown={handleSaveKey} 
+            onMouseEnter={() => setPlusletHovered(true)} onMouseLeave={() => setPlusletHovered(false)} 
+            {...provided?.draggableProps}>
             <span className="visually-hidden">{'Pluslet ' + pluslet.id}</span>
 
             {/* Actions Container */}
@@ -127,7 +132,7 @@ export const Pluslet = ({ pluslet, plusletRow, sectionUUID}: PlusletProps) => {
     )
     
     return (
-        <PlusletWindowProvider isEditMode={isEditMode} setIsEditMode={setIsEditMode} savePlusletCallback={savePluslet}>
+        <PlusletWindowProvider isEditMode={isEditMode} setIsEditMode={setIsEditMode} savePlusletCallback={savePluslet} isSaveRequested={isSaveRequested}>
             {isEditMode ? PlusletWindow() : DraggablePluslet()}
             <DeleteConfirmModal show={deletePlusletClicked} resourceName="Box" 
                 onHide={() => setDeletePlusletClicked(false)}

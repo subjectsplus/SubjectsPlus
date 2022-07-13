@@ -4,23 +4,26 @@ type PlusletWindowProviderProps = {
   isEditMode: boolean,
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>,
   savePlusletCallback: (data: object, toggleEditMode?: boolean) => void,
+  isSaveRequested: boolean,
   children: React.ReactNode
 }
 
 export type PlusletWindowType = {
   isEditMode: boolean,
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>,
-  savePlusletCallback: (data: object, toggleEditMode?: boolean) => void
+  savePlusletCallback: (data: object, toggleEditMode?: boolean) => void,
+  isSaveRequested: boolean
 }
 
 export const PlusletWindowContext = createContext<PlusletWindowType | null>(null);
 
-export const PlusletWindowProvider = ({ isEditMode, setIsEditMode, savePlusletCallback, children }: PlusletWindowProviderProps) => {
+export const PlusletWindowProvider = ({ isEditMode, setIsEditMode, savePlusletCallback, isSaveRequested, children }: PlusletWindowProviderProps) => {
 
   const value = {
     isEditMode,
     setIsEditMode,
-    savePlusletCallback
+    savePlusletCallback,
+    isSaveRequested
   };
 
   return (

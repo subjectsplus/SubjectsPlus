@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import { useDebouncedCallback } from 'use-debounce';
 import { usePlusletWindow, PlusletWindowType } from '@context/PlusletWindowContext';
@@ -9,8 +9,14 @@ type EditableTitleProps = {
 };
 
 export const EditableTitle = ({ dragHandleProps, plusletTitle }: EditableTitleProps) => {
-    const { isEditMode, savePlusletCallback } = usePlusletWindow() as PlusletWindowType;
+    const { isEditMode, savePlusletCallback, isSaveRequested } = usePlusletWindow() as PlusletWindowType;
     const [title, setTitle] = useState(plusletTitle);
+
+    useEffect(() => {
+        if (isSaveRequested) {
+            saveTitle(title, true);
+        }
+    }, [isSaveRequested]);
 
     const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         evt.preventDefault();
@@ -24,7 +30,7 @@ export const EditableTitle = ({ dragHandleProps, plusletTitle }: EditableTitlePr
         savePlusletCallback({ title: newTitle }, toggleEditMode);
     }
 
-    const debouncedSaveTitle = useDebouncedCallback(saveTitle, 300);
+    const debouncedSaveTitle = useDebouncedCallback(saveTitle, 1000);
 
     const handleOnKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
         if (evt.code === 'Enter') {
