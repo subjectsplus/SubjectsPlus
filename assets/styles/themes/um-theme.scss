@@ -137,6 +137,34 @@
 
    }
 
+   //Navbar
+   .site-navbar-slim {
+      margin-top: 22px;
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+
+      @media screen and (min-width: 992px){
+         position: initial;
+         margin-top:0;
+      }
+
+      .navbar-toggler{
+         position: relative;
+         width: 100%;
+
+         .navbar-toggler-icon{
+            position: absolute;
+            top: 75%;
+            right: 1rem;
+            background-color: #ff0;
+         }
+      }
+
+
+   }
+
+
 
 
    //guides
