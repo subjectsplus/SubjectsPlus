@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from 'react';
-import { GuideTabType } from '@shared/types/guide_types';
 
 type SectionContainerProviderProps = {
   currentDraggingId: string|null,
