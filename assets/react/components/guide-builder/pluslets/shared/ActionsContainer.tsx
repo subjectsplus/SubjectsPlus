@@ -8,11 +8,10 @@ type ActionsContainerProps = {
     visible: boolean,
     plusletDropdownRef: React.RefObject<HTMLUListElement>,
     title: string,
-    savePlusletCallback: (data: object) => void,
     dragHandleProps?: DraggableProvidedDragHandleProps,
 }
 
-export const ActionsContainer = ({ editSaveOnClick, deletePlusletOnClick, visible, plusletDropdownRef, title, savePlusletCallback, dragHandleProps }: ActionsContainerProps) => {
+export const ActionsContainer = ({ editSaveOnClick, deletePlusletOnClick, visible, plusletDropdownRef, title, dragHandleProps }: ActionsContainerProps) => {
     const { isEditMode } = usePlusletWindow() as PlusletWindowType;
 
     const EditSaveButton = () => {
@@ -34,7 +33,7 @@ export const ActionsContainer = ({ editSaveOnClick, deletePlusletOnClick, visibl
     return (
         <div className="sp-pluslet-actions-container">
             {/* Editable Title */}
-            <EditableTitle dragHandleProps={dragHandleProps} plusletTitle={title} savePlusletCallback={savePlusletCallback} />
+            <EditableTitle dragHandleProps={dragHandleProps} plusletTitle={title} />
 
             <div className={'text-end' + (visible ? '' : ' invisible')}>
                 {/* Edit/Save Button */}

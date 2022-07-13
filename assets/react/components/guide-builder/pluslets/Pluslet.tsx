@@ -112,11 +112,11 @@ export const Pluslet = ({ pluslet, plusletRow, sectionUUID}: PlusletProps) => {
                 visible={plusletHovered || isEditMode || isActiveDropdown} plusletDropdownRef={plusletDropdownRef} 
                 deletePlusletOnClick={handlePlusletDelete}
                 dragHandleProps={provided?.dragHandleProps}
-                title={pluslet.title} savePlusletCallback={savePluslet}
+                title={pluslet.title}
             />
             
             {/* Pluslet Body */}
-            <PlusletBody pluslet={pluslet} isDragging={snapshot?.isDragging || isCurrentlyDragging || isBeingDraggedOver} savePlusletCallback={savePluslet} />
+            <PlusletBody pluslet={pluslet} isDragging={snapshot?.isDragging || isCurrentlyDragging || isBeingDraggedOver} />
         </div>
     );
     
@@ -127,7 +127,7 @@ export const Pluslet = ({ pluslet, plusletRow, sectionUUID}: PlusletProps) => {
     )
     
     return (
-        <PlusletWindowProvider isEditMode={isEditMode} setIsEditMode={setIsEditMode}>
+        <PlusletWindowProvider isEditMode={isEditMode} setIsEditMode={setIsEditMode} savePlusletCallback={savePluslet}>
             {isEditMode ? PlusletWindow() : DraggablePluslet()}
             <DeleteConfirmModal show={deletePlusletClicked} resourceName="Box" 
                 onHide={() => setDeletePlusletClicked(false)}

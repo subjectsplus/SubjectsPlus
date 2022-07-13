@@ -3,14 +3,13 @@ import { PlusletType } from '@shared/types/guide_types';
 
 type PlusletBodyProps = {
     pluslet: PlusletType,
-    isDragging: boolean,
-    savePlusletCallback: (data: object, toggleEditMode?: boolean) => void
+    isDragging: boolean
 } 
 
-export const PlusletBody = ({ pluslet, isDragging, savePlusletCallback }: PlusletBodyProps) => {
+export const PlusletBody = ({ pluslet, isDragging }: PlusletBodyProps) => {
     if (isDragging) {
         return <div className="visually-hidden" />
     } else {
-        return <BasicPluslet plusletBody={pluslet.body} savePlusletCallback={savePlusletCallback} />
+        return <BasicPluslet plusletBody={pluslet.body} />
     }
 }

@@ -6,11 +6,10 @@ import { usePlusletWindow, PlusletWindowType } from '@context/PlusletWindowConte
 type EditableTitleProps = {
     dragHandleProps?: DraggableProvidedDragHandleProps,
     plusletTitle: string,
-    savePlusletCallback: (data: object, toggleEditMode?: boolean) => void,
 };
 
-export const EditableTitle = ({ dragHandleProps, plusletTitle, savePlusletCallback }: EditableTitleProps) => {
-    const { isEditMode } = usePlusletWindow() as PlusletWindowType;
+export const EditableTitle = ({ dragHandleProps, plusletTitle }: EditableTitleProps) => {
+    const { isEditMode, savePlusletCallback } = usePlusletWindow() as PlusletWindowType;
     const [title, setTitle] = useState(plusletTitle);
 
     const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +24,7 @@ export const EditableTitle = ({ dragHandleProps, plusletTitle, savePlusletCallba
         savePlusletCallback({ title: newTitle }, toggleEditMode);
     }
 
-    const debouncedSaveTitle = useDebouncedCallback(saveTitle, 500);
+    const debouncedSaveTitle = useDebouncedCallback(saveTitle, 300);
 
     const handleOnKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
         if (evt.code === 'Enter') {

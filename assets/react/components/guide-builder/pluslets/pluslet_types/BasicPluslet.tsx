@@ -8,11 +8,10 @@ import { hideAllOffcanvas } from '@utility/Utility';
 
 type BasicPlusletProps = {
     plusletBody: string,
-    savePlusletCallback: (data: object, toggleEditMode?: boolean) => void
 }
 
-export const BasicPluslet = ({ plusletBody, savePlusletCallback }: BasicPlusletProps) => {
-    const { isEditMode } = usePlusletWindow() as PlusletWindowType;
+export const BasicPluslet = ({ plusletBody }: BasicPlusletProps) => {
+    const { isEditMode, savePlusletCallback } = usePlusletWindow() as PlusletWindowType;
     const [body, setBody] = useState<string>(plusletBody);
 
     const savePluslet = (newBody: string, toggleEditMode: boolean = false) => {
