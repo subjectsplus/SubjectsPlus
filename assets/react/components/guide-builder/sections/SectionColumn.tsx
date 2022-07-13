@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pluslet } from '../Pluslet';
+import { Pluslet } from '../pluslets/Pluslet';
 import Col from 'react-bootstrap/Col';
 import { Droppable } from 'react-beautiful-dnd';
 import { PlusletType } from '@shared/types/guide_types';
