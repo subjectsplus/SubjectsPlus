@@ -102,7 +102,6 @@ export const Section = ({ sectionUUID, layout, sectionIndex, tabUUID }: SectionP
                 section: '/api/sections/' + sectionUUID
             }
 
-            console.log('initialPlusletData: ', initialPlusletData);
             createPlusletMutation.mutate(initialPlusletData);
             setCurrentEditablePluslet(initialPlusletData.id);
         }
