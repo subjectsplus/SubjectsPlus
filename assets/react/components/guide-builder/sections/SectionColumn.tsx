@@ -32,9 +32,8 @@ export const SectionColumn = ({ columnId, sectionUUID, pluslets, columnSize, add
     const getPlusletComponents = () => {
         if (pluslets && pluslets.length > 0) {
             return pluslets.map((pluslet, row) => (
-                <Pluslet key={pluslet.id} plusletUUID={pluslet.id}
-                    plusletRow={row} plusletTitle={pluslet.title} 
-                    plusletBody={pluslet.body} sectionUUID={sectionUUID} />
+                <Pluslet key={pluslet.id} pluslet={pluslet}
+                    plusletRow={row} sectionUUID={sectionUUID} />
             ));
         }
     }

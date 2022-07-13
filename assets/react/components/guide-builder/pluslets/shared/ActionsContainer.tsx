@@ -1,20 +1,20 @@
 import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import { EditableTitle } from './EditableTitle';
+import { usePlusletWindow, PlusletWindowType } from '@context/PlusletWindowContext';
 
 type ActionsContainerProps = {
-    isEditMode: boolean,
     editSaveOnClick: React.MouseEventHandler<HTMLButtonElement>,
     deletePlusletOnClick: React.MouseEventHandler<HTMLAnchorElement>,
     visible: boolean,
     plusletDropdownRef: React.RefObject<HTMLUListElement>,
     title: string,
+    savePlusletCallback: (data: object) => void,
     dragHandleProps?: DraggableProvidedDragHandleProps,
-    onEditableTitleChange: React.ChangeEventHandler<HTMLInputElement>
-    onEditableTitleKeyDown: React.KeyboardEventHandler<HTMLInputElement>
 }
 
-export const ActionsContainer = ({ isEditMode, editSaveOnClick, deletePlusletOnClick, visible, plusletDropdownRef, 
-    title, dragHandleProps, onEditableTitleChange, onEditableTitleKeyDown}: ActionsContainerProps) => {
+export const ActionsContainer = ({ editSaveOnClick, deletePlusletOnClick, visible, plusletDropdownRef, title, savePlusletCallback, dragHandleProps }: ActionsContainerProps) => {
+    const { isEditMode } = usePlusletWindow() as PlusletWindowType;
+
     const EditSaveButton = () => {
         if (isEditMode) {
             return (
@@ -34,8 +34,7 @@ export const ActionsContainer = ({ isEditMode, editSaveOnClick, deletePlusletOnC
     return (
         <div className="sp-pluslet-actions-container">
             {/* Editable Title */}
-            <EditableTitle isEditMode={isEditMode} dragHandleProps={dragHandleProps}
-                title={title} onChange={onEditableTitleChange} onKeyDown={onEditableTitleKeyDown} />
+            <EditableTitle dragHandleProps={dragHandleProps} plusletTitle={title} savePlusletCallback={savePlusletCallback} />
 
             <div className={'text-end' + (visible ? '' : ' invisible')}>
                 {/* Edit/Save Button */}
