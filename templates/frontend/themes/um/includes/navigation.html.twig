@@ -77,35 +77,49 @@
             <img src="https://www.library.miami.edu/assets/common-images/uml-logo_vision2.png" alt="University of Miami Libraries" class="d-sm-none" style="width: 186px; height: 30px;">
             <img src="https://www.library.miami.edu/assets/common-images/uml-logo_vision-full2.png" alt="University of Miami Libraries" class="d-none">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav">
-            <span class="navbar-toggler-icon d-block"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main_nav">
-            <ul class="navbar-nav">
-                <li class="nav-item active"> <a class="nav-link" href="#">Home </a> </li>
-                <li class="nav-item"><a class="nav-link" href="#"> About </a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> Services </a></li>
-                <li class="nav-item dropdown has-megamenu">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Mega menu  </a>
-                    <div class="dropdown-menu megamenu" role="menu">
-                        This is content of megamenu. <br>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
-                    </div> <!-- dropdown-mega-menu.// -->
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"> Dropdown right </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"> Submenu item 1</a></li>
-                        <li><a class="dropdown-item" href="#"> Submenu item 2 </a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mainNav">
+            <div class="offcanvas-body pt-0 justify-content-lg-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"> <a class="nav-link" href="#">Home </a> </li>
+                    <li class="nav-item"><a class="nav-link" href="#"> About </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"> Services </a></li>
+                    <li class="nav-item dropdown has-megamenu">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Mega menu  </a>
+                        <div class="dropdown-menu megamenu" role="menu">
+                            This is content of megamenu. <br>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.
+                        </div> <!-- dropdown-mega-menu.// -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="um-toggler">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="24px" height="24px" viewBox="0 0 124 124" style="enable-background:new 0 0 124 124;" xml:space="preserve">
+<g>
+    <path d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
+    <path d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
+    <path d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
+</g>
+</svg>
+
+                <i class="fas fa-bars"></i>
+                <div class="close-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="26" height="26" viewBox="0 0 256 256" xml:space="preserve">
+<g transform="translate(128 128) scale(0.72 0.72)" style="">
+    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)" >
+        <path d="M 6 90 c -1.536 0 -3.071 -0.586 -4.243 -1.758 c -2.343 -2.343 -2.343 -6.142 0 -8.484 l 78 -78 c 2.342 -2.343 6.143 -2.343 8.484 0 c 2.344 2.343 2.344 6.142 0 8.485 l -78 78 C 9.071 89.414 7.536 90 6 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+        <path d="M 84 90 c -1.535 0 -3.071 -0.586 -4.242 -1.758 l -78 -78 c -2.343 -2.343 -2.343 -6.142 0 -8.485 c 2.343 -2.343 6.143 -2.343 8.485 0 l 78 78 c 2.344 2.343 2.344 6.142 0 8.484 C 87.071 89.414 85.535 90 84 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+    </g>
+</g>
+</svg>
+                </div>
+            </button>
         </div>
     </div>
 </nav>

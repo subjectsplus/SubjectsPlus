@@ -149,17 +149,39 @@
          margin-top:0;
       }
 
-      .navbar-toggler{
+      .um-toggler {
          position: relative;
          width: 100%;
 
-         .navbar-toggler-icon{
+         .navbar-toggler{
             position: absolute;
-            top: 75%;
+            top: 0;
             right: 1rem;
-            background-color: #ff0;
+            margin-top: -1rem;
+            border-radius: 50%;
+            padding: 0.25rem;
+            background-color: #ff9f55;
+            color: #FFFFFF;
+            z-index:1045;
+            box-shadow: none;
+            width: 40px;
+            height: 40px;
+            font-size:1.65rem;
+         }
+
+         .close-icon{
+            display: none;
          }
       }
+
+      .offcanvas.show + .um-toggler .fa-bars{
+         display:none;
+      }
+      .offcanvas.show + .um-toggler .close-icon{
+         display:inline-block;
+      }
+
+
 
 
    }
