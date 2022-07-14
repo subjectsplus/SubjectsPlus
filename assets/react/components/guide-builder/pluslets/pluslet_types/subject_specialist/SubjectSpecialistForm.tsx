@@ -12,17 +12,22 @@ export const SubjectSpecialistForm = ({ specialists, extra }: SubjectSpecialistF
     return (
         <Form noValidate={true} id="specialist-form">
            {specialists.map(specialist => (
-                <div key={'specialist-info-edit-' + specialist.staffId} className="specialist-info-edit">
+                <Form.Group key={'specialist-info-edit-' + specialist.staffId} className="mb-3" controlId={'form-specialist-' + specialist.staffId}>
                     <h4>{specialist.fname + ' ' + specialist.lname}</h4>
                     {flags.map(flag => {
+                        let flagValue = false;
+                        if (extra && extra[specialist.staffId.toString()] && extra[specialist.staffId.toString()][flag]) {
+                            flagValue = extra[specialist.staffId.toString()][flag];
+                        }
+
                         return (
                             <Form.Check type="switch"
                                 key={'specialist-' + specialist.staffId + '-' + flag + '-switch'}
                                 id={'specialist-' + specialist.staffId + '-' + flag + '-switch'}
-                                label={flag} />
+                                checked={flagValue} label={flag} />
                         );
                     })}
-                </div>
+                </Form.Group>
            ))}
         </Form>
     );
