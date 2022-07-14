@@ -12,6 +12,7 @@ export type GuideType = {
     extra?: string,
     courseCode?: string,
     instructor?: string,
+    staff?: string[]
 };
 
 export type GuideTabType = {
