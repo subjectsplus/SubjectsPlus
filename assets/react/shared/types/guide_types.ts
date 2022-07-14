@@ -42,7 +42,7 @@ export type PlusletType = {
     title: string,
     body: string,
     type: string,
-    extra?: string,
+    extra?: Record<string, any>|null,
     favoriteBox?: boolean,
     pcolumn: number,
     prow: number,

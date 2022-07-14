@@ -1,5 +1,5 @@
 import { BasicPluslet } from '../pluslet_types/BasicPluslet';
-import { SubjectSpecialist } from '../pluslet_types/SubjectSpecialist';
+import { SubjectSpecialist } from '../pluslet_types/subject_specialist/SubjectSpecialist';
 import { PlusletType } from '@shared/types/guide_types';
 
 type PlusletBodyProps = {
