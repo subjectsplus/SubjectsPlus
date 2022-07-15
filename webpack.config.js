@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const hq = require('alias-hq');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -21,24 +22,20 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
 
-    /*
-    * React
-     */
-
     // Record-Search component
-    .addEntry('record_search', './assets/react/components/record-search/RecordSearch.js')
+    .addEntry('record_search', './assets/react/components/record-search/RecordSearch.tsx')
 
     // React-Select component intializer
     .addEntry('react_select_init', './assets/react/entrypoints/select-field-type/initSelect.js')
 
     // Media-Browser component loader
-    .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.js')
+    .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.tsx')
 
     // Guide-Bulder component loader
-    .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.js')
+    .addEntry('guide_builder_loader', './assets/react/entrypoints/guide_builder_loader.tsx')
 
     // Guide-Metadata component loader
-    .addEntry('guide_metadata_loader', './assets/react/entrypoints/guide_metadata_loader.js')
+    .addEntry('guide_metadata_loader', './assets/react/entrypoints/guide_metadata_loader.tsx')
 
     // Record Component
     .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
@@ -77,25 +74,14 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
+    
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
-
-    .configureBabel((config) => {
-        config.plugins.push('@babel/plugin-proposal-class-properties');
-    })
-
-    // enables @babel/preset-env polyfills
-    .configureBabelPresetEnv((config) => {
-        config.useBuiltIns = 'usage';
-        config.corejs = 3;
-    })
 
     // enables Sass/SCSS support
     .enableSassLoader()
 
     // enables PostCSS, autoprefixing
-    //.enablePostCssLoader()
-
     .enablePostCssLoader((options) => {
         options.postcssOptions = {
             config: './postcss.config.js',
@@ -127,9 +113,13 @@ Encore
         {from: './src/CKEditorConfig/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
     ])
 
-
     // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+    .enableTypeScriptLoader()
+
+    // optionally enable forked type script for faster builds
+    // https://www.npmjs.com/package/fork-ts-checker-webpack-plugin
+    // requires that you have a tsconfig.json file that is setup correctly.
+    .enableForkedTypeScriptTypesChecking()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
@@ -139,4 +129,8 @@ Encore
     //.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
+let config = Encore.getWebpackConfig();
+
+config.resolve.alias = hq.get('webpack');
+
+module.exports = config;
