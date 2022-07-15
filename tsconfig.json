@@ -1,0 +1,19 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./built",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@entrypoints/*": ["./assets/react/entrypoints/*"],
+      "@utility/*": ["./assets/react/utility/*"],
+      "@components/*": ["./assets/react/components/*"],
+      "@api/*": ["./assets/react/api/*"],
+      "@hooks/*": ["./assets/react/hooks/*"],
+      "@shared/*": ["./assets/react/shared/*"],
+      "@context/*": ["./assets/react/context/*"]
+    }
+  },
+  "include": ["./assets/react/**/*"],
+}

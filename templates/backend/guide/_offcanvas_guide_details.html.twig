@@ -4,7 +4,7 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
     </div>
     <div class="offcanvas-body">
-        <div id="guide-metadata-container"></div>
+        <div id="guide-metadata-container" data-subject-id="{{ guide.subjectId }}"></div>
     </div>
     {{ encore_entry_script_tags('guide_metadata_loader') }}
 </div>

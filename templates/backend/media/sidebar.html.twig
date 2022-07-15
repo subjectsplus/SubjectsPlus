@@ -5,10 +5,7 @@
     </div>
     <div class="offcanvas-body">
         <h4>{{ 'control.flyout.add_media_token.upload' | trans }}</h4>
-        <div id="media-browser-container"></div>
-        <script>
-            const CURRENT_STAFF_ID = "{{ app.user.staffId }}";
-        </script>
+        <div id="media-browser-container" data-staff-id="{{ app.user.staffId }}"></div>
         {{ encore_entry_script_tags('media_browser_loader') }}
     </div>
 </div>

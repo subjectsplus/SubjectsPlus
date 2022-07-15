@@ -149,6 +149,7 @@ class Subject
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Tab", mappedBy="subject", cascade={"persist", "remove"})
      * @ApiSubresource(maxDepth=1)
+     * @ORM\OrderBy({"tabIndex" = "ASC"})
      */
     private $tabs;
 
