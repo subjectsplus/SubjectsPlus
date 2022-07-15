@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{# Set config variables for future use #}
 {% if getconfig('theme_id') %}
     {% set dataTheme = getconfig('theme_id') %}
+{% endif %}
+
+{% if getconfig('meta_author') %}
+    {% set metaAuthor = getconfig('meta_author') %}
 {% endif %}
 
 {% block html_open_tag %}
@@ -10,8 +15,8 @@
 
 {% block title %}
 {% block metatitle %}SubjectsPlus{% endblock %}
-    {% if getconfig('meta_author') %}
-        | {{ getconfig('meta_author') }}
+    {% if metaAuthor is defined %}
+        {{ metaAuthor }}
     {% endif %}
 {% endblock %}
 
@@ -22,12 +27,9 @@
 {% block stylesheets %}
     {{ encore_entry_link_tags('frontend_main') }}
 
-    {% if getconfig('theme_id') == 'um' %}
-        {{ encore_entry_link_tags('um') }}
-    {% elseif getconfig('theme_id') == 'custom' %}
-        {{ encore_entry_link_tags('custom') }}
+    {% if dataTheme is defined %}
+        {{ encore_entry_link_tags(dataTheme) }}
     {% endif %}
-
 {% endblock %}
 
 {% block javascripts %}

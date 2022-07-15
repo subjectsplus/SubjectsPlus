@@ -2,8 +2,8 @@
 {% if getconfig('meta_description') %}
     <meta name="description" content="{{ getconfig('meta_description') }}">
 {% endif %}
-{% if getconfig('meta_author') %}
-    <meta name="author" content="{{ getconfig('meta_author') }}">
+{% if metaAuthor is defined %}
+    <meta name="author" content="{{ metaAuthor }}">
 {% endif %}
 {% if getconfig('meta_keywords') %}
     <meta name="keywords" content="{{ getconfig('meta_keywords') }}">
@@ -12,8 +12,8 @@
 {# Set theme variables #}
 <style>
     :root {
-    {# UM font #}
-    {% if getconfig('theme_id') == 'um' %}
+    {# UM specific font override #}
+    {% if dataTheme == 'um' %}
         --user-theme-font: "Source Sans Pro";
         --user-theme-semi-bold: 600;
     {% endif %}

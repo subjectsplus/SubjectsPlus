@@ -4,10 +4,8 @@
     </div>
     <section class="footer-content">
         {# Footer Content Switcher #}
-        {% if getconfig('theme_id') == 'um' %}
-            {% include('frontend/themes/um/includes/_footer_content.html.twig') %}
-        {% elseif getconfig('theme_id') == 'custom' %}
-            {% include('frontend/themes/custom/includes/_footer_content.html.twig') %}
+        {% if dataTheme is defined %}
+            {% include('frontend/themes/' ~ dataTheme ~ '/includes/_footer_content.html.twig') %}
         {%  else %}
             {% include('frontend/includes/_footer_content.html.twig') %}
         {% endif %}
