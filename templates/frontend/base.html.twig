@@ -22,18 +22,24 @@
 {% block body %}
 <main>
     {% block navmenu %}
-        {% include('frontend/includes/navigation-switcher.html.twig') %}
+        {% include('frontend/includes/navigation_switcher.html.twig') %}
     {% endblock %}
     {% block header %}
-        <p>Header here</p>
-        <a href="#" class="link-underline">Link example</a>
+        <div class="page-header">
+            <div class="container py-4">
+                {% block header_actions %}{% endblock %}
+                {% block header_backto %}{% endblock %}
+                <h1 class="text-center fw-light mb-0">{% block header_title %}{% endblock %}</h1>
+                {% block header_content %}{% endblock %}
+            </div>
+        </div>
     {% endblock %}
-    {% block search %}
-        <p>Search here</p>
-    {% endblock %}
-    <div class="container">
+    {% block search %}{% endblock %}
+    <div class="container py-4">
         {% block main %}
-            <p>Content goes here</p>
+            <p>Content goes here:
+                <a href="#" class="link-underline">Link with underline</a> | <a href="#" class="link-default">Link default</a>
+            </p>
         {% endblock %}
     </div>
 </main>

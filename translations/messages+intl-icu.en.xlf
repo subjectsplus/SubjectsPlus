@@ -1031,7 +1031,7 @@
       </trans-unit>
       <trans-unit id="YgEa8zG" resname="public.default_nav.databases">
         <source>public.default_nav.databases</source>
-        <target>Resources</target>
+        <target>Databases</target>
       </trans-unit>
       <trans-unit id="2eWQ5JV" resname="public.default_nav.staff">
         <source>public.default_nav.staff</source>
@@ -1052,6 +1052,50 @@
       <trans-unit id="5oWTH8D" resname="public.guide.tab.external_link.title">
         <source>public.guide.tab.external_link.title</source>
         <target>Opens in new tab or window</target>
+      </trans-unit>
+      <trans-unit id="06hFNdU" resname="public.guides.guide_collections.label">
+        <source>public.guides.guide_collections.label</source>
+        <target>Guide Collections</target>
+      </trans-unit>
+      <trans-unit id="vWfEW4A" resname="public.guides.subject_guides.label">
+        <source>public.guides.subject_guides.label</source>
+        <target>Subject Guides</target>
+      </trans-unit>
+      <trans-unit id="OB3Evda" resname="public.guides.course_guides.label">
+        <source>public.guides.course_guides.label</source>
+        <target>Course Guides</target>
+      </trans-unit>
+      <trans-unit id="eIhz1rv" resname="public.guides.topic_guides.label">
+        <source>public.guides.topic_guides.label</source>
+        <target>Topic Guides</target>
+      </trans-unit>
+      <trans-unit id="cc7k9qz" resname="public.guides.expand_hide.label">
+        <source>public.guides.expand_hide.label</source>
+        <target>Expand/hide all</target>
+      </trans-unit>
+      <trans-unit id="6kz_Ny3" resname="public.guides.subject.label">
+        <source>public.guides.subject.label</source>
+        <target>Subject</target>
+      </trans-unit>
+      <trans-unit id="VxkLr1j" resname="public.guides.course.label">
+        <source>public.guides.course.label</source>
+        <target>Course</target>
+      </trans-unit>
+      <trans-unit id="pu6M2MM" resname="public.guides.topic.label">
+        <source>public.guides.topic.label</source>
+        <target>Topic</target>
+      </trans-unit>
+      <trans-unit id="N9pZyoK" resname="public.guides.keywords.label">
+        <source>public.guides.keywords.label</source>
+        <target>Keywords</target>
+      </trans-unit>
+      <trans-unit id="5BD8eRV" resname="public.guides.plus_icon_help_text">
+        <source>public.guides.plus_icon_help_text</source>
+        <target>See all guides in this collection</target>
+      </trans-unit>
+      <trans-unit id="KARbj2c" resname="public.guides.icon_help_text">
+        <source>public.guides.icon_help_text</source>
+        <target>See guide description/keywords</target>
       </trans-unit>
     </body>
   </file>

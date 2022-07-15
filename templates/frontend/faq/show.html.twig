@@ -1,9 +1,16 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}{{ 'control.header.faqs.show_faq' | trans }} {{ faq.faqId }}{% endblock %}
+{% block metatitle %}
+    {{ 'control.header.faqs.show_faq' | trans }} {{ faq.faqId }}
+{% endblock %}
+
+{% block header_title %}
+    FAQ: {{ faq.faqId }}
+{% endblock %}
+
 
 {% block main %}
 <p>Question: {{ faq.question }}</p>
 <p>Answer:</p>
-<p>{{ faq.answer | update_tokens_from_html | raw }}</p>
+<p>{{ faq.answer | update_tokens_from_html | lazy_loading | raw }}</p>
 {% endblock %}

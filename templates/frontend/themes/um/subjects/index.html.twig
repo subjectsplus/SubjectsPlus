@@ -1,16 +1,29 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}Research Guides{% endblock %}
+{% block metatitle %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block header_title %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block search %}
+    {# TODO: Add search UI for guides #}
+{% endblock %}
+
+{% block header_content %}
+    <div class="header-content fs-sm text-center">
+        <p class="mt-4">Research Guides point you to materials and resources appropriate for particular disciplines, courses, and special topics. These guides are curated by UM librarians and experts-in-training, including Library Research Scholars and Peer Research Consultants. In a world of abundant information resources, librarians create research guides to save you time and energy.</p>
+        <p class="mb-0">If you would like to request a guide for a course or topic, <a href="https://www.google.com" target="_blank">please contact your librarian</a>.</p>
+    </div>
+{% endblock %}
 
 {% block main %}
 <h1>UM Theme</h1>
-<h1>Subjects</h1>
-<div>
-<ul>
+<ul class="list-unstyled">
 {% for subject in subjects %}
 <li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{subject.subject }}</a></li>
 {% endfor %}
 </ul>
-</div>
-
 {% endblock %}

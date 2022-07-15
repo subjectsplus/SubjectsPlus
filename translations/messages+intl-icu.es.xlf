@@ -1089,6 +1089,50 @@
         <source>public.guide.tab.external_link.title</source>
         <target>__public.guide.tab.external_link.title</target>
       </trans-unit>
+      <trans-unit id="06hFNdU" resname="public.guides.guide_collections.label">
+        <source>public.guides.guide_collections.label</source>
+        <target>__public.guides.guide_collections.label</target>
+      </trans-unit>
+      <trans-unit id="vWfEW4A" resname="public.guides.subject_guides.label">
+        <source>public.guides.subject_guides.label</source>
+        <target>__public.guides.subject_guides.label</target>
+      </trans-unit>
+      <trans-unit id="OB3Evda" resname="public.guides.course_guides.label">
+        <source>public.guides.course_guides.label</source>
+        <target>__public.guides.course_guides.label</target>
+      </trans-unit>
+      <trans-unit id="eIhz1rv" resname="public.guides.topic_guides.label">
+        <source>public.guides.topic_guides.label</source>
+        <target>__public.guides.topic_guides.label</target>
+      </trans-unit>
+      <trans-unit id="cc7k9qz" resname="public.guides.expand_hide.label">
+        <source>public.guides.expand_hide.label</source>
+        <target>__public.guides.expand_hide.label</target>
+      </trans-unit>
+      <trans-unit id="6kz_Ny3" resname="public.guides.subject.label">
+        <source>public.guides.subject.label</source>
+        <target>__public.guides.subject.label</target>
+      </trans-unit>
+      <trans-unit id="VxkLr1j" resname="public.guides.course.label">
+        <source>public.guides.course.label</source>
+        <target>__public.guides.course.label</target>
+      </trans-unit>
+      <trans-unit id="pu6M2MM" resname="public.guides.topic.label">
+        <source>public.guides.topic.label</source>
+        <target>__public.guides.topic.label</target>
+      </trans-unit>
+      <trans-unit id="N9pZyoK" resname="public.guides.keywords.label">
+        <source>public.guides.keywords.label</source>
+        <target>__public.guides.keywords.label</target>
+      </trans-unit>
+      <trans-unit id="5BD8eRV" resname="public.guides.plus_icon_help_text">
+        <source>public.guides.plus_icon_help_text</source>
+        <target>__public.guides.plus_icon_help_text</target>
+      </trans-unit>
+      <trans-unit id="KARbj2c" resname="public.guides.icon_help_text">
+        <source>public.guides.icon_help_text</source>
+        <target>__public.guides.icon_help_text</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

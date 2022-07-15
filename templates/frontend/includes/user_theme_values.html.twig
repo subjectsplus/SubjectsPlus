@@ -18,7 +18,7 @@
         --user-theme-semi-bold: 600;
     {% endif %}
 
-    {# general ui #}
+    {# general #}
     {% if getconfig('theme_bg_color') %}
         --user-theme-bg-color: {{ getconfig('theme_bg_color') }};
     {% endif %}
@@ -47,11 +47,47 @@
     {% endif %}
 
     {# header #}
+    {% if getconfig('theme_header_bg_color') %}
+        --user-theme-header-bg-color: {{ getconfig('theme_header_bg_color') }};
+    {% endif %}
+    {% if getconfig('theme_header_text_color') %}
+        --user-theme_header_text_color: {{ getconfig('theme_header_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_header_link_color') %}
+        --user-theme_header_link_color: {{ getconfig('theme_header_link_color') }};
+    {% endif %}
+    {% if getconfig('theme_header_link_hover_color') %}
+        --user-theme_header_link_hover_color: {{ getconfig('theme_header_link_hover_color') }};
+    {% endif %}
 
-    {# guides #}
+    {# footer #}
+    {% if getconfig('theme_footer_bg_color') %}
+        --user-theme-footer-bg-color: {{ getconfig('theme_footer_bg_color') }};
+    {% endif %}
+    {% if getconfig('theme_footer_text_color') %}
+        --user-theme_footer_text_color: {{ getconfig('theme_footer_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_footer_link_color') %}
+        --user-theme_footer_link_color: {{ getconfig('theme_footer_link_color') }};
+    {% endif %}
+    {% if getconfig('theme_footer_link_hover_color') %}
+        --user-theme_footer_link_hover_color: {{ getconfig('theme_footer_link_hover_color') }};
+    {% endif %}
 
-
-
-
-}
+    {# UI  #}
+    {% if getconfig('theme_ui_base_color') %}
+        --user-theme-ui-base-color: {{ getconfig('theme_ui_base_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_base_text_color') %}
+        --user-theme-ui-base-text-color: {{ getconfig('theme_ui_base_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_active_color') %}
+        --user-theme-ui-active-color: {{ getconfig('theme_ui_active_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_active_text_color') %}
+        --user-theme-ui-active-text-color: {{ getconfig('theme_ui_active_text_color') }};
+    {% endif %}
+    {% if getconfig('theme_ui_active_hover_color') %}
+        --user-theme-ui-active-hover-color: {{ getconfig('theme_ui_active_hover_color') }};
+    {% endif %}}
 </style>

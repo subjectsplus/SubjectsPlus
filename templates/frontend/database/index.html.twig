@@ -1,6 +1,17 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}Databases{% endblock %}
+{% block metatitle %}
+    Databases
+{% endblock %}
+
+{% block header_title %}
+    Databases
+{% endblock %}
+
+{% block search %}
+    {# TODO: Add search UI for databases #}
+{% endblock %}
+
 
 {% block main %}
 <h1>Databases Default Theme</h1>
@@ -13,8 +24,6 @@
 {% endfor %}
 </ul>
 
-
-{{ getconfig('smtp_port') }}
 
 <h2>Database Trials</h2>
 <ul>
