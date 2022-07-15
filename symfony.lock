@@ -145,6 +145,9 @@
             "config/packages/fos_ckeditor.yaml"
         ]
     },
+    "hslavich/oneloginsaml-bundle": {
+        "version": "v2.8.0"
+    },
     "jms/metadata": {
         "version": "2.5.1"
     },
