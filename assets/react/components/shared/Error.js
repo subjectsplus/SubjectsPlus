@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Error({onRetry}) {
     return (
         <div>
