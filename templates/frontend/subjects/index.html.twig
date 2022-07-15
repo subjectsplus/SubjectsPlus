@@ -1,17 +1,40 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}{{ 'public.subjects.title.label' | trans }}{% endblock %}
+{% block metatitle %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block header_title %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block search %}
+    {# TODO: Add search UI for guides #}
+{% endblock %}
 
 {% block main %}
+    <div class="row">
+        <div class="col-lg-8">
+            {% include('frontend/subjects/guides/_guides_listing_tabs.html.twig') %}
+        </div>
 
-<h1>All Subjects</h1>
-    <a href="#" class="link-underline">Link with underline</a>
-    <a href="#" class="link-default">Link default</a>
-<ul class="list-unstyled">
-{% for subject in subjects %}
-<li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{ subject.subject | raw }}</a></li>
-{% endfor %}
-</ul>
+        <div class="col-lg-4">
+        {% if getconfig('display_experts') == 'true' %}
+            {% include('frontend/subjects/guides/_show_experts.html.twig') %}
+        {% endif %}
 
+        {% if getconfig('display_new_databases') == 'true' or getconfig('display_new_guides') == 'true' %}
+            {# TODO: Assign different feature class based on theme #}
+            <div class="feature-neutral p-3 mt-5">
+                {% if getconfig('display_new_databases') == 'true' %}
+                    {% include('frontend/subjects/guides/_show_new_databases.html.twig') %}
+                {% endif %}
 
+                {% if getconfig('display_new_guides') == 'true' %}
+                    {% include('frontend/subjects/guides/_show_new_guides.html.twig') %}
+                {% endif %}
+            </div>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}

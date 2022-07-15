@@ -1,0 +1,22 @@
+{# TODO: Replace subjects array with guide collections array when ready #}
+
+{# Divide collections array in half  #}
+{% set guide_collections_first_half = subjects|slice(0, subjects|length / 2) %}
+{% set guide_collections_second_half = subjects|slice(subjects|length / 2) %}
+
+<div class="row mt-3">
+    <div class="col-sm-6">
+        <ul class="list-unstyled">
+            {% for subject in guide_collections_first_half %}
+                {% include('frontend/subjects/guides/_guide_collection_list_item.html.twig') %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        <ul class="list-unstyled">
+            {% for subject in guide_collections_second_half %}
+                {% include('frontend/subjects/guides/_guide_collection_list_item.html.twig') %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>

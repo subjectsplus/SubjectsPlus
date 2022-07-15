@@ -34,6 +34,16 @@ a {
       text-decoration: none;
     }
   }
+
+  &.link-icon {
+    color: var(--THEME-LINK-COLOR);
+    &:hover,
+    &:active,
+    &:focus {
+      @include transition-all();
+      color: var(--THEME-LINK-HOVER-COLOR);
+    }
+  }
 }
 
 h1, .h1,
@@ -73,4 +83,28 @@ h3, .h3 {
 
 .fs-xs {
   font-size: $font-size-mini !important;
+}
+
+.list-columns2 {
+  @media (min-width: map-get($grid-breakpoints, md)) {
+    column-count: 2;
+  }
+}
+
+.feature-neutral {
+  background-color: var(--THEME-UI-NEUTRAL-COLOR) ;
+  color: var(--THEME-UI-BASE-TEXT-COLOR);
+
+  a {
+
+  }
+}
+
+.feature-primary {
+  background-color: var(--THEME-UI-ACTIVE-COLOR);
+  color: var(--THEME-UI-ACTIVE-TEXT-COLOR);
+
+  a {
+
+  }
 }

@@ -50,8 +50,13 @@
 
 // add partials - General Elements
 @import 'elements/general';
-@import 'elements/pluslets';
+@import 'elements/buttons';
 
 // add partials - Layout
-@import 'layout/footer';
 @import 'layout/navigation';
+@import 'layout/footer';
+@import 'layout/header';
+
+// add partials - Guides
+@import 'elements/guides';
+@import 'elements/pluslets';

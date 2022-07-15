@@ -1,0 +1,14 @@
+.footer-content{
+  background-color: var(--THEME-FOOTER-BG-COLOR);
+  color: var(--THEME-FOOTER-TEXT-COLOR);
+
+  a {
+    color: var(--THEME-FOOTER-LINK-COLOR);
+
+    &:hover,
+    &:active {
+      @include transition-all();
+      color: var(--THEME-FOOTER-LINK-HOVER-COLOR);
+    }
+  }
+}

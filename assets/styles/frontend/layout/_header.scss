@@ -1,0 +1,25 @@
+.page-header{
+  background-color: var(--THEME-HEADER-BG-COLOR);
+  color: var(--THEME-HEADER-TEXT-COLOR);
+
+  a {
+    color: var(--THEME-HEADER-LINK-COLOR);
+    &:hover,
+    &:active,
+    &:focus {
+      @include transition-all();
+      color: var(--THEME-HEADER-LINK-HOVER-COLOR);
+    }
+
+    &.link-default {
+      color: var(--THEME-HEADER-TEXT-COLOR);
+      &:hover,
+      &:active,
+      &:focus {
+        @include transition-all();
+        color: var(--THEME-HEADER-LINK-COLOR);
+        text-decoration: none;
+      }
+    }
+  }
+}

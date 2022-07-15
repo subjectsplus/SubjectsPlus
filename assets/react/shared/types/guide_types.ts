@@ -12,6 +12,7 @@ export type GuideType = {
     extra?: string,
     courseCode?: string,
     instructor?: string,
+    staff?: string[]
 };
 
 export type GuideTabType = {
@@ -41,7 +42,7 @@ export type PlusletType = {
     title: string,
     body: string,
     type: string,
-    extra?: string,
+    extra?: Record<string, any>|null,
     favoriteBox?: boolean,
     pcolumn: number,
     prow: number,
