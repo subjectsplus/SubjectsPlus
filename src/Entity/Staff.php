@@ -12,6 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -26,7 +28,12 @@ use ApiPlatform\Core\Annotation\ApiFilter;
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"},
+ *     normalizationContext={"groups": {"staff"}}
  * )
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "staffId": "exact",
+ * }) 
+ *
  */
 class Staff implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -36,6 +43,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(name="staff_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups({"staff"})
      */
     private $staffId;
 
@@ -43,6 +51,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      *
      * @ORM\Column(name="lname", type="string", length=765, nullable=true)
+     * @Groups({"staff"})
      */
     private $lname;
 
@@ -50,6 +59,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      *
      * @ORM\Column(name="fname", type="string", length=765, nullable=true)
+     * @Groups({"staff"})
      */
     private $fname;
 
@@ -57,6 +67,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      *
      * @ORM\Column(name="title", type="string", length=765, nullable=true)
+     * @Groups({"staff"})
      */
     private $title;
 
@@ -64,6 +75,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      *
      * @ORM\Column(name="tel", type="string", length=45, nullable=true)
+     * @Groups({"staff"})
      */
     private $tel;
 
@@ -88,6 +100,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      *
      * @ORM\Column(name="email", type="string", length=765, nullable=true)
+     * @Groups({"staff"})
      */
     private $email;
 
@@ -255,6 +268,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      *
      * @ORM\Column(name="social_media", type="text", length=16777215, nullable=true)
+     * @Groups({"staff"})
      */
     private $socialMedia;
 
@@ -283,6 +297,7 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @ORM\OneToOne(targetEntity="App\Entity\MediaAttachment", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="staff_photo_id", referencedColumnName="media_attachment_id")
+     * @Groups({"staff"})
      */
     private $staffPhoto;
 

@@ -1,6 +1,6 @@
 import { GuideType } from '@shared/types/guide_types';
 
-export const fetchGuides = async (filters:Record<string, string>|null = null): Promise<GuideType> => {
+export const fetchGuides = async (filters:Record<string, string>|null = null): Promise<GuideType[]> => {
     const data = await fetch(`/api/subjects/`
         + (filters ? '?' + new URLSearchParams(filters) : ''));
 
