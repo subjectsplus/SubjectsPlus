@@ -5070,6 +5070,10 @@
         <source>public.new_guides.label</source>
         <target>__public.new_guides.label</target>
       </trans-unit>
+      <trans-unit id="kT_aeUX" resname="public.meta_keywords">
+        <source>public.meta_keywords</source>
+        <target>__public.meta_keywords</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

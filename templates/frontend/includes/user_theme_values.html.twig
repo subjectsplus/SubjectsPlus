@@ -1,15 +1,4 @@
-{# Set site meta variables #}
-{% if getconfig('meta_description') %}
-    <meta name="description" content="{{ getconfig('meta_description') }}">
-{% endif %}
-{% if metaAuthor is defined %}
-    <meta name="author" content="{{ metaAuthor }}">
-{% endif %}
-{% if getconfig('meta_keywords') %}
-    <meta name="keywords" content="{{ getconfig('meta_keywords') }}">
-{% endif %}
-
-{# Set theme variables #}
+{# Set theme variables styles #}
 <style>
     :root {
     {# UM specific font override #}

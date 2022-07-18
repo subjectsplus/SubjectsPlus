@@ -1,23 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{# Set config variables for future use #}
+{# Set theme config variables for future use #}
 {% if getconfig('theme_id') %}
     {% set dataTheme = getconfig('theme_id') %}
 {% endif %}
-
 {% if getconfig('meta_author') %}
     {% set metaAuthor = getconfig('meta_author') %}
 {% endif %}
+{% if getconfig('meta_description') %}
+    {% set metaDescription = getconfig('meta_description') %}
+{% endif %}
+
 
 {% block html_open_tag %}
     <html lang="{{ app.request.locale }}" data-theme="{{ dataTheme }}">
 {% endblock %}
 
 {% block title %}
-{% block metatitle %}SubjectsPlus{% endblock %}
+{% block title_tag %}SubjectsPlus{% endblock %}
     {% if metaAuthor is defined %}
-        {{ metaAuthor }}
+        | {{ metaAuthor }}
     {% endif %}
+{% endblock %}
+
+{% block metatags %}
+    {% include('frontend/includes/meta_tags.html.twig') %}
+    {% block meta_tags_description %}
+        {% if  metaDescription is defined %}
+            <meta name="description" content="{{ metaDescription }}" >
+        {% endif %}
+    {% endblock %}
+    {% block ogtags %}
+        {% block og_title %}
+            <meta property="og:title" content=""/>
+        {% endblock %}
+        {% block og_url %}
+            <meta property="og:url" content=""/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content=""/>
+        {% endblock %}
+        {% block og_image %}
+            <meta property="og:image" content=""/>
+        {% endblock %}
+    {% endblock %}
 {% endblock %}
 
 {% block theming %}
