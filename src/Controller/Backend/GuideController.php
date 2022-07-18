@@ -11,6 +11,7 @@ use App\Entity\Tab;
 use App\Entity\Section;
 use App\Form\GuideType;
 use App\Service\ChangeLogService;
+use App\Service\SubjectService;
 
 /**
  * @Route("/control/guides")
@@ -35,18 +36,26 @@ class GuideController extends AbstractController
     /**
      * @Route("/new", name="guide_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ChangeLogService $cls): Response
+    public function new(Request $request, ChangeLogService $cls, SubjectService $ss): Response
     {
         // Create a new Guide entry
         $subject = new Subject();
         $form = $this->createForm(GuideType::class, $subject);
+
+        // Autofill staff field with current user
+        /** @var \App\Entity\Staff $staff */
+        $staff = $this->getUser();
+        $form->get('staff')->setData([$staff]);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var EntityManagerInterface $entityManager */
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->transactional(function() use($cls, $subject, $entityManager) {
+            $entityManager->transactional(function() use($cls, $subject, $entityManager, $staff, $form, $ss) {
+                $staffField = $form->get('staff')->getData();
+                $ss->processSubjectStaff($subject, $staffField);
 
                 // Persist Subject entity
                 $entityManager->persist($subject);
@@ -61,11 +70,6 @@ class GuideController extends AbstractController
                 $section = new Section();
                 $section->setTab($tab);
                 $entityManager->persist($section);
-
-                // Create Staff Subject associations
-                /** @var \App\Entity\Staff $staff */
-                $staff = $this->getUser();
-                $subject->addStaff($staff);
 
                 // Create new log entry
                 $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'insert');
@@ -88,22 +92,34 @@ class GuideController extends AbstractController
         /**
      * @Route("/{subjectId}/edit", name="guide_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Subject $subject, ChangeLogService $cls): Response
+    public function edit(Request $request, Subject $subject, ChangeLogService $cls, SubjectService $ss): Response
     {
         $form = $this->createForm(GuideType::class, $subject);
+
+        // Set the staff field
+        $staffMembers = $subject->getStaff()->toArray();
+        $form->get('staff')->setData($staffMembers);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            /** @var EntityManagerInterface $entityManager */
+            $entityManager = $this->getDoctrine()->getManager();
             
-            // Create new log entry
-            /** @var \App\Entity\Staff $staff */
-            $staff = $this->getUser();
-            $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'edit');
+            $entityManager->transactional(function() use ($subject, $cls, $ss, $form) {
+                // Process staff field
+                $staffField = $form->get('staff')->getData();
+                $ss->processSubjectStaff($subject, $staffField);
 
-            return $this->redirectToRoute("guide_show", [
-                'subjectId' => $subject->getSubjectId(),
-            ]);
+                // Create new log entry
+                /** @var \App\Entity\Staff $staff */
+                $staff = $this->getUser();
+                $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'edit');
+
+                return $this->redirectToRoute("guide_show", [
+                    'subjectId' => $subject->getSubjectId(),
+                ]);
+            });
         }
 
         return $this->render('backend/guide/edit.html.twig', [
