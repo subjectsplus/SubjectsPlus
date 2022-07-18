@@ -40,8 +40,14 @@
                     </tr>
                     <tr>
                         <th>Staff</th>
-                        {# TODO: Staff associated with guide #}
-                        <td></td>
+                        <td>
+                            {% for staff in guide.staff %}
+                                {{ staff }}
+                                {% if not loop.last %}
+                                    {{'| '}}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
                     </tr>
                     <tr>
                         <th>Keywords</th>
