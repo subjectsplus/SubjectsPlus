@@ -55,6 +55,8 @@ class GuideController extends AbstractController
 
             $entityManager->transactional(function() use($cls, $subject, $entityManager, $staff, $form, $ss) {
                 $staffField = $form->get('staff')->getData();
+                if (empty($staffField)) $staffField = [$staff];
+
                 $ss->processSubjectStaff($subject, $staffField);
 
                 // Persist Subject entity
@@ -75,7 +77,7 @@ class GuideController extends AbstractController
                 $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'insert');
 
                 // Create flash message
-                $this->addFlash('notice', 'Thy will be done. New guide created. Now add some content!');
+                $this->addFlash('notice', 'Thy will be done. New guide created. Now add some content!');
             });
 
             return $this->redirectToRoute('guide_build', [
@@ -109,17 +111,21 @@ class GuideController extends AbstractController
             $entityManager->transactional(function() use ($subject, $cls, $ss, $form) {
                 // Process staff field
                 $staffField = $form->get('staff')->getData();
+
+                /** @var \App\Entity\Staff $staff */
+                $staff = $this->getUser();
+
+                if (empty($staffField)) $staffField = [$staff];
+
                 $ss->processSubjectStaff($subject, $staffField);
 
                 // Create new log entry
-                /** @var \App\Entity\Staff $staff */
-                $staff = $this->getUser();
                 $cls->addLog($staff, 'guide', $subject->getSubjectId(), $subject->getSubject(), 'edit');
-
-                return $this->redirectToRoute("guide_show", [
-                    'subjectId' => $subject->getSubjectId(),
-                ]);
             });
+
+            return $this->redirectToRoute("guide_show", [
+                'subjectId' => $subject->getSubjectId(),
+            ]);
         }
 
         return $this->render('backend/guide/edit.html.twig', [
