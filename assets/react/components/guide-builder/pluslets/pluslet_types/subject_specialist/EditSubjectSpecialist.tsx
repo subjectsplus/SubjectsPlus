@@ -29,7 +29,7 @@ export const EditSubjectSpecialist = ({ extra }: EditSubjectSpecialistProps) => 
             const specialist = key.match(/^specialist-(\d+)$/);
             if (specialist) {
                 const staffId = specialist[1];
-                newExtra[staffId] = {...data['extra'][key]}
+                newExtra[staffId] = {...data['extra'][key]};
             }
         });
 
@@ -43,7 +43,7 @@ export const EditSubjectSpecialist = ({ extra }: EditSubjectSpecialistProps) => 
         return (<p>Error: Failed to load Subject Specialists through API Endpoint!</p>);
     } else if (data) {
         return (
-            <SubjectSpecialistForm specialists={data} extra={extra} formRef={formRef} onSubmit={handleUpdate}/>
+            <SubjectSpecialistForm specialists={data} extra={extra} formRef={formRef} onSubmit={handleUpdate} />
         );
     } else {
         return (<p>Error: No Subject Specialists exist for this guide!</p>);
