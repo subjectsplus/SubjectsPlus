@@ -5023,6 +5023,14 @@
         <source>control.guide_form.staff.no_options_message</source>
         <target>__control.guide_form.staff.no_options_message</target>
       </trans-unit>
+      <trans-unit id="VGhjOVg" resname="control.guides.label.edit_full_guide_details">
+        <source>control.guides.label.edit_full_guide_details</source>
+        <target>__control.guides.label.edit_full_guide_details</target>
+      </trans-unit>
+      <trans-unit id="hUEGLy1" resname="control.guide_form.staff.label">
+        <source>control.guide_form.staff.label</source>
+        <target>__control.guide_form.staff.label</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1097,7 +1097,7 @@
         <source>public.guides.icon_help_text</source>
         <target>See guide description/keywords</target>
       </trans-unit>
-      <trans-unit id="G2r6Vsw" resname="control.guide_form.staff.label">
+      <trans-unit id="hUEGLy1" resname="control.guide_form.staff.label">
         <source>control.guide_form.staff.label</source>
         <target>Staff</target>
       </trans-unit>
@@ -1108,6 +1108,10 @@
       <trans-unit id="zeCvGFZ" resname="control.guide_form.staff.no_options_message">
         <source>control.guide_form.staff.no_options_message</source>
         <target>No results</target>
+      </trans-unit>
+      <trans-unit id="VGhjOVg" resname="control.guides.label.edit_full_guide_details">
+        <source>control.guides.label.edit_full_guide_details</source>
+        <target>Edit Full Guide Metadata</target>
       </trans-unit>
     </body>
   </file>
