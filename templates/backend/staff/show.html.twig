@@ -13,10 +13,12 @@
             </tr>
             <tr>
                 <th>Staff Photo</th>
-                <td><img src="
-                {% if staff.staffPhoto is not null %}
-                    {{ asset('uploads/images/' ~ staff.staffPhoto.media.fileName) }}
-                {% endif %}"></td>
+                <td>
+                <img src="
+                    {% if staff.staffPhoto is not null %}
+                        {{ asset(staff.staffPhoto.media | get_media_url('small')) }}
+                    {% endif %}" />
+                </td>
             </tr>
             <tr>
                 <th>Lname</th>
