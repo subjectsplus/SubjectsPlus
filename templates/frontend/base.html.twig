@@ -25,27 +25,38 @@
 
 {% block metatags %}
     {% include('frontend/includes/meta_tags.html.twig') %}
+
     {% block meta_tags_description %}
         {% if  metaDescription is defined %}
             <meta name="description" content="{{ metaDescription }}" >
+        {% else %}
+            <meta name="description" content="The best stuff for your research. No kidding." >
         {% endif %}
     {% endblock %}
+
     {% block ogtags %}
         {% block og_title %}
             {% if metaAuthor is defined %}
                 <meta property="og:title" content="SubjectsPlus | {{ metaAuthor }}"/>
+            {% else %}
+                <meta property="og:title" content="SubjectsPlus"/>
             {% endif %}
         {% endblock %}
+
         {% block og_url %}
-            <meta property="og:url" content=""/>
+            <meta property="og:url" content="{{ absolute_url(path('frontend_subjects')) }}"/>
         {% endblock %}
+
         {% block og_description %}
             {% if  metaDescription is defined %}
                 <meta property="og:description" content="{{ metaDescription }}"/>
+            {% else %}
+                <meta property="og:description" content="The best stuff for your research. No kidding."/>
             {% endif %}
         {% endblock %}
+
         {% block og_image %}
-            <meta property="og:image" content="https://subjectsplus.com/images/sp_logo.png"/>
+            <meta property="og:image" content="{{ absolute_url(asset('build/images/frontend/sp_logo.png')) }}"/>
         {% endblock %}
     {% endblock %}
 {% endblock %}
