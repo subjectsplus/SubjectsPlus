@@ -434,12 +434,12 @@ class Staff implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getActive(): ?int
+    public function getActive(): ?bool
     {
         return $this->active;
     }
 
-    public function setActive(?int $active): self
+    public function setActive(?bool $active): self
     {
         $this->active = $active;
 
