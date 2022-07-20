@@ -1,74 +1,5 @@
 {# UM Sliver #}
-<section class="slivernav">
-    <div class="row g-0">
-        <div class="col-1">
-            <button class="btn sliverbutton p-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sliverAccessibility" aria-expanded="false" aria-controls="sliverAccessibility" title="Toggle Accessibility Options">
-                <i class="fas fa-eye"></i>
-            </button>
-        </div>
-        <div class="col-10 text-center">
-            <a href="http://www.miami.edu/" target="_blank" title="University of Miami">
-                <img src="https://www.library.miami.edu/assets/common-images/um-logo-sliver.svg" alt="University of Miami Sliver-logo" style="width: 220px; height: 10px;">
-            </a>
-        </div>
-        <div class="col-1 text-end">
-            <button class="btn sliverbutton p-0 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sliverContent" aria-expanded="false" aria-controls="sliverContent" title="Toggle Sliver Menu">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-    </div>
-
-    {# Accessibility #}
-    <div class="sliver-accessibility collapse" id="sliverAccessibility" style="background-color:#212121;">
-        <div class="container p-3">
-            <h6 class="mb-4 mb-sm-1">Accessibility Options:</h6>
-            <ul class="list-unstyled fs-sm mb-sm-0 d-sm-flex flex-sm-nowrap flex-sm-row justify-content-sm-start">
-                <li class="mb-2 me-sm-4"><a href="https://camnercenter.miami.edu/disability-services/index.html">Office of Disability Services</a></li>
-                <li class="mb-2 me-sm-4"><a href="https://camnercenter.miami.edu/disability-services/request-services/index.html">Request Assistance</a></li>
-                <li>305-284-2374</li>
-            </ul>
-        </div>
-    </div>
-
-    {# Content #}
-    <div class="sliver-content collapse" id="sliverContent" style="background-color:#212121;">
-        <div class="container p-3">
-            <div class="row">
-                <div class="col-md-3">
-                    <form action="https://welcome.miami.edu/search/search-results.html">
-                        <input name="client" value="$sSearchClient" type="hidden">
-                        <input name="resTemp" value="/search/search-results.html" type="hidden">
-                        <input name="domain" value="https://library.miami.edu" type="hidden">
-                        <label class="sr-only" for="sliverSearch">Search University of Miami</label>
-                        <input class="umsearchfield" id="sliverSearch" name="q" placeholder="Search UM" type="text">
-                        <button aria-label="Search" class="btn umsearchbutton"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-                <div class="col-md-8 order-md-first">
-                    <ul class="list-unstyled fs-sm mt-3 my-md-0 d-md-flex flex-md-nowrap flex-md-row justify-content-md-between align-items-md-center justify-content-lg-start">
-                        <li class="mb-3 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/apply-now/index.html" class="btn apply-btn"><strong>Apply</strong></a></li>
-                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/about-um/index.html">About UM</a></li>
-                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/give/index.html">Give to UM</a></li>
-                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://welcome.miami.edu/academics/schools-and-colleges/index.html">Schools</a></li>
-                        <li class="mb-2 mb-md-0 me-lg-3"><a href="https://alumni.miami.edu/index.html">Alumni</a></li>
-                        <li class="mb-2 mb-md-0"><a href="http://roadmap.miami.edu/index.html">Roadmap</a></li>
-                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/academics/index.html">Academics</a></li>
-                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/admissions/index.html">Admissions</a></li>
-                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/student-life/index.html">Student Life</a></li>
-                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/research/index.html">Research</a></li>
-                        <li class="mb-2 d-md-none"><a href="https://welcome.miami.edu/uhealth/index.html">UHealth</a></li>
-                        <li class="d-md-none"><a href="https://welcome.miami.edu/athletics/index.html">Athletics</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-1 align-self-md-center">
-                    <a href="https://welcome.miami.edu/tools/index.html" class="fs-sm">Tools</a>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section>
+{% include('frontend/themes/um/includes/um_sliver.html.twig') %}
 
 {# Nav #}
 <nav class="navbar navbar-expand-lg site-navbar-slim">
@@ -79,19 +10,43 @@
         </a>
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mainNav">
             <div class="offcanvas-body pt-0 justify-content-lg-end">
-                <ul class="navbar-nav">
-                    <li class="nav-item active"> <a class="nav-link" href="#">Home </a> </li>
-                    <li class="nav-item"><a class="nav-link" href="#"> About </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"> Services </a></li>
-                    <li class="nav-item dropdown has-megamenu">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Mega menu  </a>
+                <ul class="navbar-nav my-3">
+                    <li class="nav-item mb-3 d-lg-none active"><a class="nav-link" href="#"><i class="fas fa-home"></i> Home </a> </li>
+                    <li class="nav-item mb-3 dropdown has-megamenu">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Find & Read</a>
                         <div class="dropdown-menu megamenu" role="menu">
-                            This is content of megamenu. <br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.
-                        </div> <!-- dropdown-mega-menu.// -->
+                            Content 1
+                        </div>
+                    </li>
+                    <li class="nav-item mb-3 dropdown has-megamenu">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Research & Write</a>
+                        <div class="dropdown-menu megamenu" role="menu">
+                            Content 2
+                        </div>
+                    </li>
+                    <li class="nav-item mb-3 dropdown has-megamenu">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Learn & Create</a>
+                        <div class="dropdown-menu megamenu" role="menu">
+                            Content 3
+                        </div>
+                    </li>
+                    <li class="nav-item mb-3 dropdown has-megamenu">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Spaces & Technology</a>
+                        <div class="dropdown-menu megamenu" role="menu">
+                            Content 4
+                        </div>
+                    </li>
+                    <li class="nav-item mb-3 dropdown has-megamenu">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Libraries & Collections</a>
+                        <div class="dropdown-menu megamenu" role="menu">
+                            Content 3
+                        </div>
+                    </li>
+                    <li class="nav-item mb-3 dropdown has-megamenu">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> About</a>
+                        <div class="dropdown-menu megamenu" role="menu">
+                            Content 3
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -99,18 +54,18 @@
 
         <div class="um-toggler">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     width="24px" height="24px" viewBox="0 0 124 124" style="enable-background:new 0 0 124 124;" xml:space="preserve">
-<g>
-    <path fill="#FFFFFF" d="M112,6H12C5.4,6,0,11.4,0,18s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,6,112,6z"/>
-    <path fill="#FFFFFF" d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z"/>
-    <path fill="#FFFFFF" d="M112,94H12c-6.6,0-12,5.4-12,12s5.4,12,12,12h100c6.6,0,12-5.4,12-12S118.6,94,112,94z"/>
-</g>
-</svg>
-
-                <i class="fas fa-bars"></i>
+                <div class="menu-bars-icon">
+                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+                <path fill="#ffffff" d="M38.2,34c0.8,0,1.5,0.9,1.5,2s-0.7,2-1.5,2c-0.5,0-28,0-28.5,0c-0.8,0-1.5-0.9-1.5-2s0.7-2,1.5-2C10.2,34,37.8,34,38.2,34z"
+                />
+                         <path fill="#ffffff" d="M38.2,22c0.8,0,1.5,0.9,1.5,2s-0.7,2-1.5,2c-0.5,0-28,0-28.5,0c-0.8,0-1.5-0.9-1.5-2s0.7-2,1.5-2C10.2,22,37.8,22,38.2,22z"
+                         />
+                         <path fill="#ffffff" d="M38.2,10.5c0.8,0,1.5,0.9,1.5,2s-0.7,2-1.5,2c-0.5,0-28,0-28.5,0c-0.8,0-1.5-0.9-1.5-2s0.7-2,1.5-2
+                    C10.2,10.5,37.8,10.5,38.2,10.5z"/>
+                </svg>
+                 </div>
                 <div class="close-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="26" height="26" viewBox="0 0 256 256" xml:space="preserve">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xml:space="preserve">
 <g transform="translate(128 128) scale(0.72 0.72)" style="">
     <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)" >
         <path d="M 6 90 c -1.536 0 -3.071 -0.586 -4.243 -1.758 c -2.343 -2.343 -2.343 -6.142 0 -8.484 l 78 -78 c 2.342 -2.343 6.143 -2.343 8.484 0 c 2.344 2.343 2.344 6.142 0 8.485 l -78 78 C 9.071 89.414 7.536 90 6 90 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />

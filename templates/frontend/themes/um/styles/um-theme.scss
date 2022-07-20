@@ -159,7 +159,7 @@
             right: 1rem;
             margin-top: -1rem;
             border-radius: 50%;
-            padding: 0.25rem;
+            padding: 0;
             background-color: #ff9f55;
             color: #FFFFFF;
             z-index:1045;
@@ -174,19 +174,49 @@
          }
       }
 
-      .offcanvas.show + .um-toggler .fa-bars{
+      .offcanvas.show + .um-toggler .menu-bars-icon{
          display:none;
       }
       .offcanvas.show + .um-toggler .close-icon{
          display:inline-block;
       }
 
+      .offcanvas.show {
+         margin-top: 68px;
+         width: 275px;
+      }
+
+      .nav-link {
+         text-transform: uppercase;
+         line-height: 1rem;
+         font-weight: 600;
+
+         &.dropdown-toggle::after { display: none; }
+
+         &.show {
+            .fa-chevron-circle-down {
+               &::before {
+                  content:"\f139";
+               }
+            }
+         }
+      }
+
+
+
+
+
 
 
 
    }
 
-
+   // Page header
+   .page-header{
+      margin-top: 68px;
+      @media screen and (min-width: 768px){}
+      @media screen and (min-width: 992px){}
+   }
 
 
    //guides
