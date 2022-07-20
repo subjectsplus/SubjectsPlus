@@ -22,6 +22,13 @@ export type MediaType = {
     smallImageFileHeight?: number
 }
 
+export type MediaAttachmentType = {
+    mediaAttachmentId?: number,
+    attachment_type?: string,
+    attachment_id?: number,
+    media: MediaType
+}
+
 export type ImageSizeType = 'small'|'medium'|'large';
 
 export type ImageFileDimensions = {

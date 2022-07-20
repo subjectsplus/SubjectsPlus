@@ -1,3 +1,5 @@
+import { MediaAttachmentType } from './media_types';
+
 export type StaffType = {
     staffId: number,
     lname: string,
@@ -6,5 +8,5 @@ export type StaffType = {
     tel: string,
     email: string,
     socialMedia: string|null,
-    staffPhoto: string|null,
+    staffPhoto: MediaAttachmentType|null
 }
