@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MediaAttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MediaAttachmentRepository::class)
@@ -30,6 +31,7 @@ class MediaAttachment
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Media")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="media_id")
+     * @Groups({"staff"})
      */
     private $media;
 
