@@ -8,6 +8,13 @@
     <meta name="description" content="Research Guides point you to materials and resources appropriate for particular disciplines, courses, and special topics. These guides are curated by UM librarians and experts-in-training, including Library Research Scholars and Peer Research Consultants.">
 {% endblock %}
 
+{% block og_title %}<meta property="og:title" content="{{ 'public.subjects.title.label' | trans }}" />{% endblock %}
+{% block og_url %}<meta property="og:url" content="{{ path('frontend_subjects') }}" />{% endblock %}
+{% block og_description %}
+    <meta property="og:description" content="Research Guides point you to materials and resources appropriate for particular disciplines, courses, and special topics. These guides are curated by UM librarians and experts-in-training, including Library Research Scholars and Peer Research Consultants." />
+{% endblock %}
+
+
 {% block header_title %}
     {{ 'public.subjects.title.label' | trans }}
 {% endblock %}

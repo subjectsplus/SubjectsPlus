@@ -32,16 +32,20 @@
     {% endblock %}
     {% block ogtags %}
         {% block og_title %}
-            <meta property="og:title" content=""/>
+            {% if metaAuthor is defined %}
+                <meta property="og:title" content="SubjectsPlus | {{ metaAuthor }}"/>
+            {% endif %}
         {% endblock %}
         {% block og_url %}
             <meta property="og:url" content=""/>
         {% endblock %}
         {% block og_description %}
-            <meta property="og:description" content=""/>
+            {% if  metaDescription is defined %}
+                <meta property="og:description" content="{{ metaDescription }}"/>
+            {% endif %}
         {% endblock %}
         {% block og_image %}
-            <meta property="og:image" content=""/>
+            <meta property="og:image" content="https://subjectsplus.com/images/sp_logo.png"/>
         {% endblock %}
     {% endblock %}
 {% endblock %}
