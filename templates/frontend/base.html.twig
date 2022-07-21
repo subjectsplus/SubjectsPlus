@@ -13,7 +13,7 @@
 
 
 {% block html_open_tag %}
-    <html lang="{{ app.request.locale }}" data-theme="{{ dataTheme }}">
+    <html lang="{{ app.request.locale }}" prefix="og: http://ogp.me/ns#" data-theme="{{ dataTheme }}">
 {% endblock %}
 
 {% block title %}
@@ -43,8 +43,8 @@
             {% endif %}
         {% endblock %}
 
-        {% block og_url %}
-            <meta property="og:url" content="{{ absolute_url(path('frontend_subjects')) }}"/>
+        {% block og_image %}
+            <meta property="og:image" content="{{ absolute_url(asset('build/images/frontend/sp_logo.png')) }}"/>
         {% endblock %}
 
         {% block og_description %}
@@ -55,10 +55,11 @@
             {% endif %}
         {% endblock %}
 
-        {% block og_image %}
-            <meta property="og:image" content="{{ absolute_url(asset('build/images/frontend/sp_logo.png')) }}"/>
+        {% block og_url %}
+            <meta property="og:url" content="{{ absolute_url(path('frontend_subjects')) }}"/>
         {% endblock %}
     {% endblock %}
+
 {% endblock %}
 
 {% block theming %}
