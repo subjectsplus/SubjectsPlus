@@ -69,7 +69,7 @@
 {% block stylesheets %}
     {{ encore_entry_link_tags('frontend_main') }}
 
-    {% if dataTheme is defined %}
+    {% if dataTheme == "um" or dataTheme == "custom" %}
         {{ encore_entry_link_tags(dataTheme) }}
     {% endif %}
 {% endblock %}

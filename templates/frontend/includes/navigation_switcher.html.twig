@@ -12,7 +12,7 @@
 {% endif %}
 
 {# Navigation Switcher #}
-{% if dataTheme is defined %}
+{% if dataTheme is defined and dataTheme != "default" %}
     {% include('frontend/themes/' ~ dataTheme ~ '/includes/navigation.html.twig') %}
 {%  else %}
     {% include('frontend/includes/navigation.html.twig') %}

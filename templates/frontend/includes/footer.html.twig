@@ -4,7 +4,7 @@
     </div>
     <section class="footer-content">
         {# Footer Content Switcher #}
-        {% if dataTheme is defined %}
+        {% if dataTheme is defined and dataTheme != "default" %}
             {% include('frontend/themes/' ~ dataTheme ~ '/includes/_footer_content.html.twig') %}
         {%  else %}
             {% include('frontend/includes/_footer_content.html.twig') %}
