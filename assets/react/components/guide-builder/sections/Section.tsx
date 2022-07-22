@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import Row from 'react-bootstrap/Row';
-import { v4 as uuidv4 } from 'uuid';
 import { SectionColumn } from './SectionColumn';
 import { SectionDropdown } from './SectionDropdown';
 import { DeleteConfirmModal } from '@components/shared/DeleteConfirmModal';
@@ -10,7 +9,9 @@ import { useCreatePluslet } from '@hooks/useCreatePluslet';
 import { useConvertSectionLayout } from '@hooks/useConvertSectionLayout';
 import { useDeleteSection } from '@hooks/useDeleteSection';
 import { PlusletType } from '@shared/types/guide_types';
+import { useGuideTabContainer, GuideTabContainerType } from '@context/GuideTabContainerContext';
 import { useSectionContainer, SectionContainerType } from '@context/SectionContainerContext';
+import { getInitialPlusletData } from '@utility/helpers/getInitialPlusletData';
 
 type SectionProps = {
     sectionUUID: string,
@@ -20,6 +21,7 @@ type SectionProps = {
 };
 
 export const Section = ({ sectionUUID, layout, sectionIndex, tabUUID }: SectionProps) => {
+    const { subjectId } = useGuideTabContainer() as GuideTabContainerType;
     const { currentDraggingId, setCurrentEditablePluslet } = useSectionContainer() as SectionContainerType;
 
     const {isLoading, isError, data, error} = useFetchPluslets(sectionUUID);
@@ -90,20 +92,18 @@ export const Section = ({ sectionUUID, layout, sectionIndex, tabUUID }: SectionP
         });
     }
 
-    const addPluslet = (column: number, row: number) => {
+    const addPluslet = (column: number, row: number, plusletType: string) => {
         if (Array.isArray(data)) {
-            const initialPlusletData = {
-                id: uuidv4(),
-                title: '',
-                type: 'Basic',
-                body: '',
-                pcolumn: column,
-                prow: row,
-                section: '/api/sections/' + sectionUUID
-            }
+            const initialPlusletData = getInitialPlusletData(column, row, plusletType, subjectId, sectionUUID);
 
             createPlusletMutation.mutate(initialPlusletData);
             setCurrentEditablePluslet(initialPlusletData.id);
+        }
+    }
+
+    const handleAddPluslet = (column: number, row: number) => {
+        return (plusletType: string) => {
+            addPluslet(column, row, plusletType);
         }
     }
 
@@ -132,7 +132,7 @@ export const Section = ({ sectionUUID, layout, sectionIndex, tabUUID }: SectionP
                 return (
                     <SectionColumn key={columnId} columnId={columnId} sectionUUID={sectionUUID} 
                         pluslets={columnPluslets} columnSize={Number(size)} 
-                        addPlusletOnClick={() => addPluslet(currentColumn, columnRows)} /> 
+                        addPlusletCallback={handleAddPluslet(currentColumn, columnRows)} /> 
                 );
             }
         });

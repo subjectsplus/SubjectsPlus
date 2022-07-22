@@ -26,7 +26,7 @@ Encore
     .addEntry('record_search', './assets/react/components/record-search/RecordSearch.tsx')
 
     // React-Select component intializer
-    .addEntry('react_select_init', './assets/react/entrypoints/select-field-type/initSelect.js')
+    .addEntry('react_select_init', './assets/react/entrypoints/select-field-type/initSelect.tsx')
 
     // Media-Browser component loader
     .addEntry('media_browser_loader', './assets/react/entrypoints/media_browser_loader.tsx')
@@ -51,6 +51,10 @@ Encore
     //Front-end Main CSS & JS
     .addEntry('frontend_main', './assets/frontend/FrontendMain.js')
     .addEntry('bs_tabs_anchor', './assets/frontend/javascript/BootstrapTabsAnchor.js')
+
+    //Theme CSS only
+    .addEntry('um', './assets/frontend/themes/UM.js')
+    .addEntry('custom', './assets/frontend/themes/Custom.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

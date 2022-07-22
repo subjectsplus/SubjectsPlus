@@ -17,15 +17,23 @@ export const EditSubjectSpecialist = ({ extra }: EditSubjectSpecialistProps) => 
 
     useEffect(() => {
         if (isSaveRequested) {
-            console.log('formRef.current:', formRef.current);
             formRef.current?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
         }
     }, [isSaveRequested]);
 
-    const handleUpdate = (data: Record<string, Record<string, boolean>>) => {
-        console.log('data:', data);
+    const handleUpdate = (data: Record<string, any>) => {
         // formulate the new extra field
-        const newExtra = {};
+        const newExtra: Record<string, any> = {};
+
+        Object.keys(data['extra']).forEach((key: string) => {
+            const specialist = key.match(/^specialist-(\d+)$/);
+            if (specialist) {
+                const staffId = specialist[1];
+                newExtra[staffId] = {...data['extra'][key]};
+            }
+        });
+
+        savePlusletCallback({extra: newExtra}, true);
     }
 
     if (isLoading) {
@@ -35,7 +43,7 @@ export const EditSubjectSpecialist = ({ extra }: EditSubjectSpecialistProps) => 
         return (<p>Error: Failed to load Subject Specialists through API Endpoint!</p>);
     } else if (data) {
         return (
-            <SubjectSpecialistForm specialists={data} extra={extra} formRef={formRef} onSubmit={handleUpdate}/>
+            <SubjectSpecialistForm specialists={data} extra={extra} formRef={formRef} onSubmit={handleUpdate} />
         );
     } else {
         return (<p>Error: No Subject Specialists exist for this guide!</p>);

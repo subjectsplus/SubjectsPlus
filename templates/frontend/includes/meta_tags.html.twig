@@ -1,0 +1,12 @@
+{# Set site meta variables #}
+{% if metaAuthor is defined %}
+    <meta name="author" content="{{ metaAuthor }}">
+{% else %}
+    <meta name="author" content="SubjectsPlus">
+{% endif %}
+
+{% if getconfig('meta_keywords') %}
+    <meta name="keywords" content="{{ getconfig('meta_keywords') }}">
+{% else %}
+    <meta name="keywords" content="{{ 'public.meta_keywords' | trans }}">
+{% endif %}

@@ -4,17 +4,17 @@ import Col from 'react-bootstrap/Col';
 import { Droppable } from 'react-beautiful-dnd';
 import { PlusletType } from '@shared/types/guide_types';
 import { useSectionContainer, SectionContainerType } from '@context/SectionContainerContext';
+import { AddPlusletButton } from '../pluslets/shared/AddPlusletButton';
 
 type SectionColumnProps = {
     columnId: string,
     sectionUUID: string,
     pluslets: PlusletType[]|null,
     columnSize: number,
-    addPlusletOnClick: React.MouseEventHandler<HTMLButtonElement>
+    addPlusletCallback: (plusletType: string) => void
 }
 
-export const SectionColumn = ({ columnId, sectionUUID, pluslets, columnSize, addPlusletOnClick }: SectionColumnProps) => {
-    const [addPlusletHovered, setAddPlusletHovered] = useState<boolean>(false);
+export const SectionColumn = ({ columnId, sectionUUID, pluslets, columnSize, addPlusletCallback }: SectionColumnProps) => {
     const { currentDraggingId } = useSectionContainer() as SectionContainerType;
 
     const plusletIsCurrentlyDragging = (currentDraggingId && currentDraggingId.substring(0, 8) === 'pluslet-');
@@ -48,23 +48,7 @@ export const SectionColumn = ({ columnId, sectionUUID, pluslets, columnSize, add
                         {provided.placeholder}
                         
                         {/* Add Pluslet Button */}
-                        <div className="text-center mt-2">
-                            <button
-                                className="btn btn-muted p-1"
-                                onClick={addPlusletOnClick}
-                                onMouseEnter={e => {
-                                    setAddPlusletHovered(true);
-                                }}
-                                onMouseLeave={e => {
-                                    setAddPlusletHovered(false);
-                                }}
-                            >
-                                <i className="fas fa-plus-circle d-block"></i>
-                                <span className={'fs-xs' + (addPlusletHovered ? '' : ' invisible')}>
-                                        Add Box
-                                </span>
-                            </button>
-                        </div>
+                        <AddPlusletButton addPlusletCallback={addPlusletCallback} />
                     </div>
                 )}
             </Droppable>

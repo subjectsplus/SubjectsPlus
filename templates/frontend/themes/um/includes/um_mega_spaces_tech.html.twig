@@ -1,0 +1,18 @@
+<li class="nav-item mb-3 mb-lg-0 dropdown has-megamenu">
+    <a id="mega-spaces" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="fas fa-chevron-circle-down d-lg-none"></i> Spaces & Technology</a>
+    <div class="dropdown-menu megamenu" role="menu">
+        <div class="container-lg pt-lg-4 pb-lg-1">
+            <div class="panel-close d-none d-lg-block">
+                <div class="close-mega" id="close-spaces"><i class="fas fa-times-circle" title="Close"></i></div>
+                <script type="text/javascript">
+                    let triggerSpaces = document.getElementById('mega-spaces');
+                    document.getElementById('close-spaces').addEventListener("click", ()=>{
+                        bootstrap.Dropdown.getOrCreateInstance(triggerSpaces).hide();
+                    });
+                </script>
+            </div>
+            Content 4
+            <a href="#">link</a>
+        </div>
+    </div>
+</li>

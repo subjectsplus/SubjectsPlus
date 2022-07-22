@@ -8,11 +8,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Common\Collections\Criteria;
 use App\Entity\Media;
 use App\Entity\MediaAttachment;
 use App\Entity\Staff;
 use App\Enum\ImageSizeType;
+use App\Repository\ConfigRepository;
 use Masterminds\HTML5;
 
 
@@ -30,7 +30,7 @@ class MediaService
     private $imageCompressionQuality;
 
     public function __construct(EntityManagerInterface $entityManager, FileNamerService $fileNamer, 
-        ValidatorInterface $validator, string $projectDir, string $uploadDestination, 
+        ValidatorInterface $validator, ConfigRepository $configRepo, string $projectDir, string $uploadDestination, 
         string $smallImageDimensions, string $mediumImageDimensions, string $largeImageDimensions, 
         bool $uploadOriginalImage, int $imageCompressionQuality)
     {
@@ -41,6 +41,21 @@ class MediaService
         $this->uploadDestination = rtrim($uploadDestination, "/\\");
 
         // Set Image Dimensions
+        $smallImageDimensionsConfig = $configRepo->findOneBy(['option_key' => 'small_image_dimensions']);
+        if ($smallImageDimensionsConfig) {
+            $smallImageDimensions = $smallImageDimensionsConfig->getOptionValue();
+        }
+
+        $mediumImageDimensionsConfig = $configRepo->findOneBy(['option_key' => 'medium_image_dimensions']);
+        if ($mediumImageDimensionsConfig) {
+            $mediumImageDimensions = $mediumImageDimensionsConfig->getOptionValue();
+        }
+
+        $largeImageDimensionsConfig = $configRepo->findOneBy(['option_key' => 'large_image_dimensions']);
+        if ($largeImageDimensionsConfig) {
+            $largeImageDimensions = $largeImageDimensionsConfig->getOptionValue();
+        }
+
         list($width, $height) = explode('x', $smallImageDimensions, 2);
         $this->smallImageDimensions = [(float)$width, (float)$height];
 

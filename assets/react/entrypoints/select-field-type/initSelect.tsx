@@ -1,11 +1,11 @@
-import Select from 'react-select';
-import { replaceNodeWithReactComponent } from '#utility/Utility';
+import Select, { StylesConfig } from 'react-select';
+import { replaceNodeWithReactComponent } from '@utility/Utility';
 
-const multiSelectElements = document.getElementsByClassName('form-select-multi');
+const multiSelectElements = document.getElementsByClassName('form-select-multi') as HTMLCollectionOf<HTMLSelectElement>;
 
-const singleSelectElements = document.getElementsByClassName('form-select');
+const singleSelectElements = document.getElementsByClassName('form-select') as HTMLCollectionOf<HTMLSelectElement>;
 
-const reactSelectCustomStyles = {
+const reactSelectCustomStyles: StylesConfig<Element, true> = {
     control: (provided, state) => ({
         ...provided,
         backgroundColor: 'var(--sp-input-bg)',
@@ -23,7 +23,7 @@ const reactSelectCustomStyles = {
         ...provided,
         color: 'var(--sp-input-color)'
     }),
-    indicatorsContainer: (provided, state) => ({
+    indicatorsContainer: (provided, state: any) => ({
         ...provided,
         color: state.isFocused ? 'var(--sp-input-focus-border-color)' : 'var(--sp-input-border-color)',
         '&:hover': {
@@ -58,13 +58,13 @@ const reactSelectCustomStyles = {
     })
 }
 
-Array.from(multiSelectElements).forEach( element => {
+Array.from(multiSelectElements).forEach((element: HTMLSelectElement) => {
     let options = Array.from(element.options);
     let selectedOptions = Array.from(element.querySelectorAll('option:checked'));
     
     replaceNodeWithReactComponent(element,
         <Select isMulti={true} id={element.id} classNamePrefix="sp-react-select-multi" 
-            styles={reactSelectCustomStyles} name={element.getAttribute('name')} 
+            styles={reactSelectCustomStyles} name={element.getAttribute('name') || ''} 
             placeholder={element.getAttribute('data-placeholder-text')}
             noOptionsMessage={() => element.getAttribute('data-no-options-message')}
             options={options} defaultValue={selectedOptions} />);
@@ -76,7 +76,7 @@ Array.from(singleSelectElements).forEach( element => {
 
     replaceNodeWithReactComponent(element,
         <Select id={element.id} classNamePrefix="sp-react-select" styles={reactSelectCustomStyles} 
-            name={element.getAttribute('name')} placeholder={element.getAttribute('data-placeholder-text')} 
+            name={element.getAttribute('name') || ''} placeholder={element.getAttribute('data-placeholder-text')} 
             noOptionsMessage={() => element.getAttribute('data-no-options-message')} options={options} 
             isSearchable={false}
             defaultValue={selectedOptions} />);

@@ -1133,6 +1133,46 @@
         <source>public.guides.icon_help_text</source>
         <target>__public.guides.icon_help_text</target>
       </trans-unit>
+      <trans-unit id="G2r6Vsw" resname="control.guide_form.staff">
+        <source>control.guide_form.staff</source>
+        <target>__control.guide_form.staff</target>
+      </trans-unit>
+      <trans-unit id="d6dIKya" resname="control.guide_form.staff.placeholder_text">
+        <source>control.guide_form.staff.placeholder_text</source>
+        <target>__control.guide_form.staff.placeholder_text</target>
+      </trans-unit>
+      <trans-unit id="zeCvGFZ" resname="control.guide_form.staff.no_options_message">
+        <source>control.guide_form.staff.no_options_message</source>
+        <target>__control.guide_form.staff.no_options_message</target>
+      </trans-unit>
+      <trans-unit id="VGhjOVg" resname="control.guides.label.edit_full_guide_details">
+        <source>control.guides.label.edit_full_guide_details</source>
+        <target>__control.guides.label.edit_full_guide_details</target>
+      </trans-unit>
+      <trans-unit id="hUEGLy1" resname="control.guide_form.staff.label">
+        <source>control.guide_form.staff.label</source>
+        <target>__control.guide_form.staff.label</target>
+      </trans-unit>
+      <trans-unit id="4qaFI8U" resname="public.new_databases.no_results.label">
+        <source>public.new_databases.no_results.label</source>
+        <target>__public.new_databases.no_results.label</target>
+      </trans-unit>
+      <trans-unit id="yy0rgwh" resname="public.new_databases.see_all.label">
+        <source>public.new_databases.see_all.label</source>
+        <target>__public.new_databases.see_all.label</target>
+      </trans-unit>
+      <trans-unit id="OB9HZ3M" resname="public.new_databases.label">
+        <source>public.new_databases.label</source>
+        <target>__public.new_databases.label</target>
+      </trans-unit>
+      <trans-unit id="Ys5NgP9" resname="public.new_guides.label">
+        <source>public.new_guides.label</source>
+        <target>__public.new_guides.label</target>
+      </trans-unit>
+      <trans-unit id="kT_aeUX" resname="public.meta_keywords">
+        <source>public.meta_keywords</source>
+        <target>__public.meta_keywords</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

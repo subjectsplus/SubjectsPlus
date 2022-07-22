@@ -1097,6 +1097,42 @@
         <source>public.guides.icon_help_text</source>
         <target>See guide description/keywords</target>
       </trans-unit>
+      <trans-unit id="hUEGLy1" resname="control.guide_form.staff.label">
+        <source>control.guide_form.staff.label</source>
+        <target>Staff</target>
+      </trans-unit>
+      <trans-unit id="d6dIKya" resname="control.guide_form.staff.placeholder_text">
+        <source>control.guide_form.staff.placeholder_text</source>
+        <target>Search Staff</target>
+      </trans-unit>
+      <trans-unit id="zeCvGFZ" resname="control.guide_form.staff.no_options_message">
+        <source>control.guide_form.staff.no_options_message</source>
+        <target>No results</target>
+      </trans-unit>
+      <trans-unit id="VGhjOVg" resname="control.guides.label.edit_full_guide_details">
+        <source>control.guides.label.edit_full_guide_details</source>
+        <target>Edit Full Guide Metadata</target>
+      </trans-unit>
+      <trans-unit id="4qaFI8U" resname="public.new_databases.no_results.label">
+        <source>public.new_databases.no_results.label</source>
+        <target>There are no new databases</target>
+      </trans-unit>
+      <trans-unit id="yy0rgwh" resname="public.new_databases.see_all.label">
+        <source>public.new_databases.see_all.label</source>
+        <target>See all</target>
+      </trans-unit>
+      <trans-unit id="OB9HZ3M" resname="public.new_databases.label">
+        <source>public.new_databases.label</source>
+        <target>New Databases</target>
+      </trans-unit>
+      <trans-unit id="Ys5NgP9" resname="public.new_guides.label">
+        <source>public.new_guides.label</source>
+        <target>New Guides</target>
+      </trans-unit>
+      <trans-unit id="kT_aeUX" resname="public.meta_keywords">
+        <source>public.meta_keywords</source>
+        <target>research guides, databases, staff list, faqs</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

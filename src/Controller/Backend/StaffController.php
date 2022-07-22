@@ -4,8 +4,8 @@ namespace App\Controller\Backend;
 
 
 use App\Entity\Staff;
-use App\Entity\Media;
 use App\Entity\MediaAttachment;
+use App\Service\StaffService;
 use App\Form\StaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class StaffController extends AbstractController
     /**
      * @Route("/new", name="staff_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, StaffService $ss): Response
     {
         $staff = new Staff();
         $form = $this->createForm(StaffType::class, $staff);
@@ -45,15 +45,8 @@ class StaffController extends AbstractController
             $entityManager->persist($staff);
 
             $staffPhotoAttachment = $form->get('staffPhoto')->getData();
-            if ($staffPhotoAttachment instanceof MediaAttachment) {
-                $media = $staffPhotoAttachment->getMedia();
-
-                // Set staff who uploaded the media file
-                $media->setStaff($staff);
-
-                // create media attachment entry for staff photo
-                $staffPhotoAttachment->setAttachmentType("staff_photo");
-                $staffPhotoAttachment->setAttachmentId($staff->getStaffId());
+            if ($staffPhotoAttachment) {
+                $ss->processStaffPhoto($staffPhotoAttachment, $staff);
             }
 
             $entityManager->flush();
@@ -82,24 +75,16 @@ class StaffController extends AbstractController
     /**
      * @Route("/{staffId}/edit", name="staff_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Staff $staff): Response
+    public function edit(Request $request, Staff $staff, StaffService $ss): Response
     {
         $form = $this->createForm(StaffType::class, $staff);
         $form->handleRequest($request);
         $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $staffPhotoAttachment = $form->get('staffPhoto')->getData();
-            if ($staffPhotoAttachment instanceof MediaAttachment) {
-                $media = $staffPhotoAttachment->getMedia();
-
-                // Set staff who uploaded the media file
-                $media->setStaff($staff);
-
-                // create media attachment entry for staff photo
-                $staffPhotoAttachment->setAttachmentType("staff_photo");
-                $staffPhotoAttachment->setAttachmentId($staff->getStaffId());
+            if ($staffPhotoAttachment) {
+                $ss->processStaffPhoto($staffPhotoAttachment, $staff);
             }
 
             $entityManager->flush();

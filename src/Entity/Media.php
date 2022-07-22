@@ -83,7 +83,7 @@ class Media implements \Serializable
 
     /**
      * @ORM\Column(name="file_name", type="string", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      * 
      * @var string|null
      */
@@ -91,7 +91,7 @@ class Media implements \Serializable
 
     /**
      * @ORM\Column(name="large_file_name", type="string", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      * 
      * @var string|null
      */
@@ -99,7 +99,7 @@ class Media implements \Serializable
 
     /**
      * @ORM\Column(name="medium_file_name", type="string", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      * 
      * @var string|null
      */
@@ -107,7 +107,7 @@ class Media implements \Serializable
 
     /**
      * @ORM\Column(name="small_file_name", type="string", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      * 
      * @var string|null
      */
@@ -123,7 +123,7 @@ class Media implements \Serializable
 
     /**
      * @ORM\Column(name="mime_type", type="string", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      * 
      * @var string|null
      */
@@ -188,43 +188,43 @@ class Media implements \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      */
     private $directory;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      */
     private $largeImageFileWidth;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      */
     private $largeImageFileHeight;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      */
     private $mediumImageFileWidth;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      */
     private $mediumImageFileHeight;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      */
     private $smallImageFileWidth;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"media"})
+     * @Groups({"media", "staff"})
      */
     private $smallImageFileHeight;
 
@@ -480,7 +480,6 @@ class Media implements \Serializable
     {
         return serialize(array(
             $this->mediaId,
-            $this->file,
         ));
     }
 
@@ -488,8 +487,7 @@ class Media implements \Serializable
     public function unserialize($serialized)
     {
         list (
-        $this->mediaId,
-        $this->file,
+            $this->mediaId,
         ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }
