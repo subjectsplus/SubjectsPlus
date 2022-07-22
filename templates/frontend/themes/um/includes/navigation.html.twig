@@ -1,1 +1,33 @@
-<p>This is the UM nav</p>
+{# UM Sliver #}
+{% include('frontend/themes/um/includes/um_sliver.html.twig') %}
+
+{# Nav #}
+<nav class="navbar navbar-expand-lg site-navbar-slim pb-lg-0">
+    <div class="justify-content-center flex-column container-lg flex-lg-row flex-lg-wrap">
+        <a class="navbar-brand p-0 m-0 py-sm-1" href="https://www.library.miami.edu/" target="_blank">
+            <img src="https://www.library.miami.edu/assets/common-images/uml-logo_vision2.png" alt="University of Miami Libraries" class="d-sm-none" style="width: 186px; height: 30px;">
+            <img src="https://www.library.miami.edu/assets/common-images/uml-logo_vision-full2.png" alt="University of Miami Libraries" class="d-none d-sm-inline-block" style="width: 360px; height: 30px;">
+        </a>
+        <ul class="list-inline nav-extra mb-0">
+            <li class="list-inline-item me-5"><a href="https://www.library.miami.edu/research/ask-a-librarian.html" title="Ask A Librarian"><img src="https://www.library.miami.edu/assets/common-images/special-icons/ask2.svg" alt="Ask icon" style="width:32px; height:28px;" /> A Librarian</a></li>
+            <li class="list-inline-item dropdown has-megamenu">
+                <button id="mega-accounts" class="btn dropdown-toggle p-0" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" id="megaAccounts" aria-expanded="false"><img src="https://www.library.miami.edu/assets/common-images/special-icons/accounts.svg" alt="Accounts icon" style="width:36px; height:26px;" /> Accounts</button>
+                {% include('frontend/themes/um/includes/um_mega_accounts.html.twig') %}
+            </li>
+        </ul>
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mainNav">
+            <div class="offcanvas-body pt-0 pe-0">
+                <ul class="navbar-nav my-3 mt-lg-3 mb-lg-0 justify-content-lg-between">
+                    <li class="nav-item mb-3 mb-lg-0 d-lg-none active"><a class="nav-link" href="#"><i class="fas fa-home"></i> Home </a> </li>
+                    {% include('frontend/themes/um/includes/um_mega_find_read.html.twig') %}
+                    {% include('frontend/themes/um/includes/um_mega_research_write.html.twig') %}
+                    {% include('frontend/themes/um/includes/um_mega_learn_create.html.twig') %}
+                    {% include('frontend/themes/um/includes/um_mega_spaces_tech.html.twig') %}
+                    {% include('frontend/themes/um/includes/um_mega_lib_collections.html.twig') %}
+                    {% include('frontend/themes/um/includes/um_mega_about.html.twig') %}
+                </ul>
+            </div>
+        </div>
+        {% include('frontend/themes/um/includes/um_mobile_menu_toggler.html.twig') %}
+    </div>
+</nav>

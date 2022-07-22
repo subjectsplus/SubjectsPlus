@@ -36,12 +36,15 @@
 .btn-primary{
   background-color: var(--THEME-UI-ACTIVE-COLOR);
   color: var(--THEME-UI-ACTIVE-TEXT-COLOR);
+  border: var(--THEME-UI-ACTIVE-COLOR);
+  font-weight: $font-weight-semi;
 
   &:hover,
   &:focus,
   &:active {
     @include transition-all();
     background-color: var(--THEME-UI-ACTIVE-HOVER-COLOR);
+    border: var(--THEME-UI-ACTIVE-HOVER-COLOR);
   }
 }
 

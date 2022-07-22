@@ -1,0 +1,380 @@
+// Add styles/overrides for UM theme only
+[data-theme="um"] {
+   //general
+   body {
+      @media screen and (min-width: 992px){
+         font-size: 1.125rem;
+      }
+   }
+
+   h1,h2,h3,h4,h5{
+      &.fw-light {
+         font-weight:600 !important;
+      }
+   }
+
+   h1{
+      position: relative;
+      &::after{
+         content:'';
+         position: absolute;
+         bottom:0;
+         background-color: var(--THEME-UI-ACTIVE-COLOR);
+         height:.25rem;
+         width: 2.5rem;
+         display: block;
+         left: calc(50% - 1.25rem);
+         margin-bottom: -5px;
+      }
+   }
+
+   .fs-sm {
+      font-size: 1rem !important;
+   }
+
+   .fs-xs {
+      font-size: 0.875rem !important;
+   }
+
+   // sliver
+   .slivernav {
+      background-color: #000000;
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+      color: #FFFFFF;
+      @media screen and (min-width: 992px){
+         position: initial;
+      }
+
+      .sliverbutton {
+         background-color: #636466;
+         border-color: #636466;
+         border-radius: 0;
+         width: 40px;
+         color: #FFFFFF;
+         height: 22px;
+         line-height: 1;
+
+         &:not(.collapsed){
+            background-image: url('https://cdn.miami.edu/_assets-common/images/system/btn-over-15.png');
+            background-repeat: repeat;
+            background-position: 0 0;
+            .fa-plus {
+               &::before {
+                  content:"\f068";
+               }
+            }
+         }
+
+         &:focus{ box-shadow: none; }
+      }
+
+      a {
+         color: #FFFFFF;
+
+         &:hover,
+         &:active {
+            color: rgba(255,255,255, 0.8);
+         }
+      }
+
+      .umsearchbutton,
+      .umsearchfield {
+         background-color: rgba(255,255,255,0.25);
+         border: solid 3px rgba(255,255,255,0.5);
+         font-size: .875rem;
+         line-height: 1;
+      }
+
+      .umsearchfield {
+         padding: 0.25rem 0.75rem;
+         width: calc(100% - 40px);
+         color: #FFFFFF;
+
+         &::placeholder { color: #FFFFFF; }
+
+         &:focus { background-color: rgba(255,255,255,0.9); color: #333333;
+            &::placeholder { color: #333333; }
+         }
+      }
+
+      .umsearchbutton {
+         color: #FFFFFF;
+         padding: 0.375rem 0.5rem;
+         border-radius: 0;
+         vertical-align: baseline;
+
+         &:focus{ box-shadow: none; }
+      }
+
+      .apply-btn {
+         text-transform: uppercase;
+         border: solid 3px #fff;
+         background-color: #005030;
+         color: #FFFFFF;
+         border-radius: 0;
+         padding: 0.125rem 0.5rem;
+
+         &:hover,
+         &:focus {
+            background-image: url('https://cdn.miami.edu/_assets-common/images/system/btn-over-15.png');
+            background-repeat: repeat;
+            background-position: 0 0;
+         }
+      }
+
+      .sliver-accessibility,
+      .sliver-content{
+         &.show {
+
+         }
+
+
+
+
+      }
+
+   }
+
+   //Navbar
+   .site-navbar-slim {
+      margin-top: 22px;
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+
+      @media screen and (min-width: 992px){
+         position: relative;
+         margin-top:0;
+
+         .navbar-brand {width: 65%;}
+
+         .navbar-nav { width: 100%; }
+      }
+
+      .um-toggler {
+         position: relative;
+         width: 100%;
+
+         .navbar-toggler{
+            position: absolute;
+            top: 0;
+            right: 1rem;
+            margin-top: -1rem;
+            border-radius: 50%;
+            padding: 0;
+            background-color: #ff9f55;
+            color: #FFFFFF;
+            z-index:1045;
+            box-shadow: none;
+            width: 40px;
+            height: 40px;
+            font-size:1.65rem;
+         }
+
+         .close-icon{
+            display: none;
+         }
+      }
+
+      .offcanvas.show + .um-toggler .menu-bars-icon{
+         display:none;
+      }
+      .offcanvas.show + .um-toggler .close-icon{
+         display:inline-block;
+      }
+
+      .offcanvas.show {
+         margin-top: 68px;
+         width: 275px;
+
+         .offcanvas-body { overflow-x: hidden; }
+
+         @media screen and (min-width: 580px){ margin-top: 76px; }
+      }
+
+      .nav-extra {
+         display: none;
+
+         @media screen and (min-width: 992px) {
+            display: block;
+            width: calc(100% - 65%);
+            text-align: end;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #FFFFFF;
+
+            a { color: #FFFFFF;
+
+               &:hover,
+               &:focus,
+               &:active { color: #ff9f55; text-decoration: none; }
+            }
+
+            .dropdown-toggle{
+               border-radius: 0;
+               color: #FFFFFF;
+               font-size: 14px;
+               font-weight: 600;
+               text-transform: uppercase;
+
+               &:hover,
+               &:focus{
+                  box-shadow: none;
+                  color: #ff9f55; text-decoration: none;
+               }
+
+               &:after { display: none; }
+            }
+         }
+      }
+
+      .nav-link {
+         text-transform: uppercase;
+         line-height: 1;
+         font-weight: 600;
+
+         &.dropdown-toggle::after { display: none; }
+
+         &.show {
+            .fa-chevron-circle-down {
+               &::before {
+                  content:"\f139";
+               }
+            }
+         }
+
+         &:hover,
+         &:focus,
+         &:active { background-color: transparent; }
+
+         @media screen and (min-width: 992px){
+            border-bottom: 4px solid transparent;
+            font-size: 1rem;
+            padding: 0;
+
+            &:hover,
+            &:focus,
+            &:active { border-bottom: 4px solid #ff9f55; color: #ff9f55; }
+         }
+      }
+
+      .dropdown-menu {
+         &.megamenu {
+            background-color: #3a4955;
+            border-radius: 0;
+            color: #FFFFFF;
+            padding: 1rem;
+            margin: 0 -5px 0 -1rem;
+
+            a {
+               color: #FFFFFF;
+
+               &:hover,
+               &:focus,
+               &:active {color: #ff9f55; text-decoration: none;}
+
+               &.cta { font-weight: 600; display: inline-block; padding-bottom: 0.75rem; }
+            }
+
+            h5 { font-size: 1rem; margin-bottom: 0; }
+
+            hr.hr-decoration {
+               border-top: 1px solid #dee2e6;
+               margin-top: 5px;
+               margin-bottom: 1rem;
+               opacity: 0.5;
+            }
+
+            ul { margin-bottom: 1.5rem; }
+
+            li { padding: 0.25rem 0; }
+
+            @media screen and (min-width: 992px){
+               border: none;
+               margin: 0;
+               left:0;
+               right:0;
+               width:100%;
+               padding: 0;
+               background-color: #f8f9fa;
+               color: #333333;
+               box-shadow: 0 2px 2px -2px #6c757d;
+
+               a {
+                  color: #333333;;
+
+                  &:hover,
+                  &:focus,
+                  &:active {color: #ff9f55; text-decoration: none;}
+
+                  &.cta {
+                     border: 1px solid #ff9f55;
+                     padding: 0.5rem;
+                     margin-bottom: .25rem;
+
+                     i {color: #ff9f55; margin-left: 0.25rem; font-size: 1rem; }
+                  }
+               }
+
+               h5 { font-size: 1.125rem; }
+
+               hr.hr-decoration {
+                  border-top: 3px solid #ff9f55;
+                  max-width: 50px;
+                  opacity: 1;
+               }
+
+               ul { margin-bottom: 1.5rem; }
+
+               li { padding: 0.25rem 0; }
+
+               .panel-close {
+                  position: relative;
+                  .close-mega {
+                     position: absolute;
+                     top: 0;
+                     right: 0;
+                     margin-top: -1rem;
+                     margin-right: -0.5rem;
+                     cursor: pointer;
+
+                     i { color:#ff9f55; font-size:1.75rem;}
+                  }
+               }
+            }
+
+            @media screen and (min-width: 992px) and (max-height: 750px) {
+               max-height: 475px;
+               overflow: auto;
+            }
+         }
+      }
+
+      .has-megamenu{
+         @media screen and (min-width: 992px) {
+            position: static !important;
+            line-height: 1;
+         }
+      }
+   }
+
+   // Page header
+   .page-header{
+      margin-top: 68px;
+      @media screen and (min-width: 580px){ margin-top: 76px; }
+      @media screen and (min-width: 992px){ margin-top: 0; }
+   }
+
+
+   //guides
+   .sp-guide-tabs.nav-pills .nav-item{
+      font-size: 1rem;
+   }
+
+   //
+
+
+} // end data-theme

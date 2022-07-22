@@ -21,6 +21,11 @@
     .nav-item {
       margin-right: 0.5rem;
       font-size: $font-size-sm;
+      margin-bottom: 0.5rem;
+
+      @media (min-width: map-get($grid-breakpoints, md)) {
+        margin-bottom: 0;
+      }
     }
 
     .nav-link {

@@ -1,16 +1,56 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}Research Guides{% endblock %}
+{% block title_tag %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block meta_tags_description %}
+    <meta name="description" content="A collection of research guides grouped by subject, course and topic.">
+{% endblock %}
+
+{% block og_title %}
+    {% if metaAuthor is defined %}
+        <meta property="og:title" content="{{ 'public.subjects.title.label' | trans }} | {{ metaAuthor }}" />
+    {% else %}
+        <meta property="og:title" content="{{ 'public.subjects.title.label' | trans }}" />
+    {% endif %}
+{% endblock %}
+
+{% block og_description %}
+    <meta property="og:description" content="A collection of research guides grouped by subject, course and topic." />
+{% endblock %}
+
+{% block header_title %}
+    {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block search %}
+    {# Add custom search for guides #}
+{% endblock %}
 
 {% block main %}
+    <div class="row">
+        <div class="col-lg-8">
+            {% include('frontend/subjects/guides/_guides_listing_tabs.html.twig') %}
+        </div>
 
-<h1>Subjects</h1>
-<div>
-<ul>
-{% for subject in subjects %}
-<li><a href="{{ path('subject_show', {'shortform':  subject.shortform  } ) }}">{{subject.subject }}</a></li>
-{% endfor %}
-</ul>
-</div>
+        <div class="col-lg-4">
+            {% if getconfig('display_experts') == 'true' %}
+                {% include('frontend/subjects/guides/_show_experts.html.twig') %}
+            {% endif %}
 
+            {% if getconfig('display_new_databases') == 'true' or getconfig('display_new_guides') == 'true' %}
+                {# TODO: Assign different feature class based on theme #}
+                <div class="feature-neutral p-3 mt-5">
+                    {% if getconfig('display_new_databases') == 'true' %}
+                        {% include('frontend/subjects/guides/_show_new_databases.html.twig') %}
+                    {% endif %}
+
+                    {% if getconfig('display_new_guides') == 'true' %}
+                        {% include('frontend/subjects/guides/_show_new_guides.html.twig') %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

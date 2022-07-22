@@ -1,7 +1,23 @@
 {% extends 'frontend/base.html.twig' %}
 
-{% block metatitle %}
+{% block title_tag %}
     {{ 'public.subjects.title.label' | trans }}
+{% endblock %}
+
+{% block meta_tags_description %}
+    <meta name="description" content="A collection of research guides grouped by subject, course and topic.">
+{% endblock %}
+
+{% block og_title %}
+    {% if metaAuthor is defined %}
+        <meta property="og:title" content="{{ 'public.subjects.title.label' | trans }} | {{ metaAuthor }}" />
+    {% else %}
+        <meta property="og:title" content="{{ 'public.subjects.title.label' | trans }}" />
+    {% endif %}
+{% endblock %}
+
+{% block og_description %}
+    <meta property="og:description" content="A collection of research guides grouped by subject, course and topic." />
 {% endblock %}
 
 {% block header_title %}
