@@ -1112,6 +1112,7 @@
       <trans-unit id="VGhjOVg" resname="control.guides.label.edit_full_guide_details">
         <source>control.guides.label.edit_full_guide_details</source>
         <target>Edit Full Guide Metadata</target>
+      </trans-unit>
       <trans-unit id="4qaFI8U" resname="public.new_databases.no_results.label">
         <source>public.new_databases.no_results.label</source>
         <target>There are no new databases</target>
@@ -1131,7 +1132,6 @@
       <trans-unit id="kT_aeUX" resname="public.meta_keywords">
         <source>public.meta_keywords</source>
         <target>research guides, databases, staff list, faqs</target>
-
       </trans-unit>
     </body>
   </file>
