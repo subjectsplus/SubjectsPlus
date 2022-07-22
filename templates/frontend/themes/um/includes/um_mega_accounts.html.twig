@@ -1,5 +1,14 @@
 <div class="dropdown-menu megamenu" role="menu" aria-labelledby="megaAccounts">
-    <div class="container-lg py-lg-4">
+    <div class="container-lg pt-lg-4 pb-lg-1">
+        <div class="panel-close d-none d-lg-block">
+            <div class="close-mega" id="close-accounts"><i class="fas fa-times-circle" title="Close"></i></div>
+            <script type="text/javascript">
+                let triggerAccounts = document.getElementById('mega-accounts');
+                document.getElementById('close-accounts').addEventListener("click", ()=>{
+                    bootstrap.Dropdown.getOrCreateInstance(triggerAccounts).hide();
+                });
+            </script>
+        </div>
         Accounts
         <a href="#">link</a>
     </div>

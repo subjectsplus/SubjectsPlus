@@ -1,7 +1,16 @@
 <li class="nav-item mb-3 mb-lg-0 dropdown has-megamenu">
-    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Find & Read</a>
+    <a id="mega-find-read" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="fas fa-chevron-circle-down d-lg-none"></i> Find & Read</a>
     <div class="dropdown-menu megamenu" role="menu">
-        <div class="container-lg py-lg-4">
+        <div class="container-lg pt-lg-4 pb-lg-1">
+            <div class="panel-close d-none d-lg-block">
+                <div class="close-mega" id="close-find-read"><i class="fas fa-times-circle" title="Close"></i></div>
+                <script type="text/javascript">
+                    let triggerFind = document.getElementById('mega-find-read');
+                    document.getElementById('close-find-read').addEventListener("click", ()=>{
+                        bootstrap.Dropdown.getOrCreateInstance(triggerFind).hide();
+                    });
+                </script>
+            </div>
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <h5>Books</h5>
@@ -70,9 +79,6 @@
                         <li><a href="https://sp.library.miami.edu/subjects/guide.php?subject=U2">uSearch Help</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="panel-close d-none d-lg-block">
-                <div class="close-mm" title="Close"></div>
             </div>
         </div>
     </div>

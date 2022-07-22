@@ -1,9 +1,86 @@
 <li class="nav-item mb-3 mb-lg-0 dropdown has-megamenu">
-    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Learn & Create</a>
+    <a id="mega-learn" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="fas fa-chevron-circle-down d-lg-none"></i> Learn & Create</a>
     <div class="dropdown-menu megamenu" role="menu">
-        <div class="container-lg py-lg-4">
-            Content 3
-            <a href="#">link</a>
+        <div class="container-lg pt-lg-4 pb-lg-1">
+            <div class="panel-close d-none d-lg-block">
+                <div class="close-mega" id="close-learn"><i class="fas fa-times-circle" title="Close"></i></div>
+                <script type="text/javascript">
+                    let triggerLearn = document.getElementById('mega-learn');
+                    document.getElementById('close-learn').addEventListener("click", ()=>{
+                        bootstrap.Dropdown.getOrCreateInstance(triggerLearn).hide();
+                    });
+                </script>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <h5>Learn & Create</h5>
+                    <hr align="left" class="hr-decoration">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a class="cta" href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+                                <li><a href="http://umarc.miami.edu/arc/Index.html">Camner Center for Academic Resources</a></li>
+                                <li><a href="https://www.library.miami.edu/spaces/reserve-equipment.html">Check Out Equipment</a></li>
+                                <li><a href="https://www.library.miami.edu/spaces/computers.html">Computers</a></li>
+                                <li><a href="https://www.library.miami.edu/creative-studio/index.html">Creative Studio</a></li>
+                                <li><a href="https://www.library.miami.edu/data-services/index.html">Data & Visualization Services</a></li>
+                                <li><a href="https://www.library.miami.edu/spaces/third-floor-lab.html">Digital Scholars' Lab</a></li>
+                                <li><a href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="https://www.library.miami.edu/learn/mindfulness.html">Mindfulness Programs</a></li>
+                                <li><a href="http://www.as.miami.edu/labs/">Modern Languages Lab</a></li>
+                                <li><a href="http://libcal.miami.edu/booking/exploratory">One-Button Studio</a></li>
+                                <li><a href="https://www.library.miami.edu/research/consultations.html">Research Consultations</a></li>
+                                <li><a href="https://www.library.miami.edu/spaces/computers.html">Software</a></li>
+                                <li><a href="https://www.library.miami.edu/learn/stress-relief-activities.html">Stress Relief Activities</a></li>
+                                <li><a href="http://studentsupport.it.miami.edu/sthd/">Student Technology Help Desk</a></li>
+                                <li><a href="http://www.as.miami.edu/writingcenter/">Writing Center</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="card d-none d-lg-block">
+                        <script type="text/javascript">
+                            let cardItems = [
+                                ['https://www.library.miami.edu/images/card-creative-studio.jpg'],
+                                ['https://www.library.miami.edu/images/card-linked-in-learning.jpg'],
+                                ['https://www.library.miami.edu/images/card-mango.jpg']
+                            ];
+                            let cardLink = [
+                                ['https://www.library.miami.edu/creative-studio/index.html'],
+                                ['https://lil.miami.edu'],
+                                ['http://access.library.miami.edu/login?url=http://connect.mangolanguages.com/univ-miami/start']
+                            ];
+                            let cardTitle = [
+                                ['Creative Studio'],
+                                ['LinkedIn Learning'],
+                                ['Mango Languages']
+                            ];
+                            let cardContent = [
+                                ['Creative Studio provides expert support in the use of digital audio, video, graphic design technology, printing, 3D printing, and VR technology.'],
+                                ['Tutorials just a click away. We offer access to LinkedIn Learning\'s 5,000 video tutorials covering business, creative, and technology topics.'],
+                                ['UM students, staff and faculty have access to Mango Languages which offers online learning in 71 languages.']
+                            ];
+
+                            function getRandomCardLearn() {
+                                let dataIndex = Math.floor(Math.random() * cardItems.length);
+                                let img = '<a href=\"' + cardLink[dataIndex] + '\" title=\"' + cardTitle[dataIndex] + '\"><img src="';
+                                img += cardItems[dataIndex];
+                                img += '\" alt=\"' + cardTitle[dataIndex] + '\" class=\"card-img-top img-fluid\" /></a><div class=\"card-body\"><h5 class=\"card-title\"><a href=\"' + cardLink[dataIndex] + '\">' + cardTitle[dataIndex] + '</a></h5><p>' + cardContent[dataIndex] + '</p></div>';
+                                return img;
+                            }
+
+                            document.write(getRandomCardLearn() );
+                        </script>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </li>

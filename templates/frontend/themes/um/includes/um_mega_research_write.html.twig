@@ -1,9 +1,83 @@
 <li class="nav-item mb-3 mb-lg-0 dropdown has-megamenu">
-    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> Research & Write</a>
+    <a id="mega-research" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="fas fa-chevron-circle-down d-lg-none"></i> Research & Write</a>
     <div class="dropdown-menu megamenu" role="menu">
-        <div class="container-lg py-lg-4">
-            Content 2
-            <a href="#">link</a>
+        <div class="container-lg pt-lg-4 pb-lg-1">
+            <div class="panel-close d-none d-lg-block">
+                <div class="close-mega" id="close-research"><i class="fas fa-times-circle" title="Close"></i></div>
+                <script type="text/javascript">
+                    let triggerResearch = document.getElementById('mega-research');
+                    document.getElementById('close-research').addEventListener("click", ()=>{
+                        bootstrap.Dropdown.getOrCreateInstance(triggerResearch).hide();
+                    });
+                </script>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <h5>Get Started</h5>
+                    <hr align="left" class="hr-decoration">
+                    <ul class="list-unstyled">
+                        <li><a class="cta" href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons                                 <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+                        <li><a href="https://www.library.miami.edu/research/ask-a-librarian.html">Ask a Librarian </a></li>
+                        <li><a href="https://www.library.miami.edu/research/peer-research-consultants.html">Peer Research Consultants</a></li>
+                        <li><a href="https://www.library.miami.edu/research/consultations.html">Research Consultations</a></li>
+                        <li><a href="https://sp.library.miami.edu/subjects/index.php">Research Guides</a></li>
+                        <li><a href="https://sp.library.miami.edu/subjects/staff.php?letter=Subject%20Librarians">Subject Librarians</a></li>
+                        <li><a href="https://www.library.miami.edu/research/workshops-tutorials.html">Workshops</a></li>
+                    </ul>
+
+                    <h5>Find Sources</h5>
+                    <hr align="left" class="hr-decoration">
+                    <ul class="list-unstyled">
+                        <li><a href="https://sp.library.miami.edu/subjects/databases.php">Databases A-Z</a></li>
+                        <li><a href="https://www.library.miami.edu/lib-collections/index.html">Distinctive Collections</a></li>
+                        <li><a href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=everything&search_scope=Everything&vid=uml_new&offset=0">Find Books & Articles</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <h5>Analyze Data</h5>
+                    <hr align="left" class="hr-decoration">
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.library.miami.edu/data-services/index.html">Data & Visualization Services</a></li>
+                        <li><a href="https://sp.library.miami.edu/subjects/gis">Geospatial Data (GIS)</a></li>
+                    </ul>
+
+                    <h5>Organize, Design, Write</h5>
+                    <hr align="left" class="hr-decoration">
+                    <ul class="list-unstyled">
+                        <li><a href="https://sp.library.miami.edu/subjects/guide.php?subject=citation-management-systems">Citation Management Systems</a></li>
+                        <li><a href="https://www.library.miami.edu/data-services/index.html">Data Management Strategies</a></li>
+                        <li><a href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright</a></li>
+                        <li><a href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-lg-inline-block">/</span> <a href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <h5>Publish & Promote</h5>
+                    <hr align="left" class="hr-decoration">
+                    <ul class="list-unstyled">
+                        <li><a href="https://sp.library.miami.edu/subjects/ORCID">Create an ORCID iD</a></li>
+                        <li><a href="https://sp.library.miami.edu/subjects/etd">Dissertation/Thesis Formatting Support (ETDs)</a></li>
+                        <li><a href="https://www.library.miami.edu/research/open-access-and-publishing.html">Open Access and Publishing</a></li>
+                        <li><a href="https://scholarship.miami.edu/esploro/">Scholarship@Miami</a></li>
+                    </ul>
+
+                    <h5>Fellowships & Grants</h5>
+                    <hr align="left" class="hr-decoration">
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.library.miami.edu/specialcollections/abrams-banning-grant.html">Dave Abrams and Gene Banning Pan Am Research Grant</a></li>
+                        <li><a href="https://www.library.miami.edu/chc/fellows.html">Goizueta Foundation Graduate Fellowship Program</a></li>
+                        <li><a href="https://www.library.miami.edu/research/library-research-scholars.html">Library Research Scholars &amp; Adobe Scholars</a></li>
+                        <li><a href="https://www.library.miami.edu/specialcollections/world-wings-grant.html">The World Wings International, Inc. Research Grant</a></li>
+                    </ul>
+
+                    <h5>Research from Home</h5>
+                    <hr align="left" class="hr-decoration">
+                    <ul class="list-unstyled">
+                        <li><a class="cta" href="https://www.library.miami.edu/online-services">Online Services <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </li>

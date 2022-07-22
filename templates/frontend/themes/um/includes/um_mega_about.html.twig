@@ -1,7 +1,16 @@
 <li class="nav-item mb-3 mb-lg-0 dropdown has-megamenu">
-    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chevron-circle-down d-lg-none"></i> About</a>
+    <a id="mega-about" class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="fas fa-chevron-circle-down d-lg-none"></i> About</a>
     <div class="dropdown-menu megamenu" role="menu">
-        <div class="container-lg py-lg-4">
+        <div class="container-lg pt-lg-4 pb-lg-1">
+            <div class="panel-close d-none d-lg-block">
+                <div class="close-mega" id="close-about"><i class="fas fa-times-circle" title="Close"></i></div>
+                <script type="text/javascript">
+                    let triggerAbout = document.getElementById('mega-about');
+                    document.getElementById('close-about').addEventListener("click", ()=>{
+                        bootstrap.Dropdown.getOrCreateInstance(triggerAbout).hide();
+                    });
+                </script>
+            </div>
             Content 6
             <a href="#">link</a>
         </div>
