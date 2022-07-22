@@ -5073,6 +5073,7 @@
       <trans-unit id="hUEGLy1" resname="control.guide_form.staff.label">
         <source>control.guide_form.staff.label</source>
         <target>__control.guide_form.staff.label</target>
+      </trans-unit>
       <trans-unit id="4qaFI8U" resname="public.new_databases.no_results.label">
         <source>public.new_databases.no_results.label</source>
         <target>__public.new_databases.no_results.label</target>
