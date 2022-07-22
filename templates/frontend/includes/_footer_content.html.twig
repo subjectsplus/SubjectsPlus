@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row py-4">
         <div class="col-8">
-            {% if getconfig('meta_author') %}
-                <p class="fs-sm mb-0">{{ getconfig('meta_author') }}</p>
+            {% if metaAuthor is defined %}
+                <p class="fs-sm mb-0">{{ metaAuthor }}</p>
             {% endif %}
         </div>
         <div class="col-4 text-end">

@@ -1,5 +1,29 @@
-<h4 class="mb-2">Find an Expert</h4>
-<p>Need help? Ask an expert!</p>
+{% if getconfig('round_staff_img') == 'true' %}
+    {% set imgStaffClass = "sp-staff-img-round" %}
+{% else %}
+    {% set imgStaffClass = "sp-staff-img" %}
+{% endif %}
+
+{# TODO: Add custom heading, subheading button text from backend #}
+<h4 class="mb-2 mt-3 mt-lg-0">Find an Expert</h4>
+<p class="mb-4">Need help? Ask an expert!</p>
+
+{# TODO: Backend ability to choose experts to showcase and which subjects #}
 <ul class="list-unstyled">
-    <li>show expert</li>
+    {# TODO: Add link to staff page, img_src, alt, name, title, and clickable list of subjects #}
+    <li>
+        <div class="d-flex flex-row flex-nowrap">
+            <a href="#" class="d-inline-block me-3">
+                <img src="https://sp.library.miami.edu/assets//users/_kbenknaan/headshot_large.jpg" class="{{ imgStaffClass }}" alt="staff thumbnail for staff name" />
+            </a>
+            <div class="sp-expert-content align-self-center fs-sm">
+                <a href="#" class="link-default-underline d-block mb-1"><strong>Kineret Ben-Knaan</strong></a>
+                <p class="fs-xs"><em>Research & Assessment Librarian and Subject Liaison for Judaic Studies</em></p>
+                <p class="mb-0"><strong>Subjects:</strong> <a href="#" class="link-default">Judaic Studies</a></p>
+            </div>
+        </div>
+    </li>
 </ul>
+<div class="text-center mt-4">
+    <a class="btn btn-primary fs-sm">See all experts</a>
+</div>

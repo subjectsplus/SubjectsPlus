@@ -13,6 +13,7 @@ body {
 
 a {
   color: var(--THEME-LINK-COLOR);
+  cursor: pointer;
   &:hover,
   &:active,
   &:focus {
@@ -34,6 +35,20 @@ a {
       text-decoration: none;
     }
   }
+
+  //combo
+  &.link-default-underline {
+    color: var(--THEME-TEXT-COLOR);
+    text-decoration: underline;
+    &:hover,
+    &:active,
+    &:focus {
+      @include transition-all();
+      color: var(--THEME-LINK-HOVER-COLOR);
+      text-decoration: underline;
+    }
+  }
+
 
   &.link-icon {
     color: var(--THEME-LINK-COLOR);
