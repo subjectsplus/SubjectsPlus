@@ -1,0 +1,25 @@
+.cke_image_resizer_wrapper img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cke_widget_image figure.image {
+    padding: 0.25rem;
+    margin: 0 0 1rem 0;
+    text-align: left;
+}
+
+.cke_widget_image[style="float: left;"] figure.image,
+.cke_widget_image.cke_image_nocaption[style="float: left;"] img {
+    margin: 0 1rem 1rem 0;
+}
+
+.cke_widget_image[style="float: right;"] figure.image,
+.cke_widget_image.cke_image_nocaption[style="float: right;"] img {
+    margin: 0 0 1rem 1rem;
+}
+
+.cke_widget_image img {
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,10 @@
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBookList" aria-labelledby="offcanvasGuideDetailsLabel">
+    <div class="offcanvas-header">
+        <h3 class="offcanvas-title" id="offcanvasBookListLabel">{{ 'control.guides.label.book_list' | trans }}</h3>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="{{ 'close.aria.label' | trans }}"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="guide-booklist-search-container"></div>
+    </div>
+    {{ encore_entry_script_tags('booklist_search') }}
+</div>

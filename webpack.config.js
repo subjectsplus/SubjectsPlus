@@ -37,6 +37,9 @@ Encore
     // Guide-Metadata component loader
     .addEntry('guide_metadata_loader', './assets/react/entrypoints/guide_metadata_loader.tsx')
 
+    // BookList component
+    .addEntry('booklist_search', './assets/react/components/booklist-search/BookListSearch.tsx')
+    
     // Record Component
     .addEntry('record_index_container', './assets/react/components/record/RecordIndexContainer.js')
     .addEntry('alphabet_list', './assets/react/components/record/AlphabetList.js')
