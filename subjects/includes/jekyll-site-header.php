@@ -727,13 +727,7 @@ if (is_null($header_type)
 													<div class="mm-lib-time"><a href="https://www.law.miami.edu/iml/library/library-contact-and-hours" class="no-decoration default">See Hours</a></div>
 												</div>
 											</li>
-											<li class="mm-lib">
-												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/marine-lib-sm.jpg" alt="Marine and Atmospheric Science Library" class="mm-lib-img d-none d-lg-inline-block">
-												<div class="nested-items">
-													<a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/index.html">Marine and Atmospheric Science Library</a>
-													<div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/hours.html"><span data-calendar="rsmaslib"></span></a></div>
-												</div>
-											</li>
+
 											<li class="mm-lib">
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/med-lib-sm.jpg" alt="Medical Library" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
@@ -746,6 +740,13 @@ if (is_null($header_type)
 												<div class="nested-items">
 													<a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/index.html">Music Library</a>
 													<div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/hours.html"><span data-calendar="musiclib"></span></a></div>
+												</div>
+											</li>
+											<li class="mm-lib">
+												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/marine-lib-sm.jpg" alt="Rosenstiel School Library" class="mm-lib-img d-none d-lg-inline-block">
+												<div class="nested-items">
+													<a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/index.html">Rosenstiel School Library</a>
+													<div class="mm-lib-time"><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/rsmaslib/hours.html"><span data-calendar="rsmaslib"></span></a></div>
 												</div>
 											</li>
 										</ul>

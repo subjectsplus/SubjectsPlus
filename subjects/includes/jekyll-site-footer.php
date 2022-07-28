@@ -72,10 +72,6 @@
                                         <span><a href="https://www.law.miami.edu/iml/library/library-contact-and-hours" class="no-decoration default"><i class="far fa-clock"></i> See Hours</a></span>
                                     </li>
                                     <li>
-                                        <a class="no-decoration default" href="https://www.library.miami.edu/rsmaslib/index.html">Marine and Atmospheric Science Library</a>
-                                        <span><a class="no-decoration default" href="https://www.library.miami.edu/rsmaslib/hours.html"><i class="far fa-clock"></i> <span data-calendar="rsmaslib"></span></a></span>
-                                    </li>
-                                    <li>
                                         <a class="no-decoration default" href="http://calder.med.miami.edu/">Medical Library</a>
                                         <span><a href="http://calder.med.miami.edu/libraryhours.html" class="no-decoration default"><i class="far fa-clock"></i> See Hours</a></span>
                                     </li>
@@ -83,6 +79,10 @@
                                         <a class="no-decoration default" href="https://www.library.miami.edu/musiclib/index.html">Music Library</a>
                                         <span><a class="no-decoration default" href="https://www.library.miami.edu/musiclib/hours.html"><i class="far fa-clock"></i> <span data-calendar="musiclib"></span></a></span>
                                     </li>
+									<li>
+										<a class="no-decoration default" href="https://www.library.miami.edu/rsmaslib/index.html">Rosenstiel School Library</a>
+										<span><a class="no-decoration default" href="https://www.library.miami.edu/rsmaslib/hours.html"><i class="far fa-clock"></i> <span data-calendar="rsmaslib"></span></a></span>
+									</li>
                                 </ul>
                             </div>
 
