@@ -4,6 +4,6 @@
 [submodule "subjects/themes/med"]
 	path = subjects/themes/med
 	url = git@bitbucket.org:umiamiwet/med.git
-[submodule "subjects/themes/calder-new"]
-	path = subjects/themes/calder-new
+[submodule "subjects/themes/calder"]
+	path = subjects/themes/calder
 	url = git@bitbucket.org:umiamiwet/calder.git
