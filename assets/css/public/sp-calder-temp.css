@@ -1,0 +1,23 @@
+/* header */
+.site-nav {
+    background-color: #3a4955;
+    color: #FFFFFF;
+}
+
+.site-nav a{
+    color: #FFFFFF;
+}
+
+.site-nav .navbar-brand:hover {
+    background-color: transparent;
+}
+
+.site-nav .navbar-brand img {
+    width: 181px;
+    height: 70px;
+}
+
+/* nav */
+
+
+/* footer */

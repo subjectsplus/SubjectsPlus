@@ -13,6 +13,7 @@
 
     <!-- SP CSS -->
     <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-calder.css?v=02082023-1" type="text/css">
+	<link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-calder-temp.css" type="text/css">
 
     <!-- Google Analytics -->
     <?php
@@ -33,10 +34,10 @@
 <!--SP jQuery legacy-->
 <?php
 // Load our jQuery libraries + some css
-//if (isset($use_jquery)) { print generatejQuery($use_jquery); }
+if (isset($use_jquery)) { print generatejQuery($use_jquery); }
 
 // We've got a variable for those who wish to keep the old styles
-//$v2styles = FALSE;
+$v2styles = FALSE;
 ?>
 
 <!-- Load Calder site header and nav-->
