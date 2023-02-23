@@ -1,23 +1,22 @@
 </main>
 <footer class="mt-auto">
 	<!--Powered by Subjects Plus-->
-	<div class="container mb-4">
+	<div class="container mb-2">
 		<p style="font-size:.8rem; text-align: center; margin-bottom: .25rem;">Powered by <a href="http://www.subjectsplus.com/" class="no-decoration default">SubjectsPlus</a></p>
 	</div>
 	<div class="footer-content p-3">
 		<div class="container">
 			<div class="row no-gutters">
-				<div class="col-sm-3 col-md-2 mb-3 mb-md-0">
+				<div class="col-sm-3 col-md-2 mb-3 mb-sm-0">
 					<a href="http://www.miami.edu/" target="_blank" title="University of Miami" class="no-decoration">
 						<img src="https://www.library.miami.edu/assets/common-images/um-logo2.png" alt="University of Miami" class="footer-logo" />
 					</a>
 				</div>
-				<div class="col-sm-9 col-md-6 mb-3 mb-md-0">
+				<div class="col-sm-6 col-md-6 mb-3 mb-sm-0">
 					<h4 class="mb-0"><a href="https://www.library.miami.edu/calder/index.html" class="no-decoration">Louis Calder Memorial Library</a></h4>
-					<h5 class="mb-1"><a href="https://www.library.miami.edu" class="no-decoration">University of Miami Libraries</a></h5>
-					<p class="mb-0">1601 NW 10th Ave Miami, FL 33136 | <a href="tel:1-305-243-6403" class="no-decoration telephone-link">(305) 243-6403</a></p>
+					<p class="mb-0">1601 NW 10th Ave Miami, FL 33136 <br /><a href="tel:1-305-243-6403" class="no-decoration telephone-link">(305) 243-6403</a></p>
 				</div>
-				<div class="col-md-4 text-md-right">
+				<div class="col-sm-3 col-md-4 text-sm-right">
 					<div>
 						<a href="https://www.facebook.com/caldermedlibrary" target="_blank" class="no-decoration" title="Facebook"><i class="fab fa-facebook-square"></i></a>
 					</div>
