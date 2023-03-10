@@ -1,0 +1,33 @@
+{
+    "http://imsglobal.org": {
+        "client_id": "testing12345",
+        "auth_login_url": "https://lti-ri.imsglobal.org/platforms/531/authorizations/new",
+        "auth_token_url": "https://lti-ri.imsglobal.org/platforms/531/access_tokens",
+        "key_set_url": "https://lti-ri.imsglobal.org/platforms/531/platform_keys/529.json",
+        "private_key_file": "/private.key",
+        "deployment": [
+            "1234"
+        ]
+    },
+    "ltiadvantagevalidator.imsglobal.org": {
+        "client_id": "imstestuser",
+        "auth_login_url": "https://ltiadvantagevalidator.imsglobal.org/ltitool/oidcauthurl.html",
+        "auth_token_url": "https://oauth2server.imsglobal.org/oauth2server/authcodejwt",
+        "key_set_url": "https://oauth2server.imsglobal.org/jwks",
+        "private_key_file": "/cert_suite_private.key",
+        "deployment": [
+            "testdeploy"
+        ]
+    },
+    "http://localhost:9001": {
+        "client_id": "d42df408-70f5-4b60-8274-6c98d3b9468d",
+        "auth_login_url": "http://localhost:9001/platform/login.php",
+        "auth_token_url": "http://localhost/platform/token.php",
+        "key_set_url": "http://localhost/platform/jwks.php",
+        "private_key_file": "/private.key",
+        "kid": "58f36e10-c1c1-4df0-af8b-85c857d1634f",
+        "deployment": [
+            "8c49a5fa-f955-405e-865f-3d7e959e809f"
+        ]
+    }
+}
