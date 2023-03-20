@@ -1,5 +1,5 @@
 {
-  "https://dev-e-subjectsplus.azurewebsites.net": {
+  "blackboard.com": {
     "client_id": "ce81f40c-73e6-4ffb-b216-ebfc35a9dfa0",
     "auth_login_url": "https://dev-e-subjectsplus.azurewebsites.net/addons/bb-lti/login.php",
     "auth_token_url": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
