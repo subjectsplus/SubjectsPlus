@@ -31,7 +31,11 @@ class SP_Database implements LTI\Database {
 
     public function find_deployment($iss, $deployment_id)
     {
-        // TODO: Implement find_deployment() method.
+        if (!in_array($deployment_id, $_SESSION['iss'][$iss]['deployment'])) {
+            return false;
+        }
+        return LTI\LTI_Deployment::new()
+                                 ->set_deployment_id($deployment_id);
     }
 
     private function private_key($iss) {
