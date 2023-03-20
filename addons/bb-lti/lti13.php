@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../lib/LTI13/SP_Database.php';
 
 use \IMSGlobal\LTI;
 
+
 $launch = LTI\LTI_Message_Launch::new(new SP_Database())
                                 ->validate();
 
