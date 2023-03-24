@@ -9,5 +9,15 @@
     "deployment": [
       "6e779d82-ce1f-4623-a544-c6cd573d51f2"
     ]
+  },
+  "https://www.imsglobal.org/spec/lti/v1p3#context-claim": {
+    "https://purl.imsglobal.org/spec/lti/claim/context": {
+      "id": "11f3aa53cd104f9584ce030aa520f5be",
+      "label": "ltiadvantagecert",
+      "title": "ltiadvantagecert",
+      "type": [
+        "http://purl.imsglobal.org/vocab/lis/v2/course#CourseOffering"
+      ]
+    }
   }
 }
