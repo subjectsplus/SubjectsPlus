@@ -53,7 +53,7 @@
 }
 
 .site-nav .navbar-nav .nav-link:hover {
-    color: #ff9f55;
+    color: #4CCD8C;
 }
 
 @media (min-width: 992px){
@@ -62,12 +62,6 @@
         padding-right: 0;
         padding-left: 0;
         padding-bottom: 0;
-        border-bottom: 3px solid transparent;
-    }
-
-    .site-nav .navbar-nav .nav-link:hover,
-    .site-nav .navbar-nav .nav-link:active {
-        border-bottom: 3px solid #ff9f55;
     }
 }
 
@@ -92,7 +86,7 @@
 .footer-content i {font-size: 1.5rem;}
 
 .footer-content a:hover {
-    color: #ff9f55;
+    color: #4CCD8C;
 }
 
 /* misc */
@@ -104,7 +98,51 @@
     margin-bottom: 0;
 }
 
-.calder-page-header .hr-panel {
+.calder-page-header .hr-panel,
+.guide-header .hr-panel {
     margin-bottom: 0;
     border-top: 3px solid #2c8154;
+}
+
+.printer_tabs,
+.printer_no_tabs {
+    top: 1rem;
+}
+
+.printer_tabs i,
+.printer_no_tabs i {
+    color: #2c8154;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #2c8154;
+    border-color: #2c8154;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active {
+    color: #fff;
+    background-color: #16683c;
+    border-color: #16683c;
+    box-shadow: 0 0 1px 1px #ced4da;
+}
+
+/* guide */
+.guide-header {
+    background-color: #fbf8f8;
+}
+
+.guide-header a.default:hover,
+.guide-header a.default:focus {
+    color: #2c8154;
+}
+
+#tabs #tab-container .ui-tabs-nav li.ui-tabs-active.ui-state-active a{
+    background-color: #2c8154;
+}
+
+#tabs #tab-container .ui-tabs-nav li a:hover {
+    color: #2c8154;
 }
