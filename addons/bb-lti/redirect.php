@@ -10,22 +10,22 @@ use Firebase\JWT\Key;
 $launch = LTI\LTI_Message_Launch::new(new SP_Database())
                                 ->validate();
 
-var_dump($_REQUEST['id_token']);
-die();
-
-//$jwt = $_REQUEST['id_token'];
+//var_dump($_REQUEST['id_token']);
 
 
-//$decoded = JWT::decode($jwt, new Key($publicKey, 'RS256'));
+$jwt = $_REQUEST['id_token'];
+
+
+$decoded = JWT::decode($jwt, new Key("/home/bin/jwtRS256.key.pub", 'RS256'));
 
 /*
  NOTE: This will now be an object instead of an associative array. To get
  an associative array, you will need to cast it as such:
 */
 
-//$decoded_array = (array) $decoded;
-//echo "Decode:\n" . print_r($decoded_array, true) . "\n";
-//die();
+$decoded_array = (array) $decoded;
+echo "Decode:\n" . print_r($decoded_array, true) . "\n";
+die();
 
 try {
     require_once __DIR__ . '/../../control/includes/config.php';
