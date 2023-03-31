@@ -8,7 +8,7 @@ use \IMSGlobal\LTI;
 $launch = LTI\LTI_Message_Launch::new(new SP_Database())
                                 ->validate();
 
-var_dump($_REQUEST);
+var_dump($_REQUEST['id_token']);
 die();
 try {
     require_once __DIR__ . '/../../control/includes/config.php';
