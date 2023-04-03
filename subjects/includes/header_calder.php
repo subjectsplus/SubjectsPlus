@@ -37,7 +37,7 @@
 if (isset($use_jquery)) { print generatejQuery($use_jquery); }
 
 // We've got a variable for those who wish to keep the old styles
-$v2styles = FALSE;
+$v2styles = TRUE;
 ?>
 
 <!-- Load Calder site header and nav-->
