@@ -292,6 +292,15 @@ span[id*=bib-] i {
     color: #2c8154;
 }
 
+#letterhead .bootstrap-select a:hover,
+#letterhead .bootstrap-select a:focus,
+#letterhead .bootstrap-select a:active,
+#letterhead .bootstrap-select span:hover,
+#letterhead .bootstrap-select span:focus,
+#letterhead .bootstrap-select span:active {
+    color: #2c8154;
+}
+
 .btn-select-db {
     border-radius: 0;
     line-height: 1.2;
@@ -314,3 +323,15 @@ span[id*=bib-] i {
     font-weight: 600; }
 .btn-select-db.dropdown-toggle.bs-placeholder:hover, .btn-select-db.dropdown-toggle.bs-placeholder:focus, .btn-select-db.dropdown-toggle.bs-placeholder:active {
     color: #2c8154; }
+
+.calder-autocomplete-dd {
+    position:absolute;
+    top: 215px;
+    left: 16px;
+}
+@media (min-width: 576px) {
+    .calder-autocomplete-dd {
+        top: 222px;
+        left: calc(50% - 257px);
+    }
+}
