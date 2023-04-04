@@ -178,6 +178,13 @@ a.default:focus {
     background-color: #2c8154;
 }
 
+#backtotop a,
+#backtotop a:hover,
+#backtotop a:active,
+#backtotop a:focus {
+    color: #2c8154;
+}
+
 /* search */
 .default-search {
     max-width: 600px;
