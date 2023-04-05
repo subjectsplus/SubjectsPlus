@@ -174,7 +174,7 @@ function generatejQuery( $use_jquery ) {
       <link rel=\"stylesheet\" href=\"$AssetPath" . "css/shared/colorbox.css\" type=\"text/css\" />\n";
 	}
 
-	return $myjquery;
+    return $myjquery;
 }
 
 function noPermission( $text ) {
