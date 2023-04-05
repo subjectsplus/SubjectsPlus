@@ -11,7 +11,7 @@
     <meta name="author" content="Louis Calder Memorial Library | University of Miami Libraries">
     <meta name="keywords" content="<?php if (isset($keywords)) {print $keywords;} ?>">
 
-    <!-- SP CSS -->
+    <!-- SP Calder CSS -->
 	<link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-calder.css?v=02082023-1" type="text/css">
 
     <!-- Google Analytics -->
