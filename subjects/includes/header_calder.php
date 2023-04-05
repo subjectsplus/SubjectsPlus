@@ -13,7 +13,6 @@
 
     <!-- SP CSS -->
 	<link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-calder.css?v=02082023-1" type="text/css">
-	<link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-calder-temp.css" type="text/css">
 
     <!-- Google Analytics -->
     <?php
