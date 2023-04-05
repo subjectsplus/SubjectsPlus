@@ -342,3 +342,41 @@ span[id*=bib-] i {
         left: calc(50% - 257px);
     }
 }
+
+/* Staff */
+.other-staff tr.oddrow td {
+    background-color:#f5f5f5;
+}
+
+.staff-by-dept td,
+.staff-by-dept th,
+.other-staff td,
+.other-staff th {
+    padding: 0.125rem 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .staff-by-dept td,
+    .staff-by-dept th,
+    .other-staff td,
+    .other-staff th {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+.staff-by-dept thead {
+    display:none;
+}
+
+.staff-by-dept .dept_header{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+.staff-by-dept .staffpic img,
+.other-staff .staffpic img,
+.librarians-az .staffpic img,
+.staff-profile .staff_photo img {
+    background-color: #2c8154;
+}
+
