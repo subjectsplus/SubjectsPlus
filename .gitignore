@@ -152,9 +152,9 @@ public.iml
 nul
 /node_modules/
 
-/subjects/themes/
-!/subjects/themes/custom
-!/subjects/themes/splux
+/subjects/themes/med/
+/subjects/themes/um-new/
+/subjects/themes/calder/
 
 control/lti_controller/log.txt
 

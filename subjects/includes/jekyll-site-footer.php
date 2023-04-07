@@ -16,7 +16,7 @@
             </div>
             <div class="col-sm-9 col-md-6">
                 <h4><a href="https://www.library.miami.edu" class="no-decoration">University of Miami Libraries</a></h4>
-                <h6>1300 Memorial Drive | Coral Gables, FL 33124-0320 | <a href="tel:1-305-284-3233" class="no-decoration telephone-link">(305) 284-3233</a></h6>
+                <h6>1300 Memorial Drive | Coral Gables, FL 33146 | <a href="tel:1-305-284-3233" class="no-decoration telephone-link">(305) 284-3233</a></h6>
             </div>
             <div class="col-md-4">
                 <div class="social">
