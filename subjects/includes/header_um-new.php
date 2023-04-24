@@ -14,7 +14,17 @@
     <!-- SP CSS -->
     <link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-slim.css?v=092821" type="text/css">
 
-    <!-- Google Analytics and Tag Manager -->
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-GG3W2LFPG1"></script>
+	<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GG3W2LFPG1');
+	</script>
+
+    <!-- Google Universal Analytics and Tag Manager -->
     <?php
     global $google_analytics_ua;
     global $google_tag_manager;

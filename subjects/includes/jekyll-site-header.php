@@ -365,6 +365,7 @@ if (is_null($header_type)
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/data-services/index.html">Data Management Strategies
 												</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://it-resources.research.miami.edu/">IT Resources for Researchers</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/copyright.html">Understanding Copyright
 												</a></li>
 											<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/writingcenter/">Writing Center</a> <span class="d-none d-lg-inline-block">/</span> <a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learningcommons/index.html">Learning Commons</a></li>
