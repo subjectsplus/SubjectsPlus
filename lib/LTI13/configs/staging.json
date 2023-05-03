@@ -3,6 +3,17 @@
     "client_id": "08cababc-c140-492a-99c1-1baa5a5240dd",
     "auth_login_url": "https://developer.blackboard.com/api/v1/gateway/oidcauth",
     "auth_token_url": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
+    "key_set_url": "https://developer.blackboard.com/api/v1/management/applications/ce81f40c-73e6-4ffb-b216-ebfc35a9dfa0/jwks.json",
+    "private_key_file": "/home/bin/jwtRS256.key",
+    "kid": "e6a14d56-4190-4a3b-b3da-7d728808f163",
+    "deployment": [
+      "6e779d82-ce1f-4623-a544-c6cd573d51f2"
+    ]
+  },
+  "https://dev-e-subjectsplus.azurewebsites.net": {
+    "client_id": "08cababc-c140-492a-99c1-1baa5a5240dd",
+    "auth_login_url": "https://dev-e-subjectsplus.azurewebsites.net/addons/bb-lti/login.php",
+    "auth_token_url": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
     "key_set_url": "https://developer.blackboard.com/api/v1/management/applications/08cababc-c140-492a-99c1-1baa5a5240dd/jwks.json",
     "private_key_file": "/home/bin/jwtRS256.key",
     "kid": "e6a14d56-4190-4a3b-b3da-7d728808f163",
