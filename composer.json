@@ -1,0 +1,22 @@
+{
+  "name": "uml/subjectsplus4",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "cbrownroberts",
+      "email": "email@example.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/IMSGlobal/lti-1-3-php-library"
+    }
+  ],
+  "require": {
+    "imsglobal/lti-1p3-tool": "dev-master",
+    "firebase/php-jwt": "^6.4"
+  }
+}
