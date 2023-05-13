@@ -35,10 +35,14 @@ class LTICourseController
 
     function importCourseCode()
     {
+        
         if (!$this->tableExists($this->course_code_table_name)) {
             $statement = $this->connection->prepare("CREATE TABLE IF NOT EXISTS " . $this->course_code_table_name . " (id INT NOT NULL AUTO_INCREMENT, 
             course_code LONGTEXT DEFAULT NULL, course_title LONGTEXT DEFAULT NULL, PRIMARY KEY (id))");
             $statement->execute();
+        } else {
+            // $statement = $this->connection->prepare("TRUNCATE TABLE " . $this->course_code_table_name);
+            // $statement->execute();
         }
         $this->updateBBCoursesCodeTable();
     }
@@ -49,6 +53,9 @@ class LTICourseController
             $statement = $this->connection->prepare("CREATE TABLE IF NOT EXISTS " . $this->course_instructor_table_name . " (id INT NOT NULL AUTO_INCREMENT, 
             course_id LONGTEXT DEFAULT NULL, instructor LONGTEXT DEFAULT NULL, PRIMARY KEY (id))");
             $statement->execute();
+        } else {
+            // $statement = $this->connection->prepare("TRUNCATE TABLE " . $this->course_instructor_table_name);
+            // $statement->execute();
         }
         $this->updateBBCourseInstructorTable();
     }
@@ -57,8 +64,10 @@ class LTICourseController
     {
         global $lti_courses_dir_path;
         global $subjects_theme;
-        $file_path = $this->getLatestFileFromServer($lti_courses_dir_path);
-        sleep(10);
+        // $file_path = $this->getLatestFileFromServer($lti_courses_dir_path);
+        $file_path = "./20230501-0800_courses.txt";
+
+        // sleep(10);
         $file = fopen($file_path, "r");
         fgets($file); // skip first line
         //Output a line of the file until the end is reached
@@ -67,7 +76,8 @@ class LTICourseController
             $course_data = explode("UOML", $line);
             $course_temp = explode("	", $course_data[0]);
             $course_code = $course_temp[0];
-            $course_name = $course_temp[1];
+            // $course_name = $course_temp[1];
+            $course_name = str_replace('\'', '\\\'', $course_temp[1]);
 
             if ($subjects_theme == "med") {
                 global $med_course_codes;
@@ -77,14 +87,20 @@ class LTICourseController
                 }
             }
 
+            // $statement = $this->connection->prepare("INSERT INTO " . $this->course_code_table_name . " (course_code, course_title)
+            // SELECT * FROM (SELECT '" . $course_code . "', '" . $course_name . "') AS tmp
+            // WHERE NOT EXISTS (SELECT course_code FROM " . $this->course_code_table_name . " WHERE course_code = '" . $course_code . "')");
             $statement = $this->connection->prepare("INSERT INTO " . $this->course_code_table_name . " (course_code, course_title)
-            SELECT * FROM (SELECT '" . $course_code . "', '" . $course_name . "') AS tmp
+            SELECT '" . $course_code . "', '" . $course_name . "'
             WHERE NOT EXISTS (SELECT course_code FROM " . $this->course_code_table_name . " WHERE course_code = '" . $course_code . "')");
+            
             $statement->execute();
             $line = fgets($file);
+
+            echo $course_code . " | " . $course_name . "\n";
         }
         fclose($file);
-        $this->deleteTempFile($file_path);
+        // $this->deleteTempFile($file_path);
     }
 
     private function deleteTempFile($file)
@@ -94,41 +110,41 @@ class LTICourseController
 
     public function getLatestFileFromServer($file_path = '')
     {
-        global $lti_service_account_username;
-        global $lti_service_account_password;
-        global $lti_sftp_server_url;
+        // global $lti_service_account_username;
+        // global $lti_service_account_password;
+        // global $lti_sftp_server_url;
 
 
-        // Make our connection
-        $sftp_connection = ssh2_connect($lti_sftp_server_url);
+        // // Make our connection
+        // $sftp_connection = ssh2_connect($lti_sftp_server_url);
 
-        // Authenticate
-        if (!ssh2_auth_password($sftp_connection, $lti_service_account_username, $lti_service_account_password)) throw new Exception('Unable to connect.');
+        // // Authenticate
+        // if (!ssh2_auth_password($sftp_connection, $lti_service_account_username, $lti_service_account_password)) throw new Exception('Unable to connect.');
 
-        // Create our SFTP resource
-        if (!$sftp = ssh2_sftp($sftp_connection)) throw new Exception('Unable to create SFTP connection.');
+        // // Create our SFTP resource
+        // if (!$sftp = ssh2_sftp($sftp_connection)) throw new Exception('Unable to create SFTP connection.');
 
-        //Set ignored elements array
-        $ignored = array('.', '..', '.svn', '.htaccess', 'instructors', 'old');
+        // //Set ignored elements array
+        // $ignored = array('.', '..', '.svn', '.htaccess', 'instructors', 'old');
 
-        // Get and sort the files
-        $files = array();
+        // // Get and sort the files
+        // $files = array();
 
 
-        foreach (scandir('ssh2.sftp://' . intval($sftp) . $file_path) as $file) {
-            if (in_array($file, $ignored) || in_array(pathinfo($file)['extension'], $ignored)) continue;
-            array_push($files, 'ssh2.sftp://' . intval($sftp) . $file_path . '/' . $file);
-        }
+        // foreach (scandir('ssh2.sftp://' . intval($sftp) . $file_path) as $file) {
+        //     if (in_array($file, $ignored) || in_array(pathinfo($file)['extension'], $ignored)) continue;
+        //     array_push($files, 'ssh2.sftp://' . intval($sftp) . $file_path . '/' . $file);
+        // }
 
-        if (!empty($files)) {
-            $last_file = end($files);
-            $this->downloadFileFromServer($last_file);
-        }
+        // if (!empty($files)) {
+        //     $last_file = end($files);
+        //     $this->downloadFileFromServer($last_file);
+        // }
 
-        ssh2_exec($sftp_connection, 'exit');
-        unset($sftp_connection);
+        // ssh2_exec($sftp_connection, 'exit');
+        // unset($sftp_connection);
 
-        return "./temp_files/" . basename($last_file);
+        // return "./temp_files/" . basename($last_file);
     }
 
     private function downloadFileFromServer($file)
@@ -152,8 +168,10 @@ class LTICourseController
     {
         global $lti_instructors_dir_path;
         global $subjects_theme;
-        $file_path = $this->getLatestFileFromServer($lti_instructors_dir_path);
-        sleep(10);
+        // $file_path = $this->getLatestFileFromServer($lti_instructors_dir_path);
+        $file_path = "./20210226-0800_course_instructors.txt";
+
+        // sleep(10);
         $file = fopen($file_path, "r");
         fgets($file); // skip first line
         //Output a line of the file until the end is reached
@@ -161,7 +179,8 @@ class LTICourseController
         while (!feof($file)) {
             $course_temp = explode("	", $line);
             $course_id = $course_temp[0];
-            $course_instructor = $course_temp[1];
+            // $course_instructor = $course_temp[1];
+            $course_instructor = str_replace('\'', '\\\'', $course_temp[1]);
 
             if ($subjects_theme == "med") {
                 global $med_course_codes;
@@ -177,9 +196,11 @@ class LTICourseController
 
             $statement->execute();
             $line = fgets($file);
+
+            echo $course_id . " | " . $course_instructor . "\n";
         }
         fclose($file);
-        $this->deleteTempFile($file_path);
+        // $this->deleteTempFile($file_path);
     }
 
     private function tableExists($table_name)

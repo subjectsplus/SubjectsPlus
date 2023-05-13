@@ -20,7 +20,7 @@ include(getcwd() . "/../../control/includes/config.php");
 require_once('LTICourseController.php');
 
 try {
-    $courses_code = new LTICourseController('bb_course_code', 'bb_course_instructor');
+    $courses_code = new LTICourseController('bb_course_code2', 'bb_course_instructor2');
 
     $courses_code->importCourseCode();
     $courses_code->importCourseInstructor();
