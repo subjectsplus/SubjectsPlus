@@ -315,6 +315,7 @@ class Record {
 	if (isset($_SESSION["eresource_mgr"]) && $_SESSION["eresource_mgr"] == "1") {
 		$all_string = getSubBoxes('', 50, "all");
 		$subject_string = getSubBoxes('', 50, "subject");
+        $term_string = getSubBoxes('', 50, "term");
 
 		echo "
 		<div class=\"pluslet no_overflow\">
@@ -328,6 +329,7 @@ class Record {
 		  <div id=\"ctags_selection\" align=\"left\" style=\"margin-top: 2%; margin-bottom: 2%;\">
 		  	<span id=\"subject_tag\" class=\"toggle-on\">DB by Subject</span>
 		  	<span id=\"all_tag\" class=\"toggle-off\">All</span>
+		  	<span id=\"term_tag\" class=\"toggle-off\">Term</span>
 		  </div>
 
 		  <select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select Subject--") . "</option>
@@ -343,6 +345,7 @@ class Record {
 					$('#select_subject').val('').change();
 					$('#all_tag').attr('class', 'toggle-on');
 					$('#subject_tag').attr('class', 'toggle-off');
+					$('#term_tag').attr('class', 'toggle-off');
 				});
 
 				$('#subject_tag').click(function() {
@@ -350,8 +353,16 @@ class Record {
 					$('#select_subject').val('').change();
 					$('#all_tag').attr('class', 'toggle-off');
 					$('#subject_tag').attr('class', 'toggle-on');
+					$('#term_tag').attr('class', 'toggle-off');
 				});
 
+				$('#term_tag').click(function() {
+					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select Term--") . "</option>" .  str_replace("'", "\\'", $term_string) . "');	
+					$('#select_subject').val('').change();
+					$('#all_tag').attr('class', 'toggle-off');
+					$('#subject_tag').attr('class', 'toggle-off');
+					$('#term_tag').attr('class', 'toggle-on');
+				});
 			});
 		  </script>
 		 
