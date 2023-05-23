@@ -316,6 +316,7 @@ class Record {
 		$all_string = getSubBoxes('', 50, "all");
 		$subject_string = getSubBoxes('', 50, "subject");
         $term_string = getSubBoxes('', 50, "term");
+        $ebook_string = getSubBoxes('', 50, "ebook");
 
 		echo "
 		<div class=\"pluslet no_overflow\">
@@ -330,6 +331,7 @@ class Record {
 		  	<span id=\"subject_tag\" class=\"toggle-on\">DB by Subject</span>
 		  	<span id=\"all_tag\" class=\"toggle-off\">All</span>
 		  	<span id=\"term_tag\" class=\"toggle-off\">Term</span>
+		  	<span id=\"ebook_tag\" class=\"toggle-off\">Ebook</span>
 		  </div>
 
 		  <select id=\"select_subject\"name=\"subject_id[]\"><option value=\"\">" . _("-- Select Subject--") . "</option>
@@ -346,6 +348,7 @@ class Record {
 					$('#all_tag').attr('class', 'toggle-on');
 					$('#subject_tag').attr('class', 'toggle-off');
 					$('#term_tag').attr('class', 'toggle-off');
+					$('#ebook_tag').attr('class', 'toggle-off');
 				});
 
 				$('#subject_tag').click(function() {
@@ -354,6 +357,7 @@ class Record {
 					$('#all_tag').attr('class', 'toggle-off');
 					$('#subject_tag').attr('class', 'toggle-on');
 					$('#term_tag').attr('class', 'toggle-off');
+					$('#ebook_tag').attr('class', 'toggle-off');
 				});
 
 				$('#term_tag').click(function() {
@@ -362,7 +366,17 @@ class Record {
 					$('#all_tag').attr('class', 'toggle-off');
 					$('#subject_tag').attr('class', 'toggle-off');
 					$('#term_tag').attr('class', 'toggle-on');
+					$('#ebook_tag').attr('class', 'toggle-off');
 				});
+				
+				$('#ebook_tag').click(function() {
+					$('#select_subject').empty().append('<option value=\"\">" . _("-- Select Ebook--") . "</option>" .  str_replace("'", "\\'", $ebook_string) . "');	
+					$('#select_subject').val('').change();
+					$('#all_tag').attr('class', 'toggle-off');
+					$('#subject_tag').attr('class', 'toggle-off');
+					$('#term_tag').attr('class', 'toggle-off');
+					$('#ebook_tag').attr('class', 'toggle-on');
+				});				
 			});
 		  </script>
 		 

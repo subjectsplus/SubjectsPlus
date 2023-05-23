@@ -311,12 +311,16 @@ function getSubBoxes( $prefix = "", $trunc = "", $subs = "") {
             $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Term' AND active = '1' ORDER BY type, subject";
             break;
         case "topic":
-            // only by "Term" type
+            // only by "Topic" type
             $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Topic' AND active = '1' ORDER BY type, subject";
             break;
         case "course":
-            // only by "Term" type
+            // only by "Course" type
             $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Course' AND active = '1' ORDER BY type, subject";
+            break;
+        case "ebook":
+            // only by "Ebook" type
+            $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Ebook' AND active = '1' ORDER BY type, subject";
             break;
         case "staff":
 		default:
