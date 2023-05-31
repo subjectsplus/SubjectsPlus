@@ -671,9 +671,6 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/printing.html">Printing, Copying & Scanning
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/remote-labs.html">Remote Labs
-												</a></li>
-
 											<li><a class="dropdown-item no-decoration" href="http://studentsupport.it.miami.edu/sthd/">Student Technology Help Desk
 												</a></li>
 
