@@ -429,6 +429,51 @@ ORDER BY s.subject";
 	return $alphabet;
 }
 
+function getEbooksBySubBoxes( $selected_sub ) {
+    $db                = new Querier;
+    $subs_option_boxes = "";
+    $alphabet          = "";
+
+    $subs_query  = "SELECT s.subject_id, s.subject, s.type
+FROM subject as s WHERE exists(
+SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+FROM rank r, location_title lt, location l, title t
+    WHERE subject_id = s.subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND l.format = 4
+    AND l.record_status = 'Active'
+    AND r.dbbysub_active = 1)
+AND s.active = 1
+ORDER BY s.subject";
+    $subs_result = $db->query( $subs_query );
+
+
+    $num_subs = count( $subs_result );
+
+    if ( $num_subs > 0 ) {
+        foreach ( $subs_result as $myrow ) {
+            $subs_id   = $myrow[0];
+            $subs_name = $myrow[1];
+
+            $subs_name = Truncate( $subs_name, 50, '' );
+
+            $subs_option_boxes .= "<option value=\"ebooks.php?letter=bysub&amp;subject_id=$subs_id\"";
+            if ( $selected_sub == $subs_id ) {
+                $subs_option_boxes .= " selected=\"selected\"";
+            }
+            $subs_option_boxes .= ">" . _( $subs_name ) . "</option>";
+        }
+    }
+
+    $alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
+        $subs_option_boxes
+        </select>";
+
+    return $alphabet;
+}
+
 function changeMe( $table, $flag, $item_id, $record_title, $staff_id ) {
 	$db = new Querier;
 
@@ -1099,6 +1144,16 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 				$abc_link = "databases.php";
 				$shownew  = 0;
 				break;
+            case "ebooks":
+                $lq       = "SELECT distinct UCASE(left(title,1)) AS initial
+                    FROM location l, location_title lt, title t
+                    WHERE l.location_id = lt.location_id AND lt.title_id = t.title_id
+                    AND l.format = 4  
+                    AND left(title,1) REGEXP '[A-Z]'
+                    ORDER BY initial";
+                $abc_link = "ebooks.php";
+                $shownew  = 0;
+                break;
 		}
 
 //print $lq;
@@ -1158,7 +1213,9 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 	if ( $table == "databases" ) {
 		$alphabet .= getDBbyTypeBoxes( $selected_type, $show_formats );
 		$alphabet .= getDBbySubBoxes( $selected_subject );
-	}
+	} elseif($table == "ebooks") {
+        $alphabet .= getEbooksBySubBoxes($selected_subject);
+    }
 
 	if ( $showsearch != 0 ) {
 		$alphabet .= "<input type=\"text\" id=\"letterhead_suggest\" size=\"30\"  />";
