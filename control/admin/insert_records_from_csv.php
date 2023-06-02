@@ -1,6 +1,6 @@
 <?php
 use SubjectsPlus\Control\Querier;
-use SubjectsPlus\Control\Record;
+use SubjectsPlus\Control\AzRecord\RecordInsertFromCSV;
 
 $subsubcat = "";
 $subcat = "admin";
@@ -9,11 +9,15 @@ $page_title = "Admin Insert Records from CSV";
 
 include("../includes/header.php");
 
-$csv_filepath = "./test_records_csv.csv";
-echo $_SESSION['staff_id'];
+$db = new Querier();
+$recordInsertObj = new RecordInsertFromCSV($db);
+$csv_filepath = "test_records_csv.csv";
 
-$currentTimestamp = date('Y-m-d H:i:s', strtotime('now'));
-$content_box = $currentTimestamp;
+$insertRecords = $recordInsertObj->insertFromCSV($csv_filepath);
+if($insertRecords) {
+    $content_box = print_r($insertRecords);
+}
+
 
 
 print "
@@ -21,7 +25,7 @@ print "
   <div class=\"pure-u-2-3\">
 ";
 
-makePluslet(_("Departments"), $content_box, "no_overflow");
+makePluslet(_("Record Insert From CSV"), $content_box, "no_overflow");
 
 print "</div>";
 
