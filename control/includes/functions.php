@@ -429,6 +429,57 @@ ORDER BY s.subject";
 	return $alphabet;
 }
 
+
+function getDBbyTermBoxes( $selected_sub, $additionaltype = "Placeholder" ) {
+    $db                = new Querier;
+    $subs_option_boxes = "";
+    $alphabet          = "";
+    $morequery         = "";
+
+    if ( $additionaltype != "" ) {
+        $morequery = "OR type = '" . $additionaltype . "'";
+    }
+
+    //$subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE (type = 'Subject' " . $morequery . ") AND active = '1' ORDER BY subject";
+
+    $subs_query  = "SELECT s.subject_id, s.subject, s.type
+FROM subject as s WHERE exists(
+SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+FROM rank r, location_title lt, location l, title t
+    WHERE subject_id = s.subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND s.type = 'Term'
+)
+AND s.active = 1
+ORDER BY s.subject";
+    $subs_result = $db->query( $subs_query );
+
+
+    $num_subs = count( $subs_result );
+
+    if ( $num_subs > 0 ) {
+        foreach ( $subs_result as $myrow ) {
+            $subs_id   = $myrow[0];
+            $subs_name = $myrow[1];
+
+            $subs_name = Truncate( $subs_name, 50, '' );
+
+            $subs_option_boxes .= "<option value=\"databases.php?letter=bysub&amp;subject_id=$subs_id\"";
+            if ( $selected_sub == $subs_id ) {
+                $subs_option_boxes .= " selected=\"selected\"";
+            }
+            $subs_option_boxes .= ">" . _( $subs_name ) . "</option>";
+        }
+    }
+
+    $alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
+        $subs_option_boxes
+        </select>";
+
+    return $alphabet;
+}
 function getEbooksBySubBoxes( $selected_sub ) {
     $db                = new Querier;
     $subs_option_boxes = "";
@@ -1214,6 +1265,8 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 	if ( $table == "databases" ) {
 		$alphabet .= getDBbyTypeBoxes( $selected_type, $show_formats );
 		$alphabet .= getDBbySubBoxes( $selected_subject );
+		$alphabet .= getDBbyTermBoxes( $selected_subject );
+
 	} elseif($table == "ebooks") {
         $alphabet .= getEbooksBySubBoxes($selected_subject);
     }
