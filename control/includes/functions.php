@@ -458,8 +458,9 @@ ORDER BY s.subject";
             $subs_name = $myrow[1];
 
             $subs_name = Truncate( $subs_name, 50, '' );
+            $subs_name = preg_replace('/\s*\(e\)$/', '', $subs_name);
 
-            $subs_option_boxes .= "<option value=\"ebooks.php?letter=bysub&amp;subject_id=$subs_id\"";
+            $subs_option_boxes .= "<option value=\"ebooks.php?method=byebooksub&amp;subject_id=$subs_id\"";
             if ( $selected_sub == $subs_id ) {
                 $subs_option_boxes .= " selected=\"selected\"";
             }
@@ -467,7 +468,7 @@ ORDER BY s.subject";
         }
     }
 
-    $alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
+    $alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Ebooks by Subject\">  
         $subs_option_boxes
         </select>";
 

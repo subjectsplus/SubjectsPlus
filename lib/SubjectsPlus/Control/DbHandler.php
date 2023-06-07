@@ -787,9 +787,11 @@ ORDER BY s.subject");
 
             $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
+            $ebook_subject = rtrim($myrow[0], ' (e)');
+
             $items .= "
 	<tr class=\"zebra $row_colour\" valign=\"top\">
-		<td><a href=\"ebooks.php?letter=bysub&subject_id=$myrow[1]\">$myrow[0]</a></td>
+		<td><a href=\"ebooks.php?method=byebooksub&id=$myrow[1]\">$ebook_subject</a></td>
 	</tr>";
 
             $row_count++;
