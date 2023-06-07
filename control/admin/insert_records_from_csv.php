@@ -11,13 +11,9 @@ include("../includes/header.php");
 
 $db = new Querier();
 $recordInsertObj = new RecordInsertFromCSV($db);
-$csv_filepath = "test_records_csv.csv";
+$csv_filepath = "ebooks.csv";
 
 $insertRecords = $recordInsertObj->insertFromCSV($csv_filepath);
-if($insertRecords) {
-    $content_box = print_r($insertRecords);
-}
-
 
 
 print "

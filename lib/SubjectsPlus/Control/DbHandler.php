@@ -746,7 +746,7 @@ ORDER BY s.subject");
     }
 
 
-    function displayEbooks()
+    function displayTerms()
     {
 
         $db = new Querier;
@@ -759,7 +759,7 @@ FROM rank r, location_title lt, location l, title t
     AND lt.title_id = r.title_id
     AND l.location_id = lt.location_id
     AND t.title_id = lt.title_id
-    AND l.format = 4
+    AND s.type = 'Term'
     AND r.dbbysub_active = 1)
 AND s.active = 1
 ORDER BY s.subject");
@@ -787,11 +787,11 @@ ORDER BY s.subject");
 
             $row_colour = ($row_count % 2) ? $colour1 : $colour2;
 
-            $ebook_subject = rtrim($myrow[0], ' (e)');
+            $term_subject = rtrim($myrow[0], ' (e)');
 
             $items .= "
 	<tr class=\"zebra $row_colour\" valign=\"top\">
-		<td><a href=\"ebooks.php?method=byebooksub&id=$myrow[1]\">$ebook_subject</a></td>
+		<td><a href=\"databases.php?letter=bysub&subject_id=$myrow[1]\">$term_subject</a></td>
 	</tr>";
 
             $row_count++;
