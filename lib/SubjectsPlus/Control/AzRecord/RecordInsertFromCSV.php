@@ -278,6 +278,7 @@ class RecordInsertFromCSV
             $trial_start         = $data['trial_start'];
             $trial_end           = $data['trial_end'];
             $record_status       = $data['record_status'];
+            var_dump($data);
 
             // Bind the parameters
             $stmt->bindParam(':format', $format);
