@@ -36,6 +36,8 @@ class CompleteMe
         $this->display = $display;
         $this->value = $value;
         $this->sortby = $sortby;
+
+
     }
 
     public function displayBox($printout = true)
@@ -43,6 +45,7 @@ class CompleteMe
 
         global $CpanelPath;
         global $PublicPath;
+        global $proxyURL;
         $auto_complete_url = "";
 
         //print "input_id = $this->input_id, action = $this->action, target_url = $this->target_url, collection = $this->collection";
@@ -60,6 +63,7 @@ class CompleteMe
                 $auto_complete_url = $CpanelPath;
                 break;
         }
+
 
         // Handle category selection when searching on a page other than search.php
         $category = $this->collection;
@@ -146,8 +150,12 @@ class CompleteMe
         }
       });
     
-   
+    var category = '$this->collection';
+    var proxyURL = '$proxyURL';
+    console.log(proxyURL);
+    console.log(category);
       var startURL = '$auto_complete_url';
+      console.log(startURL);
            
       jQuery('#" . $this->input_id . "').catcomplete({
         minLength	: 3,
@@ -156,10 +164,17 @@ class CompleteMe
             event.preventDefault();
         },
         select: function(event, ui) {
+        
+        if(category == 'ebooks') {
+            url = proxyURL + ui.item.url;
+        } else {
+            url = ui.item.url;
+        }
+        console.log(url);
             if (ui.item.url.indexOf('https://') === 0) {  
-                location.href = ui.item.url;              
+                location.href = url;              
             } else if (ui.item.url.indexOf('http://') === 0) {  
-                location.href = ui.item.url;  
+                location.href = url;  
             } else {
               location.href = startURL + ui.item.url;
             }   
