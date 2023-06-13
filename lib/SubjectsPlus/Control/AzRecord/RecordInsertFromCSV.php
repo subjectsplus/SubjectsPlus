@@ -237,6 +237,64 @@ class RecordInsertFromCSV
         try {
 
             // Prepare the SQL statement
+//            $sql = "INSERT INTO location (format,
+//                                        call_number,
+//                                        location,
+//                                        access_restrictions,
+//                                        eres_display,
+//                                        display_note,
+//                                        helpguide,
+//                                        citation_guide,
+//                                        ctags,
+//                                        trial_start,
+//                                        trial_end,
+//                                        record_status)
+//                    VALUES (:format,
+//                            :call_number,
+//                            :location,
+//                            :access_restrictions,
+//                            :eres_display,
+//                            :display_note,
+//                            :helpguide,
+//                            :citation_guide,
+//                            :ctags,
+//                            :trial_start,
+//                            :trial_end,
+//                            :record_status)";
+//
+//            // Prepare the statement
+//            $stmt = $this->_connection->prepare($sql);
+//
+//            $format              = $data['format'];
+//            $call_number         = $data['call_number'];
+//            $location            = $data['location'];
+//            $location            = $this->trimString($location);
+//            $access_restrictions = $data['access_restrictions'];
+//            $eres_display        = $data['eres_display'];
+//            $display_note        = $data['display_note'];
+//            $helpguide           = $data['helpguide'];
+//            $citation_guide      = $data['citation_guide'];
+//            $ctags               = $data['ctags'];
+//            $trial_start         = $data['trial_start'];
+//            $trial_end           = $data['trial_end'];
+//            $record_status       = $data['record_status'];
+//            var_dump($data);
+//
+//            // Bind the parameters
+//            $stmt->bindParam(':format', $format);
+//            $stmt->bindParam(':call_number', $call_number);
+//            $stmt->bindParam(':location', $location);
+//            $stmt->bindParam(':access_restrictions', $access_restrictions);
+//            $stmt->bindParam(':eres_display', $eres_display);
+//            $stmt->bindParam(':display_note', $display_note);
+//            $stmt->bindParam(':helpguide', $helpguide);
+//            $stmt->bindParam(':citation_guide', $citation_guide);
+//            $stmt->bindParam(':ctags', $ctags);
+//            $stmt->bindParam(':trial_start', $trial_start);
+//            $stmt->bindParam(':trial_end', $trial_end);
+//            $stmt->bindParam(':record_status', $record_status);
+
+
             $sql = "INSERT INTO location (format, 
                                         call_number, 
                                         location, 
@@ -249,50 +307,39 @@ class RecordInsertFromCSV
                                         trial_start, 
                                         trial_end, 
                                         record_status) 
-                    VALUES (:format,
-                            :call_number,
-                            :location,
-                            :access_restrictions,
-                            :eres_display,
-                            :display_note,
-                            :helpguide,
-                            :citation_guide,
-                            :ctags,
-                            :trial_start,
-                            :trial_end,
-                            :record_status)";
+                    VALUES (:location)";
 
             // Prepare the statement
             $stmt = $this->_connection->prepare($sql);
 
-            $format              = $data['format'];
-            $call_number         = $data['call_number'];
+//            $format              = $data['format'];
+//            $call_number         = $data['call_number'];
             $location            = $data['location'];
             $location            = $this->trimString($location);
-            $access_restrictions = $data['access_restrictions'];
-            $eres_display        = $data['eres_display'];
-            $display_note        = $data['display_note'];
-            $helpguide           = $data['helpguide'];
-            $citation_guide      = $data['citation_guide'];
-            $ctags               = $data['ctags'];
-            $trial_start         = $data['trial_start'];
-            $trial_end           = $data['trial_end'];
-            $record_status       = $data['record_status'];
+//            $access_restrictions = $data['access_restrictions'];
+//            $eres_display        = $data['eres_display'];
+//            $display_note        = $data['display_note'];
+//            $helpguide           = $data['helpguide'];
+//            $citation_guide      = $data['citation_guide'];
+//            $ctags               = $data['ctags'];
+//            $trial_start         = $data['trial_start'];
+//            $trial_end           = $data['trial_end'];
+//            $record_status       = $data['record_status'];
             var_dump($data);
 
             // Bind the parameters
-            $stmt->bindParam(':format', $format);
-            $stmt->bindParam(':call_number', $call_number);
+//            $stmt->bindParam(':format', $format);
+//            $stmt->bindParam(':call_number', $call_number);
             $stmt->bindParam(':location', $location);
-            $stmt->bindParam(':access_restrictions', $access_restrictions);
-            $stmt->bindParam(':eres_display', $eres_display);
-            $stmt->bindParam(':display_note', $display_note);
-            $stmt->bindParam(':helpguide', $helpguide);
-            $stmt->bindParam(':citation_guide', $citation_guide);
-            $stmt->bindParam(':ctags', $ctags);
-            $stmt->bindParam(':trial_start', $trial_start);
-            $stmt->bindParam(':trial_end', $trial_end);
-            $stmt->bindParam(':record_status', $record_status);
+//            $stmt->bindParam(':access_restrictions', $access_restrictions);
+//            $stmt->bindParam(':eres_display', $eres_display);
+//            $stmt->bindParam(':display_note', $display_note);
+//            $stmt->bindParam(':helpguide', $helpguide);
+//            $stmt->bindParam(':citation_guide', $citation_guide);
+//            $stmt->bindParam(':ctags', $ctags);
+//            $stmt->bindParam(':trial_start', $trial_start);
+//            $stmt->bindParam(':trial_end', $trial_end);
+//            $stmt->bindParam(':record_status', $record_status);
 
             // Execute the prepared statement
             $stmt->execute();
