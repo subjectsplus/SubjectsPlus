@@ -193,53 +193,53 @@ $('#term_guides').select2();
       </div>
     </div>
 
-      <div class="pluslet">
-          <div class="titlebar">
-            <div class="titlebar_text"><?php print _("Subject Guides"); ?></div>
-            <div class="titlebar_options"></div>
-          </div>
-          <div class="pluslet_body">
-            <p><?php print $subject_dropdown_intro_text; ?></p>
-            <br />
-            <div class="all-guides-dropdown dropdown_list"><?php print $subject_guides; ?></div>
-          </div>
-    </div>
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--            <div class="titlebar_text">--><?php //print _("Subject Guides"); ?><!--</div>-->
+<!--            <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--            <p>--><?php //print $subject_dropdown_intro_text; ?><!--</p>-->
+<!--            <br />-->
+<!--            <div class="all-guides-dropdown dropdown_list">--><?php //print $subject_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--    </div>-->
 
-      <div class="pluslet">
-          <div class="titlebar">
-              <div class="titlebar_text"><?php print _("Course Guides"); ?></div>
-              <div class="titlebar_options"></div>
-          </div>
-          <div class="pluslet_body">
-              <p><?php print $course_dropdown_intro_text; ?></p>
-              <br />
-              <div class="all-guides-dropdown dropdown_list"><?php print $course_guides; ?></div>
-          </div>
-      </div>
-
-      <div class="pluslet">
-          <div class="titlebar">
-              <div class="titlebar_text"><?php print _("Topic Guides"); ?></div>
-              <div class="titlebar_options"></div>
-          </div>
-          <div class="pluslet_body">
-              <p><?php print $topic_dropdown_intro_text; ?></p>
-              <br />
-              <div class="all-guides-dropdown dropdown_list"><?php print $topic_guides; ?></div>
-          </div>
-      </div>
-
-      <div class="pluslet">
-          <div class="titlebar">
-              <div class="titlebar_text"><?php print _("Term Guides"); ?></div>
-              <div class="titlebar_options"></div>
-          </div>
-          <div class="pluslet_body">
-              <p><?php print $term_dropdown_intro_text; ?></p>
-              <br />
-              <div class="all-guides-dropdown dropdown_list"><?php print $term_guides; ?></div>
-          </div>
-      </div>
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--              <div class="titlebar_text">--><?php //print _("Course Guides"); ?><!--</div>-->
+<!--              <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--              <p>--><?php //print $course_dropdown_intro_text; ?><!--</p>-->
+<!--              <br />-->
+<!--              <div class="all-guides-dropdown dropdown_list">--><?php //print $course_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!---->
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--              <div class="titlebar_text">--><?php //print _("Topic Guides"); ?><!--</div>-->
+<!--              <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--              <p>--><?php //print $topic_dropdown_intro_text; ?><!--</p>-->
+<!--              <br />-->
+<!--              <div class="all-guides-dropdown dropdown_list">--><?php //print $topic_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!---->
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--              <div class="titlebar_text">--><?php //print _("Term Guides"); ?><!--</div>-->
+<!--              <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--              <p>--><?php //print $term_dropdown_intro_text; ?><!--</p>-->
+<!--              <br />-->
+<!--              <div class="all-guides-dropdown dropdown_list">--><?php //print $term_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--      </div>-->
 
   </div>
 

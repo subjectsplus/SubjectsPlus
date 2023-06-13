@@ -300,7 +300,7 @@ function getSubBoxes( $prefix = "", $trunc = "", $subs = "") {
 		case "1": // all types
 		case "all":
 			// all types
-			$subs_query = "SELECT distinct subject_id, subject, type FROM subject ORDER BY type, subject";
+			$subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type != 'Term' AND type != 'Ebook' ORDER BY type, subject";
 			break;
 		case "subject":
 			// only by "Subject" type
