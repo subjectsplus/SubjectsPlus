@@ -85,9 +85,11 @@ class RecordInsertFromCSV
                             $location_data['trial_start']         = null;
                             $location_data['trial_end']           = null;
                             $location_data['record_status']       = $csv_data['record_status'];
+                            var_dump($location_data);
 
                             // insert into location table
                             $last_location_id = $this->insertLocation($location_data);
+                            var_dump($last_location_id);
 
                         } else {
                             return "Title did not insert";
