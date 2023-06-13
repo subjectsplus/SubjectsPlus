@@ -70,7 +70,6 @@ class RecordInsertFromCSV
 
                         // insert data into title table
                         $last_title_id = $this->insertTitle($title_data);
-                        var_dump($last_title_id);
 
                         if($last_title_id > 0) {
                             // set data array to insert data into location
@@ -110,7 +109,6 @@ class RecordInsertFromCSV
                         // fetch subject id for rank table - $subject is from csv
                         $subject_match = $this->trimString($csv_data['subject']);
                         $subject_id    = $this->fetchSubjectIdLikeSubject($subject_match);
-                        var_dump($subject_id);
 
                         // set rank data to insert into rank table
                         $rank_data['rank']                 = 0;
@@ -295,17 +293,17 @@ class RecordInsertFromCSV
 //            $stmt->bindParam(':record_status', $record_status);
 
 
-            $sql = "INSERT INTO location (location) VALUES (:location)";
+            $sql = "INSERT INTO location (format, location, access_restrictions, eres_display, record_status) VALUES (:format, :location, :access_restrictions,:eres_display, :record_status)";
 
             // Prepare the statement
             $stmt = $this->_connection->prepare($sql);
 
-//            $format              = $data['format'];
+            $format              = 4; //$data['format'];
 //            $call_number         = $data['call_number'];
             $location            = $data['location'];
             $location            = $this->trimString($location);
-//            $access_restrictions = $data['access_restrictions'];
-//            $eres_display        = $data['eres_display'];
+            $access_restrictions = 1; //$data['access_restrictions'];
+            $eres_display        = 'N'; //$data['eres_display'];
 //            $display_note        = $data['display_note'];
 //            $helpguide           = $data['helpguide'];
 //            $citation_guide      = $data['citation_guide'];
@@ -316,11 +314,11 @@ class RecordInsertFromCSV
             //var_dump($data);
 
             // Bind the parameters
-//            $stmt->bindParam(':format', $format);
+            $stmt->bindParam(':format', $format);
 //            $stmt->bindParam(':call_number', $call_number);
             $stmt->bindParam(':location', $location);
-//            $stmt->bindParam(':access_restrictions', $access_restrictions);
-//            $stmt->bindParam(':eres_display', $eres_display);
+            $stmt->bindParam(':access_restrictions', $access_restrictions);
+            $stmt->bindParam(':eres_display', $eres_display);
 //            $stmt->bindParam(':display_note', $display_note);
 //            $stmt->bindParam(':helpguide', $helpguide);
 //            $stmt->bindParam(':citation_guide', $citation_guide);
@@ -331,8 +329,6 @@ class RecordInsertFromCSV
 
             // Execute the prepared statement
             $stmt->execute();
-
-            var_dump($stmt);
 
             // Check for successful execution or handle any errors
             if ($stmt->rowCount() > 0) {
