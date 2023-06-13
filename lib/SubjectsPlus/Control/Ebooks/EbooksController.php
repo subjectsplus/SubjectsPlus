@@ -39,7 +39,8 @@ class EbooksController
                 $result = $this->_ebooksData->fetchEbooksByLetter($letter);
                 break;
             default:
-                $result = "No param selected";
+                $letter = "A";
+                $result = $this->_ebooksData->fetchEbooksByLetter($letter);
         }
         return $result;
     }
