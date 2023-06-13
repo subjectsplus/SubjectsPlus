@@ -295,19 +295,7 @@ class RecordInsertFromCSV
 //            $stmt->bindParam(':record_status', $record_status);
 
 
-            $sql = "INSERT INTO location (format, 
-                                        call_number, 
-                                        location, 
-                                        access_restrictions, 
-                                        eres_display, 
-                                        display_note, 
-                                        helpguide, 
-                                        citation_guide, 
-                                        ctags, 
-                                        trial_start, 
-                                        trial_end, 
-                                        record_status) 
-                    VALUES (:location)";
+            $sql = "INSERT INTO location (location) VALUES (:location)";
 
             // Prepare the statement
             $stmt = $this->_connection->prepare($sql);
