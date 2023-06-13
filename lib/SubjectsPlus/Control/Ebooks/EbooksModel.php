@@ -99,4 +99,17 @@ class EbooksModel
         $statement->execute();
         return $statement->fetchAll();
     }
+
+    public function fetchNewEbooks() {
+        $sql = "SELECT title, location, access_restrictions, last_modified 
+                FROM title t, location_title lt, location l 
+                WHERE t.title_id = lt.title_id 
+                AND l.location_id = lt.location_id 
+                AND l.format = 4 
+                ORDER BY t.last_modified DESC LIMIT 0,5";
+
+        $statement = $this->_connection->prepare( $sql );
+        $statement->execute();
+        return $statement->fetchAll();
+    }
 }
