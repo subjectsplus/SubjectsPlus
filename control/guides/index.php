@@ -116,6 +116,8 @@ FROM `subject`, staff_subject, staff
 WHERE staff.staff_id = staff_subject.staff_id
 AND staff_subject.subject_id = subject.subject_id
 AND staff.staff_id = '$_SESSION[staff_id]'
+AND type != 'Term'
+AND type != 'Ebook'
 ORDER BY subject";
 
 $my_subs_result = $db->query($my_subs_query);
