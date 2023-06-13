@@ -70,32 +70,39 @@ class RecordInsertFromCSV
 
                         // insert data into title table
                         $last_title_id = $this->insertTitle($title_data);
-                        var_dump($last_title_id);
 
-                        // set data array to insert data into location
-                        $location_data['format']              = $csv_data['format'];
-                        $location_data['call_number']         = null;
-                        $location_data['location']            = $csv_data['location'];
-                        $location_data['access_restrictions'] = $csv_data['access_restrictions'];
-                        $location_data['eres_display']        = $csv_data['eres_display'];
-                        $location_data['display_note']        = null;
-                        $location_data['helpguide']           = null;
-                        $location_data['citation_guide']      = null;
-                        $location_data['ctags']               = null;
-                        $location_data['trial_start']         = null;
-                        $location_data['trial_end']           = null;
-                        $location_data['record_status']       = $csv_data['record_status'];
+                        if($last_title_id > 0) {
+                            // set data array to insert data into location
+                            $location_data['format']              = $csv_data['format'];
+                            $location_data['call_number']         = null;
+                            $location_data['location']            = $csv_data['location'];
+                            $location_data['access_restrictions'] = $csv_data['access_restrictions'];
+                            $location_data['eres_display']        = $csv_data['eres_display'];
+                            $location_data['display_note']        = null;
+                            $location_data['helpguide']           = null;
+                            $location_data['citation_guide']      = null;
+                            $location_data['ctags']               = null;
+                            $location_data['trial_start']         = null;
+                            $location_data['trial_end']           = null;
+                            $location_data['record_status']       = $csv_data['record_status'];
 
-                        // insert into location table
-                        $last_location_id = $this->insertLocation($location_data);
-                        var_dump($last_location_id);
+                            // insert into location table
+                            $last_location_id = $this->insertLocation($location_data);
 
-                        // set location_title_data to insert into location_title table
-                        $location_title_data['location_id'] = $last_location_id;
-                        $location_title_data['title_id']    = $last_title_id;
+                        } else {
+                            return "Title did not insert";
+                        }
 
-                        // insert into location_title table
-                        $this->insertLocationTitle($location_title_data);
+                        if($last_location_id > 0) {
+                            // set location_title_data to insert into location_title table
+                            $location_title_data['location_id'] = $last_location_id;
+                            $location_title_data['title_id']    = $last_title_id;
+
+                            // insert into location_title table
+                            $this->insertLocationTitle($location_title_data);
+                        } else {
+                            return "location did not insert";
+                        }
 
                         // fetch subject id for rank table - $subject is from csv
                         $subject_match = $this->trimString($csv_data['subject']);

@@ -21,7 +21,7 @@ print "
   <div class=\"pure-u-2-3\">
 ";
 
-makePluslet(_("Record Insert From CSV"), $content_box, "no_overflow");
+makePluslet(_("Record Insert From CSV"), $insertRecords, "no_overflow");
 
 print "</div>";
 
