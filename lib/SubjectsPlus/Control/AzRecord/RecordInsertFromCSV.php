@@ -27,13 +27,12 @@ class RecordInsertFromCSV
     {
         $this->_connection->beginTransaction();
         $csvFile = '/home/site/wwwroot/control/admin/' . $filepath;
-        $count = 0;
+
         try {
             if (file_exists($csvFile)) {
 
                 if (($handle = fopen($csvFile, "r")) !== false) {
                     $rowNumber = 0; // Variable to track the row number
-                    $return_data = [];
 
                     // Read the CSV file row by row
                     while (($data = fgetcsv($handle, 1000, ",")) !== false) {
@@ -71,6 +70,7 @@ class RecordInsertFromCSV
 
                         // insert data into title table
                         $last_title_id = $this->insertTitle($title_data);
+                        var_dump($last_title_id);
 
                         // set data array to insert data into location
                         $location_data['format']              = $csv_data['format'];
@@ -88,6 +88,7 @@ class RecordInsertFromCSV
 
                         // insert into location table
                         $last_location_id = $this->insertLocation($location_data);
+                        var_dump($last_location_id);
 
                         // set location_title_data to insert into location_title table
                         $location_title_data['location_id'] = $last_location_id;
@@ -99,6 +100,7 @@ class RecordInsertFromCSV
                         // fetch subject id for rank table - $subject is from csv
                         $subject_match = $this->trimString($csv_data['subject']);
                         $subject_id    = $this->fetchSubjectIdLikeSubject($subject_match);
+                        var_dump($subject_id);
 
                         // set rank data to insert into rank table
                         $rank_data['rank']                 = 0;
@@ -111,17 +113,18 @@ class RecordInsertFromCSV
                         // insert into rank table
                         $this->insertRank($rank_data);
 
-                        $insertedCount = $count++;
+                        $insertedCount = $rowNumber++;
                     }
                     fclose($handle);
                 }
                 $this->_connection->commit();
+                return $insertedCount . " records inserted";
 
             } else {
                 return "The file does not exist.";
             }
 
-            return $insertedCount . " records inserted";
+
         } catch (\PDOException $e) {
             // Rollback the transaction if any error occurred
             $this->_connection->rollback();
@@ -162,10 +165,9 @@ class RecordInsertFromCSV
             } else {
                 return "Subject not found.";
             }
-        } catch (\Exception $exception) {
+        } catch (\PDOException $exception) {
             return "An error returned when attempting to fetch a subject id: " . $exception->getMessage();
         }
-
 
     }
 
@@ -214,7 +216,7 @@ class RecordInsertFromCSV
                 $return =  $this->_db->last_id();
             }
 
-        } catch (Exception $exception) {
+        } catch (\PDOException $exception) {
             $return = "An error returned when attempting to insert a title: " . $exception->getMessage();
         }
         return $return;
@@ -225,7 +227,30 @@ class RecordInsertFromCSV
         try {
 
             // Prepare the SQL statement
-            $sql = "INSERT INTO location (format, call_number, location, access_restrictions, eres_display, display_note, helpguide, citation_guide, ctags, trial_start, trial_end, record_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO location (format, 
+                                        call_number, 
+                                        location, 
+                                        access_restrictions, 
+                                        eres_display, 
+                                        display_note, 
+                                        helpguide, 
+                                        citation_guide, 
+                                        ctags, 
+                                        trial_start, 
+                                        trial_end, 
+                                        record_status) 
+                    VALUES (:format,
+                            :call_number,
+                            :location,
+                            :access_restrictions,
+                            :eres_display,
+                            :display_note,
+                            :helpguide,
+                            :citation_guide,
+                            :ctags,
+                            :trial_start,
+                            :trial_end,
+                            :record_status)";
 
             // Prepare the statement
             $stmt = $this->_connection->prepare($sql);
@@ -245,50 +270,58 @@ class RecordInsertFromCSV
             $record_status       = $data['record_status'];
 
             // Bind the parameters
-            $stmt->bindParam(1, $format);
-            $stmt->bindParam(2, $call_number);
-            $stmt->bindParam(3, $location);
-            $stmt->bindParam(4, $access_restrictions);
-            $stmt->bindParam(5, $eres_display);
-            $stmt->bindParam(6, $display_note);
-            $stmt->bindParam(7, $helpguide);
-            $stmt->bindParam(8, $citation_guide);
-            $stmt->bindParam(9, $ctags);
-            $stmt->bindParam(10, $trial_start);
-            $stmt->bindParam(11, $trial_end);
-            $stmt->bindParam(12, $record_status);
+            $stmt->bindParam(':format', $format);
+            $stmt->bindParam(':call_number', $call_number);
+            $stmt->bindParam(':location', $location);
+            $stmt->bindParam(':access_restrictions', $access_restrictions);
+            $stmt->bindParam(':eres_display', $eres_display);
+            $stmt->bindParam(':display_note', $display_note);
+            $stmt->bindParam(':helpguide', $helpguide);
+            $stmt->bindParam(':citation_guide', $citation_guide);
+            $stmt->bindParam(':ctags', $ctags);
+            $stmt->bindParam(':trial_start', $trial_start);
+            $stmt->bindParam(':trial_end', $trial_end);
+            $stmt->bindParam(':record_status', $record_status);
 
             // Execute the prepared statement
             $stmt->execute();
 
             // Check for successful execution or handle any errors
             if ($stmt->rowCount() > 0) {
-                $return =  $this->_db->last_id();
+                return  $this->_db->last_id();
             }
 
-        } catch (\Exception $exception) {
-            $return = "location table insert failed" . $exception->getMessage();
+        } catch (\PDOException $exception) {
+            return "location table insert failed" . $exception->getMessage();
         }
-        return $return;
+
     }
 
     public function insertLocationTitle($data) {
 
         try {
+            // Prepare the SQL statement
+            $sql = "INSERT INTO location_title (location_id, title_id) VALUES (:location_id, :title_id)";
+            // Prepare the statement
+            $stmt = $this->_connection->prepare($sql);
+
             $location_id = $data['location_id'];
             $title_id = $data['title_id'];
 
-            // Prepare the SQL statement
-            $sql = "INSERT INTO location_title (location_id, title_id) 
-                VALUES ('$location_id', '$title_id')";
+            // Bind the parameters
+            $stmt->bindParam(':location_id', $location_id);
+            $stmt->bindParam(':title_id', $title_id);
 
-            // Execute the SQL statement
-            $this->_db->exec($sql);
-        } catch (Exception $exception) {
+            // Execute the prepared statement
+            $stmt->execute();
+            // Check for successful execution or handle any errors
+            if ($stmt->rowCount() > 0) {
+                return $this->_db->last_id();
+            }
+
+        } catch (\PDOException $exception) {
             return "An error returned when attempting to insert a location_title: " . $exception->getMessage();
         }
-
-
     }
     public function insertRank($data) {
 
@@ -319,7 +352,7 @@ class RecordInsertFromCSV
 
             // Check for successful execution or handle any errors
             if ($stmt->rowCount() > 0) {
-                return  $this->_db->last_id();
+                return $this->_db->last_id();
             } else {
                 return "failed insert of rank";
             }
