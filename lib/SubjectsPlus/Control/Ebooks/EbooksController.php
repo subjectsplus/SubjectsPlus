@@ -25,7 +25,7 @@ class EbooksController
                 $result = "eBooks List: ". $letter;
                 break;
             default:
-                $result = "eBooks List";
+                $result = "eBooks List: A";
         }
         return $result;
     }
