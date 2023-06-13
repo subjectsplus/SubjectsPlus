@@ -86,7 +86,7 @@ class RecordInsertFromCSV
                             $location_data['trial_start']         = null;
                             $location_data['trial_end']           = null;
                             $location_data['record_status']       = $csv_data['record_status'];
-                            var_dump($location_data);
+                            //var_dump($location_data);
 
                             // insert into location table
                             $last_location_id = $this->insertLocation($location_data);
@@ -325,7 +325,7 @@ class RecordInsertFromCSV
 //            $trial_start         = $data['trial_start'];
 //            $trial_end           = $data['trial_end'];
 //            $record_status       = $data['record_status'];
-            var_dump($data);
+            //var_dump($data);
 
             // Bind the parameters
 //            $stmt->bindParam(':format', $format);
@@ -343,6 +343,8 @@ class RecordInsertFromCSV
 
             // Execute the prepared statement
             $stmt->execute();
+
+            var_dump($stmt);
 
             // Check for successful execution or handle any errors
             if ($stmt->rowCount() > 0) {
