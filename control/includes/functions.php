@@ -399,6 +399,7 @@ FROM rank r, location_title lt, location l, title t
     AND t.title_id = lt.title_id
     AND l.eres_display = 'Y'
     AND l.record_status = 'Active'
+    AND s.type != 'Term'
     AND r.dbbysub_active = 1)
 AND s.active = 1
 ORDER BY s.subject";
@@ -465,6 +466,7 @@ ORDER BY s.subject";
             $subs_name = $myrow[1];
 
             $subs_name = Truncate( $subs_name, 50, '' );
+            $subs_name = preg_replace('/\s*\(db\)$/', '', $subs_name);
 
             $subs_option_boxes .= "<option value=\"databases.php?letter=bysub&amp;subject_id=$subs_id\"";
             if ( $selected_sub == $subs_id ) {
@@ -474,7 +476,7 @@ ORDER BY s.subject";
         }
     }
 
-    $alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
+    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Term\">  
         $subs_option_boxes
         </select>";
 
