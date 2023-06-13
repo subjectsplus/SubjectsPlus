@@ -306,7 +306,23 @@ function getSubBoxes( $prefix = "", $trunc = "", $subs = "") {
 			// only by "Subject" type
 			$subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Subject' AND active = '1' ORDER BY type, subject";
 			break;
-		case "staff":
+        case "term":
+            // only by "Term" type
+            $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Term' AND active = '1' ORDER BY type, subject";
+            break;
+        case "topic":
+            // only by "Topic" type
+            $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Topic' AND active = '1' ORDER BY type, subject";
+            break;
+        case "course":
+            // only by "Course" type
+            $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Course' AND active = '1' ORDER BY type, subject";
+            break;
+        case "ebook":
+            // only by "Ebook" type
+            $subs_query = "SELECT distinct subject_id, subject, type FROM subject WHERE type LIKE 'Ebook' AND active = '1' ORDER BY type, subject";
+            break;
+        case "staff":
 		default:
 			$subs_query = "SELECT distinct s.subject_id, subject, type
 				FROM subject s, staff_subject ss
@@ -383,6 +399,7 @@ FROM rank r, location_title lt, location l, title t
     AND t.title_id = lt.title_id
     AND l.eres_display = 'Y'
     AND l.record_status = 'Active'
+    AND s.type != 'Term'
     AND r.dbbysub_active = 1)
 AND s.active = 1
 ORDER BY s.subject";
@@ -411,6 +428,104 @@ ORDER BY s.subject";
         </select>";
 
 	return $alphabet;
+}
+
+
+function getDBbyTermBoxes( $selected_sub, $additionaltype = "Placeholder" ) {
+    $db                = new Querier;
+    $subs_option_boxes = "";
+    $alphabet          = "";
+    $morequery         = "";
+
+    if ( $additionaltype != "" ) {
+        $morequery = "OR type = '" . $additionaltype . "'";
+    }
+
+    //$subs_query = "SELECT distinct subject_id, subject, type FROM `subject` WHERE (type = 'Subject' " . $morequery . ") AND active = '1' ORDER BY subject";
+
+    $subs_query  = "SELECT s.subject_id, s.subject, s.type
+FROM subject as s WHERE exists(
+SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+FROM rank r, location_title lt, location l, title t
+    WHERE subject_id = s.subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND s.type = 'Term'
+)
+AND s.active = 1
+ORDER BY s.subject";
+    $subs_result = $db->query( $subs_query );
+
+
+    $num_subs = count( $subs_result );
+
+    if ( $num_subs > 0 ) {
+        foreach ( $subs_result as $myrow ) {
+            $subs_id   = $myrow[0];
+            $subs_name = $myrow[1];
+
+            $subs_name = Truncate( $subs_name, 50, '' );
+            $subs_name = preg_replace('/\s*\(db\)$/', '', $subs_name);
+
+            $subs_option_boxes .= "<option value=\"databases.php?letter=bysub&amp;subject_id=$subs_id\"";
+            if ( $selected_sub == $subs_id ) {
+                $subs_option_boxes .= " selected=\"selected\"";
+            }
+            $subs_option_boxes .= ">" . _( $subs_name ) . "</option>";
+        }
+    }
+
+    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Term\">  
+        $subs_option_boxes
+        </select>";
+
+    return $alphabet;
+}
+function getEbooksBySubBoxes( $selected_sub ) {
+    $db                = new Querier;
+    $subs_option_boxes = "";
+    $alphabet          = "";
+
+    $subs_query  = "SELECT s.subject_id, s.subject, s.type
+FROM subject as s WHERE exists(
+SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+FROM rank r, location_title lt, location l, title t
+    WHERE subject_id = s.subject_id
+    AND lt.title_id = r.title_id
+    AND l.location_id = lt.location_id
+    AND t.title_id = lt.title_id
+    AND l.format = 4
+    AND l.record_status = 'Active'
+    AND r.dbbysub_active = 1)
+AND s.active = 1
+ORDER BY s.subject";
+    $subs_result = $db->query( $subs_query );
+
+
+    $num_subs = count( $subs_result );
+
+    if ( $num_subs > 0 ) {
+        foreach ( $subs_result as $myrow ) {
+            $subs_id   = $myrow[0];
+            $subs_name = $myrow[1];
+
+            $subs_name = Truncate( $subs_name, 50, '' );
+            $subs_name = preg_replace('/\s*\(e\)$/', '', $subs_name);
+
+            $subs_option_boxes .= "<option value=\"ebooks.php?method=byebooksub&amp;subject_id=$subs_id\"";
+            if ( $selected_sub == $subs_id ) {
+                $subs_option_boxes .= " selected=\"selected\"";
+            }
+            $subs_option_boxes .= ">" . _( $subs_name ) . "</option>";
+        }
+    }
+
+    $alphabet .= " <select name=\"browser\" id=\"select_subject\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Ebooks by Subject\">  
+        $subs_option_boxes
+        </select>";
+
+    return $alphabet;
 }
 
 function changeMe( $table, $flag, $item_id, $record_title, $staff_id ) {
@@ -1083,6 +1198,16 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 				$abc_link = "databases.php";
 				$shownew  = 0;
 				break;
+            case "ebooks":
+                $lq       = "SELECT distinct UCASE(left(title,1)) AS initial
+                    FROM location l, location_title lt, title t
+                    WHERE l.location_id = lt.location_id AND lt.title_id = t.title_id
+                    AND l.format = 4  
+                    AND left(title,1) REGEXP '[A-Z]'
+                    ORDER BY initial";
+                $abc_link = "ebooks.php";
+                $shownew  = 0;
+                break;
 		}
 
 //print $lq;
@@ -1142,7 +1267,11 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 	if ( $table == "databases" ) {
 		$alphabet .= getDBbyTypeBoxes( $selected_type, $show_formats );
 		$alphabet .= getDBbySubBoxes( $selected_subject );
-	}
+		$alphabet .= getDBbyTermBoxes( $selected_subject );
+
+	} elseif($table == "ebooks") {
+        $alphabet .= getEbooksBySubBoxes($selected_subject);
+    }
 
 	if ( $showsearch != 0 ) {
 		$alphabet .= "<input type=\"text\" id=\"letterhead_suggest\" size=\"30\"  />";
