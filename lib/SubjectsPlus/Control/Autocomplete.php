@@ -146,7 +146,9 @@ class Autocomplete {
                 $statement = $connection->prepare(
                     "SELECT subject_id as 'id', subject,'Subject Guide' as 'content_type', subject AS 'label',shortform AS 'short_form' 
        FROM subject 
-       WHERE active = '1' && type != ('Term' || 'Ebbok)'
+       WHERE active = '1'
+       AND type != 'Term' 
+       AND type != 'Ebook'
        AND (subject LIKE :search_term
            OR shortform LIKE :search_term
            OR description LIKE :search_term
