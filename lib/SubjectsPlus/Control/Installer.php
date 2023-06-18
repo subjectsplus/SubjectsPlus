@@ -619,19 +619,15 @@ class Installer
 
 		//get root to subjectsplus path
 		$lstrRootPath = dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR;
+		$subjectsHtaccess = $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess';
+		$apiHtaccess = $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess';
 
-		if( (file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
-			$subjectsHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess');
-        } else {
-			$subjectsHtaccess = $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess';
+		if( (file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($subjectsHtaccess))  ) {
+			rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $subjectsHtaccess);
+		}
 
-        }
-
-		if( (file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
-			$apiHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess');
-		} else {
-			$apiHtaccess = $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess';
-
+		if( (file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($apiHtaccess))  ) {
+			rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $apiHtaccess);
 		}
 
 		return array( $subjectsHtaccess, $apiHtaccess);
