@@ -622,14 +622,14 @@ class Installer
 
 		if( (file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
 			$subjectsHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess');
-        } else {
+        
 			$subjectsHtaccess = $lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess';
 
         }
 
 		if( (file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess-default')) &&  (!file_exists($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess'))  ) {
-			$apiHtaccess = rename($lstrRootPath . 'subjects' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess');
-		} else {
+			$apiHtaccess = rename($lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess-default', $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess');
+		
 			$apiHtaccess = $lstrRootPath . 'api' . DIRECTORY_SEPARATOR . '.htaccess';
 
 		}
