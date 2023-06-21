@@ -730,8 +730,8 @@ if (is_null($header_type)
 											<li class="mm-lib">
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/med-lib-sm.jpg" alt="Medical Library" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
-													<a class="dropdown-item no-decoration" href="http://calder.med.miami.edu/">Medical Library</a>
-													<div class="mm-lib-time"><a href="http://calder.med.miami.edu/libraryhours.html" class="no-decoration default">See Hours</a></div>
+													<a class="dropdown-item no-decoration" href="https://www.library.miami.edu/calder/index.html">Medical Library</a>
+													<div class="mm-lib-time"><a href="https://www.library.miami.edu/calder/hours.html" class="no-decoration default"><span data-calendar="calder"></span></a></div>
 												</div>
 											</li>
 											<li class="mm-lib">
