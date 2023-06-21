@@ -22,6 +22,10 @@ class RecordInsertFromCSV
         $this->_connection = $this->_db->getConnection();
         $this->_staff_id = $_SESSION['staff_id'];
     }
+    public function msleep($time)
+    {
+        usleep($time * 1000000);
+    }
 
     public function insertFromCSV($filepath)
     {
@@ -71,6 +75,7 @@ class RecordInsertFromCSV
                         // insert data into title table
                         $last_title_id = $this->insertTitle($title_data);
 
+
                         if($last_title_id > 0) {
                             // set data array to insert data into location
                             $location_data['format']              = $csv_data['format'];
@@ -89,11 +94,13 @@ class RecordInsertFromCSV
 
                             // insert into location table
                             $last_location_id = $this->insertLocation($location_data);
+                            $this->msleep(.1);
                             var_dump($last_location_id);
 
                         } else {
                             return "Title did not insert";
                         }
+
 
                         if($last_location_id > 0) {
                             // set location_title_data to insert into location_title table
@@ -109,6 +116,7 @@ class RecordInsertFromCSV
                         // fetch subject id for rank table - $subject is from csv
                         $subject_match = $this->trimString($csv_data['subject']);
                         $subject_id    = $this->fetchSubjectIdLikeSubject($subject_match);
+
 
                         // set rank data to insert into rank table
                         $rank_data['rank']                 = 0;
@@ -293,7 +301,16 @@ class RecordInsertFromCSV
 //            $stmt->bindParam(':record_status', $record_status);
 
 
-            $sql = "INSERT INTO location (format, location, access_restrictions, eres_display, record_status) VALUES (:format, :location, :access_restrictions,:eres_display, :record_status)";
+            $sql = "INSERT INTO location (format, 
+                                        location, 
+                                        access_restrictions, 
+                                        eres_display, 
+                                        record_status) 
+                            VALUES (:format, 
+                                    :location, 
+                                    :access_restrictions, 
+                                    :eres_display, 
+                                    :record_status)";
 
             // Prepare the statement
             $stmt = $this->_connection->prepare($sql);
@@ -310,7 +327,7 @@ class RecordInsertFromCSV
 //            $ctags               = $data['ctags'];
 //            $trial_start         = $data['trial_start'];
 //            $trial_end           = $data['trial_end'];
-//            $record_status       = $data['record_status'];
+            $record_status       = 'Active'; //$data['record_status'];
             //var_dump($data);
 
             // Bind the parameters
@@ -325,7 +342,7 @@ class RecordInsertFromCSV
 //            $stmt->bindParam(':ctags', $ctags);
 //            $stmt->bindParam(':trial_start', $trial_start);
 //            $stmt->bindParam(':trial_end', $trial_end);
-//            $stmt->bindParam(':record_status', $record_status);
+            $stmt->bindParam(':record_status', $record_status);
 
             // Execute the prepared statement
             $stmt->execute();
