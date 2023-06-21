@@ -72,8 +72,8 @@
                                         <span><a href="https://www.law.miami.edu/iml/library/library-contact-and-hours" class="no-decoration default"><i class="far fa-clock"></i> See Hours</a></span>
                                     </li>
                                     <li>
-                                        <a class="no-decoration default" href="http://calder.med.miami.edu/">Medical Library</a>
-                                        <span><a href="http://calder.med.miami.edu/libraryhours.html" class="no-decoration default"><i class="far fa-clock"></i> See Hours</a></span>
+                                        <a class="no-decoration default" href="https://www.library.miami.edu/calder/index.html">Medical Library</a>
+                                        <span><a href="https://www.library.miami.edu/calder/hours.html" class="no-decoration default"><i class="far fa-clock"></i> <span data-calendar="calder"></span></a></span>
                                     </li>
                                     <li>
                                         <a class="no-decoration default" href="https://www.library.miami.edu/musiclib/index.html">Music Library</a>
@@ -102,17 +102,7 @@
                                         <a class="no-decoration default" href="https://www.library.miami.edu/universityarchives/index.html">University Archives</a>
                                         <span><a class="no-decoration default" href="https://www.library.miami.edu/universityarchives/hours.html"><i class="far fa-clock"></i> <span data-calendar="universityarchives"></span></a></span>
                                     </li>
-                                </ul>
-
-                                <h5>Other</h5>
-                                <hr align="left" class="hr-panel">
-                                <ul class="list-unstyled mobile-hours-list d-inline-block">
-                                    <li>
-                                        <a class="no-decoration default" href="https://library.miami.edu/kislak-center/">Kislak Center</a>
-                                        <span><a class="no-decoration default" href="#"><i class="far fa-clock"></i> <span data-calendar="kislak"></span></a></span>
-                                    </li>
-                                </ul>
-
+                                </ul> 
                             </div>
                         </div>
                     </div>
