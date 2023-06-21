@@ -31,7 +31,10 @@ try {
   echo $e;
 }
 
-$subs_option_boxes = getSubBoxes("guide.php?subject_id=", "", 1);
+/**
+ * All guides dropdown
+ */
+$all_guides_option_boxes = getSubBoxes("guide.php?subject_id=", "", 1);
 
 $dropdown_intro_text = _("Please check with the guide's owner before modifying");
 
@@ -39,9 +42,72 @@ $all_guides = "
 <form method=\"post\" action=\"index.php\" name=\"form\">
 <select name=\"item\" id=\"guides\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
 <option value=\"\">" . _("-- Choose Guide --") . "</option>
-$subs_option_boxes
+$all_guides_option_boxes
 </select>
 </form>";
+
+/**
+ * Subject Guides Dropdown
+ */
+$subjects_option_boxes = getSubBoxes("guide.php?subject_id=", "", "subject");
+
+$subject_dropdown_intro_text = _("Please check with the guide's owner before modifying");
+
+$subject_guides = "
+<form method=\"post\" action=\"index.php\" name=\"form\">
+<select name=\"item\" id=\"subject_guides\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
+<option value=\"\">" . _("-- Choose Guide --") . "</option>
+$subjects_option_boxes
+</select>
+</form>";
+
+/**
+ * Topic Guides Dropdown
+ */
+$topic_option_boxes = getSubBoxes("guide.php?subject_id=", "", "topic");
+
+$topic_dropdown_intro_text = _("Please check with the guide's owner before modifying");
+
+$topic_guides = "
+<form method=\"post\" action=\"index.php\" name=\"form\">
+<select name=\"item\" id=\"topic_guides\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
+<option value=\"\">" . _("-- Choose Guide --") . "</option>
+$topic_option_boxes
+</select>
+</form>";
+
+/**
+ * Course Guides Dropdown
+ */
+$course_option_boxes = getSubBoxes("guide.php?subject_id=", "", "course");
+
+$course_dropdown_intro_text = _("Please check with the guide's owner before modifying");
+
+$course_guides = "
+<form method=\"post\" action=\"index.php\" name=\"form\">
+<select name=\"item\" id=\"course_guides\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
+<option value=\"\">" . _("-- Choose Guide --") . "</option>
+$course_option_boxes
+</select>
+</form>";
+
+/**
+ * Term Guides Dropdown
+ */
+
+$term_option_boxes = getSubBoxes("guide.php?subject_id=", "", "term");
+
+$term_dropdown_intro_text = _("Please check with the guide's owner before modifying");
+
+$term_guides = "
+<form method=\"post\" action=\"index.php\" name=\"form\">
+<select name=\"item\" id=\"term_guides\" size=\"1\" onChange=\"window.location=this.options[selectedIndex].value\">
+<option value=\"\">" . _("-- Choose Guide --") . "</option>
+$term_option_boxes
+</select>
+</form>";
+
+
 
 // Get all subjects associated with the person
 
@@ -50,6 +116,8 @@ FROM `subject`, staff_subject, staff
 WHERE staff.staff_id = staff_subject.staff_id
 AND staff_subject.subject_id = subject.subject_id
 AND staff.staff_id = '$_SESSION[staff_id]'
+AND type != 'Term'
+AND type != 'Ebook'
 ORDER BY subject";
 
 $my_subs_result = $db->query($my_subs_query);
@@ -92,6 +160,10 @@ if ($num_rows > 0) {
 $(document).ready(function() {
 
 $('#guides').select2();
+$('#subject_guides').select2();
+$('#topic_guides').select2();
+$('#course_guides').select2();
+$('#term_guides').select2();
 
 });
 </script>
@@ -122,6 +194,55 @@ $('#guides').select2();
         <div class="all-guides-dropdown dropdown_list"><?php print $all_guides; ?></div>
       </div>
     </div>
+
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--            <div class="titlebar_text">--><?php //print _("Subject Guides"); ?><!--</div>-->
+<!--            <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--            <p>--><?php //print $subject_dropdown_intro_text; ?><!--</p>-->
+<!--            <br />-->
+<!--            <div class="all-guides-dropdown dropdown_list">--><?php //print $subject_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--    </div>-->
+
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--              <div class="titlebar_text">--><?php //print _("Course Guides"); ?><!--</div>-->
+<!--              <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--              <p>--><?php //print $course_dropdown_intro_text; ?><!--</p>-->
+<!--              <br />-->
+<!--              <div class="all-guides-dropdown dropdown_list">--><?php //print $course_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!---->
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--              <div class="titlebar_text">--><?php //print _("Topic Guides"); ?><!--</div>-->
+<!--              <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--              <p>--><?php //print $topic_dropdown_intro_text; ?><!--</p>-->
+<!--              <br />-->
+<!--              <div class="all-guides-dropdown dropdown_list">--><?php //print $topic_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--      </div>-->
+<!---->
+<!--      <div class="pluslet">-->
+<!--          <div class="titlebar">-->
+<!--              <div class="titlebar_text">--><?php //print _("Term Guides"); ?><!--</div>-->
+<!--              <div class="titlebar_options"></div>-->
+<!--          </div>-->
+<!--          <div class="pluslet_body">-->
+<!--              <p>--><?php //print $term_dropdown_intro_text; ?><!--</p>-->
+<!--              <br />-->
+<!--              <div class="all-guides-dropdown dropdown_list">--><?php //print $term_guides; ?><!--</div>-->
+<!--          </div>-->
+<!--      </div>-->
+
   </div>
 
 
