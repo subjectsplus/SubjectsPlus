@@ -64,6 +64,9 @@ class LTICourseController
         $file_path = $this->getLatestFileFromServer($lti_courses_dir_path);
         sleep(10);
         $file = fopen($file_path, "r");
+        if ($file === false) {
+            throw new Exception('Unable to open the file: ' . $file_path);
+        }
         fgets($file); // skip first line
         //Output a line of the file until the end is reached
         $line = fgets($file);
