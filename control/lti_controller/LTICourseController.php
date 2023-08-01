@@ -16,6 +16,8 @@ include_once(getcwd() . "/../../lib/SubjectsPlus/Control/Stats/Stats.php");
 
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Stats\Stats;
+use phpseclib\Net\SSH2;
+use phpseclib\Net\SFTP;
 
 class LTICourseController
 {
@@ -98,37 +100,80 @@ class LTICourseController
         global $lti_service_account_password;
         global $lti_sftp_server_url;
 
-
         // Make our connection
-        $sftp_connection = ssh2_connect($lti_sftp_server_url);
+        $ssh = new SSH2($lti_sftp_server_url);
 
         // Authenticate
-        if (!ssh2_auth_password($sftp_connection, $lti_service_account_username, $lti_service_account_password)) throw new Exception('Unable to connect.');
+        if (!$ssh->login($lti_service_account_username, $lti_service_account_password)) {
+            throw new Exception('Unable to connect.');
+        }
 
         // Create our SFTP resource
-        if (!$sftp = ssh2_sftp($sftp_connection)) throw new Exception('Unable to create SFTP connection.');
+        $sftp = new SFTP($lti_sftp_server_url);
 
-        //Set ignored elements array
+        if (!$sftp->login($lti_service_account_username, $lti_service_account_password)) {
+            throw new Exception('Unable to create SFTP connection.');
+        }
+
+        // Set ignored elements array
         $ignored = array('.', '..', '.svn', '.htaccess', 'instructors', 'old');
 
         // Get and sort the files
-        $files = array();
+        $files = $sftp->nlist($file_path);
 
-
-        foreach (scandir('ssh2.sftp://' . intval($sftp) . $file_path) as $file) {
-            if (in_array($file, $ignored) || in_array(pathinfo($file)['extension'], $ignored)) continue;
-            array_push($files, 'ssh2.sftp://' . intval($sftp) . $file_path . '/' . $file);
-        }
+        // Remove ignored files
+        $files = array_filter($files, function ($file) use ($ignored) {
+            return !in_array(pathinfo($file, PATHINFO_BASENAME), $ignored) &&
+                !in_array(pathinfo($file, PATHINFO_EXTENSION), $ignored);
+        });
 
         if (!empty($files)) {
             $last_file = end($files);
-            $this->downloadFileFromServer($last_file);
+            $local_file_path = "./temp_files/" . basename($last_file);
+            $sftp->get($last_file, $local_file_path);
+            unset($sftp);
+            unset($ssh);
+            return $local_file_path;
         }
 
-        ssh2_exec($sftp_connection, 'exit');
-        unset($sftp_connection);
-
-        return "./temp_files/" . basename($last_file);
+        unset($sftp);
+        unset($ssh);
+        return null; // Return null if no files were found
+//        global $lti_service_account_username;
+//        global $lti_service_account_password;
+//        global $lti_sftp_server_url;
+//
+//
+//        // Make our connection
+//        $sftp_connection = ssh2_connect($lti_sftp_server_url);
+//
+//        // Authenticate
+//        if (!ssh2_auth_password($sftp_connection, $lti_service_account_username, $lti_service_account_password)) throw new Exception('Unable to connect.');
+//
+//        // Create our SFTP resource
+//        if (!$sftp = ssh2_sftp($sftp_connection)) throw new Exception('Unable to create SFTP connection.');
+//
+//        //Set ignored elements array
+//        $ignored = array('.', '..', '.svn', '.htaccess', 'instructors', 'old');
+//
+//        // Get and sort the files
+//        $files = array();
+//
+//
+//        foreach (scandir('ssh2.sftp://' . intval($sftp) . $file_path) as $file) {
+//            if (in_array($file, $ignored) || in_array(pathinfo($file)['extension'], $ignored)) continue;
+//            array_push($files, 'ssh2.sftp://' . intval($sftp) . $file_path . '/' . $file);
+//        }
+//
+//        if (!empty($files)) {
+//            $last_file = end($files);
+//            $this->downloadFileFromServer($last_file);
+//        }
+//
+//        ssh2_exec($sftp_connection, 'exit');
+//        unset($sftp_connection);
+//
+//        return "./temp_files/" . basename($last_file);
     }
 
     private function downloadFileFromServer($file)
