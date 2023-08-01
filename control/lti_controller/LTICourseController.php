@@ -133,6 +133,8 @@ class LTICourseController
                 !in_array(pathinfo($file, PATHINFO_EXTENSION), $ignored);
         });
 
+        print_r($files);
+
         if (!empty($files)) {
             $last_file = end($files);
             $local_file_path = "./temp_files/" . basename($last_file);
