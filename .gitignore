@@ -163,5 +163,4 @@ lib/HTMLPurifier/HTMLPurifier/DefinitionCache/
 .htaccess
 subjects/.htaccess
 api/.htaccess
-
-var
+!/lib/LTI13/configs/prod.json
