@@ -14,6 +14,8 @@ include('config.php');
 include_once(getcwd() . "/../../lib/SubjectsPlus/Control/Querier.php");
 include_once(getcwd() . "/../../lib/SubjectsPlus/Control/Stats/Stats.php");
 
+require('../../vendor/autoload.php');
+
 use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\Stats\Stats;
 use phpseclib\Net\SSH2;
