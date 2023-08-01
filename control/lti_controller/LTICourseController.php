@@ -136,9 +136,9 @@ class LTICourseController
         print_r($files);
 
         if (!empty($files)) {
-            $last_file = end($files);
+            $last_file = reset($files);
             $local_file_path = "./temp_files/" . basename($last_file);
-            
+
             try {
                 if ($sftp->get($last_file, $local_file_path)) {
                     echo 'File downloaded successfully!';
