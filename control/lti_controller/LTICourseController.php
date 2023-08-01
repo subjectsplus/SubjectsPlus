@@ -62,6 +62,7 @@ class LTICourseController
         global $lti_courses_dir_path;
         global $subjects_theme;
         $file_path = $this->getLatestFileFromServer($lti_courses_dir_path);
+        echo $file_path;
         sleep(10);
         $file = fopen($file_path, "r");
         if ($file === false) {
@@ -203,6 +204,7 @@ class LTICourseController
         global $lti_instructors_dir_path;
         global $subjects_theme;
         $file_path = $this->getLatestFileFromServer($lti_instructors_dir_path);
+        echo $file_path;
         sleep(10);
         $file = fopen($file_path, "r");
         fgets($file); // skip first line
