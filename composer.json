@@ -17,6 +17,7 @@
   ],
   "require": {
     "imsglobal/lti-1p3-tool": "dev-master",
-    "firebase/php-jwt": "^6.4"
+    "firebase/php-jwt": "^6.4",
+    "phpseclib/phpseclib": "^2.0"
   }
 }
