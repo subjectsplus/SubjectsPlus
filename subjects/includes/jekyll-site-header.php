@@ -470,9 +470,6 @@ if (is_null($header_type)
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learn/mindfulness.html">Mindfulness Programs
 														</a></li>
 
-													<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab
-														</a></li>
-
 													<li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/exploratory">One-Button Studio
 														</a></li>
 
@@ -635,9 +632,6 @@ if (is_null($header_type)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/ask-a-librarian.html">Research Support
