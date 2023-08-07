@@ -93,7 +93,7 @@ class CompleteMe
         // HTML for the Search Form
         $search_form_html = "
     <div id=\"autoC\" class=\"autoC\">
-       <form action=\"$this->action\" method=\"post\" class=\"pure-form\" id=\"sp_admin_search\">
+       <form action=\"$this->action\" method=\"get\" class=\"pure-form\" id=\"sp_admin_search\">
         <input type=\"text\" id=\"$this->input_id\" title=\"$this->default_text\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" value=\"" . $this->value . "\" />
         <input type=\"hidden\" value=\"" . $category . "\" name=\"category\"/>
         <input type=\"hidden\" value=\"" . $this->sortby . "\" name=\"sortby\"/>
