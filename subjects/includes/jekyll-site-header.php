@@ -141,7 +141,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=default_tab&search_scope=default_scope&vid=uml_new&offset=0">uSearch Library Catalog
+											<li><a class="dropdown-item no-decoration cta" href="https://miami.primo.exlibrisgroup.com/discovery/search?vid=01UOML_INST:uml_new&tab=LibraryCatalog&search_scope=UMLIBRARIES">uSearch Library Catalog
 													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/floor-maps.html">Floor Maps (Richter)
@@ -153,7 +153,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/specialcollections/index.html">Rare Books (Special Collections)
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">Renew your Books (My Account)
+											<li><a class="dropdown-item no-decoration" href="https://miami.primo.exlibrisgroup.com/discovery/search?vid=01UOML_INST:uml_new">Renew your Books (My Account)
 												</a></li>
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/request-materials.html">Request Materials</a></li>
 
@@ -165,13 +165,13 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=everything&search_scope=Everything&vid=uml_new&offset=0">uSearch Articles
+											<li><a class="dropdown-item no-decoration cta" href="https://miami.primo.exlibrisgroup.com/discovery/search?vid=01UOML_INST:uml_new&tab=Everything&search_scope=MyInst_andCI_ResearchOnlyInventory">uSearch Articles
 													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/databases.php">Databases A-Z
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/jsearch?vid=uml_new&lang=en_US">eJournals
+											<li><a class="dropdown-item no-decoration" href="https://miami.primo.exlibrisgroup.com/discovery/jsearch?vid=01UOML_INST:uml_new">eJournals
 												</a></li>
 
 										</ul>
@@ -184,7 +184,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=default_tab&search_scope=default_scope&vid=uml_new&offset=0">uSearch Library Catalog
+											<li><a class="dropdown-item no-decoration cta" href="https://miami.primo.exlibrisgroup.com/discovery/search?vid=01UOML_INST:uml_new&tab=LibraryCatalog&search_scope=UMLIBRARIES">uSearch Library Catalog
 													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/musiclib/index.html">Music Library
@@ -207,7 +207,7 @@ if (is_null($header_type)
 										<hr align="left" class="hr-decoration">
 										<ul>
 
-											<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=digital_collections&search_scope=Digital_Collections&vid=uml_new&offset=0">uSearch Digital Collections
+											<li><a class="dropdown-item no-decoration cta" href="https://miami.primo.exlibrisgroup.com/discovery/search?vid=01UOML_INST:uml_new&lang=en&tab=DIGITAL_COLLECTIONS&search_scope=CONTENTDM">uSearch Digital Collections
 													<i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://atom.library.miami.edu/">Archival Finding Aids
@@ -261,7 +261,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/find/course-reserves.html">Course Reserves
 												</a></li>
 											
-											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/collectionDiscovery?vid=uml_new">Featured Lists</a></li>
+											<li><a class="dropdown-item no-decoration" href="https://miami.primo.exlibrisgroup.com/discovery/collectionDiscovery?vid=01UOML_INST:uml_new">Featured Lists</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)
 												</a></li>
@@ -336,7 +336,7 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/lib-collections/index.html">Distinctive Collections
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?&tab=everything&search_scope=Everything&vid=uml_new&offset=0">Find Books & Articles
+											<li><a class="dropdown-item no-decoration" href="https://miami.primo.exlibrisgroup.com/discovery/search?vid=01UOML_INST:uml_new&tab=Everything&search_scope=MyInst_andCI_ResearchOnlyInventory">Find Books & Articles
 												</a></li>
 
 										</ul>
@@ -468,9 +468,6 @@ if (is_null($header_type)
 											<div class="col-12 col-lg-6">
 												<ul>
 													<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/learn/mindfulness.html">Mindfulness Programs
-														</a></li>
-
-													<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab
 														</a></li>
 
 													<li><a class="dropdown-item no-decoration" href="http://libcal.miami.edu/booking/exploratory">One-Button Studio
@@ -637,9 +634,6 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="http://www.math.miami.edu/resources/math-laboratory/">Math Lab
 												</a></li>
 
-											<li><a class="dropdown-item no-decoration" href="http://www.as.miami.edu/labs/">Modern Languages Lab
-												</a></li>
-
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/research/ask-a-librarian.html">Research Support
 												</a></li>
 
@@ -669,9 +663,6 @@ if (is_null($header_type)
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/printing.html">Printing, Copying & Scanning
-												</a></li>
-
-											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/remote-labs.html">Remote Labs
 												</a></li>
 
 											<li><a class="dropdown-item no-decoration" href="http://studentsupport.it.miami.edu/sthd/">Student Technology Help Desk
@@ -733,8 +724,8 @@ if (is_null($header_type)
 											<li class="mm-lib">
 												<img src="https://www.library.miami.edu/assets/common-images/mm-libraries/med-lib-sm.jpg" alt="Medical Library" class="mm-lib-img d-none d-lg-inline-block">
 												<div class="nested-items">
-													<a class="dropdown-item no-decoration" href="http://calder.med.miami.edu/">Medical Library</a>
-													<div class="mm-lib-time"><a href="http://calder.med.miami.edu/libraryhours.html" class="no-decoration default">See Hours</a></div>
+													<a class="dropdown-item no-decoration" href="https://www.library.miami.edu/calder/index.html">Medical Library</a>
+													<div class="mm-lib-time"><a href="https://www.library.miami.edu/calder/hours.html" class="no-decoration default"><span data-calendar="calder"></span></a></div>
 												</div>
 											</li>
 											<li class="mm-lib">
@@ -1012,7 +1003,7 @@ if (is_null($header_type)
 						<h5>Library Accounts</h5>
 						<hr align="left" class="hr-panel">
 						<ul class="d-inline-block">
-							<li><a class="dropdown-item no-decoration cta" href="https://miami-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=uml_new">uSearch (books, articles, music, images, etc) <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
+							<li><a class="dropdown-item no-decoration cta" href="https://miami.primo.exlibrisgroup.com/discovery/search?vid=01UOML_INST:uml_new">uSearch (books, articles, music, images, etc) <i class="fas fa-chevron-right d-none d-lg-inline-block"></i></a></li>
 							<li><a class="dropdown-item no-decoration" href="https://aeon.library.miami.edu/aeon/">Aeon (materials in our collections)</a></li>
 							<li><a class="dropdown-item no-decoration" href="https://triton.library.miami.edu/">Interlibrary Loan (ILL)</a></li>
 						</ul>

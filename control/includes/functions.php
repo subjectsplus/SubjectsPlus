@@ -476,7 +476,7 @@ ORDER BY s.subject";
         }
     }
 
-    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Term\">  
+    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subjects\">  
         $subs_option_boxes
         </select>";
 
@@ -1208,6 +1208,16 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
                 $abc_link = "ebooks.php";
                 $shownew  = 0;
                 break;
+            case "terms":
+                $lq       = "SELECT distinct UCASE(left(title,1)) AS initial
+                    FROM location l, location_title lt, title t
+                    WHERE l.location_id = lt.location_id AND lt.title_id = t.title_id
+                    AND eres_display = 'Y'
+                    AND left(title,1) REGEXP '[A-Z]'
+                    ORDER BY initial";
+                $abc_link = "databases.php";
+                $shownew  = 0;
+                break;
 		}
 
 //print $lq;
@@ -1267,10 +1277,13 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 	if ( $table == "databases" ) {
 		$alphabet .= getDBbyTypeBoxes( $selected_type, $show_formats );
 		$alphabet .= getDBbySubBoxes( $selected_subject );
-		$alphabet .= getDBbyTermBoxes( $selected_subject );
+
 
 	} elseif($table == "ebooks") {
         $alphabet .= getEbooksBySubBoxes($selected_subject);
+    } elseif($table == "terms") {
+        $alphabet .= getDBbyTypeBoxes( $selected_type, $show_formats );
+        $alphabet .= getDBbyTermBoxes( $selected_subject );
     }
 
 	if ( $showsearch != 0 ) {
