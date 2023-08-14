@@ -3,7 +3,7 @@
     "client_id": "d11e39fa-47cf-453b-a40e-2dac1be05c53",
     "auth_login_url": "https://developer.anthology.com/api/v1/gateway/oidcauth",
     "auth_token_url": "https://developer.blackboard.com/api/v1/gateway/oauth2/jwttoken",
-    "key_set_url": "https://developer.anthology.com/.well-known/jwks.json",
+    "key_set_url": "https://developer.blackboard.com/api/v1/management/applications/d11e39fa-47cf-453b-a40e-2dac1be05c53/jwks.json",
     "private_key_file": "/home/bin/jwtRS256.key",
     "kid": "e6a14d56-4190-4a3b-b3da-7d728808f163",
     "deployment": [
