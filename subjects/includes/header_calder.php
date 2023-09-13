@@ -14,6 +14,16 @@
     <!-- SP Calder CSS -->
 	<link rel="stylesheet" href="<?php print $AssetPath; ?>css/public/sp-calder.css?v=02082023-1" type="text/css">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LY97SP1NW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2LY97SP1NW');
+    </script>
+
     <!-- Google Analytics -->
     <?php
     global $google_analytics_ua;
