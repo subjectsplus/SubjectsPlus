@@ -585,6 +585,9 @@ if (is_null($header_type)
 											<li><a class="dropdown-item no-decoration" href="https://www.library.miami.edu/spaces/meditation-room.html">Meditation Room
 												</a></li>
 
+                                            <li><a class="dropdown-item no-decoration" href="https://sp.library.miami.edu/subjects/guide.php?subject=xrcl">XR Community Lab
+                                                </a></li>
+
 										</ul>
 
 									</div>
