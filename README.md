@@ -14,8 +14,8 @@ It is made available under the GNU GPL.
 
 ## Website, Documentation, Support
 
-* [Project Homepage](http://www.subjectsplus.com/)
-* [Documentation](http://www.subjectsplus.com/wiki)
+* [Project Homepage](https://subjectsplus.github.io/)
+* [Documentation](https://github.com/subjectsplus/SubjectsPlus/wiki)
 * [Mailing List](http://groups.google.com/group/subjectsplus)
 
 ## Requirements
@@ -39,4 +39,4 @@ If you run into any missing/weird functionality, check that the following extens
 If you have MySQL 5.7 you must disable ONLY_FULL_GROUP_BY permanently. Please refer to this [stack overflow](https://stackoverflow.com/questions/23921117/disable-only-full-group-by) issue.
 
 ## Installation
-Visit the [wiki](http://www.subjectsplus.com/wiki) for installation instructions.
+Visit the [wiki](https://github.com/subjectsplus/SubjectsPlus/wiki) for installation instructions.
