@@ -606,7 +606,8 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                 } else {
                     $linky = "guide.php?subject=" . $shortsub;
                 }
-                $items .= "<a href=\"$linky\">$psubject</a>";
+                //$items .= "<a href=\"$linky\">$psubject</a>";
+                $items .= "$psubject";
                 $items .= "</td>";
                 $items .= "<td class=\"staff-name-row\">";
 
@@ -687,7 +688,8 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                         $linky = "guide.php?subject=" . $subrow[1];
                     }
 
-                    $items .= "<a href=\"$linky\">$subrow[0]</a>";
+                    //$items .= "<a href=\"$linky\">$subrow[0]</a>";
+                    $items .= "$subrow[0]";
                     if ($subrowcount < $num_rows) {
                         $items .= ", ";
                     }
