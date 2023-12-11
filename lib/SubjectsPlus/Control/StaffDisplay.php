@@ -560,7 +560,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         AND type != 'Placeholder'
             order by subject, lname, fname";
 
-            $hf1 = array("label"=>"Subject","hide"=>true,"nosort"=>false);
+            $hf1 = array("label"=>"Specialty","hide"=>false,"nosort"=>false);
             $hf2 = array("label"=>"Library Liaison","hide"=>false,"nosort"=>false);
             $hf3 = array("label"=>"Phone","hide"=>true,"nosort"=>true);
             $hf4 = array("label"=>"Email","hide"=>true,"nosort"=>true);
@@ -660,7 +660,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
                 $items .= showStaff($myrow[4], '', '', 1);
 
-                $items .= "</div><div class=\"staff-subjects\"><p><strong>Subjects</strong></p>";
+                    $items .= "</div><div class=\"staff-subjects\"><p><strong>Liaison Areas</strong></p>";
 
                 $sub_query = "select subject, shortform from subject, staff_subject
                     WHERE subject.subject_id = staff_subject.subject_id
