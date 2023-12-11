@@ -459,7 +459,6 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
         $items .= "</table>";
         break;
-
         case "Librarians by Subject Specialty":
         $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
                     staff, staff_subject, subject
@@ -548,7 +547,158 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
         $items .= "</table>";
         break;
+        case "Librarians by Specialty":
+            $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
+                    staff, staff_subject, subject
+            where staff.staff_id = staff_subject.staff_id
+            AND staff_subject.subject_id = subject.subject_id
+            AND type = 'Liaison'
+        AND staff.active = 1
+        AND subject.active = 1
+        AND staff.user_type_id = 1
+        AND staff.ptags like '%librarian%'
+        AND type != 'Placeholder'
+            order by subject, lname, fname";
 
+            $hf1 = array("label"=>"Subject","hide"=>true,"nosort"=>false);
+            $hf2 = array("label"=>"Library Liaison","hide"=>false,"nosort"=>false);
+            $hf3 = array("label"=>"Phone","hide"=>true,"nosort"=>true);
+            $hf4 = array("label"=>"Email","hide"=>true,"nosort"=>true);
+
+            $head_fields = array($hf1, $hf2, $hf3, $hf4);
+            $db = new Querier;
+            $r = $db->query($q);
+
+            $items = prepareTHUM($head_fields);
+
+            $row_count = 0;
+            $colour1 = "oddrow";
+            $colour2 = "evenrow";
+            $subrowsubject = "";
+
+            foreach ($r as $myrow) {
+
+                $row_colour = ($row_count % 2) ? $colour1 : $colour2;
+
+                $full_name = $myrow["lname"] . ", " . $myrow["fname"];
+                $title = $myrow["title"];
+                $tel = $tel_prefix . " " . $myrow["tel"];
+                $email = $myrow["email"];
+                $name_id = explode("@", $email);
+
+                if ($subrowsubject == $myrow["subject"]) {
+                    //$psubject = " ";
+                    $psubject = $myrow["subject"];
+
+                } else {
+                    $subrowsubject = $myrow["subject"];
+                    $psubject = $myrow["subject"];
+                    $shortsub = $myrow["shortform"];
+                }
+
+
+
+                $items .= "<tr class=\"zebra $row_colour\">
+                    <td>";
+
+                if ($mod_rewrite == 1) {
+                    $linky = $shortsub;
+                } else {
+                    $linky = "guide.php?subject=" . $shortsub;
+                }
+                $items .= "<a href=\"$linky\">$psubject</a>";
+                $items .= "</td>";
+                $items .= "<td class=\"staff-name-row\">";
+
+                if ($mod_rewrite == 1) {
+                    //$linky = "/subjects/profile/" . $name_id[0]; // um custom
+                    $linky = "staff/" . $name_id[0];
+                } else {
+                    $linky = "staff_details.php?name=" . $name_id[0];
+                }
+
+                $items .= "<a href=\"$linky\">$full_name</a></td>";
+
+                $items .= "<td class=\"staff-tel-row\">";
+                if ($myrow["tel"] !== null && trim($myrow["tel"]) !== '') {
+                    $items .= $tel;
+                }
+                $items .= "</td>";
+
+                $items .= "<td>";
+                $items .= "<a href=\"mailto:$email\">$email</a>";
+                $items .= "</td>
+                    </tr>";
+
+                $row_count++;
+            }
+
+            $items .= "</table>";
+            break;
+        case "Liaison Librarians":
+
+            $q = "select distinct lname, fname, title, tel, email, staff.staff_id
+                from staff, staff_subject ss, subject su
+                where staff.staff_id = ss.staff_id
+                AND ss.subject_id = su.subject_id
+                AND staff.active = 1
+                AND type = 'Liaison'
+                AND su.active = '1'
+                AND user_type_id = '1'
+                AND su.type != 'Placeholder'
+                AND ptags like '%librarian%'
+                order by lname, fname";
+            $db = new Querier;
+            $r = $db->query($q);
+
+            $items = "<ul class=\"list-unstyled staff-librarians\">";
+
+            foreach ($r as $myrow) {
+
+                $items .= "<li class=\"d-lg-flex flex-lg-row flex-lg-nowrap\"><div class=\"staff-info d-flex flex-row flex-nowrap\">";
+
+                $items .= showStaff($myrow[4], '', '', 1);
+
+                $items .= "</div><div class=\"staff-subjects\"><p><strong>Subjects</strong></p>";
+
+                $sub_query = "select subject, shortform from subject, staff_subject
+                    WHERE subject.subject_id = staff_subject.subject_id
+                    AND staff_id =  '$myrow[5]'
+                    AND type = 'Liaison'
+                    AND active = '1'
+                    AND type != 'Placeholder'
+                    ORDER BY subject";
+
+                /* Select all active records (this is based on a db connection made above) */
+
+                $sub_result = $db->query($sub_query);
+
+                $num_rows = (count($sub_result) - 1);
+
+                // Loop through all items, sticking commas in between
+
+                $subrowcount = 0;
+
+                foreach ($sub_result as $subrow) {
+
+                    if ($mod_rewrite == 1) {
+                        $linky = $subrow[1];
+                    } else {
+                        $linky = "guide.php?subject=" . $subrow[1];
+                    }
+
+                    $items .= "<a href=\"$linky\">$subrow[0]</a>";
+                    if ($subrowcount < $num_rows) {
+                        $items .= ", ";
+                    }
+                    $subrowcount++;
+                }
+
+                $items .= "</div></li>";
+            }
+
+            $items .= "</ul>";
+            break;
         case "A-Z":
         default:
 
@@ -634,6 +784,8 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
         $items .= "</table>";
         break;
+
+
     }
 
     return $items;
