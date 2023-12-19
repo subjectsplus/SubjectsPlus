@@ -22,6 +22,46 @@ class EbooksModel
         //$statement = $this->_connection->prepare();
     }
 
+    public function fetchEbooksBySearch($searchterm) {
+        $statement = $this->_connection->prepare("SELECT t.title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide,alternate_title
+        	FROM title as t
+        	INNER JOIN location_title as lt
+        	ON t.title_id = lt.title_id
+        	INNER JOIN location as l
+        	ON lt.location_id = l.location_id
+        	INNER JOIN restrictions as r
+        	ON l.access_restrictions = r.restrictions_id
+        	INNER JOIN `rank` as rk
+        	ON rk.title_id = t.title_id
+        	INNER JOIN source as s
+        	ON rk.source_id = s.source_id
+            WHERE t.title LIKE :searchterm
+            AND l.format = 4
+
+        UNION
+        	SELECT  alternate_title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide,alternate_title
+            FROM title as t
+        	INNER JOIN location_title as lt
+        	ON t.title_id = lt.title_id
+        	INNER JOIN location as l
+        	ON lt.location_id = l.location_id
+        	INNER JOIN restrictions as r
+        	ON l.access_restrictions = r.restrictions_id
+        	INNER JOIN `rank` as rk
+        	ON rk.title_id = t.title_id
+        	INNER JOIN source as s
+        	ON rk.source_id = s.source_id
+            WHERE alternate_title LIKE :searchterm
+            AND l.format = 4
+            ORDER BY newtitle");
+
+        $searchterm = '%' . $searchterm . '%';
+
+        $statement->bindParam(":searchterm", $searchterm);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
     public function fetchEbooksBySubjectId($subject_id) {
         $statement = $this->_connection->prepare("
         	SELECT distinct t.title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide, alternate_title
