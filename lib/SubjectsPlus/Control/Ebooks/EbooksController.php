@@ -15,7 +15,11 @@ class EbooksController
         $this->_ebooksData = $ebooksData;
     }
 
-    public function getPageHeader($method = null, $letter = null, $subject_id = null) {
+    public function getPageHeader($method = null, $letter = null, $subject_id = null, $searchterm = null) {
+        if ($searchterm) {
+            $result = "eBooks List by search: <i>" . $searchterm . "</i>";
+            return $result;
+        }
 
         switch ($method) {
             case "byebooksub":
@@ -30,8 +34,15 @@ class EbooksController
         return $result;
     }
 
-    public function getEbooksByParams($method = null, $letter = null, $subject_id = null) {
+    public function getEbooksByParams($method = null, $letter = null, $subject_id = null, $searchterm = null) {
+        if ($searchterm) {
+            $result = $this->_ebooksData->fetchEbooksBySearch($searchterm);
+            return $result;
+        }
         switch ($method) {
+            case "searchterm":
+                $result = $this->_ebooksData->fetchEbooksBySearch($searchterm);
+                break;
             case "byebooksub":
                 $result = $this->_ebooksData->fetchEbooksBySubjectId($subject_id);
                 break;
