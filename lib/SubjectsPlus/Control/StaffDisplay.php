@@ -666,7 +666,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                     WHERE subject.subject_id = staff_subject.subject_id
                     AND staff_id =  '$myrow[5]'
                     AND type = 'Liaison'
-                    AND active = '1'
+                    AND active = 0
                     AND type != 'Placeholder'
                     ORDER BY subject";
 
