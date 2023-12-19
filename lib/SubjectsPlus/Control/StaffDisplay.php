@@ -554,7 +554,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
             AND staff_subject.subject_id = subject.subject_id
             AND type = 'Liaison'
         AND staff.active = 1
-        AND subject.active = 1
+        AND subject.active = 0
         AND staff.user_type_id = 1
         AND staff.ptags like '%librarian%'
         AND type != 'Placeholder'
@@ -644,7 +644,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
                 AND ss.subject_id = su.subject_id
                 AND staff.active = 1
                 AND type = 'Liaison'
-                AND su.active = '1'
+                AND su.active = 0
                 AND user_type_id = '1'
                 AND su.type != 'Placeholder'
                 AND ptags like '%librarian%'
