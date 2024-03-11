@@ -165,5 +165,5 @@ subjects/.htaccess
 api/.htaccess
 !/lib/LTI13/configs/prod.json
 
-/lib/LTI13/configs/staging.json
-/lib/LTI13/configs/development.json
+lib/LTI13/configs/staging.json
+lib/LTI13/configs/development.json
