@@ -497,9 +497,10 @@ FROM rank r, location_title lt, location l, title t
     AND t.title_id = lt.title_id
     AND l.format = 4
     AND l.record_status = 'Active'
-    AND r.dbbysub_active = 1)
-AND s.active = 1
-ORDER BY s.subject";
+    AND r.dbbysub_active = 1
+    AND s.active = 1
+    AND s.type = 'Ebook')
+    ORDER BY s.subject";
     $subs_result = $db->query( $subs_query );
 
 
