@@ -73,11 +73,25 @@ function isCool( $emailAdd = "", $password = "", $shibboleth = false ) {
 
 	} else {
 
-		$query  = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
-        FROM staff
-        WHERE email = '" . scrubData( $emailAdd, "email" ) . "' AND password = '" . scrubData( $password ) . "'";
-		$db     = new Querier;
-		$result = $db->query( $query );
+//		$query  = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+//        FROM staff
+//        WHERE email = '" . scrubData( $emailAdd, "email" ) . "' AND password = '" . scrubData( $password ) . "'";
+//		$db     = new Querier;
+//		$result = $db->query( $query );
+
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+    FROM staff
+    WHERE email = :email AND password = :password");
+
+        $emailAdd = scrubData($emailAdd, "email");
+        $password = scrubData($password);
+
+        $statement->bindParam(":email", $emailAdd);
+        $statement->bindParam(":password", $password);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
 
 	}
 
@@ -2112,18 +2126,25 @@ function apiGetTopicGuidesList() {
 function listCollections( $search = "", $display = "default", $show_children = "false" ) {
 	$db = new Querier();
 
-	$whereclause = "";
+	//$whereclause = "";
 	global $guide_path;
 
-	if ( $search != "" ) {
-		$search      = scrubData( $search );
-		$whereclause .= " WHERE subject LIKE '%" . $db->quote( $search ) . "%'";
-	}
+//	if ( $search != "" ) {
+//		$search      = scrubData( $search );
+//		$whereclause .= " WHERE subject LIKE '%" . $db->quote( $search ) . "%'";
+//	}
+//
+//
+//	$q        = "SELECT collection_id, title, description, shortform FROM $whereclause collection ORDER BY title";
+//	$r        = $db->query( $q );
 
+    $q  = "SELECT collection_id, title, description, shortform FROM collection ORDER BY title";
+    $connection = $db->getConnection();
+    $statement = $connection->prepare( $q );
+    $statement->execute();
+    $r = $statement->fetchAll();
 
-	$q        = "SELECT collection_id, title, description, shortform FROM $whereclause collection ORDER BY title";
-	$r        = $db->query( $q );
-	$num_rows = count( $r );
+    $num_rows = count( $r );
 
 	$switch_row = round( $num_rows / 2 );
 
@@ -2178,7 +2199,12 @@ function listCollections( $search = "", $display = "default", $show_children = "
 					// get all kids
 					$q2        = "SELECT s.subject_id, s.subject, s.shortform FROM subject s, collection_subject cs, collection c 
         WHERE s.subject_id = cs.subject_id AND cs.collection_id = c.collection_id AND c.collection_id = $myrow[0] AND s.active = 1 ORDER BY cs.sort";
-					$r2        = $db->query( $q2 );
+					//$r2        = $db->query( $q2 );
+
+                    $statement = $connection->prepare( $q2 );
+                    $statement->execute();
+                    $r2        = $statement->fetchAll();
+
 					$num_rows2 = count( $r2 );
 
 					foreach ( $r2 as $mysubguide ) {
@@ -2233,11 +2259,18 @@ function listGuideCollections( $collection_shortform ) {
 FROM collection c, collection_subject cs, subject s
 WHERE c.collection_id = cs.collection_id
 AND cs.subject_id = s.subject_id
-AND c.shortform = '$collection_shortform'
+AND c.shortform = :collection_shortform
 AND s.active = '1'
 ORDER BY cs.sort";
 
-	$rCollection = $db->query( $qCollection );
+	//$rCollection = $db->query( $qCollection );
+
+    $connection = $db->getConnection();
+    $statement = $connection->prepare( $qCollection );
+    $statement->bindParam(":collection_shortform", $collection_shortform);
+    $statement->execute();
+    $rCollection = $statement->fetchAll();
+
 
 // prepare striping
 	$colour1 = "oddrow";
