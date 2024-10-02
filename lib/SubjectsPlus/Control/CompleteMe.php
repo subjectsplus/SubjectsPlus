@@ -96,7 +96,6 @@ class CompleteMe
        <form action=\"$this->action\" method=\"get\" class=\"pure-form\" id=\"sp_admin_search\">
         <input type=\"text\" id=\"$this->input_id\" title=\"$this->default_text\" size=\"$this->search_box_size\" name=\"searchterm\" autocomplete=\"on\" placeholder=\"" . $this->default_text . "\" value=\"" . $this->value . "\" />
         <input type=\"hidden\" value=\"" . $category . "\" name=\"category\"/>
-        <input type=\"hidden\" value=\"" . $this->sortby . "\" name=\"sortby\"/>
         <input type=\"submit\" value=\"" . _("Go") . "\" class=\"pure-button pure-button-topsearch\" id=\"topsearch_button\" name=\"\" alt=\"Search\" />
        </form>
    </div>";
