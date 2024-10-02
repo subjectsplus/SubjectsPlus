@@ -501,21 +501,51 @@ function getEbooksBySubBoxes( $selected_sub ) {
     $subs_option_boxes = "";
     $alphabet          = "";
 
-    $subs_query  = "SELECT s.subject_id, s.subject, s.type
-FROM subject as s WHERE exists(
-SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
-FROM rank r, location_title lt, location l, title t
-    WHERE subject_id = s.subject_id
-    AND lt.title_id = r.title_id
-    AND l.location_id = lt.location_id
-    AND t.title_id = lt.title_id
-    AND l.format = 4
-    AND l.record_status = 'Active'
-    AND r.dbbysub_active = 1
-    AND s.active = 1
-    AND s.type = 'Ebook')
-    ORDER BY s.subject";
-    $subs_result = $db->query( $subs_query );
+//    $subs_query  = "SELECT s.subject_id, s.subject, s.type
+//FROM subject as s WHERE exists(
+//SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+//FROM rank r, location_title lt, location l, title t
+//    WHERE subject_id = s.subject_id
+//    AND lt.title_id = r.title_id
+//    AND l.location_id = lt.location_id
+//    AND t.title_id = lt.title_id
+//    AND l.format = 4
+//    AND l.record_status = 'Active'
+//    AND r.dbbysub_active = 1
+//    AND s.active = 1
+//    AND s.type = 'Ebook')
+//    ORDER BY s.subject";
+//    $subs_result = $db->query( $subs_query );
+
+    $subs_query = "SELECT s.subject_id, s.subject, s.type
+               FROM subject as s 
+               WHERE exists(
+                   SELECT 1
+                   FROM rank r
+                   JOIN location_title lt ON lt.title_id = r.title_id
+                   JOIN location l ON l.location_id = lt.location_id
+                   JOIN title t ON t.title_id = lt.title_id
+                   WHERE r.subject_id = s.subject_id
+                   AND l.format = :format
+                   AND l.record_status = :record_status
+                   AND r.dbbysub_active = :dbbysub_active
+                   AND s.active = :active
+                   AND s.type = :subject_type
+               )
+               ORDER BY s.subject";
+    $connection = $db->getConnection();
+    $stmt = $connection->prepare($subs_query);
+
+    $params = [
+        ':format' => 4,
+        ':record_status' => 'Active',
+        ':dbbysub_active' => 1,
+        ':active' => 1,
+        ':subject_type' => 'Ebook'
+    ];
+
+    $stmt->execute($params);
+    $subs_result = $stmt->fetchAll();
 
 
     $num_subs = count( $subs_result );
