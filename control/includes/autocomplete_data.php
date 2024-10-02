@@ -24,7 +24,7 @@ if (isset($_GET["subject_id"])) {
 
 
 if (isset($_GET["staff_id"])) {
-
+    scrubData($_GET['staff_id'], "integer");
     $auto_complete->setStaffId($_GET["staff_id"]);
 
 }
