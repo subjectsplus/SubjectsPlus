@@ -73,11 +73,25 @@ function isCool( $emailAdd = "", $password = "", $shibboleth = false ) {
 
 	} else {
 
-		$query  = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
-        FROM staff
-        WHERE email = '" . scrubData( $emailAdd, "email" ) . "' AND password = '" . scrubData( $password ) . "'";
-		$db     = new Querier;
-		$result = $db->query( $query );
+//		$query  = "SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+//        FROM staff
+//        WHERE email = '" . scrubData( $emailAdd, "email" ) . "' AND password = '" . scrubData( $password ) . "'";
+//		$db     = new Querier;
+//		$result = $db->query( $query );
+
+        $connection = $db->getConnection();
+        $statement = $connection->prepare("SELECT staff_id, ip, fname, lname, email, user_type_id, ptags, extra
+    FROM staff
+    WHERE email = :email AND password = :password");
+
+        $emailAdd = scrubData($emailAdd, "email");
+        $password = scrubData($password);
+
+        $statement->bindParam(":email", $emailAdd);
+        $statement->bindParam(":password", $password);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
 
 	}
 
@@ -487,21 +501,51 @@ function getEbooksBySubBoxes( $selected_sub ) {
     $subs_option_boxes = "";
     $alphabet          = "";
 
-    $subs_query  = "SELECT s.subject_id, s.subject, s.type
-FROM subject as s WHERE exists(
-SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
-FROM rank r, location_title lt, location l, title t
-    WHERE subject_id = s.subject_id
-    AND lt.title_id = r.title_id
-    AND l.location_id = lt.location_id
-    AND t.title_id = lt.title_id
-    AND l.format = 4
-    AND l.record_status = 'Active'
-    AND r.dbbysub_active = 1
-    AND s.active = 1
-    AND s.type = 'Ebook')
-    ORDER BY s.subject";
-    $subs_result = $db->query( $subs_query );
+//    $subs_query  = "SELECT s.subject_id, s.subject, s.type
+//FROM subject as s WHERE exists(
+//SELECT t.title, l.record_status, r.title_id, r.rank_id, r.description_override
+//FROM rank r, location_title lt, location l, title t
+//    WHERE subject_id = s.subject_id
+//    AND lt.title_id = r.title_id
+//    AND l.location_id = lt.location_id
+//    AND t.title_id = lt.title_id
+//    AND l.format = 4
+//    AND l.record_status = 'Active'
+//    AND r.dbbysub_active = 1
+//    AND s.active = 1
+//    AND s.type = 'Ebook')
+//    ORDER BY s.subject";
+//    $subs_result = $db->query( $subs_query );
+
+    $subs_query = "SELECT s.subject_id, s.subject, s.type
+               FROM subject as s 
+               WHERE exists(
+                   SELECT 1
+                   FROM rank r
+                   JOIN location_title lt ON lt.title_id = r.title_id
+                   JOIN location l ON l.location_id = lt.location_id
+                   JOIN title t ON t.title_id = lt.title_id
+                   WHERE r.subject_id = s.subject_id
+                   AND l.format = :format
+                   AND l.record_status = :record_status
+                   AND r.dbbysub_active = :dbbysub_active
+                   AND s.active = :active
+                   AND s.type = :subject_type
+               )
+               ORDER BY s.subject";
+    $connection = $db->getConnection();
+    $stmt = $connection->prepare($subs_query);
+
+    $params = [
+        ':format' => 4,
+        ':record_status' => 'Active',
+        ':dbbysub_active' => 1,
+        ':active' => 1,
+        ':subject_type' => 'Ebook'
+    ];
+
+    $stmt->execute($params);
+    $subs_result = $stmt->fetchAll();
 
 
     $num_subs = count( $subs_result );
@@ -1079,10 +1123,21 @@ function showStaff( $email, $picture = 1, $pic_size = "medium", $link_name = 0 )
 	global $tel_prefix;
 	global $mod_rewrite;
 
-	$q = "SELECT fname, lname, title, tel, email FROM staff WHERE email = '$email'";
+//	$q = "SELECT fname, lname, title, tel, email FROM staff WHERE email = '$email'";
+//
+//	$db = new Querier;
+//	$r  = $db->query( $q );
 
-	$db = new Querier;
-	$r  = $db->query( $q );
+    $db = new Querier;
+    $connection = $db->getConnection();
+
+    $query = "SELECT fname, lname, title, tel, email FROM staff WHERE email = :email";
+
+    $statement = $connection->prepare($query);
+    $statement->bindParam(":email", $email, PDO::PARAM_STR);
+    $statement->execute();
+
+    $r = $statement->fetchAll();
 
 	$row_count = count( $r );
 
@@ -1166,12 +1221,13 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 
 	$selected_subject = "";
 	if ( isset( $_GET["subject_id"] ) ) {
-		$selected_subject = intval( $_GET["subject_id"] );
+        $subject_id = scrubData($_GET['subject_id'], "integer");
+		$selected_subject = intval( $subject_id );
 	}
 
 	$selected_type = "";
 	if ( isset( $_GET["type"] ) ) {
-		$selected_type = $_GET["type"];
+        $selected_type = scrubData($_GET['type'], "text");
 	}
 
 	$showsearch = 0;
@@ -2112,18 +2168,25 @@ function apiGetTopicGuidesList() {
 function listCollections( $search = "", $display = "default", $show_children = "false" ) {
 	$db = new Querier();
 
-	$whereclause = "";
+	//$whereclause = "";
 	global $guide_path;
 
-	if ( $search != "" ) {
-		$search      = scrubData( $search );
-		$whereclause .= " WHERE subject LIKE '%" . $db->quote( $search ) . "%'";
-	}
+//	if ( $search != "" ) {
+//		$search      = scrubData( $search );
+//		$whereclause .= " WHERE subject LIKE '%" . $db->quote( $search ) . "%'";
+//	}
+//
+//
+//	$q        = "SELECT collection_id, title, description, shortform FROM $whereclause collection ORDER BY title";
+//	$r        = $db->query( $q );
 
+    $q  = "SELECT collection_id, title, description, shortform FROM collection ORDER BY title";
+    $connection = $db->getConnection();
+    $statement = $connection->prepare( $q );
+    $statement->execute();
+    $r = $statement->fetchAll();
 
-	$q        = "SELECT collection_id, title, description, shortform FROM $whereclause collection ORDER BY title";
-	$r        = $db->query( $q );
-	$num_rows = count( $r );
+    $num_rows = count( $r );
 
 	$switch_row = round( $num_rows / 2 );
 
@@ -2178,7 +2241,12 @@ function listCollections( $search = "", $display = "default", $show_children = "
 					// get all kids
 					$q2        = "SELECT s.subject_id, s.subject, s.shortform FROM subject s, collection_subject cs, collection c 
         WHERE s.subject_id = cs.subject_id AND cs.collection_id = c.collection_id AND c.collection_id = $myrow[0] AND s.active = 1 ORDER BY cs.sort";
-					$r2        = $db->query( $q2 );
+					//$r2        = $db->query( $q2 );
+
+                    $statement = $connection->prepare( $q2 );
+                    $statement->execute();
+                    $r2        = $statement->fetchAll();
+
 					$num_rows2 = count( $r2 );
 
 					foreach ( $r2 as $mysubguide ) {
@@ -2233,11 +2301,18 @@ function listGuideCollections( $collection_shortform ) {
 FROM collection c, collection_subject cs, subject s
 WHERE c.collection_id = cs.collection_id
 AND cs.subject_id = s.subject_id
-AND c.shortform = '$collection_shortform'
+AND c.shortform = :collection_shortform
 AND s.active = '1'
 ORDER BY cs.sort";
 
-	$rCollection = $db->query( $qCollection );
+	//$rCollection = $db->query( $qCollection );
+
+    $connection = $db->getConnection();
+    $statement = $connection->prepare( $qCollection );
+    $statement->bindParam(":collection_shortform", $collection_shortform);
+    $statement->execute();
+    $rCollection = $statement->fetchAll();
+
 
 // prepare striping
 	$colour1 = "oddrow";
