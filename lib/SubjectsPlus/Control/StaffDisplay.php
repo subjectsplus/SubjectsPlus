@@ -60,6 +60,7 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
             $db = new Querier;
 
+            $search_term = scrubData($search_term, "text");
 			$query_params = [':search_term'=>'%'.$search_term.'%'];
 
             $r = $db->queryWithPreparedStatement($q, NULL, $query_params);
@@ -154,19 +155,48 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
         case "Subject Librarians":
 
-            $q = "select distinct lname, fname, title, tel, email, staff.staff_id
-                from staff, staff_subject ss, subject su
-                where staff.staff_id = ss.staff_id
-                AND ss.subject_id = su.subject_id
-                AND staff.active = 1
-                AND type = 'Subject'
-                AND su.active = '1'
-                AND user_type_id = '1'
-                AND su.type != 'Placeholder'
-                AND ptags like '%librarian%'
-                order by lname, fname";
+//            $q = "select distinct lname, fname, title, tel, email, staff.staff_id
+//                from staff, staff_subject ss, subject su
+//                where staff.staff_id = ss.staff_id
+//                AND ss.subject_id = su.subject_id
+//                AND staff.active = 1
+//                AND type = 'Subject'
+//                AND su.active = '1'
+//                AND user_type_id = '1'
+//                AND su.type != 'Placeholder'
+//                AND ptags like '%librarian%'
+//                order by lname, fname";
+//            $db = new Querier;
+//            $r = $db->query($q);
+
+            // Get database connection
             $db = new Querier;
-            $r = $db->query($q);
+            $connection = $db->getConnection();
+
+            $sql = "SELECT DISTINCT lname, fname, title, tel, email, staff.staff_id
+        FROM staff, staff_subject ss, subject su
+        WHERE staff.staff_id = ss.staff_id
+        AND ss.subject_id = su.subject_id
+        AND staff.active = :staff_active
+        AND type = :subject_type
+        AND su.active = :subject_active
+        AND user_type_id = :user_type_id
+        AND su.type != :placeholder_type
+        AND ptags LIKE :librarian_tag
+        ORDER BY lname, fname";
+
+            $statement = $connection->prepare($sql);
+
+            $statement->bindValue(':staff_active', 1, PDO::PARAM_INT);
+            $statement->bindValue(':subject_type', 'Subject', PDO::PARAM_STR);
+            $statement->bindValue(':subject_active', '1', PDO::PARAM_STR);
+            $statement->bindValue(':user_type_id', '1', PDO::PARAM_STR);
+            $statement->bindValue(':placeholder_type', 'Placeholder', PDO::PARAM_STR);
+            $statement->bindValue(':librarian_tag', '%librarian%', PDO::PARAM_STR);
+
+            $statement->execute();
+            $r= $statement->fetchAll();
+
 
             $items = "<ul class=\"list-unstyled staff-librarians\">";
 
@@ -178,17 +208,32 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
                 $items .= "</div><div class=\"staff-subjects\"><p><strong>Subjects</strong></p>";
 
-                $sub_query = "select subject, shortform from subject, staff_subject
-                    WHERE subject.subject_id = staff_subject.subject_id
-                    AND staff_id =  '$myrow[5]'
-                    AND type = 'Subject'
-                    AND active = '1'
-                    AND type != 'Placeholder'
-                    ORDER BY subject";
+//                $sub_query = "select subject, shortform from subject, staff_subject
+//                    WHERE subject.subject_id = staff_subject.subject_id
+//                    AND staff_id =  '$myrow[5]'
+//                    AND type = 'Subject'
+//                    AND active = '1'
+//                    AND type != 'Placeholder'
+//                    ORDER BY subject";
+//
+//                /* Select all active records (this is based on a db connection made above) */
+//
+//                $sub_result = $db->query($sub_query);
 
-                /* Select all active records (this is based on a db connection made above) */
+                $sub_query = "SELECT subject, shortform 
+              FROM subject 
+              INNER JOIN staff_subject ON subject.subject_id = staff_subject.subject_id
+              WHERE staff_id = :staff_id
+              AND type = 'Subject'
+              AND active = '1'
+              AND type != 'Placeholder'
+              ORDER BY subject";
 
-                $sub_result = $db->query($sub_query);
+                $statement = $connection->prepare($sub_query);
+                $statement->bindParam(":staff_id", $myrow[5], PDO::PARAM_INT);
+                $statement->execute();
+
+                $sub_result = $statement->fetchAll();
 
                 $num_rows = (count($sub_result) - 1);
 
@@ -218,16 +263,37 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
             break;
 
         case "Faculty Profiles":
-        $q = "select lname, fname, title, tel, email, staff_id, ptags
+//        $q = "select lname, fname, title, tel, email, staff_id, ptags
+//            FROM staff
+//            WHERE active = 1
+//            AND ptags like '%librarian%'
+//            AND user_type_id = '1'
+//            order by lname, fname";
+//
+//        $db = new Querier;
+//
+//        $r = $db->query($q);
+
+            $db = new Querier;
+            $connection = $db->getConnection();
+
+            $query = "SELECT lname, fname, title, tel, email, staff_id, ptags
             FROM staff
             WHERE active = 1
-            AND ptags like '%librarian%'
-            AND user_type_id = '1'
-            order by lname, fname";
+            AND ptags LIKE :ptags
+            AND user_type_id = :user_type_id
+            ORDER BY lname, fname";
 
-        $db = new Querier;
+            $statement = $connection->prepare($query);
 
-        $r = $db->query($q);
+            $ptags = '%librarian%';
+            $user_type_id = '1';
+
+            $statement->bindParam(':ptags', $ptags, PDO::PARAM_STR);
+            $statement->bindParam(':user_type_id', $user_type_id, PDO::PARAM_INT);
+
+            $statement->execute();
+            $r = $statement->fetchAll();
 
         $items = "<table width=\"100%\" class=\"footable foo1\">";
 
@@ -293,16 +359,41 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
         break;
         case "By Department":
-        $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, s.staff_id, s.ptags
-        FROM staff s, staff_department sd, department d
-        WHERE s.staff_id = sd.staff_id
-        AND sd.department_id = d.department_id
-        AND user_type_id = '1'
-        AND active =1
-        ORDER BY department_sort, d.name, staff_sort DESC, lname";
+//        $q = "SELECT DISTINCT d.department_sort, s.staff_sort, name, lname, fname, title, s.tel, s.email, d.department_id, d.telephone, s.staff_id, s.ptags
+//        FROM staff s, staff_department sd, department d
+//        WHERE s.staff_id = sd.staff_id
+//        AND sd.department_id = d.department_id
+//        AND user_type_id = '1'
+//        AND active =1
+//        ORDER BY department_sort, d.name, staff_sort DESC, lname";
+//
+//        $db = new Querier;
+//        $r = $db->query($q);
 
-        $db = new Querier;
-        $r = $db->query($q);
+            $db = new Querier();
+            $connection = $db->getConnection();
+
+            $query = "SELECT DISTINCT d.department_sort, s.staff_sort, d.name, s.lname, s.fname, s.title, s.tel, s.email, 
+                 d.department_id, d.telephone, s.staff_id, s.ptags
+          FROM staff s
+          INNER JOIN staff_department sd ON s.staff_id = sd.staff_id
+          INNER JOIN department d ON sd.department_id = d.department_id
+          WHERE s.user_type_id = :user_type_id
+          AND s.active = :active
+          ORDER BY d.department_sort, d.name, s.staff_sort DESC, s.lname";
+
+            $statement = $connection->prepare($query);
+
+            $user_type_id = 1;
+            $active = 1;
+
+            $statement->bindParam(':user_type_id', $user_type_id, PDO::PARAM_INT);
+            $statement->bindParam(':active', $active, PDO::PARAM_INT);
+
+            $statement->execute();
+
+            $r = $statement->fetchAll();
+
 
         $items = "<table class=\"footable foo2 staff-by-dept\"><thead><tr><th data-sort-ignore=\"true\">&nbsp;</th><th data-sort-ignore=\"true\">&nbsp;</th><th data-sort-ignore=\"true\" data-hide=\"phone,mid\">&nbsp;</th><th data-sort-ignore=\"true\" data-hide=\"phone\">&nbsp;</th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\">&nbsp;</th></tr></thead>";
 
@@ -388,18 +479,51 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         break;
         case "Subject Librarians A-Z":
 
-        $q = "select distinct lname, fname, title, tel, email, staff.staff_id
-                from staff, staff_subject ss, subject su
-                where staff.staff_id = ss.staff_id
-                AND ss.subject_id = su.subject_id
-                AND staff.active = 1
-                AND type = 'Subject'
-                AND su.active = '1'
-                AND user_type_id = '1'
-                AND su.type != 'Placeholder'
-                order by lname, fname";
-        $db = new Querier;
-        $r = $db->query($q);
+//        $q = "select distinct lname, fname, title, tel, email, staff.staff_id
+//                from staff, staff_subject ss, subject su
+//                where staff.staff_id = ss.staff_id
+//                AND ss.subject_id = su.subject_id
+//                AND staff.active = 1
+//                AND type = 'Subject'
+//                AND su.active = '1'
+//                AND user_type_id = '1'
+//                AND su.type != 'Placeholder'
+//                order by lname, fname";
+//        $db = new Querier;
+//        $r = $db->query($q);
+
+
+            $db = new Querier();
+            $connection = $db->getConnection();
+
+            $query = "SELECT DISTINCT  lname, fname, title, tel, email, staff.staff_id
+            FROM staff, staff_subject ss, subject su
+            WHERE staff.staff_id = ss.staff_id
+            AND ss.subject_id = su.subject_id
+            AND staff.active = :staff_active
+            AND type = :subject_type
+            AND su.active = :subject_active
+            AND user_type_id = :user_type_id
+            AND su.type != :placeholder_type
+            ORDER BY staff.lname, staff.fname";
+
+            $statement = $connection->prepare($query);
+
+            $staff_active = 1;
+            $subject_type = 'Subject';
+            $subject_active = '1';
+            $user_type_id = '1';
+            $placeholder_type = 'Placeholder';
+
+            $statement->bindParam(':staff_active', $staff_active, PDO::PARAM_INT);
+            $statement->bindParam(':subject_type', $subject_type, PDO::PARAM_STR);
+            $statement->bindParam(':subject_active', $subject_active, PDO::PARAM_STR);
+            $statement->bindParam(':user_type_id', $user_type_id, PDO::PARAM_INT);
+            $statement->bindParam(':placeholder_type', $placeholder_type, PDO::PARAM_STR);
+
+            $statement->execute();
+
+            $r = $statement->fetchAll();
 
         $items = "<table class=\"footable foo3 table table-borderless table-responsive librarians-az\" width=\"100%\">
         <thead><tr class=\"staff-heading\"><th><strong>" . _("Librarian") . "</strong></th><th data-hide=\"phone,mid\" data-sort-ignore=\"true\"><strong>" . _("Subject Responsibilities") . "</strong></th></tr></thead>";
@@ -418,17 +542,44 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
           $items .= "<td class=\"librarian-subjects\">";
 
-          $sub_query = "select subject, shortform from subject, staff_subject
-                    WHERE subject.subject_id = staff_subject.subject_id
-                    AND staff_id =  '$myrow[5]'
-                    AND type = 'Subject'
-                    AND active = '1'
-                    AND type != 'Placeholder'
-                    ORDER BY subject";
+//          $sub_query = "select subject, shortform from subject, staff_subject
+//                    WHERE subject.subject_id = staff_subject.subject_id
+//                    AND staff_id =  '$myrow[5]'
+//                    AND type = 'Subject'
+//                    AND active = '1'
+//                    AND type != 'Placeholder'
+//                    ORDER BY subject";
+//
+//          /* Select all active records (this is based on a db connection made above) */
+//
+//          $sub_result = $db->query($sub_query);
 
-          /* Select all active records (this is based on a db connection made above) */
+             // $connection = $db->getConnection();
 
-          $sub_result = $db->query($sub_query);
+              $sub_query = "SELECT subject.subject, subject.shortform 
+              FROM subject
+              INNER JOIN staff_subject ON subject.subject_id = staff_subject.subject_id
+              WHERE staff_subject.staff_id = :staff_id
+              AND subject.type = :subject_type
+              AND subject.active = :active
+              AND subject.type != :placeholder_type
+              ORDER BY subject.subject";
+
+              $statement = $connection->prepare($sub_query);
+
+              $staff_id = $myrow[5]; // Make sure $myrow[5] is properly sanitized before using it here
+              $subject_type = 'Subject';
+              $active = '1';
+              $placeholder_type = 'Placeholder';
+
+              $statement->bindParam(':staff_id', $staff_id, PDO::PARAM_INT);
+              $statement->bindParam(':subject_type', $subject_type, PDO::PARAM_STR);
+              $statement->bindParam(':active', $active);
+              $statement->bindParam(':placeholder_type', $placeholder_type, PDO::PARAM_STR);
+
+              $statement->execute();
+
+              $sub_result = $statement->fetchAll();
 
           $num_rows = (count($sub_result) - 1);
 
@@ -460,17 +611,17 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         $items .= "</table>";
         break;
         case "Librarians by Subject Specialty":
-        $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
-                    staff, staff_subject, subject
-            where staff.staff_id = staff_subject.staff_id
-            AND staff_subject.subject_id = subject.subject_id
-            AND type = 'Subject'
-        AND staff.active = 1
-        AND subject.active = 1
-        AND staff.user_type_id = 1
-        AND staff.ptags like '%librarian%'
-        AND type != 'Placeholder'
-            order by subject, lname, fname";
+//        $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
+//                    staff, staff_subject, subject
+//            where staff.staff_id = staff_subject.staff_id
+//            AND staff_subject.subject_id = subject.subject_id
+//            AND type = 'Subject'
+//        AND staff.active = 1
+//        AND subject.active = 1
+//        AND staff.user_type_id = 1
+//        AND staff.ptags like '%librarian%'
+//        AND type != 'Placeholder'
+//            order by subject, lname, fname";
 
         $hf1 = array("label"=>"Subject","hide"=>false,"nosort"=>false);
         $hf2 = array("label"=>"Library Liaison","hide"=>false,"nosort"=>false);
@@ -478,8 +629,44 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         $hf4 = array("label"=>"Email","hide"=>true,"nosort"=>true);
 
         $head_fields = array($hf1, $hf2, $hf3, $hf4);
-        $db = new Querier;
-        $r = $db->query($q);
+//        $db = new Querier;
+//        $r = $db->query($q);
+
+
+            $db = new Querier();
+            $connection = $db->getConnection();
+
+            $query = "SELECT staff.lname, staff.fname, staff.title, staff.tel, staff.email, 
+                 subject.subject, staff.staff_id, subject.shortform
+          FROM staff
+          INNER JOIN staff_subject ON staff.staff_id = staff_subject.staff_id
+          INNER JOIN subject ON staff_subject.subject_id = subject.subject_id
+          WHERE subject.type = :subject_type
+          AND staff.active = :staff_active
+          AND subject.active = :subject_active
+          AND staff.user_type_id = :user_type_id
+          AND staff.ptags LIKE :ptags
+          AND subject.type != :placeholder_type
+          ORDER BY subject.subject, staff.lname, staff.fname";
+
+            $statement = $connection->prepare($query);
+
+            $subject_type = 'Subject';
+            $staff_active = 1;
+            $subject_active = 1;
+            $user_type_id = 1;
+            $ptags = '%librarian%';
+            $placeholder_type = 'Placeholder';
+
+            $statement->bindParam(':subject_type', $subject_type, PDO::PARAM_STR);
+            $statement->bindParam(':staff_active', $staff_active, PDO::PARAM_INT);
+            $statement->bindParam(':subject_active', $subject_active, PDO::PARAM_INT);
+            $statement->bindParam(':user_type_id', $user_type_id, PDO::PARAM_INT);
+            $statement->bindParam(':ptags', $ptags, PDO::PARAM_STR);
+            $statement->bindParam(':placeholder_type', $placeholder_type, PDO::PARAM_STR);
+
+            $statement->execute();
+            $r = $statement->fetchAll();
 
         $items = prepareTHUM($head_fields);
 
@@ -548,17 +735,17 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         $items .= "</table>";
         break;
         case "Librarians by Specialty":
-            $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
-                    staff, staff_subject, subject
-            where staff.staff_id = staff_subject.staff_id
-            AND staff_subject.subject_id = subject.subject_id
-            AND type = 'Liaison'
-        AND staff.active = 1
-        AND subject.active = 0
-        AND staff.user_type_id = 1
-        AND staff.ptags like '%librarian%'
-        AND type != 'Placeholder'
-            order by subject, lname, fname";
+//            $q = "select lname, fname, title, tel, email, subject, staff.staff_id, shortform from
+//                    staff, staff_subject, subject
+//            where staff.staff_id = staff_subject.staff_id
+//            AND staff_subject.subject_id = subject.subject_id
+//            AND type = 'Liaison'
+//        AND staff.active = 1
+//        AND subject.active = 0
+//        AND staff.user_type_id = 1
+//        AND staff.ptags like '%librarian%'
+//        AND type != 'Placeholder'
+//            order by subject, lname, fname";
 
             $hf1 = array("label"=>"Specialty","hide"=>false,"nosort"=>false);
             $hf2 = array("label"=>"Library Liaison","hide"=>false,"nosort"=>false);
@@ -566,8 +753,43 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
             $hf4 = array("label"=>"Email","hide"=>true,"nosort"=>true);
 
             $head_fields = array($hf1, $hf2, $hf3, $hf4);
-            $db = new Querier;
-            $r = $db->query($q);
+//            $db = new Querier;
+//            $r = $db->query($q);
+
+            $db = new Querier();
+            $connection = $db->getConnection();
+
+            $query = "SELECT staff.lname, staff.fname, staff.title, staff.tel, staff.email, 
+                 subject.subject, staff.staff_id, subject.shortform
+          FROM staff
+          INNER JOIN staff_subject ON staff.staff_id = staff_subject.staff_id
+          INNER JOIN subject ON staff_subject.subject_id = subject.subject_id
+          WHERE subject.type = :subject_type
+          AND staff.active = :staff_active
+          AND subject.active = :subject_active
+          AND staff.user_type_id = :user_type_id
+          AND staff.ptags LIKE :ptags
+          AND subject.type != :placeholder_type
+          ORDER BY subject.subject, staff.lname, staff.fname";
+
+            $statement = $connection->prepare($query);
+
+            $subject_type = 'Liaison';
+            $staff_active = 1;
+            $subject_active = 0;  // Note: This is different from the previous query
+            $user_type_id = 1;
+            $ptags = '%librarian%';
+            $placeholder_type = 'Placeholder';
+
+            $statement->bindParam(':subject_type', $subject_type, PDO::PARAM_STR);
+            $statement->bindParam(':staff_active', $staff_active, PDO::PARAM_INT);
+            $statement->bindParam(':subject_active', $subject_active, PDO::PARAM_INT);
+            $statement->bindParam(':user_type_id', $user_type_id, PDO::PARAM_INT);
+            $statement->bindParam(':ptags', $ptags, PDO::PARAM_STR);
+            $statement->bindParam(':placeholder_type', $placeholder_type, PDO::PARAM_STR);
+
+            $statement->execute();
+            $r = $statement->fetchAll();
 
             $items = prepareTHUM($head_fields);
 
@@ -638,19 +860,43 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
             break;
         case "Liaison Librarians":
 
-            $q = "select distinct lname, fname, title, tel, email, staff.staff_id
-                from staff, staff_subject ss, subject su
-                where staff.staff_id = ss.staff_id
-                AND ss.subject_id = su.subject_id
-                AND staff.active = 1
-                AND type = 'Liaison'
-                AND su.active = 0
-                AND user_type_id = '1'
-                AND su.type != 'Placeholder'
-                AND ptags like '%librarian%'
-                order by lname, fname";
+//            $q = "select distinct lname, fname, title, tel, email, staff.staff_id
+//                from staff, staff_subject ss, subject su
+//                where staff.staff_id = ss.staff_id
+//                AND ss.subject_id = su.subject_id
+//                AND staff.active = 1
+//                AND type = 'Liaison'
+//                AND su.active = 0
+//                AND user_type_id = '1'
+//                AND su.type != 'Placeholder'
+//                AND ptags like '%librarian%'
+//                order by lname, fname";
+//            $db = new Querier;
+//            $r = $db->query($q);
+
+
             $db = new Querier;
-            $r = $db->query($q);
+            $connection = $db->getConnection();
+
+            $q = "SELECT DISTINCT staff.lname, staff.fname, staff.title, staff.tel, staff.email, staff.staff_id
+            FROM staff
+            INNER JOIN staff_subject ss ON staff.staff_id = ss.staff_id
+            INNER JOIN subject su ON ss.subject_id = su.subject_id
+            WHERE staff.active = 1
+            AND su.type = 'Liaison'
+            AND su.active = 0
+            AND staff.user_type_id = :user_type_id
+            AND su.type != 'Placeholder'
+            AND staff.ptags LIKE :ptags
+            ORDER BY staff.lname, staff.fname";
+
+
+            $stmt = $connection->prepare($q);
+            $stmt->bindValue(':user_type_id', '1', PDO::PARAM_STR);
+            $stmt->bindValue(':ptags', '%librarian%', PDO::PARAM_STR);
+            $stmt->execute();
+            $r = $stmt->fetchAll();
+
 
             $items = "<ul class=\"list-unstyled staff-librarians\">";
 
@@ -662,17 +908,34 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
                     $items .= "</div><div class=\"staff-subjects\"><p><strong>Liaison Areas</strong></p>";
 
-                $sub_query = "select subject, shortform from subject, staff_subject
-                    WHERE subject.subject_id = staff_subject.subject_id
-                    AND staff_id =  '$myrow[5]'
-                    AND type = 'Liaison'
-                    AND active = 0
-                    AND type != 'Placeholder'
-                    ORDER BY subject";
+//                $sub_query = "select subject, shortform from subject, staff_subject
+//                    WHERE subject.subject_id = staff_subject.subject_id
+//                    AND staff_id =  '$myrow[5]'
+//                    AND type = 'Liaison'
+//                    AND active = 0
+//                    AND type != 'Placeholder'
+//                    ORDER BY subject";
+//
+//                /* Select all active records (this is based on a db connection made above) */
+//
+//                $sub_result = $db->query($sub_query);
 
-                /* Select all active records (this is based on a db connection made above) */
 
-                $sub_result = $db->query($sub_query);
+                $connection = $db->getConnection();
+
+                $sub_query = "SELECT subject.subject, subject.shortform 
+                FROM subject
+                INNER JOIN staff_subject ON subject.subject_id = staff_subject.subject_id
+                WHERE staff_subject.staff_id = :staff_id
+                AND subject.type = 'Liaison'
+                AND subject.active = 0
+                AND subject.type != 'Placeholder'
+                ORDER BY subject.subject";
+
+                $stmt = $connection->prepare($sub_query);
+                $stmt->bindValue(':staff_id', $myrow[5], PDO::PARAM_INT);
+                $stmt->execute();
+                $sub_result = $stmt->fetchAll();
 
                 $num_rows = (count($sub_result) - 1);
 
@@ -704,12 +967,12 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
         case "A-Z":
         default:
 
-        $q = "SELECT s.staff_id, lname, fname, title, tel, s.email, name, ptags
-            FROM staff s
-            LEFT JOIN department d on s.department_id = d.department_id
-            WHERE user_type_id = '1'
-        AND active = 1
-            ORDER BY s.lname, s.fname";
+//        $q = "SELECT s.staff_id, lname, fname, title, tel, s.email, name, ptags
+//            FROM staff s
+//            LEFT JOIN department d on s.department_id = d.department_id
+//            WHERE user_type_id = '1'
+//        AND active = 1
+//            ORDER BY s.lname, s.fname";
 
         $hf1 = array("label"=>"Name","hide"=>false,"nosort"=>false);
         $hf2 = array("label"=>"Title","hide"=>true,"nosort"=>false);
@@ -720,12 +983,29 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
 
 
+//        $db = new Querier;
+//            $r = $db->query($q,PDO::FETCH_ASSOC);
+
+
         $db = new Querier;
-            $r = $db->query($q,PDO::FETCH_ASSOC);
+        $connection = $db->getConnection();
+
+        $q = "SELECT s.staff_id, s.lname, s.fname, s.title, s.tel, s.email, d.name, s.ptags
+        FROM staff s
+        LEFT JOIN department d ON s.department_id = d.department_id
+        WHERE s.user_type_id = :user_type_id
+        AND s.active = :active
+        ORDER BY s.lname, s.fname";
+
+
+        $stmt = $connection->prepare($q);
+        $stmt->bindValue(':user_type_id', '1', PDO::PARAM_STR);
+        $stmt->bindValue(':active', 1, PDO::PARAM_INT);
+        $stmt->execute();
+        $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
         $items = prepareTHUM($head_fields);
-
-
 
         $row_count = 0;
         $colour1 = "oddrow";
@@ -807,16 +1087,34 @@ ORDER BY department_sort, d.name, staff_sort DESC, lname";
 
     if ($islib == 1) {
       // UM hack in query
-      $q2 = "SELECT subject, shortform 
-              FROM subject, staff_subject 
-              WHERE subject.subject_id = staff_subject.subject_id
-              AND staff_subject.staff_id = $staff_id
-              AND subject.active = 1
-              AND type = 'Subject'
-              ORDER BY subject";
-      //print $q2;
-        $db = new Querier;
-      $r2 = $db->query($q2);
+//      $q2 = "SELECT subject, shortform
+//              FROM subject, staff_subject
+//              WHERE subject.subject_id = staff_subject.subject_id
+//              AND staff_subject.staff_id = $staff_id
+//              AND subject.active = 1
+//              AND type = 'Subject'
+//              ORDER BY subject";
+//        $db = new Querier;
+//      $r2 = $db->query($q2);
+
+        $db = new Querier();
+        $connection = $db->getConnection();
+
+        $query = "SELECT subject.subject, subject.shortform 
+          FROM subject
+          INNER JOIN staff_subject ON subject.subject_id = staff_subject.subject_id
+          WHERE staff_subject.staff_id = :staff_id
+          AND subject.active = 1
+          AND subject.type = 'Subject'
+          ORDER BY subject.subject";
+
+        $statement = $connection->prepare($query);
+        $statement->bindParam(":staff_id", $staff_id, PDO::PARAM_INT);
+
+        $statement->execute();
+        $r2 = $statement->fetchAll();
+
+
 
       foreach ($r2 as $myrow2) {
 

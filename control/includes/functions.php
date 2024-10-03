@@ -1123,10 +1123,21 @@ function showStaff( $email, $picture = 1, $pic_size = "medium", $link_name = 0 )
 	global $tel_prefix;
 	global $mod_rewrite;
 
-	$q = "SELECT fname, lname, title, tel, email FROM staff WHERE email = '$email'";
+//	$q = "SELECT fname, lname, title, tel, email FROM staff WHERE email = '$email'";
+//
+//	$db = new Querier;
+//	$r  = $db->query( $q );
 
-	$db = new Querier;
-	$r  = $db->query( $q );
+    $db = new Querier;
+    $connection = $db->getConnection();
+
+    $query = "SELECT fname, lname, title, tel, email FROM staff WHERE email = :email";
+
+    $statement = $connection->prepare($query);
+    $statement->bindParam(":email", $email, PDO::PARAM_STR);
+    $statement->execute();
+
+    $r = $statement->fetchAll();
 
 	$row_count = count( $r );
 
