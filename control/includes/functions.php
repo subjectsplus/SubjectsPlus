@@ -1221,12 +1221,13 @@ function getLetters( $table, $selected = "A", $numbers = 1, $show_formats = true
 
 	$selected_subject = "";
 	if ( isset( $_GET["subject_id"] ) ) {
-		$selected_subject = intval( $_GET["subject_id"] );
+        $subject_id = scrubData($_GET['subject_id'], "integer");
+		$selected_subject = intval( $subject_id );
 	}
 
 	$selected_type = "";
 	if ( isset( $_GET["type"] ) ) {
-		$selected_type = $_GET["type"];
+        $selected_type = scrubData($_GET['type'], "text");
 	}
 
 	$showsearch = 0;
