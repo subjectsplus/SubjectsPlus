@@ -133,7 +133,7 @@ class DbHandler
                         $condition1 .= count ( $lobjTitleIds ) > 0 ? "\nOR t.title_id IN (" . implode ( ',', $lobjTitleIds ) . ")" : "";
                         $condition1 .= ")";
                         */
-                        $letter = "%" . $qualifier . "%";
+                        $letter = scrubData("%" . $qualifier . "%", "text");
 
                         $statement->bindParam(":qualifer", $letter);
                         $statement->execute();
@@ -207,7 +207,7 @@ class DbHandler
         	AND dbbysub_active = 1
         ORDER BY newtitle");
 
-                    $letter = "%" . $qualifier . "%";
+                    $letter = scrubData("%" . $qualifier . "%", "text");
 
                     $statement->bindParam(":qualifer", $letter);
                     $statement->execute();
@@ -249,7 +249,7 @@ class DbHandler
             case "search" :
                 // If you uncomment the next line, it will search description field
                 $connection = $db->getConnection();
-                $statement = $db->prepare("
+                $statement = $connection->prepare("
         	SELECT distinct left(t.title,1) as initial, t.title as newtitle, t.description, location, access_restrictions, t.title_id as this_record,eres_display, display_note, pre, citation_guide, ctags, helpguide
         	FROM title as t
         	INNER JOIN location_title as lt
@@ -266,7 +266,8 @@ class DbHandler
         	AND eres_display = 'Y'
         ORDER BY newtitle");
 
-                $qualifier = "%" . $qualifier . "%";
+                $qualifier = scrubData("%" . $qualifier . "%", "text");
+                $statement->bindParam(":qualifier", $qualifier);
                 $statement->execute();
                 $results = $statement->fetchAll();
 
@@ -312,7 +313,7 @@ ORDER BY newtitle
 
 ");
 
-                $letter = $qualifier . "%";
+                $letter = scrubData($qualifier . "%", "text");
 
                 $statement->bindParam(":qualifer", $letter);
                 $statement->execute();
@@ -361,7 +362,7 @@ ORDER BY newtitle
 
 ");
 
-                    $letter = $qualifier . "%";
+                    $letter = scrubData($qualifier . "%", "text");
 
                     $statement->bindParam(":qualifer", $letter);
                     $statement->execute();
@@ -386,13 +387,14 @@ ORDER BY newtitle
         	AND eres_display = 'Y'
         ORDER BY newtitle");
 
-                    $letter = "%" . $qualifier . "%";
+                    $letter = scrubData("%" . $qualifier . "%", "text");
 
                     $statement->bindParam(":qualifer", $letter);
                     $statement->execute();
                     $results = $statement->fetchAll();
 
-                    $condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
+                    //$condition1 = "WHERE title LIKE " . $db->quote("%" . $qualifier . "%");
+
                 }
 
                 if ($description_search == 1) {
@@ -415,7 +417,7 @@ ORDER BY newtitle
         	AND eres_display = 'Y'        	
         ORDER BY newtitle");
 
-                    $qualifier = "%" . $qualifier . "%";
+                    $qualifier = scrubData("%" . $qualifier . "%", "text");
                     $statement->bindParam(":qualifer", $qualifier);
                     $statement->bindParam(":qualifer1", $qualifier);
                     $statement->execute();
@@ -690,7 +692,7 @@ FROM rank r, location_title lt, location l, title t
 AND s.active = 1
 ORDER BY s.subject");
 
-        $statement->bindParam(":qualifer", $letter);
+        //$statement->bindParam(":qualifer", $letter);
         $statement->execute();
         $r = $statement->fetchAll();
 

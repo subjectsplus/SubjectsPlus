@@ -17,15 +17,15 @@ $auto_complete->setCollection($_GET["collection"]);
 $auto_complete->setSearchPage("control");
 
 if (isset($_GET["subject_id"])) {
-
-    $auto_complete->setSubjectId($_GET["subject_id"]);
+    $subject_id = scrubData($_GET['subject_id'], "integer");
+    $auto_complete->setSubjectId($subject_id);
 
 }
 
 
 if (isset($_GET["staff_id"])) {
-
-    $auto_complete->setStaffId($_GET["staff_id"]);
+    $staff_id = scrubData($_GET['staff_id'], "integer");
+    $auto_complete->setStaffId($staff_id);
 
 }
 

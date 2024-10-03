@@ -308,14 +308,8 @@ AND title.title LIKE :search_term";
                 break;
         }
 
-        $search_param = '%'.$search_param.'%';
-
         $statement->bindParam(":search_term", $search_param);
-
-
         $statement->execute();
-
-
         $result = $statement->fetchAll();
         $arr = array();
         $i = 0;
