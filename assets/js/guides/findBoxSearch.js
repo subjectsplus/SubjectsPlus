@@ -66,6 +66,7 @@ function findBoxSearch() {
 		 *         found.
 		 */
 		search: function (search_term) {
+			console.log('search_term: ' + search_term);
 
 			var searchScope = $("input[type='radio'][name='search_scope']:checked").val();
 			var autocompleteUrl;
@@ -73,11 +74,11 @@ function findBoxSearch() {
 			if(searchScope == 'current_guide') {
 
 				var subject_id = $('#guide-parent-wrap').attr('data-subject-id');
-				autocompleteUrl = "../includes/autocomplete_data.php?subject_id=" + subject_id + "&collection=current_guide&term=";
+				autocompleteUrl = "../includes/autocomplete_data.php?subject_id=" + encodeURIComponent(subject_id) + "&collection=current_guide&term=";
 
 			} else if (searchScope == 'my_pluslets') {
 				var staff_id = $('#guide-parent-wrap').attr('data-staff-id');
-				autocompleteUrl = "../includes/autocomplete_data.php?collection=my_pluslets&staff_id=" + staff_id + "&term=";
+				autocompleteUrl = "../includes/autocomplete_data.php?collection=my_pluslets&staff_id=" + encodeURIComponent(staff_id) +  "&term=";
 
 			} else {
 				autocompleteUrl = myFindBoxSearch.settings.autoCompleteUrl;
@@ -85,8 +86,7 @@ function findBoxSearch() {
 
 
 			$.get(
-				autocompleteUrl
-				+ search_term,
+				autocompleteUrl + encodeURIComponent(search_term),
 				function (data) {
 
 
