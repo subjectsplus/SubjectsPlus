@@ -68,6 +68,17 @@ class Querier  {
 	    try {
 		    $this->_connection = new PDO($dsn, $uname, $pword, $options);
 
+            // Disable emulated prepared statements
+            // https://www.php.net/manual/en/pdo.setattribute.php
+            // Whether enable or disable emulation of prepared statements.
+            // Some drivers do not support prepared statements natively or have limited support for them.
+            // If set to true PDO will always emulate prepared statements,
+            // otherwise PDO will attempt to use native prepared statements.
+            // In case the driver cannot successfully prepare the current query,
+            // PDO will always fall back to emulating the prepared statement.
+
+            $this->_connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
 	    } catch (\PDOException $e) {
 		    echo "<h1>There was a problem connecting to the database.</h1>";
 		    echo "<p>Are you sure that the database connection information is correct?</p>";
