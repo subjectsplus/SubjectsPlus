@@ -699,7 +699,13 @@ function scrubData( $string, $type = "text" ) {
 			if ( ! isValidEmailAddress( $string ) ) {
 				$string = '';
 			}
-
+        case "url":
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('Core.EscapeNonASCIICharacters', true);
+            $config->set('URI.AllowedSchemes', array('http' => true, 'https' => true));
+            $config->set('URI.DisableExternalResources', true);
+            $purifier = new HTMLPurifier($config);
+            $string = $purifier->purify($string);
 			break;
 		case "integer":
 // this just makes it into a whole number; might not be a good solution...
