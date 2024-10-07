@@ -27,15 +27,17 @@ class CompleteMe
 
         self::$_counter++;
         $this->num = self::$_counter;
-        $this->input_id = $input_id;
-        $this->action = $action;
-        $this->target_url = $target_url;
-        $this->default_text = $default_text;
-        $this->collection = $collection;
-        $this->search_box_size = $box_size;
-        $this->display = $display;
-        $this->value = $value;
-        $this->sortby = $sortby;
+
+        // Sanitize input
+        $this->input_id = scrubData($input_id, "text");
+        $this->action = scrubData($action, "url");
+        $this->target_url = scrubData($target_url, "url");
+        $this->default_text = scrubData($default_text, "text");
+        $this->collection = scrubData($collection, "text");
+        $this->search_box_size = scrubData($box_size, "integer");
+        $this->display = (scrubData($display, "text") === 'public') ? 'public' : 'private';
+        $this->value = scrubData($value, "text");
+        $this->sortby = scrubData($sortby, "text");
 
 
     }
@@ -48,11 +50,38 @@ class CompleteMe
         global $proxyURL;
         $auto_complete_url = "";
 
-        //print "input_id = $this->input_id, action = $this->action, target_url = $this->target_url, collection = $this->collection";
-        if ($this->display == "public") {
-            $data_location = $PublicPath . "includes/autocomplete_data.php?collection=" . $this->collection;
+        // Define the whitelist
+        $valid_collections = array(
+            "guides",
+            "records",
+            "talkback",
+            "faq",
+            "all",
+            "ebooks",
+            "admin"
+        );
+
+        // Sanitize the collection input
+        $sanitized_collection = scrubData($this->collection, "text");
+
+        // Check against the whitelist
+        if (in_array($sanitized_collection, $valid_collections)) {
+            $category = $sanitized_collection;
+
+            // Special case for "admin"
+            if ($category === "admin") {
+                $category = "staff";
+            }
         } else {
-            $data_location = $CpanelPath . "includes/autocomplete_data.php?collection=" . $this->collection;
+            // Default to "all" if not in whitelist
+            $category = "all";
+        }
+
+        // Now use $category in your URL construction
+        if ($this->display == "public") {
+            $data_location = $PublicPath . "includes/autocomplete_data.php?collection=" . urlencode($category);
+        } else {
+            $data_location = $CpanelPath . "includes/autocomplete_data.php?collection=" . urlencode($category);
         }
 
         switch ($this->display) {
@@ -104,18 +133,21 @@ class CompleteMe
         $js_autocomplete_html = "<script type=\"text/javascript\">
 
     jQuery(document).ready(function() {
-    
+    console.log('completeme:');
      var parents = [];
     
     $.widget(\"custom.catcomplete\", $.ui.autocomplete, {
       
     _renderMenu: function( ul, items ) {
+    console.log('items: ' + items);
           var that = this;
+          console.log('that: ' + this);
           pluslet_category = [];
              
           currentCategory = \"\";
     
           $.each( items, function( index, item ) {
+          console.log('item: ' + item);
            
     if (item.content_type === 'Pluslet') {
     
