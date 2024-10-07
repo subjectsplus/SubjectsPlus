@@ -13,9 +13,10 @@ $postvar_username = "";
 $postvar_password = "";
 
 if ( isset( $_POST['thecount'] ) && isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
-	$postvar_thecount = $_POST['thecount'];
-	$postvar_username = $_POST['username'];
-	$postvar_password = $_POST['password'];
+    // Sanitize and validate input data
+    $postvar_thecount = scrubData($_POST['thecount'], 'integer'); // Expecting an integer
+    $postvar_username = scrubData($_POST['username'], 'text'); // Sanitize as text
+    $postvar_password = scrubData($_POST['password'], 'text'); // Sanitize as text
 }
 $debugger = "no";
 
