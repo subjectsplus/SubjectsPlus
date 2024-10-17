@@ -28,47 +28,30 @@ $db = new Querier;
 // special image path because of mod_rewrite issues when source types are included in URL
 $img_path = $PublicPath . "images";
 
+// Initialize $check_this
+$check_this = false;
+
 if (isset($_GET['subject'])) {
-	$check_this = $_GET['subject'];
+    $check_this = scrubData($_GET['subject'], "text");
 } elseif (isset($_GET['id'])) {
-    $_GET['id'] = scrubData($_GET['id']);
+    $id = scrubData($_GET['id'],"integer");
     $connection = $db->getConnection();
     $statement = $connection->prepare("SELECT shortform FROM subject WHERE subject_id = :value LIMIT 1");
-    $statement->bindParam(':value', $_GET['id']);
+    $statement->bindParam(':value', $id, PDO::PARAM_INT);
     $statement->execute();
     $res = $statement->fetchAll();
-    
-    $check_this = $res[0]["shortform"];
 
-} else {
-	$check_this = FALSE;
+    if ($res) {
+        // Sanitize the output to prevent XSS
+        $check_this = htmlspecialchars($res[0]["shortform"], ENT_QUOTES, 'UTF-8');
+    }
+
 }
+
 
 $page_description = _("The best stuff for your research.  No kidding.");
 $page_keywords = _("library, research, databases, subjects, search, find");
 
-///////////////////////
-// Add This + Search //
-// Add This is turned off by default :)
-
-/* $addthis = '<!-- AddToAny BEGIN -->
-    <div class="a2a_kit"  style="float: left !important;">
-    <a class="a2a_dd" href="http://www.addtoany.com/share_save"><img src="../assets/images/icons/plus-26.png" border="0" alt="Share" /></a>
-    <a class="a2a_button_twitter"><img src="../assets/images/icons/twitter-26.png" border="0" alt="Twitter" /></a>   
-    <a class="a2a_button_facebook"><img src="../assets/images/icons/facebook-26.png" border="0" alt="Facebook" /></a>
-</div>
-    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
-    <!-- AddToAny END -->'; */
-
-$addthis = "";
-
-$social_and_search = '
-<div id="guide_nav_tools">
-<form id="guide_search" class="pure-form"> ' .
-$addthis . 
-'<input id="sp_search" class="find-guide-input ui-autocomplete-input" type="text" placeholder="' . _("Find in Guide") . '" autocomplete="off"/></form>
-</div>
-';
 
 if ($check_this) {
 
@@ -85,24 +68,27 @@ if ($check_this) {
 
 	$redirect_url = $r[0]["redirect_url"];
 
-	if( !is_null($redirect_url) && !empty($redirect_url)  )
-	{
-		header("Location:$redirect_url");
-	}
+    if (!is_null($redirect_url) && !empty($redirect_url)) {
+        $sanitized_url = filter_var($redirect_url, FILTER_SANITIZE_URL);
+        if (filter_var($sanitized_url, FILTER_VALIDATE_URL)) {
+            header("Location: " . $sanitized_url);
+            exit();
+        }
+    }
 
-    $subject_name = $r[0]["subject"];
-    $this_id = $r[0]["subject_id"];
-	$header_type = $r[0]["header"];
+    $subject_name = htmlspecialchars($r[0]["subject"], ENT_QUOTES, 'UTF-8');
+    $this_id = intval($r[0]["subject_id"]);
+    $header_type = htmlspecialchars($r[0]["header"], ENT_QUOTES, 'UTF-8');
 
     // check for description and keywords, which may be blank since they were added v2
     if ($r[0]["description"] != "") {
-        $page_description = $r[0]["description"];
+        $page_description = htmlspecialchars($r[0]["description"], ENT_QUOTES, 'UTF-8');
     }
     if ($r[0]["keywords"] != "") {
-        $page_keywords = $r[0]["keywords"];
+        $page_keywords = htmlspecialchars($r[0]["keywords"], ENT_QUOTES, 'UTF-8');
     }
 
-    $jobj = json_decode($r[0]["extra"]);
+    $jobj = json_decode($r[0]["extra"], false, 512, JSON_THROW_ON_ERROR);
 
     // In this section, we get the widths of the three columns, which add up to 12
     // We then do a little bit of math to get them into columns that add up to a bit under 100
@@ -167,12 +153,7 @@ if (count($all_tabs) > 1) {
     $printOption = "<div class=\"printer_no_tabs\"><i class=\"fas fa-print\" title=\"Print this guide\"></i></div>";
 }
 
-// Add tracking image
-$tracking_image = "<img style=\"display: none;\" src=\"" . $PublicPath . "track.php?subject=" . scrubData($check_this) . "&page_title=" . $page_title .
-        "\" aria-hidden=\"true\" alt=\"\" />";
 
-print $tracking_image;
-print $social_and_search;
 ?>
 
 <!--Minimal header if um-new theme is used-->
@@ -487,7 +468,6 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 
 <script>
 <?php include('./includes/js/hash.js'); ?>
-<?php include('./includes/js/track.js'); ?>
 <?php include('./includes/js/tabDropdown.js'); ?>
 <?php include('./includes/js/jquery.scrollTo.js'); ?>
 <?php include('./includes/js/autoComplete.js'); ?>
@@ -499,7 +479,6 @@ $(document.body).on('click','a[id*=boxid-]', function(event) {
 <?php include('../assets/js/guides/bookList.js'); ?>
 
 hash.init();
-track.init();
 tabDropdown.init();
 autoComplete.init();
 cloneView.init();
