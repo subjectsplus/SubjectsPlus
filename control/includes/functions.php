@@ -490,7 +490,7 @@ ORDER BY s.subject";
         }
     }
 
-    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subjects\">  
+    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
         $subs_option_boxes
         </select>";
 
