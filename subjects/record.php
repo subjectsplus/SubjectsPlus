@@ -21,7 +21,7 @@ if ( $this_fname != $that_fname ) { include($that_fname); exit; }
 
 if (isset($_GET["id"])) {
   // scrub the id
-  $_GET["id"] = scrubData($_GET["id"], "integer");
+  $record_id = scrubData($_GET["id"], "integer");
 
   // Retrieve the title, location, and access restrictions of the id
   $query = "SELECT t.title, l.location, l.access_restrictions 
@@ -33,7 +33,7 @@ if (isset($_GET["id"])) {
   $db = new Querier;
   $connection = $db->getConnection();
   $statement = $connection->prepare($query);
-  $statement->bindParam(":id", $_GET["id"]);
+  $statement->bindParam(":id", $record_id);
   $statement->execute();
   $result = $statement->fetch();
   

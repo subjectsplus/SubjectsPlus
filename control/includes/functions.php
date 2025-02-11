@@ -490,7 +490,7 @@ ORDER BY s.subject";
         }
     }
 
-    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subjects\">  
+    $alphabet .= " <select name=\"browser\" id=\"select_term\" onChange=\"window.location=this.options[selectedIndex].value\" title=\"Databases by Subject\">  
         $subs_option_boxes
         </select>";
 
@@ -699,12 +699,29 @@ function scrubData( $string, $type = "text" ) {
 			if ( ! isValidEmailAddress( $string ) ) {
 				$string = '';
 			}
-
 			break;
 		case "integer":
-// this just makes it into a whole number; might not be a good solution...
+            // this just makes it into a whole number; might not be a good solution...
 			$string = round( $string );
 			break;
+
+        case "url":
+            $config = HTMLPurifier_Config::createDefault();
+            $config->set('Core.EscapeNonASCIICharacters', true);
+            $config->set('URI.AllowedSchemes', array('http' => true, 'https' => true));
+            $config->set('URI.DisableExternalResources', true);
+            $purifier = new HTMLPurifier($config);
+            $string = $purifier->purify($string);
+            break;
+
+        default:
+            $string = strip_tags( $string );
+            $string = htmlspecialchars( $string, ENT_QUOTES );
+            $config   = HTMLPurifier_Config::createDefault();
+            $config->set('Core.EscapeNonASCIICharacters',true);
+            $purifier = new HTMLPurifier( $config );
+            $string   = $purifier->purify( $string );
+            break;
 	}
 
 
